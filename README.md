@@ -1,3 +1,11 @@
+# AngularSlice website template
+
+This website contains the template of the AngularSlice website. This repo is pulled from https://github.com/rangle/microsite-template.angular.io. 
+
+Any commits to the https://github.com/rangle/microsite-template.angular.io:master should be pulled and rebased into this branch. 
+
+This is far from ideal so we will revisit this setup in the future. 
+
 ## Updating Microsites
 
 * The microsite base template is located in the `master` branch, any changes made to master should be rebased into a microsite.
