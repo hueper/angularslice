@@ -251,6 +251,13 @@ html, body {
   position: relative;
 }
 
+ .hero-background {
+    ol {
+      padding-left: 15px;
+      line-height: 28px;
+    }
+ }
+
 /*
 This uses a CSS hack for now, but should be replaced with proper JS in the future.
 The way it currently works:
