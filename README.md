@@ -5,7 +5,8 @@ Angular Slicer
 Angular Slicer project.
 
 The project is ready to work with projects and views in projects, thus you need to use the following
-path for testing: /projects/1/views/1. A possible dev url: [http://localhost:3001/projects/1/views/1].
+path for testing: /projects/1/views/1.
+A possible dev url: [http://localhost:3001/projects/1/views/1](http://localhost:3001/projects/1/views/1).
 
 ## Install
 
