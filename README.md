@@ -1,8 +1,6 @@
-Angular Slicer
-==============
+# Angular Slicer
 
-
-Angular Slicer project.
+Angular Slicer project. Generate Angular 2 project structures with ease.
 
 The project is ready to work with projects and views in projects, thus you need to use the following
 path for testing: /projects/1/views/1.
