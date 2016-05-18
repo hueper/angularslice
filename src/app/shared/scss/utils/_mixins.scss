@@ -1,0 +1,21 @@
+// Straight from Bootstrap v4 alpha
+@mixin tab-focus() {
+  // Default
+  //outline: thin dotted;
+  // WebKit
+  //outline: .5rem auto -webkit-focus-ring-color;
+  //outline-offset: -.2rem;
+}
+
+@mixin hover-focus() {
+  @if $enable-hover-media-query {
+    &:focus { @content }
+    @include hover { @content }
+  }
+  @else {
+    &:focus,
+    &:hover {
+      @content
+    }
+  }
+}

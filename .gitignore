@@ -1,0 +1,24 @@
+# ignored files
+.DS_STORE
+.idea/
+npm-debug.log
+*.pyc
+*.log
+node_modules/
+bower_components/
+typings/
+.sass-cache
+dump/
+
+# ignored folders
+node_modules/
+bower_components/
+.sass-cache/
+dist/
+typings/
+
+Ignore JetBrains IDE's config folders
+.idea/
+
+npm-debug.log*
+

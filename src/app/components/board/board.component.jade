@@ -1,0 +1,9 @@
+.c-board
+  //- div
+    input([(ngModel)]="settings.zoom")
+
+  .c-board__workingSpace
+    .c-board__areas
+      area(*ngFor="let cmp of components", [areaData]="cmp", [isHovered]="cmp.equals(hoveredComponent)")
+      area([areaData]="newArea", *ngIf="inAreaCreation()")
+      .c-board__surface((mousedown)="onMouseDown($event)", (mousemove)="onMouseMove($event)", (mouseup)="onMouseUp($event)")
