@@ -40,6 +40,7 @@ export class BoardComponent {
 
   onMouseMove(event) {
     if (this.inAreaCreation()) {
+      this.newArea.invalid = ! this.isValidArea(this.newArea);
       this.newArea.setBottomRight(event.layerX, event.layerY);
     } else {
       const component = this.findComponent(event.layerX, event.layerY);
@@ -49,8 +50,8 @@ export class BoardComponent {
     return false;
   }
 
-  onMouseUp(event) {
-    if (this.newArea.isValid()) {
+  onMouseUp(area) {
+    if (this.isValidArea(this.newArea)) {
       this.areaCreate.emit(this.newArea);
     }
 
@@ -61,6 +62,14 @@ export class BoardComponent {
 
   inAreaCreation() {
     return this.newArea !== null;
+  }
+
+  private isValidArea(area: Area): boolean {
+    return area.hasDimensions() && ! this.isCrossingOther(area);
+  }
+
+  private isCrossingOther(area: Area): boolean {
+    return !!(<any>this.components).find((cmp) => cmp.isCrossing(area));
   }
 
   private findComponent(x, y): ComponentData {
