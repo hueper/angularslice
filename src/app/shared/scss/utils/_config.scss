@@ -1,0 +1,23 @@
+// Bootstrap specific
+$font-size-root: 10px;
+$font-family-base: 'Lato';
+$font-size-base: 1.6rem;
+$line-height: 2.4rem;
+$body-bg: #fff;
+$body-color: $tetriary;
+$link-color: $secondary;
+$link-decoration: none;
+$link-hover-color: $highlight;
+$link-hover-decoration: underline;
+$abbr-border-color: #eee;
+$enable-hover-media-query: false;
+$table-bg: transparent;
+$table-cell-padding: 0;
+$text-muted: #eee;
+
+// Custom
+$page-wrapper-width: 80rem;
+$breakpoint-xs: 320px;
+$breakpoint-sm: 640px;
+$breakpoint-md: 1024px;
+$breakpoint-lg: 1280px;

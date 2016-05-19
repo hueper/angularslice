@@ -1,0 +1,60 @@
+* {
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+  text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../assets/fonts/Lato/lato-regular-webfont.woff2') format('woff2'),
+       url('../assets/fonts/Lato/lato-regular-webfont.woff') format('woff'),
+       url('../assets/fonts/Lato/lato-regular-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../assets/fonts/Lato/lato-bold-webfont.woff2') format('woff2'),
+       url('../assets/fonts/Lato/lato-bold-webfont.woff') format('woff'),
+       url('../assets/fonts/Lato/lato-bold-webfont.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../assets/fonts/Lato/lato-italic-webfont.woff2') format('woff2'),
+       url('../assets/fonts/Lato/lato-italic-webfont.woff') format('woff'),
+       url('../assets/fonts/Lato/lato-italic-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../assets/fonts/Lato/lato-light-webfont.woff2') format('woff2'),
+       url('../assets/fonts/Lato/lato-light-webfont.woff') format('woff'),
+       url('../assets/fonts/Lato/lato-light-webfont.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CircularStd';
+  src: url('../assets/fonts/CircularStd/CircularStd-Bold.woff2') format('woff2'),
+       url('../assets/fonts/CircularStd/CircularStd-Bold.woff') format('woff'),
+       url('../assets/fonts/CircularStd/CircularStd-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BudacodeIcons';
+  src: url('../assets/fonts/Icon/BudacodeIcons.woff2') format('woff2'),
+     url('../assets/fonts/Icon/BudacodeIcons.woff') format('woff'),
+     url('../assets/fonts/Icon/BudacodeIcons.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}

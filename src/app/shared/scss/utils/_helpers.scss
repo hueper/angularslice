@@ -1,0 +1,13 @@
+// Helper placeholders
+%animate-it {
+  transition: all .4s ease-in-out;
+}
+
+%clear-after {
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+

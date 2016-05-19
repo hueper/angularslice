@@ -1,0 +1,15 @@
+.c-area {
+
+  position: absolute;
+  border: 1px dotted black;
+  background-color: rgba(0,0,0, 0.1);
+
+  &--hover {
+    border: 1px solid rgb(0,255,255);
+  }
+
+  &--invalid {
+    border-color: red;
+  }
+
+}
