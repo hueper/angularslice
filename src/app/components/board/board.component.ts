@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { Routes } from '@angular/router';
 
 import { AreaComponent } from '../area';
@@ -20,12 +20,27 @@ export class BoardComponent {
   @Output() areaCreate: EventEmitter<Area> = new EventEmitter<Area>();
   @Output() componentHover: EventEmitter<ComponentData> = new EventEmitter<ComponentData>();
 
-  settings: BoardSettings = new BoardSettings()
-
+  settings: BoardSettings = new BoardSettings();
+  
+  imageSrc: string = 'http://img.prntscr.com/img?url=http://i.imgur.com/jRMDo6h.png';
+  
   private newArea: NewArea = null;
 
   constructor() {
     this.settings.zoom = 100;
+  }
+
+  previewFile(event) {
+    var file    = event.srcElement.files[0];
+    var reader  = new FileReader();
+
+    reader.addEventListener('load', (e:any) => {
+      this.imageSrc = e.currentTarget.result;
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   }
 
   zoomPercent() {
