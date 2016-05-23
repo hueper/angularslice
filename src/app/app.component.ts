@@ -26,7 +26,7 @@ import { ProjectComponent } from './components/project';
 })
 @Routes([
   { path: '/projects/:projectId', component: ProjectComponent },
-  { path: '/*', component: WelcomeComponent }
+  { path: '/', component: ProjectComponent}
 ])
 export class AppComponent implements AfterViewInit {
 

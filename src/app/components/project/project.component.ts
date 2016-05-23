@@ -12,7 +12,8 @@ import { ViewComponent } from '../view';
   ]
 })
 @Routes([
-  { path: 'views/:viewId', component: ViewComponent }
+  { path: '/views/:viewId', component: ViewComponent },
+  { path: '/', component: ViewComponent}
 ])
 export class ProjectComponent {
 }
