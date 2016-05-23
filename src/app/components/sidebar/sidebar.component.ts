@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { ComponentElement } from '../component_element';
+import { ComponentElement } from '../component-element';
 import { ComponentData } from '../../models';
 
 @Component({
