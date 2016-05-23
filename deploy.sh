@@ -23,8 +23,6 @@ websiteRevision=$(git rev-parse --short HEAD)
 
 mkdir dist
 
-git clone "https://github.com/budacode/angularslice.git"
-cd angularslice
 git checkout master
 npm install
 npm run build
