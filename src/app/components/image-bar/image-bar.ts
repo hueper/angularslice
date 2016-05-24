@@ -1,3 +1,6 @@
+import { Component } from '@angular/core';
+import { ImageService } from '/src/app/services';
+
 @Component({
   selector: 'image-bar',
   template: require('./image-bar.jade')(),
