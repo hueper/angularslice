@@ -21,3 +21,9 @@ Ignore JetBrains IDE's config folders
 .idea/
 
 npm-debug.log*
+
+# website gitignore
+node_modules
+dist/
+.tmp
+app.yaml
