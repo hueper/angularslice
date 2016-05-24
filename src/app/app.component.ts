@@ -7,7 +7,6 @@ import {
   ROUTER_DIRECTIVES
 } from '@angular/router';
 
-import { WelcomeComponent } from './components/welcome';
 import { ProjectComponent } from './components/project';
 
 
