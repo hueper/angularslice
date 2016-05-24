@@ -17,17 +17,17 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'add',
-        path: 'src/app/{{path}}{{name}}.ts',
+        path: 'src/app/{{path}}{{name}}.component.ts',
         templateFile: 'plop-templates/component.ts',
       },
       {
         type: 'add',
-        path: 'src/app/{{path}}{{name}}.jade',
+        path: 'src/app/{{path}}{{name}}.component.jade',
         templateFile: 'plop-templates/component.jade',
       },
       {
         type: 'add',
-        path: 'src/app/{{path}}{{name}}.scss',
+        path: 'src/app/{{path}}{{name}}.component.scss',
         templateFile: 'plop-templates/component.scss',
       }
     ]
@@ -45,7 +45,7 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'add',
-        path: 'src/app/models/{{name}}.ts',
+        path: 'src/app/models/{{name}}.model.ts',
         templateFile: 'plop-templates/model.ts',
       }
     ]
@@ -63,7 +63,7 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'add',
-        path: 'src/app/services/{{name}}.ts',
+        path: 'src/app/services/{{name}}.service.ts',
         templateFile: 'plop-templates/service.ts',
       }
     ]
