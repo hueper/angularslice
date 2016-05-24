@@ -1,5 +1,4 @@
 .c-board {
-  cursor: crosshair;
 
   &__workingSpace {
   }
@@ -12,11 +11,12 @@
   }
 
   &__surface {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    cursor: crosshair;
+    //position: absolute;
+    //left: 0;
+    //top: 0;
+    //right: 0;
+    //bottom: 0;
     z-index: -1;
   }
 }

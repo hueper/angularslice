@@ -29,11 +29,11 @@ export class BasicArea implements Area {
   }
 
   getWidth(): number {
-    return this.right - this.left;
+    return Math.abs(this.right - this.left);
   }
 
   getHeight(): number {
-    return this.bottom - this.top;
+    return Math.abs(this.bottom - this.top);
   }
 
   hasDimensions(): boolean {
@@ -60,30 +60,48 @@ export class BasicArea implements Area {
 }
 
 export class NewArea extends BasicArea {
-  isInvalid: boolean = false;
+  public baseX: number;
+  public baseY: number;
 
-  private x0: number;
-  private y0: number;
+  public diagonalX: number;
+  public diagonalY: number;
 
-  constructor(left, top) {
-    super(left, top, left, top);
+  constructor(baseX: number, baseY: number) {
+    super(baseX, baseY, baseX, baseY);
 
-    this.x0 = left;
-    this.y0 = top;
+    this.baseX = baseX;
+    this.baseY = baseY;
+
+    this.diagonalX = baseX;
+    this.diagonalY = baseY;
   }
 
-  // very clumsy name, find a better one, I couldn't...
-  setBottomRight(x: number, y: number) {
-    if (x < this.x0) {
-      this.left = x;
+  addMovement(movementX: number, movementY: number) {
+    this.diagonalX += movementX;
+    this.diagonalY += movementY;
+
+    console.log(this.diagonalY);
+
+    this.setBasicCoordinates();
+  }
+
+  setBasicCoordinates() {
+    // Set left-right
+    if (this.baseX < this.diagonalX) {
+      this.left = this.baseX;
+      this.right = this.diagonalX;
     } else {
-      this.right = x;
+      this.left = this.diagonalX;
+      this.right = this.baseX;
     }
 
-    if (y < this.y0) {
-      this.top = y;
+    // Set top-bottom
+    if (this.baseY < this.diagonalY) {
+      this.top = this.baseY;
+      this.bottom = this.diagonalY;
     } else {
-      this.bottom = y;
+      this.top = this.diagonalY;
+      this.bottom = this.baseY;
     }
   }
 

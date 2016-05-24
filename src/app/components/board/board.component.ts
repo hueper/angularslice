@@ -22,7 +22,7 @@ export class BoardComponent {
 
   settings: BoardSettings = new BoardSettings();
   
-  imageSrc: string = 'http://img.prntscr.com/img?url=http://i.imgur.com/jRMDo6h.png';
+  imageSrc: string = 'http://assets.snappages.com/main/images/flat_website.png';
   
   private newArea: NewArea = null;
 
@@ -48,15 +48,18 @@ export class BoardComponent {
   }
 
   onMouseDown(event) {
+    console.log('DOWN');
     this.newArea = new NewArea(event.layerX, event.layerY);
 
     return false;
   }
 
   onMouseMove(event) {
+    console.log('MOVE');
     if (this.inAreaCreation()) {
-      this.newArea.invalid = ! this.isValidArea(this.newArea);
-      this.newArea.setBottomRight(event.layerX, event.layerY);
+      this.newArea.addMovement(event.movementX, event.movementY);
+      console.log(this.newArea.diagonalX, this.newArea.diagonalY, this.newArea, event);
+      this.newArea.invalid = !this.isValidArea(this.newArea);
     } else {
       const component = this.findComponent(event.layerX, event.layerY);
       this.hoverComponent(component);
@@ -65,7 +68,19 @@ export class BoardComponent {
     return false;
   }
 
+  // isOverLapped(newArea) {
+  //   var overLappedComponents = this.components.filter((cmp) => {
+  //     return cmp.top < newArea.bottom
+  //       || cmp.bottom > newArea.top
+  //       || cmp.right < newArea.left
+  //       || cmp.left > newArea.right;
+  //   });
+  //
+  //   return overLappedComponents.length > 0;
+  // }
+
   onMouseUp(area) {
+    console.log('UP');
     if (this.isValidArea(this.newArea)) {
       this.areaCreate.emit(this.newArea);
     }
@@ -80,7 +95,7 @@ export class BoardComponent {
   }
 
   private isValidArea(area: Area): boolean {
-    return area.hasDimensions() && ! this.isCrossingOther(area);
+    return !this.isCrossingOther(area);
   }
 
   private isCrossingOther(area: Area): boolean {
