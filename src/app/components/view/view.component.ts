@@ -3,7 +3,7 @@ import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 
 import { BoardComponent } from '../board';
 import { SidebarComponent } from '../sidebar';
-import { ComponentData, Area } from '../../models';
+import { Component as ComponentModel, Area } from '../../models';
 
 @Component({
   selector: 'view',
@@ -15,8 +15,8 @@ import { ComponentData, Area } from '../../models';
   ]
 })
 export class ViewComponent {
-  components: ComponentData[] = [];
-  hoveredComponent: ComponentData = null;
+  components: ComponentModel[] = [];
+  hoveredComponent: ComponentModel = null;
 
   private componentCounter: number = 0;
 
@@ -24,11 +24,11 @@ export class ViewComponent {
   }
 
   onAreaCreate(area: Area) {
-    const cmp = new ComponentData(this.createComponentName(), area);
+    const cmp = new ComponentModel(this.createComponentName(), area);
     this.components.push(cmp);
   }
 
-  onComponentHover(component: ComponentData) {
+  onComponentHover(component: ComponentModel) {
     this.hoveredComponent = component;
   }
 

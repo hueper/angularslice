@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { Routes } from '@angular/router';
 
 import { AreaComponent } from '../area';
-import { BoardSettings, Area, ComponentData, NewArea } from '../../models';
+import { Settings, Area, Component as ComponentModel, NewArea } from '../../models';
 
 @Component({
   selector: 'board',
@@ -14,13 +14,13 @@ import { BoardSettings, Area, ComponentData, NewArea } from '../../models';
 })
 export class BoardComponent {
 
-  @Input() components: ComponentData[];
-  @Input() hoveredComponent: ComponentData[];
+  @Input() components: ComponentModel[];
+  @Input() hoveredComponent: ComponentModel[];
 
   @Output() areaCreate: EventEmitter<Area> = new EventEmitter<Area>();
-  @Output() componentHover: EventEmitter<ComponentData> = new EventEmitter<ComponentData>();
+  @Output() componentHover: EventEmitter<ComponentModel> = new EventEmitter<ComponentModel>();
 
-  settings: BoardSettings = new BoardSettings();
+  settings: Settings = new Settings();
   
   imageSrc: string = 'http://assets.snappages.com/main/images/flat_website.png';
   
@@ -102,13 +102,13 @@ export class BoardComponent {
     return !!(<any>this.components).find((cmp) => cmp.isCrossing(area));
   }
 
-  private findComponent(x, y): ComponentData {
+  private findComponent(x, y): ComponentModel {
     // TODO: optimizing the search
     const component = (<any>this.components).find((cmp) => cmp.contains(x, y));
     return component;
   }
 
-  private hoverComponent(component: ComponentData) {
+  private hoverComponent(component: ComponentModel) {
     // TODO: hovering 'null' means unhover... refactoring is needed later!
     if (!component) {
       this.componentHover.emit(null);

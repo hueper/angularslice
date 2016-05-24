@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { ComponentElement } from '../component-element';
-import { ComponentData } from '../../models';
+import { Component as ComponentModel } from '../../models';
 
 @Component({
   selector: 'sidebar',
@@ -13,10 +13,10 @@ import { ComponentData } from '../../models';
 })
 export class SidebarComponent {
 
-  @Input() components: ComponentData[];
-  @Input() hoveredComponent: ComponentData;
+  @Input() components: ComponentModel[];
+  @Input() hoveredComponent: ComponentModel;
 
-  @Output() componentHover: EventEmitter<ComponentData> = new EventEmitter<ComponentData>();
+  @Output() componentHover: EventEmitter<ComponentModel> = new EventEmitter<ComponentModel>();
 
   constructor() {
   }

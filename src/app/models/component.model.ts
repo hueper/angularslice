@@ -1,9 +1,14 @@
 import { Rectangle, BasicArea } from './area.model';
 
-export class ComponentData extends BasicArea {
+export class Component extends BasicArea {
 
+  id: number;
   // type: string; // eg: angular, react... - later
   name: string;
+
+  parentId: number;
+  childrenIds: number[];
+  imageIds: number[];
 
   constructor(name: string, areaData: Rectangle) {
     super(areaData.left, areaData.top, areaData.right, areaData.bottom);
@@ -15,7 +20,7 @@ export class ComponentData extends BasicArea {
     return this.name;
   }
 
-  equals(cmp: ComponentData): boolean {
+  equals(cmp: Component): boolean {
     return cmp === this;
   }
 

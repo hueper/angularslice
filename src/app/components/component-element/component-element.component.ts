@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ComponentData } from '../../models';
+import { Component as ComponentModel } from '../../models';
 
 @Component({
   selector: 'component-element',
@@ -9,7 +9,7 @@ import { ComponentData } from '../../models';
 })
 export class ComponentElement {
 
-  @Input() component: ComponentData;
+  @Input() component: ComponentModel;
   @Input() isHovered: boolean;
 
   constructor() {
