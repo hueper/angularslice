@@ -47,7 +47,7 @@ rm -rf ./dist
 git checkout website
 npm install
 npm run build
-cp -rf ./dist/ ./public
+cp -rf ./dist/. ./public
 
 
 cd ./public
