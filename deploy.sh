@@ -13,6 +13,12 @@ echo "Branch: $TRAVIS_BRANCH PR: $TRAVIS_PULL_REQUEST"
 # fi
 #
 
+echo "Cloning the repo"
+git clone https://github.com/budacode/angularslice.git
+
+echo "Moving into the cloned directory"
+cd angularslice
+
 echo "Setting git config"
 git config user.name "Budacode Deploy"
 git config user.email "opensource@budacode.com"
@@ -31,7 +37,7 @@ echo "Pulling website"
 git fetch origin develop
 echo "Cheking out to website"
 git checkout website
-echo "Creating websiteRevision variable"
+echo "Creating developRevision variable"
 websiteRevision=$(git rev-parse --short HEAD)
 
 mkdir dist
@@ -51,7 +57,7 @@ npm install
 npm run build
 cp -rf ./dist/ ../dist/
 
-cd dist
+cd ../dist
 
 git init
 git config user.name "Budacode Deploy"
