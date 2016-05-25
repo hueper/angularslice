@@ -14,12 +14,15 @@ echo "Branch: $TRAVIS_BRANCH PR: $TRAVIS_PULL_REQUEST"
 
 git fetch
 
+git pull master
 git checkout master
 masterRevision=$(git rev-parse --short HEAD)
 
+git pull develop
 git checkout develop
 developRevision=$(git rev-parse --short HEAD)
 
+git pull website
 git checkout website
 websiteRevision=$(git rev-parse --short HEAD)
 
