@@ -17,6 +17,9 @@ git clone https://github.com/budacode/angularslice.git
 
 cd angularslice
 
+git config user.name "Budacode Deploy"
+git config user.email "opensource@budacode.com"
+
 git pull origin master
 git checkout master
 masterRevision=$(git rev-parse --short HEAD)
