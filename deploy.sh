@@ -55,7 +55,7 @@ cp -rf ./dist/ ./public/preview
 git checkout website
 npm install
 npm run build
-cp -rf ./dist/ ./public/
+cp -rf ./dist/dist ./public/
 
 cd ./public
 
