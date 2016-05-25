@@ -57,7 +57,7 @@ npm install
 npm run build
 cp -rf ./dist/ ./public/
 
-cd ../dist
+cd ./public
 
 git init
 git config user.name "Budacode Deploy"
