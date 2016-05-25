@@ -40,22 +40,22 @@ git checkout website
 echo "Creating developRevision variable"
 websiteRevision=$(git rev-parse --short HEAD)
 
-mkdir dist
+mkdir public
 
 git checkout master
 npm install
 npm run build
-cp -rf ./dist/ ../dist/app
+cp -rf ./dist/ ./public/app
 
 git chekout develop
 npm install
 npm run build
-cp -rf ./dist/ ../dist/preview
+cp -rf ./dist/ ./public/preview
 
 git chekout website
 npm install
 npm run build
-cp -rf ./dist/ ../dist/
+cp -rf ./dist/ ./public/
 
 cd ../dist
 
