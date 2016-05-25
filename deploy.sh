@@ -47,12 +47,12 @@ npm install
 npm run build
 cp -rf ./dist/ ./public/app
 
-git chekout develop
+git checkout develop
 npm install
 npm run build
 cp -rf ./dist/ ./public/preview
 
-git chekout website
+git checkout website
 npm install
 npm run build
 cp -rf ./dist/ ./public/
