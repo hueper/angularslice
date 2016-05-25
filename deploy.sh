@@ -17,15 +17,15 @@ git clone https://github.com/budacode/angularslice.git
 
 cd angularslice
 
-git pull master
+git pull origin master
 git checkout master
 masterRevision=$(git rev-parse --short HEAD)
 
-git pull develop
+git pull origin develop
 git checkout develop
 developRevision=$(git rev-parse --short HEAD)
 
-git pull website
+git pull origin website
 git checkout website
 websiteRevision=$(git rev-parse --short HEAD)
 
