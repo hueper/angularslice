@@ -45,17 +45,20 @@ mkdir public
 git checkout master
 npm install
 npm run build
-cp -rf ./dist/ ./public/app
+cp -rf ./dist ./public/app
+rm -rf ./dist
 
 git checkout develop
 npm install
 npm run build
 cp -rf ./dist/ ./public/preview
+rm -rf ./dist
 
 git checkout website
 npm install
 npm run build
-cp -rf ./dist/dist ./public/
+cp -rf ./dist ./public
+
 
 cd ./public
 
