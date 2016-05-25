@@ -6,11 +6,11 @@ set -o errexit -o nounset
 echo "Branch: $TRAVIS_BRANCH PR: $TRAVIS_PULL_REQUEST"
 
 # We abort the deploy when the changes were not made against the master branch
-if [[ $TRAVIS_BRANCH = master ]] || [[ $TRAVIS_BRANCH = develop ]] || [[ $TRAVIS_BRANCH = website ]]
-then
-  echo "Deploy conditions didn't pass. No deploy."
-  exit 0
-fi
+# if [[ $TRAVIS_BRANCH = master ]] || [[ $TRAVIS_BRANCH = develop ]] || [[ $TRAVIS_BRANCH = website ]]
+# then
+#   echo "Deploy conditions didn't pass. No deploy."
+#   exit 0
+# fi
 
 git checkout master
 masterRevision=$(git rev-parse --short HEAD)
