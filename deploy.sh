@@ -27,7 +27,7 @@ echo "Creating masterRevision variable"
 masterRevision=$(git rev-parse --short HEAD)
 
 echo "Pulling develop"
-git pull origin develop
+git fetch origin develop
 echo "Cheking out to develop"
 git checkout develop
 echo "Creating developRevision variable"
