@@ -13,31 +13,21 @@ echo "Branch: $TRAVIS_BRANCH PR: $TRAVIS_PULL_REQUEST"
 # fi
 #
 
-echo "Cloning the repo"
 git clone https://github.com/budacode/angularslice.git
 
-echo "Moving into the cloned directory"
 cd angularslice
 
-echo "Setting git config"
 git config user.name "Budacode Deploy"
 git config user.email "opensource@budacode.com"
 
-echo "Creating masterRevision variable"
 masterRevision=$(git rev-parse --short HEAD)
 
-echo "Pulling develop"
 git fetch origin develop
-echo "Cheking out to develop"
 git checkout develop
-echo "Creating developRevision variable"
 developRevision=$(git rev-parse --short HEAD)
 
-echo "Pulling website"
 git fetch origin develop
-echo "Cheking out to website"
 git checkout website
-echo "Creating developRevision variable"
 websiteRevision=$(git rev-parse --short HEAD)
 
 mkdir public
@@ -45,7 +35,7 @@ mkdir public
 git checkout master
 npm install
 npm run build
-cp -rf ./dist ./public/app
+cp -rf ./dist/ ./public/app
 rm -rf ./dist
 
 git checkout develop
@@ -57,7 +47,7 @@ rm -rf ./dist
 git checkout website
 npm install
 npm run build
-cp -rf ./dist ./public
+cp -rf ./dist/ ./public
 
 
 cd ./public
