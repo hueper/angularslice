@@ -13,7 +13,7 @@ echo "Branch: $TRAVIS_BRANCH PR: $TRAVIS_PULL_REQUEST"
 # fi
 #
 
-git clone https://github.com/budacode/angularslice.git
+git clone https://github.com/budacode/angularslice.git .
 
 git pull master
 git checkout master
