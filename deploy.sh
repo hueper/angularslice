@@ -11,8 +11,9 @@ echo "Branch: $TRAVIS_BRANCH PR: $TRAVIS_PULL_REQUEST"
 #   echo "Deploy conditions didn't pass. No deploy."
 #   exit 0
 # fi
+#
 
-git fetch
+git clone https://github.com/budacode/angularslice.git
 
 git pull master
 git checkout master
