@@ -12,6 +12,8 @@ echo "Branch: $TRAVIS_BRANCH PR: $TRAVIS_PULL_REQUEST"
 #   exit 0
 # fi
 
+git fetch
+
 git checkout master
 masterRevision=$(git rev-parse --short HEAD)
 
