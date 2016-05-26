@@ -45,7 +45,7 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'add',
-        path: 'src/app/models/{{name}}.model.ts',
+        path: 'src/app/shared/models/{{name}}.model.ts',
         templateFile: 'plop-templates/model.ts',
       }
     ]
@@ -63,7 +63,7 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'add',
-        path: 'src/app/services/{{name}}.service.ts',
+        path: 'src/app/shared/services/{{name}}.service.ts',
         templateFile: 'plop-templates/service.ts',
       }
     ]

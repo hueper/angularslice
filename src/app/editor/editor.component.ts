@@ -1,20 +1,19 @@
 import { Component } from '@angular/core';
-import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 
 import { BoardComponent } from '../board';
 import { SidebarComponent } from '../sidebar';
-import { Component as ComponentModel, Area } from '../../models';
+import { Component as ComponentModel, Rectangle } from '../shared/models';
 
 @Component({
-  selector: 'view',
-  template: require('./view.component.jade')(),
-  styles: [ require('./view.component.scss') ],
+  selector: 'editor',
+  template: require('./editor.component.jade')(),
+  styles: [ require('./editor.component.scss') ],
   directives: [
     BoardComponent,
     SidebarComponent
   ]
 })
-export class ViewComponent {
+export class EditorComponent {
   components: ComponentModel[] = [];
   hoveredComponent: ComponentModel = null;
 
@@ -23,7 +22,7 @@ export class ViewComponent {
   constructor() {
   }
 
-  onAreaCreate(area: Area) {
+  onAreaCreate(area: Rectangle) {
     const cmp = new ComponentModel(this.createComponentName(), area);
     this.components.push(cmp);
   }

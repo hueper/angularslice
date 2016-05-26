@@ -3,17 +3,15 @@ export interface Rectangle {
   left: number;
   bottom: number;
   right: number;
-}
 
-export interface Area extends Rectangle {
   getWidth(): number;
   getHeight(): number;
   hasDimensions(): boolean;
   contains(x: number, y: number): boolean;
-  isCrossing(area: Area): boolean;
+  isCrossing(rectangle: Rectangle): boolean;
 }
 
-export class BasicArea implements Area {
+export class BasicArea implements Rectangle {
   top: number;
   left: number;
   bottom: number;
@@ -44,27 +42,27 @@ export class BasicArea implements Area {
     return x >= this.left && x <= this.right && y >= this.top && y <= this.bottom;
   }
 
-  isCrossing(area: Area): boolean {
+  isCrossing(area: Rectangle): boolean {
     return this.isCrossingHorizontally(area) || this.isCrossingVertically(area);
   }
 
-  private isCrossingHorizontally(area: Area): boolean {
+  private isCrossingHorizontally(area: Rectangle): boolean {
     return area.left < this.right && area.right > this.left &&
       ((area.top > this.top && area.top < this.bottom) || (area.bottom > this.top && area.bottom < this.bottom));
   }
 
-  private isCrossingVertically(area: Area): boolean {
+  private isCrossingVertically(area: Rectangle): boolean {
     return area.top < this.bottom && area.bottom > this.top &&
       ((area.left > this.left && area.left < this.right) || (area.right > this.left && area.right < this.right));
   }
 }
 
 export class NewArea extends BasicArea {
-  public baseX: number;
-  public baseY: number;
+  private baseX: number;
+  private baseY: number;
 
-  public diagonalX: number;
-  public diagonalY: number;
+  private diagonalX: number;
+  private diagonalY: number;
 
   constructor(baseX: number, baseY: number) {
     super(baseX, baseY, baseX, baseY);

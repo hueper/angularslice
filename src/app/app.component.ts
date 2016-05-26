@@ -7,7 +7,7 @@ import {
   ROUTER_DIRECTIVES
 } from '@angular/router';
 
-import { ProjectComponent } from './components/project';
+import { EditorComponent } from './editor';
 
 
 @Injectable()
@@ -24,8 +24,7 @@ import { ProjectComponent } from './components/project';
   template: require('./app.component.jade')()
 })
 @Routes([
-  { path: '/projects/:projectId', component: ProjectComponent },
-  { path: '/', component: ProjectComponent}
+  { path: '/', component: EditorComponent}
 ])
 export class AppComponent implements AfterViewInit {
 

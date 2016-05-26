@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { ComponentElement } from '../component-element';
-import { Component as ComponentModel } from '../../models';
+import { ComponentElement } from './component-element';
+import { Component as ComponentModel } from '../shared/models';
 
 @Component({
   selector: 'sidebar',

@@ -1,10 +1,11 @@
-import { Area } from './area.model';
+import { Rectangle } from './area.model';
+import { BasicModel } from './basic-model.model';
 
-export class Image {
+export class Image extends BasicModel {
   public id: number;
   public rawImageId: number;
   public name: string;
-  public areas: Area[];
+  public areas: Rectangle[];
 
   // To show just parts of the image
   public x: number = 0;
@@ -13,6 +14,6 @@ export class Image {
   public height: number;
 
   constructor() {
-
+    super();
   }
 }

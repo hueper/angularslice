@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { Routes } from '@angular/router';
 
-import { AreaComponent } from '../area';
-import { Settings, Area, Component as ComponentModel, NewArea } from '../../models';
+import { AreaComponent } from './area';
+import { Settings, Rectangle, RawImage, Component as ComponentModel, NewArea } from '../shared/models';
 
 @Component({
   selector: 'board',
@@ -17,7 +17,7 @@ export class BoardComponent {
   @Input() components: ComponentModel[];
   @Input() hoveredComponent: ComponentModel[];
 
-  @Output() areaCreate: EventEmitter<Area> = new EventEmitter<Area>();
+  @Output() areaCreate: EventEmitter<Rectangle> = new EventEmitter<Rectangle>();
   @Output() componentHover: EventEmitter<ComponentModel> = new EventEmitter<ComponentModel>();
 
   settings: Settings = new Settings();
@@ -32,15 +32,7 @@ export class BoardComponent {
 
   previewFile(event) {
     var file    = event.srcElement.files[0];
-    var reader  = new FileReader();
-
-    reader.addEventListener('load', (e:any) => {
-      this.imageSrc = e.currentTarget.result;
-    }, false);
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    let rawImage = new RawImage(file);
   }
 
   zoomPercent() {
@@ -48,17 +40,14 @@ export class BoardComponent {
   }
 
   onMouseDown(event) {
-    console.log('DOWN');
     this.newArea = new NewArea(event.layerX, event.layerY);
 
     return false;
   }
 
   onMouseMove(event) {
-    console.log('MOVE');
     if (this.inAreaCreation()) {
       this.newArea.addMovement(event.movementX, event.movementY);
-      console.log(this.newArea.diagonalX, this.newArea.diagonalY, this.newArea, event);
       this.newArea.invalid = !this.isValidArea(this.newArea);
     } else {
       const component = this.findComponent(event.layerX, event.layerY);
@@ -80,7 +69,6 @@ export class BoardComponent {
   // }
 
   onMouseUp(area) {
-    console.log('UP');
     if (this.isValidArea(this.newArea)) {
       this.areaCreate.emit(this.newArea);
     }
@@ -94,11 +82,11 @@ export class BoardComponent {
     return this.newArea !== null;
   }
 
-  private isValidArea(area: Area): boolean {
+  private isValidArea(area: Rectangle): boolean {
     return !this.isCrossingOther(area);
   }
 
-  private isCrossingOther(area: Area): boolean {
+  private isCrossingOther(area: Rectangle): boolean {
     return !!(<any>this.components).find((cmp) => cmp.isCrossing(area));
   }
 

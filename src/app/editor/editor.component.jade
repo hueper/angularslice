@@ -1,0 +1,8 @@
+div.c-editor
+  sidebar.c-editor__sidebar([components]="components", [hoveredComponent]="hoveredComponent", (componentHover)="onComponentHover($event)")
+  board.c-editor__board(
+    [components]="components",
+    [hoveredComponent]="hoveredComponent",
+    (areaCreate)="onAreaCreate($event)",
+    (componentHover)="onComponentHover($event)"
+  )

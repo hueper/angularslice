@@ -1,3 +1,5 @@
+
+
 @Component({
   selector: '{{name}}',
   template: require('./{{name}}.jade')(),

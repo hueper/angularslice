@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Component as ComponentModel } from '../../models';
+import { Component as ComponentModel } from '../../shared/models';
 
 @Component({
   selector: 'component-element',
