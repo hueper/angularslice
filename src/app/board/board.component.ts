@@ -23,7 +23,8 @@ export class BoardComponent {
   settings: Settings = new Settings();
   
   imageSrc: string = 'http://assets.snappages.com/main/images/flat_website.png';
-  
+  areaStyle: any = {};
+
   private newArea: NewArea = null;
 
   constructor() {
@@ -41,13 +42,14 @@ export class BoardComponent {
 
   onMouseDown(event) {
     this.newArea = new NewArea(event.layerX, event.layerY);
+    this.areaStyle['pointer-events'] = 'none';
 
     return false;
   }
 
   onMouseMove(event) {
     if (this.inAreaCreation()) {
-      this.newArea.addMovement(event.movementX, event.movementY);
+      this.newArea.setDiagonalCoordinates(event.layerX, event.layerY);
       this.newArea.invalid = !this.isValidArea(this.newArea);
     } else {
       const component = this.findComponent(event.layerX, event.layerY);
@@ -74,6 +76,7 @@ export class BoardComponent {
     }
 
     this.newArea = null;
+    this.areaStyle = {};
 
     return false;
   }

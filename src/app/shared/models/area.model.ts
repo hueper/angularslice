@@ -78,7 +78,12 @@ export class NewArea extends BasicArea {
     this.diagonalX += movementX;
     this.diagonalY += movementY;
 
-    console.log(this.diagonalY);
+    this.setBasicCoordinates();
+  }
+
+  setDiagonalCoordinates(diagonalX: number, diagonalY: number) {
+    this.diagonalX = diagonalX;
+    this.diagonalY = diagonalY;
 
     this.setBasicCoordinates();
   }
