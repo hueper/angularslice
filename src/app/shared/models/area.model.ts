@@ -42,6 +42,16 @@ export class BasicArea implements Rectangle {
     return x >= this.left && x <= this.right && y >= this.top && y <= this.bottom;
   }
 
+  inEachOther(area: Rectangle): boolean {
+    let contains = area.left >= this.left && area.right <= this.right && area.top >= this.top && area.bottom <= this.bottom;
+    let isContained = area.left <= this.left && area.right >= this.right && area.top <= this.top && area.bottom >= this.bottom;
+    return contains || isContained;
+  }
+
+  overLaps(area: Rectangle): boolean {
+    return this.isCrossing(area) || this.inEachOther(area);
+  }
+
   isCrossing(area: Rectangle): boolean {
     return this.isCrossingHorizontally(area) || this.isCrossingVertically(area);
   }

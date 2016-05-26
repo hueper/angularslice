@@ -90,7 +90,7 @@ export class BoardComponent {
   }
 
   private isCrossingOther(area: Rectangle): boolean {
-    return !!(<any>this.components).find((cmp) => cmp.isCrossing(area));
+    return !!(<any>this.components).find((cmp) => cmp.overLaps(area));
   }
 
   private findComponent(x, y): ComponentModel {
