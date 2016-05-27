@@ -2,7 +2,7 @@ import 'zone.js/dist/zone';
 import 'reflect-metadata/Reflect.js';
 
 // RxJS 5
-import 'rxjs/Rx';
+import 'expose?Rx!rxjs/Rx';
 
 import 'expose?_!lodash';
 

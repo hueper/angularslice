@@ -1,13 +1,14 @@
-import { Component, Input, Output, EventEmitter, NgZone } from '@angular/core';
-import { Routes } from '@angular/router';
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 import { AreaComponent } from './area';
-import { Settings, Rectangle, RawImage, Component as ComponentModel, NewArea } from '../shared/models';
+import { Image, Settings, Rectangle, RawImage, Component as ComponentModel, NewArea } from '../shared/models';
+import { RawImageService, ImageService } from '../shared/services';
 
 @Component({
   selector: 'board',
   styles: [ require('./board.component.scss') ],
   template: require('./board.component.jade')(),
+  providers: [RawImageService, ImageService],
   directives: [
     AreaComponent
   ]
@@ -20,24 +21,40 @@ export class BoardComponent {
   @Output() areaCreate: EventEmitter<Rectangle> = new EventEmitter<Rectangle>();
   @Output() componentHover: EventEmitter<ComponentModel> = new EventEmitter<ComponentModel>();
 
-  settings: Settings = new Settings();
-  
-  imageSrc: string = 'http://assets.snappages.com/main/images/flat_website.png';
+  currentImage: Image = null;
   areaStyle: any = {};
+  imageContainerStyle: any = { 'width': '0', 'height': '0', 'background-image': 'url()' };
 
   private newArea: NewArea = null;
 
-  constructor() {
-    this.settings.zoom = 100;
+  constructor(
+    public rawImageService: RawImageService,
+    public imageService: ImageService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
+    // Look for new images without filtering
+    this.imageService.imagesSource.subscribe((data) => {
+      if (!data.length) return;
+      this.currentImage = data[0];
+
+      // this.imageContainerStyle['display'] = 'initial';
+      this.imageContainerStyle['width'] = this.currentImage.width + 'px';
+      this.imageContainerStyle['height'] = this.currentImage.height + 'px';
+      this.imageContainerStyle['background-image'] = 'url(' + this.rawImageService.findOne({ id: this.currentImage.rawImageId }).binaryData + ')',
+
+      this.changeDetectorRef.detectChanges();
+      console.log('was triggered', data, this.imageContainerStyle);
+    });
   }
 
-  previewFile(event) {
-    var file    = event.srcElement.files[0];
-    let rawImage = new RawImage(file);
+  loadFile(event) {
+    var file  = event.srcElement.files[0];
+    this.rawImageService.createFromFile(file);
   }
 
-  zoomPercent() {
-    return `${this.settings.zoom}%`;
+  onMouseLeave(event) {
+    // TODO: create the snap effect
+    console.log(event);
   }
 
   onMouseDown(event) {

@@ -1,21 +1,13 @@
 .c-board
-  //- div
-    input([(ngModel)]="settings.zoom")
-  input(type="file", (change)="previewFile($event)")
-  //br
-  //img([src]="imageSrc", alt="Image preview...")
+  input(type="file", (change)="loadFile($event)")
 
   .c-board__workingSpace
-    .c-board__areas(
-      [ngStyle]="{'width': '500px', 'height': '400px', 'background-image': 'url(' + imageSrc + ')'}",
+    .c-board__imageContainer(
+      [ngStyle]="imageContainerStyle",
       (mousedown)="onMouseDown($event)",
       (mousemove)="onMouseMove($event)",
+      (mouseleave)="onMouseLeave($event)",
       (mouseup)="onMouseUp($event)"
     )
       area(*ngFor="let cmp of components", [areaData]="cmp", [isHovered]="cmp.equals(hoveredComponent)", [ngStyle]="areaStyle")
       area([areaData]="newArea", *ngIf="inAreaCreation()", [ngStyle]="areaStyle")
-      //img.c-board__surface(
-      //  [src]="imageSrc",
-      //  alt="Image preview...",
-      //  (mousedown)="onMouseDown($event)",
-      //)
