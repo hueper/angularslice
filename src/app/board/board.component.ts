@@ -2,8 +2,8 @@ import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angu
 
 import { AreaComponent } from './area';
 import { ImageBarComponent } from './image-bar';
-import { Image, Area, RawImage, Folder, NewArea } from '../shared/models';
-import { RawImageService, ImageService } from '../shared/services';
+import { Area, Folder, Image, NewArea, RawImage } from '../shared/models';
+import { AreaService, ImageService, RawImageService } from '../shared/services';
 
 @Component({
   selector: 'board',
@@ -17,23 +17,26 @@ import { RawImageService, ImageService } from '../shared/services';
 })
 export class BoardComponent {
 
-  @Input() components: Folder[];
-  @Input() hoveredComponent: Folder[];
-
   @Output() areaCreate: EventEmitter<Area> = new EventEmitter<Area>();
-  @Output() componentHover: EventEmitter<Folder> = new EventEmitter<Folder>();
 
   currentImage: Image = null;
   areaStyle: any = {};
   imageContainerStyle: any = { 'width': '0', 'height': '0', 'background-image': 'url()', 'background-size': 'contain' };
 
   private newArea: NewArea = null;
+  private areas: Area[] = [];
 
   constructor(
-    public rawImageService: RawImageService,
-    public imageService: ImageService,
+    private areaService: AreaService,
+    private rawImageService: RawImageService,
+    private imageService: ImageService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
+
+    // Subscribe for areas
+    this.areaService.dataSource.subscribe((areas: Area[]) => {
+      this.areas = areas;
+    });
 
     // Look for new images without filtering
     this.imageService.dataSource.subscribe((data: Image[]) => {
@@ -81,20 +84,18 @@ export class BoardComponent {
   }
 
   onMouseMove(event) {
-    if (this.inAreaCreation()) {
+    if (this.newArea) {
       this.newArea.setDiagonalCoordinates(event.layerX, event.layerY);
-      this.newArea.invalid = !this.isValidArea(this.newArea);
-    } else {
-      const component = this.findComponent(event.layerX, event.layerY);
-      this.hoverComponent(component);
+      this.newArea.invalid = this.isCrossingOther(this.newArea);
     }
 
     return false;
   }
 
   onMouseUp(area) {
-    if (this.isValidArea(this.newArea)) {
-      this.areaCreate.emit(this.newArea);
+    if (!this.isCrossingOther(this.newArea)) {
+      this.areaService.create(this.newArea);
+      // TODO: modal dialog, create folder, files image...
     }
 
     this.newArea = null;
@@ -103,31 +104,13 @@ export class BoardComponent {
     return false;
   }
 
-  inAreaCreation() {
-    return this.newArea !== null;
-  }
-
-  private isValidArea(area: Area): boolean {
-    return !this.isCrossingOther(area);
-  }
-
   private isCrossingOther(area: Area): boolean {
-    return !!(<any>this.components).find((cmp) => cmp.overLaps(area));
+    return !!(<any>this.areas).find((cmp) => cmp.overLaps(area));
   }
 
   private findComponent(x, y): Folder {
-    // TODO: optimizing the search
-    const component = (<any>this.components).find((cmp) => cmp.contains(x, y));
+    const component = (<any>this.areas).find((cmp) => cmp.contains(x, y));
     return component;
-  }
-
-  private hoverComponent(component: Folder) {
-    // TODO: hovering 'null' means unhover... refactoring is needed later!
-    if (!component) {
-      this.componentHover.emit(null);
-    } else {
-      this.componentHover.emit(component);
-    }
   }
 
 }

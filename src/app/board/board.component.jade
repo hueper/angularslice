@@ -9,5 +9,5 @@
       (mouseleave)="onMouseLeave($event)",
       (mouseup)="onMouseUp($event)"
     )
-      area(*ngFor="let cmp of components", [areaData]="cmp", [isHovered]="cmp.equals(hoveredComponent)", [ngStyle]="areaStyle")
+      area(*ngFor="let area of areas", [areaData]="area", [ngStyle]="areaStyle")
       area([areaData]="newArea", *ngIf="inAreaCreation()", [ngStyle]="areaStyle")

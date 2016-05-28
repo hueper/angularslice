@@ -26,21 +26,11 @@ export class Area implements IArea {
 
   }
 
-  get left() {
-    return (this.width >= 0) ? this.x : this.x + this.width;
-  }
-
-  get right() {
-    return (this.width < 0) ? this.x : this.x + this.width;
-  }
-
-  get top() {
-    return (this.height >= 0) ? this.y : this.y + this.height;
-  }
-
-  get bottom() {
-    return (this.height< 0) ? this.y : this.y + this.height;
-  }
+  // Aliases for x, y, height, width
+  get left() { return this.x; }
+  get right() { return this.x + this.width; }
+  get top() { return this.y }
+  get bottom() { return this.y + this.height; }
 
   getWidth(): number {
     return Math.abs(this.right - this.left);
@@ -112,23 +102,11 @@ export class NewArea extends Area {
   }
 
   setBasicCoordinates() {
-    // Set left-right
-    if (this.baseX < this.diagonalX) {
-      this.left = this.baseX;
-      this.right = this.diagonalX;
-    } else {
-      this.left = this.diagonalX;
-      this.right = this.baseX;
-    }
+    this.x = (this.baseX < this.diagonalX) ? this.baseX : this.diagonalX;
+    this.y = (this.baseY < this.diagonalY) ? this.baseY : this.diagonalY;
 
-    // Set top-bottom
-    if (this.baseY < this.diagonalY) {
-      this.top = this.baseY;
-      this.bottom = this.diagonalY;
-    } else {
-      this.top = this.diagonalY;
-      this.bottom = this.baseY;
-    }
+    this.width = Math.abs(this.baseX - this.diagonalX);
+    this.height = Math.abs(this.baseY - this.diagonalY);
   }
 
 }
