@@ -1,25 +1,17 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { RawImage } from '../models';
-import { ImageService } from './image.service';
+import { BaseService } from './base.service';
 
 @Injectable()
-export class RawImageService {
-  rawImages: RawImage[] = [];
-  rawImagesSource: BehaviorSubject<RawImage[]> = new BehaviorSubject([]);
-  imageService: ImageService;
-  
-  constructor(imageService: ImageService) {
-    this.imageService = imageService;
+export class RawImageService extends BaseService<RawImage> {
+
+  constructor() {
+    super();
   }
   
   create(rawImage: RawImage) {
-    this.rawImages.push(rawImage);
-    this.rawImagesSource.next(this.rawImages);
-    
-    // Create an image from this data !
-    this.imageService.createFromRawImage(rawImage);
+    super.create(rawImage);
   }
 
   createFromFile(file: any) {
@@ -41,22 +33,6 @@ export class RawImageService {
     if (file) {
       reader.readAsDataURL(file);
     }
-    
-  }
-  
-  findOne(filterObject: any): RawImage {
-    return _.find(this.rawImages, filterObject);
-  }
-
-  find(filterObject: any): RawImage[] {
-    return _.filter(this.rawImages, filterObject);
-  }
-  
-  update() {
-    
-  }
-  
-  delete() {
     
   }
   

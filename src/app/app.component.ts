@@ -2,7 +2,6 @@ import { Component, Injectable, AfterViewInit, ViewContainerRef } from '@angular
 import { Modal, BS_MODAL_PROVIDERS } from 'angular2-modal/plugins/bootstrap';
 import {
   Routes,
-  Route,
   Router,
   ROUTER_DIRECTIVES
 } from '@angular/router';

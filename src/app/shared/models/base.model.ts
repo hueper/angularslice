@@ -1,6 +1,6 @@
 import { Utils } from '../services';
 
-export class BasicModel {
+export class BaseModel {
   public id: number;
 
   constructor() {

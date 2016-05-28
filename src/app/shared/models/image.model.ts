@@ -1,8 +1,6 @@
-import { BasicModel } from './basic-model.model';
+import { BaseModel } from './base.model';
 
-export class Image extends BasicModel {
-  public id: number;
-
+export class Image extends BaseModel {
   constructor(
     public rawImageId: number,
     public name: string,

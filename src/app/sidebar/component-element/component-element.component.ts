@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Component as ComponentModel } from '../../shared/models';
+import { Folder } from '../../shared/models';
 
 @Component({
   selector: 'component-element',
@@ -9,7 +9,7 @@ import { Component as ComponentModel } from '../../shared/models';
 })
 export class ComponentElement {
 
-  @Input() component: ComponentModel;
+  @Input() component: Folder;
   @Input() isHovered: boolean;
 
   constructor() {

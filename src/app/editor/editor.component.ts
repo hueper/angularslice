@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { BoardComponent } from '../board';
 import { SidebarComponent } from '../sidebar';
-import { Component as ComponentModel, Rectangle } from '../shared/models';
+import { Folder, Area } from '../shared/models';
 
 @Component({
   selector: 'editor',
@@ -14,20 +14,20 @@ import { Component as ComponentModel, Rectangle } from '../shared/models';
   ]
 })
 export class EditorComponent {
-  components: ComponentModel[] = [];
-  hoveredComponent: ComponentModel = null;
+  components: Folder[] = [];
+  hoveredComponent: Folder = null;
 
   private componentCounter: number = 0;
 
   constructor() {
   }
 
-  onAreaCreate(area: Rectangle) {
-    const cmp = new ComponentModel(this.createComponentName(), area);
+  onAreaCreate(area: Area) {
+    const cmp = new Folder(null, this.createComponentName());
     this.components.push(cmp);
   }
 
-  onComponentHover(component: ComponentModel) {
+  onComponentHover(component: Folder) {
     this.hoveredComponent = component;
   }
 

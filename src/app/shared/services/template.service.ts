@@ -1,10 +1,10 @@
 import { Injectable} from '@angular/core';
 
 import { BaseService } from './base.service';
-import { Area } from '../models';
+import { Template } from '../models';
 
 @Injectable()
-export class AreaService extends BaseService<Area> {
+export class TemplateService extends BaseService<Template> {
   constructor() {
     super();
   }

@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 import { AreaComponent } from './area';
-import { Image, Settings, Rectangle, RawImage, Component as ComponentModel, NewArea } from '../shared/models';
+import { ImageBarComponent } from './image-bar';
+import { Image, Area, RawImage, Folder, NewArea } from '../shared/models';
 import { RawImageService, ImageService } from '../shared/services';
 
 @Component({
@@ -10,20 +11,21 @@ import { RawImageService, ImageService } from '../shared/services';
   template: require('./board.component.jade')(),
   providers: [RawImageService, ImageService],
   directives: [
-    AreaComponent
+    AreaComponent,
+    ImageBarComponent,
   ]
 })
 export class BoardComponent {
 
-  @Input() components: ComponentModel[];
-  @Input() hoveredComponent: ComponentModel[];
+  @Input() components: Folder[];
+  @Input() hoveredComponent: Folder[];
 
-  @Output() areaCreate: EventEmitter<Rectangle> = new EventEmitter<Rectangle>();
-  @Output() componentHover: EventEmitter<ComponentModel> = new EventEmitter<ComponentModel>();
+  @Output() areaCreate: EventEmitter<Area> = new EventEmitter<Area>();
+  @Output() componentHover: EventEmitter<Folder> = new EventEmitter<Folder>();
 
   currentImage: Image = null;
   areaStyle: any = {};
-  imageContainerStyle: any = { 'width': '0', 'height': '0', 'background-image': 'url()' };
+  imageContainerStyle: any = { 'width': '0', 'height': '0', 'background-image': 'url()', 'background-size': 'contain' };
 
   private newArea: NewArea = null;
 
@@ -32,19 +34,33 @@ export class BoardComponent {
     public imageService: ImageService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
+
     // Look for new images without filtering
-    this.imageService.imagesSource.subscribe((data) => {
+    this.imageService.dataSource.subscribe((data: Image[]) => {
       if (!data.length) return;
       this.currentImage = data[0];
 
       // this.imageContainerStyle['display'] = 'initial';
       this.imageContainerStyle['width'] = this.currentImage.width + 'px';
       this.imageContainerStyle['height'] = this.currentImage.height + 'px';
-      this.imageContainerStyle['background-image'] = 'url(' + this.rawImageService.findOne({ id: this.currentImage.rawImageId }).binaryData + ')',
+      this.imageContainerStyle['background-image'] = 'url(' + this.imageService.getBinaryData(this.currentImage) + ')',
 
       this.changeDetectorRef.detectChanges();
-      console.log('was triggered', data, this.imageContainerStyle);
     });
+
+    setTimeout(() => {
+      // For testing, some init images
+      let img0 = 'http://s33.postimg.org/aqd0rerum/page1.jpg';
+      let img1 = 'http://s33.postimg.org/53ufz5tha/page2.jpg';
+      let img2 = 'http://s33.postimg.org/gu8dgjm9q/page3.jpg';
+      let img3 = 'http://s33.postimg.org/kdp998iny/page4.jpg';
+
+      this.rawImageService.create(new RawImage(img0, 700, 800));
+      this.rawImageService.create(new RawImage(img1, 700, 800));
+      this.rawImageService.create(new RawImage(img2, 700, 800));
+      this.rawImageService.create(new RawImage(img3, 700, 800));
+
+    }, 500);
   }
 
   loadFile(event) {
@@ -76,17 +92,6 @@ export class BoardComponent {
     return false;
   }
 
-  // isOverLapped(newArea) {
-  //   var overLappedComponents = this.components.filter((cmp) => {
-  //     return cmp.top < newArea.bottom
-  //       || cmp.bottom > newArea.top
-  //       || cmp.right < newArea.left
-  //       || cmp.left > newArea.right;
-  //   });
-  //
-  //   return overLappedComponents.length > 0;
-  // }
-
   onMouseUp(area) {
     if (this.isValidArea(this.newArea)) {
       this.areaCreate.emit(this.newArea);
@@ -102,21 +107,21 @@ export class BoardComponent {
     return this.newArea !== null;
   }
 
-  private isValidArea(area: Rectangle): boolean {
+  private isValidArea(area: Area): boolean {
     return !this.isCrossingOther(area);
   }
 
-  private isCrossingOther(area: Rectangle): boolean {
+  private isCrossingOther(area: Area): boolean {
     return !!(<any>this.components).find((cmp) => cmp.overLaps(area));
   }
 
-  private findComponent(x, y): ComponentModel {
+  private findComponent(x, y): Folder {
     // TODO: optimizing the search
     const component = (<any>this.components).find((cmp) => cmp.contains(x, y));
     return component;
   }
 
-  private hoverComponent(component: ComponentModel) {
+  private hoverComponent(component: Folder) {
     // TODO: hovering 'null' means unhover... refactoring is needed later!
     if (!component) {
       this.componentHover.emit(null);

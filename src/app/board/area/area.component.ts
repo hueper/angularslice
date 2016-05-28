@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Rectangle } from '../../shared/models';
+import { Area } from '../../shared/models';
 
 @Component({
   selector: 'area',
@@ -9,7 +9,7 @@ import { Rectangle } from '../../shared/models';
 })
 export class AreaComponent {
 
-  @Input() areaData: Rectangle;
+  @Input() areaData: Area;
   @Input() isHovered: boolean;
 
   constructor() {

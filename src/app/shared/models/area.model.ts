@@ -1,29 +1,45 @@
-export interface Rectangle {
+export interface IArea {
   top: number;
   left: number;
   bottom: number;
   right: number;
+
+  // Maybe this is not really an Area property, as it's valid just while editing
+  invalid: boolean;
 
   getWidth(): number;
   getHeight(): number;
   hasDimensions(): boolean;
   contains(x: number, y: number): boolean;
-  isCrossing(rectangle: Rectangle): boolean;
+  isCrossing(rectangle: IArea): boolean;
 }
 
-export class BasicArea implements Rectangle {
-  top: number;
-  left: number;
-  bottom: number;
-  right: number;
+export class Area implements IArea {
+  public invalid: boolean = false;
 
-  invalid: boolean = false;
+  constructor(
+    public x: number,
+    public y: number,
+    public width: number,
+    public height: number
+  ) {
 
-  constructor(left, top, right, bottom) {
-    this.left = left;
-    this.top = top;
-    this.right = right;
-    this.bottom = bottom;
+  }
+
+  get left() {
+    return (this.width >= 0) ? this.x : this.x + this.width;
+  }
+
+  get right() {
+    return (this.width < 0) ? this.x : this.x + this.width;
+  }
+
+  get top() {
+    return (this.height >= 0) ? this.y : this.y + this.height;
+  }
+
+  get bottom() {
+    return (this.height< 0) ? this.y : this.y + this.height;
   }
 
   getWidth(): number {
@@ -42,43 +58,40 @@ export class BasicArea implements Rectangle {
     return x >= this.left && x <= this.right && y >= this.top && y <= this.bottom;
   }
 
-  inEachOther(area: Rectangle): boolean {
+  inEachOther(area: Area): boolean {
     let contains = area.left >= this.left && area.right <= this.right && area.top >= this.top && area.bottom <= this.bottom;
     let isContained = area.left <= this.left && area.right >= this.right && area.top <= this.top && area.bottom >= this.bottom;
     return contains || isContained;
   }
 
-  overLaps(area: Rectangle): boolean {
+  overLaps(area: Area): boolean {
     return this.isCrossing(area) || this.inEachOther(area);
   }
 
-  isCrossing(area: Rectangle): boolean {
+  isCrossing(area: Area): boolean {
     return this.isCrossingHorizontally(area) || this.isCrossingVertically(area);
   }
 
-  private isCrossingHorizontally(area: Rectangle): boolean {
+  private isCrossingHorizontally(area: Area): boolean {
     return area.left < this.right && area.right > this.left &&
       ((area.top > this.top && area.top < this.bottom) || (area.bottom > this.top && area.bottom < this.bottom));
   }
 
-  private isCrossingVertically(area: Rectangle): boolean {
+  private isCrossingVertically(area: Area): boolean {
     return area.top < this.bottom && area.bottom > this.top &&
       ((area.left > this.left && area.left < this.right) || (area.right > this.left && area.right < this.right));
   }
 }
 
-export class NewArea extends BasicArea {
-  private baseX: number;
-  private baseY: number;
-
+export class NewArea extends Area {
   private diagonalX: number;
   private diagonalY: number;
 
-  constructor(baseX: number, baseY: number) {
+  constructor(
+    private baseX: number,
+    private baseY: number
+  ) {
     super(baseX, baseY, baseX, baseY);
-
-    this.baseX = baseX;
-    this.baseY = baseY;
 
     this.diagonalX = baseX;
     this.diagonalY = baseY;
