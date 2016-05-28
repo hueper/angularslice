@@ -10,4 +10,4 @@
       (mouseup)="onMouseUp($event)"
     )
       area(*ngFor="let area of areas", [areaData]="area", [ngStyle]="areaStyle")
-      area([areaData]="newArea", *ngIf="inAreaCreation()", [ngStyle]="areaStyle")
+      area([areaData]="newArea", *ngIf="newArea", [ngStyle]="areaStyle")

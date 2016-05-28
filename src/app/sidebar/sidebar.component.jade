@@ -1,2 +1,2 @@
 .c-sidebar
-  component-element(*ngFor="let cmp of components", [component]="cmp", [isHovered]="cmp.equals(hoveredComponent)", (mouseover)="onMouseOver(cmp)")
+  component-element(*ngFor="let folder of folders", [folder]="folder")

@@ -8,7 +8,6 @@ import {
 
 import { EditorComponent } from './editor';
 
-
 @Injectable()
 @Component({
   selector: 'app',
@@ -27,9 +26,11 @@ import { EditorComponent } from './editor';
 ])
 export class AppComponent implements AfterViewInit {
 
-  constructor(private router: Router,
-              private modal: Modal,
-              private viewContainer: ViewContainerRef) {
+  constructor(
+    private router: Router,
+    private modal: Modal,
+    private viewContainer: ViewContainerRef
+  ) {
 
     modal.defaultViewContainer = viewContainer;
   }

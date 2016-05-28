@@ -81,7 +81,7 @@ export class NewArea extends Area {
     private baseX: number,
     private baseY: number
   ) {
-    super(baseX, baseY, baseX, baseY);
+    super(baseX, baseY, 0, 0);
 
     this.diagonalX = baseX;
     this.diagonalY = baseY;

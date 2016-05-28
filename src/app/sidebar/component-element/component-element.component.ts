@@ -9,8 +9,7 @@ import { Folder } from '../../shared/models';
 })
 export class ComponentElement {
 
-  @Input() component: Folder;
-  @Input() isHovered: boolean;
+  @Input() folder: Folder;
 
   constructor() {
   }
