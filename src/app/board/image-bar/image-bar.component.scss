@@ -1,3 +1,14 @@
 .image-bar {
+  border: 3px solid pink;
+
+  .box {
+    margin-left: 10px;
+    width: 3000px;
+  }
+
+  .addImageBox {
+    border: 1px gray dashed;
+  }
+
 
 }

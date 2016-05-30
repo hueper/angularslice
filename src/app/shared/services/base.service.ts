@@ -1,15 +1,18 @@
 import { Injectable} from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
+import { BaseModel } from '../models';
+
+
 
 @Injectable()
-export class BaseService<T> {
-  data: any[] = [];
+export class BaseService<T extends BaseModel>{
+  data: T[] = [];
   dataSource: BehaviorSubject<T[]> = new BehaviorSubject([]);
   // Note: if you go with type 'T', the properties won't be available, like: instance.id
-  changeSource: ReplaySubject<any> = new ReplaySubject<any>();
-  updateSource: ReplaySubject<any> = new ReplaySubject<any>();
-  createSource: ReplaySubject<any> = new ReplaySubject<any>();
-  deleteSource: ReplaySubject<any> = new ReplaySubject<any>();
+  changeSource: ReplaySubject<Function> = new ReplaySubject<Function>();
+  updateSource: ReplaySubject<T> = new ReplaySubject<T>();
+  createSource: ReplaySubject<T> = new ReplaySubject<T>();
+  deleteSource: ReplaySubject<T> = new ReplaySubject<T>();
 
   constructor() {
     this.changeSource

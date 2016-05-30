@@ -17,6 +17,8 @@ export class ImageService extends BaseService<Image> {
       let image = new Image(rawImage.id, 'default', 0, 0, rawImage.width, rawImage.height);
       this.create(image);
     });
+    
+    rawImageService.createSource.subscribe(() => {})
   }
 
   getBinaryData (instance: Image) {

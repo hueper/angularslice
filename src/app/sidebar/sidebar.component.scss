@@ -1,7 +1,5 @@
-.c-sidebar {
-
-  &--hover {
-    border: 1px solid cyan;
-  }
-
+.sidebar {
+  flex-grow: 1;
+  background: #eee;
+  border-right: 1px solid black;
 }

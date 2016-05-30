@@ -19,7 +19,8 @@ import { EditorComponent } from './editor';
   directives: [
     ROUTER_DIRECTIVES
   ],
-  template: require('./app.component.jade')()
+  template: require('./app.component.jade')(),
+  styles: [ require('./app.component.scss') ]
 })
 @Routes([
   { path: '/', component: EditorComponent}

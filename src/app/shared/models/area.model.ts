@@ -1,3 +1,5 @@
+import { BaseModel } from './base.model';
+
 export interface IArea {
   top: number;
   left: number;
@@ -14,7 +16,7 @@ export interface IArea {
   isCrossing(rectangle: IArea): boolean;
 }
 
-export class Area implements IArea {
+export class Area extends BaseModel implements IArea {
   public invalid: boolean = false;
 
   constructor(
@@ -23,7 +25,7 @@ export class Area implements IArea {
     public width: number,
     public height: number
   ) {
-
+    super();
   }
 
   // Aliases for x, y, height, width

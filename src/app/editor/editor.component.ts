@@ -4,7 +4,7 @@ import { BoardComponent } from '../board';
 import { SidebarComponent } from '../sidebar';
 
 @Component({
-  selector: 'editor',
+  selector: 'editor.c-editor',
   template: require('./editor.component.jade')(),
   styles: [ require('./editor.component.scss') ],
   directives: [

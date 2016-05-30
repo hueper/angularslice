@@ -1,9 +1,6 @@
 import 'zone.js/dist/zone';
 import 'reflect-metadata/Reflect.js';
 
-// RxJS 5
-import 'expose?Rx!rxjs/Rx';
-
 import 'expose?_!lodash';
 
 // For vendors for example jQuery, Lodash, angular2-jwt import them here

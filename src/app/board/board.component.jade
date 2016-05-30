@@ -1,8 +1,8 @@
-.c-board
+.board
   input(type="file", (change)="loadFile($event)")
 
-  .c-board__workingSpace
-    .c-board__imageContainer(
+  .workingSpace
+    .imageContainer(
       [ngStyle]="imageContainerStyle",
       (mousedown)="onMouseDown($event)",
       (mousemove)="onMouseMove($event)",
@@ -11,3 +11,4 @@
     )
       area(*ngFor="let area of areas", [areaData]="area", [ngStyle]="areaStyle")
       area([areaData]="newArea", *ngIf="newArea", [ngStyle]="areaStyle")
+  image-bar

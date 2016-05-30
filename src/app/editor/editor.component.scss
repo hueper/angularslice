@@ -1,29 +1,17 @@
+.editor {
+  display: flex;
+  height: 100%;
+  width: 100%;
 
-.c-editor {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-
-  &__sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 300px;
-    // right: 299px;
-    bottom: 0;
-    background: #eee;
-    border-right: 1px solid black;
+  sidebar {
+    display: flex;
+    flex-basis: 300px;
   }
 
-  &__board {
-    position: fixed;
-    left: 300px;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: #ddd;
+  board {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
     overflow: auto;
   }
 }
