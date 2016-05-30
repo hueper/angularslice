@@ -3,7 +3,6 @@ import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { BaseModel } from '../models';
 
 
-
 @Injectable()
 export class BaseService<T extends BaseModel>{
   data: T[] = [];

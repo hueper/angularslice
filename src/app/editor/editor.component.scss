@@ -5,13 +5,13 @@
 
   sidebar {
     display: flex;
-    flex-basis: 300px;
+    min-width: 300px;
   }
 
   board {
     display: flex;
     flex-grow: 1;
-    width: 100%;
+
     overflow: auto;
   }
 }

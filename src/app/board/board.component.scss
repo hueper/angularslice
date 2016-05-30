@@ -13,8 +13,7 @@
 
   image-bar {
     display: flex;
-    flex-basis: 200px;
-    width: 100%;
+    min-height: 200px;
     overflow: auto;
   }
 
