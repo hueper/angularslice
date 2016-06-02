@@ -22,7 +22,13 @@ import {AreaService, ImageService, RawImageService} from "../shared/services";
 export class BoardComponent implements OnInit, OnDestroy {
   currentImage: Image = null;
   areaStyle: any = {};
-  imageContainerStyle: any = { 'width': '0', 'height': '0', 'background-image': 'url()', 'background-size': 'contain' };
+  imageContainerStyle:any = {
+    'width': '0',
+    'height': '0',
+    'background-image': 'url()',
+    'background-size': 'contain',
+    'position': 'relative'
+  };
 
   private newArea: NewArea = null;
   private areas: Area[] = [];
@@ -71,10 +77,11 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   onMouseDown(event) {
-    this.offsetTop = event.toElement.offsetTop;
-    this.offsetLeft = event.toElement.offsetLeft;
+    console.log("event => ", event);
+    this.offsetTop = event.target.offsetTop;
+    this.offsetLeft = event.target.offsetLeft;
 
-    this.newArea = new NewArea(event.clientX, event.clientY);
+    this.newArea = new NewArea(event.clientX - this.offsetLeft, event.layerY - this.offsetTop);
     this.areaStyle['pointer-events'] = 'none';
 
     return false;
@@ -83,8 +90,8 @@ export class BoardComponent implements OnInit, OnDestroy {
   onMouseMove(event) {
     if (this.newArea) {
       this.newArea.setDiagonalCoordinates(
-        Math.max(this.offsetLeft, Math.min(this.currentImage.width + this.offsetLeft, event.clientX)),
-        Math.max(this.offsetTop, Math.min(this.currentImage.height, event.clientY))
+        Math.max(0, Math.min(this.currentImage.width, event.clientX - this.offsetLeft)),
+        Math.max(0, Math.min(this.currentImage.height, event.clientY - this.offsetTop))
       );
       this.newArea.invalid = this.isCrossingOther(this.newArea);
     }
