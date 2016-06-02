@@ -9,11 +9,6 @@ import {AreaService, ImageService, RawImageService} from "../shared/services";
   selector: 'board',
   styles: [ require('./board.component.scss') ],
   template: require('./board.component.jade')(),
-  providers: [
-    AreaService,
-    RawImageService,
-    ImageService
-  ],
   directives: [
     AreaComponent,
     ImageBarComponent,
