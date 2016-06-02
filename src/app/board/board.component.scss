@@ -5,6 +5,7 @@
   flex-direction: column;
   background: #ddd;
   flex-grow: 1;
+  position: relative;
 
   .workingSpace {
     flex-grow: 1;
@@ -13,7 +14,7 @@
 
   image-bar {
     display: flex;
-    min-height: 200px;
+    min-height: 130px;
     overflow: auto;
   }
 
