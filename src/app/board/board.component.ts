@@ -1,9 +1,9 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-
-import { AreaComponent } from './area';
-import { ImageBarComponent } from './image-bar';
-import { Area, Folder, Image, NewArea, RawImage } from '../shared/models';
-import { AreaService, ImageService, RawImageService } from '../shared/services';
+import {Component, Renderer, OnInit, OnDestroy} from "@angular/core";
+import * as _ from "lodash";
+import {AreaComponent} from "./area";
+import {ImageBarComponent} from "./image-bar";
+import {Area, Folder, Image, NewArea} from "../shared/models";
+import {AreaService, ImageService, RawImageService} from "../shared/services";
 
 @Component({
   selector: 'board',
@@ -19,7 +19,7 @@ import { AreaService, ImageService, RawImageService } from '../shared/services';
     ImageBarComponent,
   ]
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit, OnDestroy {
   currentImage: Image = null;
   areaStyle: any = {};
   imageContainerStyle: any = { 'width': '0', 'height': '0', 'background-image': 'url()', 'background-size': 'contain' };
@@ -27,11 +27,15 @@ export class BoardComponent {
   private newArea: NewArea = null;
   private areas: Area[] = [];
 
-  constructor(
-    private areaService: AreaService,
-    private rawImageService: RawImageService,
-    private imageService: ImageService
-  ) {
+  private offsetTop:number;
+  private offsetLeft:number;
+
+  private listeners:any[] = [];
+
+  constructor(private areaService:AreaService,
+              private rawImageService:RawImageService,
+              private imageService:ImageService,
+              private renderer:Renderer) {
 
     // Subscribe for areas
     this.areaService.dataSource.subscribe((areas: Area[]) => {
@@ -42,13 +46,12 @@ export class BoardComponent {
     this.imageService.dataSource.subscribe((data: Image[]) => {
       if (!data.length) return;
       this.currentImage = data[0];
-    
+
       // this.imageContainerStyle['display'] = 'initial';
       this.imageContainerStyle['width'] = this.currentImage.width + 'px';
       this.imageContainerStyle['height'] = this.currentImage.height + 'px';
       this.imageContainerStyle['background-image'] = 'url(' + this.imageService.getBinaryData(this.currentImage) + ')';
     });
-
   }
 
   loadFile(event) {
@@ -56,13 +59,22 @@ export class BoardComponent {
     this.rawImageService.createFromFile(file);
   }
 
-  onMouseLeave(event) {
-    // TODO: create the snap effect
-    console.log(event);
+  ngOnInit() {
+    this.listeners.push(this.renderer.listenGlobal('document', 'mousemove', this.onMouseMove.bind(this)));
+    this.listeners.push(this.renderer.listenGlobal('document', 'mouseup', this.onMouseUp.bind(this)));
+  }
+
+  ngOnDestroy() {
+    _.each(this.listeners, unsubscribeFromListener => {
+      unsubscribeFromListener(); // unsubscribe
+    });
   }
 
   onMouseDown(event) {
-    this.newArea = new NewArea(event.layerX, event.layerY);
+    this.offsetTop = event.toElement.offsetTop;
+    this.offsetLeft = event.toElement.offsetLeft;
+
+    this.newArea = new NewArea(event.clientX, event.clientY);
     this.areaStyle['pointer-events'] = 'none';
 
     return false;
@@ -70,7 +82,10 @@ export class BoardComponent {
 
   onMouseMove(event) {
     if (this.newArea) {
-      this.newArea.setDiagonalCoordinates(event.layerX, event.layerY);
+      this.newArea.setDiagonalCoordinates(
+        Math.max(this.offsetLeft, Math.min(this.currentImage.width + this.offsetLeft, event.clientX)),
+        Math.max(this.offsetTop, Math.min(this.currentImage.height, event.clientY))
+      );
       this.newArea.invalid = this.isCrossingOther(this.newArea);
     }
 
@@ -78,7 +93,8 @@ export class BoardComponent {
   }
 
   onMouseUp(area) {
-    if (!this.isCrossingOther(this.newArea)) {
+
+    if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea)) {
       this.areaService.create(this.newArea);
       // TODO: modal dialog, create folder, files image...
     }
