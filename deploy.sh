@@ -40,7 +40,10 @@ npm install
 npm run build
 cp -rf ./dist/ ../dist/
 
+echo 'ngslice.io' > CNAME
+
 cd ../dist
+
 
 git init
 git config user.name "Budacode Deploy"
