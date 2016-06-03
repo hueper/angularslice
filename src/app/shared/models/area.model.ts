@@ -35,11 +35,11 @@ export class Area extends BaseModel implements IArea {
   get bottom() { return this.y + this.height; }
 
   getWidth(): number {
-    return Math.abs(this.right - this.left);
+    return this.width;
   }
 
   getHeight(): number {
-    return Math.abs(this.bottom - this.top);
+    return this.height;
   }
 
   hasDimensions(): boolean {
