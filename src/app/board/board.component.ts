@@ -112,7 +112,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea)) {
       this.areaService.create(this.newArea);
       // TODO: modal dialog, create folder, files image...
-      // this.openCreateComponentDialog();
+      this.openCreateComponentDialog();
     }
 
     this.newArea = null;
