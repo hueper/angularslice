@@ -52,6 +52,8 @@ cp -rf ./dist/. ./public
 
 cd ./public
 
+echo 'ngslice.io' > CNAME
+
 git init
 git config user.name "Budacode Deploy"
 git config user.email "opensource@budacode.com"
