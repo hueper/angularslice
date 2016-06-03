@@ -66,7 +66,7 @@ export class BaseService<T extends BaseModel>{
   find(filterObject: any = {}): T[] {
     return _.filter(this.data, filterObject);
   }
-  
+
   update(instance: T) {
     this.updateSource.next(instance);
   }
@@ -74,5 +74,5 @@ export class BaseService<T extends BaseModel>{
   delete(instance: T) {
     this.deleteSource.next(instance);
   }
-  
+
 }

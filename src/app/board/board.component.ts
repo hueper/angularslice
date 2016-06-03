@@ -29,6 +29,8 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   private newArea: NewArea = null;
   private areas: Area[] = [];
+  private folders: Folder[] = [];
+  private images: Image[] = [];
 
   private offsetTop:number;
   private offsetLeft:number;
@@ -46,10 +48,19 @@ export class BoardComponent implements OnInit, OnDestroy {
     // Subscribe for areas
     this.areaService.dataSource.subscribe((areas: Area[]) => {
       this.areas = areas;
+      console.log('areas =>', areas);
+    });
+
+    // Subscribe for folders
+    this.folderService.dataSource.subscribe((folders: Folder[]) => {
+      this.folders = folders;
+      console.log('folders =>', folders);
+
     });
 
     // Look for new images without filtering
     this.imageService.dataSource.subscribe((data: Image[]) => {
+      this.images = data;
       if (!data.length) return;
       this.currentImage = data[0];
 
@@ -110,7 +121,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   onMouseUp(area) {
 
     if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea)) {
-      this.areaService.create(this.newArea);
       this.openCreateComponentDialog(this.newArea);
     }
 
@@ -136,8 +146,19 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   createComponent(area, data) {
-    let folder = this.folderService.create(new Folder(null, data.newFolderName));
-    console.log(folder);
+
+    //TODO: Would be nice if the create method could give back the the created object with the created id!
+    this.folderService.create(new Folder(null, data.newFolderName));
+    let folder = _.last(this.folders);
+
+    area.setFolderId(folder.id);
+
+    if(data.attach) {
+      this.imageService.create(new Image(folder.id, this.currentImage.rawImageId, data.newImageName, area.x, area.y, area.width, area.height));
+      let image = _.last(this.images);
+      area.setImageId(image.id);
+    }
+    this.areaService.create(area);
 
   }
 
