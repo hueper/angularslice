@@ -4,8 +4,8 @@ import {AreaComponent} from "./area";
 import {ImageBarComponent} from "./image-bar";
 import {Area, Folder, Image, NewArea} from "../shared/models";
 import {AreaService, ImageService, RawImageService} from "../shared/services";
-import { Modal } from 'angular2-modal/plugins/bootstrap';
-import { ComponentDialog, ComponentDialogData } from '../component_dialog/component';
+import {Modal} from "angular2-modal/plugins/bootstrap";
+import {ComponentDialog} from "../component_dialog/component";
 
 @Component({
   selector: 'board',
@@ -34,12 +34,13 @@ export class BoardComponent implements OnInit, OnDestroy {
   private offsetLeft:number;
 
   private listeners:any[] = [];
+  private workspace:any;
 
   constructor(private areaService:AreaService,
               private rawImageService:RawImageService,
               private imageService:ImageService,
               private renderer:Renderer,
-              private modal: Modal) {
+              private modal:Modal) {
 
 
     // Subscribe for areas
@@ -57,6 +58,11 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.imageContainerStyle['height'] = this.currentImage.height + 'px';
       this.imageContainerStyle['background-image'] = 'url(' + this.imageService.getBinaryData(this.currentImage) + ')';
     });
+    setTimeout(() => {
+      this.workspace = document.querySelector('.workingSpace');
+
+    })
+
   }
 
   loadFile(event) {
@@ -77,10 +83,11 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   onMouseDown(event) {
     console.log("event => ", event);
+
     this.offsetTop = event.target.offsetTop;
     this.offsetLeft = event.target.offsetLeft;
 
-    this.newArea = new NewArea(event.clientX - this.offsetLeft, event.layerY - this.offsetTop);
+    this.newArea = new NewArea(event.offsetX, event.offsetY);
     this.areaStyle['pointer-events'] = 'none';
 
     return false;
@@ -88,9 +95,12 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   onMouseMove(event) {
     if (this.newArea) {
+      let plusTop:number = this.workspace.scrollTop;
+      let plusLeft:number = this.workspace.scrollLeft;
+
       this.newArea.setDiagonalCoordinates(
-        Math.max(0, Math.min(this.currentImage.width, event.clientX - this.offsetLeft)),
-        Math.max(0, Math.min(this.currentImage.height, event.clientY - this.offsetTop))
+        Math.max(0, Math.min(this.currentImage.width, event.clientX - this.offsetLeft + plusLeft)),
+        Math.max(0, Math.min(this.currentImage.height, event.clientY - this.offsetTop + plusTop))
       );
       this.newArea.invalid = this.isCrossingOther(this.newArea);
     }
@@ -103,7 +113,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea)) {
       this.areaService.create(this.newArea);
       // TODO: modal dialog, create folder, files image...
-      this.openCreateComponentDialog();
+      // this.openCreateComponentDialog();
     }
 
     this.newArea = null;
