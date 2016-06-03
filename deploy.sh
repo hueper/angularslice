@@ -40,9 +40,9 @@ npm install
 npm run build
 cp -rf ./dist/ ../dist/
 
-echo 'ngslice.io' > CNAME
-
 cd ../dist
+
+echo 'ngslice.io' > CNAME
 
 
 git init
