@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import * as _ from "lodash";
+import { Component, OnDestroy } from '@angular/core';
+
 import { ModalComponent, DialogRef } from 'angular2-modal';
 import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
-import {MdButton} from '@angular2-material/button';
-import {MdInput} from '@angular2-material/input';
-import {MdCheckbox} from '@angular2-material/checkbox';
-import {MdRadioButton, MdRadioGroup, MdRadioDispatcher} from '@angular2-material/radio';
-import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
+
+import { MdButton } from '@angular2-material/button';
+import { MdInput } from '@angular2-material/input';
+import { MdCheckbox } from '@angular2-material/checkbox';
+import { MdRadioButton, MdRadioGroup, MdRadioDispatcher } from '@angular2-material/radio';
+import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
 import { Folder } from '../shared/models';
 import { FolderService } from '../shared/services';
+import { Subscription } from 'rxjs';
 
 export class ComponentDialogData extends BSModalContext {
   constructor() {
@@ -30,25 +34,37 @@ export class ComponentDialogData extends BSModalContext {
   providers: [
     MdRadioDispatcher,
     MdIconRegistry,
-    FolderService
   ]
 })
-export class ComponentDialog implements ModalComponent<ComponentDialogData> {
+export class ComponentDialog implements ModalComponent<BSModalContext>, OnDestroy {
   component: any;
   public folders: Folder[];
+  private subscriptions: Subscription[] = [];
 
   constructor(
-    public dialog: DialogRef<ComponentDialogData>,
+    public dialog: DialogRef<BSModalContext>,
     private folderService: FolderService
   ) {
-    folderService.dataSource.subscribe((folders: Folder[]) => {
+    this.subscriptions.push(folderService.dataSource.subscribe((folders: Folder[]) => {
       this.folders = folders;
-    });
+      console.log(folders);
+    }));
     this.component = {
       type: 'new',
       attach: true,
       folder: null,
     }
+  }
+
+
+  onKeyUp(value) {
+    console.log(value);
+  }
+
+  ngOnDestroy() {
+    _.each(this.subscriptions, subscription => {
+      subscription.unsubscribe();
+    });
   }
 
   changeAttachImage(event) {
@@ -64,9 +80,18 @@ export class ComponentDialog implements ModalComponent<ComponentDialogData> {
   }
 
   send() {
+    let result = {
+      action: 'save',
+      data: this.component
+    };
+    this.dialog.close(result);
   }
 
   close() {
-    this.dialog.dismiss();
+    let result = {
+      action: 'cancel'
+    };
+    this.dialog.close(result);
   }
+
 }

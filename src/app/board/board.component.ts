@@ -1,11 +1,11 @@
-import {Component, Renderer, OnInit, OnDestroy} from "@angular/core";
+import {Component, Renderer, OnInit, OnDestroy } from "@angular/core";
 import * as _ from "lodash";
-import {AreaComponent} from "./area";
-import {ImageBarComponent} from "./image-bar";
-import {Area, Folder, Image, NewArea} from "../shared/models";
-import {AreaService, ImageService, RawImageService} from "../shared/services";
-import {Modal} from "angular2-modal/plugins/bootstrap";
-import {ComponentDialog} from "../component_dialog/component";
+import { AreaComponent } from "./area";
+import { ImageBarComponent } from "./image-bar";
+import { Area, Folder, Image, NewArea } from "../shared/models";
+import { AreaService, ImageService, RawImageService, FolderService } from "../shared/services";
+import { Modal } from 'angular2-modal/plugins/bootstrap';
+import { ComponentDialog, ComponentDialogData } from '../component_dialog/component';
 
 @Component({
   selector: 'board',
@@ -39,9 +39,9 @@ export class BoardComponent implements OnInit, OnDestroy {
   constructor(private areaService:AreaService,
               private rawImageService:RawImageService,
               private imageService:ImageService,
+              private folderService:FolderService,
               private renderer:Renderer,
               private modal:Modal) {
-
 
     // Subscribe for areas
     this.areaService.dataSource.subscribe((areas: Area[]) => {
@@ -111,8 +111,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea)) {
       this.areaService.create(this.newArea);
-      // TODO: modal dialog, create folder, files image...
-      this.openCreateComponentDialog();
+      this.openCreateComponentDialog(this.newArea);
     }
 
     this.newArea = null;
@@ -121,22 +120,25 @@ export class BoardComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  openCreateComponentDialog() {
-    console.log(this.modal);
+  openCreateComponentDialog(area) {
+    const data = new ComponentDialogData();
     this.modal
-      .open(ComponentDialog)
-      .then(
-        dialog => {console.log(dialog); dialog.result})
-      .then(
-        result => {
-          // sucess action
-          console.log(result);
-        }
-      );
+      .open(ComponentDialog, data)
+      .then(dialog => {
+        dialog.result.then(data => {
+          if(data && data.action == 'save') {
+            if(data.data.type == 'new') {
+              this.createComponent(area, data.data)
+            }
+          }
+        })
+      });
   }
 
-  callback() {
-    console.log('callback');
+  createComponent(area, data) {
+    let folder = this.folderService.create(new Folder(null, data.newFolderName));
+    console.log(folder);
+
   }
 
   private isCrossingOther(area: Area): boolean {
