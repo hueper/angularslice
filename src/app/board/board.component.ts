@@ -60,7 +60,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     });
     setTimeout(() => {
       this.workspace = document.querySelector('.workingSpace');
-
     })
 
   }
