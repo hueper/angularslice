@@ -88,10 +88,7 @@ export class ComponentDialog implements ModalComponent<BSModalContext>, OnDestro
   }
 
   close() {
-    let result = {
-      action: 'cancel'
-    };
-    this.dialog.close(result);
+    this.dialog.dismiss();
   }
 
 }
