@@ -4,6 +4,8 @@ import {AreaComponent} from "./area";
 import {ImageBarComponent} from "./image-bar";
 import {Area, Folder, Image, NewArea} from "../shared/models";
 import {AreaService, ImageService, RawImageService} from "../shared/services";
+import { Modal } from 'angular2-modal/plugins/bootstrap';
+import { ComponentDialog, ComponentDialogData } from '../component_dialog/component';
 
 @Component({
   selector: 'board',
@@ -41,7 +43,9 @@ export class BoardComponent implements OnInit, OnDestroy {
   constructor(private areaService:AreaService,
               private rawImageService:RawImageService,
               private imageService:ImageService,
-              private renderer:Renderer) {
+              private renderer:Renderer,
+              private modal: Modal) {
+
 
     // Subscribe for areas
     this.areaService.dataSource.subscribe((areas: Area[]) => {
@@ -104,12 +108,31 @@ export class BoardComponent implements OnInit, OnDestroy {
     if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea)) {
       this.areaService.create(this.newArea);
       // TODO: modal dialog, create folder, files image...
+      this.openCreateComponentDialog();
     }
 
     this.newArea = null;
     this.areaStyle = {};
 
     return false;
+  }
+
+  openCreateComponentDialog() {
+    console.log(this.modal);
+    this.modal
+      .open(ComponentDialog)
+      .then(
+        dialog => {console.log(dialog); dialog.result})
+      .then(
+        result => {
+          // sucess action
+          console.log(result);
+        }
+      );
+  }
+
+  callback() {
+    console.log('callback');
   }
 
   private isCrossingOther(area: Area): boolean {

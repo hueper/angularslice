@@ -17,7 +17,7 @@ import { EditorComponent } from './editor';
   ],
   pipes: [],
   directives: [
-    ROUTER_DIRECTIVES
+    ROUTER_DIRECTIVES,
   ],
   template: require('./app.component.jade')(),
   styles: [ require('./app.component.scss') ]
