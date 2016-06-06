@@ -6,3 +6,5 @@ export * from './folder.model';
 export * from './image.model';
 export * from './raw-image.model';
 export * from './template.model';
+
+export * from './confirm-data.model';

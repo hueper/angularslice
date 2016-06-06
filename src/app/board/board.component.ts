@@ -4,8 +4,10 @@ import { AreaComponent } from "./area";
 import { ImageBarComponent } from "./image-bar";
 import { Area, Folder, Image, NewArea } from "../shared/models";
 import { AreaService, ImageService, RawImageService, FolderService } from "../shared/services";
-import { Modal } from 'angular2-modal/plugins/bootstrap';
-import { ComponentDialog, ComponentDialogData } from '../component_dialog/component';
+import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { ComponentDialog } from '../component_dialog/component_dialog.component';
+import { ConfirmDialog, ConfirmDialogData } from '../confirm_dialog/confirm_dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'board',
@@ -38,6 +40,8 @@ export class BoardComponent implements OnInit, OnDestroy {
   private listeners:any[] = [];
   private workspace:any;
 
+  private subscriptions: Subscription[] = [];
+
   constructor(private areaService:AreaService,
               private rawImageService:RawImageService,
               private imageService:ImageService,
@@ -46,20 +50,19 @@ export class BoardComponent implements OnInit, OnDestroy {
               private modal:Modal) {
 
     // Subscribe for areas
-    this.areaService.dataSource.subscribe((areas: Area[]) => {
+    this.subscriptions.push(this.areaService.dataSource.subscribe((areas: Area[]) => {
       this.areas = areas;
       console.log('areas =>', areas);
-    });
+    }));
 
     // Subscribe for folders
-    this.folderService.dataSource.subscribe((folders: Folder[]) => {
+    this.subscriptions.push(this.folderService.dataSource.subscribe((folders: Folder[]) => {
       this.folders = folders;
       console.log('folders =>', folders);
-
-    });
+    }));
 
     // Look for new images without filtering
-    this.imageService.dataSource.subscribe((data: Image[]) => {
+    this.subscriptions.push(this.imageService.dataSource.subscribe((data: Image[]) => {
       this.images = data;
       if (!data.length) return;
       this.currentImage = data[0];
@@ -68,7 +71,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.imageContainerStyle['width'] = this.currentImage.width + 'px';
       this.imageContainerStyle['height'] = this.currentImage.height + 'px';
       this.imageContainerStyle['background-image'] = 'url(' + this.imageService.getBinaryData(this.currentImage) + ')';
-    });
+    }));
     setTimeout(() => {
       this.workspace = document.querySelector('.workingSpace');
     })
@@ -88,6 +91,10 @@ export class BoardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     _.each(this.listeners, unsubscribeFromListener => {
       unsubscribeFromListener(); // unsubscribe
+    });
+
+    _.each(this.subscriptions, subscription => {
+      subscription.unsubscribe();
     });
   }
 
@@ -131,15 +138,26 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   openCreateComponentDialog(area) {
-    const data = new ComponentDialogData();
+    const data = new BSModalContext();
     this.modal
       .open(ComponentDialog, data)
       .then(dialog => {
         dialog.result.then(data => {
           if(data && data.action == 'save') {
-            if(data.data.type == 'new') {
-              this.createComponent(area, data.data)
-            }
+            this.createComponent(area, data.data)
+          }
+        })
+      });
+  }
+  openConfirmDialog(callback) {
+    const data = new ConfirmDialogData();
+    this.modal
+      .open(ConfirmDialog, data)
+      .then(dialog => {
+        dialog.result.then(data => {
+          if(data && data === true) {
+            // console.log('success');
+            // callback();
           }
         })
       });
@@ -148,13 +166,21 @@ export class BoardComponent implements OnInit, OnDestroy {
   createComponent(area, data) {
 
     //TODO: Would be nice if the create method could give back the the created object with the created id!
-    this.folderService.create(new Folder(null, data.newFolderName));
-    let folder = _.last(this.folders);
+    let type = data.type;
+    let folderId;
 
-    area.setFolderId(folder.id);
+    if(type == 'new') {
+      this.folderService.create(new Folder(null, data.newFolderName));
+      folderId = _.last(this.folders).id;
+    } else {
+      folderId = data.folder;
+    }
+
+
+    area.setFolderId(folderId);
 
     if(data.attach) {
-      this.imageService.create(new Image(folder.id, this.currentImage.rawImageId, data.newImageName, area.x, area.y, area.width, area.height));
+      this.imageService.create(new Image(folderId, this.currentImage.rawImageId, data.newImageName, area.x, area.y, area.width, area.height));
       let image = _.last(this.images);
       area.setImageId(image.id);
     }

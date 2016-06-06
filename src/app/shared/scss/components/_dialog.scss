@@ -1,0 +1,108 @@
+@import '../utils/colors';
+
+.dialogBackground {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 49;
+
+  animation: fadeIn .5s forwards;
+}
+
+.dialog {
+  border-radius: .3rem;
+  width: 66rem;
+  //height: 41rem;
+  position: fixed;
+  top: 20%;
+  left: calc(50% - 33rem);
+  padding: 2rem;
+  background-color: #FFF;
+  z-index: 50;
+
+  animation: slideDown ease-out .5s forwards;
+
+  .flexContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      margin: .5rem;
+    }
+    .addition {
+      margin-top: 20px;
+    }
+    .md-button-wrapper {
+      button {
+        margin-right: 10px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .row--rightAligned {
+      justify-content: flex-end;
+
+      .column {
+        flex-grow: 0;
+      }
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .column:not(:first-of-type) {
+      margin-left: 2rem;
+    }
+  }
+
+  md-radio-button, md-checkbox {
+    margin: 5px 8px;
+  }
+
+  select {
+    margin-left: 20px;
+  }
+}
+
+.modal-sm .dialog{
+  width: 26rem;
+  left: calc(50% - 13rem);
+}
+
+
+@keyframes fadeIn {
+  from {
+    background-color: transparent;
+  }
+  to {
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translate(0, -50px);
+  }
+  40% {
+    opacity: 1;
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}

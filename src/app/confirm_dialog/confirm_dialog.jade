@@ -1,0 +1,11 @@
+.dialogBackground( (click)='cancel()' )
+.dialog
+  form()
+    .flexContainer
+      .row
+        .column
+          label {{ confirmData.message }}
+      .row.row--rightAligned
+        .md-button-wrapper
+          button(md-raised-button, color="secondary", type="button", (click)='cancel()') {{ confirmData.btnCancel }}
+          button(md-raised-button, color="primary", type="button", (click)='yes()') {{ confirmData.btnYes }}
