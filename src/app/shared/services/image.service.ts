@@ -14,10 +14,10 @@ export class ImageService extends BaseService<Image> {
 
     // Automatically create an image on rawImage creation
     rawImageService.createSource.subscribe((rawImage: RawImage) => {
-      let image = new Image(rawImage.id, 'default', 0, 0, rawImage.width, rawImage.height);
+      let image = new Image(null, rawImage.id, 'default', 0, 0, rawImage.width, rawImage.height);
       this.create(image);
     });
-    
+
     rawImageService.createSource.subscribe(() => {})
   }
 

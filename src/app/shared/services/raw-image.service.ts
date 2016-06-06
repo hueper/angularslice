@@ -15,7 +15,7 @@ export class RawImageService extends BaseService<RawImage> {
     this.create(new RawImage('http://s33.postimg.org/gu8dgjm9q/page3.jpg', 700, 800));
     this.create(new RawImage('http://s33.postimg.org/kdp998iny/page4.jpg', 700, 800));
   }
-  
+
   create(rawImage: RawImage) {
     super.create(rawImage);
   }
@@ -39,8 +39,8 @@ export class RawImageService extends BaseService<RawImage> {
     if (file) {
       reader.readAsDataURL(file);
     }
-    
+
   }
-  
-  
+
+
 }

@@ -3,11 +3,8 @@
 
   .workingSpace
     .imageContainer(
-      [ngStyle]="imageContainerStyle",
-      (mousedown)="onMouseDown($event)",
-      (mousemove)="onMouseMove($event)",
-      (mouseleave)="onMouseLeave($event)",
-      (mouseup)="onMouseUp($event)"
+    [ngStyle]="imageContainerStyle",
+    (mousedown)="onMouseDown($event)"
     )
       area(*ngFor="let area of areas", [areaData]="area", [ngStyle]="areaStyle")
       area([areaData]="newArea", *ngIf="newArea", [ngStyle]="areaStyle")

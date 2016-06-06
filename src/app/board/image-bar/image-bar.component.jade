@@ -1,3 +1,9 @@
 .image-bar
-  h1 image bar
   .box
+    .imageBox.placeholder
+      .add +
+      .text drag image here
+    .imageBox(*ngFor='let image of images')
+      .add
+        i.material-icons(style='font-size: 66px;') panorama
+      .text {{ image.name }}

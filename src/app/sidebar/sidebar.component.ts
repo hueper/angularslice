@@ -9,7 +9,6 @@ import { FolderService } from '../shared/services';
   styles: [ require('./sidebar.component.scss') ],
   template: require('./sidebar.component.jade')(),
   providers: [
-    FolderService
   ],
   directives: [
     ComponentElement

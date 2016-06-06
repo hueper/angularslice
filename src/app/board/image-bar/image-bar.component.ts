@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { ImageService } from '../../shared/services';
-import { Image } from '../../shared/models';
+import {Component} from "@angular/core";
+import {ImageService} from "../../shared/services";
+import {Image} from "../../shared/models";
 
 @Component({
   selector: 'image-bar',

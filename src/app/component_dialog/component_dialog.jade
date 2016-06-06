@@ -1,0 +1,29 @@
+.componentDialogBackground( (click)='close()' )
+.componentDialog
+  form()
+    .flexContainer
+      .row
+        .column
+          label Let's attach a component to the selected area.
+          md-radio-group([(ngModel)]='component.type')
+            md-radio-button(value='new') Create new component
+            br
+            md-radio-button(value='exist') Select an existing one
+      .row(*ngIf='component.type == "new"')
+        .column
+          md-input([(ngModel)]='component.newFolderName', placeholder="Add name for the component")
+      .row(*ngIf='component.type == "exist"')
+        .column
+          div Select the component:
+            select([(ngModel)]='component.folder')
+              option(*ngFor='let folder of folders', value='folder.id') {{ folder.name }}
+      .row.addition
+        .column
+          md-checkbox([ngModel]='component.attach', (change)='changeAttachImage($event)') Add the area's image to the attached component
+      .row(*ngIf='component.attach')
+        .column
+          md-input([(ngModel)]='component.newImageName', placeholder = "Add name for the image")
+      .row.row--rightAligned
+        .md-button-wrapper
+          button(md-raised-button, color="secondary", type="button", (click)='close()') Cancel
+          button(md-raised-button, color="primary", type="button", (click)='send()') Save

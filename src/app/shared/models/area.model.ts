@@ -20,6 +20,8 @@ export class Area extends BaseModel implements IArea {
   public invalid: boolean = false;
 
   constructor(
+    public folderId: number = null,
+    public imageId: number = null,
     public x: number,
     public y: number,
     public width: number,
@@ -35,11 +37,11 @@ export class Area extends BaseModel implements IArea {
   get bottom() { return this.y + this.height; }
 
   getWidth(): number {
-    return Math.abs(this.right - this.left);
+    return this.width;
   }
 
   getHeight(): number {
-    return Math.abs(this.bottom - this.top);
+    return this.height;
   }
 
   hasDimensions(): boolean {
@@ -83,7 +85,7 @@ export class NewArea extends Area {
     private baseX: number,
     private baseY: number
   ) {
-    super(baseX, baseY, 0, 0);
+    super(null, null, baseX, baseY, 0, 0);
 
     this.diagonalX = baseX;
     this.diagonalY = baseY;
@@ -109,6 +111,14 @@ export class NewArea extends Area {
 
     this.width = Math.abs(this.baseX - this.diagonalX);
     this.height = Math.abs(this.baseY - this.diagonalY);
+  }
+
+  setFolderId(id) {
+    this.folderId = id;
+  }
+
+  setImageId(id) {
+    this.imageId = id;
   }
 
 }
