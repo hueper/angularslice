@@ -1,10 +1,10 @@
 .board {
-  overflow: auto;
-
   display: flex;
+  flex-grow: 1;
+
+  overflow: auto;
   flex-direction: column;
   background: #ddd;
-  flex-grow: 1;
 
   .workingSpace {
     flex-grow: 1;
