@@ -7,13 +7,15 @@ import {
 } from '@angular/router';
 
 import { EditorComponent } from './editor';
+import {DialogService} from "./shared/services/dialog.service";
 
 @Injectable()
 @Component({
   selector: 'app',
   providers: [
     Modal,
-    ...BS_MODAL_PROVIDERS
+    ...BS_MODAL_PROVIDERS,
+    DialogService
   ],
   pipes: [],
   directives: [

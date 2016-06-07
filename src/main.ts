@@ -19,7 +19,7 @@ require('./app/shared/scss/styles.scss');
 bootstrap(AppComponent, [
   HTTP_PROVIDERS,
   ROUTER_PROVIDERS,
-  MODAL_BROWSER_PROVIDERS,
+  ...MODAL_BROWSER_PROVIDERS,
   AreaService, FileService, FolderService, ImageService, RawImageService, TemplateService,
   provide(APP_BASE_HREF, {useValue: location.pathname})
 ]).catch((error) => {

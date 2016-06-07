@@ -60,8 +60,7 @@ export class ConfirmDialog implements ModalComponent<ConfirmDialogData>, OnDestr
 
 
   yes() {
-    let result;
-    this.dialog.close(result);
+    this.dialog.close(true);
   }
 
   cancel() {

@@ -3,10 +3,7 @@ import * as _ from "lodash";
 import { AreaComponent } from "./area";
 import { ImageBarComponent } from "./image-bar";
 import { Area, Folder, Image, NewArea } from "../shared/models";
-import { AreaService, ImageService, RawImageService, FolderService } from "../shared/services";
-import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
-import { ComponentDialog } from '../component_dialog/component_dialog.component';
-import { ConfirmDialog, ConfirmDialogData } from '../confirm_dialog/confirm_dialog.component';
+import { AreaService, ImageService, RawImageService, FolderService, DialogService } from "../shared/services";
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,7 +13,7 @@ import { Subscription } from 'rxjs';
   directives: [
     AreaComponent,
     ImageBarComponent,
-  ]
+  ],
 })
 export class BoardComponent implements OnInit, OnDestroy {
   currentImage: Image = null;
@@ -47,7 +44,7 @@ export class BoardComponent implements OnInit, OnDestroy {
               private imageService:ImageService,
               private folderService:FolderService,
               private renderer:Renderer,
-              private modal:Modal) {
+              private dialogService:DialogService) {
 
     // Subscribe for areas
     this.subscriptions.push(this.areaService.dataSource.subscribe((areas: Area[]) => {
@@ -128,7 +125,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   onMouseUp(area) {
 
     if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea)) {
-      this.openCreateComponentDialog(this.newArea);
+      this.dialogService.openCreateComponentDialog(this.createComponentDialogCallback.bind(this));
     }
 
     this.newArea = null;
@@ -137,30 +134,12 @@ export class BoardComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  openCreateComponentDialog(area) {
-    const data = new BSModalContext();
-    this.modal
-      .open(ComponentDialog, data)
-      .then(dialog => {
-        dialog.result.then(data => {
-          if(data && data.action == 'save') {
-            this.createComponent(area, data.data)
-          }
-        })
-      });
-  }
-  openConfirmDialog(callback) {
-    const data = new ConfirmDialogData();
-    this.modal
-      .open(ConfirmDialog, data)
-      .then(dialog => {
-        dialog.result.then(data => {
-          if(data && data === true) {
-            // console.log('success');
-            // callback();
-          }
-        })
-      });
+
+
+  createComponentDialogCallback(params) {
+    if(params && params.action == 'save') {
+      this.createComponent(this.newArea, params.data)
+    }
   }
 
   createComponent(area, data) {
