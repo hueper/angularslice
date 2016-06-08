@@ -1,14 +1,14 @@
 import * as _ from "lodash";
-import { Component, OnDestroy } from '@angular/core';
-import { ModalComponent, DialogRef } from 'angular2-modal';
-import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
-import { MdButton } from '@angular2-material/button';
-import { MdInput } from '@angular2-material/input';
-import { MdCheckbox } from '@angular2-material/checkbox';
-import { MdRadioButton, MdRadioGroup, MdRadioDispatcher } from '@angular2-material/radio';
-import { Folder } from '../shared/models';
-import { FolderService } from '../shared/services';
-import { Subscription } from 'rxjs';
+import {Component, OnDestroy} from "@angular/core";
+import {ModalComponent, DialogRef} from "angular2-modal";
+import {BSModalContext} from "angular2-modal/plugins/bootstrap";
+import {MdButton} from "@angular2-material/button";
+import {MdInput} from "@angular2-material/input";
+import {MdCheckbox} from "@angular2-material/checkbox";
+import {MdRadioButton, MdRadioGroup, MdRadioDispatcher} from "@angular2-material/radio";
+import {Folder} from "../shared/models";
+import {FolderService} from "../shared/services";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -55,7 +55,7 @@ export class ComponentDialog implements ModalComponent<BSModalContext>, OnDestro
   changeAttachImage(event) {
     this.component.attach = event.checked;
   }
-  
+
   send() {
     let result = {
       action: 'save',
@@ -67,5 +67,4 @@ export class ComponentDialog implements ModalComponent<BSModalContext>, OnDestro
   close() {
     this.dialog.dismiss();
   }
-
 }

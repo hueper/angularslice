@@ -1,4 +1,4 @@
-import {Component, Renderer, OnDestroy, ElementRef} from "@angular/core";
+import {Component, Renderer, OnDestroy} from "@angular/core";
 import * as _ from "lodash";
 import {AreaComponent} from "./area";
 import {ImageBarComponent} from "./image-bar";
@@ -8,7 +8,7 @@ import {Subscription} from "rxjs";
 
 @Component({
   selector: 'board',
-  styles: [ require('./board.component.scss') ],
+  styles: [require('./board.component.scss')],
   template: require('./board.component.jade')(),
   directives: [
     AreaComponent,
@@ -16,8 +16,8 @@ import {Subscription} from "rxjs";
   ],
 })
 export class BoardComponent implements OnDestroy {
-  currentImage: Image = null;
-  areaStyle: any = {};
+  currentImage:Image = null;
+  areaStyle:any = {};
   imageContainerStyle:any = {
     'width': '0',
     'height': '0',
@@ -26,10 +26,10 @@ export class BoardComponent implements OnDestroy {
     'position': 'relative'
   };
 
-  private newArea: NewArea = null;
-  private areas: Area[] = [];
-  private folders: Folder[] = [];
-  private images: Image[] = [];
+  private newArea:NewArea = null;
+  private areas:Area[] = [];
+  private folders:Folder[] = [];
+  private images:Image[] = [];
 
   private offsetTop:number;
   private offsetLeft:number;
@@ -39,7 +39,7 @@ export class BoardComponent implements OnDestroy {
   private listeners:any[] = [];
   private workspace:any;
 
-  private subscriptions: Subscription[] = [];
+  private subscriptions:Subscription[] = [];
 
   constructor(private areaService:AreaService,
               private rawImageService:RawImageService,
@@ -49,23 +49,23 @@ export class BoardComponent implements OnDestroy {
               private dialogService:DialogService) {
 
     // Subscribe for areas
-    this.subscriptions.push(this.areaService.dataSource.subscribe((areas: Area[]) => {
+    this.subscriptions.push(this.areaService.dataSource.subscribe((areas:Area[]) => {
       this.areas = areas;
       console.log('areas =>', areas);
     }));
 
     // Subscribe for folders
-    this.subscriptions.push(this.folderService.dataSource.subscribe((folders: Folder[]) => {
+    this.subscriptions.push(this.folderService.dataSource.subscribe((folders:Folder[]) => {
       this.folders = folders;
       console.log('folders =>', folders);
     }));
 
     // Look for new images without filtering
-    this.subscriptions.push(this.imageService.dataSource.subscribe((data: Image[]) => {
+    this.subscriptions.push(this.imageService.dataSource.subscribe((data:Image[]) => {
       this.images = data;
     }));
 
-    this.subscriptions.push(this.imageService.currentImage.subscribe((data: Image) => {
+    this.subscriptions.push(this.imageService.currentImage.subscribe((data:Image) => {
       this.currentImage = data;
 
       this.imageContainerStyle['width'] = this.currentImage.width + 'px';
@@ -79,7 +79,7 @@ export class BoardComponent implements OnDestroy {
   }
 
   loadFile(event) {
-    var file  = event.srcElement.files[0];
+    var file = event.srcElement.files[0];
     this.rawImageService.createFromFile(file);
   }
 
@@ -106,7 +106,7 @@ export class BoardComponent implements OnDestroy {
     this.offsetTop = imageContainer.offsetTop;
     this.offsetLeft = imageContainer.offsetLeft;
     this.scrollTop = workingSpace.scrollTop;
-    this.scrollLeft= workingSpace.scrollLeft;
+    this.scrollLeft = workingSpace.scrollLeft;
 
     this.newArea = new NewArea(event.clientX - this.offsetLeft + this.scrollLeft, event.clientY - this.offsetTop + this.scrollTop);
     this.areaStyle['pointer-events'] = 'none';
@@ -148,11 +148,17 @@ export class BoardComponent implements OnDestroy {
    */
   onMouseUp(event) {
     if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea)) {
-      this.dialogService.openCreateComponentDialog(this.newArea, this.createComponentDialogCallback.bind(this));
+      this.dialogService.openCreateComponentDialog()
+        .then((data) => {
+          this.createComponentDialogCallback(this.newArea, data);
+          this.newArea = null;
+          this.areaStyle = {};
+        })
+        .catch(error => {
+          this.newArea = null;
+          this.areaStyle = {};
+        });
     }
-
-    this.newArea = null;
-    this.areaStyle = {};
 
     // On mouse released, we should stop listening for these events
     _.each(this.listeners, unsubscribeFromListener => {
@@ -164,10 +170,8 @@ export class BoardComponent implements OnDestroy {
     return false;
   }
 
-
-
   createComponentDialogCallback(area, data) {
-    if(data && data.action == 'save') {
+    if (data && data.action == 'save') {
       this.createComponent(area, data.data)
     }
   }
@@ -178,7 +182,7 @@ export class BoardComponent implements OnDestroy {
     let type = data.type;
     let folderId;
 
-    if(type == 'new') {
+    if (type == 'new') {
       this.folderService.create(new Folder(null, data.newFolderName));
       folderId = _.last(this.folders).id;
     } else {
@@ -188,7 +192,7 @@ export class BoardComponent implements OnDestroy {
     console.log(area);
     area.setFolderId(folderId);
 
-    if(data.attach) {
+    if (data.attach) {
       this.imageService.create(new Image(folderId, this.currentImage.rawImageId, data.newImageName, area.x, area.y, area.width, area.height));
       let image = _.last(this.images);
       area.setImageId(image.id);
@@ -197,11 +201,11 @@ export class BoardComponent implements OnDestroy {
 
   }
 
-  private isCrossingOther(area: Area): boolean {
+  private isCrossingOther(area:Area):boolean {
     return !!(<any>this.areas).find((cmp) => cmp.overLaps(area));
   }
 
-  private findComponent(x, y): Folder {
+  private findComponent(x, y):Folder {
     const component = (<any>this.areas).find((cmp) => cmp.contains(x, y));
     return component;
   }

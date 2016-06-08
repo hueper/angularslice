@@ -1,9 +1,8 @@
-import * as _ from "lodash";
-import {Injectable} from '@angular/core';
-import {Modal, BSModalContext} from 'angular2-modal/plugins/bootstrap';
-import {ComponentDialog} from '../../component_dialog/component_dialog.component';
-import {ConfirmDialog, ConfirmDialogData} from '../../confirm_dialog/confirm_dialog.component';
-import {Observable} from 'rxjs/Rx';
+import {Injectable} from "@angular/core";
+import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
+import {ComponentDialog} from "../../component_dialog/component_dialog.component";
+import {ConfirmDialog, ConfirmDialogData} from "../../confirm_dialog/confirm_dialog.component";
+
 @Injectable()
 export class DialogService {
 
@@ -11,42 +10,30 @@ export class DialogService {
 
   }
 
-  openCreateComponentDialog(area, callback) {
+  openCreateComponentDialog() {
     const data = new BSModalContext();
-    this.modal
+    return this.modal
       .open(ComponentDialog, data)
       .then(dialog => {
-        dialog.result.then(data => {
-          callback(area, data);
-        })
+        return dialog.result;
       });
   }
 
   openConfirmDialog() {
-    let promise = new Promise((resolve, reject) => {
-      const data = new ConfirmDialogData();
-      this.modal
-        .open(ConfirmDialog, data)
-        .then(dialog => {
-          dialog.result.then(data => {
-            console.log(promise);
-            if (data && data === true) {
-              resolve("confirm");
-            } else {
-              reject('error');
-            }
-          }).catch(() => reject('error'))
-        }).catch(() => reject('error'));
-    });
-    return promise;
+    const data = new ConfirmDialogData();
+    return this.modal
+      .open(ConfirmDialog, data)
+      .then(dialog => {
+        return dialog.result;
+      })
   }
 }
 
 /*
-USING CONFIRM
+ USING CONFIRM
  this.dialogService.openConfirmDialog().then((result) => {
-  console.log("Dialog result", result);
+ console.log("Dialog result", result);
  }).catch(data => {
-  console.log('data => ', data);
+ console.log('data => ', data);
  });
  */
