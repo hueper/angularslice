@@ -1,7 +1,7 @@
 import {Component, OnDestroy} from "@angular/core";
 import {ImageService} from "../../shared/services";
 import {Image} from "../../shared/models";
-import { Subscription } from 'rxjs';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'image-bar',
@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 export class ImageBarComponent implements OnDestroy {
   images: Image[] = [];
   private subscriptions: Subscription[] = [];
+  private hover:boolean = false;
 
   constructor(
     private imageService: ImageService
@@ -24,6 +25,28 @@ export class ImageBarComponent implements OnDestroy {
     // this.subscriptions.push(this.imageService.currentImage.subscribe((data: Image) => {
     //   console.log(data);
     // }));
+  }
+
+  onDragOver(event) {
+    event.preventDefault();
+    this.hover = true;
+    return false;
+  }
+
+  onDrop(event, dropZone) {
+    event.preventDefault();
+    console.debug("dropped => ", arguments);
+    return false;
+  }
+
+  onDragEnter(event) {
+    this.hover = true;
+    return false;
+  }
+
+  onDragExit(event) {
+    this.hover = false;
+    return false;
   }
 
   getImage(image) {
