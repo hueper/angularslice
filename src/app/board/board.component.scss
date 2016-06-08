@@ -15,6 +15,24 @@
     display: flex;
     min-height: 130px;
     overflow: auto;
+    position: relative;
   }
+  .fileUploadPlaceholder {
+    margin: 5vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    border: 3px dashed darkgray;
+    border-radius: 10px;
+    color: dimgrey;
 
+    .centerWrapper {
+      text-align: center;
+    }
+
+    .noImage {
+      font-weight: bold;
+    }
+  }
 }

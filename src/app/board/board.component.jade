@@ -1,11 +1,16 @@
 .board
   //input(type="file", (change)="loadFile($event)")
 
-  .workingSpace(#workingSpace)
+  .fileUploadPlaceholder(*ngIf='images.length < 0')
+    .centerWrapper
+      i.material-icons(style='font-size: 20vmin;') panorama
+      p.noImage No image attached yet
+      p.dragAndDrop Drag and drop Image file onto this window to upload
+  .workingSpace(#workingSpace, *ngIf='images.length > 0')
     .imageContainer([ngStyle]="imageContainerStyle",
       #imageContainer
       (mousedown)="onMouseDown($event, imageContainer, workingSpace)",
     )
       area(*ngFor="let area of areas", [areaData]="area", [ngStyle]="areaStyle")
       area([areaData]="newArea", *ngIf="newArea", [ngStyle]="areaStyle")
-  image-bar
+  image-bar(*ngIf='images.length > 0')
