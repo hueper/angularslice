@@ -33,7 +33,7 @@ export class ImageBarComponent implements OnDestroy {
     return false;
   }
 
-  onDrop(event, dropZone) {
+  onDrop(event) {
     event.preventDefault();
     console.debug("dropped => ", arguments);
     return false;
