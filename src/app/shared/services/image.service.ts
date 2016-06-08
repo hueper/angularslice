@@ -3,9 +3,12 @@ import { Injectable} from '@angular/core';
 import { Image, RawImage } from '../models';
 import { BaseService } from './base.service';
 import { RawImageService } from './raw-image.service';
+import { ReplaySubject } from 'rxjs';
+
 
 @Injectable()
 export class ImageService extends BaseService<Image> {
+  currentImage: ReplaySubject<Image> = new ReplaySubject<Image>();
 
   constructor(
     private rawImageService: RawImageService)
@@ -23,7 +26,10 @@ export class ImageService extends BaseService<Image> {
 
   getBinaryData (instance: Image) {
     const rawImage = this.rawImageService.findById(instance.rawImageId);
-    console.log(rawImage);
     return rawImage ? rawImage.binaryData : null;
+  }
+
+  setCurrentImage(instance: Image) {
+    this.currentImage.next(instance);
   }
 }

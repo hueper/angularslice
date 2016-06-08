@@ -4,5 +4,5 @@
       .add +
       .text drag image here
     .imageBox(*ngFor='let image of images')
-      .thumbnail([ngStyle]='{"background-image": "url(" + getImage(image) + ")"}')
+      .thumbnail([ngStyle]='{"background-image": "url(" + getImage(image) + ")"}', (click)='setBoardImage(image)')
       .text {{ image.name }}

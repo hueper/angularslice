@@ -61,14 +61,16 @@ export class BoardComponent implements OnInit, OnDestroy {
     // Look for new images without filtering
     this.subscriptions.push(this.imageService.dataSource.subscribe((data: Image[]) => {
       this.images = data;
-      if (!data.length) return;
-      this.currentImage = data[0];
+    }));
 
-      // this.imageContainerStyle['display'] = 'initial';
+    this.subscriptions.push(this.imageService.currentImage.subscribe((data: Image) => {
+      this.currentImage = data;
+
       this.imageContainerStyle['width'] = this.currentImage.width + 'px';
       this.imageContainerStyle['height'] = this.currentImage.height + 'px';
       this.imageContainerStyle['background-image'] = 'url(' + this.imageService.getBinaryData(this.currentImage) + ')';
     }));
+
     setTimeout(() => {
       this.workspace = document.querySelector('.workingSpace');
     })

@@ -20,18 +20,18 @@ export class ImageBarComponent implements OnDestroy {
   ) {
     this.subscriptions.push(this.imageService.dataSource.subscribe((data: Image[]) => {
       this.images = data;
-      // if (!data.length) return;
-      // this.currentImage = data[0];
-      //
-      // // this.imageContainerStyle['display'] = 'initial';
-      // this.imageContainerStyle['width'] = this.currentImage.width + 'px';
-      // this.imageContainerStyle['height'] = this.currentImage.height + 'px';
-      // this.imageContainerStyle['background-image'] = 'url(' + this.imageService.getBinaryData(this.currentImage) + ')';
     }));
+    // this.subscriptions.push(this.imageService.currentImage.subscribe((data: Image) => {
+    //   console.log(data);
+    // }));
   }
-  
+
   getImage(image) {
     return this.imageService.getBinaryData(image);
+  }
+
+  setBoardImage(image) {
+    this.imageService.setCurrentImage(image)
   }
 
   ngOnDestroy() {
