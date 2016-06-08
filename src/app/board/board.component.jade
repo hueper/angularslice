@@ -1,10 +1,10 @@
 .board
   //input(type="file", (change)="loadFile($event)")
 
-  .workingSpace
-    .imageContainer(
-    [ngStyle]="imageContainerStyle",
-    (mousedown)="onMouseDown($event)"
+  .workingSpace(#workingSpace)
+    .imageContainer([ngStyle]="imageContainerStyle",
+      #imageContainer
+      (mousedown)="onMouseDown($event, imageContainer, workingSpace)",
     )
       area(*ngFor="let area of areas", [areaData]="area", [ngStyle]="areaStyle")
       area([areaData]="newArea", *ngIf="newArea", [ngStyle]="areaStyle")

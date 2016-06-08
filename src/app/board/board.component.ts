@@ -1,10 +1,10 @@
-import {Component, Renderer, OnInit, OnDestroy } from "@angular/core";
+import {Component, Renderer, OnDestroy, ElementRef} from "@angular/core";
 import * as _ from "lodash";
-import { AreaComponent } from "./area";
-import { ImageBarComponent } from "./image-bar";
-import { Area, Folder, Image, NewArea } from "../shared/models";
-import { AreaService, ImageService, RawImageService, FolderService, DialogService } from "../shared/services";
-import { Subscription } from 'rxjs';
+import {AreaComponent} from "./area";
+import {ImageBarComponent} from "./image-bar";
+import {Area, Folder, Image, NewArea} from "../shared/models";
+import {AreaService, ImageService, RawImageService, FolderService, DialogService} from "../shared/services";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'board',
@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
     ImageBarComponent,
   ],
 })
-export class BoardComponent implements OnInit, OnDestroy {
+export class BoardComponent implements OnDestroy {
   currentImage: Image = null;
   areaStyle: any = {};
   imageContainerStyle:any = {
@@ -33,6 +33,8 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   private offsetTop:number;
   private offsetLeft:number;
+  private scrollTop:number;
+  private scrollLeft:number;
 
   private listeners:any[] = [];
   private workspace:any;
@@ -81,11 +83,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.rawImageService.createFromFile(file);
   }
 
-  ngOnInit() {
-    this.listeners.push(this.renderer.listenGlobal('document', 'mousemove', this.onMouseMove.bind(this)));
-    this.listeners.push(this.renderer.listenGlobal('document', 'mouseup', this.onMouseUp.bind(this)));
-  }
-
   ngOnDestroy() {
     _.each(this.listeners, unsubscribeFromListener => {
       unsubscribeFromListener(); // unsubscribe
@@ -96,18 +93,37 @@ export class BoardComponent implements OnInit, OnDestroy {
     });
   }
 
-  onMouseDown(event) {
-    console.log("event => ", event);
+  /**
+   *
+   * On mouse down, we start to listen for mousemove, and mouseup events globally
+   *
+   * @param event
+   * @param {nativeElement} imageContainer
+   * @returns {boolean}
+   */
+  onMouseDown(event, imageContainer, workingSpace) {
 
-    this.offsetTop = event.target.offsetTop;
-    this.offsetLeft = event.target.offsetLeft;
+    this.offsetTop = imageContainer.offsetTop;
+    this.offsetLeft = imageContainer.offsetLeft;
+    this.scrollTop = workingSpace.scrollTop;
+    this.scrollLeft= workingSpace.scrollLeft;
 
-    this.newArea = new NewArea(event.offsetX, event.offsetY);
+    this.newArea = new NewArea(event.clientX - this.offsetLeft + this.scrollLeft, event.clientY - this.offsetTop + this.scrollTop);
     this.areaStyle['pointer-events'] = 'none';
+
+    this.listeners.push(this.renderer.listenGlobal('document', 'mousemove', this.onMouseMove.bind(this)));
+    this.listeners.push(this.renderer.listenGlobal('document', 'mouseup', this.onMouseUp.bind(this)));
 
     return false;
   }
 
+  /**
+   *
+   * On mouse move, we update the area object's coordinates (width and height)
+   *
+   * @param event
+   * @returns {boolean}
+   */
   onMouseMove(event) {
     if (this.newArea) {
       let plusTop:number = this.workspace.scrollTop;
@@ -123,14 +139,27 @@ export class BoardComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  onMouseUp(area) {
-
+  /**
+   *
+   * On mouseUp we unsubscribe from mouseMove and mouseUp events, and show a dialog for the user
+   *
+   * @param event
+   * @returns {boolean}
+   */
+  onMouseUp(event) {
     if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea)) {
       this.dialogService.openCreateComponentDialog(this.newArea, this.createComponentDialogCallback.bind(this));
     }
 
     this.newArea = null;
     this.areaStyle = {};
+
+    // On mouse released, we should stop listening for these events
+    _.each(this.listeners, unsubscribeFromListener => {
+      unsubscribeFromListener(); // unsubscribe
+    });
+    this.listeners = [];
+
 
     return false;
   }
