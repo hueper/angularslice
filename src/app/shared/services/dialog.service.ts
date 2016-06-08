@@ -11,13 +11,13 @@ export class DialogService {
 
   }
 
-  openCreateComponentDialog(callback) {
+  openCreateComponentDialog(area, callback) {
     const data = new BSModalContext();
     this.modal
       .open(ComponentDialog, data)
       .then(dialog => {
         dialog.result.then(data => {
-          callback(data);
+          callback(area, data);
         })
       });
   }

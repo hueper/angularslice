@@ -72,7 +72,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.workspace = document.querySelector('.workingSpace');
     })
-
   }
 
   loadFile(event) {
@@ -125,7 +124,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   onMouseUp(area) {
 
     if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea)) {
-      this.dialogService.openCreateComponentDialog(this.createComponentDialogCallback.bind(this));
+      this.dialogService.openCreateComponentDialog(this.newArea, this.createComponentDialogCallback.bind(this));
     }
 
     this.newArea = null;
@@ -136,9 +135,9 @@ export class BoardComponent implements OnInit, OnDestroy {
 
 
 
-  createComponentDialogCallback(params) {
-    if(params && params.action == 'save') {
-      this.createComponent(this.newArea, params.data)
+  createComponentDialogCallback(area, data) {
+    if(data && data.action == 'save') {
+      this.createComponent(area, data.data)
     }
   }
 
@@ -155,7 +154,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       folderId = data.folder;
     }
 
-
+    console.log(area);
     area.setFolderId(folderId);
 
     if(data.attach) {
