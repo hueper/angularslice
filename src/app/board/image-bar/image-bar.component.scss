@@ -44,6 +44,10 @@
     &.placeholder {
       border: 2px dimgray dashed;
 
+      &.hover {
+        color:magenta;
+        border-color: magenta;
+      }
     }
 
     &:hover {

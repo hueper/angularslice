@@ -155,9 +155,13 @@ export class BoardComponent implements OnDestroy {
           this.areaStyle = {};
         })
         .catch(error => {
+          console.log("error => ", error);
           this.newArea = null;
           this.areaStyle = {};
         });
+    } else {
+      this.newArea = null;
+      this.areaStyle = {};
     }
 
     // On mouse released, we should stop listening for these events

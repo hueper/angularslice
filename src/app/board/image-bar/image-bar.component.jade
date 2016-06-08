@@ -1,6 +1,13 @@
 .image-bar
   .box
-    .imageBox.placeholder
+    .imageBox.placeholder(#dropZone,
+        [class.hover]='hover',
+        (drop)='onDrop($event)',
+        (dragover)='onDragOver($event)',
+        (dragenter)='onDragEnter($event)',
+        (dragleave)='onDragExit($event)',
+        (dragexit)='onDragExit($event)'
+      )
       .add +
       .text drag image here
     .imageBox(*ngFor='let image of images')
