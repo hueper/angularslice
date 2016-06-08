@@ -19,9 +19,8 @@ export class ImageBarComponent implements OnDestroy {
     private imageService: ImageService
   ) {
     this.subscriptions.push(this.imageService.dataSource.subscribe((data: Image[]) => {
-      console.log(data);
       this.images = data;
-      if (!data.length) return;
+      // if (!data.length) return;
       // this.currentImage = data[0];
       //
       // // this.imageContainerStyle['display'] = 'initial';
@@ -29,6 +28,10 @@ export class ImageBarComponent implements OnDestroy {
       // this.imageContainerStyle['height'] = this.currentImage.height + 'px';
       // this.imageContainerStyle['background-image'] = 'url(' + this.imageService.getBinaryData(this.currentImage) + ')';
     }));
+  }
+  
+  getImage(image) {
+    return this.imageService.getBinaryData(image);
   }
 
   ngOnDestroy() {
