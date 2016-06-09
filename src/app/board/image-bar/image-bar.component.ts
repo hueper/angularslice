@@ -27,6 +27,10 @@ export class ImageBarComponent implements OnDestroy {
     // }));
   }
 
+  deleteImage(image) {
+    this.imageService.delete(image);
+  }
+
   onDragOver(event) {
     event.preventDefault();
     this.hover = true;

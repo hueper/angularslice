@@ -1,7 +1,7 @@
 .board
   //input(type="file", (change)="loadFile($event)")
 
-  .fileUploadPlaceholder(*ngIf='images.length < 0')
+  .fileUploadPlaceholder(*ngIf='images.length <= 0')
     .centerWrapper
       i.material-icons(style='font-size: 20vmin;') panorama
       p.noImage No image attached yet
