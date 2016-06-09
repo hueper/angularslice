@@ -14,8 +14,3 @@
       i.closeIcon.material-icons close
       .thumbnail([ngStyle]='{"background-image": "url(" + getImage(image) + ")"}', (click)='setBoardImage(image)')
       .text {{ image.name }}
-
-.slide.slideLeft
-  i.closeIcon.material-icons(style='font-size: 36px;') keyboard_arrow_left
-.slide.slideRight
-  i.closeIcon.material-icons(style='font-size: 36px;') keyboard_arrow_right

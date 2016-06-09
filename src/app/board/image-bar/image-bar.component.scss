@@ -5,7 +5,7 @@
   position: relative;
 
   .box {
-    margin: 0 50px;
+    margin: 0;
     display: flex;
   }
 
@@ -66,23 +66,3 @@
   }
 }
 
-.slide {
-  position: absolute;
-  top: 1px;
-  bottom: 0;
-  background-color: lightgray;
-  width: 50px;
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  &.slideLeft{
-    left: 0;
-    border-right: 1px solid black;
-  }
-  &.slideRight {
-    right: 0;
-    border-left: 1px solid black;
-  }
-}
