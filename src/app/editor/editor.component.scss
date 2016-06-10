@@ -61,13 +61,17 @@ board {
   height: 100%;
   align-items: center;
   md-icon {
+    &.disabled {
+      color: gray;
+      cursor: default;
+    }
     padding: 0 5px;
     margin: 0 10px;
   }
 }
 
 .separator {
-  border-right: 1px solid gray;
+  border-right: 2px solid lightgrey;
   display: flex;
   flex: 1;
   height: 100%;
