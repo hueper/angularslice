@@ -13,9 +13,10 @@
 
   image-bar {
     display: flex;
-    min-height: 130px;
+    flex: 0 0 130px;
     overflow: auto;
     position: relative;
+    z-index: 2;
   }
   .fileUploadPlaceholder {
     margin: 5vmin;

@@ -10,7 +10,6 @@
   }
 
   .imageBox {
-    padding: 15px;
     margin: 10px;
     display: flex;
     align-items: center;
@@ -20,7 +19,7 @@
     font-size: 16px;
     line-height: normal;
     cursor: pointer;
-    min-width: 190px;
+    width: 190px;
     position: relative;
 
     .closeIcon {
@@ -42,6 +41,7 @@
     }
 
     &.placeholder {
+      padding: 15px;
       border: 2px dimgray dashed;
 
       &.hover {

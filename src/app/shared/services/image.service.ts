@@ -28,6 +28,10 @@ export class ImageService extends BaseService<Image> {
     const rawImage = this.rawImageService.findById(instance.rawImageId);
     return rawImage ? rawImage.binaryData : null;
   }
+  getRawImage (instance: Image) {
+    const rawImage = this.rawImageService.findById(instance.rawImageId);
+    return rawImage ? rawImage : null;
+  }
 
   setCurrentImage(instance: Image) {
     this.currentImage.next(instance);
