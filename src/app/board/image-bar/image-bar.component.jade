@@ -1,16 +1,18 @@
 .image-bar
   .box
-    .imageBox.placeholder(#dropZone,
+    input#file.hiddenInput(type="file", (change)="loadFile($event)")
+    label.imageBox.placeholder(#dropZone,
         [class.hover]='hover',
         (drop)='onDrop($event)',
         (dragover)='onDragOver($event)',
         (dragenter)='onDragEnter($event)',
         (dragleave)='onDragExit($event)',
-        (dragexit)='onDragExit($event)'
+        (dragexit)='onDragExit($event)',
+        for='file'
       )
       .add +
       .text drag image here
     .imageBox(*ngFor='let image of images')
       i.closeIcon.material-icons((click)='deleteImage(image)') close
-      .thumbnail([ngStyle]='{"background-image": "url(" + getImage(image) + ")"}', (click)='setBoardImage(image)')
+      sliced-image.thumbnail((click)='setBoardImage(image)', [image]='image')
       .text {{ image.name }}

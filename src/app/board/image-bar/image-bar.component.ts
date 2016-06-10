@@ -1,15 +1,14 @@
 import {Component, OnDestroy} from "@angular/core";
-import {ImageService} from "../../shared/services";
+import {ImageService, RawImageService} from "../../shared/services";
 import {Image} from "../../shared/models";
+import { SlicedImage } from '../../sliced-image';
 import {Subscription} from "rxjs";
 
 @Component({
   selector: 'image-bar',
   template: require('./image-bar.component.jade')(),
   styles: [ require('./image-bar.component.scss') ],
-  providers: [],
-  pipes: [],
-  directives: [],
+  directives: [ SlicedImage ]
 })
 export class ImageBarComponent implements OnDestroy {
   images: Image[] = [];
@@ -17,7 +16,8 @@ export class ImageBarComponent implements OnDestroy {
   private hover:boolean = false;
 
   constructor(
-    private imageService: ImageService
+    private imageService: ImageService,
+    private rawImageService: RawImageService
   ) {
     this.subscriptions.push(this.imageService.dataSource.subscribe((data: Image[]) => {
       this.images = data;
@@ -39,8 +39,15 @@ export class ImageBarComponent implements OnDestroy {
 
   onDrop(event) {
     event.preventDefault();
-    console.debug("dropped => ", arguments);
+    var file = event.dataTransfer.files[0];
+    this.rawImageService.createFromFile(file);
     return false;
+  }
+
+  loadFile(event) {
+    console.log(event);
+    var file = event.srcElement.files[0];
+    this.rawImageService.createFromFile(file);
   }
 
   onDragEnter(event) {

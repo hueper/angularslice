@@ -40,6 +40,7 @@ export class BoardComponent implements OnDestroy {
   private workspace:any;
 
   private subscriptions:Subscription[] = [];
+  private hover:boolean = false;
 
   constructor(private areaService:AreaService,
               private rawImageService:RawImageService,
@@ -78,9 +79,33 @@ export class BoardComponent implements OnDestroy {
     })
   }
 
+  onDragOver(event) {
+    event.preventDefault();
+    this.hover = true;
+    return false;
+  }
+
+  onDrop(event) {
+    event.preventDefault();
+    var file = event.dataTransfer.files[0];
+    this.rawImageService.createFromFile(file);
+    return false;
+  }
+
   loadFile(event) {
+    console.log(event);
     var file = event.srcElement.files[0];
     this.rawImageService.createFromFile(file);
+  }
+
+  onDragEnter(event) {
+    this.hover = true;
+    return false;
+  }
+
+  onDragExit(event) {
+    this.hover = false;
+    return false;
   }
 
   ngOnDestroy() {

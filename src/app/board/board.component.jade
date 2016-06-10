@@ -2,7 +2,16 @@
   //input(type="file", (change)="loadFile($event)")
 
   .fileUploadPlaceholder(*ngIf='images.length <= 0')
-    .centerWrapper
+    input#fileFull.hiddenInput(type="file", (change)="loadFile($event)")
+    label.centerWrapper(#dropZone,
+      [class.hover]='hover',
+      (drop)='onDrop($event)',
+      (dragover)='onDragOver($event)',
+      (dragenter)='onDragEnter($event)',
+      (dragleave)='onDragExit($event)',
+      (dragexit)='onDragExit($event)',
+      for='fileFull'
+    )
       i.material-icons(style='font-size: 20vmin;') panorama
       p.noImage No image attached yet
       p.dragAndDrop Drag and drop Image file onto this window to upload
