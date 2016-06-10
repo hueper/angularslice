@@ -1,30 +1,25 @@
 import {Component, OnDestroy} from "@angular/core";
 import {ImageService, RawImageService} from "../../shared/services";
 import {Image} from "../../shared/models";
-import { SlicedImage } from '../../sliced-image';
-import {Subscription} from "rxjs";
+import {SlicedImage} from "../../sliced-image";
+import {Subscription, Observable} from "rxjs/Rx";
 
 @Component({
   selector: 'image-bar',
   template: require('./image-bar.component.jade')(),
-  styles: [ require('./image-bar.component.scss') ],
-  directives: [ SlicedImage ]
+  styles: [require('./image-bar.component.scss')],
+  directives: [SlicedImage]
 })
 export class ImageBarComponent implements OnDestroy {
-  images: Image[] = [];
-  private subscriptions: Subscription[] = [];
+
+  private images:Observable<Image[]>;
+
+  private subscriptions:Subscription[] = [];
   private hover:boolean = false;
 
-  constructor(
-    private imageService: ImageService,
-    private rawImageService: RawImageService
-  ) {
-    this.subscriptions.push(this.imageService.dataSource.subscribe((data: Image[]) => {
-      this.images = data;
-    }));
-    // this.subscriptions.push(this.imageService.currentImage.subscribe((data: Image) => {
-    //   console.log(data);
-    // }));
+  constructor(private imageService:ImageService,
+              private rawImageService:RawImageService) {
+    this.images = this.imageService.dataSource;
   }
 
   deleteImage(image) {

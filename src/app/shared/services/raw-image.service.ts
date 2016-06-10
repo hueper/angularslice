@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable, NgZone} from "@angular/core";
+import {RawImage} from "../models";
+import {BaseService} from "./base.service";
 
-import { RawImage } from '../models';
-import { BaseService } from './base.service';
+// import {NgZone} from '@angular/core'
 
 @Injectable()
 export class RawImageService extends BaseService<RawImage> {
 
-  constructor() {
+  constructor(// private ApplicationRef:ApplicationRef
+    private NgZone:NgZone) {
     super();
 
     // TODO: this is just test data
@@ -18,6 +20,9 @@ export class RawImageService extends BaseService<RawImage> {
 
   create(rawImage: RawImage) {
     super.create(rawImage);
+
+    // We're going out from Zone, so after the create we'll need to trigger the change detection chain
+    // this.ApplicationRef.tick();
   }
 
   createFromFile(file: any) {
@@ -29,9 +34,11 @@ export class RawImageService extends BaseService<RawImage> {
       let binaryData = image.src;
 
       image.onload = () => {
-        let width = image.width;
-        let height = image.height;
-        this.create(new RawImage(binaryData, width, height));
+        this.NgZone.run(() => {
+          let width = image.width;
+          let height = image.height;
+          this.create(new RawImage(binaryData, width, height));
+        });
       };
 
     }, false);
