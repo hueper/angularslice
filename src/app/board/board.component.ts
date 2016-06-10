@@ -37,7 +37,6 @@ export class BoardComponent implements OnDestroy {
   private scrollLeft:number;
 
   private listeners:any[] = [];
-  private workspace:any;
 
   private subscriptions:Subscription[] = [];
   private hover:boolean = false;
@@ -73,10 +72,6 @@ export class BoardComponent implements OnDestroy {
       this.imageContainerStyle['height'] = this.currentImage.height + 'px';
       this.imageContainerStyle['background-image'] = 'url(' + this.imageService.getBinaryData(this.currentImage) + ')';
     }));
-
-    setTimeout(() => {
-      this.workspace = document.querySelector('.workingSpace');
-    })
   }
 
   onDragOver(event) {
@@ -129,6 +124,8 @@ export class BoardComponent implements OnDestroy {
   onMouseDown(event, imageContainer, workingSpace) {
 
     this.offsetTop = imageContainer.offsetTop;
+    console.debug('imageContainer.scrollTop => ', imageContainer.scrollTop);
+    console.debug('imageContainer.scrollLeft => ', imageContainer.scrollLeft);
     this.offsetLeft = imageContainer.offsetLeft;
     this.scrollTop = workingSpace.scrollTop;
     this.scrollLeft = workingSpace.scrollLeft;
@@ -151,8 +148,8 @@ export class BoardComponent implements OnDestroy {
    */
   onMouseMove(event) {
     if (this.newArea) {
-      let plusTop:number = this.workspace.scrollTop;
-      let plusLeft:number = this.workspace.scrollLeft;
+      let plusTop:number = this.scrollTop;
+      let plusLeft:number = this.scrollLeft;
 
       this.newArea.setDiagonalCoordinates(
         Math.max(0, Math.min(this.currentImage.width, event.clientX - this.offsetLeft + plusLeft)),
