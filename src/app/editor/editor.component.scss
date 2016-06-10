@@ -27,7 +27,7 @@ board {
 .c-header, .c-toolbar {
   padding: 0 25px;
   display: flex;
-  flex: 1;
+  flex: 1 0 auto;
   flex-direction: row;
   align-items: center;
 }
