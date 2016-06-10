@@ -1,4 +1,19 @@
 toolbar
+  .c-header
+    a.angular(href='./')
+      img(src='{{ logo }}')
+      | SLICE
+  .c-toolbar
+    .left
+      md-icon mode_edit
+    .h-fill-remaining.h-flex-end
+    .right
+      md-icon delete
+      span.separator
+      md-icon file_download
+      md-icon send
+      md-icon settings
+
 .editor
   sidebar
   board

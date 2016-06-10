@@ -1,8 +1,11 @@
 import {Component} from "@angular/core";
 
+import {MD_ICON_DIRECTIVES} from '@angular2-material/icon';
+
 import {BoardComponent} from "../board";
 import {SidebarComponent} from "../sidebar";
-import {ToolbarComponent} from '../toolbar';
+import {ToolbarComponent} from "../toolbar";
+
 
 @Component({
   selector: 'editor.c-editor',
@@ -11,11 +14,14 @@ import {ToolbarComponent} from '../toolbar';
   directives: [
     BoardComponent,
     SidebarComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    MD_ICON_DIRECTIVES
   ]
 })
 export class EditorComponent {
+  logo:any;
 
-  constructor() {}
-
+  constructor() {
+    this.logo = require('../shared/assets/img/angular.svg');
+  }
 }

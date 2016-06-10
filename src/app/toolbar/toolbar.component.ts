@@ -6,9 +6,7 @@ import {Component} from "@angular/core";
   styles: [require('./toolbar.component.scss')]
 })
 export class ToolbarComponent {
-  logo: any;
 
   constructor() {
-    this.logo = require('../shared/assets/img/angular.svg');
   }
 }
