@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from "@angular/core";
 
-import { BoardComponent } from '../board';
-import { SidebarComponent } from '../sidebar';
+import {BoardComponent} from "../board";
+import {SidebarComponent} from "../sidebar";
+import {ToolbarComponent} from '../toolbar';
 
 @Component({
   selector: 'editor.c-editor',
@@ -9,7 +10,8 @@ import { SidebarComponent } from '../sidebar';
   styles: [ require('./editor.component.scss') ],
   directives: [
     BoardComponent,
-    SidebarComponent
+    SidebarComponent,
+    ToolbarComponent
   ]
 })
 export class EditorComponent {

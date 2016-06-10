@@ -1,17 +1,23 @@
-.editor {
+:host, .editor {
   display: flex;
-  height: 100%;
-  width: 100%;
+  flex: 1;
+}
 
-  sidebar {
-    display: flex;
-    min-width: 300px;
-  }
+:host {
+  flex-direction: column;
+}
 
-  board {
-    display: flex;
-    flex-grow: 1;
+.editor {
+  flex-direction: row;
+}
+sidebar {
+  display: flex;
+  min-width: 300px;
+}
 
-    overflow: auto;
-  }
+board {
+  display: flex;
+  flex-grow: 1;
+
+  overflow: auto;
 }
