@@ -1,4 +1,4 @@
-import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnChanges} from "@angular/core";
+import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnChanges, NgZone} from "@angular/core";
 import {Image} from "../shared/models/";
 import {ImageService} from "../shared/services";
 
@@ -22,35 +22,39 @@ export class SlicedImage implements AfterViewInit, OnChanges {
 
 
   constructor(private imageService:ImageService,
-              private el:ElementRef) {
+              private el:ElementRef,
+              private ngZone:NgZone) {
 
   }
 
   draw() {
-    if (this.myCanvas) {
-      let canvas = this.myCanvas.nativeElement;
-      let rawImage = this.imageService.getRawImage(this.image);
-      let ctx = canvas.getContext('2d');
-      let img = document.createElement('img');
-      let canvasSize;
+    this.ngZone.run(() => {
+      if (this.myCanvas) {
 
-      img.src = rawImage.binaryData;
-      img.onload = () => {
-        let dest = this.el.nativeElement;
-        canvasSize = this.generateSizeLandscape(dest.offsetWidth, this.image.width, this.image.height);
-        if (canvasSize.height > dest.offsetHeight) {
-          canvasSize = this.generateSizePortrait(dest.offsetHeight, this.image.width, this.image.height);
-        }
+        let canvas = this.myCanvas.nativeElement;
+        let rawImage = this.imageService.getRawImage(this.image);
+        let ctx = canvas.getContext('2d');
+        let img = document.createElement('img');
+        let canvasSize;
 
-        this.width = canvas.width = canvasSize.width;
-        this.height = canvas.height = canvasSize.height;
+        img.src = rawImage.binaryData;
+        img.onload = () => {
+          let dest = this.el.nativeElement;
+          canvasSize = this.generateSizeLandscape(dest.offsetWidth, this.image.width, this.image.height);
+          if (canvasSize.height > dest.offsetHeight) {
+            canvasSize = this.generateSizePortrait(dest.offsetHeight, this.image.width, this.image.height);
+          }
 
-        this.scaleWidth = this.width / this.image.width;
-        this.scaleHeight = this.height / this.image.height;
+          this.width = canvas.width = canvasSize.width;
+          this.height = canvas.height = canvasSize.height;
 
-        ctx.drawImage(img, this.image.x, this.image.y, this.image.width, this.image.height, 0, 0, canvasSize.width, canvasSize.height);
-      };
-    }
+          this.scaleWidth = this.width / this.image.width;
+          this.scaleHeight = this.height / this.image.height;
+
+          ctx.drawImage(img, this.image.x, this.image.y, this.image.width, this.image.height, 0, 0, canvasSize.width, canvasSize.height);
+        };
+      }
+    })
   }
 
   ngOnChanges() {

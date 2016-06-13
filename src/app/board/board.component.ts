@@ -47,6 +47,8 @@ export class BoardComponent implements OnDestroy {
   private subscriptions:Subscription[] = [];
   private hover:boolean = false;
 
+  private areaSubscription:Subscription;
+
   constructor(private areaService:AreaService,
               private rawImageService:RawImageService,
               private imageService:ImageService,
@@ -54,16 +56,9 @@ export class BoardComponent implements OnDestroy {
               private renderer:Renderer,
               private dialogService:DialogService) {
 
-    // Subscribe for areas
-    this.subscriptions.push(this.areaService.dataSource.subscribe((areas:Area[]) => {
-      this.areas = areas;
-      console.log('areas =>', areas);
-    }));
-
     // Subscribe for folders
     this.subscriptions.push(this.folderService.dataSource.subscribe((folders:Folder[]) => {
       this.folders = folders;
-      console.log('folders =>', folders);
     }));
 
     // Look for new images without filtering
@@ -73,10 +68,14 @@ export class BoardComponent implements OnDestroy {
 
     this.subscriptions.push(this.imageService.currentImage.subscribe((data:Image) => {
       this.currentImage = data;
-
-      this.imageContainerStyle['width'] = this.currentImage.width + 'px';
-      this.imageContainerStyle['height'] = this.currentImage.height + 'px';
-      this.imageContainerStyle['background-image'] = 'url(' + this.imageService.getBinaryData(this.currentImage) + ')';
+      if(this.areaSubscription) {
+        this.areaSubscription.unsubscribe();
+      }
+      // Subscribe for areas
+      this.areaSubscription = this.areaService.filter(instance => instance.imageId === this.currentImage.id).subscribe((areas:Area[]) => {
+        this.areas = areas;
+      });
+      this.subscriptions.push(this.areaSubscription);
     }));
   }
 
@@ -94,7 +93,6 @@ export class BoardComponent implements OnDestroy {
   }
 
   loadFile(event) {
-    console.log(event);
     var file = event.srcElement.files[0];
     this.rawImageService.createFromFile(file);
   }
@@ -135,7 +133,6 @@ export class BoardComponent implements OnDestroy {
 
     this.offsetTop = imageContainer.myCanvas.nativeElement.offsetTop;
     this.offsetLeft = imageContainer.myCanvas.nativeElement.offsetLeft;
-    console.debug('imageContainer.elementRef => ', imageContainer.elementRef);
     this.offsetTopContainer = workingSpace.offsetTop;
     this.offsetLeftContainer = workingSpace.offsetLeft;
 
@@ -147,6 +144,8 @@ export class BoardComponent implements OnDestroy {
       imageContainer.scaleWidth, imageContainer.scaleHeight,
       this.offsetTop, this.offsetLeft
     );
+
+
     this.areaStyle['pointer-events'] = 'none';
 
     this.listeners.push(this.renderer.listenGlobal('document', 'mousemove', this.onMouseMove.bind(this)));
@@ -190,7 +189,6 @@ export class BoardComponent implements OnDestroy {
           this.areaStyle = {};
         })
         .catch(error => {
-          console.log("error => ", error);
           this.newArea = null;
           this.areaStyle = {};
         });
@@ -228,13 +226,12 @@ export class BoardComponent implements OnDestroy {
       folderId = data.folder;
     }
 
-    console.log(area);
     area.setFolderId(folderId);
 
     if (data.attach) {
       this.imageService.create(new Image(folderId, this.currentImage.rawImageId, data.newImageName, area.x / area.scaleWidth - area.offsetLeft / area.scaleWidth, area.y/ area.scaleHeight - area.offsetTop / area.scaleHeight, area.width / area.scaleWidth, area.height / area.scaleHeight));
       let image = _.last(this.images);
-      area.setImageId(image.id);
+      area.setImageId(this.currentImage.id);
     }
     this.areaService.create(area);
 
