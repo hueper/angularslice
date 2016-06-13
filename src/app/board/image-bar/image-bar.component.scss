@@ -64,7 +64,7 @@
   .thumbnail {
     flex-grow: 1;
     width: 100%;
-    background-size: cover;
+    max-height: calc(100% - 28px);
   }
   .hiddenInput {
     display: none;

@@ -5,6 +5,7 @@ import {ImageBarComponent} from "./image-bar";
 import {Area, Folder, Image, NewArea} from "../shared/models";
 import {AreaService, ImageService, RawImageService, FolderService, DialogService} from "../shared/services";
 import {Subscription} from "rxjs";
+import { SlicedImage } from "../sliced-image";
 
 @Component({
   selector: 'board',
@@ -13,10 +14,11 @@ import {Subscription} from "rxjs";
   directives: [
     AreaComponent,
     ImageBarComponent,
+    SlicedImage
   ],
 })
 export class BoardComponent implements OnDestroy {
-  currentImage:Image = null;
+  currentImage:Image;
   areaStyle:any = {};
   imageContainerStyle:any = {
     'width': '0',

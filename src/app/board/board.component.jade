@@ -16,9 +16,11 @@
       p.noImage No image attached yet
       p.dragAndDrop Drag and drop Image file onto this window to upload
   .workingSpace(#workingSpace, *ngIf='images.length > 0')
-    .imageContainer([ngStyle]="imageContainerStyle",
-      #imageContainer
+    sliced-image.imageContainer(
+      *ngIf='currentImage',
+      #imageContainer,
       (mousedown)="onMouseDown($event, imageContainer, workingSpace)",
+      [image] = 'currentImage'
     )
       area(*ngFor="let area of areas", [areaData]="area", [ngStyle]="areaStyle")
       area([areaData]="newArea", *ngIf="newArea", [ngStyle]="areaStyle")
