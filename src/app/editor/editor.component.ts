@@ -1,14 +1,16 @@
-import {Component} from "@angular/core";
+import { Component } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MD_ICON_DIRECTIVES } from '@angular2-material/icon';
+import { Observable } from 'rxjs';
 
-import {MD_ICON_DIRECTIVES} from '@angular2-material/icon';
-
-import {BoardComponent} from "../board";
-import {SidebarComponent} from "../sidebar";
-import {ToolbarComponent} from "../toolbar";
+import { BoardComponent } from "../board";
+import { SidebarComponent } from "../sidebar";
+import { ToolbarComponent } from "../toolbar";
+import { ImageService, FolderService } from "../shared/services";
 
 
 @Component({
-  selector: 'editor.c-editor',
+  selector: 'editor',
   template: require('./editor.component.jade')(),
   styles: [ require('./editor.component.scss') ],
   directives: [
@@ -19,9 +21,41 @@ import {ToolbarComponent} from "../toolbar";
   ]
 })
 export class EditorComponent {
-  logo:any;
+  logo: any;
+  sub: any;
 
-  constructor() {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private folderService: FolderService,
+    private imageService: ImageService
+  ) {
+
+    this.sub = this.router.routerState.queryParams.take(1)
+      .subscribe(params => {
+        console.log('ROUTING', params);
+
+        if (params['folderId']) {
+          this.folderService.setCurrentById(+params['folderId']);
+        }
+
+        if (params['imageId']) {
+          this.imageService.setCurrentById(+params['imageId']);
+        }
+      });
+
+    Observable.combineLatest(this.folderService.currentSource, this.imageService.currentSource)
+      .subscribe((combinedData) => {
+        console.log('combinedData', combinedData);
+
+        let currentFolder, currentImage;
+        [currentFolder, currentImage] = combinedData;
+
+        // TODO: This part is not working yet, with @angular/router@3.0.0.alpha
+        this.router.navigate([], { queryParams: { folderId: currentFolder.id, imageId: currentImage.id } });
+      });
+
+
     this.logo = require('../shared/assets/img/angular.svg');
   }
 }
