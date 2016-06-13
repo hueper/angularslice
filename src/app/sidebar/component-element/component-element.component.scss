@@ -1,5 +1,9 @@
+@import '../../shared/scss/utils/colors';
+
 .c-componentElement {
   display: flex;
+  color: $text-color;
+  padding: 2px 10px;
 
   &__folder {
     flex-grow: 1;
@@ -7,7 +11,7 @@
   &__counter {
     md-icon {
       vertical-align: middle;
-      margin-left: 10px;
+      margin-left: 5px;
     }
   }
   &--hover {
