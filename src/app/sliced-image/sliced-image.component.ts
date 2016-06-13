@@ -1,6 +1,6 @@
-import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnChanges} from '@angular/core';
-import {Image} from '../shared/models/';
-import {ImageService} from '../shared/services';
+import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnChanges} from "@angular/core";
+import {Image} from "../shared/models/";
+import {ImageService} from "../shared/services";
 
 @Component({
   selector: 'sliced-image',
@@ -14,6 +14,13 @@ export class SlicedImage implements AfterViewInit, OnChanges {
   @Input()
   image:Image;
 
+  public width:number;
+  public height:number;
+
+  public scaleWidth:number;
+  public scaleHeight:number;
+
+
   constructor(private imageService:ImageService,
               private el:ElementRef) {
 
@@ -26,7 +33,6 @@ export class SlicedImage implements AfterViewInit, OnChanges {
       let ctx = canvas.getContext('2d');
       let img = document.createElement('img');
       let canvasSize;
-      console.log(this.image)
 
       img.src = rawImage.binaryData;
       img.onload = () => {
@@ -36,8 +42,12 @@ export class SlicedImage implements AfterViewInit, OnChanges {
           canvasSize = this.generateSizePortrait(dest.offsetHeight, this.image.width, this.image.height);
         }
 
-        canvas.width = canvasSize.width;
-        canvas.height = canvasSize.height;
+        this.width = canvas.width = canvasSize.width;
+        this.height = canvas.height = canvasSize.height;
+
+        this.scaleWidth = this.width / this.image.width;
+        this.scaleHeight = this.height / this.image.height;
+
         ctx.drawImage(img, this.image.x, this.image.y, this.image.width, this.image.height, 0, 0, canvasSize.width, canvasSize.height);
       };
     }

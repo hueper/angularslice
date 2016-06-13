@@ -5,7 +5,7 @@ import {ImageBarComponent} from "./image-bar";
 import {Area, Folder, Image, NewArea} from "../shared/models";
 import {AreaService, ImageService, RawImageService, FolderService, DialogService} from "../shared/services";
 import {Subscription} from "rxjs";
-import { SlicedImage } from "../sliced-image";
+import {SlicedImage} from "../sliced-image";
 
 @Component({
   selector: 'board',
@@ -35,8 +35,12 @@ export class BoardComponent implements OnDestroy {
 
   private offsetTop:number;
   private offsetLeft:number;
-  private scrollTop:number;
-  private scrollLeft:number;
+  private offsetTopContainer:number;
+  private offsetLeftContainer:number;
+  private maxWidth:number;
+  private maxHeight:number;
+  private scaleWidth:number;
+  private scaleHeight:number;
 
   private listeners:any[] = [];
 
@@ -125,14 +129,24 @@ export class BoardComponent implements OnDestroy {
    */
   onMouseDown(event, imageContainer, workingSpace) {
 
-    this.offsetTop = imageContainer.offsetTop;
-    console.debug('imageContainer.scrollTop => ', imageContainer.scrollTop);
-    console.debug('imageContainer.scrollLeft => ', imageContainer.scrollLeft);
-    this.offsetLeft = imageContainer.offsetLeft;
-    this.scrollTop = workingSpace.scrollTop;
-    this.scrollLeft = workingSpace.scrollLeft;
+    if (event.target != imageContainer.myCanvas.nativeElement) {
+      return false;
+    }
 
-    this.newArea = new NewArea(event.clientX - this.offsetLeft + this.scrollLeft, event.clientY - this.offsetTop + this.scrollTop);
+    this.offsetTop = imageContainer.myCanvas.nativeElement.offsetTop;
+    this.offsetLeft = imageContainer.myCanvas.nativeElement.offsetLeft;
+    console.debug('imageContainer.elementRef => ', imageContainer.elementRef);
+    this.offsetTopContainer = workingSpace.offsetTop;
+    this.offsetLeftContainer = workingSpace.offsetLeft;
+
+    this.maxHeight = imageContainer.myCanvas.nativeElement.height;
+    this.maxWidth = imageContainer.myCanvas.nativeElement.width;
+
+    this.newArea = new NewArea(event.layerX + this.offsetLeft,
+      event.layerY + this.offsetTop,
+      imageContainer.scaleWidth, imageContainer.scaleHeight,
+      this.offsetTop, this.offsetLeft
+    );
     this.areaStyle['pointer-events'] = 'none';
 
     this.listeners.push(this.renderer.listenGlobal('document', 'mousemove', this.onMouseMove.bind(this)));
@@ -150,12 +164,9 @@ export class BoardComponent implements OnDestroy {
    */
   onMouseMove(event) {
     if (this.newArea) {
-      let plusTop:number = this.scrollTop;
-      let plusLeft:number = this.scrollLeft;
-
       this.newArea.setDiagonalCoordinates(
-        Math.max(0, Math.min(this.currentImage.width, event.clientX - this.offsetLeft + plusLeft)),
-        Math.max(0, Math.min(this.currentImage.height, event.clientY - this.offsetTop + plusTop))
+        Math.max(0 + this.offsetLeft, Math.min(this.maxWidth + this.offsetLeft, event.clientX - this.offsetLeftContainer)),
+        Math.max(0 + this.offsetTop, Math.min(this.maxHeight + this.offsetTop, event.clientY - this.offsetTopContainer))
       );
       this.newArea.invalid = this.isCrossingOther(this.newArea);
     }
@@ -221,7 +232,7 @@ export class BoardComponent implements OnDestroy {
     area.setFolderId(folderId);
 
     if (data.attach) {
-      this.imageService.create(new Image(folderId, this.currentImage.rawImageId, data.newImageName, area.x, area.y, area.width, area.height));
+      this.imageService.create(new Image(folderId, this.currentImage.rawImageId, data.newImageName, area.x / area.scaleWidth - area.offsetLeft / area.scaleWidth, area.y/ area.scaleHeight - area.offsetTop / area.scaleHeight, area.width / area.scaleWidth, area.height / area.scaleHeight));
       let image = _.last(this.images);
       area.setImageId(image.id);
     }
