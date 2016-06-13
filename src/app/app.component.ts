@@ -1,10 +1,6 @@
 import { Component, Injectable, AfterViewInit, ViewContainerRef } from '@angular/core';
 import { Modal, BS_MODAL_PROVIDERS } from 'angular2-modal/plugins/bootstrap';
-import {
-  Routes,
-  Router,
-  ROUTER_DIRECTIVES
-} from '@angular/router';
+import { Routes, Router, ROUTER_DIRECTIVES } from '@angular/router';
 
 import { EditorComponent } from './editor';
 import {DialogService} from "./shared/services/dialog.service";
