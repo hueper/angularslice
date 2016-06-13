@@ -51,9 +51,9 @@ ul {
           top: 0px;
           content: '';
           display: block;
-          border-left: 1px solid $color;
+          border-left: 1px solid $text-color;
           height: 1em;
-          border-bottom: 1px solid $color;
+          border-bottom: 1px solid $text-color;
           width: 10px;
         }
         &:after {
@@ -62,7 +62,7 @@ ul {
           bottom: -7px;
           content: '';
           display: block;
-          border-left: 1px solid $color;
+          border-left: 1px solid $text-color;
           height: 100%;
         }
         &.root {
