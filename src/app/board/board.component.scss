@@ -47,9 +47,9 @@
     align-items: stretch;
     justify-content: center;
     flex-grow: 1;
-    border: 3px dashed darkgray;
+    border: 3px dashed rgba(0,0,0,0.2);
     border-radius: 10px;
-    color: dimgrey;
+    color: $text-color;
     cursor: pointer;
 
     &:hover {
