@@ -2,7 +2,7 @@ ul
   li.root
     //-([ngClass]='{ root: folder.folderId === null || folder.folderId === undefined }')
     .c-flexContainer
-      md-icon folder
+      md-icon photo_library
       | {{ folder.name }}
     component-element(*ngFor='let f of folders | async', [folder]='f')
 

@@ -1,10 +1,12 @@
+@import '../shared/scss/utils/colors';
+
 .board {
   display: flex;
   flex-grow: 1;
 
   overflow: hidden;
   flex-direction: column;
-  background: #ddd;
+  background: #fafafa;
 
   .workingSpace {
     flex-grow: 1;
@@ -42,15 +44,31 @@
   .fileUploadPlaceholder {
     margin: 5vmin;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     flex-grow: 1;
-    border: 3px dashed darkgray;
+    border: 3px dashed rgba(0,0,0,0.2);
     border-radius: 10px;
-    color: dimgrey;
+    color: $text-color;
+    cursor: pointer;
+
+    &:hover {
+      //background-color: #e9e9e9;
+      border-color: $primary;
+
+      i {
+        color: $primary;
+      }
+    }
 
     .centerWrapper {
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
     }
 
     .noImage {
