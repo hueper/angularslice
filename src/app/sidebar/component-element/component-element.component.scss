@@ -12,6 +12,7 @@
   flex-direction: row;
   md-icon {
     margin-right: 5px;
+    cursor: pointer;
   }
 }
 
@@ -29,12 +30,11 @@ ul {
     margin-left: 25px;
   }
 
-  ul.closed {
-    li {
-      height: 0;
-      transition: 0.5s all ease-in-out;
-    }
+  li.closed, component-element.closed {
+    overflow: hidden;
+    height: 0;
   }
+
   &__counter {
     md-icon {
       vertical-align: middle;
@@ -65,8 +65,11 @@ ul {
       border-left: 1px solid $text-color;
       height: 100%;
     }
-    &.root {
+    &.folder {
       margin: 0px 0px 0px -20px;
+    }
+
+    &.root {
       &:before {
         display: none;
       }

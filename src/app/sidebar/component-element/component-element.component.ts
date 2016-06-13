@@ -14,6 +14,10 @@ export class ComponentElement {
 
   @Input() folder: Folder;
 
+  private folderIcon:string;
+
+  private isOpen:boolean;
+
   private folders:Observable<Folder[]>;
   private files:Observable<File[]>;
   private images:Observable<Image[]>;
@@ -24,6 +28,15 @@ export class ComponentElement {
     this.images = this.imageService.filter(image => this.folder.id == image.folderId)
     this.folders = folderService.filter(folder => folder.folderId === this.folder.id);
     this.files = fileService.filter(file => file.folderId === this.folder.id);
+
+    this.isOpen = true;
+    this.folderIcon = 'folder_open';
   }
 
+  toggleFolder(event) {
+    event.preventDefault();
+    this.isOpen = !this.isOpen;
+    this.folderIcon = this.isOpen ? 'folder_open' : 'folder';
+    return false;
+  }
 }
