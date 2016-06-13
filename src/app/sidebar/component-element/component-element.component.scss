@@ -1,12 +1,39 @@
 @import '../../shared/scss/utils/colors';
 
-.c-componentElement {
-  display: flex;
-  color: $text-color;
-  padding: 2px 10px;
+:host {
+  display: block;
+}
 
-  &__folder {
-    flex-grow: 1;
+.c-flexContainer {
+  display: flex;
+  align-content: center;
+  color: $text-color;
+  justify-content: flex-start;
+  flex-direction: row;
+  md-icon {
+    margin-right: 5px;
+  }
+}
+
+ul, li {
+  margin: 0 0 0 5px;
+  padding: 0;
+}
+
+ul {
+  margin: 0px 0px 0px 20px;
+  list-style: none;
+  line-height: 2em;
+
+  component-element {
+    margin-left: 25px;
+  }
+
+  ul.closed {
+    li {
+      height: 0;
+      transition: 0.5s all ease-in-out;
+    }
   }
   &__counter {
     md-icon {
@@ -14,8 +41,45 @@
       margin-left: 5px;
     }
   }
-  &--hover {
-    background-color: rgba(0,255,255, 0.2);
-  }
+  li, component-element {
+    font-size: 16px;
+    position: relative;
 
+    &:before {
+      position: absolute;
+      left: -15px;
+      top: 0px;
+      content: '';
+      display: block;
+      border-left: 1px solid $text-color;
+      height: 1em;
+      border-bottom: 1px solid $text-color;
+      width: 10px;
+    }
+    &:after {
+      position: absolute;
+      left: -15px;
+      bottom: -7px;
+      content: '';
+      display: block;
+      border-left: 1px solid $text-color;
+      height: 100%;
+    }
+    &.root {
+      margin: 0px 0px 0px -20px;
+      &:before {
+        display: none;
+      }
+      &:after {
+        display: none;
+      }
+    }
+  }
+  li {
+    &:last-child {
+      &:after {
+        display: none
+      }
+    }
+  }
 }
