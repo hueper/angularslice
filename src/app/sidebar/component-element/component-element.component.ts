@@ -6,16 +6,15 @@ import {MD_ICON_DIRECTIVES} from "@angular2-material/icon/icon";
 
 @Component({
   selector: 'component-element',
-  styles: [ require('./component-element.component.scss') ],
+  styles: [require('./component-element.component.scss')],
   template: require('./component-element.component.jade')(),
   directives: [MD_ICON_DIRECTIVES, ComponentElement]
 })
 export class ComponentElement {
 
-  @Input() folder: Folder;
+  @Input() folder:Folder;
 
   private folderIcon:string;
-
   private isOpen:boolean;
 
   private folders:Observable<Folder[]>;
@@ -29,12 +28,14 @@ export class ComponentElement {
     this.folders = folderService.filter(folder => folder.folderId === this.folder.id);
     this.files = fileService.filter(file => file.folderId === this.folder.id);
 
-    this.isOpen = true;
-    this.folderIcon = 'folder_open';
+    this.isOpen = false;
+    this.toggleFolder(null);
   }
 
   toggleFolder(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
     this.isOpen = !this.isOpen;
     this.folderIcon = this.isOpen ? 'folder_open' : 'folder';
     return false;
