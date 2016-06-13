@@ -42,7 +42,7 @@
   .fileUploadPlaceholder {
     margin: 5vmin;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     flex-grow: 1;
     border: 3px dashed darkgray;
@@ -51,6 +51,11 @@
 
     .centerWrapper {
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
     }
 
     .noImage {
