@@ -27,9 +27,9 @@ export class FileService extends BaseService<File> {
     });
 
     this.folderService.createSource.subscribe(folder=> {
-      this.create(new File(folder.id, this.tsTemplate.id, folder.name));
-      this.create(new File(folder.id, this.htmlTemplate.id, folder.name));
-      this.create(new File(folder.id, this.styleTemplate.id, folder.name));
+      this.create(new File(folder.id, this.tsTemplate.id, folder.name + "." + this.tsTemplate.extension));
+      this.create(new File(folder.id, this.htmlTemplate.id, folder.name + "." + this.htmlTemplate.extension));
+      this.create(new File(folder.id, this.styleTemplate.id, folder.name + "." + this.styleTemplate.extension));
     });
   }
 

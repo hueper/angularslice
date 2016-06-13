@@ -1,4 +1,10 @@
-.c-componentElement()
-  .c-componentElement__folder {{ folder.name }}
-  //-.c-componentElement__counter {{ images.length }}
-    md-icon panorama
+ul
+  li.root
+    //-([ngClass]='{ root: folder.folderId === null || folder.folderId === undefined }')
+    .c-flexContainer
+      md-icon folder
+      | {{ folder.name }}
+    component-element(*ngFor='let f of folders | async', [folder]='f')
+
+  li(*ngFor='let file of files | async')
+    | {{ file.name }}

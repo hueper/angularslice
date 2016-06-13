@@ -8,7 +8,7 @@ import {MD_ICON_DIRECTIVES} from "@angular2-material/icon/icon";
   selector: 'component-element',
   styles: [ require('./component-element.component.scss') ],
   template: require('./component-element.component.jade')(),
-  directives: [MD_ICON_DIRECTIVES]
+  directives: [MD_ICON_DIRECTIVES, ComponentElement]
 })
 export class ComponentElement {
 
@@ -22,9 +22,8 @@ export class ComponentElement {
               private folderService:FolderService,
               private fileService:FileService) {
     this.images = this.imageService.filter(image => this.folder.id == image.folderId)
-    this.folders = folderService.filter(folder => folder.id === this.folder.id);
+    this.folders = folderService.filter(folder => folder.folderId === this.folder.id);
     this.files = fileService.filter(file => file.folderId === this.folder.id);
-
   }
 
 }
