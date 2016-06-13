@@ -28,6 +28,13 @@ ul {
     margin-left: 25px;
   }
 
+  ul.closed {
+    li {
+      height: 0;
+      transition: 0.5s all ease-in-out;
+    }
+  }
+
   li, component-element {
     font-size: 16px;
     position: relative;
