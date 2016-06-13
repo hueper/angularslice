@@ -7,14 +7,13 @@
 .c-flexContainer {
   display: flex;
   align-content: center;
+  color: $text-color;
   justify-content: flex-start;
   flex-direction: row;
-  color: $text-color;
   md-icon {
     margin-right: 5px;
   }
 }
-
 
 ul, li {
   margin: 0 0 0 5px;
@@ -34,53 +33,52 @@ ul {
     li {
       height: 0;
       transition: 0.5s all ease-in-out;
-      &__counter {
-        md-icon {
-          vertical-align: middle;
-          margin-left: 5px;
-        }
-      }
+    }
+  }
+  &__counter {
+    md-icon {
+      vertical-align: middle;
+      margin-left: 5px;
+    }
+  }
+  li, component-element {
+    font-size: 16px;
+    position: relative;
 
-      li, component-element {
-        font-size: 16px;
-        position: relative;
-
-        &:before {
-          position: absolute;
-          left: -15px;
-          top: 0px;
-          content: '';
-          display: block;
-          border-left: 1px solid $text-color;
-          height: 1em;
-          border-bottom: 1px solid $text-color;
-          width: 10px;
-        }
-        &:after {
-          position: absolute;
-          left: -15px;
-          bottom: -7px;
-          content: '';
-          display: block;
-          border-left: 1px solid $text-color;
-          height: 100%;
-        }
-        &.root {
-          margin: 0px 0px 0px -20px;
-          &:before {
-            display: none;
-          }
-          &:after {
-            display: none;
-          }
-        }
+    &:before {
+      position: absolute;
+      left: -15px;
+      top: 0px;
+      content: '';
+      display: block;
+      border-left: 1px solid $text-color;
+      height: 1em;
+      border-bottom: 1px solid $text-color;
+      width: 10px;
+    }
+    &:after {
+      position: absolute;
+      left: -15px;
+      bottom: -7px;
+      content: '';
+      display: block;
+      border-left: 1px solid $text-color;
+      height: 100%;
+    }
+    &.root {
+      margin: 0px 0px 0px -20px;
+      &:before {
+        display: none;
       }
-      li {
-        &:last-child {
-          &:after {
-            display: none
-          }
-        }
+      &:after {
+        display: none;
+      }
+    }
+  }
+  li {
+    &:last-child {
+      &:after {
+        display: none
       }
     }
   }
