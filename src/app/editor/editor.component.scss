@@ -35,12 +35,18 @@ board {
 .c-header {
   height: 60px;
   background: $primary;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+  position: relative;
+  z-index: 2;
 }
 
 .c-toolbar {
-  height: 40px;
-  background: lightgray;
-  border-bottom: 1px solid gray;
+  height: 50px;
+  background-color: rgba(0,0,0,0.05);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.07),0 3px 1px -2px rgba(0,0,0,.1),0 1px 5px 0 rgba(0,0,0,.06);
+  position: relative;
+  z-index: 3;
+  //border-bottom: 1px solid gray;
 }
 
 .angular {
@@ -53,6 +59,29 @@ board {
     margin-right: 10px;
   }
 }
+md-icon {
+  &.disabled {
+    color: rgba(0,0,0,0.26);
+    cursor: default;
+    &:hover {
+      color: rgba(0,0,0,0.26);
+    }
+  }
+  cursor: pointer;
+  color: $text-color;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.left {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+}
 
 .right {
   display: flex;
@@ -61,17 +90,13 @@ board {
   height: 100%;
   align-items: center;
   md-icon {
-    &.disabled {
-      color: gray;
-      cursor: default;
-    }
     padding: 0 5px;
     margin: 0 10px;
   }
 }
 
 .separator {
-  border-right: 1px solid dimgray;
+  border-right: 1px solid rgba(0,0,0,.1);
   display: flex;
   flex: 1;
   height: 100%;
