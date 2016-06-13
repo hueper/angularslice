@@ -1,7 +1,7 @@
 import * as _ from "lodash";
-import { Injectable} from '@angular/core';
-import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
-import { BaseModel } from '../models';
+import {Injectable} from "@angular/core";
+import {BehaviorSubject, ReplaySubject, Observable} from "rxjs";
+import {BaseModel} from "../models";
 
 
 @Injectable()
@@ -52,6 +52,10 @@ export class BaseService<T extends BaseModel>{
 
   create(instance: T) {
     this.createSource.next(instance);
+  }
+
+  filter(filter:(instance:T) => boolean):Observable<T[]> {
+    return this.dataSource.map(instanceArray => instanceArray.filter(filter));
   }
 
   findById(id: number) : T {
