@@ -1,5 +1,15 @@
 .c-componentElement {
+  display: flex;
 
+  &__folder {
+    flex-grow: 1;
+  }
+  &__counter {
+    md-icon {
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+  }
   &--hover {
     background-color: rgba(0,255,255, 0.2);
   }
