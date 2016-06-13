@@ -54,7 +54,7 @@ export class BaseService<T extends BaseModel>{
     this.createSource.next(instance);
   }
 
-  findById(id: number) {
+  findById(id: number) : T {
     let result = this.data.filter((instance) => { return instance.id === id });
     return result ? result[0] : null;
   }

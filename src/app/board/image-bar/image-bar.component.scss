@@ -22,10 +22,15 @@
     width: 190px;
     position: relative;
 
+    &.currentImage {
+      background: rgba(255,255,255,0.3);
+      box-shadow: 0 0 2px 0 black;
+    }
+
     .closeIcon {
       position: absolute;
-      right: -3px;
-      top: -3px;
+      right: 5px;
+      top: 5px;
       cursor: pointer;
       font-size: 20px;
 

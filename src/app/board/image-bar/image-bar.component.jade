@@ -12,7 +12,8 @@
       )
       .add +
       .text drag image here
-    .imageBox(*ngFor='let image of images | async')
+    .imageBox(*ngFor='let image of images | async',
+      [ngClass]='{currentImage: currentImage && currentImage.id == image.id }')
       i.closeIcon.material-icons((click)='deleteImage(image)') close
       sliced-image.thumbnail((click)='setBoardImage(image)', [image]='image')
       .text {{ image.name }}

@@ -13,6 +13,7 @@ import {Subscription, Observable} from "rxjs/Rx";
 export class ImageBarComponent implements OnDestroy {
 
   private images:Observable<Image[]>;
+  private currentImage:Image;
 
   private subscriptions:Subscription[] = [];
   private hover:boolean = false;
@@ -20,6 +21,9 @@ export class ImageBarComponent implements OnDestroy {
   constructor(private imageService:ImageService,
               private rawImageService:RawImageService) {
     this.images = this.imageService.dataSource;
+    this.subscriptions.push(this.imageService.currentImage.subscribe(image => {
+      this.currentImage = image;
+    }));
   }
 
   deleteImage(image) {
