@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import { Injectable} from '@angular/core';
-import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Subject, Observable } from 'rxjs';
 import { BaseModel } from '../models';
 
 
@@ -8,6 +8,9 @@ import { BaseModel } from '../models';
 export class BaseService<T extends BaseModel>{
   data: T[] = [];
   dataSource: BehaviorSubject<T[]> = new BehaviorSubject([]);
+  currentSource: BehaviorSubject<T> = new BehaviorSubject<T>(null);
+  currentIdSource: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+
   // Note: if you go with type 'T', the properties won't be available, like: instance.id
   changeSource: ReplaySubject<Function> = new ReplaySubject<Function>();
   updateSource: ReplaySubject<T> = new ReplaySubject<T>();
@@ -15,6 +18,17 @@ export class BaseService<T extends BaseModel>{
   deleteSource: ReplaySubject<T> = new ReplaySubject<T>();
 
   constructor() {
+
+    // Create the current instance stream
+    Observable.combineLatest(this.dataSource, this.currentIdSource)
+      .map((combinedData) => {
+        let dataStore, currentId;
+        [dataStore, currentId] = combinedData;
+
+        return  _.find(dataStore, { id: currentId }) || _.get(dataStore, 0, null);
+      })
+      .subscribe(this.currentSource);
+
     this.changeSource
       .scan((dataStore, operation) => {
         return operation(dataStore);
@@ -48,6 +62,16 @@ export class BaseService<T extends BaseModel>{
         }
       })
       .subscribe(this.changeSource);
+  }
+
+  first(filter:(instance:T) => boolean): Observable<T[]> {
+    return this.dataSource.map((instanceArray: T[]) => {
+      return _.get(instanceArray.filter(filter), 0, null);
+    });
+  }
+
+  setCurrentById(id: number) {
+    this.currentIdSource.next(null);
   }
 
   create(instance: T) {
