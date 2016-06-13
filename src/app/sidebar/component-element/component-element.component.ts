@@ -1,9 +1,8 @@
-import { Component, Input } from '@angular/core';
-import {MD_ICON_DIRECTIVES} from '@angular2-material/icon';
-import { Folder, Image } from '../../shared/models';
-import {ImageService} from "../../shared/services";
-
-import {Subscription} from "rxjs";
+import {Component, Input} from "@angular/core";
+import {Folder, File, Image} from "../../shared/models";
+import {FolderService, FileService, ImageService} from "../../shared/services";
+import {Observable} from "rxjs/Rx";
+import {MD_ICON_DIRECTIVES} from "@angular2-material/icon/icon";
 
 @Component({
   selector: 'component-element',
@@ -15,17 +14,17 @@ export class ComponentElement {
 
   @Input() folder: Folder;
 
-  private images:Image[] = [];
-  private subscriptions:Subscription[] = [];
+  private folders:Observable<Folder[]>;
+  private files:Observable<File[]>;
+  private images:Observable<Image[]>;
 
-  constructor(
-    private imageService:ImageService
-  ) {
-    // Look for new images without filtering
-    this.subscriptions.push(this.imageService.filter(image => this.folder.id == image.folderId).subscribe((data:Image[]) => {
-      console.log(data);
-      this.images = data;
-    }));
+  constructor(private imageService:ImageService,
+              private folderService:FolderService,
+              private fileService:FileService) {
+    this.images = this.imageService.filter(image => this.folder.id == image.folderId)
+    this.folders = folderService.filter(folder => folder.id === this.folder.id);
+    this.files = fileService.filter(file => file.folderId === this.folder.id);
+
   }
 
 }
