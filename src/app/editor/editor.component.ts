@@ -1,12 +1,11 @@
-import { Component } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { MD_ICON_DIRECTIVES } from '@angular2-material/icon';
-import { Observable } from 'rxjs';
-
-import { BoardComponent } from "../board";
-import { SidebarComponent } from "../sidebar";
-import { ToolbarComponent } from "../toolbar";
-import { ImageService, FolderService } from "../shared/services";
+import {Component} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
+import {MD_ICON_DIRECTIVES} from "@angular2-material/icon";
+import {Observable} from "rxjs";
+import {BoardComponent} from "../board";
+import {SidebarComponent} from "../sidebar";
+import {ToolbarComponent} from "../toolbar";
+import {ImageService, FolderService} from "../shared/services";
 
 
 @Component({
@@ -46,11 +45,9 @@ export class EditorComponent {
 
     Observable.combineLatest(this.folderService.currentSource, this.imageService.currentSource)
       .subscribe((combinedData) => {
-        console.log('combinedData', combinedData);
-
         let currentFolder, currentImage;
         [currentFolder, currentImage] = combinedData;
-
+        console.debug('currentFolder.id => ', currentFolder.id);
         // TODO: This part is not working yet, with @angular/router@3.0.0.alpha
         if(currentFolder && currentImage) {
           this.router.navigate([], { queryParams: { folderId: currentFolder.id, imageId: currentImage.id } });
