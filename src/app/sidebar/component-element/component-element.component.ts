@@ -2,13 +2,12 @@ import {Component, Input} from "@angular/core";
 import {Folder, File, Image} from "../../shared/models";
 import {FolderService, FileService, ImageService} from "../../shared/services";
 import {Observable} from "rxjs/Rx";
-import {MD_ICON_DIRECTIVES} from "@angular2-material/icon/icon";
 
 @Component({
   selector: 'component-element',
   styles: [require('./component-element.component.scss')],
   template: require('./component-element.component.jade')(),
-  directives: [MD_ICON_DIRECTIVES, ComponentElement]
+  directives: [ComponentElement]
 })
 export class ComponentElement {
 
@@ -51,7 +50,7 @@ export class ComponentElement {
       event.preventDefault();
     }
     this.isOpen = !this.isOpen;
-    this.folderIcon = this.isOpen ? 'folder_open' : 'folder';
+    this.folderIcon = this.isOpen ? '-' : '+';
     return false;
   }
 }

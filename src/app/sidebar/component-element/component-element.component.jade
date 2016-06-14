@@ -3,9 +3,9 @@ ul
     (click)='selectFolder($event);'
   )
     .c-flexContainer
-      md-icon((click)='toggleFolder($event)') {{ folderIcon }}
+      .toggleFolder((click)='toggleFolder($event)') {{ folderIcon }}
       .folderName {{ folder.name }}
   component-element([ngClass]='{closed: !isOpen}', *ngFor='let f of folders | async', [folder]='f')
 
-  li([ngClass]='{closed: !isOpen}', *ngFor='let file of files | async')
+  li.file([ngClass]='{closed: !isOpen}', *ngFor='let file of files | async')
     | {{ file.name }}
