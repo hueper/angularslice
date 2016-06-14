@@ -37,22 +37,19 @@ export class SlicedImage implements AfterViewInit, OnChanges {
         let img = document.createElement('img');
         let canvasSize;
 
-        img.src = rawImage.binaryData;
-        img.onload = () => {
-          let dest = this.el.nativeElement;
-          canvasSize = this.generateSizeLandscape(dest.offsetWidth, this.image.width, this.image.height);
-          if (canvasSize.height > dest.offsetHeight) {
-            canvasSize = this.generateSizePortrait(dest.offsetHeight, this.image.width, this.image.height);
-          }
+        let dest = this.el.nativeElement;
+        canvasSize = this.generateSizeLandscape(dest.offsetWidth, this.image.width, this.image.height);
+        if (canvasSize.height > dest.offsetHeight) {
+          canvasSize = this.generateSizePortrait(dest.offsetHeight, this.image.width, this.image.height);
+        }
 
-          this.width = canvas.width = canvasSize.width;
-          this.height = canvas.height = canvasSize.height;
+        this.width = canvas.width = canvasSize.width;
+        this.height = canvas.height = canvasSize.height;
 
-          this.scaleWidth = this.width / this.image.width;
-          this.scaleHeight = this.height / this.image.height;
+        this.scaleWidth = this.width / this.image.width;
+        this.scaleHeight = this.height / this.image.height;
 
-          ctx.drawImage(img, this.image.x, this.image.y, this.image.width, this.image.height, 0, 0, canvasSize.width, canvasSize.height);
-        };
+        ctx.drawImage(rawImage.binaryData, this.image.x, this.image.y, this.image.width, this.image.height, 0, 0, canvasSize.width, canvasSize.height);
       }
     })
   }

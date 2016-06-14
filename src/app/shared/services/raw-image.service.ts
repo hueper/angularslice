@@ -28,23 +28,31 @@ export class RawImageService extends BaseService<RawImage> {
   createFromFile(file: any) {
     const reader  = new FileReader();
 
+    let fileNameSegments = file.name.split('.');
+
     reader.addEventListener('load', (e:any) => {
+      let type = 'image/' + fileNameSegments[fileNameSegments.length - 1];
+      let blob = new Blob([new Uint8Array(e.target.result)], {type: type});
+
+      let urlCreator = window.URL;
+      let imageUrl = urlCreator.createObjectURL(blob);
+
       let image = new Image();
-      image.src = e.target.result;
-      let binaryData = image.src;
+      image.src = imageUrl;
+      // let binaryData = image.src;
 
       image.onload = () => {
         this.NgZone.run(() => {
           let width = image.width;
           let height = image.height;
-          this.create(new RawImage(binaryData, width, height));
+          this.create(new RawImage(blob, type, width, height));
         });
       };
 
     }, false);
 
     if (file) {
-      reader.readAsDataURL(file);
+      reader.readAsArrayBuffer(file);
     }
 
   }
