@@ -1,13 +1,14 @@
 import {Component, Input} from "@angular/core";
 import {Folder, File, Image} from "../../shared/models";
-import {FolderService, FileService, ImageService} from "../../shared/services";
+import {FolderService, FileService, ImageService, DialogService} from "../../shared/services";
 import {Observable} from "rxjs/Rx";
+import {MD_ICON_DIRECTIVES} from "@angular2-material/icon"
 
 @Component({
   selector: 'component-element',
   styles: [require('./component-element.component.scss')],
   template: require('./component-element.component.jade')(),
-  directives: [ComponentElement]
+  directives: [ComponentElement, MD_ICON_DIRECTIVES]
 })
 export class ComponentElement {
 
@@ -23,7 +24,8 @@ export class ComponentElement {
 
   constructor(private imageService:ImageService,
               private folderService:FolderService,
-              private fileService:FileService) {
+              private fileService:FileService,
+              private dialogService:DialogService) {
 
     this.images = this.imageService.filter(image => this.folder.id == image.folderId)
     this.folders = folderService.filter(folder => folder.folderId === this.folder.id);
@@ -43,6 +45,25 @@ export class ComponentElement {
     }
     this.folderService.setCurrentById(this.folder.id);
     return false;
+  }
+
+  edit(folder) {
+    console.log(this.currentFolder);
+    this.dialogService.openEditComponentDialog(folder)
+      .then((data) => {
+        this.editComponentDialogCallback(data);
+      })
+      .catch(error => {
+
+      });
+  }
+  editComponentDialogCallback(data) {
+    if(data.action == 'save') {
+      this.folderService.update(data.data);
+    }
+    if(data.action == 'delete') {
+      this.folderService.delete(data.data);
+    }
   }
 
   toggleFolder(event) {

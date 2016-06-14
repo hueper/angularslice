@@ -5,6 +5,7 @@ ul
     .c-flexContainer
       .toggleFolder((click)='toggleFolder($event)') {{ folderIcon }}
       .folderName {{ folder.name }}
+      md-icon.edit((click)='edit(folder)') edit
   component-element([ngClass]='{closed: !isOpen}', *ngFor='let f of folders | async', [folder]='f')
 
   li.file([ngClass]='{closed: !isOpen}', *ngFor='let file of files | async')

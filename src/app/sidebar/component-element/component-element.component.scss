@@ -11,7 +11,7 @@
   justify-content: flex-start;
   flex-direction: row;
   position: relative;
-  height: 30px;
+  height: 40px;
 
   .toggleFolder {
     margin: 0 5px 0 1px;
@@ -35,6 +35,18 @@
     height: auto;
     line-height: 30px;
     cursor: pointer;
+    flex-grow: 1;
+  }
+  .edit {
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .23s;
+  }
+
+  &:hover {
+    .edit {
+      opacity: 1;
+    }
   }
 }
 
