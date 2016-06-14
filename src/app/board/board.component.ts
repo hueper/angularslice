@@ -96,6 +96,7 @@ export class BoardComponent implements OnDestroy {
   onDrop(event) {
     event.preventDefault();
     var file = event.dataTransfer.files[0];
+    this.hover =false;
     this.rawImageService.createFromFile(file);
     return false;
   }
