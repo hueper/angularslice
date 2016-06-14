@@ -1,29 +1,14 @@
 import { Component, AfterViewInit, ViewContainerRef } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Modal, BS_MODAL_PROVIDERS } from 'angular2-modal/plugins/bootstrap';
-
-import {
-  AreaService,
-  DialogService,
-  FileService,
-  FolderService,
-  ImageService,
-  RawImageService,
-  TemplateService
-} from "./shared/services";
+import {DialogService} from "./shared/services/dialog.service";
 
 @Component({
   selector: 'app',
   providers: [
     Modal,
     ...BS_MODAL_PROVIDERS,
-    DialogService,
-    AreaService,
-    FileService,
-    FolderService,
-    ImageService,
-    RawImageService,
-    TemplateService,
+    DialogService
   ],
   pipes: [],
   directives: [ ROUTER_DIRECTIVES ],

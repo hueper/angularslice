@@ -17,6 +17,12 @@
     cursor: pointer;
     position: relative;
   }
+
+  .folderName {
+    height: auto;
+    line-height: 25px;
+    cursor: pointer;
+  }
 }
 
 ul, li {
@@ -30,12 +36,22 @@ ul {
   line-height: 2em;
 
   component-element {
-    margin-left: 25px;
+    margin-left: 5px;
   }
 
   li.closed, component-element.closed {
     overflow: hidden;
     height: 0;
+  }
+
+  li.selected > .c-flexContainer {
+    font-weight: bolder;
+    color: $primary;
+
+    & > .folderName {
+      border-bottom: 2px dashed $primary;
+      line-height: 23px;
+    }
   }
 
   &__counter {
