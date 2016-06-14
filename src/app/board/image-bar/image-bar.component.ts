@@ -3,7 +3,7 @@ import {Component, OnDestroy} from "@angular/core";
 import {ImageService, RawImageService} from "../../shared/services";
 import {Image} from "../../shared/models";
 import {SlicedImage} from "../../sliced-image";
-import {Subscription, Observable} from "rxjs/Rx";
+import {Subscription} from "rxjs/Rx";
 import {FolderService} from "../../shared/services/folder.service";
 import {Folder} from "../../shared/models/folder.model";
 
@@ -15,7 +15,9 @@ import {Folder} from "../../shared/models/folder.model";
 })
 export class ImageBarComponent implements OnDestroy {
 
-  private images:Observable<Image[]>;
+  private images:Image[];
+  private imagesSubscribe:Subscription;
+
   private currentImage:Image;
 
   private currentFolder:Folder;
@@ -29,10 +31,18 @@ export class ImageBarComponent implements OnDestroy {
 
     this.subscriptions.push(this.folderService.currentSource.subscribe(currentSource => {
       this.currentFolder = currentSource;
+      if(this.imagesSubscribe) {
+        this.imagesSubscribe.unsubscribe();
+      }
 
-      this.images = this.imageService.filter(f => f.folderId === this.currentFolder.id || f.folderId === this.currentFolder.folderId);
-
+      this.imagesSubscribe = this.imageService
+        .filter(f => f.folderId === this.currentFolder.id || f.folderId === this.currentFolder.folderId)
+        .subscribe((images:Image[]) => {
+          this.images = images;
+        });
     }));
+
+
     this.subscriptions.push(this.imageService.currentImage.subscribe(image => {
       this.currentImage = image;
     }));
