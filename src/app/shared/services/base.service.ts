@@ -24,7 +24,6 @@ export class BaseService<T extends BaseModel>{
       .map((combinedData) => {
         let dataStore, currentId;
         [dataStore, currentId] = combinedData;
-
         return  _.find(dataStore, { id: currentId }) || _.get(dataStore, 0, null);
       })
       .subscribe(this.currentSource);
@@ -71,7 +70,7 @@ export class BaseService<T extends BaseModel>{
   }
 
   setCurrentById(id: number) {
-    this.currentIdSource.next(null);
+    this.currentIdSource.next(id);
   }
 
   create(instance: T) {

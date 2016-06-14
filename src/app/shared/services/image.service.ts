@@ -1,22 +1,28 @@
 import {Injectable} from "@angular/core";
-import {Image, RawImage} from "../models";
+import {Image, RawImage, Folder} from "../models";
 import {BaseService} from "./base.service";
 import {RawImageService} from "./raw-image.service";
+import {FolderService} from "./folder.service";
 import {ReplaySubject} from "rxjs";
 
 
 @Injectable()
 export class ImageService extends BaseService<Image> {
   currentImage: ReplaySubject<Image> = new ReplaySubject<Image>();
+  currentFolder: Folder;
 
-  constructor(
-    private rawImageService: RawImageService)
+  constructor(private folderService:FolderService,
+              private rawImageService: RawImageService)
   {
     super();
 
+    this.folderService.currentSource.subscribe(folder => {
+      this.currentFolder = folder;
+    });
+
     // Automatically create an image on rawImage creation
     rawImageService.createSource.subscribe((rawImage: RawImage) => {
-      let image = new Image(null, rawImage.id, 'default', 0, 0, rawImage.width, rawImage.height);
+      let image = new Image(this.currentFolder ? this.currentFolder.id : null, rawImage.id, 'default', 0, 0, rawImage.width, rawImage.height);
       this.create(image);
     });
 

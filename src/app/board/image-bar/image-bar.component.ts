@@ -1,8 +1,11 @@
+import * as _ from "lodash";
 import {Component, OnDestroy} from "@angular/core";
 import {ImageService, RawImageService} from "../../shared/services";
 import {Image} from "../../shared/models";
 import {SlicedImage} from "../../sliced-image";
-import {Subscription, Observable} from "rxjs/Rx";
+import {Subscription} from "rxjs/Rx";
+import {FolderService} from "../../shared/services/folder.service";
+import {Folder} from "../../shared/models/folder.model";
 
 @Component({
   selector: 'image-bar',
@@ -12,18 +15,41 @@ import {Subscription, Observable} from "rxjs/Rx";
 })
 export class ImageBarComponent implements OnDestroy {
 
-  private images:Observable<Image[]>;
+  private images:Image[];
+  private imagesSubscribe:Subscription;
+
   private currentImage:Image;
+  private currentFolder:Folder;
 
   private subscriptions:Subscription[] = [];
   private hover:boolean = false;
 
   constructor(private imageService:ImageService,
-              private rawImageService:RawImageService) {
-    this.images = this.imageService.dataSource;
+              private rawImageService:RawImageService,
+              private folderService:FolderService) {
+
+    this.subscriptions.push(this.folderService.currentSource.subscribe(currentSource => {
+      this.currentFolder = currentSource;
+      if(this.imagesSubscribe) {
+        this.imagesSubscribe.unsubscribe();
+      }
+
+      this.imagesSubscribe = this.imageService
+        .filter(f => this.currentFolder && f.folderId === this.currentFolder.id)
+        .subscribe((images:Image[]) => {
+          this.images = images;
+          if (this.currentImage && this.images.length > 0 && _.filter(this.images, f => f.id === this.currentImage.id).length < 1) {
+            // The current image is not in current scope/folder
+            this.imageService.setCurrentImage(this.images[0]);
+          }
+        });
+    }));
+
+
     this.subscriptions.push(this.imageService.currentImage.subscribe(image => {
       this.currentImage = image;
     }));
+
   }
 
   deleteImage(image) {

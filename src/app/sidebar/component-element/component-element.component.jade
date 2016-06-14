@@ -1,9 +1,11 @@
 ul
-  li.folder([ngClass]='{ root: folder.folderId === null || folder.folderId === undefined }')
+  li.folder([ngClass]='{ root: folder.folderId === null || folder.folderId === undefined, selected: folder && currentFolder && currentFolder.id === folder.id }',
+    (click)='selectFolder($event);'
+  )
     .c-flexContainer
       md-icon((click)='toggleFolder($event)') {{ folderIcon }}
-      | {{ folder.name }}
-    component-element([ngClass]='{closed: !isOpen}', *ngFor='let f of folders | async', [folder]='f')
+      .folderName {{ folder.name }}
+  component-element([ngClass]='{closed: !isOpen}', *ngFor='let f of folders | async', [folder]='f')
 
   li([ngClass]='{closed: !isOpen}', *ngFor='let file of files | async')
     | {{ file.name }}

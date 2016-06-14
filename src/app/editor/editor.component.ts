@@ -48,13 +48,11 @@ export class EditorComponent {
 
     Observable.combineLatest(this.folderService.currentSource, this.imageService.currentSource)
       .subscribe((combinedData) => {
-        console.log('combinedData', combinedData);
-
         let currentFolder, currentImage;
         [currentFolder, currentImage] = combinedData;
 
         this.currentFolder = currentFolder;
-
+        
         // TODO: This part is not working yet, with @angular/router@3.0.0.alpha
         if(currentFolder && currentImage) {
           // this.router.navigate([], { queryParams: { folderId: currentFolder.id, imageId: currentImage.id } });

@@ -49,6 +49,8 @@ export class BoardComponent implements OnDestroy {
 
   private areaSubscription:Subscription;
 
+  private currentFolderId:number;
+
   constructor(private areaService:AreaService,
               private rawImageService:RawImageService,
               private imageService:ImageService,
@@ -59,6 +61,12 @@ export class BoardComponent implements OnDestroy {
     // Subscribe for folders
     this.subscriptions.push(this.folderService.dataSource.subscribe((folders:Folder[]) => {
       this.folders = folders;
+    }));
+
+    this.subscriptions.push(this.folderService.currentSource.subscribe((currentSource) => {
+      if (currentSource) {
+        this.currentFolderId = currentSource.id;
+      }
     }));
 
     // Look for new images without filtering
@@ -220,7 +228,7 @@ export class BoardComponent implements OnDestroy {
     let folderId;
 
     if (type == 'new') {
-      this.folderService.create(new Folder(null, data.newFolderName));
+      this.folderService.create(new Folder(this.currentFolderId, data.newFolderName));
       folderId = _.last(this.folders).id;
     } else {
       folderId = data.folder;
