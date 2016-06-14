@@ -4,6 +4,7 @@
   "description": "A simple starter Angular2 project",
   "scripts": {
     "typings-install": "./node_modules/.bin/typings install",
+    "post-install": "npm run typings-install",
     "build": "ENV=production ./node_modules/.bin/webpack --config webpack.config.prod.js --inline --colors --progress --display-error-details --display-cached",
     "watch": "npm run build -- --watch",
     "start": "./node_modules/.bin/webpack-dev-server --config webpack.config.js --inline --colors --progress --display-error-details --display-cached --content-base src"
