@@ -1,9 +1,11 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 import {Component, OnDestroy} from "@angular/core";
 import {ImageService, RawImageService} from "../../shared/services";
 import {Image} from "../../shared/models";
 import {SlicedImage} from "../../sliced-image";
 import {Subscription, Observable} from "rxjs/Rx";
+import {FolderService} from "../../shared/services/folder.service";
+import {Folder} from "../../shared/models/folder.model";
 
 @Component({
   selector: 'image-bar',
@@ -16,15 +18,25 @@ export class ImageBarComponent implements OnDestroy {
   private images:Observable<Image[]>;
   private currentImage:Image;
 
+  private currentFolder:Folder;
+
   private subscriptions:Subscription[] = [];
   private hover:boolean = false;
 
   constructor(private imageService:ImageService,
-              private rawImageService:RawImageService) {
-    this.images = this.imageService.dataSource;
+              private rawImageService:RawImageService,
+              private folderService:FolderService) {
+
+    this.subscriptions.push(this.folderService.currentSource.subscribe(currentSource => {
+      this.currentFolder = currentSource;
+
+      this.images = this.imageService.filter(f => f.folderId === this.currentFolder.id || f.folderId === this.currentFolder.folderId);
+
+    }));
     this.subscriptions.push(this.imageService.currentImage.subscribe(image => {
       this.currentImage = image;
     }));
+
   }
 
   deleteImage(image) {
