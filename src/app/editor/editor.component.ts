@@ -52,7 +52,9 @@ export class EditorComponent {
         [currentFolder, currentImage] = combinedData;
 
         // TODO: This part is not working yet, with @angular/router@3.0.0.alpha
-        this.router.navigate([], { queryParams: { folderId: currentFolder.id, imageId: currentImage.id } });
+        if(currentFolder && currentImage) {
+          this.router.navigate([], { queryParams: { folderId: currentFolder.id, imageId: currentImage.id } });
+        }
       });
 
 
