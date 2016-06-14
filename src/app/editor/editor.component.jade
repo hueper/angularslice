@@ -5,10 +5,14 @@ toolbar
       | SLICE
   .c-toolbar
     .left
-      md-icon mode_edit
+      .folderName {{ currentFolder.name }}
+      md-icon.editFolderName mode_edit
     .h-fill-remaining.h-flex-end
     .right
-      md-icon.disabled delete
+      md-icon(
+        [ngClass]='{ disabled: !currentFolder.id }',
+        (click)='openConfirmDialog()'
+      ) delete
       span.separator
       md-icon file_download
       md-icon send
