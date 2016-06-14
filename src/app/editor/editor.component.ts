@@ -53,8 +53,10 @@ export class EditorComponent {
 
         // TODO: This part is not working yet, with @angular/router@3.0.0.alpha
         if(currentFolder && currentImage) {
-          this.router.navigate([], { queryParams: { folderId: currentFolder.id, imageId: currentImage.id } });
+          // this.router.navigate([], { queryParams: { folderId: currentFolder.id, imageId: currentImage.id } });
         }
+
+        
       });
 
 
