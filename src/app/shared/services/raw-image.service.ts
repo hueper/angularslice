@@ -12,10 +12,10 @@ export class RawImageService extends BaseService<RawImage> {
     super();
 
     // TODO: this is just test data
-    this.create(new RawImage('http://s33.postimg.org/aqd0rerum/page1.jpg', 700, 800));
-    this.create(new RawImage('http://s33.postimg.org/53ufz5tha/page2.jpg', 700, 800));
-    this.create(new RawImage('http://s33.postimg.org/gu8dgjm9q/page3.jpg', 700, 800));
-    this.create(new RawImage('http://s33.postimg.org/kdp998iny/page4.jpg', 700, 800));
+    // this.create(new RawImage('http://s33.postimg.org/aqd0rerum/page1.jpg', 700, 800));
+    // this.create(new RawImage('http://s33.postimg.org/53ufz5tha/page2.jpg', 700, 800));
+    // this.create(new RawImage('http://s33.postimg.org/gu8dgjm9q/page3.jpg', 700, 800));
+    // this.create(new RawImage('http://s33.postimg.org/kdp998iny/page4.jpg', 700, 800));
   }
 
   create(rawImage: RawImage) {

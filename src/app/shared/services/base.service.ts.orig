@@ -1,7 +1,13 @@
 import * as _ from "lodash";
+<<<<<<< HEAD
 import { Injectable} from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject, Observable } from 'rxjs';
 import { BaseModel } from '../models';
+=======
+import {Injectable} from "@angular/core";
+import {BehaviorSubject, ReplaySubject, Observable} from "rxjs";
+import {BaseModel} from "../models";
+>>>>>>> ea623e9cc4594b6d05d724c5d8d52df92c844cbc
 
 
 @Injectable()

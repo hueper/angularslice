@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-
-import { ComponentElement } from './component-element';
-import { Folder } from '../shared/models';
-import { FolderService } from '../shared/services';
+import {Component} from "@angular/core";
+import {ComponentElement} from "./component-element";
+import {Folder, File} from "../shared/models";
+import {FolderService, FileService} from "../shared/services";
+import {Observable} from "rxjs/Rx";
 
 @Component({
   selector: 'sidebar',
@@ -15,14 +15,17 @@ import { FolderService } from '../shared/services';
   ]
 })
 export class SidebarComponent {
-  public folders: Folder[];
+  public folders:Observable<Folder[]>;
+  public files:Observable<File[]>;
 
-  constructor(
-    private folderService: FolderService
+  constructor(private fileService:FileService,
+              private folderService:FolderService
   ) {
-    folderService.dataSource.subscribe((folders: Folder[]) => {
-      this.folders = folders;
-    });
+    this.files = fileService.filter(file => file.folderId === null || file.folderId === undefined);
+    this.folders = folderService.filter(folder => folder.folderId === null || folder.folderId === undefined);
+    //   .subscribe((folders: Folder[]) => {
+    //   this.folders = folders;
+    // });
   }
 
 }

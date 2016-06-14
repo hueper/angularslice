@@ -56,9 +56,22 @@ export class BoardComponent implements OnDestroy {
               private renderer:Renderer,
               private dialogService:DialogService) {
 
+<<<<<<< HEAD
+    // Subscribe for areas
+    this.subscriptions.push(this.areaService.dataSource.subscribe((areas:Area[]) => {
+      this.areas = areas;
+      // console.log('areas =>', areas);
+    }));
+
     // Subscribe for folders
     this.subscriptions.push(this.folderService.dataSource.subscribe((folders:Folder[]) => {
       this.folders = folders;
+      // console.log('folders =>', folders);
+=======
+    // Subscribe for folders
+    this.subscriptions.push(this.folderService.dataSource.subscribe((folders:Folder[]) => {
+      this.folders = folders;
+>>>>>>> ea623e9cc4594b6d05d724c5d8d52df92c844cbc
     }));
 
     // Look for new images without filtering

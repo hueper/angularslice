@@ -1,4 +1,4 @@
-import { BaseModel } from './base.model';
+import {BaseModel} from "./base.model";
 
 export interface IArea {
   top: number;
@@ -83,19 +83,16 @@ export class NewArea extends Area {
 
   constructor(
     private baseX: number,
-    private baseY: number
+    private baseY:number,
+    private scaleWidth:number,
+    private scaleHeight:number,
+    private offsetTop:number,
+    private offsetLeft: number
   ) {
     super(null, null, baseX, baseY, 0, 0);
 
     this.diagonalX = baseX;
     this.diagonalY = baseY;
-  }
-
-  addMovement(movementX: number, movementY: number) {
-    this.diagonalX += movementX;
-    this.diagonalY += movementY;
-
-    this.setBasicCoordinates();
   }
 
   setDiagonalCoordinates(diagonalX: number, diagonalY: number) {

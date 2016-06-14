@@ -1,2 +1,2 @@
 .sidebar
-  component-element(*ngFor="let folder of folders", [folder]="folder")
+  component-element(*ngFor="let folder of folders | async ", [folder]="folder")

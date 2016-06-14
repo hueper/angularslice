@@ -1,2 +1,9 @@
-.c-componentElement()
-  .c-componentElement__folder {{ folder.name }}
+ul
+  li.folder([ngClass]='{ root: folder.folderId === null || folder.folderId === undefined }')
+    .c-flexContainer
+      md-icon((click)='toggleFolder($event)') {{ folderIcon }}
+      | {{ folder.name }}
+    component-element([ngClass]='{closed: !isOpen}', *ngFor='let f of folders | async', [folder]='f')
+
+  li([ngClass]='{closed: !isOpen}', *ngFor='let file of files | async')
+    | {{ file.name }}
