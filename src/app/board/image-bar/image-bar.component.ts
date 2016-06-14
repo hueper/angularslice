@@ -19,7 +19,6 @@ export class ImageBarComponent implements OnDestroy {
   private imagesSubscribe:Subscription;
 
   private currentImage:Image;
-
   private currentFolder:Folder;
 
   private subscriptions:Subscription[] = [];
@@ -36,9 +35,13 @@ export class ImageBarComponent implements OnDestroy {
       }
 
       this.imagesSubscribe = this.imageService
-        .filter(f => f.folderId === this.currentFolder.id || f.folderId === this.currentFolder.folderId)
+        .filter(f => this.currentFolder && f.folderId === this.currentFolder.id)
         .subscribe((images:Image[]) => {
           this.images = images;
+          if (this.currentImage && this.images.length > 0 && _.filter(this.images, f => f.id === this.currentImage.id).length < 1) {
+            // The current image is not in current scope/folder
+            this.imageService.setCurrentImage(this.images[0]);
+          }
         });
     }));
 
