@@ -225,7 +225,7 @@ export class BoardComponent implements OnDestroy {
    * @returns {boolean}
    */
   onMouseUp(event) {
-    if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea)) {
+    if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea) && this.newArea.width > 7 && this.newArea.height > 7 ) {
       this.dialogService.openCreateComponentDialog()
         .then((data) => {
           this.createComponentDialogCallback(this.newArea, data);
