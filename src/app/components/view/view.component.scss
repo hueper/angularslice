@@ -1,0 +1,28 @@
+.c-view {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  &__sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 300px;
+    // right: 299px;
+    bottom: 0;
+    background: #eee;
+    border-right: 1px solid black;
+  }
+
+  &__board {
+    position: fixed;
+    left: 300px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #ddd;
+    overflow: auto;
+  }
+}
