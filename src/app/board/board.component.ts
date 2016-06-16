@@ -50,6 +50,11 @@ export class BoardComponent implements OnDestroy {
   private areaSubscription:Subscription;
 
   private currentFolderId:number;
+  public currentFolder:Folder;
+  private currentArea:Area;
+  private currentAreaFolder:Folder;
+  private areaEdit:boolean;
+  private componentEdit:boolean;
 
   constructor(private areaService:AreaService,
               private rawImageService:RawImageService,
@@ -66,6 +71,7 @@ export class BoardComponent implements OnDestroy {
     this.subscriptions.push(this.folderService.currentSource.subscribe((currentSource) => {
       if (currentSource) {
         this.currentFolderId = currentSource.id;
+        this.currentFolder = currentSource;
       }
     }));
 
@@ -85,6 +91,13 @@ export class BoardComponent implements OnDestroy {
       });
       this.subscriptions.push(this.areaSubscription);
     }));
+
+    this.subscriptions.push(this.areaService.currentSource.subscribe((data: Area) => {
+      this.currentArea = data;
+      if(data) {
+        this.currentAreaFolder = this.folderService.findById(data.folderId);
+      }
+    }));
   }
 
   onDragOver(event) {
@@ -96,6 +109,7 @@ export class BoardComponent implements OnDestroy {
   onDrop(event) {
     event.preventDefault();
     var file = event.dataTransfer.files[0];
+    this.hover =false;
     this.rawImageService.createFromFile(file);
     return false;
   }
@@ -113,6 +127,28 @@ export class BoardComponent implements OnDestroy {
   onDragExit(event) {
     this.hover = false;
     return false;
+  }
+
+  setActiveArea(area) {
+    this.areaService.setCurrentById(area.id);
+  }
+  setComponentEdit(type) {
+    if(type == 'area') {
+      this.areaEdit = true;
+    }
+    if(type == 'component') {
+      this.componentEdit = true;
+    }
+  }
+  saveComponentEdit(type) {
+    if(type == 'area') {
+      this.folderService.update(this.currentAreaFolder);
+      this.areaEdit = false;
+    }
+    if(type == 'component') {
+      this.folderService.update(this.currentFolder);
+      this.componentEdit = false;
+    }
   }
 
   ngOnDestroy() {

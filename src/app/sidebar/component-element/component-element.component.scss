@@ -6,22 +6,67 @@
 
 .c-flexContainer {
   display: flex;
-  align-content: center;
+  align-items: center;
   color: $text-color;
   justify-content: flex-start;
   flex-direction: row;
   position: relative;
+  height: 40px;
 
-  md-icon {
-    margin-right: 5px;
+  .toggleFolder {
+    margin: 0 5px 0 1px;
     cursor: pointer;
     position: relative;
+
+    width: 19px;
+    height: 19px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #006064;
+    color: white;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   }
 
   .folderName {
     height: auto;
-    line-height: 25px;
+    cursor: text;
+    flex-grow: 1;
+    transition: color .23s;
     cursor: pointer;
+  }
+  .input {
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    font-family: Lato;
+    color: rgba(0,0,0,.3);
+    border-bottom: 1px dashed rgba(0,0,0,.3);
+    flex-grow: 1;
+    font-weight: bold;
+  }
+
+  .edit, .delete {
+    cursor: pointer;
+    opacity: .2;
+    transition: opacity .23s;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .edit {
+    &:hover~.folderName {
+      color: rgba(0,0,0,.3);
+    }
+  }
+  &.editing {
+    .edit {
+      opacity: 0;
+    }
   }
 }
 
@@ -48,9 +93,12 @@ ul {
     font-weight: bolder;
     color: $primary;
 
-    & > .folderName {
-      border-bottom: 2px dashed $primary;
-      line-height: 23px;
+    & > .folderName:hover {
+      &~.edit{
+        opacity: 1;
+      }
+      cursor: text;
+      color: rgba(0,0,0,.3);
     }
   }
 
@@ -70,9 +118,9 @@ ul {
       top: 0px;
       content: '';
       display: block;
-      border-left: 1px solid $text-color;
+      border-left: 1px solid #bcbcbc;
       height: 1em;
-      border-bottom: 1px solid $text-color;
+      border-bottom: 1px solid #bcbcbc;
       width: 10px;
     }
     &:after {
@@ -81,7 +129,7 @@ ul {
       bottom: -7px;
       content: '';
       display: block;
-      border-left: 1px solid $text-color;
+      border-left: 1px solid #bcbcbc;
       height: 100%;
     }
     &.folder {
@@ -98,6 +146,10 @@ ul {
     }
   }
   li {
+    &.file {
+      color: #bcbcbc;
+    }
+
     &:last-child {
       &:after {
         display: none

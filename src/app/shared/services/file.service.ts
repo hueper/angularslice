@@ -26,10 +26,25 @@ export class FileService extends BaseService<File> {
       this.styleTemplate = t[0];
     });
 
-    this.folderService.createSource.subscribe(folder=> {
+    this.folderService.createSource.subscribe(folder => {
       this.create(new File(folder.id, this.tsTemplate.id, folder.name + "." + this.tsTemplate.extension));
       this.create(new File(folder.id, this.htmlTemplate.id, folder.name + "." + this.htmlTemplate.extension));
       this.create(new File(folder.id, this.styleTemplate.id, folder.name + "." + this.styleTemplate.extension));
+    });
+
+    this.folderService.updateSource.subscribe(folder => {
+      this.find({ folderId: folder.id }).map( (file) => {
+        var splittedName = file.name.split('.');
+        splittedName[0] = folder.name;
+        file.name = splittedName.join('.');
+        this.update(file);
+      });
+    });
+
+    this.folderService.deleteSource.subscribe(folder => {
+      this.find({ folderId: folder.id }).map( (file) => {
+        this.delete(file);
+      });
     });
   }
 

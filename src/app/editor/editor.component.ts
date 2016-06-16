@@ -1,11 +1,13 @@
-import {Component} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {MD_ICON_DIRECTIVES} from "@angular2-material/icon";
-import {Observable} from "rxjs";
-import {BoardComponent} from "../board";
-import {SidebarComponent} from "../sidebar";
-import {ToolbarComponent} from "../toolbar";
-import {ImageService, FolderService} from "../shared/services";
+import { Component } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MD_ICON_DIRECTIVES } from '@angular2-material/icon';
+import { Observable } from 'rxjs';
+
+import { BoardComponent } from "../board";
+import { SidebarComponent } from "../sidebar";
+import { ToolbarComponent } from "../toolbar";
+import { ImageService, FolderService } from "../shared/services";
+import { Folder } from "../shared/models";
 
 
 @Component({
@@ -22,6 +24,7 @@ import {ImageService, FolderService} from "../shared/services";
 export class EditorComponent {
   logo: any;
   sub: any;
+  currentFolder: Folder;
 
   constructor(
     private router: Router,
@@ -47,11 +50,15 @@ export class EditorComponent {
       .subscribe((combinedData) => {
         let currentFolder, currentImage;
         [currentFolder, currentImage] = combinedData;
-        console.debug('currentFolder.id => ', currentFolder.id);
+
+        this.currentFolder = currentFolder;
+        
         // TODO: This part is not working yet, with @angular/router@3.0.0.alpha
         if(currentFolder && currentImage) {
           // this.router.navigate([], { queryParams: { folderId: currentFolder.id, imageId: currentImage.id } });
         }
+
+
       });
 
 

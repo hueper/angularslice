@@ -37,8 +37,9 @@ export class BaseService<T extends BaseModel>{
     this.updateSource
       .map((instance) => {
         return (dataStore) => {
-          const index = _.findIndex(dataStore, instance.id);
+          const index = _.findIndex(dataStore, {id: instance.id});
           dataStore[index] = instance;
+          return dataStore;
         }
       })
       .subscribe(this.changeSource);
