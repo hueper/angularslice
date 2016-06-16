@@ -1,38 +1,27 @@
-import { Component, Injectable, AfterViewInit, ViewContainerRef } from '@angular/core';
+import { Component, AfterViewInit, ViewContainerRef } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Modal, BS_MODAL_PROVIDERS } from 'angular2-modal/plugins/bootstrap';
-import {
-  Routes,
-  Route,
-  Router,
-  ROUTER_DIRECTIVES
-} from '@angular/router';
-
-import { WelcomeComponent } from './components/welcome';
-import { ProjectComponent } from './components/project';
+import {DialogService} from "./shared/services/dialog.service";
 
 
-@Injectable()
 @Component({
   selector: 'app',
   providers: [
     Modal,
-    ...BS_MODAL_PROVIDERS
+    ...BS_MODAL_PROVIDERS,
+    DialogService
   ],
   pipes: [],
-  directives: [
-    ROUTER_DIRECTIVES
-  ],
-  template: require('./app.component.jade')()
+  directives: [ ROUTER_DIRECTIVES ],
+  template: require('./app.component.jade')(),
+  styles: [ require('./app.component.scss') ]
 })
-@Routes([
-  { path: '/projects/:projectId', component: ProjectComponent },
-  { path: '/', component: ProjectComponent}
-])
 export class AppComponent implements AfterViewInit {
 
-  constructor(private router: Router,
-              private modal: Modal,
-              private viewContainer: ViewContainerRef) {
+  constructor(
+    private modal: Modal,
+    private viewContainer: ViewContainerRef
+  ) {
 
     modal.defaultViewContainer = viewContainer;
   }

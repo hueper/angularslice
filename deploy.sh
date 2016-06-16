@@ -52,6 +52,7 @@ cp -rf ./dist/. ./public
 
 cd ./public
 
+
 git init
 git config user.name "Budacode Deploy"
 git config user.email "opensource@budacode.com"
@@ -61,6 +62,7 @@ git fetch upstream
 git reset upstream/gh-pages
 
 touch .
+echo 'ngslice.io' > CNAME
 
 git add -A .
 git commit -m "Rebuild site at master:${masterRevision}, develop:${developRevision}, website:${websiteRevision}"

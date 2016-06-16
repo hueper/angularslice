@@ -1,0 +1,24 @@
+toolbar
+  .c-header
+    a.angular(href='./')
+      img(src='{{ logo }}')
+      | SLICE
+  //-.c-toolbar
+    .left
+      .folderName {{ currentFolder.name }}
+      md-icon.editFolderName mode_edit
+    .h-fill-remaining.h-flex-end
+    .right
+      md-icon(
+        [ngClass]='{ disabled: !currentFolder.id }',
+        (click)='openConfirmDialog()'
+      ) delete
+      span.separator
+      md-icon file_download
+      md-icon send
+      md-icon settings
+
+.editor
+  sidebar
+  board
+//footer
