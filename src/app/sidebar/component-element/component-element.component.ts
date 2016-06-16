@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, ElementRef} from "@angular/core";
 import {Folder, File, Image} from "../../shared/models";
 import {FolderService, FileService, ImageService, DialogService} from "../../shared/services";
 import {Observable} from "rxjs/Rx";
@@ -16,6 +16,7 @@ export class ComponentElement {
 
   private folderIcon:string;
   private isOpen:boolean;
+  private editComponent:boolean;
 
   private currentFolder:Folder;
   private folders:Observable<Folder[]>;
@@ -47,23 +48,40 @@ export class ComponentElement {
     return false;
   }
 
-  edit(folder) {
-    console.log(this.currentFolder);
-    this.dialogService.openEditComponentDialog(folder)
-      .then((data) => {
-        this.editComponentDialogCallback(data);
-      })
-      .catch(error => {
-
-      });
+  // edit(folder) {
+  //   console.log(this.currentFolder);
+  //   this.dialogService.openEditComponentDialog(folder)
+  //     .then((data) => {
+  //       this.editComponentDialogCallback(data);
+  //     })
+  //     .catch(error => {
+  //
+  //     });
+  // }
+  // editComponentDialogCallback(data) {
+  //   if(data.action == 'save') {
+  //     this.folderService.update(data.data);
+  //   }
+  //   if(data.action == 'delete') {
+  //     this.folderService.delete(data.data);
+  //   }
+  // }
+  deleteComponent(folder) {
+    if(folder.folderId) {
+      this.folderService.delete(folder);
+    }
   }
-  editComponentDialogCallback(data) {
-    if(data.action == 'save') {
-      this.folderService.update(data.data);
+  setEditComponent(folderEdit) {
+    if(this.currentFolder.id == this.folder.id) {
+      this.editComponent = true;
+      setTimeout(() => {
+        folderEdit.focus();
+      });
     }
-    if(data.action == 'delete') {
-      this.folderService.delete(data.data);
-    }
+  }
+  saveComponent() {
+    this.folderService.update(this.currentFolder);
+    this.editComponent = false;
   }
 
   toggleFolder(event) {

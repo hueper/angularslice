@@ -2,10 +2,12 @@ ul
   li.folder([ngClass]='{ root: folder.folderId === null || folder.folderId === undefined, selected: folder && currentFolder && currentFolder.id === folder.id }',
     (click)='selectFolder($event);'
   )
-    .c-flexContainer
+    .c-flexContainer([ngClass]='{editing: editComponent}')
       .toggleFolder((click)='toggleFolder($event)') {{ folderIcon }}
-      .folderName {{ folder.name }}
-      md-icon.edit((click)='edit(folder)') edit
+      .folderName(*ngIf='!editComponent', (click)='setEditComponent(folderEdit)') {{ folder.name }}
+      input.input.folderNameInput(#folderEdit, [hidden]="!editComponent", [(ngModel)]='currentFolder.name', (blur)='saveComponent()')
+      md-icon.edit((click)='setEditComponent(folderEdit)') edit
+      md-icon.delete((click)='deleteComponent(currentFolder)') delete
   component-element([ngClass]='{closed: !isOpen}', *ngFor='let f of folders | async', [folder]='f')
 
   li.file([ngClass]='{closed: !isOpen}', *ngFor='let file of files | async')

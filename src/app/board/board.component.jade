@@ -1,5 +1,13 @@
 .board
   //input(type="file", (change)="loadFile($event)")
+  //.toolbar
+  //  .title(*ngIf='!componentEdit', [ngClass]='{active: !currentArea}', (click)='setComponentEdit("component")') {{ currentFolder.name }}
+  //  input.input.titleInput(*ngIf='!currentArea && componentEdit', [(ngModel)]='currentFolder.name', (blur)='saveComponentEdit("component")')
+  //
+  //  .childrenSymbol(*ngIf='currentArea') >
+  //
+  //  .areaTitle(*ngIf='currentArea && !areaEdit', (click)='setComponentEdit("area", true)') {{ currentAreaFolder.name }}
+  //  input.input.areaTitleInput(*ngIf='currentArea && areaEdit', [(ngModel)]='currentAreaFolder.name', (blur)='saveComponentEdit("area")')
 
   .fileUploadPlaceholder(*ngIf='images.length <= 0')
     input#fileFull.hiddenInput(type="file", (change)="loadFile($event)")
@@ -21,6 +29,6 @@
       (mousedown)="onMouseDown($event, imageContainer, workingSpace)"
     )
       sliced-image([image]='currentImage', #imageContainer)
-        area(*ngFor="let area of areas", [areaData]="area", [ngStyle]="areaStyle")
+        area(*ngFor="let area of areas", [areaData]="area", [ngStyle]="areaStyle", click='setActiveArea(area)')
         area([areaData]="newArea", *ngIf="newArea", [ngStyle]="areaStyle")
   image-bar(*ngIf='images.length > 0')
