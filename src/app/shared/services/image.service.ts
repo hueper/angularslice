@@ -27,6 +27,12 @@ export class ImageService extends BaseService<Image> {
     });
 
     rawImageService.createSource.subscribe(() => {})
+
+    folderService.deleteSource.subscribe(folder => {
+      this.find({ folderId: folder.id }).map( (image) => {
+        this.delete(image);
+      });
+    });
   }
 
   getBinaryData (instance: Image) {

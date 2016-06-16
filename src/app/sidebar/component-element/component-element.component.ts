@@ -66,7 +66,11 @@ export class ComponentElement {
   //     this.folderService.delete(data.data);
   //   }
   // }
-  deleteComponent(folder) {
+  deleteComponent(event, folder) {
+    console.log(folder);
+    if (event) {
+      event.stopPropagation();
+    }
     if(folder.folderId) {
       this.folderService.delete(folder);
     }
