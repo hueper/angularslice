@@ -54,18 +54,18 @@
     cursor: pointer;
     opacity: .2;
     transition: opacity .23s;
+  }
+  .delete {
     &:hover {
       opacity: 1;
     }
   }
   .edit {
-    &:hover~.folderName {
-      color: rgba(0,0,0,.3);
-    }
+    opacity: 0;
   }
   &.editing {
     .edit {
-      opacity: 0;
+      visibility: hidden;
     }
   }
 }
@@ -93,12 +93,20 @@ ul {
     font-weight: bolder;
     color: $primary;
 
-    & > .folderName:hover {
-      &~.edit{
-        opacity: 1;
+    & > .folderName {
+      & ~ .edit {
+        opacity: .2;
+        &:hover {
+          opacity: 1;;
+        }
       }
-      cursor: text;
-      color: rgba(0,0,0,.3);
+      &:hover {
+        & ~ .edit {
+          opacity: 1;
+        }
+        cursor: text;
+        color: rgba(0, 0, 0, .3);
+      }
     }
   }
 

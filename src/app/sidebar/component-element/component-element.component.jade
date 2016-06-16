@@ -5,9 +5,9 @@ ul
     .c-flexContainer([ngClass]='{editing: editComponent}')
       .toggleFolder((click)='toggleFolder($event)') {{ folderIcon }}
       .folderName(*ngIf='!editComponent', (click)='setEditComponent(folderEdit)') {{ folder.name }}
-      input.input.folderNameInput(#folderEdit, [hidden]="!editComponent", [(ngModel)]='currentFolder.name', (blur)='saveComponent()')
+      input.input.folderNameInput(#folderEdit, [hidden]='!editComponent', [(ngModel)]='currentFolder.name', (blur)='saveComponent()')
       md-icon.edit((click)='setEditComponent(folderEdit)') edit
-      md-icon.delete((click)='deleteComponent(currentFolder)') delete
+      md-icon.delete(*ngIf='folder.folderId !== null',(click)='deleteComponent($event, folder)') delete
   component-element([ngClass]='{closed: !isOpen}', *ngFor='let f of folders | async', [folder]='f')
 
   li.file([ngClass]='{closed: !isOpen}', *ngFor='let file of files | async')
