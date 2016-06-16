@@ -1,3 +1,6 @@
 .sidebar
+  .create((click)='createComponent()')
+    md-icon.addIcon add
+    .addTitle Create component
   component-element(*ngFor="let folder of folders | async ", [folder]="folder")
-  pre {{ currentFolder.id | async }}
+  pre {{ currentFolders.id | async }}

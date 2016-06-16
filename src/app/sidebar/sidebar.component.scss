@@ -1,3 +1,5 @@
+@import '../shared/scss/utils/colors';
+
 .sidebar {
   flex-grow: 1;
   background: #fff;
@@ -7,3 +9,20 @@
   z-index: 1;
   //box-shadow: 0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);
 }
+.create {
+  cursor: pointer;
+  padding-bottom: 10px;
+  &:hover {
+    color: $primary
+  }
+
+  .addIcon {
+    vertical-align: middle;
+  }
+
+  .addTitle {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+

@@ -3,6 +3,7 @@ import {ComponentElement} from "./component-element";
 import {Folder, File} from "../shared/models";
 import {FolderService, FileService} from "../shared/services";
 import {Observable} from "rxjs/Rx";
+import {MD_ICON_DIRECTIVES} from "@angular2-material/icon"
 
 @Component({
   selector: 'sidebar',
@@ -11,13 +12,15 @@ import {Observable} from "rxjs/Rx";
   providers: [
   ],
   directives: [
-    ComponentElement
+    ComponentElement,
+    MD_ICON_DIRECTIVES
   ]
 })
 export class SidebarComponent {
   public folders:Observable<Folder[]>;
   public files:Observable<File[]>;
-  private currentFolder:Observable<Folder>;
+  private currentFolders:Observable<Folder>;
+  private currentFolder: Folder;
 
 
   constructor(private fileService:FileService,
@@ -26,10 +29,16 @@ export class SidebarComponent {
     this.files = fileService.filter(file => file.folderId === null || file.folderId === undefined);
     this.folders = folderService.filter(folder => folder.folderId === null || folder.folderId === undefined);
 
-    this.currentFolder = this.folderService.currentSource;
-    //   .subscribe((folders: Folder[]) => {
-    //   this.folders = folders;
-    // });
+    this.currentFolders = this.folderService.currentSource;
+
+    folderService.currentSource.subscribe(folder => {
+      this.currentFolder = folder;
+    });
+
   }
 
+  createComponent() {
+    let currentId = this.currentFolder.id;
+    this.folderService.create(new Folder(currentId, 'component'));
+  }
 }

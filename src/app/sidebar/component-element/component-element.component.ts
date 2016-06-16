@@ -67,7 +67,6 @@ export class ComponentElement {
   //   }
   // }
   deleteComponent(event, folder) {
-    console.log(folder);
     if (event) {
       event.stopPropagation();
     }
