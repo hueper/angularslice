@@ -1,1 +1,5 @@
 .c-area([ngStyle]="getRectangle()", [ngClass]="{ 'c-area--hover': isHovered, 'c-area--invalid': areaData.invalid }")
+  .wrapper
+    md-icon.delete((click)='deleteArea()') delete
+    .goToComponent((click)='goToComponent()') Go to component
+

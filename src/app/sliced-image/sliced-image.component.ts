@@ -13,6 +13,8 @@ export class SlicedImage implements AfterViewInit, OnChanges {
 
   @Input()
   image:Image;
+  @Input()
+  thumbnail:boolean;
 
   public width:number;
   public height:number;

@@ -28,7 +28,7 @@
       *ngIf='currentImage',
       (mousedown)="onMouseDown($event, imageContainer, workingSpace)"
     )
-      sliced-image([image]='currentImage', #imageContainer)
+      sliced-image([image]='currentImage', #imageContainer, [thumbnail]='false')
         area(*ngFor="let area of areas", [areaData]="area", [ngStyle]="areaStyle", click='setActiveArea(area)')
         area([areaData]="newArea", *ngIf="newArea", [ngStyle]="areaStyle")
   image-bar(*ngIf='images.length > 0')
