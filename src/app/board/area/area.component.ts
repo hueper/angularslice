@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { Area } from '../../shared/models';
 import { FolderService } from '../../shared/services';
-import {MD_ICON_DIRECTIVES} from "@angular2-material/icon"
+import {MD_ICON_DIRECTIVES} from "@angular2-material/icon";
 
 
 @Component({

@@ -47,25 +47,7 @@ export class ComponentElement {
     this.folderService.setCurrentById(this.folder.id);
     return false;
   }
-
-  // edit(folder) {
-  //   console.log(this.currentFolder);
-  //   this.dialogService.openEditComponentDialog(folder)
-  //     .then((data) => {
-  //       this.editComponentDialogCallback(data);
-  //     })
-  //     .catch(error => {
-  //
-  //     });
-  // }
-  // editComponentDialogCallback(data) {
-  //   if(data.action == 'save') {
-  //     this.folderService.update(data.data);
-  //   }
-  //   if(data.action == 'delete') {
-  //     this.folderService.delete(data.data);
-  //   }
-  // }
+  
   deleteComponent(event, folder) {
     if (event) {
       event.stopPropagation();
