@@ -273,7 +273,7 @@ export class BoardComponent implements OnDestroy {
     area.setFolderId(folderId);
 
     if (data.attach) {
-      this.imageService.create(new Image(folderId, this.currentImage.rawImageId, data.newImageName, area.x / area.scaleWidth - area.offsetLeft / area.scaleWidth, area.y/ area.scaleHeight - area.offsetTop / area.scaleHeight, area.width / area.scaleWidth, area.height / area.scaleHeight));
+      this.imageService.create(new Image(folderId, this.currentImage.rawImageId, data.newImageName, area.x / area.scaleWidth - area.offsetLeft / area.scaleWidth + this.currentImage.x, area.y/ area.scaleHeight - area.offsetTop / area.scaleHeight + this.currentImage.y, area.width / area.scaleWidth, area.height / area.scaleHeight));
       let image = _.last(this.images);
       area.setImageId(this.currentImage.id);
     }
