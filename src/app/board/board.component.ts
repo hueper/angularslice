@@ -267,7 +267,7 @@ export class BoardComponent implements OnDestroy {
       this.folderService.create(new Folder(this.currentFolderId, data.newFolderName));
       folderId = _.last(this.folders).id;
     } else {
-      folderId = data.folder;
+      folderId = parseInt(data.folder);
     }
 
     area.setFolderId(folderId);

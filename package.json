@@ -65,7 +65,7 @@
     "@angular2-material/slide-toggle": "^2.0.0-alpha.5-2",
     "@angular2-material/tabs": "^2.0.0-alpha.5-2",
     "@angular2-material/toolbar": "^2.0.0-alpha.5-2",
-    "angular2-modal": "1.0.2",
+    "angular2-modal": "1.0.4",
     "core-js": "2.3.0",
     "es6-promise": "3.1.2",
     "es6-shim": "^0.35.0",

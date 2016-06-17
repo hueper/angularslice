@@ -28,8 +28,8 @@ export class ConfirmDialogDataComponent extends BSModalContext {
 }
 @Component({
   selector: 'confirm-dialog',
-  template: require('./confirm_dialog.jade')(),
-  styles: [require('./confirm_dialog.component.scss')],
+  template: require('./confirm-dialog.jade')(),
+  styles: [require('./confirm-dialog.component.scss')],
   directives: [
     MdButton,
     MdIcon
