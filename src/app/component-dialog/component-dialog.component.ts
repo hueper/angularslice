@@ -13,8 +13,8 @@ import {Subscription} from "rxjs";
 
 @Component({
   selector: 'component-dialog',
-  template: require('./component_dialog.jade')(),
-  styles: [require('./component_dialog.component.scss')],
+  template: require('./component-dialog.jade')(),
+  styles: [require('./component-dialog.component.scss')],
   directives: [
     MdButton,
     MdInput,
