@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { Component, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, ElementRef } from "@angular/core";
 import { ImageService, RawImageService } from "../../shared/services";
 import { Image } from "../../shared/models";
 import { SlicedImageComponent } from "../../sliced-image";
@@ -28,7 +28,8 @@ export class ImageBarComponent implements OnDestroy {
 
   constructor(private imageService:ImageService,
               private rawImageService:RawImageService,
-              private folderService:FolderService) {
+              private folderService:FolderService,
+              private el: ElementRef) {
 
     this.subscriptions.push(this.folderService.currentSource.subscribe(currentSource => {
       this.currentFolder = currentSource;
@@ -52,6 +53,12 @@ export class ImageBarComponent implements OnDestroy {
       this.currentImage = image;
     }));
 
+    this.subscriptions.push(this.rawImageService.currentSource.subscribe(() => {
+      setTimeout(() => {
+        this.jumpToTheLast();
+      })
+    }));
+
   }
   setEditName(inputField) {
     this.editImage = true;
@@ -68,6 +75,10 @@ export class ImageBarComponent implements OnDestroy {
     this.imageService.delete(image);
   }
 
+  jumpToTheLast() {
+    this.el.nativeElement.scrollLeft = this.el.nativeElement.scrollWidth;
+  }
+
   onDragOver(event) {
     event.preventDefault();
     this.hover = true;
@@ -82,7 +93,6 @@ export class ImageBarComponent implements OnDestroy {
   }
 
   loadFile(event) {
-    console.log(event);
     var file = event.srcElement.files[0];
     this.rawImageService.createFromFile(file);
   }
