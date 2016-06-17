@@ -7,7 +7,7 @@ import { MdButton } from '@angular2-material/button';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
 import { Subscription } from 'rxjs';
 
-export class ConfirmDialogData extends BSModalContext {
+export class ConfirmDialogDataComponent extends BSModalContext {
   public confirmData: ConfirmData;
 
   constructor(message?: string, btnYes?: string, btnCancel?: string) {
@@ -38,13 +38,13 @@ export class ConfirmDialogData extends BSModalContext {
     MdIconRegistry,
   ]
 })
-export class ConfirmDialog implements ModalComponent<ConfirmDialogData>, OnDestroy {
+export class ConfirmDialogComponent implements ModalComponent<ConfirmDialogDataComponent>, OnDestroy {
   private subscriptions: Subscription[] = [];
-  private context: ConfirmDialogData;
+  private context: ConfirmDialogDataComponent;
   private confirmData: ConfirmData;
 
   constructor(
-    public dialog: DialogRef<ConfirmDialogData>
+    public dialog: DialogRef<ConfirmDialogDataComponent>
   ) {
     this.context = dialog.context;
     this.confirmData = this.context.confirmData;

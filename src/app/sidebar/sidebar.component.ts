@@ -1,9 +1,9 @@
-import {Component} from "@angular/core";
-import {ComponentElement} from "./component-element";
-import {Folder, File} from "../shared/models";
-import {FolderService, FileService} from "../shared/services";
-import {Observable} from "rxjs/Rx";
-import {MD_ICON_DIRECTIVES} from "@angular2-material/icon"
+import { Component } from "@angular/core";
+import { ComponentElementComponent } from "./component-element";
+import { Folder, File } from "../shared/models";
+import { FolderService, FileService } from "../shared/services";
+import { Observable } from "rxjs/Rx";
+import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
 
 @Component({
   selector: 'sidebar',
@@ -12,7 +12,7 @@ import {MD_ICON_DIRECTIVES} from "@angular2-material/icon"
   providers: [
   ],
   directives: [
-    ComponentElement,
+    ComponentElementComponent,
     MD_ICON_DIRECTIVES
   ]
 })

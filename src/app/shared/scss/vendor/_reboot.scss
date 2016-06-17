@@ -61,7 +61,7 @@ html {
   // Sets a specific default `font-size` for user with `rem` type scales.
   font-size: $font-size-root;
   // Changes the default tap highlight to be completely transparent in iOS.
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -87,7 +87,7 @@ body {
 // margin for easier control within type scales as it avoids margin collapsing.
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
-  margin-bottom: .5rem;
+  margin-bottom: 5px;
 }
 
 // Reset margins on paragraphs
@@ -96,7 +96,7 @@ h1, h2, h3, h4, h5, h6 {
 // bottom margin to use `rem` units instead of `em`.
 p {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
 }
 
 // Abbreviations and acronyms
@@ -108,7 +108,7 @@ abbr[data-original-title] {
 }
 
 address {
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
   font-style: normal;
   line-height: inherit;
 }
@@ -117,7 +117,7 @@ ol,
 ul,
 dl {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
 }
 
 ol ol,
@@ -132,12 +132,12 @@ dt {
 }
 
 dd {
-  margin-bottom: .5rem;
+  margin-bottom: 5px;
   margin-left: 0; // Undo browser default
 }
 
 blockquote {
-  margin: 0 0 1rem;
+  margin: 0 0 10px;
 }
 
 
@@ -176,7 +176,7 @@ pre {
   // Remove browser default top margin
   margin-top: 0;
   // Reset browser default of `1em` to use `rem`s
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
 }
 
 
@@ -187,7 +187,7 @@ pre {
 figure {
   // Normalize adds `margin` to `figure`s as browsers apply it inconsistently.
   // We reset that to create a better flow in-page.
-  margin: 0 0 1rem;
+  margin: 0 0 10px;
 }
 
 
@@ -209,7 +209,7 @@ img {
 // for traditionally non-focusable elements with role="button"
 // see https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
 
-[role="button"] {
+[role='button'] {
   cursor: pointer;
 }
 
@@ -244,7 +244,7 @@ th {
 label {
   // Allow labels can use `margin` for spacing.
   display: inline-block;
-  margin-bottom: .5rem;
+  margin-bottom: 5px;
 }
 
 input,
@@ -282,13 +282,13 @@ legend {
   display: block;
   width: 100%;
   padding: 0;
-  margin-bottom: .5rem;
-  font-size: 1.5rem;
+  margin-bottom: 5px;
+  font-size: 15px;
   line-height: inherit;
 //  border: 0;
 }
 
-input[type="search"] {
+input[type='search'] {
   // Undo Normalize's default here to match our global overrides.
   box-sizing: inherit;
   // This overrides the extra rounded corners on search inputs in iOS so that our

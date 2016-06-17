@@ -1,11 +1,11 @@
-import {Component} from "@angular/core";
-import {ModalComponent, DialogRef} from "angular2-modal";
-import {BSModalContext} from "angular2-modal/plugins/bootstrap";
-import {MdButton} from "@angular2-material/button";
-import {MdInput} from "@angular2-material/input";
-import {Folder} from "../shared/models";
+import { Component } from "@angular/core";
+import { ModalComponent, DialogRef } from "angular2-modal";
+import { BSModalContext } from "angular2-modal/plugins/bootstrap";
+import { MdButton } from "@angular2-material/button";
+import { MdInput } from "@angular2-material/input";
+import { Folder } from "../shared/models";
 
-export class EditComponentDialogData extends BSModalContext {
+export class EditComponentDialogDataComponent extends BSModalContext {
   public component: Folder;
 
   constructor(folder?: Folder) {
@@ -25,13 +25,13 @@ export class EditComponentDialogData extends BSModalContext {
   ],
   providers: []
 })
-export class EditComponentDialog implements ModalComponent<EditComponentDialogData> {
-  private context: EditComponentDialogData;
+export class EditComponentDialogComponent implements ModalComponent<EditComponentDialogDataComponent> {
+  private context: EditComponentDialogDataComponent;
   private componentData: Folder;
 
 
   constructor(
-    public dialog: DialogRef<EditComponentDialogData>
+    public dialog: DialogRef<EditComponentDialogDataComponent>
   ) {
     this.context = dialog.context;
     this.componentData = this.context.component;

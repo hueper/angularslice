@@ -1,15 +1,14 @@
 import * as _ from "lodash";
-import {Component, OnDestroy} from "@angular/core";
-import {ModalComponent, DialogRef} from "angular2-modal";
-import {BSModalContext} from "angular2-modal/plugins/bootstrap";
-import {MdButton} from "@angular2-material/button";
-import {MdInput} from "@angular2-material/input";
-import {MdCheckbox} from "@angular2-material/checkbox";
-import {MdRadioButton, MdRadioGroup, MdRadioDispatcher} from "@angular2-material/radio";
-import {Folder} from "../shared/models";
-import {FolderService} from "../shared/services";
-import {Subscription} from "rxjs";
-
+import { Component, OnDestroy } from "@angular/core";
+import { ModalComponent, DialogRef } from "angular2-modal";
+import { BSModalContext } from "angular2-modal/plugins/bootstrap";
+import { MdButton } from "@angular2-material/button";
+import { MdInput } from "@angular2-material/input";
+import { MdCheckbox } from "@angular2-material/checkbox";
+import { MdRadioButton, MdRadioGroup, MdRadioDispatcher } from "@angular2-material/radio";
+import { Folder } from "../shared/models";
+import { FolderService } from "../shared/services";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'component-dialog',
@@ -26,7 +25,7 @@ import {Subscription} from "rxjs";
     MdRadioDispatcher,
   ]
 })
-export class ComponentDialog implements ModalComponent<BSModalContext>, OnDestroy {
+export class ComponentDialogComponent implements ModalComponent<BSModalContext>, OnDestroy {
   component: any;
   public folders: Folder[];
   private subscriptions: Subscription[] = [];

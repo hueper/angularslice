@@ -28,14 +28,16 @@
     border-radius: 50%;
     background: #006064;
     color: white;
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    box-shadow:
+      0 3px 1px -2px rgba(0, 0, 0, 0.2),
+      0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 1px 5px 0 rgba(0, 0, 0, 0.12);
   }
 
   .folderName {
     height: auto;
-    cursor: text;
     flex-grow: 1;
-    transition: color .23s;
+    transition: color 230ms;
     cursor: pointer;
   }
   .input {
@@ -44,16 +46,16 @@
     margin: 0;
     font-size: 16px;
     font-family: Lato;
-    color: rgba(0,0,0,.3);
-    border-bottom: 1px dashed rgba(0,0,0,.3);
+    color: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.3);
     flex-grow: 1;
     font-weight: bold;
   }
 
   .edit, .delete {
     cursor: pointer;
-    opacity: .2;
-    transition: opacity .23s;
+    opacity: 0.2;
+    transition: opacity 230ms;
   }
   .delete {
     &:hover {
@@ -76,9 +78,9 @@ ul, li {
 }
 
 ul {
-  margin: 0px 0px 0px 20px;
+  margin: 0 0 0 20px;
   list-style: none;
-  line-height: 2em;
+  line-height: 20px;
 
   component-element {
     margin-left: 5px;
@@ -95,9 +97,9 @@ ul {
 
     & > .folderName {
       & ~ .edit {
-        opacity: .2;
+        opacity: 0.2;
         &:hover {
-          opacity: 1;;
+          opacity: 1;
         }
       }
       &:hover {
@@ -105,7 +107,7 @@ ul {
           opacity: 1;
         }
         cursor: text;
-        color: rgba(0, 0, 0, .3);
+        color: rgba(0, 0, 0, 0.3);
       }
     }
   }
@@ -120,18 +122,18 @@ ul {
     font-size: 16px;
     position: relative;
 
-    &:before {
+    &::before {
       position: absolute;
       left: -15px;
-      top: 0px;
+      top: 0;
       content: '';
       display: block;
       border-left: 1px solid #bcbcbc;
-      height: 1em;
+      height: 10px;
       border-bottom: 1px solid #bcbcbc;
       width: 10px;
     }
-    &:after {
+    &::after {
       position: absolute;
       left: -15px;
       bottom: -7px;
@@ -141,14 +143,14 @@ ul {
       height: 100%;
     }
     &.folder {
-      margin: 0px 0px 0px -20px;
+      margin: 0 0 0 -20px;
     }
 
     &.root {
-      &:before {
+      &::before {
         display: none;
       }
-      &:after {
+      &::after {
         display: none;
       }
     }
@@ -159,8 +161,8 @@ ul {
     }
 
     &:last-child {
-      &:after {
-        display: none
+      &::after {
+        display: none;
       }
     }
   }

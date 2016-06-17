@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {Image, RawImage, Folder} from "../models";
-import {BaseService} from "./base.service";
-import {RawImageService} from "./raw-image.service";
-import {FolderService} from "./folder.service";
-import {ReplaySubject} from "rxjs";
+import { Injectable } from "@angular/core";
+import { Image, RawImage, Folder } from "../models";
+import { BaseService } from "./base.service";
+import { RawImageService } from "./raw-image.service";
+import { FolderService } from "./folder.service";
+import { ReplaySubject } from "rxjs";
 
 
 @Injectable()

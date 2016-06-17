@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {BaseService} from "./base.service";
-import {File, Template} from "../models";
-import {FolderService} from "./folder.service";
-import {TemplateService} from "./template.service";
+import { Injectable } from "@angular/core";
+import { BaseService } from "./base.service";
+import { File, Template } from "../models";
+import { FolderService } from "./folder.service";
+import { TemplateService } from "./template.service";
 
 @Injectable()
 export class FileService extends BaseService<File> {

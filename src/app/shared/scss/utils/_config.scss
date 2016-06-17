@@ -1,8 +1,8 @@
 // Bootstrap specific
 $font-size-root: 10px;
 $font-family-base: 'Lato';
-$font-size-base: 1.6rem;
-$line-height: 2.4rem;
+$font-size-base: 16px;
+$line-height: 24px;
 $body-bg: #fff;
 $body-color: $tetriary;
 $link-color: $secondary;
@@ -16,7 +16,7 @@ $table-cell-padding: 0;
 $text-muted: #eee;
 
 // Custom
-$page-wrapper-width: 80rem;
+$page-wrapper-width: 800px;
 $breakpoint-xs: 320px;
 $breakpoint-sm: 640px;
 $breakpoint-md: 1024px;

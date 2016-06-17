@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
-import {ComponentDialog} from "../../component_dialog/component_dialog.component";
-import {EditComponentDialog, EditComponentDialogData} from "../../component-edit_dialog/component-edit_dialog.component";
-import {ConfirmDialog, ConfirmDialogData} from "../../confirm_dialog/confirm_dialog.component";
+import { Injectable } from "@angular/core";
+import { Modal, BSModalContext } from "angular2-modal/plugins/bootstrap";
+import { ComponentDialogComponent } from "../../component_dialog/component_dialog.component";
+import { EditComponentDialogComponent, EditComponentDialogDataComponent } from "../../component-edit_dialog/component-edit_dialog.component";
+import { ConfirmDialogComponent, ConfirmDialogDataComponent } from "../../confirm_dialog/confirm_dialog.component";
 
 @Injectable()
 export class DialogService {
@@ -14,25 +14,25 @@ export class DialogService {
   openCreateComponentDialog() {
     const data = new BSModalContext();
     return this.modal
-      .open(ComponentDialog, data)
+      .open(ComponentDialogComponent, data)
       .then(dialog => {
         return dialog.result;
       });
   }
 
   openEditComponentDialog(folder) {
-    const data = new EditComponentDialogData(folder);
+    const data = new EditComponentDialogDataComponent(folder);
     return this.modal
-      .open(EditComponentDialog, data)
+      .open(EditComponentDialogComponent, data)
       .then(dialog => {
         return dialog.result;
       });
   }
 
   openConfirmDialog() {
-    const data = new ConfirmDialogData();
+    const data = new ConfirmDialogDataComponent();
     return this.modal
-      .open(ConfirmDialog, data)
+      .open(ConfirmDialogComponent, data)
       .then(dialog => {
         return dialog.result;
       })

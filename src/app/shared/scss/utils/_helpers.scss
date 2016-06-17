@@ -1,10 +1,10 @@
 // Helper placeholders
 %animate-it {
-  transition: all .4s ease-in-out;
+  transition: all 400ms ease-in-out;
 }
 
 %clear-after {
-  &:after {
+  &::after {
     content: '';
     display: block;
     clear: both;

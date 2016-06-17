@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ViewContainerRef } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Modal, BS_MODAL_PROVIDERS } from 'angular2-modal/plugins/bootstrap';
-import {DialogService} from "./shared/services/dialog.service";
+import { DialogService } from "./shared/services/dialog.service";
 
 
 @Component({

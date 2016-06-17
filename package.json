@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "A simple starter Angular2 project",
   "scripts": {
+    "tslint": "tslint -c tslint.json 'src/**/*.ts'",
+    "stylelint": "stylelint 'src/**/*.scss' --config stylelint-config.json --syntax scss",
     "typings-install": "./node_modules/.bin/typings install",
     "post-install": "npm run typings-install",
     "build": "ENV=production ./node_modules/.bin/webpack --config webpack.config.prod.js --inline --colors --progress --display-error-details --display-cached",
@@ -13,6 +15,7 @@
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
     "awesome-typescript-loader": "^0.17.0",
+    "codelyzer": "0.0.23",
     "copy-webpack-plugin": "^1.1.1",
     "css-loader": "^0.23.1",
     "expose-loader": "^0.7.1",
@@ -31,6 +34,8 @@
     "sass-loader": "^3.2.0",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
+    "stylelint": "^6.6.0",
+    "tslint": "^3.11.0",
     "typescript": "^1.9.0-dev.20160409",
     "typings": "^0.8.1",
     "webpack": "^1.13.0",
