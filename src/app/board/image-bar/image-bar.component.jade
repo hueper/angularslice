@@ -16,6 +16,9 @@
       [ngClass]='{currentImage: currentImage && currentImage.id == image.id }')
       sliced-image.thumbnail((click)='setBoardImage(image)', [image]='image', [thumbnail]='true')
       .text
-        .name {{ image.name }}
-        i.deleteIcon.material-icons((click)='deleteImage(image)') delete
+        .name
+          .nameHelper(*ngIf='!editImage', (click)='setEditName(imageEdit)') {{ image.name }}
+          input.input.imageNameInput(#imageEdit, [hidden]='!editImage', [(ngModel)]='image.name', (blur)='saveImage(image)')
+          md-icon.editIcon(*ngIf='!editImage', (click)='editImage = true') edit
+        md-icon.deleteIcon((click)='deleteImage(image)') delete
 

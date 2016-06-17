@@ -6,12 +6,14 @@ import {SlicedImage} from "../../sliced-image";
 import {Subscription} from "rxjs/Rx";
 import {FolderService} from "../../shared/services/folder.service";
 import {Folder} from "../../shared/models/folder.model";
+import {MD_ICON_DIRECTIVES} from "@angular2-material/icon";
+
 
 @Component({
   selector: 'image-bar',
   template: require('./image-bar.component.jade')(),
   styles: [require('./image-bar.component.scss')],
-  directives: [SlicedImage]
+  directives: [SlicedImage, MD_ICON_DIRECTIVES]
 })
 export class ImageBarComponent implements OnDestroy {
 
@@ -23,6 +25,7 @@ export class ImageBarComponent implements OnDestroy {
 
   private subscriptions:Subscription[] = [];
   private hover:boolean = false;
+  private editImage:boolean = false;
 
   constructor(private imageService:ImageService,
               private rawImageService:RawImageService,
@@ -50,6 +53,16 @@ export class ImageBarComponent implements OnDestroy {
       this.currentImage = image;
     }));
 
+  }
+  setEditName(inputField) {
+    this.editImage = true;
+    setTimeout(() => {
+      inputField.focus();
+    });
+  }
+  saveImage(image) {
+    this.imageService.update(image);
+    this.editImage = false;
   }
 
   deleteImage(image) {
