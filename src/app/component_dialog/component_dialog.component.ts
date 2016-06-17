@@ -36,7 +36,6 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
   ) {
     this.subscriptions.push(folderService.dataSource.subscribe((folders: Folder[]) => {
       this.folders = folders;
-      console.log(folders);
     }));
     this.component = {
       type: 'new',

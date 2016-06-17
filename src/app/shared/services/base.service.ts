@@ -92,7 +92,7 @@ export class BaseService<T extends BaseModel>{
   }
 
   find(filterObject: any = {}): T[] {
-    return _.filter(this.data, filterObject);
+    return _.filter(this.dataSource.getValue(), filterObject);
   }
 
   update(instance: T) {

@@ -47,4 +47,12 @@ export class ImageService extends BaseService<Image> {
   setCurrentImage(instance: Image) {
     this.currentImage.next(instance);
   }
+
+  delete(instance: Image) {
+    if(this.find({ rawImageId: instance.rawImageId}).length <= 1) {
+      this.rawImageService.delete(this.rawImageService.findById(instance.rawImageId));
+    }
+
+    super.delete(instance);
+  }
 }

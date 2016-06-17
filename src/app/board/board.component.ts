@@ -225,7 +225,7 @@ export class BoardComponent implements OnDestroy {
    * @returns {boolean}
    */
   onMouseUp(event) {
-    if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea)) {
+    if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea) && this.newArea.width > 7 && this.newArea.height > 7 ) {
       this.dialogService.openCreateComponentDialog()
         .then((data) => {
           this.createComponentDialogCallback(this.newArea, data);
@@ -273,7 +273,7 @@ export class BoardComponent implements OnDestroy {
     area.setFolderId(folderId);
 
     if (data.attach) {
-      this.imageService.create(new Image(folderId, this.currentImage.rawImageId, data.newImageName, area.x / area.scaleWidth - area.offsetLeft / area.scaleWidth, area.y/ area.scaleHeight - area.offsetTop / area.scaleHeight, area.width / area.scaleWidth, area.height / area.scaleHeight));
+      this.imageService.create(new Image(folderId, this.currentImage.rawImageId, data.newImageName, area.x / area.scaleWidth - area.offsetLeft / area.scaleWidth + this.currentImage.x, area.y/ area.scaleHeight - area.offsetTop / area.scaleHeight + this.currentImage.y, area.width / area.scaleWidth, area.height / area.scaleHeight));
       let image = _.last(this.images);
       area.setImageId(this.currentImage.id);
     }

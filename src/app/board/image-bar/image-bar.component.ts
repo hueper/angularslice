@@ -23,6 +23,7 @@ export class ImageBarComponent implements OnDestroy {
 
   private subscriptions:Subscription[] = [];
   private hover:boolean = false;
+  private editImage:boolean = false;
 
   constructor(private imageService:ImageService,
               private rawImageService:RawImageService,
@@ -50,6 +51,16 @@ export class ImageBarComponent implements OnDestroy {
       this.currentImage = image;
     }));
 
+  }
+  setEditName(inputField) {
+    this.editImage = true;
+    setTimeout(() => {
+      inputField.focus();
+    });
+  }
+  saveImage(image) {
+    this.imageService.update(image);
+    this.editImage = false;
   }
 
   deleteImage(image) {
