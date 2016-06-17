@@ -2,7 +2,7 @@
   position: absolute;
   border: 1px dotted black;
   background-color: rgba(202, 202, 202, 0.4);
-  transition: background-color .23s;
+  transition: background-color 230ms;
   cursor: default;
 
   .wrapper {
@@ -18,8 +18,8 @@
     position: absolute;
     top: 2px;
     right: 2px;
-    color: rgba(0,0,0,0);
-    transition: color .23s;
+    color: rgba(0, 0, 0, 0);
+    transition: color 230ms;
     cursor: pointer;
     font-size: 16px;
   }
@@ -32,16 +32,16 @@
     text-transform: uppercase;
     opacity: 0;
     cursor: pointer;
-    transition: opacity .23s;
+    transition: opacity 230ms;
     font-size: 10px;
   }
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.7);
     .delete {
-      color: rgba(255,255,255,.8);
+      color: rgba(255, 255, 255, 0.8);
       &:hover {
-        color: rgba(255,255,255,1)
+        color: rgba(255, 255, 255, 1);
       }
     }
     .goToComponent {
@@ -49,11 +49,11 @@
     }
   }
   &--hover {
-    border: 1px solid rgb(0,255,255);
+    border: 1px solid rgb(0, 255, 255);
   }
 
   &--invalid {
-    background-color: rgba(255,0,0, 0.1);
+    background-color: rgba(255, 0, 0, 0.1);
     border-color: red;
   }
 

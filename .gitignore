@@ -7,23 +7,9 @@ npm-debug.log
 node_modules/
 bower_components/
 typings/
-.sass-cache
-dump/
-
-# ignored folders
-node_modules/
-bower_components/
 .sass-cache/
+dump/
 dist/
-typings/
-
-Ignore JetBrains IDE's config folders
-.idea/
-
 npm-debug.log*
-
-# website gitignore
-node_modules
-dist/
 .tmp
 app.yaml

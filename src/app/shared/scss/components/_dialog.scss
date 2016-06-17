@@ -9,21 +9,20 @@
   height: 100%;
   position: fixed;
   z-index: 49;
-  animation: fadeIn .5s forwards;
+  animation: fadeIn 500ms forwards;
 }
 
 .dialog {
-  width: 66rem;
-  //height: 41rem;
+  width: 660px;
   position: fixed;
   top: 20%;
-  left: calc(50% - 33rem);
-  padding: 2rem;
-  background-color: #FFF;
+  left: calc(50% - 330px);
+  padding: 20px;
+  background-color: #fff;
   z-index: 50;
   box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
 
-  animation: slideDown ease-out .5s forwards;
+  animation: slideDown ease-out 500ms forwards;
 
   .flexContainer {
     display: flex;
@@ -35,7 +34,7 @@
     .row {
       display: flex;
       flex-direction: row;
-      margin: .5rem;
+      margin: 5px;
     }
     .addition {
       margin-top: 20px;
@@ -65,7 +64,7 @@
     }
 
     .column:not(:first-of-type) {
-      margin-left: 2rem;
+      margin-left: 20px;
     }
   }
 
@@ -78,9 +77,9 @@
   }
 }
 
-.modal-sm .dialog{
-  width: 26rem;
-  left: calc(50% - 13rem);
+.modal-sm .dialog {
+  width: 260px;
+  left: calc(50% - 130px);
 }
 
 

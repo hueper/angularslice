@@ -17,7 +17,6 @@
     flex-grow: 1;
     width: 100%;
     display: flex;
-    flex-grow: 1;
     position: relative;
 
     .boardImage {
@@ -43,7 +42,7 @@
   .toolbar {
     flex: 0 0 50px;
     display: flex;
-    border-bottom: 1px solid rgba(0,0,0,.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     align-items: center;
     padding: 0 20px;
     background: white;
@@ -55,7 +54,7 @@
         cursor: pointer;
 
         &:hover {
-          color: rgba(0,0,0,.3);
+          color: rgba(0, 0, 0, 0.3);
         }
       }
     }
@@ -65,8 +64,8 @@
       margin: 0;
       font-size: 16px;
       font-family: Lato;
-      color: rgba(0,0,0,.3);
-      border-bottom: 1px dashed rgba(0,0,0,.3);
+      color: rgba(0, 0, 0, 0.3);
+      border-bottom: 1px dashed rgba(0, 0, 0, 0.3);
     }
 
     .childrenSymbol {
@@ -81,19 +80,19 @@
   }
 
   .fileUploadPlaceholder {
-    margin: 5vmin;
+    margin: 50px;
     display: flex;
     align-items: stretch;
     justify-content: center;
     flex-grow: 1;
-    border: 3px dashed rgba(0,0,0,0.2);
+    border: 3px dashed rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     color: $text-color;
     cursor: pointer;
-    transition: border-color .23s;
+    transition: border-color 230ms;
 
     i {
-      transition: color .23s;
+      transition: color 230ms;
     }
 
     &:hover {

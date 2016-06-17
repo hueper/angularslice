@@ -1,11 +1,11 @@
-import {Component, Renderer, OnDestroy} from "@angular/core";
+import { Component, Renderer, OnDestroy } from "@angular/core";
 import * as _ from "lodash";
-import {AreaComponent} from "./area";
-import {ImageBarComponent} from "./image-bar";
-import {Area, Folder, Image, NewArea} from "../shared/models";
-import {AreaService, ImageService, RawImageService, FolderService, DialogService} from "../shared/services";
-import {Subscription} from "rxjs";
-import {SlicedImage} from "../sliced-image";
+import { AreaComponent } from "./area";
+import { ImageBarComponent } from "./image-bar";
+import { Area, Folder, Image, NewArea } from "../shared/models";
+import { AreaService, ImageService, RawImageService, FolderService, DialogService } from "../shared/services";
+import { Subscription } from "rxjs";
+import { SlicedImageComponent } from "../sliced-image";
 
 @Component({
   selector: 'board',
@@ -14,7 +14,7 @@ import {SlicedImage} from "../sliced-image";
   directives: [
     AreaComponent,
     ImageBarComponent,
-    SlicedImage
+    SlicedImageComponent
   ],
 })
 export class BoardComponent implements OnDestroy {

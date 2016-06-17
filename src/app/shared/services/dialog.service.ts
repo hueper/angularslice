@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
-import {ComponentDialog} from "../../component-dialog/component-dialog.component";
-import {ConfirmDialog, ConfirmDialogData} from "../../confirm-dialog/confirm-dialog.component";
+import { Injectable } from "@angular/core";
+import { Modal, BSModalContext } from "angular2-modal/plugins/bootstrap";
+import { ComponentDialogComponent } from "../../component-dialog/component-dialog.component";
+import { ConfirmDialogComponent, ConfirmDialogDataComponent } from "../../confirm-dialog/confirm-dialog.component";
 
 @Injectable()
 export class DialogService {
@@ -13,16 +13,16 @@ export class DialogService {
   openCreateComponentDialog() {
     const data = new BSModalContext();
     return this.modal
-      .open(ComponentDialog, data)
+      .open(ComponentDialogComponent, data)
       .then(dialog => {
         return dialog.result;
       });
   }
-
+  
   openConfirmDialog() {
-    const data = new ConfirmDialogData();
+    const data = new ConfirmDialogDataComponent();
     return this.modal
-      .open(ConfirmDialog, data)
+      .open(ConfirmDialogComponent, data)
       .then(dialog => {
         return dialog.result;
       })

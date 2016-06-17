@@ -1,4 +1,4 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { BaseService } from './base.service';
 import { FolderService } from './folder.service';
@@ -17,6 +17,5 @@ export class AreaService extends BaseService<Area> {
       });
     });
   }
-
 
 }

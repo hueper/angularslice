@@ -1,19 +1,17 @@
 import * as _ from "lodash";
-import {Component, OnDestroy} from "@angular/core";
-import {ImageService, RawImageService} from "../../shared/services";
-import {Image} from "../../shared/models";
-import {SlicedImage} from "../../sliced-image";
-import {Subscription} from "rxjs/Rx";
-import {FolderService} from "../../shared/services/folder.service";
-import {Folder} from "../../shared/models/folder.model";
-import {MD_ICON_DIRECTIVES} from "@angular2-material/icon";
-
+import { Component, OnDestroy } from "@angular/core";
+import { ImageService, RawImageService } from "../../shared/services";
+import { Image } from "../../shared/models";
+import { SlicedImageComponent } from "../../sliced-image";
+import { Subscription } from "rxjs/Rx";
+import { FolderService } from "../../shared/services/folder.service";
+import { Folder } from "../../shared/models/folder.model";
 
 @Component({
   selector: 'image-bar',
   template: require('./image-bar.component.jade')(),
   styles: [require('./image-bar.component.scss')],
-  directives: [SlicedImage, MD_ICON_DIRECTIVES]
+  directives: [SlicedImageComponent]
 })
 export class ImageBarComponent implements OnDestroy {
 

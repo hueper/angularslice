@@ -1,6 +1,6 @@
-import {Component, Input, ElementRef, ViewChild, AfterViewInit, OnChanges, NgZone} from "@angular/core";
-import {Image} from "../shared/models/";
-import {ImageService} from "../shared/services";
+import { Component, Input, ElementRef, ViewChild, AfterViewInit, OnChanges, NgZone } from "@angular/core";
+import { Image } from "../shared/models/";
+import { ImageService } from "../shared/services";
 
 @Component({
   selector: 'sliced-image',
@@ -8,11 +8,11 @@ import {ImageService} from "../shared/services";
   template: require('./sliced-image.component.jade')()
 })
 
-export class SlicedImage implements AfterViewInit, OnChanges {
+export class SlicedImageComponent implements AfterViewInit, OnChanges {
   @ViewChild('canvas') myCanvas;
 
   @Input()
-  image:Image;
+  image: Image;
   @Input()
   thumbnail:boolean;
 
@@ -23,9 +23,11 @@ export class SlicedImage implements AfterViewInit, OnChanges {
   public scaleHeight:number;
 
 
-  constructor(private imageService:ImageService,
-              private el:ElementRef,
-              private ngZone:NgZone) {
+  constructor(
+    private imageService:ImageService,
+    private el:ElementRef,
+    private ngZone:NgZone
+  ) {
 
   }
 

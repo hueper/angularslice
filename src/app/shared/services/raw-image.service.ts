@@ -1,6 +1,6 @@
-import {Injectable, NgZone} from "@angular/core";
-import {RawImage} from "../models";
-import {BaseService} from "./base.service";
+import { Injectable, NgZone } from "@angular/core";
+import { RawImage } from "../models";
+import { BaseService } from "./base.service";
 
 // import {NgZone} from '@angular/core'
 

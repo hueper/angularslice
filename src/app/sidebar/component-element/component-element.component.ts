@@ -1,16 +1,16 @@
-import {Component, Input, ElementRef} from "@angular/core";
-import {Folder, File, Image} from "../../shared/models";
-import {FolderService, FileService, ImageService, DialogService} from "../../shared/services";
-import {Observable} from "rxjs/Rx";
-import {MD_ICON_DIRECTIVES} from "@angular2-material/icon"
+import { Component, Input } from "@angular/core";
+import { Folder, File, Image } from "../../shared/models";
+import { FolderService, FileService, ImageService, DialogService } from "../../shared/services";
+import { Observable } from "rxjs/Rx";
+import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
 
 @Component({
   selector: 'component-element',
   styles: [require('./component-element.component.scss')],
   template: require('./component-element.component.jade')(),
-  directives: [ComponentElement, MD_ICON_DIRECTIVES]
+  directives: [ComponentElementComponent, MD_ICON_DIRECTIVES]
 })
-export class ComponentElement {
+export class ComponentElementComponent {
 
   @Input() folder:Folder;
 
@@ -47,7 +47,27 @@ export class ComponentElement {
     this.folderService.setCurrentById(this.folder.id);
     return false;
   }
+
+  // edit(folder) {
+  //   console.log(this.currentFolder);
+  //   this.dialogService.openEditComponentDialog(folder)
+  //     .then((data) => {
+  //       this.editComponentDialogCallback(data);
+  //     })
+  //     .catch(error => {
+  //
+  //     });
+  // }
+  // editComponentDialogCallback(data) {
+  //   if(data.action == 'save') {
+  //     this.folderService.update(data.data);
+  //   }
+  //   if(data.action == 'delete') {
+  //     this.folderService.delete(data.data);
+  //   }
+  // }
   
+
   deleteComponent(event, folder) {
     if (event) {
       event.stopPropagation();
