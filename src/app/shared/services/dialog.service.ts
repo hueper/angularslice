@@ -18,7 +18,7 @@ export class DialogService {
         return dialog.result;
       });
   }
-  
+
   openConfirmDialog() {
     const data = new ConfirmDialogDataComponent();
     return this.modal

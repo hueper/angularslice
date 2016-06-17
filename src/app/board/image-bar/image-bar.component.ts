@@ -6,12 +6,13 @@ import { SlicedImageComponent } from "../../sliced-image";
 import { Subscription } from "rxjs/Rx";
 import { FolderService } from "../../shared/services/folder.service";
 import { Folder } from "../../shared/models/folder.model";
+import { MD_ICON_DIRECTIVES } from "@angular2-material/icon";
 
 @Component({
   selector: 'image-bar',
   template: require('./image-bar.component.jade')(),
   styles: [require('./image-bar.component.scss')],
-  directives: [SlicedImageComponent]
+  directives: [SlicedImageComponent, MD_ICON_DIRECTIVES]
 })
 export class ImageBarComponent implements OnDestroy {
 
