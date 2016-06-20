@@ -44,6 +44,7 @@ var webpackConfig = {
     loaders: [
       { test: /\.jade$/, loader: 'jade-loader' },
       { test: /\.ts$/, loader: 'awesome-typescript-loader' },
+      { test: /\.css$/, loaders: ['style', 'css'] },
       { test: /\/shared\/.*.scss$/, loaders: ['style', 'css', 'autoprefixer', 'resolve-url', 'sass'] },
       { test: /\.component.scss$/, loaders: ['raw', 'extract', 'css', 'autoprefixer', 'resolve-url', 'sass'] },
       { test: [/ionicons\.svg/, /ionicons\.eot/, /\.ttf/, /\.woff/], loader: 'file-loader?name=fonts/[name].[ext]' },

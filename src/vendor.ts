@@ -1,7 +1,13 @@
+// CSS
+require('humane-js/themes/libnotify.css');
+require('humane-js/themes/original.css');
+
+// JS
 import 'zone.js/dist/zone';
 import 'reflect-metadata/Reflect.js';
 
 import 'expose?_!lodash';
+
 
 // import 'expose?ga!./ga.js';
 
