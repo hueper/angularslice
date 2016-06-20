@@ -219,8 +219,6 @@ export class BoardComponent implements OnDestroy {
       const xMax = Math.min(this.maxWidth, event.clientX - this.offsetLeftContainer);
       const yMax = Math.min(this.maxHeight, event.clientY - this.offsetTopContainer);
 
-      console.log(event.clientX, this.offsetLeftContainer);
-
       this.newArea.setDiagonalCoordinates(
         Math.max(0, xMax),
         Math.max(0, yMax)
@@ -287,7 +285,18 @@ export class BoardComponent implements OnDestroy {
     area.setFolderId(folderId);
 
     if (data.attach) {
-      this.imageService.create(new Image(folderId, this.currentImage.rawImageId, data.newImageName, area.x / area.scaleWidth - area.offsetLeft / area.scaleWidth + this.currentImage.x, area.y/ area.scaleHeight - area.offsetTop / area.scaleHeight + this.currentImage.y, area.width / area.scaleWidth, area.height / area.scaleHeight));
+      const newImage = new Image(
+        folderId,
+        this.currentImage.rawImageId,
+        data.newImageName,
+        area.x / area.scaleWidth + this.currentImage.x,
+        area.y / area.scaleHeight + this.currentImage.y,
+        area.width / area.scaleWidth,
+        area.height / area.scaleHeight
+      );
+
+      this.imageService.create(newImage);
+
       let image = _.last(this.images);
       area.setImageId(this.currentImage.id);
     }
