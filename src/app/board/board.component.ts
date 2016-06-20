@@ -1,6 +1,7 @@
 import { Component, Renderer, OnDestroy } from "@angular/core";
 import * as _ from "lodash";
 import { Subscription } from "rxjs";
+import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 const Humane = require('humane-js');
 
 import { AreaService, ImageService, RawImageService, FolderService, DialogService } from "../shared/services";
@@ -60,12 +61,13 @@ export class BoardComponent implements OnDestroy {
   private componentEdit:boolean;
 
   constructor(
-    private areaService:AreaService,
-    private rawImageService:RawImageService,
-    private imageService:ImageService,
-    private folderService:FolderService,
-    private renderer:Renderer,
-    private dialogService:DialogService
+    private ga: Angulartics2GoogleAnalytics,
+    private areaService: AreaService,
+    private rawImageService: RawImageService,
+    private imageService: ImageService,
+    private folderService: FolderService,
+    private renderer: Renderer,
+    private dialogService: DialogService
   ) {
 
     // Subscribe for folders
@@ -128,6 +130,7 @@ export class BoardComponent implements OnDestroy {
     // TODO, add analytics
     if (supportedFileExtension.indexOf(extension) === -1) {
       Humane.log(`Sorry we support just 'png' and 'jpg' files.`);
+      this.ga.eventTrack('uplaod', extension);
     } else {
       this.rawImageService.createFromFile(file);
     }
