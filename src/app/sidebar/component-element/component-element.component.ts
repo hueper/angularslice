@@ -23,10 +23,12 @@ export class ComponentElementComponent {
   private files:Observable<File[]>;
   private images:Observable<Image[]>;
 
-  constructor(private imageService:ImageService,
-              private folderService:FolderService,
-              private fileService:FileService,
-              private dialogService:DialogService) {
+  constructor(
+    private imageService:ImageService,
+    private folderService:FolderService,
+    private fileService:FileService,
+    private dialogService:DialogService
+  ) {
 
     this.images = this.imageService.filter(image => this.folder.id == image.folderId)
     this.folders = folderService.filter(folder => folder.folderId === this.folder.id);
@@ -66,7 +68,7 @@ export class ComponentElementComponent {
   //     this.folderService.delete(data.data);
   //   }
   // }
-  
+
 
   deleteComponent(event, folder) {
     if (event) {
