@@ -51,7 +51,7 @@ export class ImageBarComponent implements OnDestroy {
     }));
 
 
-    this.subscriptions.push(this.imageService.currentImage.subscribe(image => {
+    this.subscriptions.push(this.imageService.currentSource.subscribe(image => {
       this.currentImage = image;
     }));
 

@@ -3,17 +3,15 @@ import { Image, RawImage, Folder } from "../models";
 import { BaseService } from "./base.service";
 import { RawImageService } from "./raw-image.service";
 import { FolderService } from "./folder.service";
-import { ReplaySubject } from "rxjs";
-
 
 @Injectable()
 export class ImageService extends BaseService<Image> {
-  currentImage: ReplaySubject<Image> = new ReplaySubject<Image>();
   currentFolder: Folder;
 
-  constructor(private folderService:FolderService,
-              private rawImageService: RawImageService)
-  {
+  constructor(
+    private folderService:FolderService,
+    private rawImageService: RawImageService
+  ) {
     super();
 
     this.folderService.currentSource.subscribe(folder => {
@@ -45,7 +43,7 @@ export class ImageService extends BaseService<Image> {
   }
 
   setCurrentImage(instance: Image) {
-    this.currentImage.next(instance);
+    this.currentIdSource.next(instance.id);
   }
 
   delete(instance: Image) {

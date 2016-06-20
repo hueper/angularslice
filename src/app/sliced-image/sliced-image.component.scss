@@ -1,9 +1,15 @@
 :host {
   text-align: center;
 }
+
+.sliced-image {
+  position: relative;
+}
+
 canvas {
   cursor: crosshair;
 }
+
 .thumbnail {
   cursor: pointer;
 }

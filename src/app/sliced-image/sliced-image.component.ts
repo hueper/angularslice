@@ -11,10 +11,8 @@ import { ImageService } from "../shared/services";
 export class SlicedImageComponent implements AfterViewInit, OnChanges {
   @ViewChild('canvas') myCanvas;
 
-  @Input()
-  image: Image;
-  @Input()
-  thumbnail:boolean;
+  @Input() image: Image;
+  @Input() thumbnail:boolean;
 
   public width:number;
   public height:number;

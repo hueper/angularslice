@@ -56,12 +56,14 @@ export class BoardComponent implements OnDestroy {
   private areaEdit:boolean;
   private componentEdit:boolean;
 
-  constructor(private areaService:AreaService,
-              private rawImageService:RawImageService,
-              private imageService:ImageService,
-              private folderService:FolderService,
-              private renderer:Renderer,
-              private dialogService:DialogService) {
+  constructor(
+    private areaService:AreaService,
+    private rawImageService:RawImageService,
+    private imageService:ImageService,
+    private folderService:FolderService,
+    private renderer:Renderer,
+    private dialogService:DialogService
+  ) {
 
     // Subscribe for folders
     this.subscriptions.push(this.folderService.dataSource.subscribe((folders:Folder[]) => {
@@ -80,7 +82,7 @@ export class BoardComponent implements OnDestroy {
       this.images = data;
     }));
 
-    this.subscriptions.push(this.imageService.currentImage.subscribe((data:Image) => {
+    this.subscriptions.push(this.imageService.currentSource.subscribe((data:Image) => {
       this.currentImage = data;
       if(this.areaSubscription) {
         this.areaSubscription.unsubscribe();
