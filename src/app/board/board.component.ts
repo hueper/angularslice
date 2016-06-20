@@ -24,13 +24,6 @@ import { SlicedImageComponent } from "../sliced-image";
 export class BoardComponent implements OnDestroy {
   currentImage:Image;
   areaStyle:any = {};
-  imageContainerStyle:any = {
-    'width': '0',
-    'height': '0',
-    'background-image': 'url()',
-    'background-size': 'contain',
-    'position': 'relative'
-  };
 
   private newArea:NewArea = null;
   private areas:Area[] = [];
@@ -186,26 +179,25 @@ export class BoardComponent implements OnDestroy {
    * @param {nativeElement} imageContainer
    * @returns {boolean}
    */
-  onMouseDown(event, imageContainer, workingSpace) {
+  onMouseDown(event, imageContainer) {
 
     if (event.target != imageContainer.myCanvas.nativeElement) {
       return false;
     }
 
-    this.offsetTop = imageContainer.myCanvas.nativeElement.offsetTop;
-    this.offsetLeft = imageContainer.myCanvas.nativeElement.offsetLeft;
-    this.offsetTopContainer = workingSpace.offsetTop;
-    this.offsetLeftContainer = workingSpace.offsetLeft;
+    // Global position
+    this.offsetTopContainer = imageContainer.myCanvas.nativeElement.offsetParent.offsetTop;
+    this.offsetLeftContainer = imageContainer.myCanvas.nativeElement.offsetParent.offsetLeft;
 
     this.maxHeight = imageContainer.myCanvas.nativeElement.height;
     this.maxWidth = imageContainer.myCanvas.nativeElement.width;
 
-    this.newArea = new NewArea(event.layerX + this.offsetLeft,
-      event.layerY + this.offsetTop,
-      imageContainer.scaleWidth, imageContainer.scaleHeight,
-      this.offsetTop, this.offsetLeft
+    this.newArea = new NewArea(
+      event.layerX,
+      event.layerY,
+      imageContainer.scaleWidth,
+      imageContainer.scaleHeight
     );
-
 
     this.areaStyle['pointer-events'] = 'none';
 
@@ -224,9 +216,14 @@ export class BoardComponent implements OnDestroy {
    */
   onMouseMove(event) {
     if (this.newArea) {
+      const xMax = Math.min(this.maxWidth, event.clientX - this.offsetLeftContainer);
+      const yMax = Math.min(this.maxHeight, event.clientY - this.offsetTopContainer);
+
+      console.log(event.clientX, this.offsetLeftContainer);
+
       this.newArea.setDiagonalCoordinates(
-        Math.max(0 + this.offsetLeft, Math.min(this.maxWidth + this.offsetLeft, event.clientX - this.offsetLeftContainer)),
-        Math.max(0 + this.offsetTop, Math.min(this.maxHeight + this.offsetTop, event.clientY - this.offsetTopContainer))
+        Math.max(0, xMax),
+        Math.max(0, yMax)
       );
       this.newArea.invalid = this.isCrossingOther(this.newArea);
     }

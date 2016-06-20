@@ -85,9 +85,7 @@ export class NewArea extends Area {
     private baseX: number,
     private baseY:number,
     private scaleWidth:number,
-    private scaleHeight:number,
-    private offsetTop:number,
-    private offsetLeft: number
+    private scaleHeight:number
   ) {
     super(null, null, baseX, baseY, 0, 0);
 
