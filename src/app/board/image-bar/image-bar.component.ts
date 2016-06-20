@@ -1,12 +1,11 @@
-import * as _ from "lodash";
 import { Component, OnDestroy, ElementRef } from "@angular/core";
-import { ImageService, RawImageService } from "../../shared/services";
-import { Image } from "../../shared/models";
-import { SlicedImageComponent } from "../../sliced-image";
-import { Subscription } from "rxjs/Rx";
-import { FolderService } from "../../shared/services/folder.service";
-import { Folder } from "../../shared/models/folder.model";
 import { MD_ICON_DIRECTIVES } from "@angular2-material/icon";
+import * as _ from "lodash";
+import { Subscription } from "rxjs/Rx";
+
+import { ImageService, FolderService, DialogService, RawImageService } from "../../shared/services";
+import { Image, Folder } from "../../shared/models";
+import { SlicedImageComponent } from "../../sliced-image";
 
 @Component({
   selector: 'image-bar',
@@ -26,10 +25,13 @@ export class ImageBarComponent implements OnDestroy {
   private hover:boolean = false;
   private editImage:boolean = false;
 
-  constructor(private imageService:ImageService,
-              private rawImageService:RawImageService,
-              private folderService:FolderService,
-              private el: ElementRef) {
+  constructor(
+    private imageService:ImageService,
+    private rawImageService:RawImageService,
+    private folderService:FolderService,
+    private el: ElementRef,
+    private dialogService: DialogService
+  ) {
 
     this.subscriptions.push(this.folderService.currentSource.subscribe(currentSource => {
       this.currentFolder = currentSource;
@@ -72,7 +74,12 @@ export class ImageBarComponent implements OnDestroy {
   }
 
   deleteImage(image) {
-    this.imageService.delete(image);
+    // Confirm Dialog
+    this.dialogService.openConfirmDialog().then((result) => {
+      if (result) {
+        this.imageService.delete(image);
+      }
+    });
   }
 
   jumpToTheLast() {

@@ -69,14 +69,18 @@ export class ComponentElementComponent {
   //   }
   // }
 
-
   deleteComponent(event, folder) {
     if (event) {
       event.stopPropagation();
     }
-    if(folder.folderId) {
-      this.folderService.delete(folder);
-    }
+
+    // Confirm Dialog
+    this.dialogService.openConfirmDialog().then((result) => {
+      if (result && folder.folderId) {
+        this.folderService.delete(folder);
+      }
+    });
+
   }
   setEditComponent(folderEdit) {
     if(this.currentFolder.id == this.folder.id) {

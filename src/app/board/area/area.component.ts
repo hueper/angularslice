@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { Area } from '../../shared/models';
-import { FolderService } from '../../shared/services';
+import { DialogService, FolderService } from '../../shared/services';
 import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
 
 
@@ -17,7 +17,8 @@ export class AreaComponent {
   @Input() isHovered: boolean;
 
   constructor(
-    private folderService: FolderService
+    private folderService: FolderService,
+    private dialogService: DialogService
   ) {
 
   }
@@ -27,8 +28,13 @@ export class AreaComponent {
   }
 
   deleteArea() {
-    let folder = this.folderService.findById(this.areaData.folderId);
-    this.folderService.delete(folder);
+    // Confirm Dialog
+    this.dialogService.openConfirmDialog().then((result) => {
+      if (result) {
+        let folder = this.folderService.findById(this.areaData.folderId);
+        this.folderService.delete(folder);
+      }
+    });
   }
 
   getRectangle() {
