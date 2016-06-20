@@ -14,15 +14,15 @@ export class FileService extends BaseService<File> {
               private folderService:FolderService) {
     super();
 
-    templateService.filter(f => f.extension.toLowerCase() === 'ts').subscribe((t:Template[]) => {
+    templateService.filter(f => f.extension.toLowerCase() === 'component.ts').subscribe((t:Template[]) => {
       this.tsTemplate = t[0];
     });
 
-    templateService.filter(f => f.extension.toLowerCase() === 'html').subscribe((t:Template[]) => {
+    templateService.filter(f => f.extension.toLowerCase() === 'component.html').subscribe((t:Template[]) => {
       this.htmlTemplate = t[0];
     });
 
-    templateService.filter(f => f.extension.toLowerCase() === 'css').subscribe((t:Template[]) => {
+    templateService.filter(f => f.extension.toLowerCase() === 'component.css').subscribe((t:Template[]) => {
       this.styleTemplate = t[0];
     });
 

@@ -8,7 +8,7 @@ export class TemplateService extends BaseService<Template> {
   constructor() {
     super();
 
-    this.create(new Template('ts', `
+    this.create(new Template('component.ts', `
 import {Component} from '@angular/core';
 
 @Component({
@@ -23,8 +23,8 @@ export class {{properCase name}}Component {
   constructor() {
   }
 }`))
-    this.create(new Template('html', '<div class="{{name}}"></div>'));
-    this.create(new Template('css', `.{{name}} {
+    this.create(new Template('component.html', '<div class="{{name}}"></div>'));
+    this.create(new Template('component.css', `.{{name}} {
   
 }`));
 

@@ -9,7 +9,7 @@ export class FolderService extends BaseService<Folder> {
 
   constructor() {
     super();
-    this.create(new Folder(null, 'Application'));
+    this.create(new Folder(null, 'app'));
 
 
     // this.filter(f => f.folderId === null && this.dummyBoolean).subscribe(folders=> {

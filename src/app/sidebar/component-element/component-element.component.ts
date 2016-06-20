@@ -83,7 +83,7 @@ export class ComponentElementComponent {
 
   }
   setEditComponent(folderEdit) {
-    if(this.currentFolder.id == this.folder.id) {
+    if(this.currentFolder.id === this.folder.id && this.folder.folderId !== null) {
       this.editComponent = true;
       setTimeout(() => {
         folderEdit.focus();

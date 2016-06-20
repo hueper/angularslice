@@ -6,7 +6,7 @@ ul
       .toggleFolder((click)='toggleFolder($event)') {{ folderIcon }}
       .folderName(*ngIf='!editComponent', (click)='setEditComponent(folderEdit)') {{ folder.name }}
       input.input.folderNameInput(#folderEdit, [hidden]='!editComponent', [(ngModel)]='currentFolder.name', (blur)='saveComponent()')
-      md-icon.edit((click)='setEditComponent(folderEdit)') edit
+      md-icon.edit(*ngIf='folder.folderId !== null', (click)='setEditComponent(folderEdit)') edit
       md-icon.delete(*ngIf='folder.folderId !== null', (click)='deleteComponent($event, folder)') delete
   component-element([ngClass]='{closed: !isOpen}', *ngFor='let f of folders | async', [folder]='f')
 
