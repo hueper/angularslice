@@ -6,9 +6,11 @@ import { MdButton } from "@angular2-material/button";
 import { MdInput } from "@angular2-material/input";
 import { MdCheckbox } from "@angular2-material/checkbox";
 import { MdRadioButton, MdRadioGroup, MdRadioDispatcher } from "@angular2-material/radio";
+import { Subscription } from "rxjs";
+const Humane = require('humane-js');
+
 import { Folder } from "../shared/models";
 import { FolderService } from "../shared/services";
-import { Subscription } from "rxjs";
 
 @Component({
   selector: 'component-dialog',
@@ -55,6 +57,10 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
   }
 
   send() {
+    if (this.component.type === 'new' && !this.component.newFolderName) {
+      Humane.log('Component name is missing', { timeout: 4000, clickToClose: true });
+      return;
+    }
     let result = {
       action: 'save',
       data: this.component

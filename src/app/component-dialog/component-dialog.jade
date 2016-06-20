@@ -9,10 +9,10 @@
             md-radio-button(value='new') Create new component
             br
             md-radio-button(value='exist') Select an existing one
-      .row(*ngIf='component.type == "new"')
+      .row(*ngIf='component.type === "new"')
         .column
-          md-input([(ngModel)]='component.newFolderName', placeholder="Add name for the component")
-      .row(*ngIf='component.type == "exist"')
+          md-input([(ngModel)]='component.newFolderName', required, placeholder="Add name for the component")
+      .row(*ngIf='component.type === "exist"')
         .column
           div Select the component:
             select([(ngModel)]='component.folder')
