@@ -129,8 +129,8 @@ export class BoardComponent implements OnDestroy {
 
     // TODO, add analytics
     if (supportedFileExtension.indexOf(extension) === -1) {
-      Humane.log(`Sorry we support just 'png' and 'jpg' files.`);
-      this.ga.eventTrack('uplaod', extension);
+      Humane.log(`Sorry we support just 'png' and 'jpg' files at the moment.`);
+      this.ga.eventTrack('uplaod', { category: extension });
     } else {
       this.rawImageService.createFromFile(file);
     }

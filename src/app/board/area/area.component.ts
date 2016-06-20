@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { Area } from '../../shared/models';
-import { DialogService, FolderService } from '../../shared/services';
+import { AreaService, DialogService, FolderService } from '../../shared/services';
 import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
 
 
@@ -18,7 +18,8 @@ export class AreaComponent {
 
   constructor(
     private folderService: FolderService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private areaService: AreaService
   ) {
 
   }
@@ -31,8 +32,8 @@ export class AreaComponent {
     // Confirm Dialog
     this.dialogService.openConfirmDialog().then((result) => {
       if (result) {
-        let folder = this.folderService.findById(this.areaData.folderId);
-        this.folderService.delete(folder);
+        // let folder = this.areaService.findById(this.areaData.folderId);
+        this.areaService.delete(this.areaData);
       }
     });
   }
