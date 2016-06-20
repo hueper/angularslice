@@ -20,7 +20,10 @@ export class ImageService extends BaseService<Image> {
 
     // Automatically create an image on rawImage creation
     rawImageService.createSource.subscribe((rawImage: RawImage) => {
-      let image = new Image(this.currentFolder ? this.currentFolder.id : null, rawImage.id, 'default', 0, 0, rawImage.width, rawImage.height);
+      const folderId = this.currentFolder ? this.currentFolder.id : null;
+      const fileName = rawImage.name ? rawImage.name : 'image' + Math.floor(Math.random() * 10000);
+
+      let image = new Image(folderId, rawImage.id, fileName, 0, 0, rawImage.width, rawImage.height);
       this.create(image);
     });
 

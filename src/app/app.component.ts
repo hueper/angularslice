@@ -2,7 +2,6 @@ import { Component, AfterViewInit, ViewContainerRef } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Modal, BS_MODAL_PROVIDERS } from 'angular2-modal/plugins/bootstrap';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
-const Humane = require('humane-js');
 // Strange, but true: this method would work but throws an error: 'cannot find module'
 // import * as Humane from 'humane-js/humane.js';
 
@@ -29,8 +28,6 @@ export class AppComponent implements AfterViewInit {
     private viewContainer: ViewContainerRef,
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
   ) {
-
-    Humane.log("Welcome Back");
 
     // Just an example for GA
     // setTimeout( () => {

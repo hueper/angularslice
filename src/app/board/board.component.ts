@@ -1,11 +1,14 @@
 import { Component, Renderer, OnDestroy } from "@angular/core";
 import * as _ from "lodash";
-import { AreaComponent } from "./area";
+import { Subscription } from "rxjs";
+const Humane = require('humane-js');
+
+import { AreaService, ImageService, RawImageService, FolderService, DialogService } from "../shared/services";
 import { ImageBarComponent } from "./image-bar";
 import { Area, Folder, Image, NewArea } from "../shared/models";
-import { AreaService, ImageService, RawImageService, FolderService, DialogService } from "../shared/services";
-import { Subscription } from "rxjs";
+import { AreaComponent } from "./area";
 import { SlicedImageComponent } from "../sliced-image";
+
 
 @Component({
   selector: 'board',
@@ -117,8 +120,17 @@ export class BoardComponent implements OnDestroy {
   }
 
   loadFile(event) {
-    var file = event.srcElement.files[0];
-    this.rawImageService.createFromFile(file);
+    // TODO, move to config:
+    const supportedFileExtension = ['jpg', 'png', 'jpeg'];
+    const file = event.srcElement.files[0];
+    const extension = file.name.split('.').pop();
+
+    // TODO, add analytics
+    if (supportedFileExtension.indexOf(extension) === -1) {
+      Humane.log(`Sorry we support just 'png' and 'jpg' files.`);
+    } else {
+      this.rawImageService.createFromFile(file);
+    }
   }
 
   onDragEnter(event) {

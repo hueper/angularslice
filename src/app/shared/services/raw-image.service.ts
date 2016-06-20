@@ -37,7 +37,7 @@ export class RawImageService extends BaseService<RawImage> {
         this.NgZone.run(() => {
           let width = image.width;
           let height = image.height;
-          this.create(new RawImage(binaryData, width, height));
+          this.create(new RawImage(binaryData, width, height, file.name));
         });
       };
 
