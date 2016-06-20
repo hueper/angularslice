@@ -1,6 +1,8 @@
 import { Component, AfterViewInit, ViewContainerRef } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Modal, BS_MODAL_PROVIDERS } from 'angular2-modal/plugins/bootstrap';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
+
 import { DialogService } from "./shared/services/dialog.service";
 
 
@@ -9,7 +11,8 @@ import { DialogService } from "./shared/services/dialog.service";
   providers: [
     Modal,
     ...BS_MODAL_PROVIDERS,
-    DialogService
+    DialogService,
+    Angulartics2GoogleAnalytics
   ],
   pipes: [],
   directives: [ ROUTER_DIRECTIVES ],
@@ -20,8 +23,15 @@ export class AppComponent implements AfterViewInit {
 
   constructor(
     private modal: Modal,
-    private viewContainer: ViewContainerRef
+    private viewContainer: ViewContainerRef,
+    private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
   ) {
+
+    // Just an example for GA
+    // setTimeout( () => {
+    //   angulartics2GoogleAnalytics.eventTrack('testing', { category: 'ngslice' });
+    //   console.log('DONE');
+    // }, 1000);
 
     modal.defaultViewContainer = viewContainer;
   }
