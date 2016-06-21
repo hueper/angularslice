@@ -1,4 +1,5 @@
 import { Injectable, NgZone } from "@angular/core";
+import {Http} from '@angular/http'
 import { RawImage } from "../models";
 import { BaseService } from "./base.service";
 
@@ -8,7 +9,8 @@ import { BaseService } from "./base.service";
 export class RawImageService extends BaseService<RawImage> {
 
   constructor(// private ApplicationRef:ApplicationRef
-    private NgZone:NgZone) {
+    private Http: Http,
+    private NgZone: NgZone) {
     super();
 
     // TODO: this is just test data
@@ -26,18 +28,29 @@ export class RawImageService extends BaseService<RawImage> {
   }
 
   createFromFile(file: any) {
-    const reader  = new FileReader();
+    const reader = new FileReader();
 
-    reader.addEventListener('load', (e:any) => {
+    reader.addEventListener('load', (e: any) => {
       let image = new Image();
       image.src = e.target.result;
       let binaryData = image.src;
 
       image.onload = () => {
         this.NgZone.run(() => {
+          let formData = new FormData();
+          console.debug(image.src.substr(0, 50));
+          //image.src.split(';')[0]
+          formData.append('width', image.width);
+          formData.append('height', image.height);
+          formData.append('target', file, 'image/jpeg');
+
+          this.Http.post('http://localhost:3000/api/rawImages/upload', formData).subscribe(result => {
+            console.log(result);
+            
+          });
           let width = image.width;
           let height = image.height;
-          this.create(new RawImage(binaryData, width, height, file.name));
+          // this.create(new RawImage(binaryData, width, height, file.name));
         });
       };
 
