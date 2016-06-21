@@ -1,5 +1,7 @@
 import { Injectable, NgZone } from "@angular/core";
 import { Http, Headers } from "@angular/http";
+const Humane = require('humane-js');
+
 import { RawImage } from "../models";
 import { BaseService } from "./base.service";
 
@@ -37,22 +39,29 @@ export class RawImageService extends BaseService<RawImage> {
       let binaryData = image.src;
 
       image.onload = () => {
+        const width = image.width;
+        const height = image.height;
+        const fileType = image.src.split(';')[0].split(':')[1];
+
         this.NgZone.run(() => {
+
           let formData = new FormData();
-          console.debug(image.src.substr(0, 50));
-          //image.src.split(';')[0]
-          formData.append('width', image.width);
-          formData.append('height', image.height);
-          formData.append('target', file, 'image/jpeg');
+          formData.append('width', width);
+          formData.append('height', height);
+          formData.append('target', file, fileType);
 
-          this.Http.post('http://localhost:3000/api/rawImages/upload', formData).subscribe(result => {
-            console.log(result);
-            
+          this.Http.post('http://192.168.1.102:3000/api/rawImages/upload', formData)
+            .map(res => res.json())
+            .subscribe((res: any) => {
+              const data = res.data;
+
+              if (res.success) {
+                this.create(new RawImage(data._id, data.url, data.width, data.height, file.name));
+              } else {
+                Humane.log('Sorry, something baaad happened o.O');
+              }
           });
-          let width = image.width;
-          let height = image.height;
 
-          this.create(new RawImage(binaryData, width, height, file.name));
 
           // var headers = new Headers();
           // headers.append('Content-Type', 'application/x-www-form-urlencoded');

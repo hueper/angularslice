@@ -4,6 +4,12 @@ export class BaseModel {
   public _id: string;
 
   constructor() {
-    this._id = '' + Utils.generateId();
+    if (!this._id) {
+      this._id = this.generateId();
+    }
+  }
+
+  generateId() {
+    return '' + Utils.generateId();
   }
 }
