@@ -3,4 +3,4 @@
     md-icon.addIcon add
     .addTitle Create component
   component-element(*ngFor="let folder of folders | async ", [folder]="folder")
-  pre {{ currentFolders.id | async }}
+  pre {{ currentFolders._id | async }}

@@ -12,27 +12,27 @@ import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
 })
 export class ComponentElementComponent {
 
-  @Input() folder:Folder;
+  @Input() folder: Folder;
 
-  private folderIcon:string;
-  private isOpen:boolean;
-  private editComponent:boolean;
+  private folderIcon: string;
+  private isOpen: boolean;
+  private editComponent: boolean;
 
-  private currentFolder:Folder;
-  private folders:Observable<Folder[]>;
-  private files:Observable<File[]>;
-  private images:Observable<Image[]>;
+  private currentFolder: Folder;
+  private folders: Observable<Folder[]>;
+  private files: Observable<File[]>;
+  private images: Observable<Image[]>;
 
   constructor(
-    private imageService:ImageService,
-    private folderService:FolderService,
-    private fileService:FileService,
-    private dialogService:DialogService
+    private imageService: ImageService,
+    private folderService: FolderService,
+    private fileService: FileService,
+    private dialogService: DialogService
   ) {
 
-    this.images = this.imageService.filter(image => this.folder.id == image.folderId)
-    this.folders = folderService.filter(folder => folder.folderId === this.folder.id);
-    this.files = fileService.filter(file => file.folderId === this.folder.id);
+    this.images = this.imageService.filter(image => this.folder._id == image.folderId)
+    this.folders = folderService.filter(folder => folder.folderId === this.folder._id);
+    this.files = fileService.filter(file => file.folderId === this.folder._id);
 
     folderService.currentSource.subscribe(folder => {
       this.currentFolder = folder;
@@ -46,28 +46,9 @@ export class ComponentElementComponent {
     if (event) {
       event.preventDefault();
     }
-    this.folderService.setCurrentById(this.folder.id);
+    this.folderService.setCurrentById(this.folder._id);
     return false;
   }
-
-  // edit(folder) {
-  //   console.log(this.currentFolder);
-  //   this.dialogService.openEditComponentDialog(folder)
-  //     .then((data) => {
-  //       this.editComponentDialogCallback(data);
-  //     })
-  //     .catch(error => {
-  //
-  //     });
-  // }
-  // editComponentDialogCallback(data) {
-  //   if(data.action == 'save') {
-  //     this.folderService.update(data.data);
-  //   }
-  //   if(data.action == 'delete') {
-  //     this.folderService.delete(data.data);
-  //   }
-  // }
 
   deleteComponent(event, folder) {
     if (event) {
@@ -83,7 +64,7 @@ export class ComponentElementComponent {
 
   }
   setEditComponent(folderEdit) {
-    if(this.currentFolder.id === this.folder.id && this.folder.folderId !== null) {
+    if(this.currentFolder._id === this.folder._id && this.folder.folderId !== null) {
       this.editComponent = true;
       setTimeout(() => {
         folderEdit.focus();

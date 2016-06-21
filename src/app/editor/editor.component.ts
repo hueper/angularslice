@@ -38,11 +38,11 @@ export class EditorComponent {
         console.log('ROUTING', params);
 
         if (params['folderId']) {
-          this.folderService.setCurrentById(+params['folderId']);
+          this.folderService.setCurrentById(params['folderId']);
         }
 
         if (params['imageId']) {
-          this.imageService.setCurrentById(+params['imageId']);
+          this.imageService.setCurrentById(params['imageId']);
         }
       });
 
@@ -52,7 +52,7 @@ export class EditorComponent {
         [currentFolder, currentImage] = combinedData;
 
         this.currentFolder = currentFolder;
-        
+
         // TODO: This part is not working yet, with @angular/router@3.0.0.alpha
         if(currentFolder && currentImage) {
           // this.router.navigate([], { queryParams: { folderId: currentFolder.id, imageId: currentImage.id } });

@@ -12,7 +12,7 @@ A possible dev url: [http://localhost:3001/projects/1/views/1](http://localhost:
 
 ## Develop
 
-  To start hack on the site, just run `npm start`.
+  To start hack on the site, just run `docker-compose create`.
 
 ## Deploy
 

@@ -1,9 +1,9 @@
 import { Utils } from '../services';
 
 export class BaseModel {
-  public id: number;
+  public _id: string;
 
   constructor() {
-    this.id = Utils.generateId();
+    this._id = '' + Utils.generateId();
   }
 }

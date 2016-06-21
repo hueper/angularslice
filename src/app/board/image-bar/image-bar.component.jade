@@ -13,7 +13,7 @@
       .add +
       .text drag image here
     .imageBox(*ngFor='let image of images',
-      [ngClass]='{currentImage: currentImage && currentImage.id == image.id }')
+      [ngClass]='{currentImage: currentImage && currentImage._id == image._id }')
       sliced-image.thumbnail((click)='setBoardImage(image)', [image]='image', [thumbnail]='true')
       .text
         .name

@@ -20,8 +20,8 @@ export class Area extends BaseModel implements IArea {
   public invalid: boolean = false;
 
   constructor(
-    public folderId: number = null,
-    public imageId: number = null,
+    public folderId: string,
+    public imageId: string,
     public x: number,
     public y: number,
     public width: number,

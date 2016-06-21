@@ -2,7 +2,6 @@
 require('humane-js/themes/flatty.css');
 // require('humane-js/themes/libnotify.css');
 // require('humane-js/themes/original.css');
-require('tlite/tlite.css');
 
 // JS
 import 'zone.js/dist/zone';

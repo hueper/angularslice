@@ -38,7 +38,7 @@ export class SidebarComponent {
   }
 
   createComponent() {
-    let currentId = this.currentFolder.id;
+    let currentId = this.currentFolder._id;
     this.folderService.create(new Folder(currentId, 'component'));
   }
 }

@@ -2,8 +2,8 @@ import { BaseModel } from './base.model';
 
 export class Image extends BaseModel {
   constructor(
-    public folderId: number,
-    public rawImageId: number,
+    public folderId: string,
+    public rawImageId: string,
     public name: string,
     public x: number,
     public y: number,

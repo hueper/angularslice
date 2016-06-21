@@ -9,7 +9,7 @@ export class BaseService<T extends BaseModel>{
   data: T[] = [];
   dataSource: BehaviorSubject<T[]> = new BehaviorSubject([]);
   currentSource: BehaviorSubject<T> = new BehaviorSubject<T>(null);
-  currentIdSource: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+  currentIdSource: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   // Note: if you go with type 'T', the properties won't be available, like: instance.id
   changeSource: ReplaySubject<Function> = new ReplaySubject<Function>();
@@ -24,7 +24,7 @@ export class BaseService<T extends BaseModel>{
       .map((combinedData) => {
         let dataStore, currentId;
         [dataStore, currentId] = combinedData;
-        return  _.find(dataStore, { id: currentId }) || _.get(dataStore, 0, null);
+        return  _.find(dataStore, { _id: currentId }) || _.get(dataStore, 0, null);
       })
       .subscribe(this.currentSource);
 
@@ -37,7 +37,7 @@ export class BaseService<T extends BaseModel>{
     this.updateSource
       .map((instance) => {
         return (dataStore) => {
-          const index = _.findIndex(dataStore, {id: instance.id});
+          const index = _.findIndex(dataStore, { _id: instance._id });
           dataStore[index] = instance;
           return dataStore;
         }
@@ -58,7 +58,7 @@ export class BaseService<T extends BaseModel>{
         return (dataStore) => {
           return dataStore.filter((instance) => {
             console.log(instanceToDelete, instance);
-            return instance.id !== instanceToDelete.id;
+            return instance._id !== instanceToDelete._id;
           })
         }
       })
@@ -71,7 +71,7 @@ export class BaseService<T extends BaseModel>{
     });
   }
 
-  setCurrentById(id: number) {
+  setCurrentById(id: string) {
     this.currentIdSource.next(id);
   }
 
@@ -83,8 +83,8 @@ export class BaseService<T extends BaseModel>{
     return this.dataSource.map(instanceArray => instanceArray.filter(filter));
   }
 
-  findById(id: number) : T {
-    let result = this.data.filter((instance) => { return instance.id === id });
+  findById(id: string) : T {
+    let result = this.data.filter((instance) => { return instance._id === id });
     return result ? result[0] : null;
   }
 

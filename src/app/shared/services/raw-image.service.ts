@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from "@angular/core";
-import {Http} from '@angular/http'
+import { Http, Headers } from "@angular/http";
 import { RawImage } from "../models";
 import { BaseService } from "./base.service";
 
@@ -22,6 +22,7 @@ export class RawImageService extends BaseService<RawImage> {
 
   create(rawImage: RawImage) {
     super.create(rawImage);
+
 
     // We're going out from Zone, so after the create we'll need to trigger the change detection chain
     // this.ApplicationRef.tick();
@@ -50,7 +51,31 @@ export class RawImageService extends BaseService<RawImage> {
           });
           let width = image.width;
           let height = image.height;
-          // this.create(new RawImage(binaryData, width, height, file.name));
+
+          this.create(new RawImage(binaryData, width, height, file.name));
+
+          // var headers = new Headers();
+          // headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          //
+          // console.log(file);
+          //
+          // const params = { width, height, target: file };
+          // localStorage.setItem('testrequest', JSON.stringify(params));
+          // // const params = JSON.parse(localStorage.getItem('testrequest'));
+          //
+          // this.http.post('http://192.168.1.102:3000/api/rawImages/upload', params, { headers: headers }).subscribe(response => {
+          //   console.log(response, 'HERE IS THE RESP');
+          //   // this.create(new RawImage(binaryData, width, height, file.name));
+          // });
+
+
+
+          // Upload to the server
+          // TODO: put the request into a separate service
+          // this.http.post('http://192.168.1.102:3000/api/rawImages/upload', params).subscribe(response => {
+          //   console.log(response, 'HERE IS THE RESP');
+          // });
+
         });
       };
 

@@ -20,17 +20,17 @@ export class ImageService extends BaseService<Image> {
 
     // Automatically create an image on rawImage creation
     rawImageService.createSource.subscribe((rawImage: RawImage) => {
-      const folderId = this.currentFolder ? this.currentFolder.id : null;
+      const folderId = this.currentFolder ? this.currentFolder._id : null;
       const fileName = rawImage.name ? rawImage.name : 'image' + Math.floor(Math.random() * 10000);
 
-      let image = new Image(folderId, rawImage.id, fileName, 0, 0, rawImage.width, rawImage.height);
+      let image = new Image(folderId, rawImage._id, fileName, 0, 0, rawImage.width, rawImage.height);
       this.create(image);
     });
 
     rawImageService.createSource.subscribe(() => {})
 
     folderService.deleteSource.subscribe(folder => {
-      this.find({ folderId: folder.id }).map( (image) => {
+      this.find({ folderId: folder._id }).map( (image) => {
         this.delete(image);
       });
     });
@@ -46,7 +46,7 @@ export class ImageService extends BaseService<Image> {
   }
 
   setCurrentImage(instance: Image) {
-    this.currentIdSource.next(instance.id);
+    this.currentIdSource.next(instance._id);
   }
 
   delete(instance: Image) {

@@ -1,4 +1,5 @@
 import { Component, Renderer, OnDestroy } from "@angular/core";
+import { Http, Headers } from "@angular/http";
 import * as _ from "lodash";
 import { Subscription } from "rxjs";
 import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
@@ -22,38 +23,39 @@ import { SlicedImageComponent } from "../sliced-image";
   ],
 })
 export class BoardComponent implements OnDestroy {
-  currentImage:Image;
-  areaStyle:any = {};
+  currentImage: Image;
+  areaStyle: any = {};
 
-  private newArea:NewArea = null;
-  private areas:Area[] = [];
-  private folders:Folder[] = [];
-  private images:Image[] = [];
+  private newArea: NewArea = null;
+  private areas: Area[] = [];
+  private folders: Folder[] = [];
+  private images: Image[] = [];
 
-  private offsetTop:number;
-  private offsetLeft:number;
-  private offsetTopContainer:number;
-  private offsetLeftContainer:number;
-  private maxWidth:number;
-  private maxHeight:number;
-  private scaleWidth:number;
-  private scaleHeight:number;
+  private offsetTop: number;
+  private offsetLeft: number;
+  private offsetTopContainer: number;
+  private offsetLeftContainer: number;
+  private maxWidth: number;
+  private maxHeight: number;
+  private scaleWidth: number;
+  private scaleHeight: number;
 
-  private listeners:any[] = [];
+  private listeners: any[] = [];
 
-  private subscriptions:Subscription[] = [];
-  private hover:boolean = false;
+  private subscriptions: Subscription[] = [];
+  private hover: boolean = false;
 
-  private areaSubscription:Subscription;
+  private areaSubscription: Subscription;
 
-  private currentFolderId:number;
-  public currentFolder:Folder;
-  private currentArea:Area;
-  private currentAreaFolder:Folder;
-  private areaEdit:boolean;
-  private componentEdit:boolean;
+  private currentFolderId: string;
+  public currentFolder: Folder;
+  private currentArea: Area;
+  private currentAreaFolder: Folder;
+  private areaEdit: boolean;
+  private componentEdit: boolean;
 
   constructor(
+    private http: Http,
     private ga: Angulartics2GoogleAnalytics,
     private areaService: AreaService,
     private rawImageService: RawImageService,
@@ -63,6 +65,18 @@ export class BoardComponent implements OnDestroy {
     private dialogService: DialogService
   ) {
 
+    // TODO: put the request into a separate service
+    // const image = localStorage.getItem('image');
+    // const params = { width: image.width, height: image.height, target: image.src };
+    // var headers = new Headers();
+    // headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    //
+    // const params = JSON.parse(localStorage.getItem('testrequest'));
+    // this.http.post('http://192.168.1.102:3000/api/rawImages/upload', params, { headers: headers }).subscribe(response => {
+    //   console.log(response, 'HERE IS THE RESP');
+    //   // this.create(new RawImage(binaryData, width, height, file.name));
+    // });
+
     // Subscribe for folders
     this.subscriptions.push(this.folderService.dataSource.subscribe((folders:Folder[]) => {
       this.folders = folders;
@@ -70,7 +84,7 @@ export class BoardComponent implements OnDestroy {
 
     this.subscriptions.push(this.folderService.currentSource.subscribe((currentSource) => {
       if (currentSource) {
-        this.currentFolderId = currentSource.id;
+        this.currentFolderId = currentSource._id;
         this.currentFolder = currentSource;
       }
     }));
@@ -86,7 +100,7 @@ export class BoardComponent implements OnDestroy {
         this.areaSubscription.unsubscribe();
       }
       // Subscribe for areas
-      this.areaSubscription = this.areaService.filter(instance => instance.imageId === this.currentImage.id).subscribe((areas:Area[]) => {
+      this.areaSubscription = this.areaService.filter(instance => instance.imageId === this.currentImage._id).subscribe((areas:Area[]) => {
         this.areas = areas;
       });
       this.subscriptions.push(this.areaSubscription);
@@ -140,7 +154,7 @@ export class BoardComponent implements OnDestroy {
   }
 
   setActiveArea(area) {
-    this.areaService.setCurrentById(area.id);
+    this.areaService.setCurrentById(area._id);
   }
   setComponentEdit(type) {
     if(type == 'area') {
@@ -277,7 +291,7 @@ export class BoardComponent implements OnDestroy {
 
     if (type == 'new') {
       this.folderService.create(new Folder(this.currentFolderId, data.newFolderName));
-      folderId = _.last(this.folders).id;
+      folderId = _.last(this.folders)._id;
     } else {
       folderId = parseInt(data.folder);
     }
@@ -298,7 +312,7 @@ export class BoardComponent implements OnDestroy {
       this.imageService.create(newImage);
 
       let image = _.last(this.images);
-      area.setImageId(this.currentImage.id);
+      area.setImageId(this.currentImage._id);
     }
     this.areaService.create(area);
 
