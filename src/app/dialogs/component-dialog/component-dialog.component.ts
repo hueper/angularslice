@@ -9,8 +9,8 @@ import { MdRadioButton, MdRadioGroup, MdRadioDispatcher } from "@angular2-materi
 import { Subscription } from "rxjs";
 const Humane = require('humane-js');
 
-import { Folder } from "../shared/models";
-import { FolderService } from "../shared/services";
+import { Folder } from "../../shared/models";
+import { FolderService } from "../../shared/services";
 
 @Component({
   selector: 'component-dialog',

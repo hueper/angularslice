@@ -8,3 +8,4 @@ export * from './raw-image.model';
 export * from './template.model';
 
 export * from './confirm-data.model';
+export * from './user.model';

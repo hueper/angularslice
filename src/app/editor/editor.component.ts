@@ -7,7 +7,7 @@ const Humane = require('humane-js');
 import { BoardComponent } from "../board";
 import { SidebarComponent } from "../sidebar";
 import { ToolbarComponent } from "../toolbar";
-import { ImageService, FolderService } from "../shared/services";
+import { DialogService, ImageService, FolderService, ProjectService, UserService } from "../shared/services";
 import { Folder } from "../shared/models";
 
 
@@ -28,22 +28,51 @@ export class EditorComponent {
   currentFolder: Folder;
 
   githubAuth() {
-    const authUrl = 'https://github.com/login/oauth/authorize?client_id=ac28f4f2805e50fcdde3';
-    const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=400');
+    // TODO: just for testing
+    return this.pushToGithub();
 
-    const _oauthInterval = window.setInterval(() => {
-      if (_oauthWindow.closed) {
-        window.clearInterval(_oauthInterval);
-        Humane.log('Awesome! See you next time!');
-      }
-    }, 1000);
+    // const authUrl = 'https://github.com/login/oauth/authorize?client_id=ac28f4f2805e50fcdde3';
+    // const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=400');
+    //
+    // const _oauthInterval = window.setInterval(() => {
+    //   if (_oauthWindow.closed) {
+    //     window.clearInterval(_oauthInterval);
+    //     // Poll
+    //     console.log('POLLNG');
+    //     this.userService.pollUser().subscribe((res) => {
+    //       if (res.data.oauthData) {
+    //         Humane.log(`Awesome! See you next time!`);
+    //         // TODO: show the Dialog
+    //       } else {
+    //         Humane.log(`Sorry, we couldn't authenticate you. Please try again.`);
+    //       }
+    //       console.log('POLLNG', res);
+    //     });
+    //   }
+    // }, 1000);
+  }
+
+  pushToGithub() {
+    this.dialogService.openGithubDialog().then((res) => {
+      console.log(res);
+      this.projectService.generate(res).subscribe((res: any) => {
+        if (res.success) {
+          Humane.log('Awesome');
+        } else {
+          Humane.log('Fuck me');
+        }
+      });
+    });
   }
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private dialogService: DialogService,
     private folderService: FolderService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private projectService: ProjectService,
+    private userService: UserService
   ) {
 
     this.sub = this.router.routerState.queryParams.take(1)

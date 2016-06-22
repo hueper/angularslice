@@ -1,13 +1,26 @@
-import { Injectable } from "@angular/core";
-import { Modal, BSModalContext } from "angular2-modal/plugins/bootstrap";
-import { ComponentDialogComponent } from "../../component-dialog/component-dialog.component";
-import { ConfirmDialogComponent, ConfirmDialogDataComponent } from "../../confirm-dialog/confirm-dialog.component";
+import { Injectable } from '@angular/core';
+import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import {
+  ComponentDialogComponent,
+  ConfirmDialogComponent,
+  ConfirmDialogData,
+  GithubDialogComponent
+} from '../../dialogs';
 
 @Injectable()
 export class DialogService {
 
   constructor(private modal:Modal) {
 
+  }
+
+  openGithubDialog() {
+    const data = new BSModalContext();
+    return this.modal
+      .open(GithubDialogComponent, data)
+      .then(dialog => {
+        return dialog.result;
+      });
   }
 
   openCreateComponentDialog() {
@@ -20,7 +33,7 @@ export class DialogService {
   }
 
   openConfirmDialog() {
-    const data = new ConfirmDialogDataComponent();
+    const data = new ConfirmDialogData();
     return this.modal
       .open(ConfirmDialogComponent, data)
       .then(dialog => {
@@ -28,12 +41,3 @@ export class DialogService {
       })
   }
 }
-
-/*
- USING CONFIRM
- this.dialogService.openConfirmDialog().then((result) => {
- console.log("Dialog result", result);
- }).catch(data => {
- console.log('data => ', data);
- });
- */
