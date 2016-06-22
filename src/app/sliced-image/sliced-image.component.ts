@@ -39,7 +39,7 @@ export class SlicedImageComponent implements AfterViewInit, OnChanges {
         let img = document.createElement('img');
         let canvasSize;
 
-        img.src = rawImage.binaryData;
+        img.src = rawImage.url;
         img.onload = () => {
           let dest = this.el.nativeElement;
           canvasSize = this.generateSizeLandscape(dest.offsetWidth, this.image.width, this.image.height);

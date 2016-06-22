@@ -38,7 +38,7 @@ export class ImageService extends BaseService<Image> {
 
   getBinaryData (instance: Image) {
     const rawImage = this.rawImageService.findById(instance.rawImageId);
-    return rawImage ? rawImage.binaryData : null;
+    return rawImage ? rawImage.url : null;
   }
   getRawImage (instance: Image) {
     const rawImage = this.rawImageService.findById(instance.rawImageId);

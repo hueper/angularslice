@@ -9,3 +9,4 @@ export * from './raw-image.service';
 export * from './template.service';
 
 export * from './dialog.service';
+export * from './http.service';

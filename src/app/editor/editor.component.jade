@@ -3,6 +3,8 @@ toolbar
     a.angular(href='./')
       img(src='{{ logo }}')
       | SLICE
+    a((click)='githubAuth()') Push to Github
+
   //-.c-toolbar
     .left
       .folderName {{ currentFolder.name }}

@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MD_ICON_DIRECTIVES } from '@angular2-material/icon';
 import { Observable } from 'rxjs';
+const Humane = require('humane-js');
 
 import { BoardComponent } from "../board";
 import { SidebarComponent } from "../sidebar";
@@ -25,6 +26,18 @@ export class EditorComponent {
   logo: any;
   sub: any;
   currentFolder: Folder;
+
+  githubAuth() {
+    const authUrl = 'https://github.com/login/oauth/authorize?client_id=ac28f4f2805e50fcdde3';
+    const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=400');
+
+    const _oauthInterval = window.setInterval(() => {
+      if (_oauthWindow.closed) {
+        window.clearInterval(_oauthInterval);
+        Humane.log('Awesome! See you next time!');
+      }
+    }, 1000);
+  }
 
   constructor(
     private router: Router,

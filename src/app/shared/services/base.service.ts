@@ -57,7 +57,6 @@ export class BaseService<T extends BaseModel>{
       .map((instanceToDelete) => {
         return (dataStore) => {
           return dataStore.filter((instance) => {
-            console.log(instanceToDelete, instance);
             return instance._id !== instanceToDelete._id;
           })
         }
