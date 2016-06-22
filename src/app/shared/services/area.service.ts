@@ -9,7 +9,7 @@ export class AreaService extends BaseService<Area> {
   constructor(
     private folderService:FolderService
   ) {
-    super();
+    super('areas', Area);
 
     this.folderService.deleteSource.subscribe(folder => {
       this.find({ folderId: folder._id }).map( (area) => {

@@ -11,25 +11,11 @@ import { HttpService } from "./http.service.ts";
 
 @Injectable()
 export class RawImageService extends BaseService<RawImage> {
-
   constructor( // private ApplicationRef:ApplicationRef
     private httpService: HttpService,
     private ngZone: NgZone
   ) {
-
-    super();
-    this.httpService.get('/rawImages/list')
-      .map(res => res.json())
-      .subscribe((res: any) => {
-        // let initRawImages : RawImage[] = [];
-        for (let id in res.data) {
-          let { _id, url, width, height } = res.data[id];
-          // TODO: later we shouldn't create, because it trigger create in ImageService. Now we need these images.
-          this.create(new RawImage(_id, url, width, height));
-          // initRawImages.push(new RawImage(_id, url, width, height));
-        }
-        // this.dataSource.next(initRawImages);
-      });
+    super('rawImages', RawImage);
   }
 
   delete(rawImage: RawImage) {

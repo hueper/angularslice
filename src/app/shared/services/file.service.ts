@@ -10,9 +10,11 @@ export class FileService extends BaseService<File> {
   private htmlTemplate:Template;
   private styleTemplate:Template;
 
-  constructor(private templateService:TemplateService,
-              private folderService:FolderService) {
-    super();
+  constructor(
+    private templateService:TemplateService,
+    private folderService:FolderService
+  ) {
+    super('files', File);
 
     templateService.filter(f => f.extension.toLowerCase() === 'component.ts').subscribe((t:Template[]) => {
       this.tsTemplate = t[0];

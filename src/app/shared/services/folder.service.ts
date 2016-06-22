@@ -8,8 +8,13 @@ export class FolderService extends BaseService<Folder> {
   private dummyBoolean:boolean = true;
 
   constructor() {
-    super();
-    this.create(new Folder(null, 'app'));
+    super('folders', Folder);
+
+    // Just create if not read from cache..
+    const rootFolder = this.findOne({ folderId: null });
+    if (!rootFolder) {
+      this.create(new Folder(null, 'app'));
+    }
 
 
     // this.filter(f => f.folderId === null && this.dummyBoolean).subscribe(folders=> {

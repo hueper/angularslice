@@ -3,7 +3,7 @@ import { Http, RequestOptions } from "@angular/http";
 
 @Injectable()
 export class HttpService {
-  private baseUrl: string = 'http://192.168.1.102:3000/api';
+  private baseUrl: string = 'http://192.168.1.103:3000/api';
   private defaultRequestOptions: RequestOptions = new RequestOptions({ withCredentials: true });
 
   constructor(

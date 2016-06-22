@@ -12,7 +12,7 @@ export class ImageService extends BaseService<Image> {
     private folderService:FolderService,
     private rawImageService: RawImageService
   ) {
-    super();
+    super('images', Image);
 
     this.folderService.currentSource.subscribe(folder => {
       this.currentFolder = folder;

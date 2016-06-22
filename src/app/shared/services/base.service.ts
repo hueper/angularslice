@@ -1,12 +1,13 @@
 import * as _ from "lodash";
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject, Observable } from 'rxjs';
+import { plainToConstructorArray } from 'constructor-utils';
+
 import { BaseModel } from '../models';
 
 
 @Injectable()
 export class BaseService<T extends BaseModel>{
-  data: T[] = [];
   dataSource: BehaviorSubject<T[]> = new BehaviorSubject([]);
   currentSource: BehaviorSubject<T> = new BehaviorSubject<T>(null);
   currentIdSource: BehaviorSubject<string> = new BehaviorSubject<string>(null);
@@ -17,7 +18,30 @@ export class BaseService<T extends BaseModel>{
   createSource: ReplaySubject<T> = new ReplaySubject<T>();
   deleteSource: ReplaySubject<T> = new ReplaySubject<T>();
 
-  constructor() {
+  constructor(
+    private entityType = null,
+    private ClassT: any = null
+  ) {
+
+    // localStorage READ & WRITE
+    if (this.entityType) {
+      // Load data from localStorage
+      let storedData = JSON.parse(localStorage.getItem(this.entityType));
+      if (storedData) {
+        // Instantiate the elements
+        storedData = plainToConstructorArray(ClassT, storedData);
+        console.log(storedData);
+        this.dataSource.next(storedData);
+        console.log('READ', this.entityType, storedData);
+      }
+
+      // Save data to localStorage on changes
+      this.dataSource.subscribe((dataStore) => {
+        localStorage.setItem(this.entityType, JSON.stringify(dataStore));
+        // console.log('WRITE', this.entityType, JSON.stringify(dataStore));
+      });
+    }
+
 
     // Create the current instance stream
     Observable.combineLatest(this.dataSource, this.currentIdSource)
@@ -31,7 +55,7 @@ export class BaseService<T extends BaseModel>{
     this.changeSource
       .scan((dataStore, operation) => {
         return operation(dataStore);
-      }, this.data)
+      }, this.dataSource.getValue())
       .subscribe(this.dataSource);
 
     this.updateSource
@@ -83,12 +107,12 @@ export class BaseService<T extends BaseModel>{
   }
 
   findById(id: string) : T {
-    let result = this.data.filter((instance) => { return instance._id === id });
+    let result = this.dataSource.getValue().filter((instance) => { return instance._id === id });
     return result ? result[0] : null;
   }
 
   findOne(filterObject: any): T {
-    return _.find(this.data, filterObject);
+    return _.find(this.dataSource.getValue(), filterObject);
   }
 
   find(filterObject: any = {}): T[] {
