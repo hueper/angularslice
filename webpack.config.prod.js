@@ -8,49 +8,24 @@ var prodConfig = {
   cache: false,
   debug: false,
   devtool: false,
-  plugins : [
+  plugins: [
     new CopyWebpackPlugin([
-      { from : 'src/index.html', to : 'index.html' },
+      {from: 'src/index.html', to: 'index.html'},
     ]),
     //new webpack.optimize.OccurenceOrderPlugin(),
-    //new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      beautify : false,
+      beautify: false,
       minimize: true,
       sourceMap: false,
-      mangle : {
-        screw_ie8 : true,
-        except : [
-          'RouterActive',
-          'RouterLink',
-          'RouterOutlet',
-          'NgFor',
-          'NgIf',
-          'NgClass',
-          'NgSwitch',
-          'NgStyle',
-          'NgSwitchDefault',
-          'NgModel',
-          'NgControl',
-          'NgFormControl',
-          'NgForm',
-          'AsyncPipe',
-          'DatePipe',
-          'JsonPipe',
-          'NumberPipe',
-          'DecimalPipe',
-          'PercentPipe',
-          'CurrencyPipe',
-          'LowerCasePipe',
-          'UpperCasePipe',
-          'SlicePipe',
-          'ReplacePipe',
-          'I18nPluralPipe',
-          'I18nSelectPipe'
-        ] // needed for uglify RouterLink problem
+      mangle: {
+        screw_ie8: true
       },// prod
-      compress : { screw_ie8 : true },//prod
-      comments : false//prod
+      compress: {
+        screw_ie8: true,
+        warnings: false
+      },//prod
+      comments: false//prod
     })
   ]
 };
