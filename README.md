@@ -6,6 +6,12 @@ Any commits to the https://github.com/rangle/microsite-template.angular.io:maste
 
 This is far from ideal so we will revisit this setup in the future. 
 
+## Instructions
+
+ - Work in the app folder
+ - Run `gulp serve` to start the watcher
+
+
 ## Updating Microsites
 
 * The microsite base template is located in the `master` branch, any changes made to master should be rebased into a microsite.

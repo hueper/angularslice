@@ -1,0 +1,73 @@
+$brandColor: #1C6274;
+$brandYellow: #feffb4;
+$darkBrandColor: #47676f;
+
+.slogan {
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  line-height: 40px;
+  margin-bottom: 60px;
+}
+
+.button-container {
+  text-align: center;
+  width: 190px;
+  margin-top: 32px;
+
+  button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: $brandYellow;
+
+    a {
+      color: #1C6274;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
+}
+
+.bottom-section {
+  background-color: $brandColor;
+  padding: 40px;
+
+  .button-before-text {
+    font-size: 22px;
+    color: white;
+    margin-bottom: 5px;
+  }
+
+  button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: $brandYellow;
+
+    a {
+      color: #1C6274;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
+}
+
+span.italic {
+  font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .button-container {
+    margin: auto;
+  }
+  .browser-mockup {
+    margin: auto;
+    margin-bottom: 30px;
+  }
+
+  .hero-background ol {
+    width: 300px;
+    text-align: left;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+}
