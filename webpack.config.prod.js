@@ -3,6 +3,7 @@ var webpackMerge = require('webpack-merge');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var webpackConfig = require('./webpack.config.js');
+var ENV = process.env.ENV ? process.env.ENV : 'development';
 
 var prodConfig = {
   cache: false,
