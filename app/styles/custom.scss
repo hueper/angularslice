@@ -1,6 +1,31 @@
 $brandColor: #1C6274;
 $brandYellow: #feffb4;
+$brandYellowHover: #feff8f;
 $darkBrandColor: #47676f;
+
+.footer {
+  .logo-container {
+    margin-top: 10px;
+    .footer-logo {
+      height: 45px;
+      margin-right: 10px;
+    }
+  }
+
+  .license-text {
+    text-align: left;
+  }
+
+}
+
+.alignLeft {
+  text-align: left;
+}
+
+.alignRight {
+  text-align: right;
+}
+
 
 .slogan {
   width: 100%;
@@ -12,13 +37,18 @@ $darkBrandColor: #47676f;
 
 .button-container {
   text-align: center;
-  width: 190px;
+  width: 215px;
   margin-top: 32px;
 
   button {
     margin-top: 5px;
     margin-bottom: 5px;
     background-color: $brandYellow;
+    width: 100%;
+
+    &:hover {
+      background-color: $brandYellowHover;
+    }
 
     a {
       color: #1C6274;
@@ -42,6 +72,9 @@ $darkBrandColor: #47676f;
     margin-top: 5px;
     margin-bottom: 5px;
     background-color: $brandYellow;
+    &:hover {
+      background-color: $brandYellowHover;
+    }
 
     a {
       color: #1C6274;
@@ -55,7 +88,14 @@ span.italic {
   font-style: italic;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 840px) {
+
+  .footer {
+    .license-text {
+      text-align: center;
+    }
+  }
+
   .button-container {
     margin: auto;
   }
@@ -65,7 +105,7 @@ span.italic {
   }
 
   .hero-background ol {
-    width: 300px;
+    width: 160px;
     text-align: left;
     margin: auto;
     margin-bottom: 30px;
