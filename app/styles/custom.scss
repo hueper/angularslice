@@ -2,7 +2,65 @@ $brandColor: #1C6274;
 $brandYellow: #feffb4;
 $brandYellowHover: #feff8f;
 $darkBrandColor: #47676f;
+$footerBg: #263238;
 
+// Subscription page, aka app folder
+.rocket-image {
+  margin-top: -130px;
+}
+
+.bird-text-container {
+  display: inline-block;
+  width: 60%;
+}
+
+.subtitle {
+  margin-top: -10px;
+  color: lightgray;
+}
+
+.subscribe-upper-frame {
+  height: 40px;
+  background-color: $brandColor;
+  color: white;
+  text-align: center;
+  line-height: 40px;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 10px 10px 0 0;
+}
+.subscribe-bottom-frame {
+  background-color: $footerBg;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 0 0 10px 10px;
+}
+
+.subscribe-button-container {
+  text-align: center;
+
+  .button {
+    background-color: #ff8282 !important;
+    width: 300px !important;
+  }
+}
+
+.share-section {
+  text-align: center;
+
+  .innerWrapper {
+    width: 705px;
+
+    .a2a_kit {
+      display: inline-block;
+    }
+  }
+}
+
+
+
+
+// Main INDEX.html
 .footer {
   .logo-container {
     margin-top: 10px;
@@ -89,6 +147,13 @@ span.italic {
 }
 
 @media (max-width: 840px) {
+  .bird-text-container {
+    display: block;
+    width: 100%;
+  }
+  .rocket-image {
+    margin-top: 0px;
+  }
 
   .footer {
     .license-text {
