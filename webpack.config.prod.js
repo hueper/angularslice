@@ -30,7 +30,5 @@ var prodConfig = {
   ]
 };
 
-// webpackConfig.devtool;
 
 module.exports = webpackMerge({}, webpackConfig, prodConfig);
-//module.exports = webpackConfig;
