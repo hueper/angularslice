@@ -27,7 +27,7 @@ export class GithubDialogComponent implements ModalComponent<BSModalContext> {
   ) {}
 
   send() {
-    // Humane.log('Component name is missing', { timeout: 4000, clickToClose: true });
+    // humane.log('Component name is missing', { timeout: 4000, clickToClose: true });
 
     this.dialog.close(this.componentData.repoName);
   }

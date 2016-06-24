@@ -2,13 +2,16 @@ import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MD_ICON_DIRECTIVES } from '@angular2-material/icon';
 import { Observable } from 'rxjs';
+
 const Humane = require('humane-js');
+import * as _ from 'lodash';
 
 import { BoardComponent } from "../board";
 import { SidebarComponent } from "../sidebar";
 import { ToolbarComponent } from "../toolbar";
 import { DialogService, ImageService, FolderService, ProjectService, UserService } from "../shared/services";
 import { Folder } from "../shared/models";
+import { User } from "../shared/models/user.model";
 
 
 @Component({
@@ -28,13 +31,23 @@ export class EditorComponent {
   currentFolder: Folder;
 
   githubAuth() {
-    const authUrl = '/auth/github';
+    const authUrl = 'http://192.168.1.102:3000/auth/github';
     const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=400');
 
     _oauthWindow.addEventListener('unload', (event) => {
       this.userService.pollUser().subscribe(res => {
-        console.log("res => ", res);
-      })
+        let user = res.data as User;
+        let accessToken = _.get(user, 'oauthData.github.accessToken', false);
+
+        if(accessToken) {
+          //TODO: the user authentication was successfull, we can do whatever we want ;)
+        } else {
+          console.log("accessToken => ", user);
+          Humane.log('The authentication was unsuccessfull, we can\'t push to github without a valid access token');
+          
+        }
+      });
+      _oauthWindow.removeEventListener('unload');
     });
 
     // const _oauthInterval = window.setInterval(() => {
