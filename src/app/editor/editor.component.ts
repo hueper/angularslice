@@ -28,28 +28,25 @@ export class EditorComponent {
   currentFolder: Folder;
 
   githubAuth() {
-    // TODO: just for testing
-    return this.pushToGithub();
+    const authUrl = 'https://github.com/login/oauth/authorize?client_id=ac28f4f2805e50fcdde3';
+    const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=400');
 
-    // const authUrl = 'https://github.com/login/oauth/authorize?client_id=ac28f4f2805e50fcdde3';
-    // const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=400');
-    //
-    // const _oauthInterval = window.setInterval(() => {
-    //   if (_oauthWindow.closed) {
-    //     window.clearInterval(_oauthInterval);
-    //     // Poll
-    //     console.log('POLLNG');
-    //     this.userService.pollUser().subscribe((res) => {
-    //       if (res.data.oauthData) {
-    //         Humane.log(`Awesome! See you next time!`);
-    //         // TODO: show the Dialog
-    //       } else {
-    //         Humane.log(`Sorry, we couldn't authenticate you. Please try again.`);
-    //       }
-    //       console.log('POLLNG', res);
-    //     });
-    //   }
-    // }, 1000);
+    const _oauthInterval = window.setInterval(() => {
+      if (_oauthWindow.closed) {
+        window.clearInterval(_oauthInterval);
+        // Poll
+        console.log('POLLNG');
+        this.userService.pollUser().subscribe((res) => {
+          if (res.data.oauthData) {
+            Humane.log(`Awesome! See you next time!`);
+            // TODO: show the Dialog
+          } else {
+            Humane.log(`Sorry, we couldn't authenticate you. Please try again.`);
+          }
+          console.log('POLLNG', res);
+        });
+      }
+    }, 1000);
   }
 
   pushToGithub() {
@@ -63,14 +60,14 @@ export class EditorComponent {
         }
       });
     }).catch(err=> {
-      
+
     });
   }
 
   export() {
     this.dialogService.openExportDialog().then(res => {
       console.log(res);
-      this.pushToGithub();
+      this.githubAuth();
     });
   }
 
