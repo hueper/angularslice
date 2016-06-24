@@ -24,6 +24,7 @@ export class ImageService extends BaseService<Image> {
       const fileName = rawImage.name ? rawImage.name : 'image' + Math.floor(Math.random() * 10000);
 
       let image = new Image(folderId, rawImage._id, fileName, 0, 0, rawImage.width, rawImage.height);
+      this.setCurrentImage(image);
       this.create(image);
     });
 
