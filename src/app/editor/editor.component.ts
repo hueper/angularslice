@@ -11,7 +11,6 @@ import { SidebarComponent } from "../sidebar";
 import { ToolbarComponent } from "../toolbar";
 import { DialogService, ImageService, FolderService, ProjectService, UserService } from "../shared/services";
 import { Folder } from "../shared/models";
-import { User } from "../shared/models/user.model";
 
 
 @Component({
@@ -47,7 +46,7 @@ export class EditorComponent {
 
   export() {
     this.dialogService.openExportDialog().then(result => {
-
+      console.log("result => ", result);
       if (result === "github") {
         this.pushToGithub();
       } else {
