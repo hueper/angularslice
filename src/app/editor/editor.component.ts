@@ -28,9 +28,11 @@ export class EditorComponent {
   currentFolder: Folder;
 
   githubAuth() {
-    const authUrl = 'https://github.com/login/oauth/authorize?client_id=ac28f4f2805e50fcdde3';
+    const authUrl = 'https://github.com/login/oauth/authorize?client_id=e57db1300ee2cb4462bf';
     const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=400');
-
+    _oauthWindow.addEventListener('close', (event) => {
+      console.log("Closed!==================> ");
+    });
     const _oauthInterval = window.setInterval(() => {
       if (_oauthWindow.closed) {
         window.clearInterval(_oauthInterval);
