@@ -87120,7 +87120,7 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><div class=\"flexContainer\"><div class=\"row h-center\"><div (click)=\"noop(&quot;github&quot;, $event)\" [ngClass]=\"{active: activeSelect==&quot;github&quot;}\" class=\"choose\"><div class=\"fa fa-github\"></div>Github</div><div (click)=\"noop(&quot;bitbucket&quot;, $event)\" [ngClass]=\"{active: activeSelect==&quot;bitbucket&quot;}\" class=\"choose\"><div class=\"fa fa-bitbucket\"></div>Bitbucket</div><div (click)=\"noop(&quot;zip&quot;, $event)\" [ngClass]=\"{active: activeSelect==&quot;zip&quot;}\" class=\"choose\"><div class=\"fa fa-file-archive-o\"></div>Zipped folder</div></div></div></div>");;return buf.join("");
+	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><div class=\"flexContainer\"><div class=\"row h-center\"><div (click)=\"githubAuth()\" [ngClass]=\"{active: activeSelect==&quot;github&quot;}\" class=\"choose\"><div class=\"fa fa-github\"></div>Github</div><div (click)=\"noop(&quot;bitbucket&quot;, $event)\" [ngClass]=\"{active: activeSelect==&quot;bitbucket&quot;}\" class=\"choose\"><div class=\"fa fa-bitbucket\"></div>Bitbucket</div><div (click)=\"noop(&quot;zip&quot;, $event)\" [ngClass]=\"{active: activeSelect==&quot;zip&quot;}\" class=\"choose\"><div class=\"fa fa-file-archive-o\"></div>Zipped folder</div></div></div></div>");;return buf.join("");
 	}
 
 /***/ },
