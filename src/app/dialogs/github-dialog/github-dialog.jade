@@ -4,8 +4,7 @@
     .flexContainer
       .row
         .column
-          md-input([(ngModel)]='componentData.repoName', required, placeholder="Add name for the component")
-          pre {{ componentData.repoName | json }}
+          md-input([(ngModel)]='componentData.repoName', required, placeholder="Add name for the repository")
       .row.row--rightAligned
         .md-button-wrapper
           button(md-raised-button, color="secondary", type="button", (click)='close()') Cancel

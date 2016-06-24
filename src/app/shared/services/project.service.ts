@@ -13,9 +13,9 @@ export class ProjectService {
   generate(repoName: string) {
     let params = {
       files: this.folderService.dataSource.getValue(),
-      repository_name: repoName
+      repositoryName: repoName
     }
 
-    return this.httpService.post('/generate', repoName).map(res => res.json());
+    return this.httpService.post('/generate', params).map(res => res.json());
   }
 }

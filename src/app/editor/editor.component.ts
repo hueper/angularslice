@@ -30,31 +30,10 @@ export class EditorComponent {
   sub: any;
   currentFolder: Folder;
 
-  githubAuth() {
- 
-
-    // const _oauthInterval = window.setInterval(() => {
-    //   if (_oauthWindow.closed) {
-    //     window.clearInterval(_oauthInterval);
-    //     // Poll
-    //     console.log('POLLNG');
-    //     this.userService.pollUser().subscribe((res) => {
-    //       if (res.data.oauthData) {
-    //         Humane.log(`Awesome! See you next time!`);
-    //         // TODO: show the Dialog
-    //       } else {
-    //         Humane.log(``);
-    //       }
-    //       console.log('POLLNG', res);
-    //     });
-    //   }
-    // }, 1000);
-  }
-
   pushToGithub() {
     this.dialogService.openGithubDialog().then((res) => {
-      console.log(res);
       this.projectService.generate(res).subscribe((res: any) => {
+        console.log("res => ", res);
         if (res.success) {
           Humane.log('Awesome');
         } else {
@@ -67,9 +46,15 @@ export class EditorComponent {
   }
 
   export() {
-    this.dialogService.openExportDialog().then(res => {
-      console.log(res);
-      this.githubAuth();
+    this.dialogService.openExportDialog().then(result => {
+
+      if (result === "github") {
+        this.pushToGithub();
+      } else {
+        alert("WUUUUUUUUT????");
+      }
+    }).catch(err => {
+      console.log(err);
     });
   }
 
