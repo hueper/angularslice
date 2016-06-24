@@ -17,6 +17,7 @@ $footerBg: #263238;
 .subtitle {
   margin-top: -10px;
   color: lightgray;
+  padding: 5px 5px 0 5px;
 }
 
 .subscribe-upper-frame {
@@ -153,6 +154,8 @@ span.italic {
   }
   .rocket-image {
     margin-top: 0px;
+    margin: auto;
+    display: block;
   }
 
   .footer {
