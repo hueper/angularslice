@@ -87006,6 +87006,7 @@ webpackJsonp([0],[
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
+	var _ = __webpack_require__(647);
 	var core_1 = __webpack_require__(5);
 	var angular2_modal_1 = __webpack_require__(690);
 	var button_1 = __webpack_require__(691);
@@ -87025,25 +87026,25 @@ webpackJsonp([0],[
 	        this.dialog.close(type);
 	    };
 	    ExportDialogComponent.prototype.githubAuth = function () {
+	        var _this = this;
 	        this.loading = true;
 	        var authUrl = 'http://192.168.1.102:3000/auth/github';
 	        var _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600');
-	        // _oauthWindow.addEventListener('unload', () => {
-	        //   this.userService.pollUser().subscribe(res => {
-	        //     let user = res.data as User;
-	        //     let accessToken = _.get(user, 'oauthData.github.accessToken', false);
-	        //
-	        //     if (accessToken) {
-	        //       this.dialog.close({ success: true, type: 'github' });
-	        //       //TODO: the user authentication was successfull, we can do whatever we want ;)
-	        //     } else {
-	        //       console.log("accessToken => ", user);
-	        //       Humane.log(`Sorry, we couldn't authenticate you. Please try again.`, { addnCls: 'humane-error' });
-	        //
-	        //     }
-	        //   });
-	        //   _oauthWindow.removeEventListener('unload');
-	        // });
+	        _oauthWindow.addEventListener('unload', function () {
+	            _this.userService.pollUser().subscribe(function (res) {
+	                var user = res.data;
+	                var accessToken = _.get(user, 'oauthData.github.accessToken', false);
+	                if (accessToken) {
+	                    _this.dialog.close({ success: true, type: 'github' });
+	                }
+	                else {
+	                    _this.loading = false;
+	                    console.log("accessToken => ", user);
+	                    Humane.log("Sorry, we couldn't authenticate you. Please try again.", { addnCls: 'humane-error' });
+	                }
+	            });
+	            _oauthWindow.removeEventListener('unload');
+	        });
 	    };
 	    ExportDialogComponent.prototype.close = function () {
 	        this.dialog.dismiss();
