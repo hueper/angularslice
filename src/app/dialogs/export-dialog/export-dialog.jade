@@ -1,9 +1,10 @@
 .dialogBackground( (click)='close()' )
 .dialog
-  .loading([hidden]='!loading')
-    .content
-      md-progress-circle(mode='indeterminate')
-      | Loading, please wait!
+  .loadingContainer([hidden]='!loading')
+    .loading
+      .content
+        md-progress-circle(mode='indeterminate')
+        | Loading, please wait!
   .flexContainer
     .row.h-center
       .choose((click)='githubAuth()', [ngClass]='{active: activeSelect=="github"}')
