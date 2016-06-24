@@ -30,9 +30,9 @@ export class BaseService<T extends BaseModel>{
       if (storedData) {
         // Instantiate the elements
         storedData = plainToConstructorArray(ClassT, storedData);
-        console.log(storedData);
+        // console.log(storedData);
         this.dataSource.next(storedData);
-        console.log('READ', this.entityType, storedData);
+        // console.log('READ', this.entityType, storedData);
       }
 
       // Save data to localStorage on changes

@@ -3,7 +3,9 @@ toolbar
     a.angular(href='./')
       img(src='{{ logo }}')
       | SLICE
-    a((click)='githubAuth()') Push to Github
+    .export((click)='export()')
+      i.fa.fa-floppy-o
+      | Export project
 
   //-.c-toolbar
     .left

@@ -24,6 +24,19 @@ board {
   overflow: auto;
 }
 
+.export {
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  height: 30px;
+  margin-top: -15px;
+  & .fa {
+    margin: 0 10px;
+  }
+}
+
 .c-header, .c-toolbar {
   padding: 0 25px;
   display: flex;

@@ -4,40 +4,52 @@ import {
   ComponentDialogComponent,
   ConfirmDialogComponent,
   ConfirmDialogData,
-  GithubDialogComponent
+  GithubDialogComponent,
+  ExportDialogComponent
 } from '../../dialogs';
 
 @Injectable()
 export class DialogService {
 
-  constructor(private modal:Modal) {
+  constructor(private modal: Modal) {
 
   }
 
   openGithubDialog() {
     const data = new BSModalContext();
     return this.modal
-      .open(GithubDialogComponent, data)
-      .then(dialog => {
-        return dialog.result;
+               .open(GithubDialogComponent, data)
+               .then(dialog => {
+                 return dialog.result;
+               });
+  }
+
+  openExportDialog() {
+    const data = new BSModalContext();
+    return this.modal
+               .open(ExportDialogComponent, data)
+               .then(dialog => {
+                 return dialog.result;
+               }).catch(err => {
+        console.log(err)
       });
   }
 
   openCreateComponentDialog() {
     const data = new BSModalContext();
     return this.modal
-      .open(ComponentDialogComponent, data)
-      .then(dialog => {
-        return dialog.result;
-      });
+               .open(ComponentDialogComponent, data)
+               .then(dialog => {
+                 return dialog.result;
+               });
   }
 
   openConfirmDialog() {
     const data = new ConfirmDialogData();
     return this.modal
-      .open(ConfirmDialogComponent, data)
-      .then(dialog => {
-        return dialog.result;
-      })
+               .open(ConfirmDialogComponent, data)
+               .then(dialog => {
+                 return dialog.result;
+               })
   }
 }

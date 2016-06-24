@@ -14,7 +14,7 @@ import { Folder } from "../shared/models";
 @Component({
   selector: 'editor',
   template: require('./editor.component.jade')(),
-  styles: [ require('./editor.component.scss') ],
+  styles: [require('./editor.component.scss')],
   directives: [
     BoardComponent,
     SidebarComponent,
@@ -62,46 +62,51 @@ export class EditorComponent {
           Humane.log('Fuck me');
         }
       });
+    }).catch(err=> {
+      
     });
   }
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private dialogService: DialogService,
-    private folderService: FolderService,
-    private imageService: ImageService,
-    private projectService: ProjectService,
-    private userService: UserService
-  ) {
+  export() {
+    this.dialogService.openExportDialog().then(res => {
+      console.log(res);
+      this.pushToGithub();
+    });
+  }
+
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private dialogService: DialogService,
+              private folderService: FolderService,
+              private imageService: ImageService,
+              private projectService: ProjectService,
+              private userService: UserService) {
 
     this.sub = this.router.routerState.queryParams.take(1)
-      .subscribe(params => {
-        console.log('ROUTING', params);
+                   .subscribe(params => {
+                     if (params['folderId']) {
+                       this.folderService.setCurrentById(params['folderId']);
+                     }
 
-        if (params['folderId']) {
-          this.folderService.setCurrentById(params['folderId']);
-        }
-
-        if (params['imageId']) {
-          this.imageService.setCurrentById(params['imageId']);
-        }
-      });
+                     if (params['imageId']) {
+                       this.imageService.setCurrentById(params['imageId']);
+                     }
+                   });
 
     Observable.combineLatest(this.folderService.currentSource, this.imageService.currentSource)
-      .subscribe((combinedData) => {
-        let currentFolder, currentImage;
-        [currentFolder, currentImage] = combinedData;
+              .subscribe((combinedData) => {
+                let currentFolder, currentImage;
+                [currentFolder, currentImage] = combinedData;
 
-        this.currentFolder = currentFolder;
+                this.currentFolder = currentFolder;
 
-        // TODO: This part is not working yet, with @angular/router@3.0.0.alpha
-        if(currentFolder && currentImage) {
-          // this.router.navigate([], { queryParams: { folderId: currentFolder.id, imageId: currentImage.id } });
-        }
+                // TODO: This part is not working yet, with @angular/router@3.0.0.alpha
+                if (currentFolder && currentImage) {
+                  // this.router.navigate([], { queryParams: { folderId: currentFolder.id, imageId: currentImage.id } });
+                }
 
 
-      });
+              });
 
 
     this.logo = require('../shared/assets/img/angular.svg');

@@ -1,0 +1,13 @@
+.dialogBackground( (click)='close()' )
+.dialog
+  .flexContainer
+    .row.h-center
+      .choose((click)='noop("github", $event)', [ngClass]='{active: activeSelect=="github"}')
+        .fa.fa-github
+        | Github
+      .choose((click)='noop("bitbucket", $event)', [ngClass]='{active: activeSelect=="bitbucket"}')
+        .fa.fa-bitbucket
+        | Bitbucket
+      .choose((click)='noop("zip", $event)', [ngClass]='{active: activeSelect=="zip"}')
+        .fa.fa-file-archive-o
+        | Zipped folder

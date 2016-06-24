@@ -11,7 +11,7 @@ export class HttpService {
 
   constructor(private http: Http) {
     if(__DEV__) {
-      this.baseUrl = 'http://192.168.1.103:3000/api';
+      this.baseUrl = 'http://192.168.1.102:3000/api';
     } else {
       this.baseUrl = '/api';
     }
