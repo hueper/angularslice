@@ -30,9 +30,10 @@ export class DialogService {
                .open(ExportDialogComponent, data)
                .then(dialog => {
                  return dialog.result;
-               }).catch(err => {
-        console.log(err)
-      });
+               })
+               .catch(err => {
+                 console.log(err)
+               });
   }
 
   openCreateComponentDialog() {

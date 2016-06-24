@@ -7,27 +7,25 @@ import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
 
 @Component({
   selector: 'area',
-  styles: [ require('./area.component.scss') ],
+  styles: [require('./area.component.scss')],
   template: require('./area.component.jade')(),
   directives: [MD_ICON_DIRECTIVES]
 })
 export class AreaComponent {
-
+  
   @Input() areaData: Area;
   @Input() isHovered: boolean;
-
-  constructor(
-    private folderService: FolderService,
-    private dialogService: DialogService,
-    private areaService: AreaService
-  ) {
-
+  
+  constructor(private folderService: FolderService,
+              private dialogService: DialogService,
+              private areaService: AreaService) {
+    
   }
-
+  
   goToComponent() {
     this.folderService.setCurrentById(this.areaData.folderId);
   }
-
+  
   deleteArea() {
     // Confirm Dialog
     this.dialogService.openConfirmDialog().then((result) => {
@@ -37,7 +35,7 @@ export class AreaComponent {
       }
     });
   }
-
+  
   getRectangle() {
     return {
       left: `${this.areaData.left}px`,
@@ -46,5 +44,5 @@ export class AreaComponent {
       height: `${this.areaData.getHeight()}px`
     };
   }
-
+  
 }
