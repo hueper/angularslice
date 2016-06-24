@@ -11,9 +11,9 @@ webpackJsonp([0],[
 	var platform_browser_1 = __webpack_require__(377);
 	var angulartics2_1 = __webpack_require__(389);
 	var app_routes_ts_1 = __webpack_require__(399);
-	var app_component_ts_1 = __webpack_require__(744);
+	var app_component_ts_1 = __webpack_require__(745);
 	var services_1 = __webpack_require__(649);
-	__webpack_require__(747);
+	__webpack_require__(748);
 	platform_browser_dynamic_1.bootstrap(app_component_ts_1.AppComponent, [
 	    http_1.HTTP_PROVIDERS,
 	    angulartics2_1.Angulartics2,
@@ -56383,8 +56383,8 @@ webpackJsonp([0],[
 	var rxjs_1 = __webpack_require__(442);
 	var Humane = __webpack_require__(644);
 	var board_1 = __webpack_require__(645);
-	var sidebar_1 = __webpack_require__(729);
-	var toolbar_1 = __webpack_require__(737);
+	var sidebar_1 = __webpack_require__(730);
+	var toolbar_1 = __webpack_require__(738);
 	var services_1 = __webpack_require__(649);
 	var EditorComponent = (function () {
 	    function EditorComponent(router, route, dialogService, folderService, imageService, projectService, userService) {
@@ -56414,7 +56414,7 @@ webpackJsonp([0],[
 	            if (currentFolder && currentImage) {
 	            }
 	        });
-	        this.logo = __webpack_require__(741);
+	        this.logo = __webpack_require__(742);
 	    }
 	    EditorComponent.prototype.githubAuth = function () {
 	        // const _oauthInterval = window.setInterval(() => {
@@ -56459,8 +56459,8 @@ webpackJsonp([0],[
 	    EditorComponent = __decorate([
 	        core_1.Component({
 	            selector: 'editor',
-	            template: __webpack_require__(742)(),
-	            styles: [__webpack_require__(743)],
+	            template: __webpack_require__(743)(),
+	            styles: [__webpack_require__(744)],
 	            directives: [
 	                board_1.BoardComponent,
 	                sidebar_1.SidebarComponent,
@@ -66221,10 +66221,10 @@ webpackJsonp([0],[
 	var angulartics2_google_analytics_1 = __webpack_require__(648);
 	var Humane = __webpack_require__(644);
 	var services_1 = __webpack_require__(649);
-	var image_bar_1 = __webpack_require__(715);
+	var image_bar_1 = __webpack_require__(716);
 	var models_1 = __webpack_require__(661);
-	var area_1 = __webpack_require__(723);
-	var sliced_image_1 = __webpack_require__(717);
+	var area_1 = __webpack_require__(724);
+	var sliced_image_1 = __webpack_require__(718);
 	var BoardComponent = (function () {
 	    function BoardComponent(http, ga, areaService, rawImageService, imageService, folderService, renderer, dialogService) {
 	        // TODO: put the request into a separate service
@@ -66456,8 +66456,8 @@ webpackJsonp([0],[
 	    BoardComponent = __decorate([
 	        core_1.Component({
 	            selector: 'board',
-	            styles: [__webpack_require__(727)],
-	            template: __webpack_require__(728)(),
+	            styles: [__webpack_require__(728)],
+	            template: __webpack_require__(729)(),
 	            directives: [
 	                area_1.AreaComponent,
 	                image_bar_1.ImageBarComponent,
@@ -83037,7 +83037,7 @@ webpackJsonp([0],[
 	__export(__webpack_require__(676));
 	__export(__webpack_require__(675));
 	__export(__webpack_require__(711));
-	__export(__webpack_require__(714));
+	__export(__webpack_require__(715));
 
 
 /***/ },
@@ -87006,7 +87006,6 @@ webpackJsonp([0],[
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var _ = __webpack_require__(647);
 	var core_1 = __webpack_require__(5);
 	var angular2_modal_1 = __webpack_require__(690);
 	var button_1 = __webpack_require__(691);
@@ -87015,32 +87014,36 @@ webpackJsonp([0],[
 	var radio_1 = __webpack_require__(695);
 	var Humane = __webpack_require__(644);
 	var user_service_1 = __webpack_require__(711);
+	var progress_circle_1 = __webpack_require__(712);
 	var ExportDialogComponent = (function () {
 	    function ExportDialogComponent(dialog, userService) {
 	        this.dialog = dialog;
 	        this.userService = userService;
+	        this.loading = false;
 	    }
 	    ExportDialogComponent.prototype.noop = function (type, $event) {
 	        this.dialog.close(type);
 	    };
 	    ExportDialogComponent.prototype.githubAuth = function () {
-	        var _this = this;
+	        this.loading = true;
 	        var authUrl = 'http://192.168.1.102:3000/auth/github';
 	        var _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600');
-	        _oauthWindow.addEventListener('unload', function () {
-	            _this.userService.pollUser().subscribe(function (res) {
-	                var user = res.data;
-	                var accessToken = _.get(user, 'oauthData.github.accessToken', false);
-	                if (accessToken) {
-	                    _this.dialog.close({ success: true, type: 'github' });
-	                }
-	                else {
-	                    console.log("accessToken => ", user);
-	                    Humane.log("Sorry, we couldn't authenticate you. Please try again.", { addnCls: 'humane-error' });
-	                }
-	            });
-	            _oauthWindow.removeEventListener('unload');
-	        });
+	        // _oauthWindow.addEventListener('unload', () => {
+	        //   this.userService.pollUser().subscribe(res => {
+	        //     let user = res.data as User;
+	        //     let accessToken = _.get(user, 'oauthData.github.accessToken', false);
+	        //
+	        //     if (accessToken) {
+	        //       this.dialog.close({ success: true, type: 'github' });
+	        //       //TODO: the user authentication was successfull, we can do whatever we want ;)
+	        //     } else {
+	        //       console.log("accessToken => ", user);
+	        //       Humane.log(`Sorry, we couldn't authenticate you. Please try again.`, { addnCls: 'humane-error' });
+	        //
+	        //     }
+	        //   });
+	        //   _oauthWindow.removeEventListener('unload');
+	        // });
 	    };
 	    ExportDialogComponent.prototype.close = function () {
 	        this.dialog.dismiss();
@@ -87048,14 +87051,15 @@ webpackJsonp([0],[
 	    ExportDialogComponent = __decorate([
 	        core_1.Component({
 	            selector: 'export-dialog',
-	            template: __webpack_require__(712)(),
-	            styles: [__webpack_require__(713)],
+	            template: __webpack_require__(713)(),
+	            styles: [__webpack_require__(714)],
 	            directives: [
 	                button_1.MdButton,
 	                input_1.MdInput,
 	                checkbox_1.MdCheckbox,
 	                radio_1.MdRadioGroup,
 	                radio_1.MdRadioButton,
+	                progress_circle_1.MD_PROGRESS_CIRCLE_DIRECTIVES
 	            ],
 	            providers: [
 	                radio_1.MdRadioDispatcher,
@@ -87113,6 +87117,294 @@ webpackJsonp([0],[
 /* 712 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(5);
+	// TODO(josephperrott): Benchpress tests.
+	/** A single degree in radians. */
+	var DEGREE_IN_RADIANS = Math.PI / 180;
+	/** Duration of the indeterminate animation. */
+	var DURATION_INDETERMINATE = 667;
+	/** Duration of the indeterminate animation. */
+	var DURATION_DETERMINATE = 225;
+	/** Start animation value of the indeterminate animation */
+	var startIndeterminate = 3;
+	/** End animation value of the indeterminate animation */
+	var endIndeterminate = 80;
+	/**
+	 * <md-progress-circle> component.
+	 */
+	var MdProgressCircle = (function () {
+	    function MdProgressCircle(_changeDetectorRef) {
+	        this._changeDetectorRef = _changeDetectorRef;
+	        /** The id of the last requested animation. */
+	        this._lastAnimationId = 0;
+	        /**
+	         * Value of the progress circle.
+	         *
+	         * Input:number, defaults to 0.
+	         * _value is bound to the host as the attribute aria-valuenow.
+	         */
+	        this._value = 0;
+	        this._mode = 'determinate';
+	    }
+	    Object.defineProperty(MdProgressCircle.prototype, "currentPath", {
+	        get: function () {
+	            return this._currentPath;
+	        },
+	        set: function (path) {
+	            this._currentPath = path;
+	            // Mark for check as our ChangeDetectionStrategy is OnPush, when changes come from within the
+	            // component, change detection must be called for.
+	            this._changeDetectorRef.markForCheck();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MdProgressCircle.prototype, "value", {
+	        get: function () {
+	            return this._value;
+	        },
+	        set: function (v) {
+	            if (v) {
+	                var newValue = clamp(v);
+	                this._animateCircle(this.value, newValue, linearEase, DURATION_DETERMINATE, 0);
+	                this._value = newValue;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MdProgressCircle.prototype, "mode", {
+	        /**
+	         * Mode of the progress circle
+	         *
+	         * Input must be one of the values from ProgressMode, defaults to 'determinate'.
+	         * mode is bound to the host as the attribute host.
+	         */
+	        get: function () {
+	            return this._mode;
+	        },
+	        set: function (m) {
+	            if (m == 'indeterminate') {
+	                this._startIndeterminateAnimation();
+	            }
+	            else {
+	                this._cleanupIndeterminateAnimation();
+	            }
+	            this._mode = m;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * Animates the circle from one percentage value to another.
+	     *
+	     * @param animateFrom The percentage of the circle filled starting the animation.
+	     * @param animateTo The percentage of the circle filled ending the animation.
+	     * @param ease The easing function to manage the pace of change in the animation.
+	     * @param duration The length of time to show the animation, in milliseconds.
+	     * @param rotation The starting angle of the circle fill, with 0° represented at the top center
+	     *    of the circle.
+	     */
+	    MdProgressCircle.prototype._animateCircle = function (animateFrom, animateTo, ease, duration, rotation) {
+	        var _this = this;
+	        var id = ++this._lastAnimationId;
+	        var startTime = now();
+	        var changeInValue = animateTo - animateFrom;
+	        // No need to animate it if the values are the same
+	        if (animateTo === animateFrom) {
+	            this.currentPath = getSvgArc(animateTo, rotation);
+	        }
+	        else {
+	            var animation_1 = function (currentTime) {
+	                var elapsedTime = Math.max(0, Math.min((currentTime || now()) - startTime, duration));
+	                _this.currentPath = getSvgArc(ease(elapsedTime, animateFrom, changeInValue, duration), rotation);
+	                // Prevent overlapping animations by checking if a new animation has been called for and
+	                // if the animation has lasted long than the animation duration.
+	                if (id === _this._lastAnimationId && elapsedTime < duration) {
+	                    requestAnimationFrame(animation_1);
+	                }
+	            };
+	            requestAnimationFrame(animation_1);
+	        }
+	    };
+	    /**
+	     * Starts the indeterminate animation interval, if it is not already running.
+	     */
+	    MdProgressCircle.prototype._startIndeterminateAnimation = function () {
+	        var _this = this;
+	        var rotationStartPoint = 0;
+	        var start = startIndeterminate;
+	        var end = endIndeterminate;
+	        var duration = DURATION_INDETERMINATE;
+	        var animate = function () {
+	            _this._animateCircle(start, end, materialEase, duration, rotationStartPoint);
+	            // Prevent rotation from reaching Number.MAX_SAFE_INTEGER.
+	            rotationStartPoint = (rotationStartPoint + end) % 100;
+	            var temp = start;
+	            start = -end;
+	            end = -temp;
+	        };
+	        if (!this._interdeterminateInterval) {
+	            this._interdeterminateInterval = setInterval(animate, duration + 50, 0, false);
+	            animate();
+	        }
+	    };
+	    /**
+	     * Removes interval, ending the animation.
+	     */
+	    MdProgressCircle.prototype._cleanupIndeterminateAnimation = function () {
+	        if (this._interdeterminateInterval) {
+	            clearInterval(this._interdeterminateInterval);
+	            this._interdeterminateInterval = null;
+	        }
+	    };
+	    __decorate([
+	        core_1.Input(),
+	        core_1.HostBinding('attr.aria-valuenow'), 
+	        __metadata('design:type', Object)
+	    ], MdProgressCircle.prototype, "value", null);
+	    __decorate([
+	        core_1.HostBinding('attr.mode'),
+	        core_1.Input(), 
+	        __metadata('design:type', Object)
+	    ], MdProgressCircle.prototype, "mode", null);
+	    MdProgressCircle = __decorate([
+	        core_1.Component({
+	            moduleId: module.id,
+	            selector: 'md-progress-circle',
+	            host: {
+	                'role': 'progressbar',
+	                'aria-valuemin': '0',
+	                'aria-valuemax': '100',
+	            },
+	            template: "<!-- preserveAspectRatio of xMidYMid meet as the center of the viewport is the circle's center.  The center of the circle with remain at the center of the md-progress-circle element containing the SVG. --> <svg viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid meet\"> <path [attr.d]=\"currentPath\"></path> </svg> ",
+	            styles: ["/* Animation Durations */ /** Component sizing */ :host { display: block; /** Height and width are provided for md-progress-circle to act as a default. The height and width are expected to be overwritten by application css. */ height: 100px; width: 100px; /** SVG's viewBox is defined as 0 0 100 100, this means that all SVG children will placed based on a 100px by 100px box.  Additionally all SVG sizes and locations are in reference to this viewBox. */ } :host svg { height: 100%; width: 100%; -webkit-transform-origin: center; transform-origin: center; } :host path { fill: transparent; stroke: #00897b; /** Stroke width of 10px defines stroke as 10% of the viewBox */ stroke-width: 10px; } :host[color=\"accent\"] path { stroke: #8e24aa; } :host[color=\"warn\"] path { stroke: #e53935; } :host[mode=\"indeterminate\"] { -webkit-animation-duration: 5.25s, 2.8875s; animation-duration: 5.25s, 2.8875s; -webkit-animation-name: md-progress-circle-sporadic-rotate, md-progress-circle-linear-rotate; animation-name: md-progress-circle-sporadic-rotate, md-progress-circle-linear-rotate; -webkit-animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1), linear; animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1), linear; -webkit-animation-iteration-count: infinite; animation-iteration-count: infinite; -webkit-transition: none; transition: none; } /** Animations for indeterminate mode */ @-webkit-keyframes md-progress-circle-linear-rotate { 0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } } @keyframes md-progress-circle-linear-rotate { 0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } } @-webkit-keyframes md-progress-circle-sporadic-rotate { 12.5% { -webkit-transform: rotate(135deg); transform: rotate(135deg); } 25% { -webkit-transform: rotate(270deg); transform: rotate(270deg); } 37.5% { -webkit-transform: rotate(405deg); transform: rotate(405deg); } 50% { -webkit-transform: rotate(540deg); transform: rotate(540deg); } 62.5% { -webkit-transform: rotate(675deg); transform: rotate(675deg); } 75% { -webkit-transform: rotate(810deg); transform: rotate(810deg); } 87.5% { -webkit-transform: rotate(945deg); transform: rotate(945deg); } 100% { -webkit-transform: rotate(1080deg); transform: rotate(1080deg); } } @keyframes md-progress-circle-sporadic-rotate { 12.5% { -webkit-transform: rotate(135deg); transform: rotate(135deg); } 25% { -webkit-transform: rotate(270deg); transform: rotate(270deg); } 37.5% { -webkit-transform: rotate(405deg); transform: rotate(405deg); } 50% { -webkit-transform: rotate(540deg); transform: rotate(540deg); } 62.5% { -webkit-transform: rotate(675deg); transform: rotate(675deg); } 75% { -webkit-transform: rotate(810deg); transform: rotate(810deg); } 87.5% { -webkit-transform: rotate(945deg); transform: rotate(945deg); } 100% { -webkit-transform: rotate(1080deg); transform: rotate(1080deg); } } "],
+	            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+	        }), 
+	        __metadata('design:paramtypes', [core_1.ChangeDetectorRef])
+	    ], MdProgressCircle);
+	    return MdProgressCircle;
+	}());
+	exports.MdProgressCircle = MdProgressCircle;
+	/**
+	 * <md-spinner> component.
+	 *
+	 * This is a component definition to be used as a convenience reference to create an
+	 * indeterminate <md-progress-circle> instance.
+	 */
+	var MdSpinner = (function (_super) {
+	    __extends(MdSpinner, _super);
+	    function MdSpinner(changeDetectorRef) {
+	        _super.call(this, changeDetectorRef);
+	        this.mode = 'indeterminate';
+	    }
+	    MdSpinner = __decorate([
+	        core_1.Component({
+	            moduleId: module.id,
+	            selector: 'md-spinner',
+	            host: {
+	                'role': 'progressbar',
+	            },
+	            template: "<!-- preserveAspectRatio of xMidYMid meet as the center of the viewport is the circle's center.  The center of the circle with remain at the center of the md-progress-circle element containing the SVG. --> <svg viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid meet\"> <path [attr.d]=\"currentPath\"></path> </svg> ",
+	            styles: ["/* Animation Durations */ /** Component sizing */ :host { display: block; /** Height and width are provided for md-progress-circle to act as a default. The height and width are expected to be overwritten by application css. */ height: 100px; width: 100px; /** SVG's viewBox is defined as 0 0 100 100, this means that all SVG children will placed based on a 100px by 100px box.  Additionally all SVG sizes and locations are in reference to this viewBox. */ } :host svg { height: 100%; width: 100%; -webkit-transform-origin: center; transform-origin: center; } :host path { fill: transparent; stroke: #00897b; /** Stroke width of 10px defines stroke as 10% of the viewBox */ stroke-width: 10px; } :host[color=\"accent\"] path { stroke: #8e24aa; } :host[color=\"warn\"] path { stroke: #e53935; } :host[mode=\"indeterminate\"] { -webkit-animation-duration: 5.25s, 2.8875s; animation-duration: 5.25s, 2.8875s; -webkit-animation-name: md-progress-circle-sporadic-rotate, md-progress-circle-linear-rotate; animation-name: md-progress-circle-sporadic-rotate, md-progress-circle-linear-rotate; -webkit-animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1), linear; animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1), linear; -webkit-animation-iteration-count: infinite; animation-iteration-count: infinite; -webkit-transition: none; transition: none; } /** Animations for indeterminate mode */ @-webkit-keyframes md-progress-circle-linear-rotate { 0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } } @keyframes md-progress-circle-linear-rotate { 0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } } @-webkit-keyframes md-progress-circle-sporadic-rotate { 12.5% { -webkit-transform: rotate(135deg); transform: rotate(135deg); } 25% { -webkit-transform: rotate(270deg); transform: rotate(270deg); } 37.5% { -webkit-transform: rotate(405deg); transform: rotate(405deg); } 50% { -webkit-transform: rotate(540deg); transform: rotate(540deg); } 62.5% { -webkit-transform: rotate(675deg); transform: rotate(675deg); } 75% { -webkit-transform: rotate(810deg); transform: rotate(810deg); } 87.5% { -webkit-transform: rotate(945deg); transform: rotate(945deg); } 100% { -webkit-transform: rotate(1080deg); transform: rotate(1080deg); } } @keyframes md-progress-circle-sporadic-rotate { 12.5% { -webkit-transform: rotate(135deg); transform: rotate(135deg); } 25% { -webkit-transform: rotate(270deg); transform: rotate(270deg); } 37.5% { -webkit-transform: rotate(405deg); transform: rotate(405deg); } 50% { -webkit-transform: rotate(540deg); transform: rotate(540deg); } 62.5% { -webkit-transform: rotate(675deg); transform: rotate(675deg); } 75% { -webkit-transform: rotate(810deg); transform: rotate(810deg); } 87.5% { -webkit-transform: rotate(945deg); transform: rotate(945deg); } 100% { -webkit-transform: rotate(1080deg); transform: rotate(1080deg); } } "],
+	        }), 
+	        __metadata('design:paramtypes', [core_1.ChangeDetectorRef])
+	    ], MdSpinner);
+	    return MdSpinner;
+	}(MdProgressCircle));
+	exports.MdSpinner = MdSpinner;
+	/**
+	 * Module functions.
+	 */
+	/** Clamps a value to be between 0 and 100. */
+	function clamp(v) {
+	    return Math.max(0, Math.min(100, v));
+	}
+	/**
+	 * Returns the current timestamp either based on the performance global or a date object.
+	 */
+	function now() {
+	    if (typeof performance !== 'undefined') {
+	        return performance.now();
+	    }
+	    return Date.now();
+	}
+	/**
+	 * Converts Polar coordinates to Cartesian.
+	 */
+	function polarToCartesian(radius, pathRadius, angleInDegrees) {
+	    var angleInRadians = (angleInDegrees - 90) * DEGREE_IN_RADIANS;
+	    return (radius + (pathRadius * Math.cos(angleInRadians))) +
+	        ',' + (radius + (pathRadius * Math.sin(angleInRadians)));
+	}
+	/**
+	 * Easing function for linear animation.
+	 */
+	function linearEase(currentTime, startValue, changeInValue, duration) {
+	    return changeInValue * currentTime / duration + startValue;
+	}
+	/**
+	 * Easing function to match material design indeterminate animation.
+	 */
+	function materialEase(currentTime, startValue, changeInValue, duration) {
+	    var time = currentTime / duration;
+	    var timeCubed = Math.pow(time, 3);
+	    var timeQuad = Math.pow(time, 4);
+	    var timeQuint = Math.pow(time, 5);
+	    return startValue + changeInValue * ((6 * timeQuint) + (-15 * timeQuad) + (10 * timeCubed));
+	}
+	/**
+	 * Determines the path value to define the arc.  Converting percentage values to to polar
+	 * coordinates on the circle, and then to cartesian coordinates in the viewport.
+	 *
+	 * @param currentValue The current percentage value of the progress circle, the percentage of the
+	 *    circle to fill.
+	 * @param rotation The starting point of the circle with 0 being the 0 degree point.
+	 * @return A string for an SVG path representing a circle filled from the starting point to the
+	 *    percentage value provided.
+	 */
+	function getSvgArc(currentValue, rotation) {
+	    // The angle can't be exactly 360, because the arc becomes hidden.
+	    var maximumAngle = 359.99 / 100;
+	    var startPoint = rotation || 0;
+	    var radius = 50;
+	    var pathRadius = 40;
+	    var startAngle = startPoint * maximumAngle;
+	    var endAngle = currentValue * maximumAngle;
+	    var start = polarToCartesian(radius, pathRadius, startAngle);
+	    var end = polarToCartesian(radius, pathRadius, endAngle + startAngle);
+	    var arcSweep = endAngle < 0 ? 0 : 1;
+	    var largeArcFlag;
+	    if (endAngle < 0) {
+	        largeArcFlag = endAngle >= -180 ? 0 : 1;
+	    }
+	    else {
+	        largeArcFlag = endAngle <= 180 ? 0 : 1;
+	    }
+	    return "M" + start + "A" + pathRadius + "," + pathRadius + " 0 " + largeArcFlag + "," + arcSweep + " " + end;
+	}
+	exports.MD_PROGRESS_CIRCLE_DIRECTIVES = [MdProgressCircle, MdSpinner];
+	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/progress-circle/progress-circle.js.map
+
+/***/ },
+/* 713 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var jade = __webpack_require__(698);
 
 	module.exports = function template(locals) {
@@ -87120,17 +87412,17 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><div class=\"flexContainer\"><div class=\"row h-center\"><div (click)=\"githubAuth()\" [ngClass]=\"{active: activeSelect==&quot;github&quot;}\" class=\"choose\"><div class=\"fa fa-github\"></div>Github</div><div (click)=\"noop(&quot;bitbucket&quot;, $event)\" [ngClass]=\"{active: activeSelect==&quot;bitbucket&quot;}\" class=\"choose\"><div class=\"fa fa-bitbucket\"></div>Bitbucket</div><div (click)=\"noop(&quot;zip&quot;, $event)\" [ngClass]=\"{active: activeSelect==&quot;zip&quot;}\" class=\"choose\"><div class=\"fa fa-file-archive-o\"></div>Zipped folder</div></div></div></div>");;return buf.join("");
+	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><div [hidden]=\"!loading\" class=\"loading\"><div class=\"content\"><md-progress-circle mode=\"indeterminate\"></md-progress-circle>Loading, please wait!</div></div><div class=\"flexContainer\"><div class=\"row h-center\"><div (click)=\"githubAuth()\" [ngClass]=\"{active: activeSelect==&quot;github&quot;}\" class=\"choose\"><div class=\"fa fa-github\"></div>Github</div><div (click)=\"noop(&quot;bitbucket&quot;, $event)\" [ngClass]=\"{active: activeSelect==&quot;bitbucket&quot;}\" class=\"choose\"><div class=\"fa fa-bitbucket\"></div>Bitbucket</div><div (click)=\"noop(&quot;zip&quot;, $event)\" [ngClass]=\"{active: activeSelect==&quot;zip&quot;}\" class=\"choose\"><div class=\"fa fa-file-archive-o\"></div>Zipped folder</div></div></div></div>");;return buf.join("");
 	}
 
 /***/ },
-/* 713 */
+/* 714 */
 /***/ function(module, exports) {
 
-	module.exports = ".row.h-center {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n              -ms-grid-row-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n\n.choose {\n  -webkit-transition: 200ms all ease-in-out;\n  transition: 200ms all ease-in-out;\n  cursor: pointer;\n  text-align: center;\n  padding: 15px;\n}\n\n.choose .fa {\n  -webkit-transition: 200ms all ease-in-out;\n  transition: 200ms all ease-in-out;\n  background: white;\n  display: block;\n  margin: 0 10px;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  padding: 15px;\n  border-radius: 50%;\n  height: 100px;\n  width: 100px;\n  text-align: center;\n  font-size: 64px;\n  color: #006064;\n}\n\n.choose:hover {\n  color: #006064;\n}\n\n.choose:hover .fa {\n  background: #006064;\n  color: white;\n}\n\n.choose.disabled,\n.choose.disabled .fa {\n  color: #aaa;\n  cursor: not-allowed;\n}\n\n.choose.disabled:hover {\n  color: #aaa;\n}\n\n.choose.disabled:hover .fa {\n  color: #aaa;\n  background: white;\n}\n\n.choose.active {\n  background: #006064;\n  color: white;\n}\n\n.choose.active .fa {\n  background: white;\n  color: #006064;\n}"
+	module.exports = ".row.h-center {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n              -ms-grid-row-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: #fff;\n  text-align: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  color: black;\n}\n\n.loading .content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.choose {\n  -webkit-transition: 200ms all ease-in-out;\n  transition: 200ms all ease-in-out;\n  cursor: pointer;\n  text-align: center;\n  padding: 15px;\n}\n\n.choose .fa {\n  -webkit-transition: 200ms all ease-in-out;\n  transition: 200ms all ease-in-out;\n  background: white;\n  display: block;\n  margin: 0 10px;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  padding: 15px;\n  border-radius: 50%;\n  height: 100px;\n  width: 100px;\n  text-align: center;\n  font-size: 64px;\n  color: #006064;\n}\n\n.choose:hover {\n  color: #006064;\n}\n\n.choose:hover .fa {\n  background: #006064;\n  color: white;\n}\n\n.choose.disabled,\n.choose.disabled .fa {\n  color: #aaa;\n  cursor: not-allowed;\n}\n\n.choose.disabled:hover {\n  color: #aaa;\n}\n\n.choose.disabled:hover .fa {\n  color: #aaa;\n  background: white;\n}\n\n.choose.active {\n  background: #006064;\n  color: white;\n}\n\n.choose.active .fa {\n  background: white;\n  color: #006064;\n}"
 
 /***/ },
-/* 714 */
+/* 715 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87168,18 +87460,18 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 715 */
+/* 716 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(716));
+	__export(__webpack_require__(717));
 
 
 /***/ },
-/* 716 */
+/* 717 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87196,7 +87488,7 @@ webpackJsonp([0],[
 	var icon_1 = __webpack_require__(346);
 	var _ = __webpack_require__(647);
 	var services_1 = __webpack_require__(649);
-	var sliced_image_1 = __webpack_require__(717);
+	var sliced_image_1 = __webpack_require__(718);
 	var ImageBarComponent = (function () {
 	    function ImageBarComponent(imageService, rawImageService, folderService, el, dialogService) {
 	        var _this = this;
@@ -87291,8 +87583,8 @@ webpackJsonp([0],[
 	    ImageBarComponent = __decorate([
 	        core_1.Component({
 	            selector: 'image-bar',
-	            template: __webpack_require__(721)(),
-	            styles: [__webpack_require__(722)],
+	            template: __webpack_require__(722)(),
+	            styles: [__webpack_require__(723)],
 	            directives: [sliced_image_1.SlicedImageComponent, icon_1.MD_ICON_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [services_1.ImageService, services_1.RawImageService, services_1.FolderService, core_1.ElementRef, services_1.DialogService])
@@ -87303,18 +87595,18 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 717 */
+/* 718 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(718));
+	__export(__webpack_require__(719));
 
 
 /***/ },
-/* 718 */
+/* 719 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87397,8 +87689,8 @@ webpackJsonp([0],[
 	    SlicedImageComponent = __decorate([
 	        core_1.Component({
 	            selector: 'sliced-image',
-	            styles: [__webpack_require__(719)],
-	            template: __webpack_require__(720)()
+	            styles: [__webpack_require__(720)],
+	            template: __webpack_require__(721)()
 	        }), 
 	        __metadata('design:paramtypes', [services_1.ImageService, core_1.ElementRef, core_1.NgZone])
 	    ], SlicedImageComponent);
@@ -87408,13 +87700,13 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 719 */
+/* 720 */
 /***/ function(module, exports) {
 
 	module.exports = ":host {\n  text-align: center;\n}\n\n.sliced-image {\n  position: relative;\n}\n\ncanvas {\n  cursor: crosshair;\n}\n\n.thumbnail {\n  cursor: pointer;\n}"
 
 /***/ },
-/* 720 */
+/* 721 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(698);
@@ -87428,7 +87720,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 721 */
+/* 722 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(698);
@@ -87442,24 +87734,24 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 722 */
+/* 723 */
 /***/ function(module, exports) {
 
 	module.exports = ".image-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  position: relative;\n}\n\n.image-bar .box {\n  margin: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.image-bar .imageBox {\n  margin: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  color: rgba(0, 0, 0, 0.54);\n  font-size: 16px;\n  line-height: normal;\n  cursor: pointer;\n  width: 190px;\n  position: relative;\n  background-color: white;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n}\n\n.image-bar .imageBox.currentImage .text {\n  color: #006064;\n}\n\n.image-bar .imageBox.currentImage .text .deleteIcon {\n  color: rgba(0, 0, 0, 0.54);\n}\n\n.image-bar .imageBox:hover .text {\n  color: #006064;\n}\n\n.image-bar .imageBox:hover .text .deleteIcon {\n  color: rgba(0, 0, 0, 0.54);\n}\n\n.image-bar .imageBox .text {\n  padding: 5px 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n\n.image-bar .imageBox .text .name {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n\n.image-bar .imageBox .text .name:hover .editIcon {\n  visibility: visible;\n  opacity: 0.5;\n}\n\n.image-bar .imageBox .text .name:hover .editIcon:hover {\n  opacity: 1;\n}\n\n.image-bar .imageBox .nameHelper {\n  display: inline-block;\n  vertical-align: middle;\n  width: 119px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  cursor: text;\n  border-bottom: 1px solid transparent;\n  padding-left: 5px;\n}\n\n.image-bar .imageBox .nameHelper:hover {\n  color: rgba(0, 0, 0, 0.3);\n}\n\n.image-bar .imageBox .imageNameInput {\n  border: none;\n  padding: 0;\n  padding-left: 5px;\n  font-family: Lato;\n  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);\n  color: rgba(0, 0, 0, 0.3);\n  font-size: 16px;\n  width: calc(100% - 10px);\n  box-sizing: border-box;\n  height: 24px;\n  margin-right: 5px;\n}\n\n.image-bar .imageBox .editIcon {\n  font-size: 16px;\n  margin-left: 5px;\n  vertical-align: middle;\n  width: auto;\n  height: auto;\n  visibility: hidden;\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n  opacity: 0;\n  -webkit-transition: opacity 230ms;\n  transition: opacity 230ms;\n}\n\n.image-bar .imageBox .deleteIcon {\n  font-size: 20px;\n  cursor: pointer;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 20px;\n          flex: 0 0 20px;\n  width: 20px;\n  height: 20px;\n}\n\n.image-bar .imageBox .deleteIcon:hover {\n  color: #006064 !important;\n}\n\n.image-bar .imageBox .add {\n  line-height: 50%;\n  font-size: 72px;\n  text-align: center;\n  margin-bottom: 5px;\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n}\n\n.image-bar .imageBox.placeholder {\n  padding: 15px;\n  border: 2px dashed rgba(0, 0, 0, 0.2);\n  background-color: transparent;\n  box-shadow: none;\n  color: rgba(0, 0, 0, 0.3);\n  -webkit-transition: border-color 230ms;\n  transition: border-color 230ms;\n}\n\n.image-bar .imageBox.placeholder .text {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  border-top: none;\n}\n\n.image-bar .imageBox.placeholder:hover,\n.image-bar .imageBox.placeholder.hover {\n  border-color: #006064;\n}\n\n.image-bar .imageBox.placeholder:hover .add,\n.image-bar .imageBox.placeholder.hover .add {\n  color: #006064;\n}\n\n.image-bar .thumbnail {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  width: 100%;\n  max-height: calc(100% - 36px);\n}\n\n.image-bar .hiddenInput {\n  display: none;\n}"
 
 /***/ },
-/* 723 */
+/* 724 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(724));
+	__export(__webpack_require__(725));
 
 
 /***/ },
-/* 724 */
+/* 725 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87514,8 +87806,8 @@ webpackJsonp([0],[
 	    AreaComponent = __decorate([
 	        core_1.Component({
 	            selector: 'area',
-	            styles: [__webpack_require__(725)],
-	            template: __webpack_require__(726)(),
+	            styles: [__webpack_require__(726)],
+	            template: __webpack_require__(727)(),
 	            directives: [icon_1.MD_ICON_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [services_1.FolderService, services_1.DialogService, services_1.AreaService])
@@ -87526,13 +87818,13 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 725 */
+/* 726 */
 /***/ function(module, exports) {
 
 	module.exports = ".c-area {\n  position: absolute;\n  border: 1px dotted black;\n  background-color: rgba(202, 202, 202, 0.4);\n  -webkit-transition: background-color 230ms;\n  transition: background-color 230ms;\n  cursor: default;\n}\n\n.c-area .wrapper {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n\n.c-area .delete {\n  position: absolute;\n  top: 2px;\n  right: 2px;\n  color: transparent;\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n  cursor: pointer;\n  font-size: 16px;\n}\n\n.c-area .goToComponent {\n  border: 1px solid white;\n  padding: 2% 3%;\n  text-align: center;\n  color: white;\n  text-transform: uppercase;\n  opacity: 0;\n  cursor: pointer;\n  -webkit-transition: opacity 230ms;\n  transition: opacity 230ms;\n  font-size: 10px;\n}\n\n.c-area:hover {\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.c-area:hover .delete {\n  color: rgba(255, 255, 255, 0.8);\n}\n\n.c-area:hover .delete:hover {\n  color: white;\n}\n\n.c-area:hover .goToComponent {\n  opacity: 1;\n}\n\n.c-area--hover {\n  border: 1px solid cyan;\n}\n\n.c-area--invalid {\n  background-color: rgba(255, 0, 0, 0.1);\n  border-color: red;\n}"
 
 /***/ },
-/* 726 */
+/* 727 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(698);
@@ -87546,13 +87838,13 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 727 */
+/* 728 */
 /***/ function(module, exports) {
 
 	module.exports = ".board {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: hidden;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  background: #fafafa;\n}\n\n.board .workingSpace {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.board .imageContainer {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.board .imageContainer .boardImage {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n\n.board image-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 130px;\n          flex: 0 0 130px;\n  overflow: auto;\n  position: relative;\n  z-index: 2;\n}\n\n.board sliced-image {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n\n.board .toolbar {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 50px;\n          flex: 0 0 50px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.2);\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 0 20px;\n  background: white;\n  font-size: 16px;\n  box-sizing: content-box;\n}\n\n.board .toolbar .title.active {\n  color: #006064;\n  cursor: pointer;\n}\n\n.board .toolbar .title.active:hover {\n  color: rgba(0, 0, 0, 0.3);\n}\n\n.board .toolbar .input {\n  border: none;\n  padding: 0;\n  margin: 0;\n  font-size: 16px;\n  font-family: Lato;\n  color: rgba(0, 0, 0, 0.3);\n  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);\n}\n\n.board .toolbar .childrenSymbol {\n  color: #006064;\n  padding: 0 20px;\n}\n\n.board .toolbar .areaTitle {\n  color: #006064;\n  cursor: pointer;\n}\n\n.board .fileUploadPlaceholder {\n  margin: 50px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  border: 3px dashed rgba(0, 0, 0, 0.2);\n  border-radius: 10px;\n  color: rgba(0, 0, 0, 0.54);\n  cursor: pointer;\n  -webkit-transition: border-color 230ms;\n  transition: border-color 230ms;\n}\n\n.board .fileUploadPlaceholder i {\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n}\n\n.board .fileUploadPlaceholder:hover {\n  border-color: #006064;\n}\n\n.board .fileUploadPlaceholder:hover i {\n  color: #006064;\n}\n\n.board .fileUploadPlaceholder .centerWrapper {\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  cursor: pointer;\n}\n\n.board .fileUploadPlaceholder .noImage {\n  font-weight: bold;\n}\n\n.board .hiddenInput {\n  display: none;\n}"
 
 /***/ },
-/* 728 */
+/* 729 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(698);
@@ -87566,18 +87858,18 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 729 */
+/* 730 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(730));
+	__export(__webpack_require__(731));
 
 
 /***/ },
-/* 730 */
+/* 731 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87591,7 +87883,7 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var component_element_1 = __webpack_require__(731);
+	var component_element_1 = __webpack_require__(732);
 	var models_1 = __webpack_require__(661);
 	var services_1 = __webpack_require__(649);
 	var icon_1 = __webpack_require__(346);
@@ -87614,8 +87906,8 @@ webpackJsonp([0],[
 	    SidebarComponent = __decorate([
 	        core_1.Component({
 	            selector: 'sidebar',
-	            styles: [__webpack_require__(735)],
-	            template: __webpack_require__(736)(),
+	            styles: [__webpack_require__(736)],
+	            template: __webpack_require__(737)(),
 	            providers: [],
 	            directives: [
 	                component_element_1.ComponentElementComponent,
@@ -87630,18 +87922,18 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 731 */
+/* 732 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(732));
+	__export(__webpack_require__(733));
 
 
 /***/ },
-/* 732 */
+/* 733 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87720,8 +88012,8 @@ webpackJsonp([0],[
 	    ComponentElementComponent = __decorate([
 	        core_1.Component({
 	            selector: 'component-element',
-	            styles: [__webpack_require__(733)],
-	            template: __webpack_require__(734)(),
+	            styles: [__webpack_require__(734)],
+	            template: __webpack_require__(735)(),
 	            directives: [ComponentElementComponent, icon_1.MD_ICON_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [services_1.ImageService, services_1.FolderService, services_1.FileService, services_1.DialogService])
@@ -87732,13 +88024,13 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 733 */
+/* 734 */
 /***/ function(module, exports) {
 
 	module.exports = ":host {\n  display: block;\n}\n\n.c-flexContainer {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: rgba(0, 0, 0, 0.54);\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  position: relative;\n  height: 30px;\n}\n\n.c-flexContainer .toggleFolder {\n  margin: 0 5px 0 1px;\n  cursor: pointer;\n  position: relative;\n  width: 19px;\n  height: 19px;\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  border-radius: 50%;\n  background: #006064;\n  color: white;\n  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n}\n\n.c-flexContainer .folderName {\n  height: auto;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n  cursor: pointer;\n}\n\n.c-flexContainer .input {\n  border: none;\n  padding: 0;\n  margin: 0;\n  font-size: 16px;\n  font-family: Lato;\n  color: rgba(0, 0, 0, 0.3);\n  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-weight: bold;\n}\n\n.c-flexContainer .edit,\n.c-flexContainer .delete {\n  cursor: pointer;\n  opacity: 0.2;\n  -webkit-transition: opacity 230ms;\n  transition: opacity 230ms;\n}\n\n.c-flexContainer .delete:hover {\n  opacity: 1;\n}\n\n.c-flexContainer .edit {\n  opacity: 0;\n}\n\n.c-flexContainer.editing .edit {\n  visibility: hidden;\n}\n\nul,\nli {\n  margin: 0 0 0 5px;\n  padding: 0;\n}\n\nul {\n  margin: 0 0 0 20px;\n  list-style: none;\n  line-height: 20px;\n}\n\nul component-element {\n  margin-left: 5px;\n}\n\nul li.closed,\nul component-element.closed {\n  overflow: hidden;\n  height: 0;\n}\n\nul li.selected > .c-flexContainer {\n  font-weight: bolder;\n  color: #006064;\n}\n\nul li.selected > .c-flexContainer > .folderName ~ .edit {\n  opacity: 0.2;\n}\n\nul li.selected > .c-flexContainer > .folderName ~ .edit:hover {\n  opacity: 1;\n}\n\nul li.selected > .c-flexContainer > .folderName:hover {\n  cursor: text;\n  color: rgba(0, 0, 0, 0.3);\n}\n\nul li.selected > .c-flexContainer > .folderName:hover ~ .edit {\n  opacity: 1;\n}\n\nul__counter md-icon {\n  vertical-align: middle;\n  margin-left: 5px;\n}\n\nul li,\nul component-element {\n  font-size: 16px;\n  position: relative;\n}\n\nul li::before,\nul component-element::before {\n  position: absolute;\n  left: -15px;\n  top: 0;\n  content: '';\n  display: block;\n  border-left: 1px solid #bcbcbc;\n  height: 10px;\n  border-bottom: 1px solid #bcbcbc;\n  width: 10px;\n}\n\nul li::after,\nul component-element::after {\n  position: absolute;\n  left: -15px;\n  bottom: -7px;\n  content: '';\n  display: block;\n  border-left: 1px solid #bcbcbc;\n  height: 100%;\n}\n\nul li.folder,\nul component-element.folder {\n  margin: 0 0 0 -20px;\n}\n\nul li.root::before,\nul component-element.root::before {\n  display: none;\n}\n\nul li.root::after,\nul component-element.root::after {\n  display: none;\n}\n\nul li.file {\n  color: #bcbcbc;\n}\n\nul li:last-child::after {\n  display: none;\n}"
 
 /***/ },
-/* 734 */
+/* 735 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(698);
@@ -87752,13 +88044,13 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 735 */
+/* 736 */
 /***/ function(module, exports) {
 
 	module.exports = ".sidebar {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  background: #fff;\n  border-right: 1px solid #e0e0e0;\n  padding: 15px;\n  position: relative;\n  z-index: 1;\n}\n\n.create {\n  cursor: pointer;\n  padding-bottom: 10px;\n}\n\n.create:hover {\n  color: #006064;\n}\n\n.create .addIcon {\n  vertical-align: middle;\n}\n\n.create .addTitle {\n  display: inline-block;\n  vertical-align: middle;\n}"
 
 /***/ },
-/* 736 */
+/* 737 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(698);
@@ -87772,18 +88064,18 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 737 */
+/* 738 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(738));
+	__export(__webpack_require__(739));
 
 
 /***/ },
-/* 738 */
+/* 739 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87803,8 +88095,8 @@ webpackJsonp([0],[
 	    ToolbarComponent = __decorate([
 	        core_1.Component({
 	            selector: 'toolbar',
-	            template: __webpack_require__(739)(),
-	            styles: [__webpack_require__(740)]
+	            template: __webpack_require__(740)(),
+	            styles: [__webpack_require__(741)]
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], ToolbarComponent);
@@ -87814,7 +88106,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 739 */
+/* 740 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(698);
@@ -87828,19 +88120,19 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 740 */
+/* 741 */
 /***/ function(module, exports) {
 
 	module.exports = ":host {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  width: 100%;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  z-index: 2;\n}"
 
 /***/ },
-/* 741 */
+/* 742 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "img/angular.svg";
 
 /***/ },
-/* 742 */
+/* 743 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(698);
@@ -87854,13 +88146,13 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 743 */
+/* 744 */
 /***/ function(module, exports) {
 
 	module.exports = ":host,\n.editor {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n:host {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n.editor {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n\nsidebar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  min-width: 300px;\n}\n\nboard {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: auto;\n}\n\n.export {\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  right: 20px;\n  top: 50%;\n  height: 30px;\n  margin-top: -15px;\n}\n\n.export .fa {\n  margin: 0 10px;\n}\n\n.c-header,\n.c-toolbar {\n  padding: 0 25px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1 0 auto;\n          flex: 1 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.c-header {\n  height: 60px;\n  background: #006064;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  position: relative;\n  z-index: 2;\n}\n\n.c-toolbar {\n  height: 50px;\n  background-color: rgba(0, 0, 0, 0.05);\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.06);\n  position: relative;\n  z-index: 3;\n}\n\n.angular {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: white;\n  font-size: 21px;\n}\n\n.angular img {\n  margin-right: 10px;\n}\n\nmd-icon {\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n}\n\nmd-icon.disabled {\n  color: rgba(0, 0, 0, 0.26);\n  cursor: default;\n}\n\nmd-icon.disabled:hover {\n  color: rgba(0, 0, 0, 0.26);\n}\n\nmd-icon:hover {\n  color: #006064;\n}\n\n.left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 1 auto;\n          flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.folderName {\n  margin-right: 10px;\n}\n\n.editFolderName {\n  cursor: pointer;\n}\n\n.right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 1 auto;\n          flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.right md-icon {\n  padding: 0 5px;\n  margin: 0 10px;\n}\n\n.separator {\n  border-right: 1px solid rgba(0, 0, 0, 0.1);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  height: 100%;\n  margin: 0 10px;\n}"
 
 /***/ },
-/* 744 */
+/* 745 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87905,8 +88197,8 @@ webpackJsonp([0],[
 	            ]),
 	            pipes: [],
 	            directives: [router_1.ROUTER_DIRECTIVES],
-	            template: __webpack_require__(745)(),
-	            styles: [__webpack_require__(746)]
+	            template: __webpack_require__(746)(),
+	            styles: [__webpack_require__(747)]
 	        }), 
 	        __metadata('design:paramtypes', [bootstrap_1.Modal, core_1.ViewContainerRef, angulartics2_google_analytics_1.Angulartics2GoogleAnalytics])
 	    ], AppComponent);
@@ -87916,7 +88208,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 745 */
+/* 746 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(698);
@@ -87930,22 +88222,22 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 746 */
+/* 747 */
 /***/ function(module, exports) {
 
 	module.exports = ":host,\n.app-router,\nmain {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n.mobile-screen {\n  display: none;\n}\n\n@media (max-width: 730px) {\n  .mobile-screen {\n    background-color: #006064;\n    color: white;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-flow: column;\n        flex-flow: column;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n  }\n\n  .mobile-screen a {\n    color: #feffb4;\n  }\n\n  .app-router {\n    display: none;\n  }\n}"
 
 /***/ },
-/* 747 */
+/* 748 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(748);
+	var content = __webpack_require__(749);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(768)(content, {});
+	var update = __webpack_require__(769)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -87962,124 +88254,124 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 748 */
+/* 749 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(749)();
+	exports = module.exports = __webpack_require__(750)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "* {\n  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(750) + ") format(\"woff2\"), url(" + __webpack_require__(751) + ") format(\"woff\"), url(" + __webpack_require__(752) + ") format(\"truetype\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(753) + ") format(\"woff2\"), url(" + __webpack_require__(754) + ") format(\"woff\"), url(" + __webpack_require__(755) + ") format(\"truetype\");\n  font-weight: bold;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(756) + ") format(\"woff2\"), url(" + __webpack_require__(757) + ") format(\"woff\"), url(" + __webpack_require__(758) + ") format(\"truetype\");\n  font-weight: normal;\n  font-style: italic;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(759) + ") format(\"woff2\"), url(" + __webpack_require__(760) + ") format(\"woff\"), url(" + __webpack_require__(761) + ") format(\"truetype\");\n  font-weight: 300;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'CircularStd';\n  src: url(" + __webpack_require__(762) + ") format(\"woff2\"), url(" + __webpack_require__(763) + ") format(\"woff\"), url(" + __webpack_require__(764) + ") format(\"truetype\");\n  font-weight: bold;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'BudacodeIcons';\n  src: url(" + __webpack_require__(765) + ") format(\"woff2\"), url(" + __webpack_require__(766) + ") format(\"woff\"), url(" + __webpack_require__(767) + ") format(\"ttf\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n.h-fill-remaining {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.h-flex-end {\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n              -ms-grid-row-align: flex-end;\n          align-items: flex-end;\n}\n\n.h-flex-align-center {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n              -ms-grid-row-align: center;\n          align-items: center;\n}\n\n* {\n  outline: none;\n  box-sizing: border-box;\n}\n\nhtml,\nbody {\n  margin: 0;\n  max-height: 100%;\n  min-height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  background-color: #fafafa;\n}\n\nhtml {\n  box-sizing: border-box;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: inherit;\n}\n\n@-moz-viewport {\n  width: device-width;\n}\n\n@-ms-viewport {\n  width: device-width;\n}\n\n@-o-viewport {\n  width: device-width;\n}\n\n@-webkit-viewport {\n  width: device-width;\n}\n\n@viewport {\n  width: device-width;\n}\n\nhtml {\n  font-size: 10px;\n  -webkit-tap-highlight-color: transparent;\n}\n\nbody {\n  font-family: \"Lato\";\n  font-size: 16px;\n  line-height: 24px;\n  color: #2e3233;\n  background-color: #fff;\n  margin: 0;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin-top: 0;\n  margin-bottom: 5px;\n}\n\np {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nabbr[title],\nabbr[data-original-title] {\n  cursor: help;\n  border-bottom: 1px dotted #eee;\n}\n\naddress {\n  margin-bottom: 10px;\n  font-style: normal;\n  line-height: inherit;\n}\n\nol,\nul,\ndl {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nol ol,\nul ul,\nol ul,\nul ol {\n  margin-bottom: 0;\n}\n\ndt {\n  font-weight: bold;\n}\n\ndd {\n  margin-bottom: 5px;\n  margin-left: 0;\n}\n\nblockquote {\n  margin: 0 0 10px;\n}\n\na.linkPrimary {\n  color: #006064;\n}\n\na.linkPrimary:hover {\n  color: #006064;\n  text-decoration: underline;\n}\n\na {\n  color: #fff;\n  text-decoration: none;\n}\n\na:focus,\na:hover {\n  color: #feffb4;\n  text-decoration: underline;\n}\n\npre {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nfigure {\n  margin: 0 0 10px;\n}\n\nimg {\n  vertical-align: middle;\n}\n\n[role='button'] {\n  cursor: pointer;\n}\n\ntable {\n  background-color: transparent;\n}\n\ncaption {\n  padding-top: 0;\n  padding-bottom: 0;\n  color: #eee;\n  text-align: left;\n  caption-side: bottom;\n}\n\nth {\n  text-align: left;\n}\n\nlabel {\n  display: inline-block;\n  margin-bottom: 5px;\n}\n\ninput,\nbutton,\nselect,\ntextarea {\n  margin: 0;\n  line-height: inherit;\n  border-radius: 0;\n}\n\ntextarea {\n  resize: vertical;\n}\n\nfieldset {\n  min-width: 0;\n  padding: 0;\n  margin: 0;\n  border: 0;\n}\n\nlegend {\n  display: block;\n  width: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n  font-size: 15px;\n  line-height: inherit;\n}\n\ninput[type='search'] {\n  box-sizing: inherit;\n  -webkit-appearance: none;\n}\n\noutput {\n  display: inline-block;\n}\n\n.dialogBackground {\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  z-index: 49;\n  -webkit-animation: fadeIn 500ms forwards;\n          animation: fadeIn 500ms forwards;\n}\n\n.dialog {\n  width: 660px;\n  position: fixed;\n  top: 20%;\n  left: calc(50% - 330px);\n  padding: 20px;\n  background-color: #fff;\n  z-index: 50;\n  box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);\n  -webkit-animation: slideDown ease-out 500ms forwards;\n          animation: slideDown ease-out 500ms forwards;\n}\n\n.dialog .flexContainer {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 100%;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n\n.dialog .flexContainer .row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  margin: 5px;\n}\n\n.dialog .flexContainer .addition {\n  margin-top: 20px;\n}\n\n.dialog .flexContainer .md-button-wrapper button {\n  margin-right: 10px;\n}\n\n.dialog .flexContainer .md-button-wrapper button:last-child {\n  margin-right: 0;\n}\n\n.dialog .flexContainer .row--rightAligned {\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n\n.dialog .flexContainer .row--rightAligned .column {\n  -webkit-box-flex: 0;\n      -ms-flex-positive: 0;\n          flex-grow: 0;\n}\n\n.dialog .flexContainer .column {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n\n.dialog .flexContainer .column:not(:first-of-type) {\n  margin-left: 20px;\n}\n\n.dialog md-radio-button,\n.dialog md-checkbox {\n  margin: 5px 8px;\n}\n\n.dialog select {\n  margin-left: 20px;\n}\n\n.modal-sm .dialog {\n  width: 260px;\n  left: calc(50% - 130px);\n}\n\n@-webkit-keyframes fadeIn {\n  from {\n    background-color: transparent;\n  }\n\n  to {\n    background: rgba(0, 0, 0, 0.3);\n  }\n}\n\n@keyframes fadeIn {\n  from {\n    background-color: transparent;\n  }\n\n  to {\n    background: rgba(0, 0, 0, 0.3);\n  }\n}\n\n@-webkit-keyframes slideDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate(0, -50px);\n            transform: translate(0, -50px);\n  }\n\n  40% {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n}\n\n@keyframes slideDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate(0, -50px);\n            transform: translate(0, -50px);\n  }\n\n  40% {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n}", ""]);
+	exports.push([module.id, "* {\n  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(751) + ") format(\"woff2\"), url(" + __webpack_require__(752) + ") format(\"woff\"), url(" + __webpack_require__(753) + ") format(\"truetype\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(754) + ") format(\"woff2\"), url(" + __webpack_require__(755) + ") format(\"woff\"), url(" + __webpack_require__(756) + ") format(\"truetype\");\n  font-weight: bold;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(757) + ") format(\"woff2\"), url(" + __webpack_require__(758) + ") format(\"woff\"), url(" + __webpack_require__(759) + ") format(\"truetype\");\n  font-weight: normal;\n  font-style: italic;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(760) + ") format(\"woff2\"), url(" + __webpack_require__(761) + ") format(\"woff\"), url(" + __webpack_require__(762) + ") format(\"truetype\");\n  font-weight: 300;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'CircularStd';\n  src: url(" + __webpack_require__(763) + ") format(\"woff2\"), url(" + __webpack_require__(764) + ") format(\"woff\"), url(" + __webpack_require__(765) + ") format(\"truetype\");\n  font-weight: bold;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'BudacodeIcons';\n  src: url(" + __webpack_require__(766) + ") format(\"woff2\"), url(" + __webpack_require__(767) + ") format(\"woff\"), url(" + __webpack_require__(768) + ") format(\"ttf\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n.h-fill-remaining {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.h-flex-end {\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n              -ms-grid-row-align: flex-end;\n          align-items: flex-end;\n}\n\n.h-flex-align-center {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n              -ms-grid-row-align: center;\n          align-items: center;\n}\n\n* {\n  outline: none;\n  box-sizing: border-box;\n}\n\nhtml,\nbody {\n  margin: 0;\n  max-height: 100%;\n  min-height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  background-color: #fafafa;\n}\n\nhtml {\n  box-sizing: border-box;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: inherit;\n}\n\n@-moz-viewport {\n  width: device-width;\n}\n\n@-ms-viewport {\n  width: device-width;\n}\n\n@-o-viewport {\n  width: device-width;\n}\n\n@-webkit-viewport {\n  width: device-width;\n}\n\n@viewport {\n  width: device-width;\n}\n\nhtml {\n  font-size: 10px;\n  -webkit-tap-highlight-color: transparent;\n}\n\nbody {\n  font-family: \"Lato\";\n  font-size: 16px;\n  line-height: 24px;\n  color: #2e3233;\n  background-color: #fff;\n  margin: 0;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin-top: 0;\n  margin-bottom: 5px;\n}\n\np {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nabbr[title],\nabbr[data-original-title] {\n  cursor: help;\n  border-bottom: 1px dotted #eee;\n}\n\naddress {\n  margin-bottom: 10px;\n  font-style: normal;\n  line-height: inherit;\n}\n\nol,\nul,\ndl {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nol ol,\nul ul,\nol ul,\nul ol {\n  margin-bottom: 0;\n}\n\ndt {\n  font-weight: bold;\n}\n\ndd {\n  margin-bottom: 5px;\n  margin-left: 0;\n}\n\nblockquote {\n  margin: 0 0 10px;\n}\n\na.linkPrimary {\n  color: #006064;\n}\n\na.linkPrimary:hover {\n  color: #006064;\n  text-decoration: underline;\n}\n\na {\n  color: #fff;\n  text-decoration: none;\n}\n\na:focus,\na:hover {\n  color: #feffb4;\n  text-decoration: underline;\n}\n\npre {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nfigure {\n  margin: 0 0 10px;\n}\n\nimg {\n  vertical-align: middle;\n}\n\n[role='button'] {\n  cursor: pointer;\n}\n\ntable {\n  background-color: transparent;\n}\n\ncaption {\n  padding-top: 0;\n  padding-bottom: 0;\n  color: #eee;\n  text-align: left;\n  caption-side: bottom;\n}\n\nth {\n  text-align: left;\n}\n\nlabel {\n  display: inline-block;\n  margin-bottom: 5px;\n}\n\ninput,\nbutton,\nselect,\ntextarea {\n  margin: 0;\n  line-height: inherit;\n  border-radius: 0;\n}\n\ntextarea {\n  resize: vertical;\n}\n\nfieldset {\n  min-width: 0;\n  padding: 0;\n  margin: 0;\n  border: 0;\n}\n\nlegend {\n  display: block;\n  width: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n  font-size: 15px;\n  line-height: inherit;\n}\n\ninput[type='search'] {\n  box-sizing: inherit;\n  -webkit-appearance: none;\n}\n\noutput {\n  display: inline-block;\n}\n\n.dialogBackground {\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  z-index: 49;\n  -webkit-animation: fadeIn 500ms forwards;\n          animation: fadeIn 500ms forwards;\n}\n\n.dialog {\n  width: 660px;\n  position: fixed;\n  top: 20%;\n  left: calc(50% - 330px);\n  padding: 20px;\n  background-color: #fff;\n  z-index: 50;\n  box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);\n  -webkit-animation: slideDown ease-out 500ms forwards;\n          animation: slideDown ease-out 500ms forwards;\n}\n\n.dialog .flexContainer {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 100%;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n\n.dialog .flexContainer .row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  margin: 5px;\n}\n\n.dialog .flexContainer .addition {\n  margin-top: 20px;\n}\n\n.dialog .flexContainer .md-button-wrapper button {\n  margin-right: 10px;\n}\n\n.dialog .flexContainer .md-button-wrapper button:last-child {\n  margin-right: 0;\n}\n\n.dialog .flexContainer .row--rightAligned {\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n\n.dialog .flexContainer .row--rightAligned .column {\n  -webkit-box-flex: 0;\n      -ms-flex-positive: 0;\n          flex-grow: 0;\n}\n\n.dialog .flexContainer .column {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n\n.dialog .flexContainer .column:not(:first-of-type) {\n  margin-left: 20px;\n}\n\n.dialog md-radio-button,\n.dialog md-checkbox {\n  margin: 5px 8px;\n}\n\n.dialog select {\n  margin-left: 20px;\n}\n\n.modal-sm .dialog {\n  width: 260px;\n  left: calc(50% - 130px);\n}\n\n@-webkit-keyframes fadeIn {\n  from {\n    background-color: transparent;\n  }\n\n  to {\n    background: rgba(0, 0, 0, 0.3);\n  }\n}\n\n@keyframes fadeIn {\n  from {\n    background-color: transparent;\n  }\n\n  to {\n    background: rgba(0, 0, 0, 0.3);\n  }\n}\n\n@-webkit-keyframes slideDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate(0, -50px);\n            transform: translate(0, -50px);\n  }\n\n  40% {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n}\n\n@keyframes slideDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate(0, -50px);\n            transform: translate(0, -50px);\n  }\n\n  40% {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n}", ""]);
 
 	// exports
 
 
 /***/ },
-/* 749 */,
-/* 750 */
+/* 750 */,
+/* 751 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-regular-webfont.woff2";
 
 /***/ },
-/* 751 */
+/* 752 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-regular-webfont.woff";
 
 /***/ },
-/* 752 */
+/* 753 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-regular-webfont.ttf";
 
 /***/ },
-/* 753 */
+/* 754 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-bold-webfont.woff2";
 
 /***/ },
-/* 754 */
+/* 755 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-bold-webfont.woff";
 
 /***/ },
-/* 755 */
+/* 756 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-bold-webfont.ttf";
 
 /***/ },
-/* 756 */
+/* 757 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-italic-webfont.woff2";
 
 /***/ },
-/* 757 */
+/* 758 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-italic-webfont.woff";
 
 /***/ },
-/* 758 */
+/* 759 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-italic-webfont.ttf";
 
 /***/ },
-/* 759 */
+/* 760 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-light-webfont.woff2";
 
 /***/ },
-/* 760 */
+/* 761 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-light-webfont.woff";
 
 /***/ },
-/* 761 */
+/* 762 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-light-webfont.ttf";
 
 /***/ },
-/* 762 */
+/* 763 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/CircularStd-Bold.woff2";
 
 /***/ },
-/* 763 */
+/* 764 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/CircularStd-Bold.woff";
 
 /***/ },
-/* 764 */
+/* 765 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/CircularStd-Bold.ttf";
 
 /***/ },
-/* 765 */
+/* 766 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/BudacodeIcons.woff2";
 
 /***/ },
-/* 766 */
+/* 767 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/BudacodeIcons.woff";
 
 /***/ },
-/* 767 */
+/* 768 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/BudacodeIcons.ttf";
