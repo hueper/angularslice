@@ -31,8 +31,15 @@ export class EditorComponent {
     const authUrl = '/auth/github';
     const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=400');
     _oauthWindow.addEventListener('beforeunload', (event) => {
-      console.log("Closed!==================> ");
+      console.log("BEFOREUNLOAD!==================> ");
     });
+    _oauthWindow.addEventListener('onbeforeunload', (event) => {
+      console.log("ONBEFOREUNLOAD!==================> ");
+    });
+    _oauthWindow.addEventListener('unload', (event) => {
+      console.log("UNLOAD!==================> ");
+    });
+
     // const _oauthInterval = window.setInterval(() => {
     //   if (_oauthWindow.closed) {
     //     window.clearInterval(_oauthInterval);
