@@ -7,7 +7,6 @@
   max-width: 490px;
   width: 100%;
   background-color: white;
-  overflow: hidden;
 }
 
 .browser-mockup:before {
@@ -32,6 +31,7 @@
   height: 100%;
   border-top: 1px solid #CCC;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .browser-mockup .editor {
@@ -41,6 +41,7 @@
   border-top: 1px solid #CCC;
   box-sizing: border-box;
   vertical-align: top;
+  overflow: hidden;
 }
 
 .browser-mockup .left-panel {
@@ -149,6 +150,7 @@
 .browser-mockup.animate {
   .navbar-animation {
     animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
     transition: all .6s ease-in;
     width: 62.5%;
     height: 30px;

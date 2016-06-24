@@ -111,7 +111,6 @@ $footerBg: #263238;
   text-align: center;
   width: 215px;
   margin-top: 38px;
-  font-weight: 500;
 
   .mdl-button {
     margin-top: 5px;
@@ -119,6 +118,7 @@ $footerBg: #263238;
     background-color: $brandYellow;
     color: $brandColor;
     width: 100%;
+    font-weight: 500;
 
     &:hover {
       background-color: $brandYellowHover;

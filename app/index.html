@@ -20,9 +20,18 @@
       function animate() {
         let browserMockup = document.getElementsByClassName('browser-mockup')[0];
         browserMockup.classList.add('animate');
+
+        setTimeout(function () {
+          browserMockup.classList.remove('animate');
+        }, 4000);
       }
 
-      window.onload = window.setTimeout(animate, 1000);
+      window.onload = function () {
+        window.setTimeout(function () {
+          animate();
+          window.setInterval(animate, 5000);
+        }, 1000);
+      }
     </script>
 
   </head>
