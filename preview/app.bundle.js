@@ -87023,7 +87023,7 @@ webpackJsonp([0],[
 	                var user = res.data;
 	                var accessToken = _.get(user, 'oauthData.github.accessToken', false);
 	                if (accessToken) {
-	                    _this.dialog.close({ success: true, type: 'github' });
+	                    _this.dialog.close('github');
 	                }
 	                else {
 	                    _this.loading = false;
