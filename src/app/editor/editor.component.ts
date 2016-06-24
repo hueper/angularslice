@@ -28,7 +28,7 @@ export class EditorComponent {
   currentFolder: Folder;
 
   githubAuth() {
-    const authUrl = 'https://github.com/login/oauth/authorize?client_id=e57db1300ee2cb4462bf';
+    const authUrl = '/auth/github';
     const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=400');
     _oauthWindow.addEventListener('close', (event) => {
       console.log("Closed!==================> ");
