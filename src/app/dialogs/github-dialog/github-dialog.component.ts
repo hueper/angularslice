@@ -58,7 +58,7 @@ export class GithubDialogComponent implements ModalComponent<BSModalContext> {
   }
 
   close(success: boolean, user: User) {
-    this.dialog.dismiss({
+    this.dialog.close({
       success: success,
       user: user
     });
