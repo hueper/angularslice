@@ -13,6 +13,7 @@ import { Folder } from "../../shared/models";
 import { FolderService } from "../../shared/services";
 import { UserService } from "../../shared/services/user.service";
 import { User } from "../../shared/models/user.model";
+import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 
 @Component({
   selector: 'export-dialog',
@@ -24,6 +25,7 @@ import { User } from "../../shared/models/user.model";
     MdCheckbox,
     MdRadioGroup,
     MdRadioButton,
+    MD_PROGRESS_CIRCLE_DIRECTIVES
   ],
   providers: [
     MdRadioDispatcher,
@@ -31,10 +33,10 @@ import { User } from "../../shared/models/user.model";
 })
 export class ExportDialogComponent implements ModalComponent<BSModalContext> {
   protected activeSelect: string;
+  protected loading:boolean = false;
 
   constructor(public dialog: DialogRef<BSModalContext>,
               private userService: UserService) {
-
   }
 
   noop(type: string, $event) {
@@ -43,25 +45,26 @@ export class ExportDialogComponent implements ModalComponent<BSModalContext> {
 
 
   githubAuth() {
+    this.loading = true;
     const authUrl = 'http://192.168.1.102:3000/auth/github';
     const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600');
 
-    _oauthWindow.addEventListener('unload', () => {
-      this.userService.pollUser().subscribe(res => {
-        let user = res.data as User;
-        let accessToken = _.get(user, 'oauthData.github.accessToken', false);
-
-        if (accessToken) {
-          this.dialog.close({ success: true, type: 'github' });
-          //TODO: the user authentication was successfull, we can do whatever we want ;)
-        } else {
-          console.log("accessToken => ", user);
-          Humane.log(`Sorry, we couldn't authenticate you. Please try again.`, { addnCls: 'humane-error' });
-
-        }
-      });
-      _oauthWindow.removeEventListener('unload');
-    });
+    // _oauthWindow.addEventListener('unload', () => {
+    //   this.userService.pollUser().subscribe(res => {
+    //     let user = res.data as User;
+    //     let accessToken = _.get(user, 'oauthData.github.accessToken', false);
+    //
+    //     if (accessToken) {
+    //       this.dialog.close({ success: true, type: 'github' });
+    //       //TODO: the user authentication was successfull, we can do whatever we want ;)
+    //     } else {
+    //       console.log("accessToken => ", user);
+    //       Humane.log(`Sorry, we couldn't authenticate you. Please try again.`, { addnCls: 'humane-error' });
+    //
+    //     }
+    //   });
+    //   _oauthWindow.removeEventListener('unload');
+    // });
   }
 
 
