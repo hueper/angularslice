@@ -87016,7 +87016,7 @@ webpackJsonp([0],[
 	    ExportDialogComponent.prototype.githubAuth = function () {
 	        var _this = this;
 	        this.loading = true;
-	        var authUrl = 'http://192.168.1.102:3000/auth/github';
+	        var authUrl = '/auth/github';
 	        var _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600');
 	        _oauthWindow.addEventListener('unload', function () {
 	            _this.userService.pollUser().subscribe(function (res) {
