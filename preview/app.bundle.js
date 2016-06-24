@@ -87434,7 +87434,7 @@ webpackJsonp([0],[
 	    }
 	    ProjectService.prototype.generate = function (repoName) {
 	        var params = {
-	            files: this.folderService.dataSource.getValue(),
+	            folders: this.folderService.dataSource.getValue(),
 	            repositoryName: repoName
 	        };
 	        return this.httpService.post('/generate', params).map(function (res) { return res.json(); });
