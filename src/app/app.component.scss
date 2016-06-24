@@ -1,9 +1,36 @@
-:host, main {
+@import './shared/scss/utils/colors';
+
+:host, .app-router, main {
   display: flex;
   flex: 1;
-  flex-direction:column;
+  flex-direction: column;
 }
+
+.mobile-screen {
+  display: none;
+}
+
 //main {
 //  width: 100vw;
 //  height: 100vh;
 //}
+
+@media (max-width: 900px) {
+  .mobile-screen {
+    background-color: $primary;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    flex-grow: 1;
+
+    a {
+      color: $highlight;
+    }
+  }
+  .app-router {
+    display: none;
+  }
+}
