@@ -31,25 +31,7 @@ export class EditorComponent {
   currentFolder: Folder;
 
   githubAuth() {
-    const authUrl = 'http://192.168.1.102:3000/auth/github';
-    const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600');
-
-    _oauthWindow.addEventListener('unload', () => {
-      this.userService.pollUser().subscribe(res => {
-        let user = res.data as User;
-        let accessToken = _.get(user, 'oauthData.github.accessToken', false);
-
-        if (accessToken) {
-          this.pushToGithub();
-          //TODO: the user authentication was successfull, we can do whatever we want ;)
-        } else {
-          console.log("accessToken => ", user);
-          Humane.log(`Sorry, we couldn't authenticate you. Please try again.`, { addnCls: 'humane-error' });
-
-        }
-      });
-      _oauthWindow.removeEventListener('unload');
-    });
+ 
 
     // const _oauthInterval = window.setInterval(() => {
     //   if (_oauthWindow.closed) {
