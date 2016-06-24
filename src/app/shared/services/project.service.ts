@@ -12,7 +12,7 @@ export class ProjectService {
 
   generate(repoName: string) {
     let params = {
-      files: this.folderService.dataSource.getValue(),
+      folders: this.folderService.dataSource.getValue(),
       repositoryName: repoName
     }
 
