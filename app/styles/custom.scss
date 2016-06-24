@@ -5,8 +5,23 @@ $darkBrandColor: #47676f;
 $footerBg: #263238;
 
 // Subscription page, aka app folder
+#mc_embed_signup {
+  margin: auto;
+}
+
+.app-header-section {
+  text-align: center;
+}
+
+.top-section {
+  width: 690px;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
 .rocket-image {
   margin-top: -130px;
+  margin-left: 50px;
 }
 
 .bird-text-container {
@@ -51,6 +66,7 @@ $footerBg: #263238;
 
   .innerWrapper {
     width: 705px;
+    margin: auto;
 
     .a2a_kit {
       display: inline-block;
