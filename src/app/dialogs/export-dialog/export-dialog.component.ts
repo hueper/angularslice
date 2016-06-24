@@ -55,7 +55,7 @@ export class ExportDialogComponent implements ModalComponent<BSModalContext> {
         let accessToken = _.get(user, 'oauthData.github.accessToken', false);
 
         if (accessToken) {
-          this.dialog.close({ success: true, type: 'github' });
+          this.dialog.close('github');
           //TODO: the user authentication was successfull, we can do whatever we want ;)
         } else {
           this.loading = false;

@@ -46,7 +46,6 @@ export class EditorComponent {
 
   export() {
     this.dialogService.openExportDialog().then(result => {
-      console.log("result => ", result);
       if (result === "github") {
         this.pushToGithub();
       } else {
