@@ -56416,29 +56416,11 @@ webpackJsonp([0],[
 	        });
 	        this.logo = __webpack_require__(742);
 	    }
-	    EditorComponent.prototype.githubAuth = function () {
-	        // const _oauthInterval = window.setInterval(() => {
-	        //   if (_oauthWindow.closed) {
-	        //     window.clearInterval(_oauthInterval);
-	        //     // Poll
-	        //     console.log('POLLNG');
-	        //     this.userService.pollUser().subscribe((res) => {
-	        //       if (res.data.oauthData) {
-	        //         Humane.log(`Awesome! See you next time!`);
-	        //         // TODO: show the Dialog
-	        //       } else {
-	        //         Humane.log(``);
-	        //       }
-	        //       console.log('POLLNG', res);
-	        //     });
-	        //   }
-	        // }, 1000);
-	    };
 	    EditorComponent.prototype.pushToGithub = function () {
 	        var _this = this;
 	        this.dialogService.openGithubDialog().then(function (res) {
-	            console.log(res);
 	            _this.projectService.generate(res).subscribe(function (res) {
+	                console.log("res => ", res);
 	                if (res.success) {
 	                    Humane.log('Awesome');
 	                }
@@ -56451,9 +56433,15 @@ webpackJsonp([0],[
 	    };
 	    EditorComponent.prototype.export = function () {
 	        var _this = this;
-	        this.dialogService.openExportDialog().then(function (res) {
-	            console.log(res);
-	            _this.githubAuth();
+	        this.dialogService.openExportDialog().then(function (result) {
+	            if (result === "github") {
+	                _this.pushToGithub();
+	            }
+	            else {
+	                alert("WUUUUUUUUT????");
+	            }
+	        }).catch(function (err) {
+	            console.log(err);
 	        });
 	    };
 	    EditorComponent = __decorate([
@@ -86857,7 +86845,7 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><form><div class=\"flexContainer\"><div class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"componentData.repoName\" required placeholder=\"Add name for the component\"></md-input><pre>{{ componentData.repoName | json }}</pre></div></div><div class=\"row row--rightAligned\"><div class=\"md-button-wrapper\"><button md-raised-button color=\"secondary\" type=\"button\" (click)=\"close()\">Cancel</button><button md-raised-button color=\"primary\" type=\"button\" (click)=\"send()\">Push</button></div></div></div></form></div>");;return buf.join("");
+	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><form><div class=\"flexContainer\"><div class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"componentData.repoName\" required placeholder=\"Add name for the repository\"></md-input></div></div><div class=\"row row--rightAligned\"><div class=\"md-button-wrapper\"><button md-raised-button color=\"secondary\" type=\"button\" (click)=\"close()\">Cancel</button><button md-raised-button color=\"primary\" type=\"button\" (click)=\"send()\">Push</button></div></div></div></form></div>");;return buf.join("");
 	}
 
 /***/ },
@@ -87447,9 +87435,9 @@ webpackJsonp([0],[
 	    ProjectService.prototype.generate = function (repoName) {
 	        var params = {
 	            files: this.folderService.dataSource.getValue(),
-	            repository_name: repoName
+	            repositoryName: repoName
 	        };
-	        return this.httpService.post('/generate', repoName).map(function (res) { return res.json(); });
+	        return this.httpService.post('/generate', params).map(function (res) { return res.json(); });
 	    };
 	    ProjectService = __decorate([
 	        core_1.Injectable(), 
