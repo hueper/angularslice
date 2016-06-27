@@ -40,15 +40,12 @@ export class AreaComponent {
   }
 
   getRectangle() {
-    console.log("this.scaleWidth => ", this.scaleWidth);
-    console.log("this.scaleHeight => ", this.scaleHeight);
     let values = {
       left: `${this.areaData.left * this.scaleWidth}px`,
       top: `${this.areaData.top * this.scaleHeight}px`,
       width: `${this.areaData.getWidth() * this.scaleWidth}px`,
       height: `${this.areaData.getHeight() * this.scaleHeight}px`
     };
-    console.log("values => ", values);
     return values;
   }
 
