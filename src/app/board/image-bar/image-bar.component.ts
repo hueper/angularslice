@@ -6,48 +6,49 @@ import { Subscription } from "rxjs/Rx";
 import { ImageService, FolderService, DialogService, RawImageService } from "../../shared/services";
 import { Image, Folder } from "../../shared/models";
 import { SlicedImageComponent } from "../../sliced-image";
+import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 
 @Component({
   selector: 'image-bar',
   template: require('./image-bar.component.jade')(),
   styles: [require('./image-bar.component.scss')],
-  directives: [SlicedImageComponent, MD_ICON_DIRECTIVES]
+  directives: [SlicedImageComponent, MD_ICON_DIRECTIVES, MD_PROGRESS_CIRCLE_DIRECTIVES]
 })
 export class ImageBarComponent implements OnDestroy {
 
-  private images:Image[];
-  private imagesSubscribe:Subscription;
+  private images: Image[];
+  private imagesSubscribe: Subscription;
+  private loading: boolean = false;
 
-  private currentImage:Image;
-  private currentFolder:Folder;
+  private currentImage: Image;
+  private currentFolder: Folder;
 
-  private subscriptions:Subscription[] = [];
-  private hover:boolean = false;
-  private editImage:boolean = false;
+  private subscriptions: Subscription[] = [];
+  private hover: boolean = false;
+  private editImage: boolean = false;
 
-  constructor(
-    private imageService:ImageService,
-    private rawImageService:RawImageService,
-    private folderService:FolderService,
-    private el: ElementRef,
-    private dialogService: DialogService
-  ) {
+  constructor(private imageService: ImageService,
+              private rawImageService: RawImageService,
+              private folderService: FolderService,
+              private el: ElementRef,
+              private dialogService: DialogService) {
 
     this.subscriptions.push(this.folderService.currentSource.subscribe(currentSource => {
       this.currentFolder = currentSource;
-      if(this.imagesSubscribe) {
+      if (this.imagesSubscribe) {
         this.imagesSubscribe.unsubscribe();
       }
 
       this.imagesSubscribe = this.imageService
-        .filter(f => this.currentFolder && f.folderId === this.currentFolder._id)
-        .subscribe((images:Image[]) => {
-          this.images = images;
-          if (this.currentImage && this.images.length > 0 && _.filter(this.images, f => f._id === this.currentImage._id).length < 1) {
-            // The current image is not in current scope/folder
-            this.imageService.setCurrentImage(this.images[0]);
-          }
-        });
+                                 .filter(f => this.currentFolder && f.folderId === this.currentFolder._id)
+                                 .subscribe((images: Image[]) => {
+                                   this.images = images;
+                                   if (this.currentImage && this.images.length > 0 && _.filter(this.images,
+                                       f => f._id === this.currentImage._id).length < 1) {
+                                     // The current image is not in current scope/folder
+                                     this.imageService.setCurrentImage(this.images[0]);
+                                   }
+                                 });
     }));
 
 
@@ -62,12 +63,14 @@ export class ImageBarComponent implements OnDestroy {
     }));
 
   }
+
   setEditName(inputField) {
     this.editImage = true;
     setTimeout(() => {
       inputField.focus();
     });
   }
+
   saveImage(image) {
     this.imageService.update(image);
     this.editImage = false;
@@ -94,14 +97,20 @@ export class ImageBarComponent implements OnDestroy {
 
   onDrop(event) {
     event.preventDefault();
+    this.loading = true;
     var file = event.dataTransfer.files[0];
-    this.rawImageService.createFromFile(file);
+    this.rawImageService.createFromFile(file).then(res => {
+      this.loading = false;
+    });
     return false;
   }
 
   loadFile(event) {
+    this.loading = true;
     var file = event.srcElement.files[0];
-    this.rawImageService.createFromFile(file);
+    this.rawImageService.createFromFile(file).then(res => {
+      this.loading = false;
+    });
   }
 
   onDragEnter(event) {

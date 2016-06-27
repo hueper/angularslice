@@ -10,6 +10,7 @@ import { ImageBarComponent } from "./image-bar";
 import { Area, Folder, Image, NewArea } from "../shared/models";
 import { AreaComponent } from "./area";
 import { SlicedImageComponent } from "../sliced-image";
+import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 
 
 @Component({
@@ -19,12 +20,14 @@ import { SlicedImageComponent } from "../sliced-image";
   directives: [
     AreaComponent,
     ImageBarComponent,
-    SlicedImageComponent
+    SlicedImageComponent, MD_PROGRESS_CIRCLE_DIRECTIVES
   ],
 })
 export class BoardComponent implements OnDestroy {
   currentImage: Image;
   areaStyle: any = {};
+
+  private loading: boolean = false;
 
   private newArea: NewArea = null;
   private areas: Area[] = [];
@@ -109,14 +112,18 @@ export class BoardComponent implements OnDestroy {
 
   onDrop(event) {
     event.preventDefault();
+    this.loading = true;
     var file = event.dataTransfer.files[0];
     this.hover = false;
-    this.rawImageService.createFromFile(file);
+    this.rawImageService.createFromFile(file).then(result => {
+      this.loading = false;
+    });
     return false;
   }
 
   loadFile(event) {
     // TODO, move to config:
+    this.loading = true;
     const supportedFileExtension = ['jpg', 'png', 'jpeg'];
     const file = event.srcElement.files[0];
     const extension = file.name.split('.').pop();
@@ -126,7 +133,9 @@ export class BoardComponent implements OnDestroy {
       Humane.log(`Sorry we support just 'png' and 'jpg' files at the moment.`, { timeout: 4000, clickToClose: true });
       this.ga.eventTrack('uplaod', { category: extension });
     } else {
-      this.rawImageService.createFromFile(file);
+      this.rawImageService.createFromFile(file).then(result => {
+        this.loading = false;
+      });;
     }
   }
 

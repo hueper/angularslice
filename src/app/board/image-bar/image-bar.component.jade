@@ -12,6 +12,12 @@
       )
       .add +
       .text drag image here
+      .loadingContainer([hidden]='!loading')
+        .loading
+          .content
+            md-progress-circle(mode='indeterminate')
+              | Loading, please wait!
+
     .imageBox(*ngFor='let image of images',
       [ngClass]='{currentImage: currentImage && currentImage._id == image._id }')
       sliced-image.thumbnail((click)='setBoardImage(image)', [image]='image', [thumbnail]='true')

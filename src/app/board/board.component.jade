@@ -23,6 +23,12 @@
       i.material-icons(style='font-size: 20vmin;') panorama
       p.noImage No image attached yet
       p.dragAndDrop Drag and drop Image file onto this window to upload
+  .loadingContainer([hidden]='!loading')
+    .loading
+      .content
+        md-progress-circle(mode='indeterminate')
+          | Loading, please wait!
+
   .workingSpace(#workingSpace, *ngIf='images.length > 0')
     .imageContainer(
       *ngIf='currentImage',
@@ -38,4 +44,4 @@
         area([areaData]="newArea",
             *ngIf="newArea",
             [ngStyle]="areaStyle")
-  image-bar(*ngIf='images.length > 0')
+  image-bar(*ngIf='images.length > 0', [loading]='loading')
