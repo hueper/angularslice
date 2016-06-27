@@ -66760,6 +66760,7 @@ webpackJsonp([0],[
 	var models_1 = __webpack_require__(660);
 	var area_1 = __webpack_require__(723);
 	var sliced_image_1 = __webpack_require__(717);
+	var progress_circle_1 = __webpack_require__(711);
 	var BoardComponent = (function () {
 	    function BoardComponent(http, ga, areaService, rawImageService, imageService, folderService, renderer, dialogService) {
 	        var _this = this;
@@ -66772,6 +66773,7 @@ webpackJsonp([0],[
 	        this.renderer = renderer;
 	        this.dialogService = dialogService;
 	        this.areaStyle = {};
+	        this.loading = false;
 	        this.newArea = null;
 	        this.areas = [];
 	        this.folders = [];
@@ -66817,14 +66819,20 @@ webpackJsonp([0],[
 	        return false;
 	    };
 	    BoardComponent.prototype.onDrop = function (event) {
+	        var _this = this;
 	        event.preventDefault();
+	        this.loading = true;
 	        var file = event.dataTransfer.files[0];
 	        this.hover = false;
-	        this.rawImageService.createFromFile(file);
+	        this.rawImageService.createFromFile(file).then(function (result) {
+	            _this.loading = false;
+	        });
 	        return false;
 	    };
 	    BoardComponent.prototype.loadFile = function (event) {
+	        var _this = this;
 	        // TODO, move to config:
+	        this.loading = true;
 	        var supportedFileExtension = ['jpg', 'png', 'jpeg'];
 	        var file = event.srcElement.files[0];
 	        var extension = file.name.split('.').pop();
@@ -66834,7 +66842,10 @@ webpackJsonp([0],[
 	            this.ga.eventTrack('uplaod', { category: extension });
 	        }
 	        else {
-	            this.rawImageService.createFromFile(file);
+	            this.rawImageService.createFromFile(file).then(function (result) {
+	                _this.loading = false;
+	            });
+	            ;
 	        }
 	    };
 	    BoardComponent.prototype.onDragEnter = function (event) {
@@ -66989,7 +67000,7 @@ webpackJsonp([0],[
 	            directives: [
 	                area_1.AreaComponent,
 	                image_bar_1.ImageBarComponent,
-	                sliced_image_1.SlicedImageComponent
+	                sliced_image_1.SlicedImageComponent, progress_circle_1.MD_PROGRESS_CIRCLE_DIRECTIVES
 	            ],
 	        }), 
 	        __metadata('design:paramtypes', [http_1.Http, angulartics2_google_analytics_1.Angulartics2GoogleAnalytics, services_1.AreaService, services_1.RawImageService, services_1.ImageService, services_1.FolderService, core_1.Renderer, services_1.DialogService])
@@ -84792,36 +84803,39 @@ webpackJsonp([0],[
 	    };
 	    RawImageService.prototype.createFromFile = function (file) {
 	        var _this = this;
-	        var reader = new FileReader();
-	        reader.addEventListener('load', function (e) {
-	            var image = new Image();
-	            image.src = e.target.result;
-	            image.onload = function () {
-	                var width = image.width;
-	                var height = image.height;
-	                var fileType = image.src.split(';')[0].split(':')[1];
-	                _this.ngZone.run(function () {
-	                    var formData = new FormData();
-	                    formData.append('width', width);
-	                    formData.append('height', height);
-	                    formData.append('target', file, fileType);
-	                    _this.httpService.post('/rawImages/upload', formData)
-	                        .map(function (res) { return res.json(); })
-	                        .subscribe(function (res) {
-	                        var data = res.data;
-	                        if (res.success) {
-	                            _this.create(new models_1.RawImage(data._id, data.url, data.width, data.height, file.name));
-	                        }
-	                        else {
-	                            Humane.log('Sorry, something baaad happened o.O');
-	                        }
+	        return new Promise(function (resolve, reject) {
+	            var reader = new FileReader();
+	            reader.addEventListener('load', function (e) {
+	                var image = new Image();
+	                image.src = e.target.result;
+	                image.onload = function () {
+	                    var width = image.width;
+	                    var height = image.height;
+	                    var fileType = image.src.split(';')[0].split(':')[1];
+	                    _this.ngZone.run(function () {
+	                        var formData = new FormData();
+	                        formData.append('width', width);
+	                        formData.append('height', height);
+	                        formData.append('target', file, fileType);
+	                        _this.httpService.post('/rawImages/upload', formData)
+	                            .map(function (res) { return res.json(); })
+	                            .subscribe(function (res) {
+	                            var data = res.data;
+	                            if (res.success) {
+	                                _this.create(new models_1.RawImage(data._id, data.url, data.width, data.height, file.name));
+	                                resolve(res);
+	                            }
+	                            else {
+	                                Humane.log('Sorry, something baaad happened o.O');
+	                            }
+	                        });
 	                    });
-	                });
-	            };
-	        }, false);
-	        if (file) {
-	            reader.readAsDataURL(file);
-	        }
+	                };
+	            }, false);
+	            if (file) {
+	                reader.readAsDataURL(file);
+	            }
+	        });
 	    };
 	    RawImageService = __decorate([
 	        core_1.Injectable(), 
@@ -88032,6 +88046,7 @@ webpackJsonp([0],[
 	var _ = __webpack_require__(646);
 	var services_1 = __webpack_require__(648);
 	var sliced_image_1 = __webpack_require__(717);
+	var progress_circle_1 = __webpack_require__(711);
 	var ImageBarComponent = (function () {
 	    function ImageBarComponent(imageService, rawImageService, folderService, el, dialogService) {
 	        var _this = this;
@@ -88040,6 +88055,7 @@ webpackJsonp([0],[
 	        this.folderService = folderService;
 	        this.el = el;
 	        this.dialogService = dialogService;
+	        this.loading = false;
 	        this.subscriptions = [];
 	        this.hover = false;
 	        this.editImage = false;
@@ -88095,14 +88111,22 @@ webpackJsonp([0],[
 	        return false;
 	    };
 	    ImageBarComponent.prototype.onDrop = function (event) {
+	        var _this = this;
 	        event.preventDefault();
+	        this.loading = true;
 	        var file = event.dataTransfer.files[0];
-	        this.rawImageService.createFromFile(file);
+	        this.rawImageService.createFromFile(file).then(function (res) {
+	            _this.loading = false;
+	        });
 	        return false;
 	    };
 	    ImageBarComponent.prototype.loadFile = function (event) {
+	        var _this = this;
+	        this.loading = true;
 	        var file = event.srcElement.files[0];
-	        this.rawImageService.createFromFile(file);
+	        this.rawImageService.createFromFile(file).then(function (res) {
+	            _this.loading = false;
+	        });
 	    };
 	    ImageBarComponent.prototype.onDragEnter = function (event) {
 	        this.hover = true;
@@ -88128,7 +88152,7 @@ webpackJsonp([0],[
 	            selector: 'image-bar',
 	            template: __webpack_require__(721)(),
 	            styles: [__webpack_require__(722)],
-	            directives: [sliced_image_1.SlicedImageComponent, icon_1.MD_ICON_DIRECTIVES]
+	            directives: [sliced_image_1.SlicedImageComponent, icon_1.MD_ICON_DIRECTIVES, progress_circle_1.MD_PROGRESS_CIRCLE_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [services_1.ImageService, services_1.RawImageService, services_1.FolderService, core_1.ElementRef, services_1.DialogService])
 	    ], ImageBarComponent);
@@ -88273,14 +88297,14 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"image-bar\"><div class=\"box\"><input id=\"file\" type=\"file\" (change)=\"loadFile($event)\" class=\"hiddenInput\"><label #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"file\" class=\"imageBox placeholder\"><div class=\"add\">+</div><div class=\"text\">drag image here</div></label><div *ngFor=\"let image of images\" [ngClass]=\"{currentImage: currentImage &amp;&amp; currentImage._id == image._id }\" class=\"imageBox\"><sliced-image (click)=\"setBoardImage(image)\" [image]=\"image\" [thumbnail]=\"true\" class=\"thumbnail\"></sliced-image><div class=\"text\"><div class=\"name\"><div *ngIf=\"!editImage\" (click)=\"setEditName(imageEdit)\" class=\"nameHelper\">{{ image.name }}</div><input #imageEdit [hidden]=\"!editImage\" [(ngModel)]=\"image.name\" (blur)=\"saveImage(image)\" class=\"input imageNameInput\"><md-icon *ngIf=\"!editImage\" (click)=\"editImage = true\" class=\"editIcon\">edit</md-icon></div><md-icon (click)=\"deleteImage(image)\" class=\"deleteIcon\">delete</md-icon></div></div></div></div>");;return buf.join("");
+	buf.push("<div class=\"image-bar\"><div class=\"box\"><input id=\"file\" type=\"file\" (change)=\"loadFile($event)\" class=\"hiddenInput\"><label #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"file\" class=\"imageBox placeholder\"><div class=\"add\">+</div><div class=\"text\">drag image here</div><div [hidden]=\"!loading\" class=\"loadingContainer\"><div class=\"loading\"><div class=\"content\"><md-progress-circle mode=\"indeterminate\">Loading, please wait!</md-progress-circle></div></div></div></label><div *ngFor=\"let image of images\" [ngClass]=\"{currentImage: currentImage &amp;&amp; currentImage._id == image._id }\" class=\"imageBox\"><sliced-image (click)=\"setBoardImage(image)\" [image]=\"image\" [thumbnail]=\"true\" class=\"thumbnail\"></sliced-image><div class=\"text\"><div class=\"name\"><div *ngIf=\"!editImage\" (click)=\"setEditName(imageEdit)\" class=\"nameHelper\">{{ image.name }}</div><input #imageEdit [hidden]=\"!editImage\" [(ngModel)]=\"image.name\" (blur)=\"saveImage(image)\" class=\"input imageNameInput\"><md-icon *ngIf=\"!editImage\" (click)=\"editImage = true\" class=\"editIcon\">edit</md-icon></div><md-icon (click)=\"deleteImage(image)\" class=\"deleteIcon\">delete</md-icon></div></div></div></div>");;return buf.join("");
 	}
 
 /***/ },
 /* 722 */
 /***/ function(module, exports) {
 
-	module.exports = ".image-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  position: relative;\n}\n\n.image-bar .box {\n  margin: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.image-bar .imageBox {\n  margin: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  color: rgba(0, 0, 0, 0.54);\n  font-size: 16px;\n  line-height: normal;\n  cursor: pointer;\n  width: 190px;\n  position: relative;\n  background-color: white;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n}\n\n.image-bar .imageBox.currentImage .text {\n  color: #006064;\n}\n\n.image-bar .imageBox.currentImage .text .deleteIcon {\n  color: rgba(0, 0, 0, 0.54);\n}\n\n.image-bar .imageBox:hover .text {\n  color: #006064;\n}\n\n.image-bar .imageBox:hover .text .deleteIcon {\n  color: rgba(0, 0, 0, 0.54);\n}\n\n.image-bar .imageBox .text {\n  padding: 5px 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n\n.image-bar .imageBox .text .name {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n\n.image-bar .imageBox .text .name:hover .editIcon {\n  visibility: visible;\n  opacity: 0.5;\n}\n\n.image-bar .imageBox .text .name:hover .editIcon:hover {\n  opacity: 1;\n}\n\n.image-bar .imageBox .nameHelper {\n  display: inline-block;\n  vertical-align: middle;\n  width: 119px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  cursor: text;\n  border-bottom: 1px solid transparent;\n  padding-left: 5px;\n  white-space: nowrap;\n}\n\n.image-bar .imageBox .nameHelper:hover {\n  color: rgba(0, 0, 0, 0.3);\n}\n\n.image-bar .imageBox .imageNameInput {\n  border: none;\n  padding: 0;\n  padding-left: 5px;\n  font-family: Lato;\n  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);\n  color: rgba(0, 0, 0, 0.3);\n  font-size: 16px;\n  width: calc(100% - 10px);\n  box-sizing: border-box;\n  height: 24px;\n  margin-right: 5px;\n}\n\n.image-bar .imageBox .editIcon {\n  font-size: 16px;\n  margin-left: 5px;\n  vertical-align: middle;\n  width: auto;\n  height: auto;\n  visibility: hidden;\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n  opacity: 0;\n  -webkit-transition: opacity 230ms;\n  transition: opacity 230ms;\n}\n\n.image-bar .imageBox .deleteIcon {\n  font-size: 20px;\n  cursor: pointer;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 20px;\n          flex: 0 0 20px;\n  width: 20px;\n  height: 20px;\n}\n\n.image-bar .imageBox .deleteIcon:hover {\n  color: #006064 !important;\n}\n\n.image-bar .imageBox .add {\n  line-height: 50%;\n  font-size: 72px;\n  text-align: center;\n  margin-bottom: 5px;\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n}\n\n.image-bar .imageBox.placeholder {\n  padding: 15px;\n  border: 2px dashed rgba(0, 0, 0, 0.2);\n  background-color: transparent;\n  box-shadow: none;\n  color: rgba(0, 0, 0, 0.3);\n  -webkit-transition: border-color 230ms;\n  transition: border-color 230ms;\n}\n\n.image-bar .imageBox.placeholder .text {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  border-top: none;\n}\n\n.image-bar .imageBox.placeholder:hover,\n.image-bar .imageBox.placeholder.hover {\n  border-color: #006064;\n}\n\n.image-bar .imageBox.placeholder:hover .add,\n.image-bar .imageBox.placeholder.hover .add {\n  color: #006064;\n}\n\n.image-bar .thumbnail {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  width: 100%;\n  max-height: calc(100% - 36px);\n}\n\n.image-bar .hiddenInput {\n  display: none;\n}"
+	module.exports = ".image-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  position: relative;\n}\n\n.image-bar .box {\n  margin: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.image-bar .imageBox {\n  margin: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  color: rgba(0, 0, 0, 0.54);\n  font-size: 16px;\n  line-height: normal;\n  cursor: pointer;\n  width: 190px;\n  position: relative;\n  background-color: white;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n}\n\n.image-bar .imageBox.currentImage .text {\n  color: #006064;\n}\n\n.image-bar .imageBox.currentImage .text .deleteIcon {\n  color: rgba(0, 0, 0, 0.54);\n}\n\n.image-bar .imageBox:hover .text {\n  color: #006064;\n}\n\n.image-bar .imageBox:hover .text .deleteIcon {\n  color: rgba(0, 0, 0, 0.54);\n}\n\n.image-bar .imageBox .text {\n  padding: 5px 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n\n.image-bar .imageBox .text .name {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n\n.image-bar .imageBox .text .name:hover .editIcon {\n  visibility: visible;\n  opacity: 0.5;\n}\n\n.image-bar .imageBox .text .name:hover .editIcon:hover {\n  opacity: 1;\n}\n\n.image-bar .imageBox .nameHelper {\n  display: inline-block;\n  vertical-align: middle;\n  width: 119px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  cursor: text;\n  border-bottom: 1px solid transparent;\n  padding-left: 5px;\n  white-space: nowrap;\n}\n\n.image-bar .imageBox .nameHelper:hover {\n  color: rgba(0, 0, 0, 0.3);\n}\n\n.image-bar .imageBox .imageNameInput {\n  border: none;\n  padding: 0;\n  padding-left: 5px;\n  font-family: Lato;\n  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);\n  color: rgba(0, 0, 0, 0.3);\n  font-size: 16px;\n  width: calc(100% - 10px);\n  box-sizing: border-box;\n  height: 24px;\n  margin-right: 5px;\n}\n\n.image-bar .imageBox .editIcon {\n  font-size: 16px;\n  margin-left: 5px;\n  vertical-align: middle;\n  width: auto;\n  height: auto;\n  visibility: hidden;\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n  opacity: 0;\n  -webkit-transition: opacity 230ms;\n  transition: opacity 230ms;\n}\n\n.image-bar .imageBox .deleteIcon {\n  font-size: 20px;\n  cursor: pointer;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 20px;\n          flex: 0 0 20px;\n  width: 20px;\n  height: 20px;\n}\n\n.image-bar .imageBox .deleteIcon:hover {\n  color: #006064 !important;\n}\n\n.image-bar .imageBox .add {\n  line-height: 50%;\n  font-size: 72px;\n  text-align: center;\n  margin-bottom: 5px;\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n}\n\n.image-bar .imageBox.placeholder {\n  padding: 15px;\n  border: 2px dashed rgba(0, 0, 0, 0.2);\n  background-color: transparent;\n  box-shadow: none;\n  color: rgba(0, 0, 0, 0.3);\n  -webkit-transition: border-color 230ms;\n  transition: border-color 230ms;\n}\n\n.image-bar .imageBox.placeholder .text {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  border-top: none;\n}\n\n.image-bar .imageBox.placeholder:hover,\n.image-bar .imageBox.placeholder.hover {\n  border-color: #006064;\n}\n\n.image-bar .imageBox.placeholder:hover .add,\n.image-bar .imageBox.placeholder.hover .add {\n  color: #006064;\n}\n\n.image-bar .thumbnail {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  width: 100%;\n  max-height: calc(100% - 36px);\n}\n\n.image-bar .hiddenInput {\n  display: none;\n}\n\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: rgba(255, 255, 255, 0.8);\n  text-align: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  color: black;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  z-index: 10;\n}\n\n.loading .content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}"
 
 /***/ },
 /* 723 */
@@ -88395,7 +88419,7 @@ webpackJsonp([0],[
 /* 727 */
 /***/ function(module, exports) {
 
-	module.exports = ".board {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: hidden;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  background: #fafafa;\n}\n\n.board .workingSpace {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.board .imageContainer {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.board .imageContainer .boardImage {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n\n.board image-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 130px;\n          flex: 0 0 130px;\n  overflow: auto;\n  position: relative;\n  z-index: 2;\n}\n\n.board sliced-image {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n\n.board .toolbar {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 50px;\n          flex: 0 0 50px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.2);\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 0 20px;\n  background: white;\n  font-size: 16px;\n  box-sizing: content-box;\n}\n\n.board .toolbar .title.active {\n  color: #006064;\n  cursor: pointer;\n}\n\n.board .toolbar .title.active:hover {\n  color: rgba(0, 0, 0, 0.3);\n}\n\n.board .toolbar .input {\n  border: none;\n  padding: 0;\n  margin: 0;\n  font-size: 16px;\n  font-family: Lato;\n  color: rgba(0, 0, 0, 0.3);\n  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);\n}\n\n.board .toolbar .childrenSymbol {\n  color: #006064;\n  padding: 0 20px;\n}\n\n.board .toolbar .areaTitle {\n  color: #006064;\n  cursor: pointer;\n}\n\n.board .fileUploadPlaceholder {\n  margin: 50px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  border: 3px dashed rgba(0, 0, 0, 0.2);\n  border-radius: 10px;\n  color: rgba(0, 0, 0, 0.54);\n  cursor: pointer;\n  -webkit-transition: border-color 230ms;\n  transition: border-color 230ms;\n}\n\n.board .fileUploadPlaceholder i {\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n}\n\n.board .fileUploadPlaceholder:hover {\n  border-color: #006064;\n}\n\n.board .fileUploadPlaceholder:hover i {\n  color: #006064;\n}\n\n.board .fileUploadPlaceholder .centerWrapper {\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  cursor: pointer;\n}\n\n.board .fileUploadPlaceholder .noImage {\n  font-weight: bold;\n}\n\n.board .hiddenInput {\n  display: none;\n}"
+	module.exports = ".board {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: hidden;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  background: #fafafa;\n}\n\n.board .workingSpace {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.board .imageContainer {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.board .imageContainer .boardImage {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n\n.board image-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 130px;\n          flex: 0 0 130px;\n  overflow: auto;\n  position: relative;\n  z-index: 2;\n}\n\n.board sliced-image {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n\n.board .toolbar {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 50px;\n          flex: 0 0 50px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.2);\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 0 20px;\n  background: white;\n  font-size: 16px;\n  box-sizing: content-box;\n}\n\n.board .toolbar .title.active {\n  color: #006064;\n  cursor: pointer;\n}\n\n.board .toolbar .title.active:hover {\n  color: rgba(0, 0, 0, 0.3);\n}\n\n.board .toolbar .input {\n  border: none;\n  padding: 0;\n  margin: 0;\n  font-size: 16px;\n  font-family: Lato;\n  color: rgba(0, 0, 0, 0.3);\n  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);\n}\n\n.board .toolbar .childrenSymbol {\n  color: #006064;\n  padding: 0 20px;\n}\n\n.board .toolbar .areaTitle {\n  color: #006064;\n  cursor: pointer;\n}\n\n.board .fileUploadPlaceholder {\n  margin: 50px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  border: 3px dashed rgba(0, 0, 0, 0.2);\n  border-radius: 10px;\n  color: rgba(0, 0, 0, 0.54);\n  cursor: pointer;\n  -webkit-transition: border-color 230ms;\n  transition: border-color 230ms;\n}\n\n.board .fileUploadPlaceholder i {\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n}\n\n.board .fileUploadPlaceholder:hover {\n  border-color: #006064;\n}\n\n.board .fileUploadPlaceholder:hover i {\n  color: #006064;\n}\n\n.board .fileUploadPlaceholder .centerWrapper {\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  cursor: pointer;\n}\n\n.board .fileUploadPlaceholder .noImage {\n  font-weight: bold;\n}\n\n.board .hiddenInput {\n  display: none;\n}\n\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: rgba(255, 255, 255, 0.8);\n  text-align: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  color: black;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  z-index: 10;\n}\n\n.loading .content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}"
 
 /***/ },
 /* 728 */
@@ -88408,7 +88432,7 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"board\"><!--input(type=\"file\", (change)=\"loadFile($event)\")--><!--.toolbar--><!--  .title(*ngIf='!componentEdit', [ngClass]='{active: !currentArea}', (click)='setComponentEdit(\"component\")') {{ currentFolder.name }}--><!--  input.input.titleInput(*ngIf='!currentArea && componentEdit', [(ngModel)]='currentFolder.name', (blur)='saveComponentEdit(\"component\")')--><!----><!--  .childrenSymbol(*ngIf='currentArea') >--><!----><!--  .areaTitle(*ngIf='currentArea && !areaEdit', (click)='setComponentEdit(\"area\", true)') {{ currentAreaFolder.name }}--><!--  input.input.areaTitleInput(*ngIf='currentArea && areaEdit', [(ngModel)]='currentAreaFolder.name', (blur)='saveComponentEdit(\"area\")')--><div *ngIf=\"images.length &lt;= 0\" class=\"fileUploadPlaceholder\"><input id=\"fileFull\" type=\"file\" (change)=\"loadFile($event)\" class=\"hiddenInput\"><label #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"fileFull\" class=\"centerWrapper\"><i style=\"font-size: 20vmin;\" class=\"material-icons\">panorama</i><p class=\"noImage\">No image attached yet</p><p class=\"dragAndDrop\">Drag and drop Image file onto this window to upload</p></label></div><div #workingSpace *ngIf=\"images.length &gt; 0\" class=\"workingSpace\"><div *ngIf=\"currentImage\" (mousedown)=\"onMouseDown($event, imageContainer, workingSpace)\" class=\"imageContainer\"><sliced-image [image]=\"currentImage\" #imageContainer [thumbnail]=\"false\"><area *ngFor=\"let area of areas\" [scaleWidth]=\"imageContainer.scaleWidth\" [scaleHeight]=\"imageContainer.scaleHeight\" [areaData]=\"area\" [ngStyle]=\"areaStyle\" (click)=\"setActiveArea(area)\"><area [areaData]=\"newArea\" *ngIf=\"newArea\" [ngStyle]=\"areaStyle\"></sliced-image></div></div><image-bar *ngIf=\"images.length &gt; 0\"></image-bar></div>");;return buf.join("");
+	buf.push("<div class=\"board\"><!--input(type=\"file\", (change)=\"loadFile($event)\")--><!--.toolbar--><!--  .title(*ngIf='!componentEdit', [ngClass]='{active: !currentArea}', (click)='setComponentEdit(\"component\")') {{ currentFolder.name }}--><!--  input.input.titleInput(*ngIf='!currentArea && componentEdit', [(ngModel)]='currentFolder.name', (blur)='saveComponentEdit(\"component\")')--><!----><!--  .childrenSymbol(*ngIf='currentArea') >--><!----><!--  .areaTitle(*ngIf='currentArea && !areaEdit', (click)='setComponentEdit(\"area\", true)') {{ currentAreaFolder.name }}--><!--  input.input.areaTitleInput(*ngIf='currentArea && areaEdit', [(ngModel)]='currentAreaFolder.name', (blur)='saveComponentEdit(\"area\")')--><div *ngIf=\"images.length &lt;= 0\" class=\"fileUploadPlaceholder\"><input id=\"fileFull\" type=\"file\" (change)=\"loadFile($event)\" class=\"hiddenInput\"><label #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"fileFull\" class=\"centerWrapper\"><i style=\"font-size: 20vmin;\" class=\"material-icons\">panorama</i><p class=\"noImage\">No image attached yet</p><p class=\"dragAndDrop\">Drag and drop Image file onto this window to upload</p></label></div><div [hidden]=\"!loading\" class=\"loadingContainer\"><div class=\"loading\"><div class=\"content\"><md-progress-circle mode=\"indeterminate\">Loading, please wait!</md-progress-circle></div></div></div><div #workingSpace *ngIf=\"images.length &gt; 0\" class=\"workingSpace\"><div *ngIf=\"currentImage\" (mousedown)=\"onMouseDown($event, imageContainer, workingSpace)\" class=\"imageContainer\"><sliced-image [image]=\"currentImage\" #imageContainer [thumbnail]=\"false\"><area *ngFor=\"let area of areas\" [scaleWidth]=\"imageContainer.scaleWidth\" [scaleHeight]=\"imageContainer.scaleHeight\" [areaData]=\"area\" [ngStyle]=\"areaStyle\" (click)=\"setActiveArea(area)\"><area [areaData]=\"newArea\" *ngIf=\"newArea\" [ngStyle]=\"areaStyle\"></sliced-image></div></div><image-bar *ngIf=\"images.length &gt; 0\" [loading]=\"loading\"></image-bar></div>");;return buf.join("");
 	}
 
 /***/ },
