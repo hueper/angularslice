@@ -4,14 +4,13 @@ import { MD_ICON_DIRECTIVES } from '@angular2-material/icon';
 import { Observable } from 'rxjs';
 
 const Humane = require('humane-js');
-import * as _ from 'lodash';
 
 import { BoardComponent } from "../board";
 import { SidebarComponent } from "../sidebar";
 import { ToolbarComponent } from "../toolbar";
 import { DialogService, ImageService, FolderService, ProjectService, UserService } from "../shared/services";
 import { Folder } from "../shared/models";
-import { DialogRef } from "angular2-modal/angular2-modal";
+import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 
 
 @Component({
@@ -22,16 +21,19 @@ import { DialogRef } from "angular2-modal/angular2-modal";
     BoardComponent,
     SidebarComponent,
     ToolbarComponent,
-    MD_ICON_DIRECTIVES
+    MD_ICON_DIRECTIVES,
+    MD_PROGRESS_CIRCLE_DIRECTIVES
   ]
 })
 export class EditorComponent {
   logo: any;
   sub: any;
   currentFolder: Folder;
+  private loading: boolean = false;
 
   pushToGithub() {
     this.dialogService.openGithubDialog().then((res) => {
+      this.loading = true;
       this.projectService.generate(res).subscribe((res: any) => {
         console.log("res => ", res);
         if (res.success) {
@@ -39,6 +41,7 @@ export class EditorComponent {
         } else {
           Humane.log('Fuck me');
         }
+        this.loading = false;
       });
     }).catch(err=> {
 

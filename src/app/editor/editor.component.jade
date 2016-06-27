@@ -26,3 +26,8 @@ toolbar
   sidebar
   board
 //footer
+.loadingContainer([hidden]='!loading')
+  .loading
+    .content
+      md-progress-circle(mode='indeterminate')
+        | Loading, please wait!

@@ -12,6 +12,7 @@
 .editor {
   flex-direction: row;
 }
+
 sidebar {
   display: flex;
   min-width: 300px;
@@ -48,10 +49,9 @@ board {
 .c-header {
   height: 60px;
   background: $primary;
-  box-shadow:
-    0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+  0 3px 1px -2px rgba(0, 0, 0, 0.2),
+  0 1px 5px 0 rgba(0, 0, 0, 0.12);
   position: relative;
   z-index: 2;
 }
@@ -59,10 +59,9 @@ board {
 .c-toolbar {
   height: 50px;
   background-color: rgba(0, 0, 0, 0.05);
-  box-shadow:
-    0 2px 2px 0 rgba(0, 0, 0, 0.07),
-    0 3px 1px -2px rgba(0, 0, 0, 0.1),
-    0 1px 5px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07),
+  0 3px 1px -2px rgba(0, 0, 0, 0.1),
+  0 1px 5px 0 rgba(0, 0, 0, 0.06);
   position: relative;
   z-index: 3;
   //border-bottom: 1px solid gray;
@@ -78,6 +77,7 @@ board {
     margin-right: 10px;
   }
 }
+
 md-icon {
   &.disabled {
     color: rgba(0, 0, 0, 0.26);
@@ -101,9 +101,11 @@ md-icon {
   height: 100%;
   align-items: center;
 }
+
 .folderName {
   margin-right: 10px;
 }
+
 .editFolderName {
   cursor: pointer;
 }
@@ -126,4 +128,27 @@ md-icon {
   flex: 1;
   height: 100%;
   margin: 0 10px;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  color: black;
+  display: flex;
+  z-index: 10;
+
+  .content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
