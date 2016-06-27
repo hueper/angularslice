@@ -100,6 +100,7 @@ export class ImageBarComponent implements OnDestroy {
     this.loading = true;
     var file = event.dataTransfer.files[0];
     this.rawImageService.createFromFile(file).then(res => {
+      console.log("res => ", res);
       this.loading = false;
     });
     return false;
@@ -109,6 +110,7 @@ export class ImageBarComponent implements OnDestroy {
     this.loading = true;
     var file = event.srcElement.files[0];
     this.rawImageService.createFromFile(file).then(res => {
+      console.log("res => ", res);
       this.loading = false;
     });
   }
