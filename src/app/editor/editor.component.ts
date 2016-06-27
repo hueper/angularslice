@@ -48,12 +48,12 @@ export class EditorComponent {
   export() {
     this.dialogService.openExportDialog().then(result => {
       console.log("result => ", result);
-      // if (result == "github") {
-      //   this.pushToGithub();
-      // } else {
-      //   // TODO: Show an alert to the user for we're not ready with those functions yet
-      //   alert("WUUUUUUUUT????");
-      // }
+      if (result == "github") {
+        this.pushToGithub();
+      } else {
+        // TODO: Show an alert to the user for we're not ready with those functions yet
+        alert("WUUUUUUUUT????");
+      }
     }).catch(err => {
       console.log(err);
     });
