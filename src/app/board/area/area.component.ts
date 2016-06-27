@@ -12,20 +12,23 @@ import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
   directives: [MD_ICON_DIRECTIVES]
 })
 export class AreaComponent {
-  
+
   @Input() areaData: Area;
   @Input() isHovered: boolean;
-  
+
+  @Input() scaleWidth: number = 1;
+  @Input() scaleHeight: number = 1;
+
   constructor(private folderService: FolderService,
               private dialogService: DialogService,
               private areaService: AreaService) {
-    
+
   }
-  
+
   goToComponent() {
     this.folderService.setCurrentById(this.areaData.folderId);
   }
-  
+
   deleteArea() {
     // Confirm Dialog
     this.dialogService.openConfirmDialog().then((result) => {
@@ -35,14 +38,18 @@ export class AreaComponent {
       }
     });
   }
-  
+
   getRectangle() {
-    return {
-      left: `${this.areaData.left}px`,
-      top: `${this.areaData.top}px`,
-      width: `${this.areaData.getWidth()}px`,
-      height: `${this.areaData.getHeight()}px`
+    console.log("this.scaleWidth => ", this.scaleWidth);
+    console.log("this.scaleHeight => ", this.scaleHeight);
+    let values = {
+      left: `${this.areaData.left * this.scaleWidth}px`,
+      top: `${this.areaData.top * this.scaleHeight}px`,
+      width: `${this.areaData.getWidth() * this.scaleWidth}px`,
+      height: `${this.areaData.getHeight() * this.scaleHeight}px`
     };
+    console.log("values => ", values);
+    return values;
   }
-  
+
 }

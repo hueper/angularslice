@@ -54,31 +54,17 @@ export class BoardComponent implements OnDestroy {
   private areaEdit: boolean;
   private componentEdit: boolean;
 
-  constructor(
-    private http: Http,
-    private ga: Angulartics2GoogleAnalytics,
-    private areaService: AreaService,
-    private rawImageService: RawImageService,
-    private imageService: ImageService,
-    private folderService: FolderService,
-    private renderer: Renderer,
-    private dialogService: DialogService
-  ) {
-
-    // TODO: put the request into a separate service
-    // const image = localStorage.getItem('image');
-    // const params = { width: image.width, height: image.height, target: image.src };
-    // var headers = new Headers();
-    // headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    //
-    // const params = JSON.parse(localStorage.getItem('testrequest'));
-    // this.http.post('http://192.168.1.102:3000/api/rawImages/upload', params, { headers: headers }).subscribe(response => {
-    //   console.log(response, 'HERE IS THE RESP');
-    //   // this.create(new RawImage(binaryData, width, height, file.name));
-    // });
+  constructor(private http: Http,
+              private ga: Angulartics2GoogleAnalytics,
+              private areaService: AreaService,
+              private rawImageService: RawImageService,
+              private imageService: ImageService,
+              private folderService: FolderService,
+              private renderer: Renderer,
+              private dialogService: DialogService) {
 
     // Subscribe for folders
-    this.subscriptions.push(this.folderService.dataSource.subscribe((folders:Folder[]) => {
+    this.subscriptions.push(this.folderService.dataSource.subscribe((folders: Folder[]) => {
       this.folders = folders;
     }));
 
@@ -90,25 +76,26 @@ export class BoardComponent implements OnDestroy {
     }));
 
     // Look for new images without filtering
-    this.subscriptions.push(this.imageService.dataSource.subscribe((data:Image[]) => {
+    this.subscriptions.push(this.imageService.dataSource.subscribe((data: Image[]) => {
       this.images = data;
     }));
 
-    this.subscriptions.push(this.imageService.currentSource.subscribe((data:Image) => {
+    this.subscriptions.push(this.imageService.currentSource.subscribe((data: Image) => {
       this.currentImage = data;
-      if(this.areaSubscription) {
+      if (this.areaSubscription) {
         this.areaSubscription.unsubscribe();
       }
       // Subscribe for areas
-      this.areaSubscription = this.areaService.filter(instance => instance.imageId === this.currentImage._id).subscribe((areas:Area[]) => {
-        this.areas = areas;
-      });
+      this.areaSubscription = this.areaService.filter(instance => instance.imageId === this.currentImage._id).subscribe(
+        (areas: Area[]) => {
+          this.areas = areas;
+        });
       this.subscriptions.push(this.areaSubscription);
     }));
 
     this.subscriptions.push(this.areaService.currentSource.subscribe((data: Area) => {
       this.currentArea = data;
-      if(data) {
+      if (data) {
         this.currentAreaFolder = this.folderService.findById(data.folderId);
       }
     }));
@@ -123,7 +110,7 @@ export class BoardComponent implements OnDestroy {
   onDrop(event) {
     event.preventDefault();
     var file = event.dataTransfer.files[0];
-    this.hover =false;
+    this.hover = false;
     this.rawImageService.createFromFile(file);
     return false;
   }
@@ -156,20 +143,22 @@ export class BoardComponent implements OnDestroy {
   setActiveArea(area) {
     this.areaService.setCurrentById(area._id);
   }
+
   setComponentEdit(type) {
-    if(type == 'area') {
+    if (type == 'area') {
       this.areaEdit = true;
     }
-    if(type == 'component') {
+    if (type == 'component') {
       this.componentEdit = true;
     }
   }
+
   saveComponentEdit(type) {
-    if(type == 'area') {
+    if (type == 'area') {
       this.folderService.update(this.currentAreaFolder);
       this.areaEdit = false;
     }
-    if(type == 'component') {
+    if (type == 'component') {
       this.folderService.update(this.currentFolder);
       this.componentEdit = false;
     }
@@ -251,17 +240,18 @@ export class BoardComponent implements OnDestroy {
    * @returns {boolean}
    */
   onMouseUp(event) {
-    if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea) && this.newArea.width > 7 && this.newArea.height > 7 ) {
+    if (!_.isEmpty(this.newArea) && !this.isCrossingOther(
+        this.newArea) && this.newArea.width > 7 && this.newArea.height > 7) {
       this.dialogService.openCreateComponentDialog()
-        .then((data) => {
-          this.createComponentDialogCallback(this.newArea, data);
-          this.newArea = null;
-          this.areaStyle = {};
-        })
-        .catch(error => {
-          this.newArea = null;
-          this.areaStyle = {};
-        });
+          .then((data) => {
+            this.createComponentDialogCallback(this.newArea, data);
+            this.newArea = null;
+            this.areaStyle = {};
+          })
+          .catch(error => {
+            this.newArea = null;
+            this.areaStyle = {};
+          });
     } else {
       this.newArea = null;
       this.areaStyle = {};
@@ -314,15 +304,20 @@ export class BoardComponent implements OnDestroy {
       let image = _.last(this.images);
       area.setImageId(this.currentImage._id);
     }
+    area.x = area.x / area.scaleWidth;
+    area.y = area.y / area.scaleHeight;
+    area.width = area.width / area.scaleWidth;
+    area.height = area.height / area.scaleHeight;
+
     this.areaService.create(area);
 
   }
 
-  private isCrossingOther(area:Area):boolean {
+  private isCrossingOther(area: Area): boolean {
     return !!(<any>this.areas).find((cmp) => cmp.overLaps(area));
   }
 
-  private findComponent(x, y):Folder {
+  private findComponent(x, y): Folder {
     const component = (<any>this.areas).find((cmp) => cmp.contains(x, y));
     return component;
   }

@@ -21,6 +21,10 @@ export class DialogService {
                .open(GithubDialogComponent, data)
                .then(dialog => {
                  return dialog.result;
+               })
+               .catch(err => {
+                 console.log(err);
+                 return null;
                });
   }
 
@@ -43,6 +47,10 @@ export class DialogService {
                .open(ComponentDialogComponent, data)
                .then(dialog => {
                  return dialog.result;
+               })
+               .catch(err => {
+                 console.log(err);
+                 return null;
                });
   }
 
@@ -53,5 +61,9 @@ export class DialogService {
                .then(dialog => {
                  return dialog.result;
                })
+               .catch(err => {
+                 console.log(err);
+                 return null;
+               });
   }
 }
