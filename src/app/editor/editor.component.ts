@@ -11,6 +11,7 @@ import { SidebarComponent } from "../sidebar";
 import { ToolbarComponent } from "../toolbar";
 import { DialogService, ImageService, FolderService, ProjectService, UserService } from "../shared/services";
 import { Folder } from "../shared/models";
+import { DialogRef } from "angular2-modal/angular2-modal";
 
 
 @Component({
@@ -46,11 +47,13 @@ export class EditorComponent {
 
   export() {
     this.dialogService.openExportDialog().then(result => {
-      if (result === "github") {
-        this.pushToGithub();
-      } else {
-        alert("WUUUUUUUUT????");
-      }
+      console.log("result => ", result);
+      // if (result == "github") {
+      //   this.pushToGithub();
+      // } else {
+      //   // TODO: Show an alert to the user for we're not ready with those functions yet
+      //   alert("WUUUUUUUUT????");
+      // }
     }).catch(err => {
       console.log(err);
     });

@@ -46,7 +46,7 @@ export class ExportDialogComponent implements ModalComponent<BSModalContext> {
 
   githubAuth() {
     this.loading = true;
-    const authUrl = '/auth/github';
+    const authUrl = 'http://localhost:3000/auth/github';
     const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600');
 
     _oauthWindow.addEventListener('unload', () => {
@@ -59,8 +59,8 @@ export class ExportDialogComponent implements ModalComponent<BSModalContext> {
           //TODO: the user authentication was successfull, we can do whatever we want ;)
         } else {
           this.loading = false;
-          console.log("accessToken => ", user);
           Humane.log(`Sorry, we couldn't authenticate you. Please try again.`, { addnCls: 'humane-error' });
+          this.close();
         }
       });
       _oauthWindow.removeEventListener('unload');

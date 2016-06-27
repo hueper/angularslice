@@ -24,7 +24,7 @@ export class DialogService {
                });
   }
 
-  openExportDialog() {
+  openExportDialog(): Promise<any> {
     const data = new BSModalContext();
     return this.modal
                .open(ExportDialogComponent, data)
@@ -32,7 +32,8 @@ export class DialogService {
                  return dialog.result;
                })
                .catch(err => {
-                 console.log(err)
+                 console.log(err);
+                 return null;
                });
   }
 
