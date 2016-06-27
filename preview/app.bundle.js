@@ -66762,17 +66762,6 @@ webpackJsonp([0],[
 	var sliced_image_1 = __webpack_require__(717);
 	var BoardComponent = (function () {
 	    function BoardComponent(http, ga, areaService, rawImageService, imageService, folderService, renderer, dialogService) {
-	        // TODO: put the request into a separate service
-	        // const image = localStorage.getItem('image');
-	        // const params = { width: image.width, height: image.height, target: image.src };
-	        // var headers = new Headers();
-	        // headers.append('Content-Type', 'application/x-www-form-urlencoded');
-	        //
-	        // const params = JSON.parse(localStorage.getItem('testrequest'));
-	        // this.http.post('http://192.168.1.102:3000/api/rawImages/upload', params, { headers: headers }).subscribe(response => {
-	        //   console.log(response, 'HERE IS THE RESP');
-	        //   // this.create(new RawImage(binaryData, width, height, file.name));
-	        // });
 	        var _this = this;
 	        this.http = http;
 	        this.ga = ga;
@@ -66979,6 +66968,10 @@ webpackJsonp([0],[
 	            var image = _.last(this.images);
 	            area.setImageId(this.currentImage._id);
 	        }
+	        area.x = area.x / area.scaleWidth;
+	        area.y = area.y / area.scaleHeight;
+	        area.width = area.width / area.scaleWidth;
+	        area.height = area.height / area.scaleHeight;
 	        this.areaService.create(area);
 	    };
 	    BoardComponent.prototype.isCrossingOther = function (area) {
@@ -84920,6 +84913,10 @@ webpackJsonp([0],[
 	            .open(dialogs_1.GithubDialogComponent, data)
 	            .then(function (dialog) {
 	            return dialog.result;
+	        })
+	            .catch(function (err) {
+	            console.log(err);
+	            return null;
 	        });
 	    };
 	    DialogService.prototype.openExportDialog = function () {
@@ -84940,6 +84937,10 @@ webpackJsonp([0],[
 	            .open(dialogs_1.ComponentDialogComponent, data)
 	            .then(function (dialog) {
 	            return dialog.result;
+	        })
+	            .catch(function (err) {
+	            console.log(err);
+	            return null;
 	        });
 	    };
 	    DialogService.prototype.openConfirmDialog = function () {
@@ -84948,6 +84949,10 @@ webpackJsonp([0],[
 	            .open(dialogs_1.ConfirmDialogComponent, data)
 	            .then(function (dialog) {
 	            return dialog.result;
+	        })
+	            .catch(function (err) {
+	            console.log(err);
+	            return null;
 	        });
 	    };
 	    DialogService = __decorate([
@@ -88311,6 +88316,8 @@ webpackJsonp([0],[
 	        this.folderService = folderService;
 	        this.dialogService = dialogService;
 	        this.areaService = areaService;
+	        this.scaleWidth = 1;
+	        this.scaleHeight = 1;
 	    }
 	    AreaComponent.prototype.goToComponent = function () {
 	        this.folderService.setCurrentById(this.areaData.folderId);
@@ -88326,12 +88333,13 @@ webpackJsonp([0],[
 	        });
 	    };
 	    AreaComponent.prototype.getRectangle = function () {
-	        return {
-	            left: this.areaData.left + "px",
-	            top: this.areaData.top + "px",
-	            width: this.areaData.getWidth() + "px",
-	            height: this.areaData.getHeight() + "px"
+	        var values = {
+	            left: this.areaData.left * this.scaleWidth + "px",
+	            top: this.areaData.top * this.scaleHeight + "px",
+	            width: this.areaData.getWidth() * this.scaleWidth + "px",
+	            height: this.areaData.getHeight() * this.scaleHeight + "px"
 	        };
+	        return values;
 	    };
 	    __decorate([
 	        core_1.Input(), 
@@ -88341,6 +88349,14 @@ webpackJsonp([0],[
 	        core_1.Input(), 
 	        __metadata('design:type', Boolean)
 	    ], AreaComponent.prototype, "isHovered", void 0);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Number)
+	    ], AreaComponent.prototype, "scaleWidth", void 0);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Number)
+	    ], AreaComponent.prototype, "scaleHeight", void 0);
 	    AreaComponent = __decorate([
 	        core_1.Component({
 	            selector: 'area',
@@ -88392,7 +88408,7 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"board\"><!--input(type=\"file\", (change)=\"loadFile($event)\")--><!--.toolbar--><!--  .title(*ngIf='!componentEdit', [ngClass]='{active: !currentArea}', (click)='setComponentEdit(\"component\")') {{ currentFolder.name }}--><!--  input.input.titleInput(*ngIf='!currentArea && componentEdit', [(ngModel)]='currentFolder.name', (blur)='saveComponentEdit(\"component\")')--><!----><!--  .childrenSymbol(*ngIf='currentArea') >--><!----><!--  .areaTitle(*ngIf='currentArea && !areaEdit', (click)='setComponentEdit(\"area\", true)') {{ currentAreaFolder.name }}--><!--  input.input.areaTitleInput(*ngIf='currentArea && areaEdit', [(ngModel)]='currentAreaFolder.name', (blur)='saveComponentEdit(\"area\")')--><div *ngIf=\"images.length &lt;= 0\" class=\"fileUploadPlaceholder\"><input id=\"fileFull\" type=\"file\" (change)=\"loadFile($event)\" class=\"hiddenInput\"><label #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"fileFull\" class=\"centerWrapper\"><i style=\"font-size: 20vmin;\" class=\"material-icons\">panorama</i><p class=\"noImage\">No image attached yet</p><p class=\"dragAndDrop\">Drag and drop Image file onto this window to upload</p></label></div><div #workingSpace *ngIf=\"images.length &gt; 0\" class=\"workingSpace\"><div *ngIf=\"currentImage\" (mousedown)=\"onMouseDown($event, imageContainer, workingSpace)\" class=\"imageContainer\"><sliced-image [image]=\"currentImage\" #imageContainer [thumbnail]=\"false\"><area *ngFor=\"let area of areas\" [areaData]=\"area\" [ngStyle]=\"areaStyle\" click=\"setActiveArea(area)\"><area [areaData]=\"newArea\" *ngIf=\"newArea\" [ngStyle]=\"areaStyle\"></sliced-image></div></div><image-bar *ngIf=\"images.length &gt; 0\"></image-bar></div>");;return buf.join("");
+	buf.push("<div class=\"board\"><!--input(type=\"file\", (change)=\"loadFile($event)\")--><!--.toolbar--><!--  .title(*ngIf='!componentEdit', [ngClass]='{active: !currentArea}', (click)='setComponentEdit(\"component\")') {{ currentFolder.name }}--><!--  input.input.titleInput(*ngIf='!currentArea && componentEdit', [(ngModel)]='currentFolder.name', (blur)='saveComponentEdit(\"component\")')--><!----><!--  .childrenSymbol(*ngIf='currentArea') >--><!----><!--  .areaTitle(*ngIf='currentArea && !areaEdit', (click)='setComponentEdit(\"area\", true)') {{ currentAreaFolder.name }}--><!--  input.input.areaTitleInput(*ngIf='currentArea && areaEdit', [(ngModel)]='currentAreaFolder.name', (blur)='saveComponentEdit(\"area\")')--><div *ngIf=\"images.length &lt;= 0\" class=\"fileUploadPlaceholder\"><input id=\"fileFull\" type=\"file\" (change)=\"loadFile($event)\" class=\"hiddenInput\"><label #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"fileFull\" class=\"centerWrapper\"><i style=\"font-size: 20vmin;\" class=\"material-icons\">panorama</i><p class=\"noImage\">No image attached yet</p><p class=\"dragAndDrop\">Drag and drop Image file onto this window to upload</p></label></div><div #workingSpace *ngIf=\"images.length &gt; 0\" class=\"workingSpace\"><div *ngIf=\"currentImage\" (mousedown)=\"onMouseDown($event, imageContainer, workingSpace)\" class=\"imageContainer\"><sliced-image [image]=\"currentImage\" #imageContainer [thumbnail]=\"false\"><area *ngFor=\"let area of areas\" [scaleWidth]=\"imageContainer.scaleWidth\" [scaleHeight]=\"imageContainer.scaleHeight\" [areaData]=\"area\" [ngStyle]=\"areaStyle\" (click)=\"setActiveArea(area)\"><area [areaData]=\"newArea\" *ngIf=\"newArea\" [ngStyle]=\"areaStyle\"></sliced-image></div></div><image-bar *ngIf=\"images.length &gt; 0\"></image-bar></div>");;return buf.join("");
 	}
 
 /***/ },
