@@ -56603,6 +56603,7 @@ webpackJsonp([0],[
 	var sidebar_1 = __webpack_require__(729);
 	var toolbar_1 = __webpack_require__(737);
 	var services_1 = __webpack_require__(648);
+	var progress_circle_1 = __webpack_require__(711);
 	var EditorComponent = (function () {
 	    function EditorComponent(router, route, dialogService, folderService, imageService, projectService, userService) {
 	        var _this = this;
@@ -56613,6 +56614,7 @@ webpackJsonp([0],[
 	        this.imageService = imageService;
 	        this.projectService = projectService;
 	        this.userService = userService;
+	        this.loading = false;
 	        this.sub = this.router.routerState.queryParams.take(1)
 	            .subscribe(function (params) {
 	            if (params['folderId']) {
@@ -56636,6 +56638,7 @@ webpackJsonp([0],[
 	    EditorComponent.prototype.pushToGithub = function () {
 	        var _this = this;
 	        this.dialogService.openGithubDialog().then(function (res) {
+	            _this.loading = true;
 	            _this.projectService.generate(res).subscribe(function (res) {
 	                console.log("res => ", res);
 	                if (res.success) {
@@ -56644,6 +56647,7 @@ webpackJsonp([0],[
 	                else {
 	                    Humane.log('Fuck me');
 	                }
+	                _this.loading = false;
 	            });
 	        }).catch(function (err) {
 	        });
@@ -56672,7 +56676,8 @@ webpackJsonp([0],[
 	                board_1.BoardComponent,
 	                sidebar_1.SidebarComponent,
 	                toolbar_1.ToolbarComponent,
-	                icon_1.MD_ICON_DIRECTIVES
+	                icon_1.MD_ICON_DIRECTIVES,
+	                progress_circle_1.MD_PROGRESS_CIRCLE_DIRECTIVES
 	            ]
 	        }), 
 	        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, services_1.DialogService, services_1.FolderService, services_1.ImageService, services_1.ProjectService, services_1.UserService])
@@ -88675,14 +88680,14 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<toolbar><div class=\"c-header\"><a href=\"./\" class=\"angular\"><img src=\"{{ logo }}\">SLICE</a><div (click)=\"export()\" class=\"export\"><i class=\"fa fa-floppy-o\"></i>Export project</div></div></toolbar><div class=\"editor\"><sidebar></sidebar><board></board></div><!--footer-->");;return buf.join("");
+	buf.push("<toolbar><div class=\"c-header\"><a href=\"./\" class=\"angular\"><img src=\"{{ logo }}\">SLICE</a><div (click)=\"export()\" class=\"export\"><i class=\"fa fa-floppy-o\"></i>Export project</div></div></toolbar><div class=\"editor\"><sidebar></sidebar><board></board></div><!--footer--><div [hidden]=\"!loading\" class=\"loadingContainer\"><div class=\"loading\"><div class=\"content\"><md-progress-circle mode=\"indeterminate\">Loading, please wait!</md-progress-circle></div></div></div>");;return buf.join("");
 	}
 
 /***/ },
 /* 743 */
 /***/ function(module, exports) {
 
-	module.exports = ":host,\n.editor {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n:host {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n.editor {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n\nsidebar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  min-width: 300px;\n}\n\nboard {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: auto;\n}\n\n.export {\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  right: 20px;\n  top: 50%;\n  height: 30px;\n  margin-top: -15px;\n}\n\n.export .fa {\n  margin: 0 10px;\n}\n\n.c-header,\n.c-toolbar {\n  padding: 0 25px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1 0 auto;\n          flex: 1 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.c-header {\n  height: 60px;\n  background: #006064;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  position: relative;\n  z-index: 2;\n}\n\n.c-toolbar {\n  height: 50px;\n  background-color: rgba(0, 0, 0, 0.05);\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.06);\n  position: relative;\n  z-index: 3;\n}\n\n.angular {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: white;\n  font-size: 21px;\n}\n\n.angular img {\n  margin-right: 10px;\n}\n\nmd-icon {\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n}\n\nmd-icon.disabled {\n  color: rgba(0, 0, 0, 0.26);\n  cursor: default;\n}\n\nmd-icon.disabled:hover {\n  color: rgba(0, 0, 0, 0.26);\n}\n\nmd-icon:hover {\n  color: #006064;\n}\n\n.left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 1 auto;\n          flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.folderName {\n  margin-right: 10px;\n}\n\n.editFolderName {\n  cursor: pointer;\n}\n\n.right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 1 auto;\n          flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.right md-icon {\n  padding: 0 5px;\n  margin: 0 10px;\n}\n\n.separator {\n  border-right: 1px solid rgba(0, 0, 0, 0.1);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  height: 100%;\n  margin: 0 10px;\n}"
+	module.exports = ":host,\n.editor {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n:host {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n.editor {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n\nsidebar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  min-width: 300px;\n}\n\nboard {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: auto;\n}\n\n.export {\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  right: 20px;\n  top: 50%;\n  height: 30px;\n  margin-top: -15px;\n}\n\n.export .fa {\n  margin: 0 10px;\n}\n\n.c-header,\n.c-toolbar {\n  padding: 0 25px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1 0 auto;\n          flex: 1 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.c-header {\n  height: 60px;\n  background: #006064;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  position: relative;\n  z-index: 2;\n}\n\n.c-toolbar {\n  height: 50px;\n  background-color: rgba(0, 0, 0, 0.05);\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.06);\n  position: relative;\n  z-index: 3;\n}\n\n.angular {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: white;\n  font-size: 21px;\n}\n\n.angular img {\n  margin-right: 10px;\n}\n\nmd-icon {\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n}\n\nmd-icon.disabled {\n  color: rgba(0, 0, 0, 0.26);\n  cursor: default;\n}\n\nmd-icon.disabled:hover {\n  color: rgba(0, 0, 0, 0.26);\n}\n\nmd-icon:hover {\n  color: #006064;\n}\n\n.left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 1 auto;\n          flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.folderName {\n  margin-right: 10px;\n}\n\n.editFolderName {\n  cursor: pointer;\n}\n\n.right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 1 auto;\n          flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.right md-icon {\n  padding: 0 5px;\n  margin: 0 10px;\n}\n\n.separator {\n  border-right: 1px solid rgba(0, 0, 0, 0.1);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  height: 100%;\n  margin: 0 10px;\n}\n\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: rgba(255, 255, 255, 0.8);\n  text-align: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  color: black;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  z-index: 10;\n}\n\n.loading .content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}"
 
 /***/ },
 /* 744 */
