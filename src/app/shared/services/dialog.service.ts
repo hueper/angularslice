@@ -41,8 +41,10 @@ export class DialogService {
                });
   }
 
-  openCreateComponentDialog() {
+  openCreateComponentDialog(hasImage: boolean = true) {
     const data = new BSModalContext();
+    data["hasImage"] = hasImage;
+
     return this.modal
                .open(ComponentDialogComponent, data)
                .then(dialog => {

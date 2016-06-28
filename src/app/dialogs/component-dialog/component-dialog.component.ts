@@ -31,6 +31,7 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
   component: any;
   public folders: Folder[];
   private subscriptions: Subscription[] = [];
+  private hasImage: boolean = true;
 
   constructor(public dialog: DialogRef<BSModalContext>,
               private folderService: FolderService) {
@@ -41,7 +42,9 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
       type: 'new',
       attach: true,
       folder: null,
-    }
+    };
+
+    this.hasImage = this.dialog.context['hasImage'];
   }
 
   eventHandler(event) {

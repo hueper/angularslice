@@ -276,7 +276,7 @@ export class BoardComponent implements OnDestroy {
   onMouseUp(event) {
     if (!_.isEmpty(this.newArea) && !this.isCrossingOther(
         this.newArea) && this.newArea.width > 7 && this.newArea.height > 7) {
-      this.dialogService.openCreateComponentDialog()
+      this.dialogService.openCreateComponentDialog(true)
           .then((data) => {
             this.createComponentDialogCallback(this.newArea, data);
             this.newArea = null;
@@ -308,8 +308,6 @@ export class BoardComponent implements OnDestroy {
   }
 
   createComponent(area, data) {
-    console.log("area => ", area);
-    console.log("data => ", data);
     //TODO: Would be nice if the create method could give back the the created object with the created id!
     let type = data.type;
     let folderId;
