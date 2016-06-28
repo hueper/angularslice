@@ -39,16 +39,20 @@ export class ImageBarComponent implements OnDestroy {
         this.imagesSubscribe.unsubscribe();
       }
 
-      this.imagesSubscribe = this.imageService
-                                 .filter(f => this.currentFolder && f.folderId === this.currentFolder._id)
-                                 .subscribe((images: Image[]) => {
-                                   this.images = images;
-                                   if (this.currentImage && this.images.length > 0 && _.filter(this.images,
-                                       f => f._id === this.currentImage._id).length < 1) {
-                                     // The current image is not in current scope/folder
-                                     this.imageService.setCurrentImage(this.images[0]);
-                                   }
-                                 });
+      this.imagesSubscribe =
+        this.imageService
+            .filter(f => this.currentFolder && f.folderId === this.currentFolder._id)
+            .subscribe((images: Image[]) => {
+                this.images = images;
+                if (this.currentImage && this.images.length > 0 && _.filter(this.images,
+                    f => f._id === this.currentImage._id).length < 1) {
+                  // The current image is not in current scope/folder
+                  this.imageService.setCurrentImage(this.images[0]);
+                } else {
+                  this.imageService.setCurrentImage(null);
+                }
+              }
+            );
     }));
 
 
@@ -108,7 +112,7 @@ export class ImageBarComponent implements OnDestroy {
 
   loadFile(event) {
     this.loading = true;
-    var file = event.target.files[0];
+    var file = event.tar.files[0];
     this.rawImageService.createFromFile(file).then(res => {
       console.log("res => ", res);
       this.loading = false;

@@ -60,7 +60,7 @@ var webpackConfig = {
 
 // Our Webpack Defaults
 var defaultConfig = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
   cache: true,
   debug: true,
   output: {
@@ -76,7 +76,6 @@ var defaultConfig = {
         loader: 'source-map-loader',
         exclude: [
           // these packages have problems with their sourcemaps
-          path.join(__dirname, 'node_modules', 'ng2-scrollspy'),
           path.join(__dirname, 'node_modules', 'rxjs'),
           path.join(__dirname, 'node_modules', '@angular2-material'),
         ]

@@ -19,22 +19,31 @@ export interface IArea {
 export class Area extends BaseModel implements IArea {
   public invalid: boolean = false;
 
-  constructor(
-    public folderId: string,
-    public imageId: string,
-    public x: number,
-    public y: number,
-    public width: number,
-    public height: number
-  ) {
+  constructor(public folderId: string,
+              public imageId: string,
+              public x: number,
+              public y: number,
+              public width: number,
+              public height: number) {
     super();
   }
 
   // Aliases for x, y, height, width
-  get left() { return this.x; }
-  get right() { return this.x + this.width; }
-  get top() { return this.y }
-  get bottom() { return this.y + this.height; }
+  get left() {
+    return this.x;
+  }
+
+  get right() {
+    return this.x + this.width;
+  }
+
+  get top() {
+    return this.y
+  }
+
+  get bottom() {
+    return this.y + this.height;
+  }
 
   getWidth(): number {
     return this.width;
@@ -81,12 +90,10 @@ export class NewArea extends Area {
   private diagonalX: number;
   private diagonalY: number;
 
-  constructor(
-    private baseX: number,
-    private baseY:number,
-    private scaleWidth:number,
-    private scaleHeight:number
-  ) {
+  constructor(private baseX: number,
+              private baseY: number,
+              private scaleWidth: number,
+              private scaleHeight: number) {
     super(null, null, baseX, baseY, 0, 0);
 
     this.diagonalX = baseX;
@@ -108,11 +115,11 @@ export class NewArea extends Area {
     this.height = Math.abs(this.baseY - this.diagonalY);
   }
 
-  setFolderId(id) {
+  setFolderId(id: string) {
     this.folderId = id;
   }
 
-  setImageId(id) {
+  setImageId(id: string) {
     this.imageId = id;
   }
 

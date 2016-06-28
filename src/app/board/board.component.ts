@@ -49,6 +49,8 @@ export class BoardComponent implements OnDestroy {
   private hover: boolean = false;
 
   private areaSubscription: Subscription;
+  private currentImageSubscription: Subscription;
+  private imagesSubscription: Subscription;
 
   private currentFolderId: string;
   public currentFolder: Folder;
@@ -75,33 +77,49 @@ export class BoardComponent implements OnDestroy {
       if (currentSource) {
         this.currentFolderId = currentSource._id;
         this.currentFolder = currentSource;
+
+        if (this.currentImageSubscription) {
+          this.currentImageSubscription.unsubscribe();
+        }
+        if (this.imagesSubscription) {
+          this.imagesSubscription.unsubscribe();
+        }
+        this.currentImageSubscription = this.subscribeImageSource();
+        this.imagesSubscription = this.subscribeImagesSource();
       }
     }));
 
     // Look for new images without filtering
-    this.subscriptions.push(this.imageService.dataSource.subscribe((data: Image[]) => {
-      this.images = data;
-    }));
-
-    this.subscriptions.push(this.imageService.currentSource.subscribe((data: Image) => {
-      this.currentImage = data;
-      if (this.areaSubscription) {
-        this.areaSubscription.unsubscribe();
-      }
-      // Subscribe for areas
-      this.areaSubscription = this.areaService.filter(instance => instance.imageId === this.currentImage._id).subscribe(
-        (areas: Area[]) => {
-          this.areas = areas;
-        });
-      this.subscriptions.push(this.areaSubscription);
-    }));
-
     this.subscriptions.push(this.areaService.currentSource.subscribe((data: Area) => {
       this.currentArea = data;
       if (data) {
         this.currentAreaFolder = this.folderService.findById(data.folderId);
       }
     }));
+  }
+
+  subscribeImagesSource(): Subscription {
+    console.log("this.currentFolderId => ", this.currentFolderId);
+    return this.imageService.filter(image => image.folderId === this.currentFolderId).subscribe((data: Image[]) => {
+      this.images = data;
+    });
+  }
+
+  subscribeImageSource(): Subscription {
+    return this.imageService.currentSource.subscribe((data: Image) => {
+      this.currentImage = data;
+      if (this.areaSubscription) {
+        this.areaSubscription.unsubscribe();
+      }
+      if (this.currentImage) {
+        // Subscribe for areas
+        this.areaSubscription = this.areaService.filter(
+          instance => instance.imageId === this.currentImage._id).subscribe(
+          (areas: Area[]) => {
+            this.areas = areas;
+          });
+      }
+    })
   }
 
   onDragOver(event) {
@@ -135,7 +153,8 @@ export class BoardComponent implements OnDestroy {
     } else {
       this.rawImageService.createFromFile(file).then(result => {
         this.loading = false;
-      });;
+      });
+      ;
     }
   }
 
@@ -179,8 +198,17 @@ export class BoardComponent implements OnDestroy {
     });
 
     _.each(this.subscriptions, subscription => {
-      subscription.unsubscribe();
+      if (!subscription.isUnsubscribed) {
+        subscription.unsubscribe();
+      }
     });
+
+    if (!this.currentImageSubscription.isUnsubscribed) {
+      this.currentImageSubscription.unsubscribe();
+    }
+    if (!this.areaSubscription.isUnsubscribed) {
+      this.areaSubscription.unsubscribe();
+    }
   }
 
   /**
@@ -283,7 +311,8 @@ export class BoardComponent implements OnDestroy {
   }
 
   createComponent(area, data) {
-
+    console.log("area => ", area);
+    console.log("data => ", data);
     //TODO: Would be nice if the create method could give back the the created object with the created id!
     let type = data.type;
     let folderId;
@@ -292,14 +321,14 @@ export class BoardComponent implements OnDestroy {
       this.folderService.create(new Folder(this.currentFolderId, data.newFolderName));
       folderId = _.last(this.folders)._id;
     } else {
-      folderId = parseInt(data.folder);
+      folderId = data.folder;
     }
 
     area.setFolderId(folderId);
 
     if (data.attach) {
       const newImage = new Image(
-        folderId,
+        folderId.toString(),
         this.currentImage.rawImageId,
         data.newImageName,
         area.x / area.scaleWidth + this.currentImage.x,
