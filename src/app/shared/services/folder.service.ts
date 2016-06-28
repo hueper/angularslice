@@ -14,5 +14,10 @@ export class FolderService extends BaseService<Folder> {
       this.create(new Folder(null, 'app'));
     }
 
+    this.deleteSource.subscribe(folder => {
+      this.find({ folderId: folder._id }).map((children) => {
+        this.delete(children);
+      });
+    });
   }
 }
