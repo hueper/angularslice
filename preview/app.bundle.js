@@ -66956,7 +66956,7 @@ webpackJsonp([0],[
 	    BoardComponent.prototype.onMouseUp = function (event) {
 	        var _this = this;
 	        if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea) && this.newArea.width > 7 && this.newArea.height > 7) {
-	            this.dialogService.openCreateComponentDialog()
+	            this.dialogService.openCreateComponentDialog(true)
 	                .then(function (data) {
 	                _this.createComponentDialogCallback(_this.newArea, data);
 	                _this.newArea = null;
@@ -66984,8 +66984,6 @@ webpackJsonp([0],[
 	        }
 	    };
 	    BoardComponent.prototype.createComponent = function (area, data) {
-	        console.log("area => ", area);
-	        console.log("data => ", data);
 	        //TODO: Would be nice if the create method could give back the the created object with the created id!
 	        var type = data.type;
 	        var folderId;
@@ -84977,8 +84975,10 @@ webpackJsonp([0],[
 	            return null;
 	        });
 	    };
-	    DialogService.prototype.openCreateComponentDialog = function () {
+	    DialogService.prototype.openCreateComponentDialog = function (hasImage) {
+	        if (hasImage === void 0) { hasImage = true; }
 	        var data = new bootstrap_1.BSModalContext();
+	        data["hasImage"] = hasImage;
 	        return this.modal
 	            .open(dialogs_1.ComponentDialogComponent, data)
 	            .then(function (dialog) {
@@ -85564,6 +85564,7 @@ webpackJsonp([0],[
 	        this.dialog = dialog;
 	        this.folderService = folderService;
 	        this.subscriptions = [];
+	        this.hasImage = true;
 	        this.subscriptions.push(folderService.dataSource.subscribe(function (folders) {
 	            _this.folders = folders;
 	        }));
@@ -85572,6 +85573,7 @@ webpackJsonp([0],[
 	            attach: true,
 	            folder: null,
 	        };
+	        this.hasImage = this.dialog.context['hasImage'];
 	    }
 	    ComponentDialogComponent.prototype.eventHandler = function (event) {
 	        if (event.which === 13) {
@@ -87110,7 +87112,7 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><form (keypress)=\"eventHandler($event)\"><div class=\"flexContainer\"><div class=\"row\"><div class=\"column\"><label>Let's attach a component to the selected area.</label><md-radio-group [(ngModel)]=\"component.type\"><md-radio-button value=\"new\">Create new component</md-radio-button><br><md-radio-button value=\"exist\">Select an existing one</md-radio-button></md-radio-group></div></div><div *ngIf=\"component.type === &quot;new&quot;\" class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"component.newFolderName\" required placeholder=\"Add name for the component\"></md-input></div></div><div *ngIf=\"component.type === &quot;exist&quot;\" class=\"row\"><div class=\"column\"><div>Select the component:<select [(ngModel)]=\"component.folder\"><option *ngFor=\"let folder of folders\" [value]=\"folder._id\">{{ folder.name }}</option></select></div></div></div><div class=\"row addition\"><div class=\"column\"><md-checkbox [ngModel]=\"component.attach\" (change)=\"changeAttachImage($event)\">Add the area's image to the attached component</md-checkbox></div></div><div *ngIf=\"component.attach\" class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"component.newImageName\" placeholder=\"Add name for the image\"></md-input></div></div><div class=\"row row--rightAligned\"><div class=\"md-button-wrapper\"><button md-raised-button color=\"secondary\" type=\"button\" (click)=\"close()\">Cancel</button><button md-raised-button color=\"primary\" type=\"button\" (click)=\"send()\">Save</button></div></div></div></form></div>");;return buf.join("");
+	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><form (keypress)=\"eventHandler($event)\"><div class=\"flexContainer\"><div *ngIf=\"hasImage\" class=\"row\"><div class=\"column\"><label>Let's attach a component to the selected area.</label><md-radio-group [(ngModel)]=\"component.type\"><md-radio-button value=\"new\">Create new component</md-radio-button><br><md-radio-button value=\"exist\">Select an existing one</md-radio-button></md-radio-group></div></div><div *ngIf=\"component.type === &quot;new&quot;\" class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"component.newFolderName\" required placeholder=\"Add name for the component\"></md-input></div></div><div *ngIf=\"component.type === &quot;exist&quot;\" class=\"row\"><div class=\"column\"><div>Select the component:<select [(ngModel)]=\"component.folder\"><option *ngFor=\"let folder of folders\" [value]=\"folder._id\">{{ folder.name }}</option></select></div></div></div><div *ngIf=\"hasImage\" class=\"row addition\"><div class=\"column\"><md-checkbox [ngModel]=\"component.attach\" (change)=\"changeAttachImage($event)\">Add the area's image to the attached component</md-checkbox></div></div><div *ngIf=\"component.attach &amp;&amp; hasImage\" class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"component.newImageName\" placeholder=\"Add name for the image\"></md-input></div></div><div class=\"row row--rightAligned\"><div class=\"md-button-wrapper\"><button md-raised-button color=\"secondary\" type=\"button\" (click)=\"close()\">Cancel</button><button md-raised-button color=\"primary\" type=\"button\" (click)=\"send()\">Save</button></div></div></div></form></div>");;return buf.join("");
 	}
 
 /***/ },
@@ -88520,11 +88522,13 @@ webpackJsonp([0],[
 	var models_1 = __webpack_require__(660);
 	var services_1 = __webpack_require__(648);
 	var icon_1 = __webpack_require__(346);
+	var dialog_service_1 = __webpack_require__(675);
 	var SidebarComponent = (function () {
-	    function SidebarComponent(fileService, folderService) {
+	    function SidebarComponent(fileService, folderService, dialogService) {
 	        var _this = this;
 	        this.fileService = fileService;
 	        this.folderService = folderService;
+	        this.dialogService = dialogService;
 	        this.files = fileService.filter(function (file) { return file.folderId === null || file.folderId === undefined; });
 	        this.folders = folderService.filter(function (folder) { return folder.folderId === null || folder.folderId === undefined; });
 	        this.currentFolders = this.folderService.currentSource;
@@ -88533,8 +88537,10 @@ webpackJsonp([0],[
 	        });
 	    }
 	    SidebarComponent.prototype.createComponent = function () {
-	        var currentId = this.currentFolder._id;
-	        this.folderService.create(new models_1.Folder(currentId, 'component'));
+	        var _this = this;
+	        this.dialogService.openCreateComponentDialog(false).then(function (dialogResult) {
+	            _this.folderService.create(new models_1.Folder(_this.currentFolder._id, dialogResult.data.newFolderName));
+	        });
 	    };
 	    SidebarComponent = __decorate([
 	        core_1.Component({
@@ -88547,7 +88553,7 @@ webpackJsonp([0],[
 	                icon_1.MD_ICON_DIRECTIVES
 	            ]
 	        }), 
-	        __metadata('design:paramtypes', [services_1.FileService, services_1.FolderService])
+	        __metadata('design:paramtypes', [services_1.FileService, services_1.FolderService, dialog_service_1.DialogService])
 	    ], SidebarComponent);
 	    return SidebarComponent;
 	}());
