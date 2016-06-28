@@ -46,7 +46,7 @@ export class ExportDialogComponent implements ModalComponent<BSModalContext> {
 
   githubAuth() {
     this.loading = true;
-    const authUrl = 'http://localhost:3000/auth/github';
+    const authUrl = '/auth/github';
     let _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600,top=0,left=0');
     let interval = setInterval(() => {
       if (_oauthWindow.closed) {
