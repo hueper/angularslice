@@ -39,7 +39,7 @@ export class EditorComponent {
         if (res.success) {
           Humane.log('Awesome');
         } else {
-          Humane.log('Fuck me');
+          // TODO: the request was dismissed
         }
         this.loading = false;
       });
@@ -53,9 +53,11 @@ export class EditorComponent {
       console.log("result => ", result);
       if (result == "github") {
         this.pushToGithub();
-      } else {
+      } else if (result !== null) {
         // TODO: Show an alert to the user for we're not ready with those functions yet
-        alert("WUUUUUUUUT????");
+        alert("Not implemented yet");
+      } else {
+        // TODO: the popup was dismissed (closed without answer!)
       }
     }).catch(err => {
       console.log(err);

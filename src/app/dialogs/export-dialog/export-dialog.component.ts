@@ -33,7 +33,7 @@ import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circl
 })
 export class ExportDialogComponent implements ModalComponent<BSModalContext> {
   protected activeSelect: string;
-  protected loading:boolean = false;
+  protected loading: boolean = false;
 
   constructor(public dialog: DialogRef<BSModalContext>,
               private userService: UserService) {
@@ -46,27 +46,31 @@ export class ExportDialogComponent implements ModalComponent<BSModalContext> {
 
   githubAuth() {
     this.loading = true;
-    const authUrl = '/auth/github';
-    const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600');
-
-    _oauthWindow.addEventListener('unload', () => {
-      this.userService.pollUser().subscribe(res => {
-        let user = res.data as User;
-        let accessToken = _.get(user, 'oauthData.github.accessToken', false);
-
-        if (accessToken) {
-          this.dialog.close('github');
-          //TODO: the user authentication was successfull, we can do whatever we want ;)
-        } else {
-          this.loading = false;
-          Humane.log(`Sorry, we couldn't authenticate you. Please try again.`, { addnCls: 'humane-error' });
-          this.close();
-        }
-      });
-      _oauthWindow.removeEventListener('unload');
-    });
+    const authUrl = 'http://localhost:3000/auth/github';
+    let _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600,top=0,left=0');
+    let interval = setInterval(() => {
+      if (_oauthWindow.closed) {
+        clearInterval(interval);
+        this.windowClosed();
+      }
+    }, 500);
   }
 
+  windowClosed() {
+    this.userService.pollUser().subscribe(res => {
+      let user = res.data as User;
+      let accessToken = _.get(user, 'oauthData.github.accessToken', false);
+
+      if (accessToken) {
+        this.dialog.close('github');
+        //TODO: the user authentication was successfull, we can do whatever we want ;)
+      } else {
+        this.loading = false;
+        Humane.log(`Sorry, we couldn't authenticate you. Please try again.`, { addnCls: 'humane-error' });
+        this.close();
+      }
+    });
+  }
 
   close() {
     this.dialog.dismiss();
