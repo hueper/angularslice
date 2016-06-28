@@ -66810,7 +66810,6 @@ webpackJsonp([0],[
 	    }
 	    BoardComponent.prototype.subscribeImagesSource = function () {
 	        var _this = this;
-	        console.log("this.currentFolderId => ", this.currentFolderId);
 	        return this.imageService.filter(function (image) { return image.folderId === _this.currentFolderId; }).subscribe(function (data) {
 	            _this.images = data;
 	        });
@@ -66822,12 +66821,10 @@ webpackJsonp([0],[
 	            if (_this.areaSubscription) {
 	                _this.areaSubscription.unsubscribe();
 	            }
-	            if (_this.currentImage) {
-	                // Subscribe for areas
-	                _this.areaSubscription = _this.areaService.filter(function (instance) { return instance.imageId === _this.currentImage._id; }).subscribe(function (areas) {
-	                    _this.areas = areas;
-	                });
-	            }
+	            // Subscribe for areas
+	            _this.areaSubscription = _this.areaService.filter(function (instance) { return instance.imageId === _this.currentImage._id; }).subscribe(function (areas) {
+	                _this.areas = areas;
+	            });
 	        });
 	    };
 	    BoardComponent.prototype.onDragOver = function (event) {
@@ -88107,9 +88104,6 @@ webpackJsonp([0],[
 	                    if (_this.currentImage && _this.images.length > 0 && _.filter(_this.images, function (f) { return f._id === _this.currentImage._id; }).length < 1) {
 	                        // The current image is not in current scope/folder
 	                        _this.imageService.setCurrentImage(_this.images[0]);
-	                    }
-	                    else {
-	                        _this.imageService.setCurrentImage(null);
 	                    }
 	                });
 	        }));
