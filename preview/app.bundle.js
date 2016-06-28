@@ -85573,6 +85573,11 @@ webpackJsonp([0],[
 	            folder: null,
 	        };
 	    }
+	    ComponentDialogComponent.prototype.eventHandler = function (event) {
+	        if (event.which === 13) {
+	            this.send();
+	        }
+	    };
 	    ComponentDialogComponent.prototype.ngOnDestroy = function () {
 	        _.each(this.subscriptions, function (subscription) {
 	            subscription.unsubscribe();
@@ -87105,7 +87110,7 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><form><div class=\"flexContainer\"><div class=\"row\"><div class=\"column\"><label>Let's attach a component to the selected area.</label><md-radio-group [(ngModel)]=\"component.type\"><md-radio-button value=\"new\">Create new component</md-radio-button><br><md-radio-button value=\"exist\">Select an existing one</md-radio-button></md-radio-group></div></div><div *ngIf=\"component.type === &quot;new&quot;\" class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"component.newFolderName\" required placeholder=\"Add name for the component\"></md-input></div></div><div *ngIf=\"component.type === &quot;exist&quot;\" class=\"row\"><div class=\"column\"><div>Select the component:<select [(ngModel)]=\"component.folder\"><option *ngFor=\"let folder of folders\" [value]=\"folder._id\">{{ folder.name }}</option></select></div></div></div><div class=\"row addition\"><div class=\"column\"><md-checkbox [ngModel]=\"component.attach\" (change)=\"changeAttachImage($event)\">Add the area's image to the attached component</md-checkbox></div></div><div *ngIf=\"component.attach\" class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"component.newImageName\" placeholder=\"Add name for the image\"></md-input></div></div><div class=\"row row--rightAligned\"><div class=\"md-button-wrapper\"><button md-raised-button color=\"secondary\" type=\"button\" (click)=\"close()\">Cancel</button><button md-raised-button color=\"primary\" type=\"button\" (click)=\"send()\">Save</button></div></div></div></form></div>");;return buf.join("");
+	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><form (keypress)=\"eventHandler($event)\"><div class=\"flexContainer\"><div class=\"row\"><div class=\"column\"><label>Let's attach a component to the selected area.</label><md-radio-group [(ngModel)]=\"component.type\"><md-radio-button value=\"new\">Create new component</md-radio-button><br><md-radio-button value=\"exist\">Select an existing one</md-radio-button></md-radio-group></div></div><div *ngIf=\"component.type === &quot;new&quot;\" class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"component.newFolderName\" required placeholder=\"Add name for the component\"></md-input></div></div><div *ngIf=\"component.type === &quot;exist&quot;\" class=\"row\"><div class=\"column\"><div>Select the component:<select [(ngModel)]=\"component.folder\"><option *ngFor=\"let folder of folders\" [value]=\"folder._id\">{{ folder.name }}</option></select></div></div></div><div class=\"row addition\"><div class=\"column\"><md-checkbox [ngModel]=\"component.attach\" (change)=\"changeAttachImage($event)\">Add the area's image to the attached component</md-checkbox></div></div><div *ngIf=\"component.attach\" class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"component.newImageName\" placeholder=\"Add name for the image\"></md-input></div></div><div class=\"row row--rightAligned\"><div class=\"md-button-wrapper\"><button md-raised-button color=\"secondary\" type=\"button\" (click)=\"close()\">Cancel</button><button md-raised-button color=\"primary\" type=\"button\" (click)=\"send()\">Save</button></div></div></div></form></div>");;return buf.join("");
 	}
 
 /***/ },
@@ -87409,9 +87414,18 @@ webpackJsonp([0],[
 	            repoName: null
 	        };
 	    }
+	    GithubDialogComponent.prototype.eventHandler = function (event) {
+	        if (event.which === 13) {
+	            this.send();
+	        }
+	    };
 	    GithubDialogComponent.prototype.send = function () {
-	        // humane.log('Component name is missing', { timeout: 4000, clickToClose: true });
-	        this.dialog.close(this.componentData.repoName);
+	        if (this.componentData.repoName) {
+	            this.dialog.close(this.componentData.repoName);
+	        }
+	        else {
+	            humane.log('Component name is missing', { timeout: 4000, clickToClose: true });
+	        }
 	    };
 	    GithubDialogComponent.prototype.close = function () {
 	        this.dialog.dismiss();
@@ -87445,7 +87459,7 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><form><div class=\"flexContainer\"><div class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"componentData.repoName\" required placeholder=\"Add name for the repository\"></md-input></div></div><div class=\"row row--rightAligned\"><div class=\"md-button-wrapper\"><button md-raised-button color=\"secondary\" type=\"button\" (click)=\"close()\">Cancel</button><button md-raised-button color=\"primary\" type=\"button\" (click)=\"send()\">Push</button></div></div></div></form></div>");;return buf.join("");
+	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><form (keypress)=\"eventHandler($event)\"><div class=\"flexContainer\"><div class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"componentData.repoName\" required placeholder=\"Add name for the repository\"></md-input></div></div><div class=\"row row--rightAligned\"><div class=\"md-button-wrapper\"><button md-raised-button color=\"secondary\" type=\"button\" (click)=\"close()\">Cancel</button><button md-raised-button color=\"primary\" type=\"button\" (click)=\"send()\">Push</button></div></div></div></form></div>");;return buf.join("");
 	}
 
 /***/ },
