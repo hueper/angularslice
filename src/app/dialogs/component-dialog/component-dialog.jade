@@ -1,6 +1,6 @@
 .dialogBackground( (click)='close()' )
 .dialog
-  form()
+  form((keypress)='eventHandler($event)')
     .flexContainer
       .row
         .column
