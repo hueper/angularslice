@@ -66790,23 +66790,17 @@ webpackJsonp([0],[
 	            if (currentSource) {
 	                _this.currentFolderId = currentSource._id;
 	                _this.currentFolder = currentSource;
+	                if (_this.currentImageSubscription) {
+	                    _this.currentImageSubscription.unsubscribe();
+	                }
+	                if (_this.imagesSubscription) {
+	                    _this.imagesSubscription.unsubscribe();
+	                }
+	                _this.currentImageSubscription = _this.subscribeImageSource();
+	                _this.imagesSubscription = _this.subscribeImagesSource();
 	            }
 	        }));
 	        // Look for new images without filtering
-	        this.subscriptions.push(this.imageService.dataSource.subscribe(function (data) {
-	            _this.images = data;
-	        }));
-	        this.subscriptions.push(this.imageService.currentSource.subscribe(function (data) {
-	            _this.currentImage = data;
-	            if (_this.areaSubscription) {
-	                _this.areaSubscription.unsubscribe();
-	            }
-	            // Subscribe for areas
-	            _this.areaSubscription = _this.areaService.filter(function (instance) { return instance.imageId === _this.currentImage._id; }).subscribe(function (areas) {
-	                _this.areas = areas;
-	            });
-	            _this.subscriptions.push(_this.areaSubscription);
-	        }));
 	        this.subscriptions.push(this.areaService.currentSource.subscribe(function (data) {
 	            _this.currentArea = data;
 	            if (data) {
@@ -66814,6 +66808,28 @@ webpackJsonp([0],[
 	            }
 	        }));
 	    }
+	    BoardComponent.prototype.subscribeImagesSource = function () {
+	        var _this = this;
+	        console.log("this.currentFolderId => ", this.currentFolderId);
+	        return this.imageService.filter(function (image) { return image.folderId === _this.currentFolderId; }).subscribe(function (data) {
+	            _this.images = data;
+	        });
+	    };
+	    BoardComponent.prototype.subscribeImageSource = function () {
+	        var _this = this;
+	        return this.imageService.currentSource.subscribe(function (data) {
+	            _this.currentImage = data;
+	            if (_this.areaSubscription) {
+	                _this.areaSubscription.unsubscribe();
+	            }
+	            if (_this.currentImage) {
+	                // Subscribe for areas
+	                _this.areaSubscription = _this.areaService.filter(function (instance) { return instance.imageId === _this.currentImage._id; }).subscribe(function (areas) {
+	                    _this.areas = areas;
+	                });
+	            }
+	        });
+	    };
 	    BoardComponent.prototype.onDragOver = function (event) {
 	        event.preventDefault();
 	        this.hover = true;
@@ -66883,8 +66899,16 @@ webpackJsonp([0],[
 	            unsubscribeFromListener(); // unsubscribe
 	        });
 	        _.each(this.subscriptions, function (subscription) {
-	            subscription.unsubscribe();
+	            if (!subscription.isUnsubscribed) {
+	                subscription.unsubscribe();
+	            }
 	        });
+	        if (!this.currentImageSubscription.isUnsubscribed) {
+	            this.currentImageSubscription.unsubscribe();
+	        }
+	        if (!this.areaSubscription.isUnsubscribed) {
+	            this.areaSubscription.unsubscribe();
+	        }
 	    };
 	    /**
 	     *
@@ -66963,6 +66987,8 @@ webpackJsonp([0],[
 	        }
 	    };
 	    BoardComponent.prototype.createComponent = function (area, data) {
+	        console.log("area => ", area);
+	        console.log("data => ", data);
 	        //TODO: Would be nice if the create method could give back the the created object with the created id!
 	        var type = data.type;
 	        var folderId;
@@ -66971,11 +66997,11 @@ webpackJsonp([0],[
 	            folderId = _.last(this.folders)._id;
 	        }
 	        else {
-	            folderId = parseInt(data.folder);
+	            folderId = data.folder;
 	        }
 	        area.setFolderId(folderId);
 	        if (data.attach) {
-	            var newImage = new models_1.Image(folderId, this.currentImage.rawImageId, data.newImageName, area.x / area.scaleWidth + this.currentImage.x, area.y / area.scaleHeight + this.currentImage.y, area.width / area.scaleWidth, area.height / area.scaleHeight);
+	            var newImage = new models_1.Image(folderId.toString(), this.currentImage.rawImageId, data.newImageName, area.x / area.scaleWidth + this.currentImage.x, area.y / area.scaleHeight + this.currentImage.y, area.width / area.scaleWidth, area.height / area.scaleHeight);
 	            this.imageService.create(newImage);
 	            var image = _.last(this.images);
 	            area.setImageId(this.currentImage._id);
@@ -83589,7 +83615,12 @@ webpackJsonp([0],[
 	    function Utils() {
 	    }
 	    Utils.generateId = function () {
-	        return Math.floor(Math.random() * 100000000000);
+	        var text = "";
+	        var possible = "abcdef0123456789";
+	        for (var i = 0; i < 24; i++) {
+	            text += possible.charAt(Math.floor(Math.random() * possible.length));
+	        }
+	        return "" + text;
 	    };
 	    return Utils;
 	}());
@@ -83700,7 +83731,9 @@ webpackJsonp([0],[
 	        return this.dataSource.map(function (instanceArray) { return instanceArray.filter(filter); });
 	    };
 	    BaseService.prototype.findById = function (id) {
-	        var result = this.dataSource.getValue().filter(function (instance) { return instance._id === id; });
+	        var result = this.dataSource.getValue().filter(function (instance) {
+	            return instance._id === id;
+	        });
 	        return result ? result[0] : null;
 	    };
 	    BaseService.prototype.findOne = function (filterObject) {
@@ -84223,24 +84256,11 @@ webpackJsonp([0],[
 	    __extends(FolderService, _super);
 	    function FolderService() {
 	        _super.call(this, 'folders', models_1.Folder);
-	        this.dummyBoolean = true;
 	        // Just create if not read from cache..
 	        var rootFolder = this.findOne({ folderId: null });
 	        if (!rootFolder) {
 	            this.create(new models_1.Folder(null, 'app'));
 	        }
-	        // this.filter(f => f.folderId === null && this.dummyBoolean).subscribe(folders=> {
-	        //   this.dummyBoolean = false;
-	        //   if (folders.length > 0) {
-	        //     let folder = folders[0];
-	        //     this.create(new Folder(folder.id, 'folder1'));
-	        //     this.create(new Folder(folder.id, 'folder2'));
-	        //     this.create(new Folder(folder.id, 'folder3'));
-	        //   }
-	        // });
-	        // this.create(new Folder(null, 'folder1'));
-	        // this.create(new Folder(null, 'folder2'));
-	        // this.create(new Folder(null, 'folder3'));
 	    }
 	    FolderService = __decorate([
 	        core_1.Injectable(), 
@@ -84315,22 +84335,30 @@ webpackJsonp([0],[
 	    }
 	    Object.defineProperty(Area.prototype, "left", {
 	        // Aliases for x, y, height, width
-	        get: function () { return this.x; },
+	        get: function () {
+	            return this.x;
+	        },
 	        enumerable: true,
 	        configurable: true
 	    });
 	    Object.defineProperty(Area.prototype, "right", {
-	        get: function () { return this.x + this.width; },
+	        get: function () {
+	            return this.x + this.width;
+	        },
 	        enumerable: true,
 	        configurable: true
 	    });
 	    Object.defineProperty(Area.prototype, "top", {
-	        get: function () { return this.y; },
+	        get: function () {
+	            return this.y;
+	        },
 	        enumerable: true,
 	        configurable: true
 	    });
 	    Object.defineProperty(Area.prototype, "bottom", {
-	        get: function () { return this.y + this.height; },
+	        get: function () {
+	            return this.y + this.height;
+	        },
 	        enumerable: true,
 	        configurable: true
 	    });
@@ -84735,7 +84763,7 @@ webpackJsonp([0],[
 	        return rawImage ? rawImage : null;
 	    };
 	    ImageService.prototype.setCurrentImage = function (instance) {
-	        this.currentIdSource.next(instance._id);
+	        this.currentIdSource.next(instance ? instance._id : null);
 	    };
 	    ImageService.prototype.delete = function (instance) {
 	        if (this.find({ rawImageId: instance.rawImageId }).length <= 1) {
@@ -88071,15 +88099,19 @@ webpackJsonp([0],[
 	            if (_this.imagesSubscribe) {
 	                _this.imagesSubscribe.unsubscribe();
 	            }
-	            _this.imagesSubscribe = _this.imageService
-	                .filter(function (f) { return _this.currentFolder && f.folderId === _this.currentFolder._id; })
-	                .subscribe(function (images) {
-	                _this.images = images;
-	                if (_this.currentImage && _this.images.length > 0 && _.filter(_this.images, function (f) { return f._id === _this.currentImage._id; }).length < 1) {
-	                    // The current image is not in current scope/folder
-	                    _this.imageService.setCurrentImage(_this.images[0]);
-	                }
-	            });
+	            _this.imagesSubscribe =
+	                _this.imageService
+	                    .filter(function (f) { return _this.currentFolder && f.folderId === _this.currentFolder._id; })
+	                    .subscribe(function (images) {
+	                    _this.images = images;
+	                    if (_this.currentImage && _this.images.length > 0 && _.filter(_this.images, function (f) { return f._id === _this.currentImage._id; }).length < 1) {
+	                        // The current image is not in current scope/folder
+	                        _this.imageService.setCurrentImage(_this.images[0]);
+	                    }
+	                    else {
+	                        _this.imageService.setCurrentImage(null);
+	                    }
+	                });
 	        }));
 	        this.subscriptions.push(this.imageService.currentSource.subscribe(function (image) {
 	            _this.currentImage = image;
@@ -88131,7 +88163,7 @@ webpackJsonp([0],[
 	    ImageBarComponent.prototype.loadFile = function (event) {
 	        var _this = this;
 	        this.loading = true;
-	        var file = event.target.files[0];
+	        var file = event.tar.files[0];
 	        this.rawImageService.createFromFile(file).then(function (res) {
 	            console.log("res => ", res);
 	            _this.loading = false;
