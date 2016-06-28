@@ -84252,12 +84252,18 @@ webpackJsonp([0],[
 	var FolderService = (function (_super) {
 	    __extends(FolderService, _super);
 	    function FolderService() {
+	        var _this = this;
 	        _super.call(this, 'folders', models_1.Folder);
 	        // Just create if not read from cache..
 	        var rootFolder = this.findOne({ folderId: null });
 	        if (!rootFolder) {
 	            this.create(new models_1.Folder(null, 'app'));
 	        }
+	        this.deleteSource.subscribe(function (folder) {
+	            _this.find({ folderId: folder._id }).map(function (children) {
+	                _this.delete(children);
+	            });
+	        });
 	    }
 	    FolderService = __decorate([
 	        core_1.Injectable(), 
