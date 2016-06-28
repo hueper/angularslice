@@ -56645,7 +56645,6 @@ webpackJsonp([0],[
 	                    Humane.log('Awesome');
 	                }
 	                else {
-	                    Humane.log('Fuck me');
 	                }
 	                _this.loading = false;
 	            });
@@ -56659,9 +56658,11 @@ webpackJsonp([0],[
 	            if (result == "github") {
 	                _this.pushToGithub();
 	            }
-	            else {
+	            else if (result !== null) {
 	                // TODO: Show an alert to the user for we're not ready with those functions yet
-	                alert("WUUUUUUUUT????");
+	                alert("Not implemented yet");
+	            }
+	            else {
 	            }
 	        }).catch(function (err) {
 	            console.log(err);
@@ -87585,21 +87586,27 @@ webpackJsonp([0],[
 	        var _this = this;
 	        this.loading = true;
 	        var authUrl = '/auth/github';
-	        var _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600');
-	        _oauthWindow.addEventListener('unload', function () {
-	            _this.userService.pollUser().subscribe(function (res) {
-	                var user = res.data;
-	                var accessToken = _.get(user, 'oauthData.github.accessToken', false);
-	                if (accessToken) {
-	                    _this.dialog.close('github');
-	                }
-	                else {
-	                    _this.loading = false;
-	                    Humane.log("Sorry, we couldn't authenticate you. Please try again.", { addnCls: 'humane-error' });
-	                    _this.close();
-	                }
-	            });
-	            _oauthWindow.removeEventListener('unload');
+	        var _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600,top=0,left=0');
+	        var interval = setInterval(function () {
+	            if (_oauthWindow.closed) {
+	                clearInterval(interval);
+	                _this.windowClosed();
+	            }
+	        }, 500);
+	    };
+	    ExportDialogComponent.prototype.windowClosed = function () {
+	        var _this = this;
+	        this.userService.pollUser().subscribe(function (res) {
+	            var user = res.data;
+	            var accessToken = _.get(user, 'oauthData.github.accessToken', false);
+	            if (accessToken) {
+	                _this.dialog.close('github');
+	            }
+	            else {
+	                _this.loading = false;
+	                Humane.log("Sorry, we couldn't authenticate you. Please try again.", { addnCls: 'humane-error' });
+	                _this.close();
+	            }
 	        });
 	    };
 	    ExportDialogComponent.prototype.close = function () {
