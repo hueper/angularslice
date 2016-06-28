@@ -66835,7 +66835,7 @@ webpackJsonp([0],[
 	        // TODO, move to config:
 	        this.loading = true;
 	        var supportedFileExtension = ['jpg', 'png', 'jpeg'];
-	        var file = event.srcElement.files[0];
+	        var file = event.target.files[0];
 	        var extension = file.name.split('.').pop();
 	        // TODO, add analytics
 	        if (supportedFileExtension.indexOf(extension) === -1) {
@@ -88131,7 +88131,7 @@ webpackJsonp([0],[
 	    ImageBarComponent.prototype.loadFile = function (event) {
 	        var _this = this;
 	        this.loading = true;
-	        var file = event.srcElement.files[0];
+	        var file = event.target.files[0];
 	        this.rawImageService.createFromFile(file).then(function (res) {
 	            console.log("res => ", res);
 	            _this.loading = false;
