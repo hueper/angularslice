@@ -125,7 +125,7 @@ export class BoardComponent implements OnDestroy {
     // TODO, move to config:
     this.loading = true;
     const supportedFileExtension = ['jpg', 'png', 'jpeg'];
-    const file = event.srcElement.files[0];
+    const file = event.target.files[0];
     const extension = file.name.split('.').pop();
 
     // TODO, add analytics
