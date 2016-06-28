@@ -99,7 +99,6 @@ export class BoardComponent implements OnDestroy {
   }
 
   subscribeImagesSource(): Subscription {
-    console.log("this.currentFolderId => ", this.currentFolderId);
     return this.imageService.filter(image => image.folderId === this.currentFolderId).subscribe((data: Image[]) => {
       this.images = data;
     });
@@ -111,14 +110,12 @@ export class BoardComponent implements OnDestroy {
       if (this.areaSubscription) {
         this.areaSubscription.unsubscribe();
       }
-      if (this.currentImage) {
-        // Subscribe for areas
-        this.areaSubscription = this.areaService.filter(
-          instance => instance.imageId === this.currentImage._id).subscribe(
-          (areas: Area[]) => {
-            this.areas = areas;
-          });
-      }
+      // Subscribe for areas
+      this.areaSubscription = this.areaService.filter(
+        instance => instance.imageId === this.currentImage._id).subscribe(
+        (areas: Area[]) => {
+          this.areas = areas;
+        });
     })
   }
 

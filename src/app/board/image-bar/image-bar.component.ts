@@ -48,8 +48,6 @@ export class ImageBarComponent implements OnDestroy {
                     f => f._id === this.currentImage._id).length < 1) {
                   // The current image is not in current scope/folder
                   this.imageService.setCurrentImage(this.images[0]);
-                } else {
-                  this.imageService.setCurrentImage(null);
                 }
               }
             );
