@@ -56603,7 +56603,7 @@ webpackJsonp([0],[
 	var sidebar_1 = __webpack_require__(729);
 	var toolbar_1 = __webpack_require__(737);
 	var services_1 = __webpack_require__(648);
-	var progress_circle_1 = __webpack_require__(711);
+	var progress_circle_1 = __webpack_require__(710);
 	var EditorComponent = (function () {
 	    function EditorComponent(router, route, dialogService, folderService, imageService, projectService, userService) {
 	        var _this = this;
@@ -56659,10 +56659,10 @@ webpackJsonp([0],[
 	                _this.pushToGithub();
 	            }
 	            else if (result !== null) {
-	                // TODO: Show an alert to the user for we're not ready with those functions yet
-	                alert("Not implemented yet");
+	                Humane.log('Sorry, this option is not available yet. Use GitHub until that.');
 	            }
 	            else {
+	                Humane.log('Ooops, something bad happened. Please get in touch.');
 	            }
 	        }).catch(function (err) {
 	            console.log(err);
@@ -66761,7 +66761,7 @@ webpackJsonp([0],[
 	var models_1 = __webpack_require__(660);
 	var area_1 = __webpack_require__(723);
 	var sliced_image_1 = __webpack_require__(717);
-	var progress_circle_1 = __webpack_require__(711);
+	var progress_circle_1 = __webpack_require__(710);
 	var BoardComponent = (function () {
 	    function BoardComponent(http, ga, areaService, rawImageService, imageService, folderService, renderer, dialogService) {
 	        var _this = this;
@@ -66850,12 +66850,12 @@ webpackJsonp([0],[
 	        var supportedFileExtension = ['jpg', 'png', 'jpeg'];
 	        var file = event.target.files[0];
 	        var extension = file.name.split('.').pop();
-	        // TODO, add analytics
 	        if (supportedFileExtension.indexOf(extension) === -1) {
 	            Humane.log("Sorry we support just 'png' and 'jpg' files at the moment.", { timeout: 4000, clickToClose: true });
-	            this.ga.eventTrack('uplaod', { category: extension });
+	            this.ga.eventTrack('upload', { category: extension });
 	        }
 	        else {
+	            this.ga.eventTrack('upload', { category: 'supportedExentension' });
 	            this.rawImageService.createFromFile(file).then(function (result) {
 	                _this.loading = false;
 	            });
@@ -66988,6 +66988,7 @@ webpackJsonp([0],[
 	        var type = data.type;
 	        var folderId;
 	        if (type == 'new') {
+	            this.ga.eventTrack('createFolder', { category: 'byAreaDialog' });
 	            this.folderService.create(new models_1.Folder(this.currentFolderId, data.newFolderName));
 	            folderId = _.last(this.folders)._id;
 	        }
@@ -67005,6 +67006,7 @@ webpackJsonp([0],[
 	        area.y = area.y / area.scaleHeight;
 	        area.width = area.width / area.scaleWidth;
 	        area.height = area.height / area.scaleHeight;
+	        this.ga.eventTrack('createArea', { category: 'none' });
 	        this.areaService.create(area);
 	    };
 	    BoardComponent.prototype.isCrossingOther = function (area) {
@@ -83597,7 +83599,7 @@ webpackJsonp([0],[
 	__export(__webpack_require__(671));
 	__export(__webpack_require__(675));
 	__export(__webpack_require__(674));
-	__export(__webpack_require__(710));
+	__export(__webpack_require__(711));
 	__export(__webpack_require__(714));
 
 
@@ -87617,20 +87619,24 @@ webpackJsonp([0],[
 	var input_1 = __webpack_require__(691);
 	var checkbox_1 = __webpack_require__(693);
 	var radio_1 = __webpack_require__(694);
+	var progress_circle_1 = __webpack_require__(710);
+	var angulartics2_google_analytics_1 = __webpack_require__(647);
 	var Humane = __webpack_require__(643);
-	var user_service_1 = __webpack_require__(710);
-	var progress_circle_1 = __webpack_require__(711);
+	var user_service_1 = __webpack_require__(711);
 	var ExportDialogComponent = (function () {
-	    function ExportDialogComponent(dialog, userService) {
+	    function ExportDialogComponent(dialog, ga, userService) {
 	        this.dialog = dialog;
+	        this.ga = ga;
 	        this.userService = userService;
 	        this.loading = false;
 	    }
 	    ExportDialogComponent.prototype.noop = function (type, $event) {
+	        this.ga.eventTrack('exportProject', { category: type });
 	        this.dialog.close(type);
 	    };
 	    ExportDialogComponent.prototype.githubAuth = function () {
 	        var _this = this;
+	        this.ga.eventTrack('exportProject', { category: 'github' });
 	        this.loading = true;
 	        var authUrl = '/auth/github';
 	        var _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600,top=0,left=0');
@@ -87676,7 +87682,7 @@ webpackJsonp([0],[
 	                radio_1.MdRadioDispatcher,
 	            ]
 	        }), 
-	        __metadata('design:paramtypes', [angular2_modal_1.DialogRef, user_service_1.UserService])
+	        __metadata('design:paramtypes', [angular2_modal_1.DialogRef, angulartics2_google_analytics_1.Angulartics2GoogleAnalytics, user_service_1.UserService])
 	    ], ExportDialogComponent);
 	    return ExportDialogComponent;
 	}());
@@ -87685,47 +87691,6 @@ webpackJsonp([0],[
 
 /***/ },
 /* 710 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var core_1 = __webpack_require__(5);
-	var BehaviorSubject_1 = __webpack_require__(420);
-	var http_service_ts_1 = __webpack_require__(674);
-	var UserService = (function () {
-	    function UserService(httpService) {
-	        this.httpService = httpService;
-	        this.userSource = new BehaviorSubject_1.BehaviorSubject(null);
-	        this.pollUser();
-	    }
-	    UserService.prototype.pollUser = function () {
-	        var _this = this;
-	        var observable = this.httpService.get('/users/me')
-	            .map(function (res) { return res.json(); });
-	        observable.subscribe(function (res) {
-	            _this.userSource.next(res.data);
-	        });
-	        return observable;
-	    };
-	    UserService = __decorate([
-	        core_1.Injectable(), 
-	        __metadata('design:paramtypes', [http_service_ts_1.HttpService])
-	    ], UserService);
-	    return UserService;
-	}());
-	exports.UserService = UserService;
-
-
-/***/ },
-/* 711 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88013,6 +87978,47 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/progress-circle/progress-circle.js.map
 
 /***/ },
+/* 711 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(5);
+	var BehaviorSubject_1 = __webpack_require__(420);
+	var http_service_ts_1 = __webpack_require__(674);
+	var UserService = (function () {
+	    function UserService(httpService) {
+	        this.httpService = httpService;
+	        this.userSource = new BehaviorSubject_1.BehaviorSubject(null);
+	        this.pollUser();
+	    }
+	    UserService.prototype.pollUser = function () {
+	        var _this = this;
+	        var observable = this.httpService.get('/users/me')
+	            .map(function (res) { return res.json(); });
+	        observable.subscribe(function (res) {
+	            _this.userSource.next(res.data);
+	        });
+	        return observable;
+	    };
+	    UserService = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [http_service_ts_1.HttpService])
+	    ], UserService);
+	    return UserService;
+	}());
+	exports.UserService = UserService;
+
+
+/***/ },
 /* 712 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -88098,13 +88104,15 @@ webpackJsonp([0],[
 	var core_1 = __webpack_require__(5);
 	var icon_1 = __webpack_require__(346);
 	var _ = __webpack_require__(646);
+	var angulartics2_google_analytics_1 = __webpack_require__(647);
 	var services_1 = __webpack_require__(648);
 	var sliced_image_1 = __webpack_require__(717);
-	var progress_circle_1 = __webpack_require__(711);
+	var progress_circle_1 = __webpack_require__(710);
 	var ImageBarComponent = (function () {
-	    function ImageBarComponent(imageService, rawImageService, folderService, el, dialogService) {
+	    function ImageBarComponent(imageService, ga, rawImageService, folderService, el, dialogService) {
 	        var _this = this;
 	        this.imageService = imageService;
+	        this.ga = ga;
 	        this.rawImageService = rawImageService;
 	        this.folderService = folderService;
 	        this.el = el;
@@ -88145,11 +88153,13 @@ webpackJsonp([0],[
 	        });
 	    };
 	    ImageBarComponent.prototype.saveImage = function (image) {
+	        this.ga.eventTrack('renameImage', { category: 'manually' });
 	        this.imageService.update(image);
 	        this.editImage = false;
 	    };
 	    ImageBarComponent.prototype.deleteImage = function (image) {
 	        var _this = this;
+	        this.ga.eventTrack('deleteImage', { category: 'manually' });
 	        // Confirm Dialog
 	        this.dialogService.openConfirmDialog().then(function (result) {
 	            if (result) {
@@ -88181,7 +88191,6 @@ webpackJsonp([0],[
 	        this.loading = true;
 	        var file = event.tar.files[0];
 	        this.rawImageService.createFromFile(file).then(function (res) {
-	            console.log("res => ", res);
 	            _this.loading = false;
 	        });
 	    };
@@ -88211,7 +88220,7 @@ webpackJsonp([0],[
 	            styles: [__webpack_require__(722)],
 	            directives: [sliced_image_1.SlicedImageComponent, icon_1.MD_ICON_DIRECTIVES, progress_circle_1.MD_PROGRESS_CIRCLE_DIRECTIVES]
 	        }), 
-	        __metadata('design:paramtypes', [services_1.ImageService, services_1.RawImageService, services_1.FolderService, core_1.ElementRef, services_1.DialogService])
+	        __metadata('design:paramtypes', [services_1.ImageService, angulartics2_google_analytics_1.Angulartics2GoogleAnalytics, services_1.RawImageService, services_1.FolderService, core_1.ElementRef, services_1.DialogService])
 	    ], ImageBarComponent);
 	    return ImageBarComponent;
 	}());
@@ -88389,22 +88398,26 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
+	var icon_1 = __webpack_require__(346);
+	var angulartics2_google_analytics_1 = __webpack_require__(647);
 	var models_1 = __webpack_require__(660);
 	var services_1 = __webpack_require__(648);
-	var icon_1 = __webpack_require__(346);
 	var AreaComponent = (function () {
-	    function AreaComponent(folderService, dialogService, areaService) {
+	    function AreaComponent(folderService, ga, dialogService, areaService) {
 	        this.folderService = folderService;
+	        this.ga = ga;
 	        this.dialogService = dialogService;
 	        this.areaService = areaService;
 	        this.scaleWidth = 1;
 	        this.scaleHeight = 1;
 	    }
 	    AreaComponent.prototype.goToComponent = function () {
+	        this.ga.eventTrack('navigateByArea', { category: 'manually' });
 	        this.folderService.setCurrentById(this.areaData.folderId);
 	    };
 	    AreaComponent.prototype.deleteArea = function () {
 	        var _this = this;
+	        this.ga.eventTrack('deleteArea', { category: 'manually' });
 	        // Confirm Dialog
 	        this.dialogService.openConfirmDialog().then(function (result) {
 	            if (result) {
@@ -88445,7 +88458,7 @@ webpackJsonp([0],[
 	            template: __webpack_require__(726)(),
 	            directives: [icon_1.MD_ICON_DIRECTIVES]
 	        }), 
-	        __metadata('design:paramtypes', [services_1.FolderService, services_1.DialogService, services_1.AreaService])
+	        __metadata('design:paramtypes', [services_1.FolderService, angulartics2_google_analytics_1.Angulartics2GoogleAnalytics, services_1.DialogService, services_1.AreaService])
 	    ], AreaComponent);
 	    return AreaComponent;
 	}());
@@ -88518,15 +88531,17 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var component_element_1 = __webpack_require__(731);
-	var models_1 = __webpack_require__(660);
-	var services_1 = __webpack_require__(648);
 	var icon_1 = __webpack_require__(346);
+	var angulartics2_google_analytics_1 = __webpack_require__(647);
+	var component_element_1 = __webpack_require__(731);
+	var services_1 = __webpack_require__(648);
+	var models_1 = __webpack_require__(660);
 	var dialog_service_1 = __webpack_require__(675);
 	var SidebarComponent = (function () {
-	    function SidebarComponent(fileService, folderService, dialogService) {
+	    function SidebarComponent(fileService, ga, folderService, dialogService) {
 	        var _this = this;
 	        this.fileService = fileService;
+	        this.ga = ga;
 	        this.folderService = folderService;
 	        this.dialogService = dialogService;
 	        this.files = fileService.filter(function (file) { return file.folderId === null || file.folderId === undefined; });
@@ -88539,6 +88554,7 @@ webpackJsonp([0],[
 	    SidebarComponent.prototype.createComponent = function () {
 	        var _this = this;
 	        this.dialogService.openCreateComponentDialog(false).then(function (dialogResult) {
+	            _this.ga.eventTrack('createFolder', { category: 'byButton' });
 	            _this.folderService.create(new models_1.Folder(_this.currentFolder._id, dialogResult.data.newFolderName));
 	        });
 	    };
@@ -88553,7 +88569,7 @@ webpackJsonp([0],[
 	                icon_1.MD_ICON_DIRECTIVES
 	            ]
 	        }), 
-	        __metadata('design:paramtypes', [services_1.FileService, services_1.FolderService, dialog_service_1.DialogService])
+	        __metadata('design:paramtypes', [services_1.FileService, angulartics2_google_analytics_1.Angulartics2GoogleAnalytics, services_1.FolderService, dialog_service_1.DialogService])
 	    ], SidebarComponent);
 	    return SidebarComponent;
 	}());
@@ -88586,13 +88602,15 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var models_1 = __webpack_require__(660);
-	var services_1 = __webpack_require__(648);
 	var icon_1 = __webpack_require__(346);
+	var angulartics2_google_analytics_1 = __webpack_require__(647);
+	var services_1 = __webpack_require__(648);
+	var models_1 = __webpack_require__(660);
 	var ComponentElementComponent = (function () {
-	    function ComponentElementComponent(imageService, folderService, fileService, dialogService) {
+	    function ComponentElementComponent(imageService, ga, folderService, fileService, dialogService) {
 	        var _this = this;
 	        this.imageService = imageService;
+	        this.ga = ga;
 	        this.folderService = folderService;
 	        this.fileService = fileService;
 	        this.dialogService = dialogService;
@@ -88614,6 +88632,7 @@ webpackJsonp([0],[
 	    };
 	    ComponentElementComponent.prototype.deleteComponent = function (event, folder) {
 	        var _this = this;
+	        this.ga.eventTrack('deleteFolder', { category: 'manually' });
 	        if (event) {
 	            event.stopPropagation();
 	        }
@@ -88633,6 +88652,7 @@ webpackJsonp([0],[
 	        }
 	    };
 	    ComponentElementComponent.prototype.saveComponent = function () {
+	        this.ga.eventTrack('renameFolder', { category: 'manually' });
 	        this.folderService.update(this.currentFolder);
 	        this.editComponent = false;
 	    };
@@ -88655,7 +88675,7 @@ webpackJsonp([0],[
 	            template: __webpack_require__(734)(),
 	            directives: [ComponentElementComponent, icon_1.MD_ICON_DIRECTIVES]
 	        }), 
-	        __metadata('design:paramtypes', [services_1.ImageService, services_1.FolderService, services_1.FileService, services_1.DialogService])
+	        __metadata('design:paramtypes', [services_1.ImageService, angulartics2_google_analytics_1.Angulartics2GoogleAnalytics, services_1.FolderService, services_1.FileService, services_1.DialogService])
 	    ], ComponentElementComponent);
 	    return ComponentElementComponent;
 	}());
