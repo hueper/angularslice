@@ -37,7 +37,7 @@ export class TooltipDirective {
   @HostListener('mouseenter', ['$event', '$target'])
   public show(): void {
     
-    if (this.visible || !this.enable || this.enable == 'falsegit ') {
+    if (this.visible || !this.enable || this.enable == 'false ') {
       return;
     }
     if (this.destroyTimeout || this.cRef) {
