@@ -59,14 +59,16 @@ export class BoardComponent implements OnDestroy {
   private areaEdit: boolean;
   private componentEdit: boolean;
 
-  constructor(private http: Http,
-              private ga: Angulartics2GoogleAnalytics,
-              private areaService: AreaService,
-              private rawImageService: RawImageService,
-              private imageService: ImageService,
-              private folderService: FolderService,
-              private renderer: Renderer,
-              private dialogService: DialogService) {
+  constructor(
+    private http: Http,
+    private ga: Angulartics2GoogleAnalytics,
+    private areaService: AreaService,
+    private rawImageService: RawImageService,
+    private imageService: ImageService,
+    private folderService: FolderService,
+    private renderer: Renderer,
+    private dialogService: DialogService
+  ) {
 
     // Subscribe for folders
     this.subscriptions.push(this.folderService.dataSource.subscribe((folders: Folder[]) => {
@@ -143,11 +145,11 @@ export class BoardComponent implements OnDestroy {
     const file = event.target.files[0];
     const extension = file.name.split('.').pop();
 
-    // TODO, add analytics
     if (supportedFileExtension.indexOf(extension) === -1) {
       Humane.log(`Sorry we support just 'png' and 'jpg' files at the moment.`, { timeout: 4000, clickToClose: true });
-      this.ga.eventTrack('uplaod', { category: extension });
+      this.ga.eventTrack('upload', { category: extension });
     } else {
+      this.ga.eventTrack('upload', { category: 'supportedExentension' });
       this.rawImageService.createFromFile(file).then(result => {
         this.loading = false;
       });
@@ -313,6 +315,7 @@ export class BoardComponent implements OnDestroy {
     let folderId;
 
     if (type == 'new') {
+      this.ga.eventTrack('createFolder', { category: 'byAreaDialog'} );
       this.folderService.create(new Folder(this.currentFolderId, data.newFolderName));
       folderId = _.last(this.folders)._id;
     } else {
@@ -342,6 +345,7 @@ export class BoardComponent implements OnDestroy {
     area.width = area.width / area.scaleWidth;
     area.height = area.height / area.scaleHeight;
 
+    this.ga.eventTrack('createArea', { category: 'none'} );
     this.areaService.create(area);
 
   }

@@ -1,8 +1,10 @@
 import { Component, Input } from "@angular/core";
-import { Folder, File, Image } from "../../shared/models";
-import { FolderService, FileService, ImageService, DialogService } from "../../shared/services";
 import { Observable } from "rxjs/Rx";
 import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
+import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
+
+import { FolderService, FileService, ImageService, DialogService } from "../../shared/services";
+import { Folder, File, Image } from "../../shared/models";
 
 @Component({
   selector: 'component-element',
@@ -25,6 +27,7 @@ export class ComponentElementComponent {
 
   constructor(
     private imageService: ImageService,
+    private ga: Angulartics2GoogleAnalytics,
     private folderService: FolderService,
     private fileService: FileService,
     private dialogService: DialogService
@@ -51,6 +54,8 @@ export class ComponentElementComponent {
   }
 
   deleteComponent(event, folder) {
+    this.ga.eventTrack('deleteFolder', { category: 'manually' });
+
     if (event) {
       event.stopPropagation();
     }
@@ -58,11 +63,13 @@ export class ComponentElementComponent {
     // Confirm Dialog
     this.dialogService.openConfirmDialog().then((result) => {
       if (result && folder.folderId) {
+
         this.folderService.delete(folder);
       }
     });
 
   }
+
   setEditComponent(folderEdit) {
     if(this.currentFolder._id === this.folder._id && this.folder.folderId !== null) {
       this.editComponent = true;
@@ -71,7 +78,9 @@ export class ComponentElementComponent {
       });
     }
   }
+
   saveComponent() {
+    this.ga.eventTrack('renameFolder', { category: 'manually' });
     this.folderService.update(this.currentFolder);
     this.editComponent = false;
   }

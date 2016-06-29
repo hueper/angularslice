@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
+import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 
 import { Area } from '../../shared/models';
 import { AreaService, DialogService, FolderService } from '../../shared/services';
-import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
 
 
 @Component({
@@ -20,16 +21,20 @@ export class AreaComponent {
   @Input() scaleHeight: number = 1;
 
   constructor(private folderService: FolderService,
+              private ga: Angulartics2GoogleAnalytics,
               private dialogService: DialogService,
               private areaService: AreaService) {
 
   }
 
   goToComponent() {
+    this.ga.eventTrack('navigateByArea', { category: 'manually' });
     this.folderService.setCurrentById(this.areaData.folderId);
   }
 
   deleteArea() {
+    this.ga.eventTrack('deleteArea', { category: 'manually' });
+
     // Confirm Dialog
     this.dialogService.openConfirmDialog().then((result) => {
       if (result) {
