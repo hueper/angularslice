@@ -13,7 +13,7 @@
   }
 
   &-top::after {
-    content: " ";
+    content: ' ';
     position: absolute;
     top: 100%; /* At the bottom of the tooltip */
     left: 50%;
@@ -24,7 +24,7 @@
   }
 
   &-left::after {
-    content: " ";
+    content: ' ';
     position: absolute;
     top: 50%;
     right: 100%; /* To the left of the tooltip */
