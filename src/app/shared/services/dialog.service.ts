@@ -21,26 +21,38 @@ export class DialogService {
                .open(GithubDialogComponent, data)
                .then(dialog => {
                  return dialog.result;
+               })
+               .catch(err => {
+                 console.log(err);
+                 return null;
                });
   }
 
-  openExportDialog() {
+  openExportDialog(): Promise<any> {
     const data = new BSModalContext();
     return this.modal
                .open(ExportDialogComponent, data)
                .then(dialog => {
                  return dialog.result;
-               }).catch(err => {
-        console.log(err)
-      });
+               })
+               .catch(err => {
+                 console.log(err);
+                 return null;
+               });
   }
 
-  openCreateComponentDialog() {
+  openCreateComponentDialog(hasImage: boolean = true) {
     const data = new BSModalContext();
+    data["hasImage"] = hasImage;
+
     return this.modal
                .open(ComponentDialogComponent, data)
                .then(dialog => {
                  return dialog.result;
+               })
+               .catch(err => {
+                 console.log(err);
+                 return null;
                });
   }
 
@@ -51,5 +63,9 @@ export class DialogService {
                .then(dialog => {
                  return dialog.result;
                })
+               .catch(err => {
+                 console.log(err);
+                 return null;
+               });
   }
 }

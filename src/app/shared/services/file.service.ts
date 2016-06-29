@@ -35,7 +35,7 @@ export class FileService extends BaseService<File> {
     });
 
     this.folderService.updateSource.subscribe(folder => {
-      this.find({ folderId: folder._id }).map( (file) => {
+      this.find({ folderId: folder._id }).map((file: File) => {
         var splittedName = file.name.split('.');
         splittedName[0] = folder.name;
         file.name = splittedName.join('.');

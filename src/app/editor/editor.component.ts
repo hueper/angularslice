@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MD_ICON_DIRECTIVES } from '@angular2-material/icon';
 import { Observable } from 'rxjs';
+
 const Humane = require('humane-js');
 
 import { BoardComponent } from "../board";
@@ -9,6 +10,7 @@ import { SidebarComponent } from "../sidebar";
 import { ToolbarComponent } from "../toolbar";
 import { DialogService, ImageService, FolderService, ProjectService, UserService } from "../shared/services";
 import { Folder } from "../shared/models";
+import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 
 
 @Component({
@@ -19,51 +21,27 @@ import { Folder } from "../shared/models";
     BoardComponent,
     SidebarComponent,
     ToolbarComponent,
-    MD_ICON_DIRECTIVES
+    MD_ICON_DIRECTIVES,
+    MD_PROGRESS_CIRCLE_DIRECTIVES
   ]
 })
 export class EditorComponent {
   logo: any;
   sub: any;
   currentFolder: Folder;
-
-  githubAuth() {
-    const authUrl = '/auth/github';
-    const _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=400');
-
-    _oauthWindow.addEventListener('unload', (event) => {
-      this.userService.pollUser().subscribe(res => {
-        console.log("res => ", res);
-      })
-    });
-
-    // const _oauthInterval = window.setInterval(() => {
-    //   if (_oauthWindow.closed) {
-    //     window.clearInterval(_oauthInterval);
-    //     // Poll
-    //     console.log('POLLNG');
-    //     this.userService.pollUser().subscribe((res) => {
-    //       if (res.data.oauthData) {
-    //         Humane.log(`Awesome! See you next time!`);
-    //         // TODO: show the Dialog
-    //       } else {
-    //         Humane.log(`Sorry, we couldn't authenticate you. Please try again.`);
-    //       }
-    //       console.log('POLLNG', res);
-    //     });
-    //   }
-    // }, 1000);
-  }
+  private loading: boolean = false;
 
   pushToGithub() {
     this.dialogService.openGithubDialog().then((res) => {
-      console.log(res);
+      this.loading = true;
       this.projectService.generate(res).subscribe((res: any) => {
+        console.log("res => ", res);
         if (res.success) {
           Humane.log('Awesome');
         } else {
-          Humane.log('Fuck me');
+          // TODO: the request was dismissed
         }
+        this.loading = false;
       });
     }).catch(err=> {
 
@@ -71,9 +49,18 @@ export class EditorComponent {
   }
 
   export() {
-    this.dialogService.openExportDialog().then(res => {
-      console.log(res);
-      this.githubAuth();
+    this.dialogService.openExportDialog().then(result => {
+      console.log("result => ", result);
+      if (result == "github") {
+        this.pushToGithub();
+      } else if (result !== null) {
+        // TODO: Show an alert to the user for we're not ready with those functions yet
+        alert("Not implemented yet");
+      } else {
+        // TODO: the popup was dismissed (closed without answer!)
+      }
+    }).catch(err => {
+      console.log(err);
     });
   }
 

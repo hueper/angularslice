@@ -47,7 +47,7 @@ export class ImageService extends BaseService<Image> {
   }
 
   setCurrentImage(instance: Image) {
-    this.currentIdSource.next(instance._id);
+    this.currentIdSource.next(instance ? instance._id : null);
   }
 
   delete(instance: Image) {

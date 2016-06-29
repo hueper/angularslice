@@ -31,11 +31,10 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
   component: any;
   public folders: Folder[];
   private subscriptions: Subscription[] = [];
+  private hasImage: boolean = true;
 
-  constructor(
-    public dialog: DialogRef<BSModalContext>,
-    private folderService: FolderService
-  ) {
+  constructor(public dialog: DialogRef<BSModalContext>,
+              private folderService: FolderService) {
     this.subscriptions.push(folderService.dataSource.subscribe((folders: Folder[]) => {
       this.folders = folders;
     }));
@@ -43,6 +42,14 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
       type: 'new',
       attach: true,
       folder: null,
+    };
+
+    this.hasImage = this.dialog.context['hasImage'];
+  }
+
+  eventHandler(event) {
+    if (event.which === 13) {
+      this.send();
     }
   }
 

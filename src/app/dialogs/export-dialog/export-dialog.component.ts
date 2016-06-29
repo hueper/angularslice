@@ -11,6 +11,9 @@ const Humane = require('humane-js');
 
 import { Folder } from "../../shared/models";
 import { FolderService } from "../../shared/services";
+import { UserService } from "../../shared/services/user.service";
+import { User } from "../../shared/models/user.model";
+import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 
 @Component({
   selector: 'export-dialog',
@@ -22,6 +25,7 @@ import { FolderService } from "../../shared/services";
     MdCheckbox,
     MdRadioGroup,
     MdRadioButton,
+    MD_PROGRESS_CIRCLE_DIRECTIVES
   ],
   providers: [
     MdRadioDispatcher,
@@ -29,13 +33,43 @@ import { FolderService } from "../../shared/services";
 })
 export class ExportDialogComponent implements ModalComponent<BSModalContext> {
   protected activeSelect: string;
+  protected loading: boolean = false;
 
-  constructor(public dialog: DialogRef<BSModalContext>) {
-
+  constructor(public dialog: DialogRef<BSModalContext>,
+              private userService: UserService) {
   }
 
   noop(type: string, $event) {
     this.dialog.close(type);
+  }
+
+
+  githubAuth() {
+    this.loading = true;
+    const authUrl = '/auth/github';
+    let _oauthWindow = window.open(authUrl, 'GitHub Auth', 'width=800,height=600,top=0,left=0');
+    let interval = setInterval(() => {
+      if (_oauthWindow.closed) {
+        clearInterval(interval);
+        this.windowClosed();
+      }
+    }, 500);
+  }
+
+  windowClosed() {
+    this.userService.pollUser().subscribe(res => {
+      let user = res.data as User;
+      let accessToken = _.get(user, 'oauthData.github.accessToken', false);
+
+      if (accessToken) {
+        this.dialog.close('github');
+        //TODO: the user authentication was successfull, we can do whatever we want ;)
+      } else {
+        this.loading = false;
+        Humane.log(`Sorry, we couldn't authenticate you. Please try again.`, { addnCls: 'humane-error' });
+        this.close();
+      }
+    });
   }
 
   close() {

@@ -7,7 +7,7 @@ import { BaseModel } from '../models';
 
 
 @Injectable()
-export class BaseService<T extends BaseModel>{
+export class BaseService<T extends BaseModel> {
   dataSource: BehaviorSubject<T[]> = new BehaviorSubject([]);
   currentSource: BehaviorSubject<T> = new BehaviorSubject<T>(null);
   currentIdSource: BehaviorSubject<string> = new BehaviorSubject<string>(null);
@@ -18,10 +18,8 @@ export class BaseService<T extends BaseModel>{
   createSource: ReplaySubject<T> = new ReplaySubject<T>();
   deleteSource: ReplaySubject<T> = new ReplaySubject<T>();
 
-  constructor(
-    private entityType = null,
-    private ClassT: any = null
-  ) {
+  constructor(private entityType = null,
+              private ClassT: any = null) {
 
     // localStorage READ & WRITE
     if (this.entityType) {
@@ -45,50 +43,50 @@ export class BaseService<T extends BaseModel>{
 
     // Create the current instance stream
     Observable.combineLatest(this.dataSource, this.currentIdSource)
-      .map((combinedData) => {
-        let dataStore, currentId;
-        [dataStore, currentId] = combinedData;
-        return  _.find(dataStore, { _id: currentId }) || _.get(dataStore, 0, null);
-      })
-      .subscribe(this.currentSource);
+              .map((combinedData) => {
+                let dataStore, currentId;
+                [dataStore, currentId] = combinedData;
+                return _.find(dataStore, { _id: currentId }) || _.get(dataStore, 0, null);
+              })
+              .subscribe(this.currentSource);
 
     this.changeSource
-      .scan((dataStore, operation) => {
-        return operation(dataStore);
-      }, this.dataSource.getValue())
-      .subscribe(this.dataSource);
+        .scan((dataStore, operation) => {
+          return operation(dataStore);
+        }, this.dataSource.getValue())
+        .subscribe(this.dataSource);
 
     this.updateSource
-      .map((instance) => {
-        return (dataStore) => {
-          const index = _.findIndex(dataStore, { _id: instance._id });
-          dataStore[index] = instance;
-          return dataStore;
-        }
-      })
-      .subscribe(this.changeSource);
+        .map((instance) => {
+          return (dataStore) => {
+            const index = _.findIndex(dataStore, { _id: instance._id });
+            dataStore[index] = instance;
+            return dataStore;
+          }
+        })
+        .subscribe(this.changeSource);
 
     this.createSource
-      .map((instance) => {
-        return (dataStore) => {
-          dataStore.push(instance);
-          return dataStore;
-        }
-      })
-      .subscribe(this.changeSource);
+        .map((instance) => {
+          return (dataStore) => {
+            dataStore.push(instance);
+            return dataStore;
+          }
+        })
+        .subscribe(this.changeSource);
 
     this.deleteSource
-      .map((instanceToDelete) => {
-        return (dataStore) => {
-          return dataStore.filter((instance) => {
-            return instance._id !== instanceToDelete._id;
-          })
-        }
-      })
-      .subscribe(this.changeSource);
+        .map((instanceToDelete) => {
+          return (dataStore) => {
+            return dataStore.filter((instance) => {
+              return instance._id !== instanceToDelete._id;
+            })
+          }
+        })
+        .subscribe(this.changeSource);
   }
 
-  first(filter:(instance:T) => boolean): Observable<T[]> {
+  first(filter: (instance: T) => boolean): Observable<T[]> {
     return this.dataSource.map((instanceArray: T[]) => {
       return _.get(instanceArray.filter(filter), 0, null);
     });
@@ -102,20 +100,22 @@ export class BaseService<T extends BaseModel>{
     this.createSource.next(instance);
   }
 
-  filter(filter:(instance:T) => boolean):Observable<T[]> {
+  filter(filter: (instance: T) => boolean): Observable<T[]> {
     return this.dataSource.map(instanceArray => instanceArray.filter(filter));
   }
 
-  findById(id: string) : T {
-    let result = this.dataSource.getValue().filter((instance) => { return instance._id === id });
+  findById(id: string): T {
+    let result = this.dataSource.getValue().filter((instance) => {
+      return instance._id === id
+    });
     return result ? result[0] : null;
   }
 
-  findOne(filterObject: any): T {
+  findOne(filterObject: any) {
     return _.find(this.dataSource.getValue(), filterObject);
   }
 
-  find(filterObject: any = {}): T[] {
+  find(filterObject: any = {}) {
     return _.filter(this.dataSource.getValue(), filterObject);
   }
 

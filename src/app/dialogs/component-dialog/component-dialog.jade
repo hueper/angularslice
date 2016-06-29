@@ -1,8 +1,8 @@
 .dialogBackground( (click)='close()' )
 .dialog
-  form()
+  form((keypress)='eventHandler($event)')
     .flexContainer
-      .row
+      .row(*ngIf='hasImage')
         .column
           label Let's attach a component to the selected area.
           md-radio-group([(ngModel)]='component.type')
@@ -17,10 +17,10 @@
           div Select the component:
             select([(ngModel)]='component.folder')
               option(*ngFor='let folder of folders', [value]='folder._id') {{ folder.name }}
-      .row.addition
+      .row.addition(*ngIf='hasImage')
         .column
           md-checkbox([ngModel]='component.attach', (change)='changeAttachImage($event)') Add the area's image to the attached component
-      .row(*ngIf='component.attach')
+      .row(*ngIf='component.attach && hasImage')
         .column
           md-input([(ngModel)]='component.newImageName', placeholder = "Add name for the image")
       .row.row--rightAligned

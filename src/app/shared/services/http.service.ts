@@ -3,6 +3,13 @@ import { Http, RequestOptions } from "@angular/http";
 
 declare var __DEV__;
 
+export interface HttpResponse<T> {
+  success: boolean;
+  data?: T;
+  message?: string;
+  errorObject?: any;
+}
+
 @Injectable()
 export class HttpService {
 
@@ -10,7 +17,7 @@ export class HttpService {
   private defaultRequestOptions: RequestOptions = new RequestOptions({ withCredentials: true });
 
   constructor(private http: Http) {
-    if(__DEV__) {
+    if (__DEV__) {
       this.baseUrl = 'http://192.168.1.102:3000/api';
     } else {
       this.baseUrl = '/api';

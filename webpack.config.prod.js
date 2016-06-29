@@ -14,20 +14,20 @@ var prodConfig = {
       {from: 'src/index.html', to: 'index.html'},
     ]),
     //new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      minimize: true,
-      sourceMap: false,
-      mangle: {
-        screw_ie8: true
-      },// prod
-      compress: {
-        screw_ie8: true,
-        warnings: false
-      },//prod
-      comments: false//prod
-    })
+    // new webpack.optimize.DedupePlugin(),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   beautify: false,
+    //   minimize: true,
+    //   sourceMap: false,
+    //   mangle: {
+    //     screw_ie8: true
+    //   },// prod
+    //   compress: {
+    //     screw_ie8: true,
+    //     warnings: false
+    //   },//prod
+    //   comments: false//prod
+    // })
   ]
 };
 

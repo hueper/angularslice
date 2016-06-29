@@ -41,7 +41,7 @@ bootstrap(AppComponent, [
   TemplateService,
   UserService,
 
-  provide(APP_BASE_HREF, {useValue: location.pathname})
+  provide(APP_BASE_HREF, { useValue: location.pathname })
 ]).catch((error) => {
   console.error('Error during app bootstrapping', error)
 });

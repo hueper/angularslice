@@ -1,8 +1,13 @@
 .dialogBackground( (click)='close()' )
 .dialog
+  .loadingContainer([hidden]='!loading')
+    .loading
+      .content
+        md-progress-circle(mode='indeterminate')
+        | Loading, please wait!
   .flexContainer
     .row.h-center
-      .choose((click)='noop("github", $event)', [ngClass]='{active: activeSelect=="github"}')
+      .choose((click)='githubAuth()', [ngClass]='{active: activeSelect=="github"}')
         .fa.fa-github
         | Github
       .choose((click)='noop("bitbucket", $event)', [ngClass]='{active: activeSelect=="bitbucket"}')
