@@ -23,17 +23,24 @@ export class TooltipDirective {
   private visible: boolean = false;
   private tooltip: Promise<ComponentRef<any>>;
   private cRef: ComponentRef<TooltipContainerComponent>;
+  
+  private destroyTimeout: any;
+  
   public constructor(public viewContainerRef: ViewContainerRef,
                      protected tooltipService: TooltipService,
                      protected app: ApplicationRef,
                      protected injector: Injector,
                      protected ComponentResolver: ComponentResolver) {
   }
-
+  
   @HostListener('focusin', ['$event', '$target'])
   @HostListener('mouseenter', ['$event', '$target'])
   public show(): void {
     if (this.visible || !this.enable) {
+      return;
+    }
+    if(this.destroyTimeout || this.cRef) {
+      clearTimeout(this.destroyTimeout);
       return;
     }
     this.visible = true;
@@ -49,10 +56,7 @@ export class TooltipDirective {
     let binding = ReflectiveInjector.resolveAndCreate([
       new Provider(TooltipOptions, { useValue: options })
     ], this.injector);
-    
     this.tooltip = this.ComponentResolver.resolveComponent(TooltipContainerComponent).then(componentFactory => {
-      // let cRef = this.viewContainerRef.createComponent(componentFactory, -1, binding);
-      // return cRef;
       this.cRef = this.tooltipService.showTooltip(componentFactory, binding)
       return this.cRef;
     });
@@ -60,27 +64,32 @@ export class TooltipDirective {
   
   @HostListener('mousemove', ["$event", "$target"])
   move(event, target) {
-    if (this.followCursor !== true || this.visible !== true) {
+    if (!this.followCursor || !this.visible || !this.cRef) {
       return;
     }
-    // this.cRef.instance.top: event.clientX;
+    if(this.destroyTimeout) {
+      clearTimeout(this.destroyTimeout);
+    }
     
-    console.log("event => ", event);
+    this.cRef.instance.top = (event.clientY - 20) + 'px';
+    this.cRef.instance.left = (event.clientX + 25) + 'px';
   }
   
   // params event, target
   @HostListener('focusout', ['$event', '$target'])
   @HostListener('mouseleave', ['$event', '$target'])
   public hide(): void {
+    
     if (!this.visible) {
       return;
     }
-    this.visible = false;
     this.tooltip.then((componentRef: ComponentRef<TooltipContainerComponent>) => {
-      componentRef.instance.beforeDestroy();
-      setTimeout(() => {
+      this.destroyTimeout = setTimeout(() => {
         componentRef.destroy();
-      }, 400);
+        this.cRef = null;
+        this.visible = false;
+        this.destroyTimeout = false;
+      }, 1000);
       return componentRef;
     });
   }

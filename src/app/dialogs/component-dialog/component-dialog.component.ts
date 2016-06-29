@@ -10,8 +10,7 @@ import { Subscription } from "rxjs";
 const Humane = require('humane-js');
 
 import { Folder } from "../../shared/models";
-import { FolderService, TooltipService } from "../../shared/services";
-import { TooltipDirective } from "../../shared/directives";
+import { FolderService } from "../../shared/services";
 
 @Component({
   selector: 'component-dialog',

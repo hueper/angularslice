@@ -1,5 +1,4 @@
-div.tooltip([ngStyle]="{top: top, left: left, display: display}", @state='state'
-  [ngClass] = "classMap")
-  .tooltip-arrow
+div.tooltip([ngStyle]="{top: top, left: left, display: display}",
+  [ngClass]="classMap")
   .tooltip-inner
     | {{content}}

@@ -11,6 +11,7 @@ import { Area, Folder, Image, NewArea } from "../shared/models";
 import { AreaComponent } from "./area";
 import { SlicedImageComponent } from "../sliced-image";
 import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
+import { TooltipDirective } from "../shared/directives/tooltip/tooltip.directive";
 
 
 @Component({
@@ -20,7 +21,9 @@ import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circl
   directives: [
     AreaComponent,
     ImageBarComponent,
-    SlicedImageComponent, MD_PROGRESS_CIRCLE_DIRECTIVES
+    SlicedImageComponent,
+    MD_PROGRESS_CIRCLE_DIRECTIVES,
+    TooltipDirective
   ],
 })
 export class BoardComponent implements OnDestroy {

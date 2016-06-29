@@ -29,7 +29,6 @@ export class ConfirmDialogComponent implements ModalComponent<ConfirmDialogData>
   ) {
     this.context = dialog.context;
     this.confirmData = this.context.confirmData;
-    console.log(this.confirmData);
   }
 
   ngOnDestroy() {

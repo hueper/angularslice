@@ -35,7 +35,6 @@ export class EditorComponent {
     this.dialogService.openGithubDialog().then((res) => {
       this.loading = true;
       this.projectService.generate(res).subscribe((res: any) => {
-        console.log("res => ", res);
         if (res.success) {
           Humane.log('Awesome');
         } else {
@@ -50,7 +49,6 @@ export class EditorComponent {
 
   export() {
     this.dialogService.openExportDialog().then(result => {
-      console.log("result => ", result);
       if (result == "github") {
         this.pushToGithub();
       } else if (result !== null) {
@@ -60,7 +58,6 @@ export class EditorComponent {
         // TODO: the popup was dismissed (closed without answer!)
       }
     }).catch(err => {
-      console.log(err);
     });
   }
 
