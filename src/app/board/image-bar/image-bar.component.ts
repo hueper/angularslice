@@ -3,6 +3,7 @@ import { MD_ICON_DIRECTIVES } from "@angular2-material/icon";
 import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 import * as _ from "lodash";
 import { Subscription } from "rxjs/Rx";
+import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 
 import { ImageService, FolderService, DialogService, RawImageService } from "../../shared/services";
 import { Image, Folder } from "../../shared/models";
@@ -29,6 +30,7 @@ export class ImageBarComponent implements OnDestroy {
   private editImage: boolean = false;
   
   constructor(private imageService: ImageService,
+              private ga: Angulartics2GoogleAnalytics,
               private rawImageService: RawImageService,
               private folderService: FolderService,
               private el: ElementRef,
@@ -75,11 +77,13 @@ export class ImageBarComponent implements OnDestroy {
   }
   
   saveImage(image) {
+    this.ga.eventTrack('renameImage', { category: 'manually' });
     this.imageService.update(image);
     this.editImage = false;
   }
   
   deleteImage(image) {
+    this.ga.eventTrack('deleteImage', { category: 'manually' });
     // Confirm Dialog
     this.dialogService.openConfirmDialog().then((result) => {
       if (result) {

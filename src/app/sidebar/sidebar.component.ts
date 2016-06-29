@@ -1,9 +1,11 @@
 import { Component } from "@angular/core";
-import { ComponentElementComponent } from "./component-element";
-import { Folder, File } from "../shared/models";
-import { FolderService, FileService } from "../shared/services";
 import { Observable } from "rxjs/Rx";
 import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
+import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
+
+import { ComponentElementComponent } from "./component-element";
+import { FolderService, FileService } from "../shared/services";
+import { Folder, File } from "../shared/models";
 import { DialogService } from "../shared/services/dialog.service";
 
 @Component({
@@ -23,6 +25,7 @@ export class SidebarComponent {
   private currentFolder: Folder;
 
   constructor(private fileService: FileService,
+              private ga: Angulartics2GoogleAnalytics,
               private folderService: FolderService,
               private dialogService: DialogService) {
     this.files = fileService.filter(file => file.folderId === null || file.folderId === undefined);
@@ -38,6 +41,7 @@ export class SidebarComponent {
 
   createComponent() {
     this.dialogService.openCreateComponentDialog(false).then(dialogResult => {
+      this.ga.eventTrack('createFolder', { category: 'byButton'} );
       this.folderService.create(new Folder(this.currentFolder._id, dialogResult.data.newFolderName));
     });
   }

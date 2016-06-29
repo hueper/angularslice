@@ -52,10 +52,9 @@ export class EditorComponent {
       if (result == "github") {
         this.pushToGithub();
       } else if (result !== null) {
-        // TODO: Show an alert to the user for we're not ready with those functions yet
-        alert("Not implemented yet");
+        Humane.log('Sorry, this option is not available yet. Use GitHub until that.')
       } else {
-        // TODO: the popup was dismissed (closed without answer!)
+        Humane.log('Ooops, something bad happened. Please get in touch.')
       }
     }).catch(err => {
     });
