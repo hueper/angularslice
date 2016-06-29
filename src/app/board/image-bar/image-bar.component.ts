@@ -114,7 +114,7 @@ export class ImageBarComponent implements OnDestroy {
   
   loadFile(event) {
     this.loading = true;
-    var file = event.tar.files[0];
+    var file = event.target.files[0];
     this.rawImageService.createFromFile(file).then(res => {
       this.loading = false;
     });

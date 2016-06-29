@@ -1,11 +1,13 @@
 import { Component, Input, ElementRef, ViewChild, AfterViewInit, OnChanges, NgZone } from "@angular/core";
 import { Image } from "../shared/models/";
 import { ImageService } from "../shared/services";
+import { TooltipDirective } from "../shared/directives/tooltip/tooltip.directive";
 
 @Component({
   selector: 'sliced-image',
   styles: [require('./sliced-image.component.scss')],
-  template: require('./sliced-image.component.jade')()
+  template: require('./sliced-image.component.jade')(),
+  directives: [TooltipDirective]
 })
 
 export class SlicedImageComponent implements AfterViewInit, OnChanges {

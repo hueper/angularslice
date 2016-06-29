@@ -13,9 +13,8 @@ export class TooltipDirective {
   /* tslint:disable */
   @Input('tooltip') public content: string;
   @Input('tooltipPlacement') public placement: string = 'top';
-  @Input('tooltipIsOpen') public isOpen: boolean;
-  @Input('tooltipEnable') public enable: boolean = true;
-  @Input('tooltipAnimation') public animation: boolean = true;
+  @Input('tooltipEnable') public enable: string = 'true';
+  @Input('timeout') public timeout: number = 0;
   @Input('tooltipAppendToBody') public appendToBody: boolean = true;
   @Input('tooltipFollowCursor') public followCursor: boolean = false;
   /* tslint:enable */
@@ -31,15 +30,17 @@ export class TooltipDirective {
                      protected app: ApplicationRef,
                      protected injector: Injector,
                      protected ComponentResolver: ComponentResolver) {
+    
   }
   
   @HostListener('focusin', ['$event', '$target'])
   @HostListener('mouseenter', ['$event', '$target'])
   public show(): void {
-    if (this.visible || !this.enable) {
+    
+    if (this.visible || !this.enable || this.enable == 'falsegit ') {
       return;
     }
-    if(this.destroyTimeout || this.cRef) {
+    if (this.destroyTimeout || this.cRef) {
       clearTimeout(this.destroyTimeout);
       return;
     }
@@ -47,7 +48,6 @@ export class TooltipDirective {
     let options = new TooltipOptions({
       content: this.content,
       placement: this.placement,
-      animation: this.animation,
       appendToBody: this.appendToBody,
       followCursor: this.followCursor,
       hostEl: this.viewContainerRef.element
@@ -67,7 +67,7 @@ export class TooltipDirective {
     if (!this.followCursor || !this.visible || !this.cRef) {
       return;
     }
-    if(this.destroyTimeout) {
+    if (this.destroyTimeout) {
       clearTimeout(this.destroyTimeout);
     }
     
@@ -79,7 +79,7 @@ export class TooltipDirective {
   @HostListener('focusout', ['$event', '$target'])
   @HostListener('mouseleave', ['$event', '$target'])
   public hide(): void {
-    
+    console.log("this.timeout => ", this.timeout);
     if (!this.visible) {
       return;
     }
@@ -89,7 +89,7 @@ export class TooltipDirective {
         this.cRef = null;
         this.visible = false;
         this.destroyTimeout = false;
-      }, 1000);
+      }, Math.max(50, this.timeout * 1000));
       return componentRef;
     });
   }

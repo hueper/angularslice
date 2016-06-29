@@ -1,3 +1,8 @@
 .sliced-image
-  canvas.image(#canvas, [ngClass]='{thumbnail: thumbnail}')
+  canvas.image(#canvas, [ngClass]='{thumbnail: thumbnail}',
+  tooltip='Select the greatest component on the image to start the slice', tooltipTimeout='1',
+  tooltipFollowCursor='true',
+  tooltipAppendToBody='true', tooltipPlacement='left',
+  tooltipEnable='{{ !thumbnail }}'
+  )
   ng-content

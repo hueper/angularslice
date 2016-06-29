@@ -34,10 +34,7 @@
     *ngIf='currentImage',
     (mousedown)="onMouseDown($event, imageContainer, workingSpace)"
     )
-      sliced-image([image]='currentImage', #imageContainer, [thumbnail]='false',
-      tooltip='Select the greatest component on the image to start the slice',
-      tooltipFollowCursor='true', tooltipAppendToBody='true', tooltipPlacement='left'
-      )
+      sliced-image([image]='currentImage', #imageContainer, [thumbnail]='false')
         area(*ngFor="let area of areas",
         [scaleWidth]='imageContainer.scaleWidth',
         [scaleHeight]='imageContainer.scaleHeight',
