@@ -66940,7 +66940,7 @@ webpackJsonp([0],[
 	            var xMax = Math.min(this.maxWidth, event.clientX - this.offsetLeftContainer);
 	            var yMax = Math.min(this.maxHeight, event.clientY - this.offsetTopContainer);
 	            this.newArea.setDiagonalCoordinates(Math.max(0, xMax), Math.max(0, yMax));
-	            this.newArea.invalid = this.isCrossingOther(this.newArea);
+	            this.newArea.invalid = this.isCrossingOther(this.newArea, this.scaleWidth, this.scaleHeight);
 	        }
 	        return false;
 	    };
@@ -66953,7 +66953,7 @@ webpackJsonp([0],[
 	     */
 	    BoardComponent.prototype.onMouseUp = function (event) {
 	        var _this = this;
-	        if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea) && this.newArea.width > 7 && this.newArea.height > 7) {
+	        if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea, this.scaleWidth, this.scaleHeight) && this.newArea.width > 7 && this.newArea.height > 7) {
 	            this.dialogService.openCreateComponentDialog(true)
 	                .then(function (data) {
 	                _this.createComponentDialogCallback(_this.newArea, data);
@@ -67007,11 +67007,11 @@ webpackJsonp([0],[
 	        this.ga.eventTrack('createArea', { category: 'none' });
 	        this.areaService.create(area);
 	    };
-	    BoardComponent.prototype.isCrossingOther = function (area) {
-	        return !!this.areas.find(function (cmp) { return cmp.overLaps(area); });
+	    BoardComponent.prototype.isCrossingOther = function (area, scaleWidth, scaleHeight) {
+	        return !!this.areas.find(function (cmp) { return cmp.overLaps(area, scaleWidth, scaleHeight); });
 	    };
-	    BoardComponent.prototype.findComponent = function (x, y) {
-	        var component = this.areas.find(function (cmp) { return cmp.contains(x, y); });
+	    BoardComponent.prototype.findComponent = function (x, y, scaleWidth, scaleHeight) {
+	        var component = this.areas.find(function (cmp) { return cmp.contains(x, y, scaleWidth, scaleHeight); });
 	        return component;
 	    };
 	    BoardComponent = __decorate([
@@ -84375,27 +84375,28 @@ webpackJsonp([0],[
 	    Area.prototype.hasDimensions = function () {
 	        return this.right - this.left > 0 && this.bottom - this.top > 0;
 	    };
-	    Area.prototype.contains = function (x, y) {
-	        return x >= this.left && x <= this.right && y >= this.top && y <= this.bottom;
+	    Area.prototype.contains = function (x, y, scaleWidth, scaleHeight) {
+	        return x >= this.left / scaleWidth && x <= this.right / scaleWidth && y >= this.top / scaleHeight && y <= this.bottom / scaleHeight;
 	    };
-	    Area.prototype.inEachOther = function (area) {
-	        var contains = area.left >= this.left && area.right <= this.right && area.top >= this.top && area.bottom <= this.bottom;
-	        var isContained = area.left <= this.left && area.right >= this.right && area.top <= this.top && area.bottom >= this.bottom;
+	    Area.prototype.inEachOther = function (area, scaleWidth, scaleHeight) {
+	        var contains = area.left >= this.left / scaleWidth && area.right <= this.right / scaleWidth && area.top >= this.top / scaleHeight && area.bottom <= this.bottom / scaleHeight;
+	        var isContained = area.left <= this.left / scaleWidth && area.right >= this.right / scaleWidth && area.top <= this.top / scaleHeight && area.bottom >= this.bottom / scaleHeight;
 	        return contains || isContained;
 	    };
-	    Area.prototype.overLaps = function (area) {
-	        return this.isCrossing(area) || this.inEachOther(area);
+	    Area.prototype.overLaps = function (area, scaleWidth, scaleHeight) {
+	        return this.isCrossing(area, scaleWidth, scaleHeight) || this.inEachOther(area, scaleWidth, scaleHeight);
 	    };
-	    Area.prototype.isCrossing = function (area) {
-	        return this.isCrossingHorizontally(area) || this.isCrossingVertically(area);
+	    Area.prototype.isCrossing = function (area, scaleWidth, scaleHeight) {
+	        return this.isCrossingHorizontally(area, scaleWidth, scaleHeight) || this.isCrossingVertically(area, scaleWidth, scaleHeight);
 	    };
-	    Area.prototype.isCrossingHorizontally = function (area) {
-	        return area.left < this.right && area.right > this.left &&
-	            ((area.top > this.top && area.top < this.bottom) || (area.bottom > this.top && area.bottom < this.bottom));
+	    Area.prototype.isCrossingHorizontally = function (area, scaleWidth, scaleHeight) {
+	        return area.left < this.right / scaleHeight && area.right > this.left / scaleHeight &&
+	            ((area.top > this.top / scaleHeight && area.top < this.bottom / scaleHeight)
+	                || (area.bottom > this.top / scaleHeight && area.bottom < this.bottom / scaleHeight));
 	    };
-	    Area.prototype.isCrossingVertically = function (area) {
-	        return area.top < this.bottom && area.bottom > this.top &&
-	            ((area.left > this.left && area.left < this.right) || (area.right > this.left && area.right < this.right));
+	    Area.prototype.isCrossingVertically = function (area, scaleWidth, scaleHeight) {
+	        return area.top < this.bottom / scaleHeight && area.bottom > this.top / scaleHeight &&
+	            ((area.left > this.left / scaleHeight && area.left < this.right / scaleHeight) || (area.right > this.left / scaleHeight && area.right < this.right / scaleHeight));
 	    };
 	    return Area;
 	}(base_model_1.BaseModel));
@@ -87115,7 +87116,7 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><form (keypress)=\"eventHandler($event)\"><div class=\"flexContainer\"><div *ngIf=\"hasImage\" class=\"row\"><div class=\"column\"><label>Let's attach a component to the selected area.</label><md-radio-group [(ngModel)]=\"component.type\"><md-radio-button value=\"new\">Create new component</md-radio-button><br><md-radio-button value=\"exist\">Select an existing one</md-radio-button></md-radio-group></div></div><div *ngIf=\"component.type === &quot;new&quot;\" class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"component.newFolderName\" required placeholder=\"Add name for the component\"></md-input></div></div><div *ngIf=\"component.type === &quot;exist&quot;\" class=\"row\"><div class=\"column\"><div>Select the component:<select [(ngModel)]=\"component.folder\"><option *ngFor=\"let folder of folders\" [value]=\"folder._id\">{{ folder.name }}</option></select></div></div></div><div *ngIf=\"hasImage\" class=\"row addition\"><div class=\"column\"><md-checkbox [ngModel]=\"component.attach\" (change)=\"changeAttachImage($event)\">Add the area's image to the attached component</md-checkbox></div></div><div *ngIf=\"component.attach &amp;&amp; hasImage\" class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"component.newImageName\" placeholder=\"Add name for the image\"></md-input></div></div><div class=\"row row--rightAligned\"><div class=\"md-button-wrapper\"><button md-raised-button color=\"secondary\" type=\"button\" (click)=\"close()\">Cancel</button><button md-raised-button color=\"primary\" type=\"button\" (click)=\"send()\">Save</button></div></div></div></form></div>");;return buf.join("");
+	buf.push("<div (click)=\"close()\" class=\"dialogBackground\"></div><div class=\"dialog\"><form (keypress)=\"eventHandler($event)\"><div class=\"flexContainer\"><div *ngIf=\"hasImage\" class=\"row\"><div class=\"column\"><label>Let's attach a component to the selected area.</label><md-radio-group [(ngModel)]=\"component.type\"><md-radio-button value=\"new\">Create new component</md-radio-button><br><md-radio-button value=\"exist\">Select an existing one</md-radio-button></md-radio-group></div></div><div *ngIf=\"component.type === &quot;new&quot;\" class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"component.newFolderName\" required placeholder=\"Add name for the component\"></md-input></div></div><div *ngIf=\"component.type === &quot;exist&quot;\" class=\"row\"><div class=\"column\"><div>Select the component:<select [(ngModel)]=\"component.folder\"><option *ngFor=\"let folder of folders\" [value]=\"folder._id\">{{ folder.name }}</option></select></div></div></div><div *ngIf=\"hasImage\" class=\"row addition\"><div class=\"column\"><md-checkbox [ngModel]=\"component.attach\" (change)=\"changeAttachImage($event)\">Add the area's image to the attached component</md-checkbox>As you select an area on an image, you create a reference to a component. It's still up to you, whether you want to add this selected image to the newly created component.\nBasically you can create components without images or even add multiple ones for different layouts.</div></div><div *ngIf=\"component.attach &amp;&amp; hasImage\" class=\"row\"><div class=\"column\"><md-input [(ngModel)]=\"component.newImageName\" placeholder=\"Add name for the image\"></md-input></div></div><div class=\"row row--rightAligned\"><div class=\"md-button-wrapper\"><button md-raised-button color=\"secondary\" type=\"button\" (click)=\"close()\">Cancel</button><button md-raised-button color=\"primary\" type=\"button\" (click)=\"send()\">Save</button></div></div></div></form></div>");;return buf.join("");
 	}
 
 /***/ },
