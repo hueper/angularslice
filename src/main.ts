@@ -17,7 +17,7 @@ import {
   RawImageService,
   ProjectService,
   TemplateService,
-  UserService,
+  UserService
 } from "./app/shared/services";
 
 require('./app/shared/scss/styles.scss');
@@ -25,12 +25,12 @@ require('./app/shared/scss/styles.scss');
 
 bootstrap(AppComponent, [
   HTTP_PROVIDERS,
-
+  
   Angulartics2,
   APP_ROUTER_PROVIDERS,
   ...MODAL_BROWSER_PROVIDERS,
   MdIconRegistry,
-
+  
   AreaService,
   FileService,
   FolderService,
@@ -40,7 +40,7 @@ bootstrap(AppComponent, [
   ProjectService,
   TemplateService,
   UserService,
-
+  
   provide(APP_BASE_HREF, { useValue: location.pathname })
 ]).catch((error) => {
   console.error('Error during app bootstrapping', error)

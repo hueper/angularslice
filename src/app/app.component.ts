@@ -5,40 +5,39 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulart
 // Strange, but true: this method would work but throws an error: 'cannot find module'
 // import * as Humane from 'humane-js/humane.js';
 
-import { DialogService } from "./shared/services/dialog.service";
+import { TooltipService, DialogService } from "./shared/services";
 
 
 @Component({
   selector: 'app',
   providers: [
+    TooltipService,
     Modal,
     ...BS_MODAL_PROVIDERS,
     DialogService,
-    Angulartics2GoogleAnalytics
+    Angulartics2GoogleAnalytics,
   ],
   pipes: [],
-  directives: [ ROUTER_DIRECTIVES ],
+  directives: [ROUTER_DIRECTIVES],
   template: require('./app.component.jade')(),
-  styles: [ require('./app.component.scss') ]
+  styles: [require('./app.component.scss')]
 })
 export class AppComponent implements AfterViewInit {
-
-  constructor(
-    private modal: Modal,
-    private viewContainer: ViewContainerRef,
-    private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
-  ) {
-
+  
+  constructor(private modal: Modal,
+              private viewContainer: ViewContainerRef,
+              private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
+    
     // Just an example for GA
     // setTimeout( () => {
     //   angulartics2GoogleAnalytics.eventTrack('testing', { category: 'ngslice' });
     //   console.log('DONE');
     // }, 1000);
-
+    
     modal.defaultViewContainer = viewContainer;
   }
-
+  
   ngAfterViewInit() {
   }
-
+  
 }

@@ -19,7 +19,9 @@
               | Loading, please wait!
 
     .imageBox(*ngFor='let image of images',
-      [ngClass]='{currentImage: currentImage && currentImage._id == image._id }')
+      [ngClass]='{currentImage: currentImage && currentImage._id == image._id }',
+      tooltip='{{image.name}}', tooltipAppendToBody='true'
+    )
       sliced-image.thumbnail((click)='setBoardImage(image)', [image]='image', [thumbnail]='true')
       .text
         .name

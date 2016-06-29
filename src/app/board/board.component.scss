@@ -8,6 +8,10 @@
   flex-direction: column;
   background: #fafafa;
 
+  .imageBox {
+    position: relative;
+  }
+
   .workingSpace {
     flex-grow: 1;
     overflow: auto;

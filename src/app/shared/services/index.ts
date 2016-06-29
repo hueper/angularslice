@@ -12,3 +12,4 @@ export * from './dialog.service';
 export * from './http.service';
 export * from './user.service';
 export * from './project.service';
+export * from './tooltip.service';

@@ -22,7 +22,6 @@ export class SidebarComponent {
   private currentFolders: Observable<Folder>;
   private currentFolder: Folder;
 
-
   constructor(private fileService: FileService,
               private folderService: FolderService,
               private dialogService: DialogService) {

@@ -10,7 +10,8 @@ import { Subscription } from "rxjs";
 const Humane = require('humane-js');
 
 import { Folder } from "../../shared/models";
-import { FolderService } from "../../shared/services";
+import { FolderService, TooltipService } from "../../shared/services";
+import { TooltipDirective } from "../../shared/directives";
 
 @Component({
   selector: 'component-dialog',
@@ -21,10 +22,10 @@ import { FolderService } from "../../shared/services";
     MdInput,
     MdCheckbox,
     MdRadioGroup,
-    MdRadioButton,
+    MdRadioButton
   ],
   providers: [
-    MdRadioDispatcher,
+    MdRadioDispatcher
   ]
 })
 export class ComponentDialogComponent implements ModalComponent<BSModalContext>, OnDestroy {
@@ -32,7 +33,7 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
   public folders: Folder[];
   private subscriptions: Subscription[] = [];
   private hasImage: boolean = true;
-
+  
   constructor(public dialog: DialogRef<BSModalContext>,
               private folderService: FolderService) {
     this.subscriptions.push(folderService.dataSource.subscribe((folders: Folder[]) => {
@@ -43,26 +44,26 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
       attach: true,
       folder: null,
     };
-
+    
     this.hasImage = this.dialog.context['hasImage'];
   }
-
+  
   eventHandler(event) {
     if (event.which === 13) {
       this.send();
     }
   }
-
+  
   ngOnDestroy() {
     _.each(this.subscriptions, subscription => {
       subscription.unsubscribe();
     });
   }
-
+  
   changeAttachImage(event) {
     this.component.attach = event.checked;
   }
-
+  
   send() {
     if (this.component.type === 'new' && !this.component.newFolderName) {
       Humane.log('Component name is missing', { timeout: 4000, clickToClose: true });
@@ -74,7 +75,7 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
     };
     this.dialog.close(result);
   }
-
+  
   close() {
     this.dialog.dismiss();
   }
