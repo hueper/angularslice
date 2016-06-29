@@ -79,7 +79,6 @@ export class TooltipDirective {
   @HostListener('focusout', ['$event', '$target'])
   @HostListener('mouseleave', ['$event', '$target'])
   public hide(): void {
-    console.log("this.timeout => ", this.timeout);
     if (!this.visible) {
       return;
     }
