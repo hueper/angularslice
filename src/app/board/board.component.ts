@@ -62,16 +62,14 @@ export class BoardComponent implements OnDestroy {
   private areaEdit: boolean;
   private componentEdit: boolean;
 
-  constructor(
-    private http: Http,
-    private ga: Angulartics2GoogleAnalytics,
-    private areaService: AreaService,
-    private rawImageService: RawImageService,
-    private imageService: ImageService,
-    private folderService: FolderService,
-    private renderer: Renderer,
-    private dialogService: DialogService
-  ) {
+  constructor(private http: Http,
+              private ga: Angulartics2GoogleAnalytics,
+              private areaService: AreaService,
+              private rawImageService: RawImageService,
+              private imageService: ImageService,
+              private folderService: FolderService,
+              private renderer: Renderer,
+              private dialogService: DialogService) {
 
     // Subscribe for folders
     this.subscriptions.push(this.folderService.dataSource.subscribe((folders: Folder[]) => {
@@ -265,7 +263,7 @@ export class BoardComponent implements OnDestroy {
         Math.max(0, xMax),
         Math.max(0, yMax)
       );
-      this.newArea.invalid = this.isCrossingOther(this.newArea);
+      this.newArea.invalid = this.isCrossingOther(this.newArea, this.scaleWidth, this.scaleHeight);
     }
 
     return false;
@@ -279,8 +277,8 @@ export class BoardComponent implements OnDestroy {
    * @returns {boolean}
    */
   onMouseUp(event) {
-    if (!_.isEmpty(this.newArea) && !this.isCrossingOther(
-        this.newArea) && this.newArea.width > 7 && this.newArea.height > 7) {
+    if (!_.isEmpty(this.newArea) && !this.isCrossingOther(this.newArea, this.scaleWidth,
+        this.scaleHeight) && this.newArea.width > 7 && this.newArea.height > 7) {
       this.dialogService.openCreateComponentDialog(true)
           .then((data) => {
             this.createComponentDialogCallback(this.newArea, data);
@@ -318,7 +316,7 @@ export class BoardComponent implements OnDestroy {
     let folderId;
 
     if (type == 'new') {
-      this.ga.eventTrack('createFolder', { category: 'byAreaDialog'} );
+      this.ga.eventTrack('createFolder', { category: 'byAreaDialog' });
       this.folderService.create(new Folder(this.currentFolderId, data.newFolderName));
       folderId = _.last(this.folders)._id;
     } else {
@@ -348,17 +346,17 @@ export class BoardComponent implements OnDestroy {
     area.width = area.width / area.scaleWidth;
     area.height = area.height / area.scaleHeight;
 
-    this.ga.eventTrack('createArea', { category: 'none'} );
+    this.ga.eventTrack('createArea', { category: 'none' });
     this.areaService.create(area);
 
   }
 
-  private isCrossingOther(area: Area): boolean {
-    return !!(<any>this.areas).find((cmp) => cmp.overLaps(area));
+  private isCrossingOther(area: Area, scaleWidth: number, scaleHeight: number): boolean {
+    return !!(<any>this.areas).find((cmp) => cmp.overLaps(area, scaleWidth, scaleHeight));
   }
 
-  private findComponent(x, y): Folder {
-    const component = (<any>this.areas).find((cmp) => cmp.contains(x, y));
+  private findComponent(x: number, y: number, scaleWidth: number, scaleHeight: number): Folder {
+    const component = (<any>this.areas).find((cmp) => cmp.contains(x, y, scaleWidth, scaleHeight));
     return component;
   }
 

@@ -12,8 +12,8 @@ export interface IArea {
   getWidth(): number;
   getHeight(): number;
   hasDimensions(): boolean;
-  contains(x: number, y: number): boolean;
-  isCrossing(rectangle: IArea): boolean;
+  contains(x: number, y: number, scaleWidth: number, scaleHeight: number): boolean;
+  isCrossing(rectangle: IArea, scaleWidth: number, scaleHeight: number): boolean;
 }
 
 export class Area extends BaseModel implements IArea {
@@ -57,32 +57,34 @@ export class Area extends BaseModel implements IArea {
     return this.right - this.left > 0 && this.bottom - this.top > 0;
   }
 
-  contains(x: number, y: number): boolean {
-    return x >= this.left && x <= this.right && y >= this.top && y <= this.bottom;
+  contains(x: number, y: number, scaleWidth: number, scaleHeight: number): boolean {
+    return x >= this.left / scaleWidth && x <= this.right / scaleWidth && y >= this.top / scaleHeight && y <= this.bottom / scaleHeight;
   }
 
-  inEachOther(area: Area): boolean {
-    let contains = area.left >= this.left && area.right <= this.right && area.top >= this.top && area.bottom <= this.bottom;
-    let isContained = area.left <= this.left && area.right >= this.right && area.top <= this.top && area.bottom >= this.bottom;
+  inEachOther(area: Area, scaleWidth: number, scaleHeight: number): boolean {
+    let contains = area.left >= this.left / scaleWidth && area.right <= this.right / scaleWidth && area.top >= this.top / scaleHeight && area.bottom <= this.bottom / scaleHeight;
+    let isContained = area.left <= this.left / scaleWidth && area.right >= this.right / scaleWidth && area.top <= this.top / scaleHeight && area.bottom >= this.bottom / scaleHeight;
     return contains || isContained;
   }
 
-  overLaps(area: Area): boolean {
-    return this.isCrossing(area) || this.inEachOther(area);
+  overLaps(area: Area, scaleWidth: number, scaleHeight: number): boolean {
+    return this.isCrossing(area, scaleWidth, scaleHeight) || this.inEachOther(area, scaleWidth, scaleHeight);
   }
 
-  isCrossing(area: Area): boolean {
-    return this.isCrossingHorizontally(area) || this.isCrossingVertically(area);
+  isCrossing(area: Area, scaleWidth: number, scaleHeight: number): boolean {
+    return this.isCrossingHorizontally(area, scaleWidth, scaleHeight) || this.isCrossingVertically(area, scaleWidth,
+        scaleHeight);
   }
 
-  private isCrossingHorizontally(area: Area): boolean {
-    return area.left < this.right && area.right > this.left &&
-      ((area.top > this.top && area.top < this.bottom) || (area.bottom > this.top && area.bottom < this.bottom));
+  private isCrossingHorizontally(area: Area, scaleWidth: number, scaleHeight: number): boolean {
+    return area.left < this.right / scaleHeight && area.right > this.left / scaleHeight &&
+      ((area.top > this.top / scaleHeight && area.top < this.bottom / scaleHeight)
+      || (area.bottom > this.top / scaleHeight && area.bottom < this.bottom / scaleHeight));
   }
 
-  private isCrossingVertically(area: Area): boolean {
-    return area.top < this.bottom && area.bottom > this.top &&
-      ((area.left > this.left && area.left < this.right) || (area.right > this.left && area.right < this.right));
+  private isCrossingVertically(area: Area, scaleWidth: number, scaleHeight: number): boolean {
+    return area.top < this.bottom / scaleHeight && area.bottom > this.top / scaleHeight &&
+      ((area.left > this.left / scaleHeight && area.left < this.right / scaleHeight) || (area.right > this.left / scaleHeight && area.right < this.right / scaleHeight));
   }
 }
 
