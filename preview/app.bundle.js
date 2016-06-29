@@ -66759,7 +66759,7 @@ webpackJsonp([0],[
 	var area_1 = __webpack_require__(733);
 	var sliced_image_1 = __webpack_require__(718);
 	var progress_circle_1 = __webpack_require__(710);
-	var tooltip_directive_1 = __webpack_require__(729);
+	var tooltip_directive_1 = __webpack_require__(720);
 	var BoardComponent = (function () {
 	    function BoardComponent(http, ga, areaService, rawImageService, imageService, folderService, renderer, dialogService) {
 	        var _this = this;
@@ -88140,7 +88140,7 @@ webpackJsonp([0],[
 	var angulartics2_google_analytics_1 = __webpack_require__(647);
 	var services_1 = __webpack_require__(648);
 	var sliced_image_1 = __webpack_require__(718);
-	var directives_1 = __webpack_require__(722);
+	var directives_1 = __webpack_require__(729);
 	var ImageBarComponent = (function () {
 	    function ImageBarComponent(imageService, ga, rawImageService, folderService, el, dialogService) {
 	        var _this = this;
@@ -88221,7 +88221,7 @@ webpackJsonp([0],[
 	    ImageBarComponent.prototype.loadFile = function (event) {
 	        var _this = this;
 	        this.loading = true;
-	        var file = event.tar.files[0];
+	        var file = event.target.files[0];
 	        this.rawImageService.createFromFile(file).then(function (res) {
 	            _this.loading = false;
 	        });
@@ -88287,6 +88287,7 @@ webpackJsonp([0],[
 	var core_1 = __webpack_require__(5);
 	var _1 = __webpack_require__(660);
 	var services_1 = __webpack_require__(648);
+	var tooltip_directive_1 = __webpack_require__(720);
 	var SlicedImageComponent = (function () {
 	    function SlicedImageComponent(imageService, el, ngZone) {
 	        this.imageService = imageService;
@@ -88354,8 +88355,9 @@ webpackJsonp([0],[
 	    SlicedImageComponent = __decorate([
 	        core_1.Component({
 	            selector: 'sliced-image',
-	            styles: [__webpack_require__(720)],
-	            template: __webpack_require__(721)()
+	            styles: [__webpack_require__(727)],
+	            template: __webpack_require__(728)(),
+	            directives: [tooltip_directive_1.TooltipDirective]
 	        }), 
 	        __metadata('design:paramtypes', [services_1.ImageService, core_1.ElementRef, core_1.NgZone])
 	    ], SlicedImageComponent);
@@ -88366,50 +88368,143 @@ webpackJsonp([0],[
 
 /***/ },
 /* 720 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = ":host {\n  text-align: center;\n}\n\n.sliced-image {\n  position: relative;\n}\n\ncanvas {\n  cursor: crosshair;\n}\n\n.thumbnail {\n  cursor: pointer;\n}"
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(5);
+	var tooltip_options_class_1 = __webpack_require__(721);
+	var tooltip_component_1 = __webpack_require__(722);
+	var tooltip_service_1 = __webpack_require__(715);
+	var TooltipDirective = (function () {
+	    function TooltipDirective(viewContainerRef, tooltipService, app, injector, ComponentResolver) {
+	        this.viewContainerRef = viewContainerRef;
+	        this.tooltipService = tooltipService;
+	        this.app = app;
+	        this.injector = injector;
+	        this.ComponentResolver = ComponentResolver;
+	        this.placement = 'top';
+	        this.enable = 'true';
+	        this.timeout = 0;
+	        this.appendToBody = true;
+	        this.followCursor = false;
+	        /* tslint:enable */
+	        this.visible = false;
+	    }
+	    TooltipDirective.prototype.show = function () {
+	        var _this = this;
+	        if (this.visible || !this.enable || this.enable == 'false') {
+	            return;
+	        }
+	        if (this.destroyTimeout || this.cRef) {
+	            clearTimeout(this.destroyTimeout);
+	            return;
+	        }
+	        this.visible = true;
+	        var options = new tooltip_options_class_1.TooltipOptions({
+	            content: this.content,
+	            placement: this.placement,
+	            appendToBody: this.appendToBody,
+	            followCursor: this.followCursor,
+	            hostEl: this.viewContainerRef.element
+	        });
+	        var binding = core_1.ReflectiveInjector.resolveAndCreate([
+	            new core_1.Provider(tooltip_options_class_1.TooltipOptions, { useValue: options })
+	        ], this.injector);
+	        this.tooltip = this.ComponentResolver.resolveComponent(tooltip_component_1.TooltipContainerComponent).then(function (componentFactory) {
+	            _this.cRef = _this.tooltipService.showTooltip(componentFactory, binding);
+	            return _this.cRef;
+	        });
+	    };
+	    TooltipDirective.prototype.move = function (event, target) {
+	        if (!this.followCursor || !this.visible || !this.cRef) {
+	            return;
+	        }
+	        if (this.destroyTimeout) {
+	            clearTimeout(this.destroyTimeout);
+	        }
+	        this.cRef.instance.top = (event.clientY - 20) + 'px';
+	        this.cRef.instance.left = (event.clientX + 25) + 'px';
+	    };
+	    // params event, target
+	    TooltipDirective.prototype.hide = function () {
+	        var _this = this;
+	        if (!this.visible) {
+	            return;
+	        }
+	        this.tooltip.then(function (componentRef) {
+	            _this.destroyTimeout = setTimeout(function () {
+	                componentRef.destroy();
+	                _this.cRef = null;
+	                _this.visible = false;
+	                _this.destroyTimeout = false;
+	            }, Math.max(50, _this.timeout * 1000));
+	            return componentRef;
+	        });
+	    };
+	    __decorate([
+	        core_1.Input('tooltip'), 
+	        __metadata('design:type', String)
+	    ], TooltipDirective.prototype, "content", void 0);
+	    __decorate([
+	        core_1.Input('tooltipPlacement'), 
+	        __metadata('design:type', String)
+	    ], TooltipDirective.prototype, "placement", void 0);
+	    __decorate([
+	        core_1.Input('tooltipEnable'), 
+	        __metadata('design:type', String)
+	    ], TooltipDirective.prototype, "enable", void 0);
+	    __decorate([
+	        core_1.Input('timeout'), 
+	        __metadata('design:type', Number)
+	    ], TooltipDirective.prototype, "timeout", void 0);
+	    __decorate([
+	        core_1.Input('tooltipAppendToBody'), 
+	        __metadata('design:type', Boolean)
+	    ], TooltipDirective.prototype, "appendToBody", void 0);
+	    __decorate([
+	        core_1.Input('tooltipFollowCursor'), 
+	        __metadata('design:type', Boolean)
+	    ], TooltipDirective.prototype, "followCursor", void 0);
+	    __decorate([
+	        core_1.HostListener('focusin', ['$event', '$target']),
+	        core_1.HostListener('mouseenter', ['$event', '$target']), 
+	        __metadata('design:type', Function), 
+	        __metadata('design:paramtypes', []), 
+	        __metadata('design:returntype', void 0)
+	    ], TooltipDirective.prototype, "show", null);
+	    __decorate([
+	        core_1.HostListener('mousemove', ["$event", "$target"]), 
+	        __metadata('design:type', Function), 
+	        __metadata('design:paramtypes', [Object, Object]), 
+	        __metadata('design:returntype', void 0)
+	    ], TooltipDirective.prototype, "move", null);
+	    __decorate([
+	        core_1.HostListener('focusout', ['$event', '$target']),
+	        core_1.HostListener('mouseleave', ['$event', '$target']), 
+	        __metadata('design:type', Function), 
+	        __metadata('design:paramtypes', []), 
+	        __metadata('design:returntype', void 0)
+	    ], TooltipDirective.prototype, "hide", null);
+	    TooltipDirective = __decorate([
+	        core_1.Directive({ selector: '[tooltip]' }), 
+	        __metadata('design:paramtypes', [core_1.ViewContainerRef, tooltip_service_1.TooltipService, core_1.ApplicationRef, core_1.Injector, core_1.ComponentResolver])
+	    ], TooltipDirective);
+	    return TooltipDirective;
+	}());
+	exports.TooltipDirective = TooltipDirective;
+
 
 /***/ },
 /* 721 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var jade = __webpack_require__(697);
-
-	module.exports = function template(locals) {
-	var buf = [];
-	var jade_mixins = {};
-	var jade_interp;
-
-	buf.push("<div class=\"sliced-image\"><canvas #canvas [ngClass]=\"{thumbnail: thumbnail}\" class=\"image\"></canvas><ng-content></ng-content></div>");;return buf.join("");
-	}
-
-/***/ },
-/* 722 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	function __export(m) {
-	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-	}
-	__export(__webpack_require__(723));
-
-
-/***/ },
-/* 723 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	function __export(m) {
-	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-	}
-	__export(__webpack_require__(724));
-	__export(__webpack_require__(725));
-	__export(__webpack_require__(729));
-
-
-/***/ },
-/* 724 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88438,7 +88533,18 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 725 */
+/* 722 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	function __export(m) {
+	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+	}
+	__export(__webpack_require__(723));
+
+
+/***/ },
+/* 723 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88457,8 +88563,8 @@ webpackJsonp([0],[
 	var _ = __webpack_require__(646);
 	var core_1 = __webpack_require__(5);
 	var common_1 = __webpack_require__(2);
-	var tooltip_options_class_1 = __webpack_require__(724);
-	var PositionService_1 = __webpack_require__(726);
+	var tooltip_options_class_1 = __webpack_require__(721);
+	var PositionService_1 = __webpack_require__(724);
 	var TooltipContainerComponent = (function () {
 	    function TooltipContainerComponent(element, options) {
 	        this.top = '0';
@@ -88497,8 +88603,8 @@ webpackJsonp([0],[
 	        core_1.Component({
 	            selector: 'tooltip-container',
 	            directives: [common_1.NgClass, common_1.NgStyle],
-	            template: __webpack_require__(727)(),
-	            styles: [__webpack_require__(728)]
+	            template: __webpack_require__(725)(),
+	            styles: [__webpack_require__(726)]
 	        }),
 	        __param(1, core_1.Inject(tooltip_options_class_1.TooltipOptions)), 
 	        __metadata('design:paramtypes', [core_1.ElementRef, tooltip_options_class_1.TooltipOptions])
@@ -88509,7 +88615,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 726 */
+/* 724 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -88666,7 +88772,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 727 */
+/* 725 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(697);
@@ -88680,151 +88786,40 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 728 */
+/* 726 */
 /***/ function(module, exports) {
 
 	module.exports = ".tooltip {\n  position: absolute;\n  padding: 5px 15px;\n  border-radius: 5px;\n  background: rgba(0, 0, 0, 0.6);\n  border: 1px solid gray;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  color: white;\n  z-index: 100;\n}\n\n.tooltip-inner {\n  white-space: nowrap;\n}\n\n.tooltip-top::after {\n  content: \" \";\n  position: absolute;\n  top: 100%;\n  /* At the bottom of the tooltip */\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px;\n  border-style: solid;\n  border-color: rgba(0, 0, 0, 0.3) transparent transparent transparent;\n}\n\n.tooltip-left::after {\n  content: \" \";\n  position: absolute;\n  top: 50%;\n  right: 100%;\n  /* To the left of the tooltip */\n  margin-top: -5px;\n  border-width: 5px;\n  border-style: solid;\n  border-color: transparent rgba(0, 0, 0, 0.6) transparent transparent;\n}"
+
+/***/ },
+/* 727 */
+/***/ function(module, exports) {
+
+	module.exports = ":host {\n  text-align: center;\n}\n\n.sliced-image {\n  position: relative;\n}\n\ncanvas {\n  cursor: crosshair;\n}\n\n.thumbnail {\n  cursor: pointer;\n}"
+
+/***/ },
+/* 728 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var jade = __webpack_require__(697);
+
+	module.exports = function template(locals) {
+	var buf = [];
+	var jade_mixins = {};
+	var jade_interp;
+
+	buf.push("<div class=\"sliced-image\"><canvas #canvas [ngClass]=\"{thumbnail: thumbnail}\" tooltip=\"Select the greatest component on the image to start the slice\" tooltipTimeout=\"1\" tooltipFollowCursor=\"true\" tooltipAppendToBody=\"true\" tooltipPlacement=\"left\" tooltipEnable=\"{{ !thumbnail }}\" class=\"image\"></canvas><ng-content></ng-content></div>");;return buf.join("");
+	}
 
 /***/ },
 /* 729 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var core_1 = __webpack_require__(5);
-	var tooltip_options_class_1 = __webpack_require__(724);
-	var tooltip_component_1 = __webpack_require__(730);
-	var tooltip_service_1 = __webpack_require__(715);
-	var TooltipDirective = (function () {
-	    function TooltipDirective(viewContainerRef, tooltipService, app, injector, ComponentResolver) {
-	        this.viewContainerRef = viewContainerRef;
-	        this.tooltipService = tooltipService;
-	        this.app = app;
-	        this.injector = injector;
-	        this.ComponentResolver = ComponentResolver;
-	        this.placement = 'top';
-	        this.enable = true;
-	        this.animation = true;
-	        this.appendToBody = true;
-	        this.followCursor = false;
-	        /* tslint:enable */
-	        this.visible = false;
-	    }
-	    TooltipDirective.prototype.show = function () {
-	        var _this = this;
-	        if (this.visible || !this.enable) {
-	            return;
-	        }
-	        if (this.destroyTimeout || this.cRef) {
-	            clearTimeout(this.destroyTimeout);
-	            return;
-	        }
-	        this.visible = true;
-	        var options = new tooltip_options_class_1.TooltipOptions({
-	            content: this.content,
-	            placement: this.placement,
-	            animation: this.animation,
-	            appendToBody: this.appendToBody,
-	            followCursor: this.followCursor,
-	            hostEl: this.viewContainerRef.element
-	        });
-	        var binding = core_1.ReflectiveInjector.resolveAndCreate([
-	            new core_1.Provider(tooltip_options_class_1.TooltipOptions, { useValue: options })
-	        ], this.injector);
-	        this.tooltip = this.ComponentResolver.resolveComponent(tooltip_component_1.TooltipContainerComponent).then(function (componentFactory) {
-	            _this.cRef = _this.tooltipService.showTooltip(componentFactory, binding);
-	            return _this.cRef;
-	        });
-	    };
-	    TooltipDirective.prototype.move = function (event, target) {
-	        if (!this.followCursor || !this.visible || !this.cRef) {
-	            return;
-	        }
-	        if (this.destroyTimeout) {
-	            clearTimeout(this.destroyTimeout);
-	        }
-	        this.cRef.instance.top = (event.clientY - 20) + 'px';
-	        this.cRef.instance.left = (event.clientX + 25) + 'px';
-	    };
-	    // params event, target
-	    TooltipDirective.prototype.hide = function () {
-	        var _this = this;
-	        if (!this.visible) {
-	            return;
-	        }
-	        this.tooltip.then(function (componentRef) {
-	            _this.destroyTimeout = setTimeout(function () {
-	                componentRef.destroy();
-	                _this.cRef = null;
-	                _this.visible = false;
-	                _this.destroyTimeout = false;
-	            }, 1000);
-	            return componentRef;
-	        });
-	    };
-	    __decorate([
-	        core_1.Input('tooltip'), 
-	        __metadata('design:type', String)
-	    ], TooltipDirective.prototype, "content", void 0);
-	    __decorate([
-	        core_1.Input('tooltipPlacement'), 
-	        __metadata('design:type', String)
-	    ], TooltipDirective.prototype, "placement", void 0);
-	    __decorate([
-	        core_1.Input('tooltipIsOpen'), 
-	        __metadata('design:type', Boolean)
-	    ], TooltipDirective.prototype, "isOpen", void 0);
-	    __decorate([
-	        core_1.Input('tooltipEnable'), 
-	        __metadata('design:type', Boolean)
-	    ], TooltipDirective.prototype, "enable", void 0);
-	    __decorate([
-	        core_1.Input('tooltipAnimation'), 
-	        __metadata('design:type', Boolean)
-	    ], TooltipDirective.prototype, "animation", void 0);
-	    __decorate([
-	        core_1.Input('tooltipAppendToBody'), 
-	        __metadata('design:type', Boolean)
-	    ], TooltipDirective.prototype, "appendToBody", void 0);
-	    __decorate([
-	        core_1.Input('tooltipFollowCursor'), 
-	        __metadata('design:type', Boolean)
-	    ], TooltipDirective.prototype, "followCursor", void 0);
-	    __decorate([
-	        core_1.HostListener('focusin', ['$event', '$target']),
-	        core_1.HostListener('mouseenter', ['$event', '$target']), 
-	        __metadata('design:type', Function), 
-	        __metadata('design:paramtypes', []), 
-	        __metadata('design:returntype', void 0)
-	    ], TooltipDirective.prototype, "show", null);
-	    __decorate([
-	        core_1.HostListener('mousemove', ["$event", "$target"]), 
-	        __metadata('design:type', Function), 
-	        __metadata('design:paramtypes', [Object, Object]), 
-	        __metadata('design:returntype', void 0)
-	    ], TooltipDirective.prototype, "move", null);
-	    __decorate([
-	        core_1.HostListener('focusout', ['$event', '$target']),
-	        core_1.HostListener('mouseleave', ['$event', '$target']), 
-	        __metadata('design:type', Function), 
-	        __metadata('design:paramtypes', []), 
-	        __metadata('design:returntype', void 0)
-	    ], TooltipDirective.prototype, "hide", null);
-	    TooltipDirective = __decorate([
-	        core_1.Directive({ selector: '[tooltip]' }), 
-	        __metadata('design:paramtypes', [core_1.ViewContainerRef, tooltip_service_1.TooltipService, core_1.ApplicationRef, core_1.Injector, core_1.ComponentResolver])
-	    ], TooltipDirective);
-	    return TooltipDirective;
-	}());
-	exports.TooltipDirective = TooltipDirective;
+	function __export(m) {
+	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+	}
+	__export(__webpack_require__(730));
 
 
 /***/ },
@@ -88835,7 +88830,9 @@ webpackJsonp([0],[
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(725));
+	__export(__webpack_require__(721));
+	__export(__webpack_require__(723));
+	__export(__webpack_require__(720));
 
 
 /***/ },
@@ -88988,7 +88985,7 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"board\"><!--input(type=\"file\", (change)=\"loadFile($event)\")--><!--.toolbar--><!--  .title(*ngIf='!componentEdit', [ngClass]='{active: !currentArea}', (click)='setComponentEdit(\"component\")') {{ currentFolder.name }}--><!--  input.input.titleInput(*ngIf='!currentArea && componentEdit', [(ngModel)]='currentFolder.name', (blur)='saveComponentEdit(\"component\")')--><!----><!--  .childrenSymbol(*ngIf='currentArea') >--><!----><!--  .areaTitle(*ngIf='currentArea && !areaEdit', (click)='setComponentEdit(\"area\", true)') {{ currentAreaFolder.name }}--><!--  input.input.areaTitleInput(*ngIf='currentArea && areaEdit', [(ngModel)]='currentAreaFolder.name', (blur)='saveComponentEdit(\"area\")')--><div *ngIf=\"images.length &lt;= 0\" class=\"fileUploadPlaceholder\"><input id=\"fileFull\" type=\"file\" (change)=\"loadFile($event)\" class=\"hiddenInput\"><label #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"fileFull\" class=\"centerWrapper\"><i style=\"font-size: 20vmin;\" class=\"material-icons\">panorama</i><p class=\"noImage\">No image attached yet</p><p class=\"dragAndDrop\">Drag and drop Image file onto this window to upload</p></label></div><div [hidden]=\"!loading\" class=\"loadingContainer\"><div class=\"loading\"><div class=\"content\"><md-progress-circle mode=\"indeterminate\">Loading, please wait!</md-progress-circle></div></div></div><div #workingSpace *ngIf=\"images.length &gt; 0\" class=\"workingSpace\"><div *ngIf=\"currentImage\" (mousedown)=\"onMouseDown($event, imageContainer, workingSpace)\" class=\"imageContainer\"><sliced-image [image]=\"currentImage\" #imageContainer [thumbnail]=\"false\" tooltip=\"Select the greatest component on the image to start the slice\" tooltipFollowCursor=\"true\" tooltipAppendToBody=\"true\" tooltipPlacement=\"left\"><area *ngFor=\"let area of areas\" [scaleWidth]=\"imageContainer.scaleWidth\" [scaleHeight]=\"imageContainer.scaleHeight\" [areaData]=\"area\" [ngStyle]=\"areaStyle\" (click)=\"setActiveArea(area)\"><area [areaData]=\"newArea\" *ngIf=\"newArea\" [ngStyle]=\"areaStyle\"></sliced-image></div></div><image-bar *ngIf=\"images.length &gt; 0\" [loading]=\"loading\"></image-bar></div>");;return buf.join("");
+	buf.push("<div class=\"board\"><!--input(type=\"file\", (change)=\"loadFile($event)\")--><!--.toolbar--><!--  .title(*ngIf='!componentEdit', [ngClass]='{active: !currentArea}', (click)='setComponentEdit(\"component\")') {{ currentFolder.name }}--><!--  input.input.titleInput(*ngIf='!currentArea && componentEdit', [(ngModel)]='currentFolder.name', (blur)='saveComponentEdit(\"component\")')--><!----><!--  .childrenSymbol(*ngIf='currentArea') >--><!----><!--  .areaTitle(*ngIf='currentArea && !areaEdit', (click)='setComponentEdit(\"area\", true)') {{ currentAreaFolder.name }}--><!--  input.input.areaTitleInput(*ngIf='currentArea && areaEdit', [(ngModel)]='currentAreaFolder.name', (blur)='saveComponentEdit(\"area\")')--><div *ngIf=\"images.length &lt;= 0\" class=\"fileUploadPlaceholder\"><input id=\"fileFull\" type=\"file\" (change)=\"loadFile($event)\" class=\"hiddenInput\"><label #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"fileFull\" class=\"centerWrapper\"><i style=\"font-size: 20vmin;\" class=\"material-icons\">panorama</i><p class=\"noImage\">No image attached yet</p><p class=\"dragAndDrop\">Drag and drop Image file onto this window to upload</p></label></div><div [hidden]=\"!loading\" class=\"loadingContainer\"><div class=\"loading\"><div class=\"content\"><md-progress-circle mode=\"indeterminate\">Loading, please wait!</md-progress-circle></div></div></div><div #workingSpace *ngIf=\"images.length &gt; 0\" class=\"workingSpace\"><div *ngIf=\"currentImage\" (mousedown)=\"onMouseDown($event, imageContainer, workingSpace)\" class=\"imageContainer\"><sliced-image [image]=\"currentImage\" #imageContainer [thumbnail]=\"false\"><area *ngFor=\"let area of areas\" [scaleWidth]=\"imageContainer.scaleWidth\" [scaleHeight]=\"imageContainer.scaleHeight\" [areaData]=\"area\" [ngStyle]=\"areaStyle\" (click)=\"setActiveArea(area)\"><area [areaData]=\"newArea\" *ngIf=\"newArea\" [ngStyle]=\"areaStyle\"></sliced-image></div></div><image-bar *ngIf=\"images.length &gt; 0\" [loading]=\"loading\"></image-bar></div>");;return buf.join("");
 	}
 
 /***/ },
