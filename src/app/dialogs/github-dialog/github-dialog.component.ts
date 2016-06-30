@@ -28,6 +28,8 @@ export class GithubDialogComponent implements ModalComponent<BSModalContext> {
   eventHandler(event) {
     if (event.which === 13) {
       this.send();
+      event.preventDefault();
+      return false;
     }
   }
 
