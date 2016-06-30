@@ -56741,7 +56741,7 @@ webpackJsonp([0],[
 	var sidebar_1 = __webpack_require__(739);
 	var toolbar_1 = __webpack_require__(747);
 	var services_1 = __webpack_require__(648);
-	var progress_circle_1 = __webpack_require__(709);
+	var progress_circle_1 = __webpack_require__(710);
 	var EditorComponent = (function () {
 	    function EditorComponent(router, route, dialogService, folderService, imageService, projectService, userService) {
 	        var _this = this;
@@ -66896,7 +66896,7 @@ webpackJsonp([0],[
 	var models_1 = __webpack_require__(660);
 	var area_1 = __webpack_require__(733);
 	var sliced_image_1 = __webpack_require__(718);
-	var progress_circle_1 = __webpack_require__(709);
+	var progress_circle_1 = __webpack_require__(710);
 	var tooltip_directive_1 = __webpack_require__(720);
 	var BoardComponent = (function () {
 	    function BoardComponent(http, ga, areaService, rawImageService, imageService, folderService, renderer, dialogService) {
@@ -66958,9 +66958,11 @@ webpackJsonp([0],[
 	                _this.areaSubscription.unsubscribe();
 	            }
 	            // Subscribe for areas
-	            _this.areaSubscription = _this.areaService.filter(function (instance) { return instance.imageId === _this.currentImage._id; }).subscribe(function (areas) {
-	                _this.areas = areas;
-	            });
+	            if (_this.currentImage) {
+	                _this.areaSubscription = _this.areaService.filter(function (instance) { return instance.imageId === _this.currentImage._id; }).subscribe(function (areas) {
+	                    _this.areas = areas;
+	                });
+	            }
 	        });
 	    };
 	    BoardComponent.prototype.onDragOver = function (event) {
@@ -83579,12 +83581,12 @@ webpackJsonp([0],[
 	__export(__webpack_require__(658));
 	__export(__webpack_require__(670));
 	__export(__webpack_require__(659));
-	__export(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./image.service\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
-	__export(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./raw-image.service\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+	__export(__webpack_require__(672));
+	__export(__webpack_require__(673));
 	__export(__webpack_require__(671));
+	__export(__webpack_require__(675));
 	__export(__webpack_require__(674));
 	__export(__webpack_require__(711));
-	__export(__webpack_require__(710));
 	__export(__webpack_require__(714));
 	__export(__webpack_require__(715));
 
@@ -84696,8 +84698,187 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 672 */,
-/* 673 */,
+/* 672 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(5);
+	var models_1 = __webpack_require__(660);
+	var base_service_1 = __webpack_require__(650);
+	var raw_image_service_1 = __webpack_require__(673);
+	var folder_service_1 = __webpack_require__(659);
+	var ImageService = (function (_super) {
+	    __extends(ImageService, _super);
+	    function ImageService(folderService, rawImageService) {
+	        var _this = this;
+	        _super.call(this, 'images', models_1.Image);
+	        this.folderService = folderService;
+	        this.rawImageService = rawImageService;
+	        this.folderService.currentSource.subscribe(function (folder) {
+	            _this.currentFolder = folder;
+	        });
+	        // Automatically create an image on rawImage creation
+	        rawImageService.createSource.subscribe(function (rawImage) {
+	            var folderId = _this.currentFolder ? _this.currentFolder._id : null;
+	            var fileName = rawImage.name ? rawImage.name : 'image' + Math.floor(Math.random() * 10000);
+	            var image = new models_1.Image(folderId, rawImage._id, fileName, 0, 0, rawImage.width, rawImage.height);
+	            _this.setCurrentImage(image);
+	            _this.create(image);
+	        });
+	        folderService.deleteSource.subscribe(function (folder) {
+	            _this.find({ folderId: folder._id }).map(function (image) {
+	                _this.delete(image);
+	            });
+	        });
+	    }
+	    ImageService.prototype.getBinaryData = function (instance) {
+	        var rawImage = this.rawImageService.findById(instance.rawImageId);
+	        return rawImage ? rawImage.url : null;
+	    };
+	    ImageService.prototype.getRawImage = function (instance) {
+	        var rawImage = this.rawImageService.findById(instance.rawImageId);
+	        return rawImage ? rawImage : null;
+	    };
+	    ImageService.prototype.setCurrentImage = function (instance) {
+	        this.currentIdSource.next(instance ? instance._id : null);
+	    };
+	    ImageService.prototype.delete = function (instance) {
+	        if (this.find({ rawImageId: instance.rawImageId }).length <= 1) {
+	            this.rawImageService.delete(this.rawImageService.findById(instance.rawImageId));
+	        }
+	        _super.prototype.delete.call(this, instance);
+	    };
+	    ImageService = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [folder_service_1.FolderService, raw_image_service_1.RawImageService])
+	    ], ImageService);
+	    return ImageService;
+	}(base_service_1.BaseService));
+	exports.ImageService = ImageService;
+
+
+/***/ },
+/* 673 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(5);
+	var Humane = __webpack_require__(644);
+	var angulartics2_google_analytics_1 = __webpack_require__(399);
+	var models_1 = __webpack_require__(660);
+	var base_service_ts_1 = __webpack_require__(650);
+	var http_service_ts_1 = __webpack_require__(674);
+	// import {NgZone} from '@angular/core'
+	var RawImageService = (function (_super) {
+	    __extends(RawImageService, _super);
+	    function RawImageService(// private ApplicationRef:ApplicationRef
+	        httpService, ga, ngZone) {
+	        _super.call(this, 'rawImages', models_1.RawImage);
+	        this.httpService = httpService;
+	        this.ga = ga;
+	        this.ngZone = ngZone;
+	    }
+	    RawImageService.prototype.delete = function (rawImage) {
+	        var _this = this;
+	        return this.httpService.delete("/rawImages/" + rawImage._id)
+	            .map(function (res) { return res.json(); })
+	            .share()
+	            .subscribe(function (res) {
+	            if (res.success) {
+	                // Delete locally
+	                _super.prototype.delete.call(_this, rawImage);
+	            }
+	        });
+	    };
+	    RawImageService.prototype.create = function (rawImage) {
+	        _super.prototype.create.call(this, rawImage);
+	        // We're going out from Zone, so after the create we'll need to trigger the change detection chain
+	        // this.ApplicationRef.tick();
+	    };
+	    RawImageService.prototype.createFromFile = function (file) {
+	        var _this = this;
+	        // Supported extensions
+	        var supportedFileExtension = ['jpg', 'png', 'jpeg'];
+	        var extension = file.name.split('.').pop();
+	        return new Promise(function (resolve, reject) {
+	            // Check extensions
+	            if (supportedFileExtension.indexOf(extension) === -1) {
+	                Humane.log("Sorry we support just 'png' and 'jpg' files at the moment.", { timeout: 4000, clickToClose: true });
+	                _this.ga.eventTrack('upload', { category: extension });
+	                reject();
+	            }
+	            _this.ga.eventTrack('upload', { category: 'supportedExentension' });
+	            var reader = new FileReader();
+	            reader.addEventListener('load', function (e) {
+	                var image = new Image();
+	                image.src = e.target.result;
+	                image.onload = function () {
+	                    var width = image.width;
+	                    var height = image.height;
+	                    var fileType = image.src.split(';')[0].split(':')[1];
+	                    _this.ngZone.run(function () {
+	                        var formData = new FormData();
+	                        formData.append('width', width);
+	                        formData.append('height', height);
+	                        formData.append('target', file, fileType);
+	                        _this.httpService.post('/rawImages/upload', formData)
+	                            .map(function (res) { return res.json(); })
+	                            .subscribe(function (res) {
+	                            var data = res.data;
+	                            if (res.success) {
+	                                _this.create(new models_1.RawImage(data._id, data.url, data.width, data.height, file.name));
+	                                resolve(res);
+	                            }
+	                            else {
+	                                Humane.log('Sorry, something baaad happened o.O');
+	                            }
+	                        });
+	                    });
+	                };
+	            }, false);
+	            if (file) {
+	                reader.readAsDataURL(file);
+	            }
+	        });
+	    };
+	    RawImageService = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [http_service_ts_1.HttpService, angulartics2_google_analytics_1.Angulartics2GoogleAnalytics, core_1.NgZone])
+	    ], RawImageService);
+	    return RawImageService;
+	}(base_service_ts_1.BaseService));
+	exports.RawImageService = RawImageService;
+
+
+/***/ },
 /* 674 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -84712,8 +84893,62 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var bootstrap_1 = __webpack_require__(675);
-	var dialogs_1 = __webpack_require__(685);
+	var http_1 = __webpack_require__(325);
+	var HttpService = (function () {
+	    function HttpService(http) {
+	        this.http = http;
+	        this.defaultRequestOptions = new http_1.RequestOptions({ withCredentials: true });
+	        if (false) {
+	            this.baseUrl = 'http://192.168.1.102:3000/api';
+	        }
+	        else {
+	            this.baseUrl = '/api';
+	        }
+	    }
+	    HttpService.prototype.post = function (path, body, requestOptions) {
+	        if (body === void 0) { body = {}; }
+	        if (requestOptions === void 0) { requestOptions = this.defaultRequestOptions; }
+	        return this.http.post(this.baseUrl + path, body);
+	    };
+	    HttpService.prototype.get = function (path, body, requestOptions) {
+	        if (body === void 0) { body = {}; }
+	        if (requestOptions === void 0) { requestOptions = this.defaultRequestOptions; }
+	        return this.http.get(this.baseUrl + path, body);
+	    };
+	    HttpService.prototype.put = function (path, body, requestOptions) {
+	        if (body === void 0) { body = {}; }
+	        if (requestOptions === void 0) { requestOptions = this.defaultRequestOptions; }
+	        return this.http.put(this.baseUrl + path, body);
+	    };
+	    HttpService.prototype.delete = function (path) {
+	        return this.http.delete(this.baseUrl + path);
+	    };
+	    HttpService = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [http_1.Http])
+	    ], HttpService);
+	    return HttpService;
+	}());
+	exports.HttpService = HttpService;
+
+
+/***/ },
+/* 675 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(5);
+	var bootstrap_1 = __webpack_require__(676);
+	var dialogs_1 = __webpack_require__(686);
 	var DialogService = (function () {
 	    function DialogService(modal) {
 	        this.modal = modal;
@@ -84778,37 +85013,37 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 675 */
+/* 676 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var core_1 = __webpack_require__(5);
-	var modal_1 = __webpack_require__(676);
-	var modal_backdrop_1 = __webpack_require__(677);
-	var one_button_preset_1 = __webpack_require__(679);
-	var two_button_preset_1 = __webpack_require__(684);
+	var modal_1 = __webpack_require__(677);
+	var modal_backdrop_1 = __webpack_require__(678);
+	var one_button_preset_1 = __webpack_require__(680);
+	var two_button_preset_1 = __webpack_require__(685);
 	var angular2_modal_1 = __webpack_require__(379);
-	var modal_context_1 = __webpack_require__(681);
+	var modal_context_1 = __webpack_require__(682);
 	exports.BSModalContext = modal_context_1.BSModalContext;
 	exports.BSModalContextBuilder = modal_context_1.BSModalContextBuilder;
-	var modal_backdrop_2 = __webpack_require__(677);
+	var modal_backdrop_2 = __webpack_require__(678);
 	exports.BSModalBackdrop = modal_backdrop_2.BSModalBackdrop;
-	var modal_container_1 = __webpack_require__(678);
+	var modal_container_1 = __webpack_require__(679);
 	exports.BSModalContainer = modal_container_1.BSModalContainer;
-	var message_modal_1 = __webpack_require__(682);
+	var message_modal_1 = __webpack_require__(683);
 	exports.BSMessageModal = message_modal_1.BSMessageModal;
-	var modal_footer_1 = __webpack_require__(683);
+	var modal_footer_1 = __webpack_require__(684);
 	exports.BSModalFooter = modal_footer_1.BSModalFooter;
-	var message_modal_preset_1 = __webpack_require__(680);
+	var message_modal_preset_1 = __webpack_require__(681);
 	exports.MessageModalPresetBuilder = message_modal_preset_1.MessageModalPresetBuilder;
 	var modal_open_context_1 = __webpack_require__(388);
 	exports.ModalOpenContext = modal_open_context_1.ModalOpenContext;
 	exports.ModalOpenContextBuilder = modal_open_context_1.ModalOpenContextBuilder;
-	var one_button_preset_2 = __webpack_require__(679);
+	var one_button_preset_2 = __webpack_require__(680);
 	exports.OneButtonPresetBuilder = one_button_preset_2.OneButtonPresetBuilder;
-	var two_button_preset_2 = __webpack_require__(684);
+	var two_button_preset_2 = __webpack_require__(685);
 	exports.TwoButtonPresetBuilder = two_button_preset_2.TwoButtonPresetBuilder;
-	var modal_2 = __webpack_require__(676);
+	var modal_2 = __webpack_require__(677);
 	exports.Modal = modal_2.Modal;
 	exports.BS_MODAL_PROVIDERS = angular2_modal_1.MODAL_PROVIDERS.concat([
 	    new core_1.Provider(angular2_modal_1.Modal, { useClass: modal_1.Modal }),
@@ -84823,7 +85058,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 676 */
+/* 677 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84832,7 +85067,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 677 */
+/* 678 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84847,7 +85082,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var angular2_modal_1 = __webpack_require__(379);
-	var modal_container_1 = __webpack_require__(678);
+	var modal_container_1 = __webpack_require__(679);
 	var dialogRefCount = 0;
 	/**
 	 * Represents the modal backdrop.
@@ -84892,7 +85127,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 678 */
+/* 679 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84907,7 +85142,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var angular2_modal_1 = __webpack_require__(379);
-	var modal_1 = __webpack_require__(676);
+	var modal_1 = __webpack_require__(677);
 	var utils_1 = __webpack_require__(387);
 	/**
 	 * A component that acts as a top level container for an open modal window.
@@ -84976,7 +85211,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 679 */
+/* 680 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84985,7 +85220,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var message_modal_preset_1 = __webpack_require__(680);
+	var message_modal_preset_1 = __webpack_require__(681);
 	var utils_1 = __webpack_require__(387);
 	/**
 	 * A Preset for a classic 1 button modal window.
@@ -85013,7 +85248,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 680 */
+/* 681 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85023,8 +85258,8 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var fluent_assign_1 = __webpack_require__(380);
-	var modal_context_1 = __webpack_require__(681);
-	var message_modal_1 = __webpack_require__(682);
+	var modal_context_1 = __webpack_require__(682);
+	var message_modal_1 = __webpack_require__(683);
 	var utils_1 = __webpack_require__(387);
 	var DEFAULT_VALUES = {
 	    component: message_modal_1.BSMessageModal,
@@ -85069,7 +85304,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 681 */
+/* 682 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85118,7 +85353,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 682 */
+/* 683 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85133,7 +85368,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var angular2_modal_1 = __webpack_require__(379);
-	var modal_footer_1 = __webpack_require__(683);
+	var modal_footer_1 = __webpack_require__(684);
 	/**
 	 * A Component representing a generic bootstrap modal content element.
 	 *
@@ -85182,7 +85417,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 683 */
+/* 684 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85236,7 +85471,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 684 */
+/* 685 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85246,7 +85481,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var utils_1 = __webpack_require__(387);
-	var message_modal_preset_1 = __webpack_require__(680);
+	var message_modal_preset_1 = __webpack_require__(681);
 	/**
 	 * A Preset for a classic 2 button modal window.
 	 */
@@ -85278,20 +85513,6 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 685 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	function __export(m) {
-	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-	}
-	__export(__webpack_require__(686));
-	__export(__webpack_require__(699));
-	__export(__webpack_require__(703));
-	__export(__webpack_require__(707));
-
-
-/***/ },
 /* 686 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -85300,10 +85521,24 @@ webpackJsonp([0],[
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
 	__export(__webpack_require__(687));
+	__export(__webpack_require__(700));
+	__export(__webpack_require__(704));
+	__export(__webpack_require__(708));
 
 
 /***/ },
 /* 687 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	function __export(m) {
+	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+	}
+	__export(__webpack_require__(688));
+
+
+/***/ },
+/* 688 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85318,11 +85553,11 @@ webpackJsonp([0],[
 	};
 	var _ = __webpack_require__(647);
 	var core_1 = __webpack_require__(5);
-	var angular2_modal_1 = __webpack_require__(688);
-	var button_1 = __webpack_require__(689);
-	var input_1 = __webpack_require__(690);
-	var checkbox_1 = __webpack_require__(692);
-	var radio_1 = __webpack_require__(693);
+	var angular2_modal_1 = __webpack_require__(689);
+	var button_1 = __webpack_require__(690);
+	var input_1 = __webpack_require__(691);
+	var checkbox_1 = __webpack_require__(693);
+	var radio_1 = __webpack_require__(694);
 	var angulartics2_google_analytics_1 = __webpack_require__(399);
 	var Humane = __webpack_require__(644);
 	var services_1 = __webpack_require__(648);
@@ -85382,8 +85617,8 @@ webpackJsonp([0],[
 	    ComponentDialogComponent = __decorate([
 	        core_1.Component({
 	            selector: 'component-dialog',
-	            template: __webpack_require__(695)(),
-	            styles: [__webpack_require__(698)],
+	            template: __webpack_require__(696)(),
+	            styles: [__webpack_require__(699)],
 	            directives: [
 	                button_1.MdButton,
 	                input_1.MdInput,
@@ -85403,7 +85638,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 688 */
+/* 689 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85415,7 +85650,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 689 */
+/* 690 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85581,7 +85816,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/button/button.js.map
 
 /***/ },
-/* 690 */
+/* 691 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85601,7 +85836,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var common_1 = __webpack_require__(2);
-	var field_value_1 = __webpack_require__(691);
+	var field_value_1 = __webpack_require__(692);
 	var error_1 = __webpack_require__(347);
 	var Observable_1 = __webpack_require__(38);
 	var noop = function () { };
@@ -86041,7 +86276,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/input/input.js.map
 
 /***/ },
-/* 691 */
+/* 692 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -86075,7 +86310,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/core/annotations/field-value.js.map
 
 /***/ },
-/* 692 */
+/* 693 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -86407,7 +86642,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/checkbox/checkbox.js.map
 
 /***/ },
-/* 693 */
+/* 694 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -86425,9 +86660,9 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var common_1 = __webpack_require__(2);
-	var radio_dispatcher_1 = __webpack_require__(694);
+	var radio_dispatcher_1 = __webpack_require__(695);
 	// Re-exports.
-	var radio_dispatcher_2 = __webpack_require__(694);
+	var radio_dispatcher_2 = __webpack_require__(695);
 	exports.MdRadioDispatcher = radio_dispatcher_2.MdRadioDispatcher;
 	/**
 	 * Provider Expression that allows md-radio-group to register as a ControlValueAccessor. This
@@ -86831,7 +87066,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/radio/radio.js.map
 
 /***/ },
-/* 694 */
+/* 695 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -86879,10 +87114,10 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/radio/radio_dispatcher.js.map
 
 /***/ },
-/* 695 */
+/* 696 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -86893,7 +87128,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 696 */
+/* 697 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87113,7 +87348,7 @@ webpackJsonp([0],[
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(697).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(698).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -87145,30 +87380,30 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 697 */
+/* 698 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 698 */
+/* 699 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 699 */
+/* 700 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(700));
+	__export(__webpack_require__(701));
 
 
 /***/ },
-/* 700 */
+/* 701 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87182,9 +87417,9 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var angular2_modal_1 = __webpack_require__(688);
-	var button_1 = __webpack_require__(689);
-	var input_1 = __webpack_require__(690);
+	var angular2_modal_1 = __webpack_require__(689);
+	var button_1 = __webpack_require__(690);
+	var input_1 = __webpack_require__(691);
 	var Humane = __webpack_require__(644);
 	var GithubDialogComponent = (function () {
 	    function GithubDialogComponent(dialog) {
@@ -87212,8 +87447,8 @@ webpackJsonp([0],[
 	    GithubDialogComponent = __decorate([
 	        core_1.Component({
 	            selector: 'github-dialog',
-	            template: __webpack_require__(701)(),
-	            styles: [__webpack_require__(702)],
+	            template: __webpack_require__(702)(),
+	            styles: [__webpack_require__(703)],
 	            directives: [
 	                button_1.MdButton,
 	                input_1.MdInput,
@@ -87228,10 +87463,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 701 */
+/* 702 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -87242,24 +87477,24 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 702 */
+/* 703 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 703 */
+/* 704 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(704));
+	__export(__webpack_require__(705));
 
 
 /***/ },
-/* 704 */
+/* 705 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87279,10 +87514,10 @@ webpackJsonp([0],[
 	};
 	var _ = __webpack_require__(647);
 	var core_1 = __webpack_require__(5);
-	var angular2_modal_1 = __webpack_require__(688);
-	var bootstrap_1 = __webpack_require__(675);
+	var angular2_modal_1 = __webpack_require__(689);
+	var bootstrap_1 = __webpack_require__(676);
 	var models_1 = __webpack_require__(660);
-	var button_1 = __webpack_require__(689);
+	var button_1 = __webpack_require__(690);
 	var icon_1 = __webpack_require__(346);
 	var ConfirmDialogComponent = (function () {
 	    function ConfirmDialogComponent(dialog) {
@@ -87305,8 +87540,8 @@ webpackJsonp([0],[
 	    ConfirmDialogComponent = __decorate([
 	        core_1.Component({
 	            selector: 'confirm-dialog',
-	            template: __webpack_require__(705)(),
-	            styles: [__webpack_require__(706)],
+	            template: __webpack_require__(706)(),
+	            styles: [__webpack_require__(707)],
 	            directives: [
 	                button_1.MdButton,
 	                icon_1.MdIcon
@@ -87342,10 +87577,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 705 */
+/* 706 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -87356,24 +87591,24 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 706 */
+/* 707 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 707 */
+/* 708 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(708));
+	__export(__webpack_require__(709));
 
 
 /***/ },
-/* 708 */
+/* 709 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87388,15 +87623,15 @@ webpackJsonp([0],[
 	};
 	var _ = __webpack_require__(647);
 	var core_1 = __webpack_require__(5);
-	var angular2_modal_1 = __webpack_require__(688);
-	var button_1 = __webpack_require__(689);
-	var input_1 = __webpack_require__(690);
-	var checkbox_1 = __webpack_require__(692);
-	var radio_1 = __webpack_require__(693);
-	var progress_circle_1 = __webpack_require__(709);
+	var angular2_modal_1 = __webpack_require__(689);
+	var button_1 = __webpack_require__(690);
+	var input_1 = __webpack_require__(691);
+	var checkbox_1 = __webpack_require__(693);
+	var radio_1 = __webpack_require__(694);
+	var progress_circle_1 = __webpack_require__(710);
 	var angulartics2_google_analytics_1 = __webpack_require__(399);
 	var Humane = __webpack_require__(644);
-	var user_service_1 = __webpack_require__(710);
+	var user_service_1 = __webpack_require__(711);
 	var ExportDialogComponent = (function () {
 	    function ExportDialogComponent(dialog, ga, userService) {
 	        this.dialog = dialog;
@@ -87464,7 +87699,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 709 */
+/* 710 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87752,7 +87987,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/progress-circle/progress-circle.js.map
 
 /***/ },
-/* 710 */
+/* 711 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87767,7 +88002,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var BehaviorSubject_1 = __webpack_require__(421);
-	var http_service_ts_1 = __webpack_require__(711);
+	var http_service_ts_1 = __webpack_require__(674);
 	var UserService = (function () {
 	    function UserService(httpService) {
 	        this.httpService = httpService;
@@ -87793,64 +88028,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 711 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var core_1 = __webpack_require__(5);
-	var http_1 = __webpack_require__(325);
-	var HttpService = (function () {
-	    function HttpService(http) {
-	        this.http = http;
-	        this.defaultRequestOptions = new http_1.RequestOptions({ withCredentials: true });
-	        if (false) {
-	            this.baseUrl = 'http://192.168.1.102:3000/api';
-	        }
-	        else {
-	            this.baseUrl = '/api';
-	        }
-	    }
-	    HttpService.prototype.post = function (path, body, requestOptions) {
-	        if (body === void 0) { body = {}; }
-	        if (requestOptions === void 0) { requestOptions = this.defaultRequestOptions; }
-	        return this.http.post(this.baseUrl + path, body);
-	    };
-	    HttpService.prototype.get = function (path, body, requestOptions) {
-	        if (body === void 0) { body = {}; }
-	        if (requestOptions === void 0) { requestOptions = this.defaultRequestOptions; }
-	        return this.http.get(this.baseUrl + path, body);
-	    };
-	    HttpService.prototype.put = function (path, body, requestOptions) {
-	        if (body === void 0) { body = {}; }
-	        if (requestOptions === void 0) { requestOptions = this.defaultRequestOptions; }
-	        return this.http.put(this.baseUrl + path, body);
-	    };
-	    HttpService.prototype.delete = function (path) {
-	        return this.http.delete(this.baseUrl + path);
-	    };
-	    HttpService = __decorate([
-	        core_1.Injectable(), 
-	        __metadata('design:paramtypes', [http_1.Http])
-	    ], HttpService);
-	    return HttpService;
-	}());
-	exports.HttpService = HttpService;
-
-
-/***/ },
 /* 712 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -87881,7 +88062,7 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var http_service_ts_1 = __webpack_require__(711);
+	var http_service_ts_1 = __webpack_require__(674);
 	var folder_service_ts_1 = __webpack_require__(659);
 	var ProjectService = (function () {
 	    function ProjectService(folderService, httpService) {
@@ -87963,7 +88144,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var icon_1 = __webpack_require__(346);
-	var progress_circle_1 = __webpack_require__(709);
+	var progress_circle_1 = __webpack_require__(710);
 	var _ = __webpack_require__(647);
 	var angulartics2_google_analytics_1 = __webpack_require__(399);
 	var services_1 = __webpack_require__(648);
@@ -88598,7 +88779,7 @@ webpackJsonp([0],[
 /* 725 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88624,7 +88805,7 @@ webpackJsonp([0],[
 /* 728 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88662,7 +88843,7 @@ webpackJsonp([0],[
 /* 731 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88781,7 +88962,7 @@ webpackJsonp([0],[
 /* 736 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88801,7 +88982,7 @@ webpackJsonp([0],[
 /* 738 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88842,7 +89023,7 @@ webpackJsonp([0],[
 	var component_element_1 = __webpack_require__(741);
 	var services_1 = __webpack_require__(648);
 	var models_1 = __webpack_require__(660);
-	var dialog_service_1 = __webpack_require__(674);
+	var dialog_service_1 = __webpack_require__(675);
 	var SidebarComponent = (function () {
 	    function SidebarComponent(fileService, ga, folderService, dialogService) {
 	        var _this = this;
@@ -88861,7 +89042,9 @@ webpackJsonp([0],[
 	        var _this = this;
 	        this.dialogService.openCreateComponentDialog(false).then(function (dialogResult) {
 	            _this.ga.eventTrack('createFolder', { category: 'byButton' });
-	            _this.folderService.create(new models_1.Folder(_this.currentFolder._id, dialogResult.data.newFolderName));
+	            if (dialogResult) {
+	                _this.folderService.create(new models_1.Folder(_this.currentFolder._id, dialogResult.data.newFolderName));
+	            }
 	        });
 	    };
 	    SidebarComponent = __decorate([
@@ -89005,7 +89188,7 @@ webpackJsonp([0],[
 /* 744 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89025,7 +89208,7 @@ webpackJsonp([0],[
 /* 746 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89081,7 +89264,7 @@ webpackJsonp([0],[
 /* 749 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89107,7 +89290,7 @@ webpackJsonp([0],[
 /* 752 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89139,7 +89322,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var router_1 = __webpack_require__(401);
-	var bootstrap_1 = __webpack_require__(675);
+	var bootstrap_1 = __webpack_require__(676);
 	// Strange, but true: this method would work but throws an error: 'cannot find module'
 	// import * as Humane from 'humane-js/humane.js';
 	var services_1 = __webpack_require__(648);
@@ -89176,7 +89359,7 @@ webpackJsonp([0],[
 /* 755 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(696);
+	var jade = __webpack_require__(697);
 
 	module.exports = function template(locals) {
 	var buf = [];
