@@ -88708,7 +88708,7 @@ webpackJsonp([0],[
 	        this.loading = false;
 	        this.subscriptions = [];
 	        this.hover = false;
-	        this.editImage = false;
+	        this.editImage = {};
 	        this.subscriptions.push(this.folderService.currentSource.subscribe(function (currentSource) {
 	            _this.currentFolder = currentSource;
 	            if (_this.imagesSubscribe) {
@@ -88734,8 +88734,10 @@ webpackJsonp([0],[
 	            });
 	        }));
 	    }
-	    ImageBarComponent.prototype.setEditName = function (inputField) {
-	        this.editImage = true;
+	    ImageBarComponent.prototype.setEditName = function (id, inputField) {
+	        this.editImage[id] = true;
+	        console.log("inputField => ", inputField);
+	        console.log("id => ", id);
 	        setTimeout(function () {
 	            inputField.focus();
 	        });
@@ -88743,7 +88745,14 @@ webpackJsonp([0],[
 	    ImageBarComponent.prototype.saveImage = function (image) {
 	        this.ga.eventTrack('renameImage', { category: 'manually' });
 	        this.imageService.update(image);
-	        this.editImage = false;
+	        this.editImage[image._id] = false;
+	    };
+	    ImageBarComponent.prototype.imageKeyDown = function (event) {
+	        if (event.which === 13) {
+	            event.preventDefault();
+	            event.target.blur();
+	            return false;
+	        }
 	    };
 	    ImageBarComponent.prototype.deleteImage = function (image) {
 	        var _this = this;
@@ -88774,7 +88783,11 @@ webpackJsonp([0],[
 	        if (file === void 0) { file = null; }
 	        this.loading = true;
 	        file = file ? file : event.target.files[0];
-	        this.rawImageService.createFromFile(file).then(function (result) { _this.loading = false; }, function (errResult) { _this.loading = false; });
+	        this.rawImageService.createFromFile(file).then(function (result) {
+	            _this.loading = false;
+	        }, function (errResult) {
+	            _this.loading = false;
+	        });
 	    };
 	    ImageBarComponent.prototype.onDragEnter = function (event) {
 	        this.hover = true;
@@ -88947,7 +88960,7 @@ webpackJsonp([0],[
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"image-bar\"><div class=\"box\"><input id=\"file\" type=\"file\" (change)=\"loadFile($event)\" class=\"hiddenInput\"><label #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"file\" class=\"imageBox placeholder\"><div class=\"add\">+</div><div class=\"text\">drag image here</div><div [hidden]=\"!loading\" class=\"loadingContainer\"><div class=\"loading\"><div class=\"content\"><md-progress-circle mode=\"indeterminate\">Loading, please wait!</md-progress-circle></div></div></div></label><div *ngFor=\"let image of images\" [ngClass]=\"{currentImage: currentImage &amp;&amp; currentImage._id == image._id }\" tooltip=\"{{image.name}}\" tooltipAppendToBody=\"true\" tooltipEnable=\"false\" class=\"imageBox\"><sliced-image (click)=\"setBoardImage(image)\" [image]=\"image\" [thumbnail]=\"true\" class=\"thumbnail\"></sliced-image><div class=\"text\"><div class=\"name\"><div *ngIf=\"!editImage\" (click)=\"setEditName(imageEdit)\" class=\"nameHelper\">{{ image.name }}</div><input #imageEdit [hidden]=\"!editImage\" [(ngModel)]=\"image.name\" (blur)=\"saveImage(image)\" class=\"input imageNameInput\"><md-icon *ngIf=\"!editImage\" (click)=\"editImage = true\" class=\"editIcon\">edit</md-icon></div><md-icon (click)=\"deleteImage(image)\" class=\"deleteIcon\">delete</md-icon></div></div></div></div>");;return buf.join("");
+	buf.push("<div class=\"image-bar\"><div class=\"box\"><input id=\"file\" type=\"file\" (change)=\"loadFile($event)\" class=\"hiddenInput\"><label #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"file\" class=\"imageBox placeholder\"><div class=\"add\">+</div><div class=\"text\">drag image here</div><div [hidden]=\"!loading\" class=\"loadingContainer\"><div class=\"loading\"><div class=\"content\"><md-progress-circle mode=\"indeterminate\">Loading, please wait!</md-progress-circle></div></div></div></label><div *ngFor=\"let image of images\" [ngClass]=\"{currentImage: currentImage &amp;&amp; currentImage._id == image._id }\" tooltip=\"{{image.name}}\" tooltipAppendToBody=\"true\" tooltipEnable=\"false\" class=\"imageBox\"><sliced-image (click)=\"setBoardImage(image)\" [image]=\"image\" [thumbnail]=\"true\" class=\"thumbnail\"></sliced-image><div class=\"text\"><div class=\"name\"><div *ngIf=\"!editImage[image._id]\" (click)=\"setEditName(image._id, imageEdit)\" class=\"nameHelper\">{{ image.name }}</div><input #imageEdit [hidden]=\"!editImage[image._id]\" [(ngModel)]=\"image.name\" (blur)=\"saveImage(image)\" (keydown)=\"imageKeyDown($event)\" class=\"input imageNameInput\"><md-icon *ngIf=\"!editImage[image._id]\" (click)=\"editImage[image._id] = true\" class=\"editIcon\">edit</md-icon></div><md-icon (click)=\"deleteImage(image)\" class=\"deleteIcon\">delete</md-icon></div></div></div></div>");;return buf.join("");
 	}
 
 /***/ },
