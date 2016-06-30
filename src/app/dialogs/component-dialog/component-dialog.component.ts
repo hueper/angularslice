@@ -8,6 +8,7 @@ import { MdInput } from "@angular2-material/input";
 import { MdCheckbox } from "@angular2-material/checkbox";
 import { MdRadioButton, MdRadioGroup, MdRadioDispatcher } from "@angular2-material/radio";
 import { Subscription } from "rxjs";
+
 const Humane = require('humane-js');
 
 import { Folder } from "../../shared/models";
@@ -37,7 +38,7 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
   
   @ViewChild('componentName') private componentName: any;
   
-  public folders: Folder[];
+  public folders: any[];
   private subscriptions: Subscription[] = [];
   private hasImage: boolean = true;
   
@@ -45,14 +46,19 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
               private ga: AnalyticsService,
               private folderService: FolderService,
               private detector: ChangeDetectorRef) {
-    this.subscriptions.push(folderService.dataSource.subscribe((folders: Folder[]) => {
+    this.subscriptions.push(folderService.dataSource.map(x =>
+      x.map(folder => ({ id: folder._id, text: folder.name }))
+    ).subscribe((folders: any[]) => {
       this.folders = folders;
+      console.log("this.folders => ", this.folders);
+  
     }));
     this.component = {
       type: 'new',
       attach: true,
       folder: null,
     };
+    
     
     this.hasImage = this.dialog.context['hasImage'];
   }
