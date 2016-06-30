@@ -88052,6 +88052,8 @@ webpackJsonp([0],[
 	    GithubDialogComponent.prototype.eventHandler = function (event) {
 	        if (event.which === 13) {
 	            this.send();
+	            event.preventDefault();
+	            return false;
 	        }
 	    };
 	    GithubDialogComponent.prototype.send = function () {
