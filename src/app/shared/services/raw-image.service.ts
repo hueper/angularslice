@@ -2,6 +2,7 @@ import { Injectable, NgZone } from "@angular/core";
 import { Http, Headers } from "@angular/http";
 import { HttpConfig } from "../../config/http-config.ts";
 const Humane = require('humane-js');
+import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 
 import { RawImage } from "../models";
 import { BaseService } from "./base.service.ts";
@@ -13,6 +14,7 @@ import { HttpService } from "./http.service.ts";
 export class RawImageService extends BaseService<RawImage> {
   constructor( // private ApplicationRef:ApplicationRef
     private httpService: HttpService,
+    private ga: Angulartics2GoogleAnalytics,
     private ngZone: NgZone) {
     super('rawImages', RawImage);
   }
@@ -38,7 +40,20 @@ export class RawImageService extends BaseService<RawImage> {
 
   createFromFile(file: any): Promise<any> {
 
+    // Supported extensions
+    const supportedFileExtension = ['jpg', 'png', 'jpeg'];
+    const extension = file.name.split('.').pop();
+
     return new Promise((resolve, reject) => {
+      // Check extensions
+      if (supportedFileExtension.indexOf(extension) === -1) {
+        Humane.log(`Sorry we support just 'png' and 'jpg' files at the moment.`, { timeout: 4000, clickToClose: true });
+        this.ga.eventTrack('upload', { category: extension });
+        reject();
+      }
+
+      this.ga.eventTrack('upload', { category: 'supportedExentension' });
+
       const reader = new FileReader();
 
       reader.addEventListener('load', (e: any) => {
