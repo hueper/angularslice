@@ -132,32 +132,18 @@ export class BoardComponent implements OnDestroy {
   
   onDrop(event) {
     event.preventDefault();
-    this.loading = true;
-    var file = event.dataTransfer.files[0];
-    this.hover = false;
-    this.rawImageService.createFromFile(file).then(result => {
-      this.loading = false;
-    });
+    let file = event.dataTransfer.files[0];
+    this.loadFile(event, file);
     return false;
   }
-  
-  loadFile(event) {
-    // TODO, move to config:
+
+  loadFile(event, file = null) {
     this.loading = true;
-    const supportedFileExtension = ['jpg', 'png', 'jpeg'];
-    const file = event.target.files[0];
-    const extension = file.name.split('.').pop();
-    
-    if (supportedFileExtension.indexOf(extension) === -1) {
-      Humane.log(`Sorry we support just 'png' and 'jpg' files at the moment.`, { timeout: 4000, clickToClose: true });
-      this.ga.eventTrack('upload', { category: extension });
-    } else {
-      this.ga.eventTrack('upload', { category: 'supportedExentension' });
-      this.rawImageService.createFromFile(file).then(result => {
-        this.loading = false;
-      });
-      ;
-    }
+    file = file ? file : event.target.files[0];
+    this.rawImageService.createFromFile(file).then(
+      result => { this.loading = false },
+      errResult => { this.loading = false }
+    );
   }
   
   onDragEnter(event) {
