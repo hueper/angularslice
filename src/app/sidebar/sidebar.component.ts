@@ -23,26 +23,28 @@ export class SidebarComponent {
   public files: Observable<File[]>;
   private currentFolders: Observable<Folder>;
   private currentFolder: Folder;
-
+  
   constructor(private fileService: FileService,
               private ga: Angulartics2GoogleAnalytics,
               private folderService: FolderService,
               private dialogService: DialogService) {
     this.files = fileService.filter(file => file.folderId === null || file.folderId === undefined);
     this.folders = folderService.filter(folder => folder.folderId === null || folder.folderId === undefined);
-
+    
     this.currentFolders = this.folderService.currentSource;
-
+    
     folderService.currentSource.subscribe(folder => {
       this.currentFolder = folder;
     });
-
+    
   }
-
+  
   createComponent() {
     this.dialogService.openCreateComponentDialog(false).then(dialogResult => {
-      this.ga.eventTrack('createFolder', { category: 'byButton'} );
-      this.folderService.create(new Folder(this.currentFolder._id, dialogResult.data.newFolderName));
+      this.ga.eventTrack('createFolder', { category: 'byButton' });
+      if (dialogResult) {
+        this.folderService.create(new Folder(this.currentFolder._id, dialogResult.data.newFolderName));
+      }
     });
   }
 }

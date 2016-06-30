@@ -1,6 +1,5 @@
 import { Injectable, NgZone } from "@angular/core";
 import { Http, Headers } from "@angular/http";
-import { HttpConfig } from "../../config/http-config.ts";
 const Humane = require('humane-js');
 
 import { RawImage } from "../models";

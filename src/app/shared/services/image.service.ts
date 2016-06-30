@@ -28,8 +28,6 @@ export class ImageService extends BaseService<Image> {
       this.create(image);
     });
 
-    rawImageService.createSource.subscribe(() => {})
-
     folderService.deleteSource.subscribe(folder => {
       this.find({ folderId: folder._id }).map( (image) => {
         this.delete(image);
