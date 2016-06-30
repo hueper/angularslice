@@ -56741,7 +56741,7 @@ webpackJsonp([0],[
 	var sidebar_1 = __webpack_require__(739);
 	var toolbar_1 = __webpack_require__(747);
 	var services_1 = __webpack_require__(648);
-	var progress_circle_1 = __webpack_require__(710);
+	var progress_circle_1 = __webpack_require__(709);
 	var EditorComponent = (function () {
 	    function EditorComponent(router, route, dialogService, folderService, imageService, projectService, userService) {
 	        var _this = this;
@@ -66896,7 +66896,7 @@ webpackJsonp([0],[
 	var models_1 = __webpack_require__(660);
 	var area_1 = __webpack_require__(733);
 	var sliced_image_1 = __webpack_require__(718);
-	var progress_circle_1 = __webpack_require__(710);
+	var progress_circle_1 = __webpack_require__(709);
 	var tooltip_directive_1 = __webpack_require__(720);
 	var BoardComponent = (function () {
 	    function BoardComponent(http, ga, areaService, rawImageService, imageService, folderService, renderer, dialogService) {
@@ -83596,12 +83596,12 @@ webpackJsonp([0],[
 	__export(__webpack_require__(658));
 	__export(__webpack_require__(670));
 	__export(__webpack_require__(659));
-	__export(__webpack_require__(672));
-	__export(__webpack_require__(673));
+	__export(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./image.service\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+	__export(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./raw-image.service\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
 	__export(__webpack_require__(671));
-	__export(__webpack_require__(675));
 	__export(__webpack_require__(674));
 	__export(__webpack_require__(711));
+	__export(__webpack_require__(710));
 	__export(__webpack_require__(714));
 	__export(__webpack_require__(715));
 
@@ -84713,176 +84713,8 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 672 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var core_1 = __webpack_require__(5);
-	var models_1 = __webpack_require__(660);
-	var base_service_1 = __webpack_require__(650);
-	var raw_image_service_1 = __webpack_require__(673);
-	var folder_service_1 = __webpack_require__(659);
-	var ImageService = (function (_super) {
-	    __extends(ImageService, _super);
-	    function ImageService(folderService, rawImageService) {
-	        var _this = this;
-	        _super.call(this, 'images', models_1.Image);
-	        this.folderService = folderService;
-	        this.rawImageService = rawImageService;
-	        this.folderService.currentSource.subscribe(function (folder) {
-	            _this.currentFolder = folder;
-	        });
-	        // Automatically create an image on rawImage creation
-	        rawImageService.createSource.subscribe(function (rawImage) {
-	            var folderId = _this.currentFolder ? _this.currentFolder._id : null;
-	            var fileName = rawImage.name ? rawImage.name : 'image' + Math.floor(Math.random() * 10000);
-	            var image = new models_1.Image(folderId, rawImage._id, fileName, 0, 0, rawImage.width, rawImage.height);
-	            _this.setCurrentImage(image);
-	            _this.create(image);
-	        });
-	        rawImageService.createSource.subscribe(function () { });
-	        folderService.deleteSource.subscribe(function (folder) {
-	            _this.find({ folderId: folder._id }).map(function (image) {
-	                _this.delete(image);
-	            });
-	        });
-	    }
-	    ImageService.prototype.getBinaryData = function (instance) {
-	        var rawImage = this.rawImageService.findById(instance.rawImageId);
-	        return rawImage ? rawImage.url : null;
-	    };
-	    ImageService.prototype.getRawImage = function (instance) {
-	        var rawImage = this.rawImageService.findById(instance.rawImageId);
-	        return rawImage ? rawImage : null;
-	    };
-	    ImageService.prototype.setCurrentImage = function (instance) {
-	        this.currentIdSource.next(instance ? instance._id : null);
-	    };
-	    ImageService.prototype.delete = function (instance) {
-	        if (this.find({ rawImageId: instance.rawImageId }).length <= 1) {
-	            this.rawImageService.delete(this.rawImageService.findById(instance.rawImageId));
-	        }
-	        _super.prototype.delete.call(this, instance);
-	    };
-	    ImageService = __decorate([
-	        core_1.Injectable(), 
-	        __metadata('design:paramtypes', [folder_service_1.FolderService, raw_image_service_1.RawImageService])
-	    ], ImageService);
-	    return ImageService;
-	}(base_service_1.BaseService));
-	exports.ImageService = ImageService;
-
-
-/***/ },
-/* 673 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var core_1 = __webpack_require__(5);
-	var Humane = __webpack_require__(644);
-	var models_1 = __webpack_require__(660);
-	var base_service_ts_1 = __webpack_require__(650);
-	var http_service_ts_1 = __webpack_require__(674);
-	// import {NgZone} from '@angular/core'
-	var RawImageService = (function (_super) {
-	    __extends(RawImageService, _super);
-	    function RawImageService(// private ApplicationRef:ApplicationRef
-	        httpService, ngZone) {
-	        _super.call(this, 'rawImages', models_1.RawImage);
-	        this.httpService = httpService;
-	        this.ngZone = ngZone;
-	    }
-	    RawImageService.prototype.delete = function (rawImage) {
-	        var _this = this;
-	        return this.httpService.delete("/rawImages/" + rawImage._id)
-	            .map(function (res) { return res.json(); })
-	            .share()
-	            .subscribe(function (res) {
-	            if (res.success) {
-	                // Delete locally
-	                _super.prototype.delete.call(_this, rawImage);
-	            }
-	        });
-	    };
-	    RawImageService.prototype.create = function (rawImage) {
-	        _super.prototype.create.call(this, rawImage);
-	        // We're going out from Zone, so after the create we'll need to trigger the change detection chain
-	        // this.ApplicationRef.tick();
-	    };
-	    RawImageService.prototype.createFromFile = function (file) {
-	        var _this = this;
-	        return new Promise(function (resolve, reject) {
-	            var reader = new FileReader();
-	            reader.addEventListener('load', function (e) {
-	                var image = new Image();
-	                image.src = e.target.result;
-	                image.onload = function () {
-	                    var width = image.width;
-	                    var height = image.height;
-	                    var fileType = image.src.split(';')[0].split(':')[1];
-	                    _this.ngZone.run(function () {
-	                        var formData = new FormData();
-	                        formData.append('width', width);
-	                        formData.append('height', height);
-	                        formData.append('target', file, fileType);
-	                        _this.httpService.post('/rawImages/upload', formData)
-	                            .map(function (res) { return res.json(); })
-	                            .subscribe(function (res) {
-	                            var data = res.data;
-	                            if (res.success) {
-	                                _this.create(new models_1.RawImage(data._id, data.url, data.width, data.height, file.name));
-	                                resolve(res);
-	                            }
-	                            else {
-	                                Humane.log('Sorry, something baaad happened o.O');
-	                            }
-	                        });
-	                    });
-	                };
-	            }, false);
-	            if (file) {
-	                reader.readAsDataURL(file);
-	            }
-	        });
-	    };
-	    RawImageService = __decorate([
-	        core_1.Injectable(), 
-	        __metadata('design:paramtypes', [http_service_ts_1.HttpService, core_1.NgZone])
-	    ], RawImageService);
-	    return RawImageService;
-	}(base_service_ts_1.BaseService));
-	exports.RawImageService = RawImageService;
-
-
-/***/ },
+/* 672 */,
+/* 673 */,
 /* 674 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -84897,62 +84729,8 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var http_1 = __webpack_require__(325);
-	var HttpService = (function () {
-	    function HttpService(http) {
-	        this.http = http;
-	        this.defaultRequestOptions = new http_1.RequestOptions({ withCredentials: true });
-	        if (false) {
-	            this.baseUrl = 'http://192.168.1.107:3000/api';
-	        }
-	        else {
-	            this.baseUrl = '/api';
-	        }
-	    }
-	    HttpService.prototype.post = function (path, body, requestOptions) {
-	        if (body === void 0) { body = {}; }
-	        if (requestOptions === void 0) { requestOptions = this.defaultRequestOptions; }
-	        return this.http.post(this.baseUrl + path, body);
-	    };
-	    HttpService.prototype.get = function (path, body, requestOptions) {
-	        if (body === void 0) { body = {}; }
-	        if (requestOptions === void 0) { requestOptions = this.defaultRequestOptions; }
-	        return this.http.get(this.baseUrl + path, body);
-	    };
-	    HttpService.prototype.put = function (path, body, requestOptions) {
-	        if (body === void 0) { body = {}; }
-	        if (requestOptions === void 0) { requestOptions = this.defaultRequestOptions; }
-	        return this.http.put(this.baseUrl + path, body);
-	    };
-	    HttpService.prototype.delete = function (path) {
-	        return this.http.delete(this.baseUrl + path);
-	    };
-	    HttpService = __decorate([
-	        core_1.Injectable(), 
-	        __metadata('design:paramtypes', [http_1.Http])
-	    ], HttpService);
-	    return HttpService;
-	}());
-	exports.HttpService = HttpService;
-
-
-/***/ },
-/* 675 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var core_1 = __webpack_require__(5);
-	var bootstrap_1 = __webpack_require__(676);
-	var dialogs_1 = __webpack_require__(686);
+	var bootstrap_1 = __webpack_require__(675);
+	var dialogs_1 = __webpack_require__(685);
 	var DialogService = (function () {
 	    function DialogService(modal) {
 	        this.modal = modal;
@@ -85017,37 +84795,37 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 676 */
+/* 675 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var core_1 = __webpack_require__(5);
-	var modal_1 = __webpack_require__(677);
-	var modal_backdrop_1 = __webpack_require__(678);
-	var one_button_preset_1 = __webpack_require__(680);
-	var two_button_preset_1 = __webpack_require__(685);
+	var modal_1 = __webpack_require__(676);
+	var modal_backdrop_1 = __webpack_require__(677);
+	var one_button_preset_1 = __webpack_require__(679);
+	var two_button_preset_1 = __webpack_require__(684);
 	var angular2_modal_1 = __webpack_require__(379);
-	var modal_context_1 = __webpack_require__(682);
+	var modal_context_1 = __webpack_require__(681);
 	exports.BSModalContext = modal_context_1.BSModalContext;
 	exports.BSModalContextBuilder = modal_context_1.BSModalContextBuilder;
-	var modal_backdrop_2 = __webpack_require__(678);
+	var modal_backdrop_2 = __webpack_require__(677);
 	exports.BSModalBackdrop = modal_backdrop_2.BSModalBackdrop;
-	var modal_container_1 = __webpack_require__(679);
+	var modal_container_1 = __webpack_require__(678);
 	exports.BSModalContainer = modal_container_1.BSModalContainer;
-	var message_modal_1 = __webpack_require__(683);
+	var message_modal_1 = __webpack_require__(682);
 	exports.BSMessageModal = message_modal_1.BSMessageModal;
-	var modal_footer_1 = __webpack_require__(684);
+	var modal_footer_1 = __webpack_require__(683);
 	exports.BSModalFooter = modal_footer_1.BSModalFooter;
-	var message_modal_preset_1 = __webpack_require__(681);
+	var message_modal_preset_1 = __webpack_require__(680);
 	exports.MessageModalPresetBuilder = message_modal_preset_1.MessageModalPresetBuilder;
 	var modal_open_context_1 = __webpack_require__(388);
 	exports.ModalOpenContext = modal_open_context_1.ModalOpenContext;
 	exports.ModalOpenContextBuilder = modal_open_context_1.ModalOpenContextBuilder;
-	var one_button_preset_2 = __webpack_require__(680);
+	var one_button_preset_2 = __webpack_require__(679);
 	exports.OneButtonPresetBuilder = one_button_preset_2.OneButtonPresetBuilder;
-	var two_button_preset_2 = __webpack_require__(685);
+	var two_button_preset_2 = __webpack_require__(684);
 	exports.TwoButtonPresetBuilder = two_button_preset_2.TwoButtonPresetBuilder;
-	var modal_2 = __webpack_require__(677);
+	var modal_2 = __webpack_require__(676);
 	exports.Modal = modal_2.Modal;
 	exports.BS_MODAL_PROVIDERS = angular2_modal_1.MODAL_PROVIDERS.concat([
 	    new core_1.Provider(angular2_modal_1.Modal, { useClass: modal_1.Modal }),
@@ -85062,7 +84840,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 677 */
+/* 676 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85071,7 +84849,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 678 */
+/* 677 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85086,7 +84864,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var angular2_modal_1 = __webpack_require__(379);
-	var modal_container_1 = __webpack_require__(679);
+	var modal_container_1 = __webpack_require__(678);
 	var dialogRefCount = 0;
 	/**
 	 * Represents the modal backdrop.
@@ -85131,7 +84909,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 679 */
+/* 678 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85146,7 +84924,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var angular2_modal_1 = __webpack_require__(379);
-	var modal_1 = __webpack_require__(677);
+	var modal_1 = __webpack_require__(676);
 	var utils_1 = __webpack_require__(387);
 	/**
 	 * A component that acts as a top level container for an open modal window.
@@ -85215,7 +84993,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 680 */
+/* 679 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85224,7 +85002,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var message_modal_preset_1 = __webpack_require__(681);
+	var message_modal_preset_1 = __webpack_require__(680);
 	var utils_1 = __webpack_require__(387);
 	/**
 	 * A Preset for a classic 1 button modal window.
@@ -85252,7 +85030,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 681 */
+/* 680 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85262,8 +85040,8 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var fluent_assign_1 = __webpack_require__(380);
-	var modal_context_1 = __webpack_require__(682);
-	var message_modal_1 = __webpack_require__(683);
+	var modal_context_1 = __webpack_require__(681);
+	var message_modal_1 = __webpack_require__(682);
 	var utils_1 = __webpack_require__(387);
 	var DEFAULT_VALUES = {
 	    component: message_modal_1.BSMessageModal,
@@ -85308,7 +85086,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 682 */
+/* 681 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85357,7 +85135,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 683 */
+/* 682 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85372,7 +85150,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var angular2_modal_1 = __webpack_require__(379);
-	var modal_footer_1 = __webpack_require__(684);
+	var modal_footer_1 = __webpack_require__(683);
 	/**
 	 * A Component representing a generic bootstrap modal content element.
 	 *
@@ -85421,7 +85199,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 684 */
+/* 683 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85475,7 +85253,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 685 */
+/* 684 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85485,7 +85263,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var utils_1 = __webpack_require__(387);
-	var message_modal_preset_1 = __webpack_require__(681);
+	var message_modal_preset_1 = __webpack_require__(680);
 	/**
 	 * A Preset for a classic 2 button modal window.
 	 */
@@ -85517,6 +85295,20 @@ webpackJsonp([0],[
 
 
 /***/ },
+/* 685 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	function __export(m) {
+	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+	}
+	__export(__webpack_require__(686));
+	__export(__webpack_require__(699));
+	__export(__webpack_require__(703));
+	__export(__webpack_require__(707));
+
+
+/***/ },
 /* 686 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -85525,24 +85317,10 @@ webpackJsonp([0],[
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
 	__export(__webpack_require__(687));
-	__export(__webpack_require__(700));
-	__export(__webpack_require__(704));
-	__export(__webpack_require__(708));
 
 
 /***/ },
 /* 687 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	function __export(m) {
-	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-	}
-	__export(__webpack_require__(688));
-
-
-/***/ },
-/* 688 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85557,11 +85335,11 @@ webpackJsonp([0],[
 	};
 	var _ = __webpack_require__(647);
 	var core_1 = __webpack_require__(5);
-	var angular2_modal_1 = __webpack_require__(689);
-	var button_1 = __webpack_require__(690);
-	var input_1 = __webpack_require__(691);
-	var checkbox_1 = __webpack_require__(693);
-	var radio_1 = __webpack_require__(694);
+	var angular2_modal_1 = __webpack_require__(688);
+	var button_1 = __webpack_require__(689);
+	var input_1 = __webpack_require__(690);
+	var checkbox_1 = __webpack_require__(692);
+	var radio_1 = __webpack_require__(693);
 	var angulartics2_google_analytics_1 = __webpack_require__(399);
 	var Humane = __webpack_require__(644);
 	var services_1 = __webpack_require__(648);
@@ -85585,7 +85363,9 @@ webpackJsonp([0],[
 	    }
 	    ComponentDialogComponent.prototype.eventHandler = function (event) {
 	        if (event.which === 13) {
+	            event.preventDefault();
 	            this.send();
+	            return false;
 	        }
 	    };
 	    ComponentDialogComponent.prototype.ngOnDestroy = function () {
@@ -85619,8 +85399,8 @@ webpackJsonp([0],[
 	    ComponentDialogComponent = __decorate([
 	        core_1.Component({
 	            selector: 'component-dialog',
-	            template: __webpack_require__(696)(),
-	            styles: [__webpack_require__(699)],
+	            template: __webpack_require__(695)(),
+	            styles: [__webpack_require__(698)],
 	            directives: [
 	                button_1.MdButton,
 	                input_1.MdInput,
@@ -85640,7 +85420,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 689 */
+/* 688 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85652,7 +85432,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 690 */
+/* 689 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85818,7 +85598,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/button/button.js.map
 
 /***/ },
-/* 691 */
+/* 690 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85838,7 +85618,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var common_1 = __webpack_require__(2);
-	var field_value_1 = __webpack_require__(692);
+	var field_value_1 = __webpack_require__(691);
 	var error_1 = __webpack_require__(347);
 	var Observable_1 = __webpack_require__(38);
 	var noop = function () { };
@@ -86278,7 +86058,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/input/input.js.map
 
 /***/ },
-/* 692 */
+/* 691 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -86312,7 +86092,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/core/annotations/field-value.js.map
 
 /***/ },
-/* 693 */
+/* 692 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -86644,7 +86424,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/checkbox/checkbox.js.map
 
 /***/ },
-/* 694 */
+/* 693 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -86662,9 +86442,9 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var common_1 = __webpack_require__(2);
-	var radio_dispatcher_1 = __webpack_require__(695);
+	var radio_dispatcher_1 = __webpack_require__(694);
 	// Re-exports.
-	var radio_dispatcher_2 = __webpack_require__(695);
+	var radio_dispatcher_2 = __webpack_require__(694);
 	exports.MdRadioDispatcher = radio_dispatcher_2.MdRadioDispatcher;
 	/**
 	 * Provider Expression that allows md-radio-group to register as a ControlValueAccessor. This
@@ -87068,7 +86848,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/radio/radio.js.map
 
 /***/ },
-/* 695 */
+/* 694 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87116,10 +86896,10 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/radio/radio_dispatcher.js.map
 
 /***/ },
-/* 696 */
+/* 695 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -87130,7 +86910,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 697 */
+/* 696 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87350,7 +87130,7 @@ webpackJsonp([0],[
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(698).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(697).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -87382,30 +87162,30 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 698 */
+/* 697 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 699 */
+/* 698 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 700 */
+/* 699 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(701));
+	__export(__webpack_require__(700));
 
 
 /***/ },
-/* 701 */
+/* 700 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87419,9 +87199,9 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var angular2_modal_1 = __webpack_require__(689);
-	var button_1 = __webpack_require__(690);
-	var input_1 = __webpack_require__(691);
+	var angular2_modal_1 = __webpack_require__(688);
+	var button_1 = __webpack_require__(689);
+	var input_1 = __webpack_require__(690);
 	var Humane = __webpack_require__(644);
 	var GithubDialogComponent = (function () {
 	    function GithubDialogComponent(dialog) {
@@ -87449,8 +87229,8 @@ webpackJsonp([0],[
 	    GithubDialogComponent = __decorate([
 	        core_1.Component({
 	            selector: 'github-dialog',
-	            template: __webpack_require__(702)(),
-	            styles: [__webpack_require__(703)],
+	            template: __webpack_require__(701)(),
+	            styles: [__webpack_require__(702)],
 	            directives: [
 	                button_1.MdButton,
 	                input_1.MdInput,
@@ -87465,10 +87245,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 702 */
+/* 701 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -87479,24 +87259,24 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 703 */
+/* 702 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 704 */
+/* 703 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(705));
+	__export(__webpack_require__(704));
 
 
 /***/ },
-/* 705 */
+/* 704 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87516,10 +87296,10 @@ webpackJsonp([0],[
 	};
 	var _ = __webpack_require__(647);
 	var core_1 = __webpack_require__(5);
-	var angular2_modal_1 = __webpack_require__(689);
-	var bootstrap_1 = __webpack_require__(676);
+	var angular2_modal_1 = __webpack_require__(688);
+	var bootstrap_1 = __webpack_require__(675);
 	var models_1 = __webpack_require__(660);
-	var button_1 = __webpack_require__(690);
+	var button_1 = __webpack_require__(689);
 	var icon_1 = __webpack_require__(346);
 	var ConfirmDialogComponent = (function () {
 	    function ConfirmDialogComponent(dialog) {
@@ -87542,8 +87322,8 @@ webpackJsonp([0],[
 	    ConfirmDialogComponent = __decorate([
 	        core_1.Component({
 	            selector: 'confirm-dialog',
-	            template: __webpack_require__(706)(),
-	            styles: [__webpack_require__(707)],
+	            template: __webpack_require__(705)(),
+	            styles: [__webpack_require__(706)],
 	            directives: [
 	                button_1.MdButton,
 	                icon_1.MdIcon
@@ -87579,10 +87359,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 706 */
+/* 705 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -87593,24 +87373,24 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 707 */
+/* 706 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 708 */
+/* 707 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(709));
+	__export(__webpack_require__(708));
 
 
 /***/ },
-/* 709 */
+/* 708 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87625,15 +87405,15 @@ webpackJsonp([0],[
 	};
 	var _ = __webpack_require__(647);
 	var core_1 = __webpack_require__(5);
-	var angular2_modal_1 = __webpack_require__(689);
-	var button_1 = __webpack_require__(690);
-	var input_1 = __webpack_require__(691);
-	var checkbox_1 = __webpack_require__(693);
-	var radio_1 = __webpack_require__(694);
-	var progress_circle_1 = __webpack_require__(710);
+	var angular2_modal_1 = __webpack_require__(688);
+	var button_1 = __webpack_require__(689);
+	var input_1 = __webpack_require__(690);
+	var checkbox_1 = __webpack_require__(692);
+	var radio_1 = __webpack_require__(693);
+	var progress_circle_1 = __webpack_require__(709);
 	var angulartics2_google_analytics_1 = __webpack_require__(399);
 	var Humane = __webpack_require__(644);
-	var user_service_1 = __webpack_require__(711);
+	var user_service_1 = __webpack_require__(710);
 	var ExportDialogComponent = (function () {
 	    function ExportDialogComponent(dialog, ga, userService) {
 	        this.dialog = dialog;
@@ -87701,7 +87481,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 710 */
+/* 709 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87989,7 +87769,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=/usr/local/google/home/jelbourn/material2/tmp/broccoli_type_script_compiler-input_base_path-OxHzApZr.tmp/0/components/progress-circle/progress-circle.js.map
 
 /***/ },
-/* 711 */
+/* 710 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88004,7 +87784,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var BehaviorSubject_1 = __webpack_require__(421);
-	var http_service_ts_1 = __webpack_require__(674);
+	var http_service_ts_1 = __webpack_require__(711);
 	var UserService = (function () {
 	    function UserService(httpService) {
 	        this.httpService = httpService;
@@ -88030,10 +87810,64 @@ webpackJsonp([0],[
 
 
 /***/ },
+/* 711 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(5);
+	var http_1 = __webpack_require__(325);
+	var HttpService = (function () {
+	    function HttpService(http) {
+	        this.http = http;
+	        this.defaultRequestOptions = new http_1.RequestOptions({ withCredentials: true });
+	        if (false) {
+	            this.baseUrl = 'http://192.168.1.102:3000/api';
+	        }
+	        else {
+	            this.baseUrl = '/api';
+	        }
+	    }
+	    HttpService.prototype.post = function (path, body, requestOptions) {
+	        if (body === void 0) { body = {}; }
+	        if (requestOptions === void 0) { requestOptions = this.defaultRequestOptions; }
+	        return this.http.post(this.baseUrl + path, body);
+	    };
+	    HttpService.prototype.get = function (path, body, requestOptions) {
+	        if (body === void 0) { body = {}; }
+	        if (requestOptions === void 0) { requestOptions = this.defaultRequestOptions; }
+	        return this.http.get(this.baseUrl + path, body);
+	    };
+	    HttpService.prototype.put = function (path, body, requestOptions) {
+	        if (body === void 0) { body = {}; }
+	        if (requestOptions === void 0) { requestOptions = this.defaultRequestOptions; }
+	        return this.http.put(this.baseUrl + path, body);
+	    };
+	    HttpService.prototype.delete = function (path) {
+	        return this.http.delete(this.baseUrl + path);
+	    };
+	    HttpService = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [http_1.Http])
+	    ], HttpService);
+	    return HttpService;
+	}());
+	exports.HttpService = HttpService;
+
+
+/***/ },
 /* 712 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88064,7 +87898,7 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var http_service_ts_1 = __webpack_require__(674);
+	var http_service_ts_1 = __webpack_require__(711);
 	var folder_service_ts_1 = __webpack_require__(659);
 	var ProjectService = (function () {
 	    function ProjectService(folderService, httpService) {
@@ -88146,7 +87980,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var icon_1 = __webpack_require__(346);
-	var progress_circle_1 = __webpack_require__(710);
+	var progress_circle_1 = __webpack_require__(709);
 	var _ = __webpack_require__(647);
 	var angulartics2_google_analytics_1 = __webpack_require__(399);
 	var services_1 = __webpack_require__(648);
@@ -88786,7 +88620,7 @@ webpackJsonp([0],[
 /* 725 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88812,7 +88646,7 @@ webpackJsonp([0],[
 /* 728 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88850,14 +88684,14 @@ webpackJsonp([0],[
 /* 731 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"image-bar\"><div class=\"box\"><input id=\"file\" type=\"file\" (change)=\"loadFile($event)\" class=\"hiddenInput\"><label #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"file\" class=\"imageBox placeholder\"><div class=\"add\">+</div><div class=\"text\">drag image here</div><div [hidden]=\"!loading\" class=\"loadingContainer\"><div class=\"loading\"><div class=\"content\"><md-progress-circle mode=\"indeterminate\">Loading, please wait!</md-progress-circle></div></div></div></label><div *ngFor=\"let image of images\" [ngClass]=\"{currentImage: currentImage &amp;&amp; currentImage._id == image._id }\" tooltip=\"{{image.name}}\" tooltipAppendToBody=\"true\" class=\"imageBox\"><sliced-image (click)=\"setBoardImage(image)\" [image]=\"image\" [thumbnail]=\"true\" class=\"thumbnail\"></sliced-image><div class=\"text\"><div class=\"name\"><div *ngIf=\"!editImage\" (click)=\"setEditName(imageEdit)\" class=\"nameHelper\">{{ image.name }}</div><input #imageEdit [hidden]=\"!editImage\" [(ngModel)]=\"image.name\" (blur)=\"saveImage(image)\" class=\"input imageNameInput\"><md-icon *ngIf=\"!editImage\" (click)=\"editImage = true\" class=\"editIcon\">edit</md-icon></div><md-icon (click)=\"deleteImage(image)\" class=\"deleteIcon\">delete</md-icon></div></div></div></div>");;return buf.join("");
+	buf.push("<div class=\"image-bar\"><div class=\"box\"><input id=\"file\" type=\"file\" (change)=\"loadFile($event)\" class=\"hiddenInput\"><label #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"file\" class=\"imageBox placeholder\"><div class=\"add\">+</div><div class=\"text\">drag image here</div><div [hidden]=\"!loading\" class=\"loadingContainer\"><div class=\"loading\"><div class=\"content\"><md-progress-circle mode=\"indeterminate\">Loading, please wait!</md-progress-circle></div></div></div></label><div *ngFor=\"let image of images\" [ngClass]=\"{currentImage: currentImage &amp;&amp; currentImage._id == image._id }\" tooltip=\"{{image.name}}\" tooltipAppendToBody=\"true\" tooltipEnable=\"false\" class=\"imageBox\"><sliced-image (click)=\"setBoardImage(image)\" [image]=\"image\" [thumbnail]=\"true\" class=\"thumbnail\"></sliced-image><div class=\"text\"><div class=\"name\"><div *ngIf=\"!editImage\" (click)=\"setEditName(imageEdit)\" class=\"nameHelper\">{{ image.name }}</div><input #imageEdit [hidden]=\"!editImage\" [(ngModel)]=\"image.name\" (blur)=\"saveImage(image)\" class=\"input imageNameInput\"><md-icon *ngIf=\"!editImage\" (click)=\"editImage = true\" class=\"editIcon\">edit</md-icon></div><md-icon (click)=\"deleteImage(image)\" class=\"deleteIcon\">delete</md-icon></div></div></div></div>");;return buf.join("");
 	}
 
 /***/ },
@@ -88969,7 +88803,7 @@ webpackJsonp([0],[
 /* 736 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88989,7 +88823,7 @@ webpackJsonp([0],[
 /* 738 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89030,7 +88864,7 @@ webpackJsonp([0],[
 	var component_element_1 = __webpack_require__(741);
 	var services_1 = __webpack_require__(648);
 	var models_1 = __webpack_require__(660);
-	var dialog_service_1 = __webpack_require__(675);
+	var dialog_service_1 = __webpack_require__(674);
 	var SidebarComponent = (function () {
 	    function SidebarComponent(fileService, ga, folderService, dialogService) {
 	        var _this = this;
@@ -89117,6 +88951,13 @@ webpackJsonp([0],[
 	        this.isOpen = false;
 	        this.toggleFolder(null);
 	    }
+	    Object.defineProperty(ComponentElementComponent.prototype, "isRoot", {
+	        get: function () {
+	            return this.currentFolder.folderId == (null || undefined);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    ComponentElementComponent.prototype.selectFolder = function (event) {
 	        if (event) {
 	            event.preventDefault();
@@ -89180,20 +89021,20 @@ webpackJsonp([0],[
 /* 743 */
 /***/ function(module, exports) {
 
-	module.exports = ":host {\n  display: block;\n}\n\n.c-flexContainer {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: rgba(0, 0, 0, 0.54);\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  position: relative;\n  height: 30px;\n}\n\n.c-flexContainer .toggleFolder {\n  margin: 0 5px 0 1px;\n  cursor: pointer;\n  position: relative;\n  width: 19px;\n  height: 19px;\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  border-radius: 50%;\n  background: #006064;\n  color: white;\n  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n}\n\n.c-flexContainer .folderName {\n  height: auto;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n  cursor: pointer;\n}\n\n.c-flexContainer .input {\n  border: none;\n  padding: 0;\n  margin: 0;\n  font-size: 16px;\n  font-family: Lato;\n  color: rgba(0, 0, 0, 0.3);\n  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-weight: bold;\n}\n\n.c-flexContainer .edit,\n.c-flexContainer .delete {\n  cursor: pointer;\n  opacity: 0.2;\n  -webkit-transition: opacity 230ms;\n  transition: opacity 230ms;\n}\n\n.c-flexContainer .delete:hover {\n  opacity: 1;\n}\n\n.c-flexContainer .edit {\n  opacity: 0;\n}\n\n.c-flexContainer.editing .edit {\n  visibility: hidden;\n}\n\nul,\nli {\n  margin: 0 0 0 5px;\n  padding: 0;\n}\n\nul {\n  margin: 0 0 0 20px;\n  list-style: none;\n  line-height: 20px;\n}\n\nul component-element {\n  margin-left: 5px;\n}\n\nul li.closed,\nul component-element.closed {\n  overflow: hidden;\n  height: 0;\n}\n\nul li.selected > .c-flexContainer {\n  font-weight: bolder;\n  color: #006064;\n}\n\nul li.selected > .c-flexContainer > .folderName ~ .edit {\n  opacity: 0.2;\n}\n\nul li.selected > .c-flexContainer > .folderName ~ .edit:hover {\n  opacity: 1;\n}\n\nul li.selected > .c-flexContainer > .folderName:hover {\n  cursor: text;\n  color: rgba(0, 0, 0, 0.3);\n}\n\nul li.selected > .c-flexContainer > .folderName:hover ~ .edit {\n  opacity: 1;\n}\n\nul__counter md-icon {\n  vertical-align: middle;\n  margin-left: 5px;\n}\n\nul li,\nul component-element {\n  font-size: 16px;\n  position: relative;\n}\n\nul li::before,\nul component-element::before {\n  position: absolute;\n  left: -15px;\n  top: 0;\n  content: '';\n  display: block;\n  border-left: 1px solid #bcbcbc;\n  height: 10px;\n  border-bottom: 1px solid #bcbcbc;\n  width: 10px;\n}\n\nul li::after,\nul component-element::after {\n  position: absolute;\n  left: -15px;\n  bottom: -7px;\n  content: '';\n  display: block;\n  border-left: 1px solid #bcbcbc;\n  height: 100%;\n}\n\nul li.folder,\nul component-element.folder {\n  margin: 0 0 0 -20px;\n}\n\nul li.root::before,\nul component-element.root::before {\n  display: none;\n}\n\nul li.root::after,\nul component-element.root::after {\n  display: none;\n}\n\nul li.file {\n  color: #bcbcbc;\n}\n\nul li:last-child::after {\n  display: none;\n}"
+	module.exports = ":host {\n  display: block;\n}\n\n.c-flexContainer {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: rgba(0, 0, 0, 0.54);\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  position: relative;\n  height: 30px;\n}\n\n.c-flexContainer .toggleFolder {\n  margin: 0 5px 0 1px;\n  cursor: pointer;\n  position: relative;\n  width: 19px;\n  height: 19px;\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  border-radius: 50%;\n  background: #006064;\n  color: white;\n  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n}\n\n.c-flexContainer .folderName {\n  height: auto;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n  cursor: pointer;\n}\n\n.c-flexContainer .input {\n  border: none;\n  padding: 0;\n  margin: 0;\n  font-size: 16px;\n  font-family: Lato;\n  color: rgba(0, 0, 0, 0.3);\n  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-weight: bold;\n}\n\n.c-flexContainer .edit,\n.c-flexContainer .delete {\n  cursor: pointer;\n  opacity: 0.2;\n  -webkit-transition: opacity 230ms;\n  transition: opacity 230ms;\n}\n\n.c-flexContainer .delete:hover {\n  opacity: 1;\n}\n\n.c-flexContainer .edit {\n  opacity: 0;\n}\n\n.c-flexContainer.editing .edit {\n  visibility: hidden;\n}\n\nul,\nli {\n  margin: 0 0 0 5px;\n  padding: 0;\n}\n\nul {\n  margin: 0 0 0 20px;\n  list-style: none;\n  line-height: 20px;\n}\n\nul component-element {\n  margin-left: 5px;\n}\n\nul li.closed,\nul component-element.closed {\n  overflow: hidden;\n  height: 0;\n}\n\nul li.selected > .c-flexContainer {\n  font-weight: bolder;\n  color: #006064;\n}\n\nul li.selected > .c-flexContainer > .folderName ~ .edit {\n  opacity: 0.2;\n}\n\nul li.selected > .c-flexContainer > .folderName ~ .edit:hover {\n  opacity: 1;\n}\n\nul li.selected > .c-flexContainer > .folderName:hover {\n  cursor: text;\n  color: rgba(0, 0, 0, 0.3);\n}\n\nul li.selected > .c-flexContainer > .folderName:hover ~ .edit {\n  opacity: 1;\n}\n\nul li.selected > .c-flexContainer.root > .folderName:hover {\n  cursor: default;\n}\n\nul__counter md-icon {\n  vertical-align: middle;\n  margin-left: 5px;\n}\n\nul li,\nul component-element {\n  font-size: 16px;\n  position: relative;\n}\n\nul li::before,\nul component-element::before {\n  position: absolute;\n  left: -15px;\n  top: 0;\n  content: '';\n  display: block;\n  border-left: 1px solid #bcbcbc;\n  height: 10px;\n  border-bottom: 1px solid #bcbcbc;\n  width: 10px;\n}\n\nul li::after,\nul component-element::after {\n  position: absolute;\n  left: -15px;\n  bottom: -7px;\n  content: '';\n  display: block;\n  border-left: 1px solid #bcbcbc;\n  height: 100%;\n}\n\nul li.folder,\nul component-element.folder {\n  margin: 0 0 0 -20px;\n}\n\nul li.root::before,\nul component-element.root::before {\n  display: none;\n}\n\nul li.root::after,\nul component-element.root::after {\n  display: none;\n}\n\nul li.file {\n  color: #bcbcbc;\n}\n\nul li:last-child::after {\n  display: none;\n}"
 
 /***/ },
 /* 744 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<ul><li [ngClass]=\"{ root: !folder.folderId, selected: folder &amp;&amp; currentFolder &amp;&amp; currentFolder._id === folder._id }\" (click)=\"selectFolder($event);\" class=\"folder\"><div [ngClass]=\"{editing: editComponent}\" class=\"c-flexContainer\"><div (click)=\"toggleFolder($event)\" class=\"toggleFolder\">{{ folderIcon }}</div><div *ngIf=\"!editComponent\" (click)=\"setEditComponent(folderEdit)\" class=\"folderName\">{{ folder.name }}</div><input #folderEdit [hidden]=\"!editComponent\" [(ngModel)]=\"currentFolder.name\" (blur)=\"saveComponent()\" class=\"input folderNameInput\"><md-icon *ngIf=\"folder.folderId !== null\" (click)=\"setEditComponent(folderEdit)\" class=\"edit\">edit</md-icon><md-icon *ngIf=\"folder.folderId !== null\" (click)=\"deleteComponent($event, folder)\" class=\"delete\">delete</md-icon></div></li><component-element [ngClass]=\"{closed: !isOpen}\" *ngFor=\"let f of folders | async\" [folder]=\"f\"></component-element><li [ngClass]=\"{closed: !isOpen}\" *ngFor=\"let file of files | async\" class=\"file\">{{ file.name }}</li></ul>");;return buf.join("");
+	buf.push("<ul><li [ngClass]=\"{ root: !folder.folderId, selected: folder &amp;&amp; currentFolder &amp;&amp; currentFolder._id === folder._id }\" (click)=\"selectFolder($event);\" class=\"folder\"><div [ngClass]=\"{editing: editComponent, root: isRoot}\" class=\"c-flexContainer\"><div (click)=\"toggleFolder($event)\" class=\"toggleFolder\">{{ folderIcon }}</div><div *ngIf=\"!editComponent\" (click)=\"setEditComponent(folderEdit)\" class=\"folderName\">{{ folder.name }}</div><input #folderEdit [hidden]=\"!editComponent\" [(ngModel)]=\"currentFolder.name\" (blur)=\"saveComponent()\" class=\"input folderNameInput\"><md-icon *ngIf=\"folder.folderId !== null\" (click)=\"setEditComponent(folderEdit)\" class=\"edit\">edit</md-icon><md-icon *ngIf=\"folder.folderId !== null\" (click)=\"deleteComponent($event, folder)\" class=\"delete\">delete</md-icon></div></li><component-element [ngClass]=\"{closed: !isOpen}\" *ngFor=\"let f of folders | async\" [folder]=\"f\"></component-element><li [ngClass]=\"{closed: !isOpen}\" *ngFor=\"let file of files | async\" class=\"file\">{{ file.name }}</li></ul>");;return buf.join("");
 	}
 
 /***/ },
@@ -89206,7 +89047,7 @@ webpackJsonp([0],[
 /* 746 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89262,7 +89103,7 @@ webpackJsonp([0],[
 /* 749 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89288,7 +89129,7 @@ webpackJsonp([0],[
 /* 752 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89302,7 +89143,7 @@ webpackJsonp([0],[
 /* 753 */
 /***/ function(module, exports) {
 
-	module.exports = ":host,\n.editor {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n:host {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n.editor {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n\nsidebar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  min-width: 300px;\n}\n\nboard {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: auto;\n}\n\n.export {\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  right: 20px;\n  top: 50%;\n  height: 30px;\n  margin-top: -15px;\n}\n\n.export .fa {\n  margin: 0 10px;\n}\n\n.c-header,\n.c-toolbar {\n  padding: 0 25px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1 0 auto;\n          flex: 1 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.c-header {\n  height: 60px;\n  background: #006064;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  position: relative;\n  z-index: 2;\n}\n\n.c-toolbar {\n  height: 50px;\n  background-color: rgba(0, 0, 0, 0.05);\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.06);\n  position: relative;\n  z-index: 3;\n}\n\n.angular {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: white;\n  font-size: 21px;\n}\n\n.angular img {\n  margin-right: 10px;\n}\n\nmd-icon {\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n}\n\nmd-icon.disabled {\n  color: rgba(0, 0, 0, 0.26);\n  cursor: default;\n}\n\nmd-icon.disabled:hover {\n  color: rgba(0, 0, 0, 0.26);\n}\n\nmd-icon:hover {\n  color: #006064;\n}\n\n.left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 1 auto;\n          flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.folderName {\n  margin-right: 10px;\n}\n\n.editFolderName {\n  cursor: pointer;\n}\n\n.right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 1 auto;\n          flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.right md-icon {\n  padding: 0 5px;\n  margin: 0 10px;\n}\n\n.separator {\n  border-right: 1px solid rgba(0, 0, 0, 0.1);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  height: 100%;\n  margin: 0 10px;\n}\n\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: rgba(255, 255, 255, 0.8);\n  text-align: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  color: black;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  z-index: 10;\n}\n\n.loading .content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}"
+	module.exports = ":host,\n.editor {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n:host {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n.editor {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n\nsidebar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 300px;\n          flex: 0 0 300px;\n}\n\nboard {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: auto;\n}\n\n.export {\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  right: 20px;\n  top: 50%;\n  height: 30px;\n  margin-top: -15px;\n}\n\n.export .fa {\n  margin: 0 10px;\n}\n\n.c-header,\n.c-toolbar {\n  padding: 0 25px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1 0 auto;\n          flex: 1 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.c-header {\n  height: 60px;\n  background: #006064;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  position: relative;\n  z-index: 2;\n}\n\n.c-toolbar {\n  height: 50px;\n  background-color: rgba(0, 0, 0, 0.05);\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.06);\n  position: relative;\n  z-index: 3;\n}\n\n.angular {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: white;\n  font-size: 21px;\n}\n\n.angular img {\n  margin-right: 10px;\n}\n\nmd-icon {\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n}\n\nmd-icon.disabled {\n  color: rgba(0, 0, 0, 0.26);\n  cursor: default;\n}\n\nmd-icon.disabled:hover {\n  color: rgba(0, 0, 0, 0.26);\n}\n\nmd-icon:hover {\n  color: #006064;\n}\n\n.left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 1 auto;\n          flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.folderName {\n  margin-right: 10px;\n}\n\n.editFolderName {\n  cursor: pointer;\n}\n\n.right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 1 auto;\n          flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.right md-icon {\n  padding: 0 5px;\n  margin: 0 10px;\n}\n\n.separator {\n  border-right: 1px solid rgba(0, 0, 0, 0.1);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  height: 100%;\n  margin: 0 10px;\n}\n\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: rgba(255, 255, 255, 0.8);\n  text-align: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  color: black;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  z-index: 10;\n}\n\n.loading .content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}"
 
 /***/ },
 /* 754 */
@@ -89320,7 +89161,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var router_1 = __webpack_require__(401);
-	var bootstrap_1 = __webpack_require__(676);
+	var bootstrap_1 = __webpack_require__(675);
 	// Strange, but true: this method would work but throws an error: 'cannot find module'
 	// import * as Humane from 'humane-js/humane.js';
 	var services_1 = __webpack_require__(648);
@@ -89357,7 +89198,7 @@ webpackJsonp([0],[
 /* 755 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(697);
+	var jade = __webpack_require__(696);
 
 	module.exports = function template(locals) {
 	var buf = [];
