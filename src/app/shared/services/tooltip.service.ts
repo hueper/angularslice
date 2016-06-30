@@ -4,9 +4,10 @@ import { TooltipContainerComponent } from "../directives/tooltip/tooltip-compone
 
 @Injectable()
 export class TooltipService {
-  constructor(private viewContainer: ViewContainerRef) {
+  public viewContainer: ViewContainerRef = null;
+  constructor() {
   }
-  
+
   showTooltip(componentFactory: ComponentFactory<TooltipContainerComponent>,
               binding: Injector) {
     let cRef = this.viewContainer.createComponent(componentFactory, -1, binding);

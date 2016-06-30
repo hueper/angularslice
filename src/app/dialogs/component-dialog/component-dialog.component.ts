@@ -3,6 +3,7 @@ import { Component, OnDestroy } from "@angular/core";
 import { ModalComponent, DialogRef } from "angular2-modal";
 import { BSModalContext } from "angular2-modal/plugins/bootstrap";
 import { MdButton } from "@angular2-material/button";
+import { MD_ICON_DIRECTIVES } from "@angular2-material/icon/icon";
 import { MdInput } from "@angular2-material/input";
 import { MdCheckbox } from "@angular2-material/checkbox";
 import { MdRadioButton, MdRadioGroup, MdRadioDispatcher } from "@angular2-material/radio";
@@ -11,7 +12,8 @@ import { Subscription } from "rxjs";
 const Humane = require('humane-js');
 
 import { Folder } from "../../shared/models";
-import { FolderService } from "../../shared/services";
+import { TooltipDirective } from "../../shared/directives";
+import { FolderService, TooltipService } from "../../shared/services";
 
 @Component({
   selector: 'component-dialog',
@@ -22,7 +24,9 @@ import { FolderService } from "../../shared/services";
     MdInput,
     MdCheckbox,
     MdRadioGroup,
-    MdRadioButton
+    MdRadioButton,
+    MD_ICON_DIRECTIVES,
+    TooltipDirective
   ],
   providers: [
     MdRadioDispatcher

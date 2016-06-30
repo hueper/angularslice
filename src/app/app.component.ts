@@ -10,7 +10,6 @@ import { TooltipService, DialogService } from "./shared/services";
 @Component({
   selector: 'app',
   providers: [
-    TooltipService,
     Modal,
     ...BS_MODAL_PROVIDERS,
     DialogService,
@@ -23,9 +22,11 @@ import { TooltipService, DialogService } from "./shared/services";
 export class AppComponent implements AfterViewInit {
 
   constructor(private modal: Modal,
-              private viewContainer: ViewContainerRef) {
-
+              private viewContainer: ViewContainerRef,
+              private tooltipService: TooltipService
+  ) {
     modal.defaultViewContainer = viewContainer;
+    tooltipService.viewContainer = viewContainer;
   }
 
   ngAfterViewInit() {

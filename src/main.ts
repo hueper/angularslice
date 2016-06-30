@@ -20,6 +20,7 @@ import {
   TemplateService,
   UserService
 } from "./app/shared/services";
+import { TooltipService } from "./app/shared/services/tooltip.service";
 
 require('./app/shared/scss/styles.scss');
 
@@ -41,6 +42,7 @@ bootstrap(AppComponent, [
   RawImageService,
   ProjectService,
   TemplateService,
+  TooltipService,
   UserService,
 
   provide(APP_BASE_HREF, { useValue: location.pathname })

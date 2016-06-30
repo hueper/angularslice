@@ -1,7 +1,7 @@
 import {
   Directive, Input, HostListener,
   ComponentRef, Provider, ReflectiveInjector, ViewContainerRef, ComponentResolver, Injector, ApplicationRef
-  
+
 } from '@angular/core';
 
 import { TooltipOptions } from './tooltip-options.class';
@@ -18,25 +18,23 @@ export class TooltipDirective {
   @Input('tooltipAppendToBody') public appendToBody: boolean = true;
   @Input('tooltipFollowCursor') public followCursor: boolean = false;
   /* tslint:enable */
-  
+
   private visible: boolean = false;
   private tooltip: Promise<ComponentRef<any>>;
   private cRef: ComponentRef<TooltipContainerComponent>;
-  
+
   private destroyTimeout: any;
-  
+
   public constructor(public viewContainerRef: ViewContainerRef,
-                     protected tooltipService: TooltipService,
-                     protected app: ApplicationRef,
                      protected injector: Injector,
-                     protected ComponentResolver: ComponentResolver) {
-    
+                     protected ComponentResolver: ComponentResolver,
+                     protected tooltipService: TooltipService) {
   }
-  
+
   @HostListener('focusin', ['$event', '$target'])
   @HostListener('mouseenter', ['$event', '$target'])
   public show(): void {
-    
+
     if (this.visible || !this.enable || this.enable == 'false') {
       return;
     }
@@ -52,16 +50,16 @@ export class TooltipDirective {
       followCursor: this.followCursor,
       hostEl: this.viewContainerRef.element
     });
-    
+
     let binding = ReflectiveInjector.resolveAndCreate([
       new Provider(TooltipOptions, { useValue: options })
     ], this.injector);
     this.tooltip = this.ComponentResolver.resolveComponent(TooltipContainerComponent).then(componentFactory => {
-      this.cRef = this.tooltipService.showTooltip(componentFactory, binding)
+      this.cRef = this.tooltipService.showTooltip(componentFactory, binding);
       return this.cRef;
     });
   }
-  
+
   @HostListener('mousemove', ["$event", "$target"])
   move(event, target) {
     if (!this.followCursor || !this.visible || !this.cRef) {
@@ -70,11 +68,11 @@ export class TooltipDirective {
     if (this.destroyTimeout) {
       clearTimeout(this.destroyTimeout);
     }
-    
+
     this.cRef.instance.top = (event.clientY - 20) + 'px';
     this.cRef.instance.left = (event.clientX + 25) + 'px';
   }
-  
+
   // params event, target
   @HostListener('focusout', ['$event', '$target'])
   @HostListener('mouseleave', ['$event', '$target'])

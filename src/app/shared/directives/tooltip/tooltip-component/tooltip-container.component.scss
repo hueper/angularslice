@@ -2,7 +2,7 @@
   position: absolute;
   padding: 5px 15px;
   border-radius: 5px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   border: 1px solid gray;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   color: white;
@@ -10,6 +10,7 @@
 
   &-inner {
     white-space: nowrap;
+    font-size: 12px;
   }
 
   &-top::after {
@@ -20,7 +21,7 @@
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: rgba(0, 0, 0, 0.3) transparent transparent transparent;
+    border-color: rgba(0, 0, 0, 0.4) transparent transparent transparent;
   }
 
   &-left::after {
@@ -31,6 +32,6 @@
     margin-top: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent rgba(0, 0, 0, 0.6) transparent transparent;
+    border-color: transparent rgba(0, 0, 0, 0.4) transparent transparent;
   }
 }

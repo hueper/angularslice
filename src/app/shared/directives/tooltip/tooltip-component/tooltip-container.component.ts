@@ -5,12 +5,7 @@ import {
   ElementRef,
   Inject,
   AfterViewInit,
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-  keyframes, ApplicationRef, HostListener
+  HostListener
   
 } from '@angular/core';
 import { NgClass, NgStyle } from '@angular/common';
@@ -18,10 +13,12 @@ import { NgClass, NgStyle } from '@angular/common';
 import { TooltipOptions } from '../tooltip-options.class';
 
 import { positionService } from '../PositionService';
+import { EscapeHtmlPipe } from "../../../pipes/EscapeHtml";
 
 @Component({
   selector: 'tooltip-container',
   directives: [NgClass, NgStyle],
+  pipes: [EscapeHtmlPipe],
   template: require('./tooltip-container.component.jade')(),
   styles: [require('./tooltip-container.component.scss')]
 })

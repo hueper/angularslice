@@ -1,4 +1,3 @@
-div.tooltip([ngStyle]="{top: top, left: left, display: display}",
-  [ngClass]="classMap")
-  .tooltip-inner
-    | {{content}}
+div.tooltip([ngStyle]="{top: top, left: left, display: display}", [ngClass]="classMap")
+  .tooltip-inner([innerHTML]='content')
+    //| {{ content | escapeHtml }}
