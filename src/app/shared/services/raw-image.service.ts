@@ -1,11 +1,11 @@
 import { Injectable, NgZone } from "@angular/core";
 import { Http, Headers } from "@angular/http";
 const Humane = require('humane-js');
-import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 
 import { RawImage } from "../models";
 import { BaseService } from "./base.service.ts";
 import { HttpService } from "./http.service.ts";
+import { AnalyticsService } from "./analytics.service";
 
 // import {NgZone} from '@angular/core'
 
@@ -13,7 +13,7 @@ import { HttpService } from "./http.service.ts";
 export class RawImageService extends BaseService<RawImage> {
   constructor( // private ApplicationRef:ApplicationRef
     private httpService: HttpService,
-    private ga: Angulartics2GoogleAnalytics,
+    private ga: AnalyticsService,
     private ngZone: NgZone) {
     super('rawImages', RawImage);
   }

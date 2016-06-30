@@ -1,10 +1,10 @@
 import { Component, Input } from "@angular/core";
 import { Observable } from "rxjs/Rx";
 import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
-import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 
 import { FolderService, FileService, ImageService, DialogService } from "../../shared/services";
 import { Folder, File, Image } from "../../shared/models";
+import { AnalyticsService } from "../../shared/services/analytics.service";
 
 @Component({
   selector: 'component-element',
@@ -30,7 +30,7 @@ export class ComponentElementComponent {
   }
   
   constructor(private imageService: ImageService,
-              private ga: Angulartics2GoogleAnalytics,
+              private ga: AnalyticsService,
               private folderService: FolderService,
               private fileService: FileService,
               private dialogService: DialogService) {

@@ -7,13 +7,13 @@ import { MD_ICON_DIRECTIVES } from "@angular2-material/icon/icon";
 import { MdInput } from "@angular2-material/input";
 import { MdCheckbox } from "@angular2-material/checkbox";
 import { MdRadioButton, MdRadioGroup, MdRadioDispatcher } from "@angular2-material/radio";
-import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 import { Subscription } from "rxjs";
 const Humane = require('humane-js');
 
 import { Folder } from "../../shared/models";
 import { TooltipDirective } from "../../shared/directives";
 import { FolderService } from "../../shared/services";
+import { AnalyticsService } from "../../shared/services/analytics.service";
 
 @Component({
   selector: 'component-dialog',
@@ -42,10 +42,9 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
   private hasImage: boolean = true;
   
   constructor(public dialog: DialogRef<BSModalContext>,
-              private ga: Angulartics2GoogleAnalytics,
+              private ga: AnalyticsService,
               private folderService: FolderService,
-              private detector: ChangeDetectorRef
-  ) {
+              private detector: ChangeDetectorRef) {
     this.subscriptions.push(folderService.dataSource.subscribe((folders: Folder[]) => {
       this.folders = folders;
     }));
@@ -88,6 +87,13 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
       Humane.log('Component name is missing', { timeout: 4000, clickToClose: true });
       return;
     }
+    if (!this.component.newImageName) {
+      this.component.newImageName = this.component.newFolderName;
+    }
+    
+    
+    console.log("this.component => ", this.component);
+    
     let result = {
       action: 'save',
       data: this.component
@@ -96,8 +102,8 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
   }
   
   ngAfterViewInit(): any {
-    if(!this.hasImage) {
-      if(this.componentName) {
+    if (!this.hasImage) {
+      if (this.componentName) {
         this.componentName.focus();
         this.detector.detectChanges();
       }

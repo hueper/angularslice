@@ -3,12 +3,12 @@ import { MD_ICON_DIRECTIVES } from "@angular2-material/icon";
 import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 import * as _ from "lodash";
 import { Subscription } from "rxjs/Rx";
-import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 
 import { ImageService, FolderService, DialogService, RawImageService } from "../../shared/services";
 import { Image, Folder } from "../../shared/models";
 import { SlicedImageComponent } from "../../sliced-image";
 import { TooltipDirective } from '../../shared/directives';
+import { AnalyticsService } from "../../shared/services/analytics.service";
 
 @Component({
   selector: 'image-bar',
@@ -30,7 +30,7 @@ export class ImageBarComponent implements OnDestroy {
   private editImage: boolean = false;
 
   constructor(private imageService: ImageService,
-              private ga: Angulartics2GoogleAnalytics,
+              private ga: AnalyticsService,
               private rawImageService: RawImageService,
               private folderService: FolderService,
               private el: ElementRef,

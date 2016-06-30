@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { Component, ElementRef, OnDestroy } from "@angular/core";
+import { Component } from "@angular/core";
 import { ModalComponent, DialogRef } from "angular2-modal";
 import { BSModalContext } from "angular2-modal/plugins/bootstrap";
 import { MdButton } from "@angular2-material/button";
@@ -7,14 +7,12 @@ import { MdInput } from "@angular2-material/input";
 import { MdCheckbox } from "@angular2-material/checkbox";
 import { MdRadioButton, MdRadioGroup, MdRadioDispatcher } from "@angular2-material/radio";
 import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
-import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
-import { Subscription } from "rxjs";
+
 const Humane = require('humane-js');
 
-import { Folder } from "../../shared/models";
-import { FolderService } from "../../shared/services";
 import { UserService } from "../../shared/services/user.service";
 import { User } from "../../shared/models/user.model";
+import { AnalyticsService } from "../../shared/services/analytics.service";
 
 @Component({
   selector: 'export-dialog',
@@ -37,7 +35,7 @@ export class ExportDialogComponent implements ModalComponent<BSModalContext> {
   protected loading: boolean = false;
 
   constructor(public dialog: DialogRef<BSModalContext>,
-              private ga: Angulartics2GoogleAnalytics,
+              private ga: AnalyticsService,
               private userService: UserService) {
   }
 

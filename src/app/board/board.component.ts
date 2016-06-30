@@ -2,7 +2,6 @@ import { Component, Renderer, OnDestroy } from "@angular/core";
 import { Http, Headers } from "@angular/http";
 import * as _ from "lodash";
 import { Subscription } from "rxjs";
-import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 const Humane = require('humane-js');
 
 import { AreaService, ImageService, RawImageService, FolderService, DialogService } from "../shared/services";
@@ -12,6 +11,7 @@ import { AreaComponent } from "./area";
 import { SlicedImageComponent } from "../sliced-image";
 import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 import { TooltipDirective } from "../shared/directives/tooltip/tooltip.directive";
+import { AnalyticsService } from "../shared/services/analytics.service";
 
 
 @Component({
@@ -63,7 +63,7 @@ export class BoardComponent implements OnDestroy {
   private componentEdit: boolean;
   
   constructor(private http: Http,
-              private ga: Angulartics2GoogleAnalytics,
+              private ga: AnalyticsService,
               private areaService: AreaService,
               private rawImageService: RawImageService,
               private imageService: ImageService,

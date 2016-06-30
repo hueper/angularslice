@@ -21,6 +21,7 @@ import {
   UserService
 } from "./app/shared/services";
 import { TooltipService } from "./app/shared/services/tooltip.service";
+import { AnalyticsService } from "./app/shared/services/analytics.service";
 
 require('./app/shared/scss/styles.scss');
 
@@ -29,6 +30,8 @@ bootstrap(AppComponent, [
   HTTP_PROVIDERS,
 
   Angulartics2GoogleAnalytics,
+  AnalyticsService,
+  
   Angulartics2,
   APP_ROUTER_PROVIDERS,
   ...MODAL_BROWSER_PROVIDERS,

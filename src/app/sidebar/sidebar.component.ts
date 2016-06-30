@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs/Rx";
 import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
-import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 
 import { ComponentElementComponent } from "./component-element";
 import { FolderService, FileService } from "../shared/services";
 import { Folder, File } from "../shared/models";
 import { DialogService } from "../shared/services/dialog.service";
+import { AnalyticsService } from "../shared/services/analytics.service";
 
 @Component({
   selector: 'sidebar',
@@ -25,7 +25,7 @@ export class SidebarComponent {
   private currentFolder: Folder;
   
   constructor(private fileService: FileService,
-              private ga: Angulartics2GoogleAnalytics,
+              private ga: AnalyticsService,
               private folderService: FolderService,
               private dialogService: DialogService) {
     this.files = fileService.filter(file => file.folderId === null || file.folderId === undefined);
