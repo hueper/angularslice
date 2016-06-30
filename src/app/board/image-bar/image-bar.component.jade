@@ -20,7 +20,7 @@
 
     .imageBox(*ngFor='let image of images',
       [ngClass]='{currentImage: currentImage && currentImage._id == image._id }',
-      tooltip='{{image.name}}', tooltipAppendToBody='true'
+      tooltip='{{image.name}}', tooltipAppendToBody='true', tooltipEnable='false'
     )
       sliced-image.thumbnail((click)='setBoardImage(image)', [image]='image', [thumbnail]='true')
       .text

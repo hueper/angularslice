@@ -49,7 +49,9 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
   
   eventHandler(event) {
     if (event.which === 13) {
+      event.preventDefault();
       this.send();
+      return false;
     }
   }
   

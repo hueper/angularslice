@@ -2,7 +2,7 @@ ul
   li.folder([ngClass]='{ root: !folder.folderId, selected: folder && currentFolder && currentFolder._id === folder._id }',
     (click)='selectFolder($event);'
   )
-    .c-flexContainer([ngClass]='{editing: editComponent}')
+    .c-flexContainer([ngClass]='{editing: editComponent, root: isRoot}')
       .toggleFolder((click)='toggleFolder($event)') {{ folderIcon }}
       .folderName(*ngIf='!editComponent', (click)='setEditComponent(folderEdit)') {{ folder.name }}
       input.input.folderNameInput(#folderEdit, [hidden]='!editComponent', [(ngModel)]='currentFolder.name', (blur)='saveComponent()')
