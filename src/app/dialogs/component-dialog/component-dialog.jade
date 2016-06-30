@@ -11,7 +11,7 @@
             md-radio-button(value='exist') Select an existing one
       .row(*ngIf='component.type === "new"')
         .column
-          md-input([(ngModel)]='component.newFolderName', required, placeholder="Add name for the component")
+          md-input([(ngModel)]='component.newFolderName', #componentName, required, placeholder="Add name for the component")
       .row(*ngIf='component.type === "exist"')
         .column
           div Select the component:
@@ -20,8 +20,6 @@
       .row.addition(*ngIf='hasImage')
         .column
           md-checkbox([ngModel]='component.attach', (change)='changeAttachImage($event)') Add the area's image to the attached component
-          //| As you select an area on an image, you create a reference to a component. It's still up to you, whether you want to add this selected image to the newly created component.
-          //| Basically you can create components without images or even add multiple ones for different layouts.
         .column.info(
           tooltip="As you select an area on an image, you create a reference to a component.<br>It's still up to you, whether you want to add this selected image to the newly created component.<br> Basically you can create components without images or even add multiple ones for different layouts.",
           tooltipPlacement='left'

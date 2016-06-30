@@ -81,6 +81,14 @@ export class ComponentElementComponent {
     }
   }
   
+  keyDown(event) {
+    if (event.which === 13) {
+      event.preventDefault();
+      event.target.blur();
+      return false;
+    }
+  }
+  
   saveComponent() {
     this.ga.eventTrack('renameFolder', { category: 'manually' });
     this.folderService.update(this.currentFolder);

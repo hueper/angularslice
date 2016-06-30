@@ -113,7 +113,7 @@ ul {
     &.root > {
       .folderName {
         &:hover{
-          cursor: default;
+          cursor: pointer;
         }
       }
     }

@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { Component, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, AfterViewInit, ViewChild, ChangeDetectorRef } from "@angular/core";
 import { ModalComponent, DialogRef } from "angular2-modal";
 import { BSModalContext } from "angular2-modal/plugins/bootstrap";
 import { MdButton } from "@angular2-material/button";
@@ -13,7 +13,7 @@ const Humane = require('humane-js');
 
 import { Folder } from "../../shared/models";
 import { TooltipDirective } from "../../shared/directives";
-import { FolderService, TooltipService } from "../../shared/services";
+import { FolderService } from "../../shared/services";
 
 @Component({
   selector: 'component-dialog',
@@ -32,15 +32,20 @@ import { FolderService, TooltipService } from "../../shared/services";
     MdRadioDispatcher
   ]
 })
-export class ComponentDialogComponent implements ModalComponent<BSModalContext>, OnDestroy {
+export class ComponentDialogComponent implements ModalComponent<BSModalContext>, OnDestroy, AfterViewInit {
   component: any;
+  
+  @ViewChild('componentName') private componentName: any;
+  
   public folders: Folder[];
   private subscriptions: Subscription[] = [];
   private hasImage: boolean = true;
-
+  
   constructor(public dialog: DialogRef<BSModalContext>,
               private ga: Angulartics2GoogleAnalytics,
-              private folderService: FolderService) {
+              private folderService: FolderService,
+              private detector: ChangeDetectorRef
+  ) {
     this.subscriptions.push(folderService.dataSource.subscribe((folders: Folder[]) => {
       this.folders = folders;
     }));
@@ -49,10 +54,10 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
       attach: true,
       folder: null,
     };
-
+    
     this.hasImage = this.dialog.context['hasImage'];
   }
-
+  
   eventHandler(event) {
     if (event.which === 13) {
       event.preventDefault();
@@ -60,24 +65,24 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
       return false;
     }
   }
-
+  
   ngOnDestroy() {
     _.each(this.subscriptions, subscription => {
       subscription.unsubscribe();
     });
   }
-
+  
   changeAttachImage(event) {
     this.component.attach = event.checked;
     if (!event.checked) {
       this.ga.eventTrack('selectNoImage', { category: 'areaDialog' });
     }
   }
-
+  
   changeExistingComponent() {
     this.ga.eventTrack('selectExistingComponent', { category: 'areaDialog' });
   }
-
+  
   send() {
     if (this.component.type === 'new' && !this.component.newFolderName) {
       Humane.log('Component name is missing', { timeout: 4000, clickToClose: true });
@@ -89,7 +94,16 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
     };
     this.dialog.close(result);
   }
-
+  
+  ngAfterViewInit(): any {
+    if(!this.hasImage) {
+      if(this.componentName) {
+        this.componentName.focus();
+        this.detector.detectChanges();
+      }
+    }
+  }
+  
   close() {
     this.dialog.dismiss();
   }
