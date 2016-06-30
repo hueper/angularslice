@@ -6,6 +6,7 @@ import { MdButton } from "@angular2-material/button";
 import { MdInput } from "@angular2-material/input";
 import { MdCheckbox } from "@angular2-material/checkbox";
 import { MdRadioButton, MdRadioGroup, MdRadioDispatcher } from "@angular2-material/radio";
+import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 import { Subscription } from "rxjs";
 const Humane = require('humane-js');
 
@@ -32,8 +33,9 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
   public folders: Folder[];
   private subscriptions: Subscription[] = [];
   private hasImage: boolean = true;
-  
+
   constructor(public dialog: DialogRef<BSModalContext>,
+              private ga: Angulartics2GoogleAnalytics,
               private folderService: FolderService) {
     this.subscriptions.push(folderService.dataSource.subscribe((folders: Folder[]) => {
       this.folders = folders;
@@ -43,10 +45,10 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
       attach: true,
       folder: null,
     };
-    
+
     this.hasImage = this.dialog.context['hasImage'];
   }
-  
+
   eventHandler(event) {
     if (event.which === 13) {
       event.preventDefault();
@@ -54,17 +56,24 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
       return false;
     }
   }
-  
+
   ngOnDestroy() {
     _.each(this.subscriptions, subscription => {
       subscription.unsubscribe();
     });
   }
-  
+
   changeAttachImage(event) {
     this.component.attach = event.checked;
+    if (!event.checked) {
+      this.ga.eventTrack('selectNoImage', { category: 'areaDialog' });
+    }
   }
-  
+
+  changeExistingComponent() {
+    this.ga.eventTrack('selectExistingComponent', { category: 'areaDialog' });
+  }
+
   send() {
     if (this.component.type === 'new' && !this.component.newFolderName) {
       Humane.log('Component name is missing', { timeout: 4000, clickToClose: true });
@@ -76,7 +85,7 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
     };
     this.dialog.close(result);
   }
-  
+
   close() {
     this.dialog.dismiss();
   }

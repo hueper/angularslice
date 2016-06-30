@@ -15,7 +15,7 @@
       .row(*ngIf='component.type === "exist"')
         .column
           div Select the component:
-            select([(ngModel)]='component.folder')
+            select([(ngModel)]='component.folder', (change)='changeExistingComponent($event)')
               option(*ngFor='let folder of folders', [value]='folder._id') {{ folder.name }}
       .row.addition(*ngIf='hasImage')
         .column
