@@ -11,7 +11,7 @@ export class AnalyticsService {
   }
   
   eventTrack(action: string, properties: any): void {
-    if (__DEV__ == 'production') {
+    if (!__DEV__) {
       this.ga.eventTrack(action, properties);
     }
   }
