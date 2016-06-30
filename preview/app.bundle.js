@@ -66969,34 +66969,17 @@ webpackJsonp([0],[
 	        return false;
 	    };
 	    BoardComponent.prototype.onDrop = function (event) {
-	        var _this = this;
 	        event.preventDefault();
-	        this.loading = true;
 	        var file = event.dataTransfer.files[0];
-	        this.hover = false;
-	        this.rawImageService.createFromFile(file).then(function (result) {
-	            _this.loading = false;
-	        });
+	        this.loadFile(event, file);
 	        return false;
 	    };
-	    BoardComponent.prototype.loadFile = function (event) {
+	    BoardComponent.prototype.loadFile = function (event, file) {
 	        var _this = this;
-	        // TODO, move to config:
+	        if (file === void 0) { file = null; }
 	        this.loading = true;
-	        var supportedFileExtension = ['jpg', 'png', 'jpeg'];
-	        var file = event.target.files[0];
-	        var extension = file.name.split('.').pop();
-	        if (supportedFileExtension.indexOf(extension) === -1) {
-	            Humane.log("Sorry we support just 'png' and 'jpg' files at the moment.", { timeout: 4000, clickToClose: true });
-	            this.ga.eventTrack('upload', { category: extension });
-	        }
-	        else {
-	            this.ga.eventTrack('upload', { category: 'supportedExentension' });
-	            this.rawImageService.createFromFile(file).then(function (result) {
-	                _this.loading = false;
-	            });
-	            ;
-	        }
+	        file = file ? file : event.target.files[0];
+	        this.rawImageService.createFromFile(file).then(function (result) { _this.loading = false; }, function (errResult) { _this.loading = false; });
 	    };
 	    BoardComponent.prototype.onDragEnter = function (event) {
 	        this.hover = true;
@@ -88054,22 +88037,17 @@ webpackJsonp([0],[
 	        return false;
 	    };
 	    ImageBarComponent.prototype.onDrop = function (event) {
-	        var _this = this;
 	        event.preventDefault();
-	        this.loading = true;
 	        var file = event.dataTransfer.files[0];
-	        this.rawImageService.createFromFile(file).then(function (res) {
-	            _this.loading = false;
-	        });
+	        this.loadFile(event, file);
 	        return false;
 	    };
-	    ImageBarComponent.prototype.loadFile = function (event) {
+	    ImageBarComponent.prototype.loadFile = function (event, file) {
 	        var _this = this;
+	        if (file === void 0) { file = null; }
 	        this.loading = true;
-	        var file = event.target.files[0];
-	        this.rawImageService.createFromFile(file).then(function (res) {
-	            _this.loading = false;
-	        });
+	        file = file ? file : event.target.files[0];
+	        this.rawImageService.createFromFile(file).then(function (result) { _this.loading = false; }, function (errResult) { _this.loading = false; });
 	    };
 	    ImageBarComponent.prototype.onDragEnter = function (event) {
 	        this.hover = true;
