@@ -17,31 +17,31 @@ import { AnalyticsService } from "../../shared/services/analytics.service";
   directives: [SlicedImageComponent, MD_ICON_DIRECTIVES, MD_PROGRESS_CIRCLE_DIRECTIVES, TooltipDirective]
 })
 export class ImageBarComponent implements OnDestroy {
-
+  
   private images: Image[];
   private imagesSubscribe: Subscription;
   private loading: boolean = false;
-
+  
   private currentImage: Image;
   private currentFolder: Folder;
-
+  
   private subscriptions: Subscription[] = [];
   private hover: boolean = false;
-  private editImage: boolean = false;
-
+  private editImage: any = {};
+  
   constructor(private imageService: ImageService,
               private ga: AnalyticsService,
               private rawImageService: RawImageService,
               private folderService: FolderService,
               private el: ElementRef,
               private dialogService: DialogService) {
-
+    
     this.subscriptions.push(this.folderService.currentSource.subscribe(currentSource => {
       this.currentFolder = currentSource;
       if (this.imagesSubscribe) {
         this.imagesSubscribe.unsubscribe();
       }
-
+      
       this.imagesSubscribe =
         this.imageService
             .filter(f => this.currentFolder && f.folderId === this.currentFolder._id)
@@ -55,33 +55,43 @@ export class ImageBarComponent implements OnDestroy {
               }
             );
     }));
-
-
+    
+    
     this.subscriptions.push(this.imageService.currentSource.subscribe(image => {
       this.currentImage = image;
     }));
-
+    
     this.subscriptions.push(this.rawImageService.currentSource.subscribe(() => {
       setTimeout(() => {
         this.jumpToTheLast();
       })
     }));
-
+    
   }
-
-  setEditName(inputField) {
-    this.editImage = true;
+  
+  setEditName(id, inputField) {
+    this.editImage[id] = true;
+    console.log("inputField => ", inputField);
+    console.log("id => ", id);
     setTimeout(() => {
       inputField.focus();
     });
   }
-
+  
   saveImage(image) {
     this.ga.eventTrack('renameImage', { category: 'manually' });
     this.imageService.update(image);
-    this.editImage = false;
+    this.editImage[image._id] = false;
   }
-
+  
+  imageKeyDown(event) {
+    if (event.which === 13) {
+      event.preventDefault();
+      event.target.blur();
+      return false;
+    }
+  }
+  
   deleteImage(image) {
     this.ga.eventTrack('deleteImage', { category: 'manually' });
     // Confirm Dialog
@@ -91,55 +101,59 @@ export class ImageBarComponent implements OnDestroy {
       }
     });
   }
-
+  
   jumpToTheLast() {
     this.el.nativeElement.scrollLeft = this.el.nativeElement.scrollWidth;
   }
-
+  
   onDragOver(event) {
     event.preventDefault();
     this.hover = true;
     return false;
   }
-
+  
   onDrop(event) {
     event.preventDefault();
     let file = event.dataTransfer.files[0];
     this.loadFile(event, file);
     return false;
   }
-
+  
   loadFile(event, file = null) {
     this.loading = true;
     file = file ? file : event.target.files[0];
     this.rawImageService.createFromFile(file).then(
-      result => { this.loading = false },
-      errResult => { this.loading = false }
+      result => {
+        this.loading = false
+      },
+      errResult => {
+        this.loading = false
+      }
     );
   }
-
+  
   onDragEnter(event) {
     this.hover = true;
     return false;
   }
-
+  
   onDragExit(event) {
     this.hover = false;
     return false;
   }
-
+  
   getImage(image) {
     return this.imageService.getBinaryData(image);
   }
-
+  
   setBoardImage(image) {
     this.imageService.setCurrentImage(image)
   }
-
+  
   ngOnDestroy() {
     _.each(this.subscriptions, subscription => {
       subscription.unsubscribe();
     });
   }
-
+  
 }
