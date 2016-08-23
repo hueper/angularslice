@@ -12,11 +12,11 @@ webpackJsonp([0],[
 	var angulartics2_1 = __webpack_require__(389);
 	var angulartics2_google_analytics_1 = __webpack_require__(399);
 	var app_routes_ts_1 = __webpack_require__(400);
-	var app_component_ts_1 = __webpack_require__(756);
-	var services_1 = __webpack_require__(648);
-	var tooltip_service_1 = __webpack_require__(709);
-	var analytics_service_1 = __webpack_require__(675);
-	__webpack_require__(759);
+	var app_component_ts_1 = __webpack_require__(760);
+	var services_1 = __webpack_require__(650);
+	var tooltip_service_1 = __webpack_require__(713);
+	var analytics_service_1 = __webpack_require__(677);
+	__webpack_require__(763);
 	platform_browser_dynamic_1.bootstrap(app_component_ts_1.AppComponent, [
 	    http_1.HTTP_PROVIDERS,
 	    angulartics2_google_analytics_1.Angulartics2GoogleAnalytics,
@@ -49378,6 +49378,7 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
+	var http_1 = __webpack_require__(325);
 	var error_1 = __webpack_require__(347);
 	var icon_registry_1 = __webpack_require__(348);
 	var icon_registry_2 = __webpack_require__(348);
@@ -49582,9 +49583,7 @@ webpackJsonp([0],[
 	        __metadata('design:type', String)
 	    ], MdIcon.prototype, "hostAriaLabel", void 0);
 	    MdIcon = __decorate([
-	        core_1.Component({
-	            moduleId: module.id,
-	            template: '<ng-content></ng-content>',
+	        core_1.Component({            template: '<ng-content></ng-content>',
 	            selector: 'md-icon',
 	            styles: ["/** The width/height of the icon element. */ /** This works because we're using ViewEncapsulation.None. If we used the default encapsulation, the selector would need to be \":host\". */ md-icon { background-repeat: no-repeat; display: inline-block; fill: currentColor; height: 24px; width: 24px; } "],
 	            host: {
@@ -49598,7 +49597,23 @@ webpackJsonp([0],[
 	    return MdIcon;
 	}());
 	exports.MdIcon = MdIcon;
+	/** @deprecated */
 	exports.MD_ICON_DIRECTIVES = [MdIcon];
+	var MdIconModule = (function () {
+	    function MdIconModule() {
+	    }
+	    MdIconModule = __decorate([
+	        core_1.NgModule({
+	            imports: [http_1.HttpModule],
+	            exports: exports.MD_ICON_DIRECTIVES,
+	            declarations: exports.MD_ICON_DIRECTIVES,
+	            providers: [icon_registry_1.MdIconRegistry],
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], MdIconModule);
+	    return MdIconModule;
+	}());
+	exports.MdIconModule = MdIconModule;
 	//# sourceMappingURL=icon.js.map
 
 /***/ },
@@ -49678,10 +49693,7 @@ webpackJsonp([0],[
 	    return MdIconSvgTagNotFoundError;
 	}(error_1.MdError));
 	exports.MdIconSvgTagNotFoundError = MdIconSvgTagNotFoundError;
-	/**
-	  * Configuration for an icon, including the URL and possibly the cached SVG element.
-	  * @internal
-	  */
+	/** Configuration for an icon, including the URL and possibly the cached SVG element. */
 	var SvgIconConfig = (function () {
 	    function SvgIconConfig(url) {
 	        this.url = url;
@@ -53165,7 +53177,7 @@ webpackJsonp([0],[
 
 	"use strict";
 	var router_1 = __webpack_require__(401);
-	var editor_1 = __webpack_require__(434);
+	var editor_1 = __webpack_require__(444);
 	var routes = [
 	    { path: '', component: editor_1.EditorComponent },
 	];
@@ -53186,9 +53198,16 @@ webpackJsonp([0],[
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
-	var router_link_1 = __webpack_require__(402);
-	var router_link_active_1 = __webpack_require__(430);
-	var router_outlet_1 = __webpack_require__(431);
+	var common_router_providers_1 = __webpack_require__(402);
+	exports.provideRouterConfig = common_router_providers_1.provideRouterConfig;
+	exports.provideRoutes = common_router_providers_1.provideRoutes;
+	var router_link_1 = __webpack_require__(439);
+	exports.RouterLink = router_link_1.RouterLink;
+	exports.RouterLinkWithHref = router_link_1.RouterLinkWithHref;
+	var router_link_active_1 = __webpack_require__(440);
+	exports.RouterLinkActive = router_link_active_1.RouterLinkActive;
+	var router_outlet_1 = __webpack_require__(441);
+	exports.RouterOutlet = router_outlet_1.RouterOutlet;
 	var router_1 = __webpack_require__(403);
 	exports.NavigationCancel = router_1.NavigationCancel;
 	exports.NavigationEnd = router_1.NavigationEnd;
@@ -53196,23 +53215,25 @@ webpackJsonp([0],[
 	exports.NavigationStart = router_1.NavigationStart;
 	exports.Router = router_1.Router;
 	exports.RoutesRecognized = router_1.RoutesRecognized;
-	var router_outlet_map_1 = __webpack_require__(429);
+	var router_module_1 = __webpack_require__(442);
+	exports.ROUTER_DIRECTIVES = router_module_1.ROUTER_DIRECTIVES;
+	exports.RouterModule = router_module_1.RouterModule;
+	var router_outlet_map_1 = __webpack_require__(438);
 	exports.RouterOutletMap = router_outlet_map_1.RouterOutletMap;
-	var router_providers_1 = __webpack_require__(432);
+	var router_providers_1 = __webpack_require__(443);
 	exports.provideRouter = router_providers_1.provideRouter;
-	var router_state_1 = __webpack_require__(422);
+	var router_state_1 = __webpack_require__(432);
 	exports.ActivatedRoute = router_state_1.ActivatedRoute;
 	exports.ActivatedRouteSnapshot = router_state_1.ActivatedRouteSnapshot;
 	exports.RouterState = router_state_1.RouterState;
 	exports.RouterStateSnapshot = router_state_1.RouterStateSnapshot;
-	var shared_1 = __webpack_require__(416);
+	var shared_1 = __webpack_require__(427);
 	exports.PRIMARY_OUTLET = shared_1.PRIMARY_OUTLET;
-	var url_tree_1 = __webpack_require__(417);
+	var url_tree_1 = __webpack_require__(428);
 	exports.DefaultUrlSerializer = url_tree_1.DefaultUrlSerializer;
-	exports.UrlPathWithParams = url_tree_1.UrlPathWithParams;
+	exports.UrlSegment = url_tree_1.UrlSegment;
 	exports.UrlSerializer = url_tree_1.UrlSerializer;
 	exports.UrlTree = url_tree_1.UrlTree;
-	exports.ROUTER_DIRECTIVES = [router_outlet_1.RouterOutlet, router_link_1.RouterLink, router_link_active_1.RouterLinkActive];
 
 
 /***/ },
@@ -53230,68 +53251,131 @@ webpackJsonp([0],[
 	var common_1 = __webpack_require__(2);
 	var core_1 = __webpack_require__(5);
 	var router_1 = __webpack_require__(403);
-	var router_state_1 = __webpack_require__(422);
-	var RouterLink = (function () {
-	    /**
-	     * @internal
-	     */
-	    function RouterLink(router, route, locationStrategy) {
-	        this.router = router;
-	        this.route = route;
-	        this.locationStrategy = locationStrategy;
-	        this.commands = [];
+	var router_config_loader_1 = __webpack_require__(422);
+	var router_outlet_map_1 = __webpack_require__(438);
+	var router_state_1 = __webpack_require__(432);
+	var url_tree_1 = __webpack_require__(428);
+	var collection_1 = __webpack_require__(424);
+	exports.ROUTER_CONFIGURATION = new core_1.OpaqueToken('ROUTER_CONFIGURATION');
+	function setupRouter(ref, resolver, urlSerializer, outletMap, location, injector, loader, config, opts) {
+	    if (opts === void 0) { opts = {}; }
+	    if (ref.componentTypes.length == 0) {
+	        throw new Error('Bootstrap at least one component before injecting Router.');
 	    }
-	    Object.defineProperty(RouterLink.prototype, "routerLink", {
-	        set: function (data) {
-	            if (Array.isArray(data)) {
-	                this.commands = data;
-	            }
-	            else {
-	                this.commands = [data];
-	            }
+	    var componentType = ref.componentTypes[0];
+	    var r = new router_1.Router(componentType, resolver, urlSerializer, outletMap, location, injector, loader, collection_1.flatten(config));
+	    if (opts.enableTracing) {
+	        r.events.subscribe(function (e) {
+	            console.group("Router Event: " + e.constructor.name);
+	            console.log(e.toString());
+	            console.log(e);
+	            console.groupEnd();
+	        });
+	    }
+	    return r;
+	}
+	exports.setupRouter = setupRouter;
+	function rootRoute(router) {
+	    return router.routerState.root;
+	}
+	exports.rootRoute = rootRoute;
+	function initialRouterNavigation(router) {
+	    return function () { router.initialNavigation(); };
+	}
+	exports.initialRouterNavigation = initialRouterNavigation;
+	/**
+	 * An array of {@link Provider}s. To use the router, you must add this to your application.
+	 *
+	 * ### Example
+	 *
+	 * ```
+	 * @Component({directives: [ROUTER_DIRECTIVES]})
+	 * class AppCmp {
+	 *   // ...
+	 * }
+	 *
+	 * const config = [
+	 *   {path: 'home', component: Home}
+	 * ];
+	 *
+	 * bootstrap(AppCmp, [provideRouter(config)]);
+	 * ```
+	 *
+	 * @deprecated use RouterModule instead
+	 */
+	function provideRouter(routes, config) {
+	    if (config === void 0) { config = {}; }
+	    return [
+	        provideRoutes(routes),
+	        { provide: exports.ROUTER_CONFIGURATION, useValue: config }, common_1.Location,
+	        { provide: common_1.LocationStrategy, useClass: common_1.PathLocationStrategy },
+	        { provide: url_tree_1.UrlSerializer, useClass: url_tree_1.DefaultUrlSerializer },
+	        {
+	            provide: router_1.Router,
+	            useFactory: setupRouter,
+	            deps: [
+	                core_1.ApplicationRef, core_1.ComponentResolver, url_tree_1.UrlSerializer, router_outlet_map_1.RouterOutletMap, common_1.Location, core_1.Injector,
+	                core_1.NgModuleFactoryLoader, router_config_loader_1.ROUTES, exports.ROUTER_CONFIGURATION
+	            ]
 	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    RouterLink.prototype.ngOnChanges = function (changes) { this.updateTargetUrlAndHref(); };
-	    RouterLink.prototype.onClick = function (button, ctrlKey, metaKey) {
-	        if (button !== 0 || ctrlKey || metaKey) {
-	            return true;
-	        }
-	        if (typeof this.target === 'string' && this.target != '_self') {
-	            return true;
-	        }
-	        this.router.navigateByUrl(this.urlTree);
-	        return false;
-	    };
-	    RouterLink.prototype.updateTargetUrlAndHref = function () {
-	        this.urlTree = this.router.createUrlTree(this.commands, { relativeTo: this.route, queryParams: this.queryParams, fragment: this.fragment });
-	        if (this.urlTree) {
-	            this.href = this.locationStrategy.prepareExternalUrl(this.router.serializeUrl(this.urlTree));
-	        }
-	    };
-	    /** @nocollapse */
-	    RouterLink.decorators = [
-	        { type: core_1.Directive, args: [{ selector: '[routerLink]' },] },
+	        router_outlet_map_1.RouterOutletMap, { provide: router_state_1.ActivatedRoute, useFactory: rootRoute, deps: [router_1.Router] },
+	        // Trigger initial navigation
+	        provideRouterInitializer(), { provide: core_1.NgModuleFactoryLoader, useClass: core_1.SystemJsNgModuleLoader }
 	    ];
-	    /** @nocollapse */
-	    RouterLink.ctorParameters = [
-	        { type: router_1.Router, },
-	        { type: router_state_1.ActivatedRoute, },
-	        { type: common_1.LocationStrategy, },
-	    ];
-	    /** @nocollapse */
-	    RouterLink.propDecorators = {
-	        'target': [{ type: core_1.Input },],
-	        'queryParams': [{ type: core_1.Input },],
-	        'fragment': [{ type: core_1.Input },],
-	        'href': [{ type: core_1.HostBinding },],
-	        'routerLink': [{ type: core_1.Input },],
-	        'onClick': [{ type: core_1.HostListener, args: ['click', ['$event.button', '$event.ctrlKey', '$event.metaKey'],] },],
+	}
+	exports.provideRouter = provideRouter;
+	function provideRouterInitializer() {
+	    return {
+	        provide: core_1.APP_BOOTSTRAP_LISTENER,
+	        multi: true,
+	        useFactory: initialRouterNavigation,
+	        deps: [router_1.Router]
 	    };
-	    return RouterLink;
-	}());
-	exports.RouterLink = RouterLink;
+	}
+	exports.provideRouterInitializer = provideRouterInitializer;
+	/**
+	 * Router configuration.
+	 *
+	 * ### Example
+	 *
+	 * ```
+	 * @NgModule({providers: [
+	 *   provideRoutes([{path: 'home', component: Home}])
+	 * ]})
+	 * class LazyLoadedModule {
+	 *   // ...
+	 * }
+	 * ```
+	 *
+	 * @deprecated
+	 */
+	function provideRoutes(routes) {
+	    return [
+	        { provide: core_1.ANALYZE_FOR_ENTRY_COMPONENTS, multi: true, useValue: routes },
+	        { provide: router_config_loader_1.ROUTES, multi: true, useValue: routes }
+	    ];
+	}
+	exports.provideRoutes = provideRoutes;
+	/**
+	 * Router configuration.
+	 *
+	 * ### Example
+	 *
+	 * ```
+	 * @NgModule({providers: [
+	 *   provideRouterOptions({enableTracing: true})
+	 * ]})
+	 * class LazyLoadedModule {
+	 *   // ...
+	 * }
+	 * ```
+	 *
+	 * @deprecated
+	 */
+	function provideRouterConfig(config) {
+	    return { provide: exports.ROUTER_CONFIGURATION, useValue: config };
+	}
+	exports.provideRouterConfig = provideRouterConfig;
 
 
 /***/ },
@@ -53312,22 +53396,25 @@ webpackJsonp([0],[
 	__webpack_require__(408);
 	__webpack_require__(410);
 	var core_1 = __webpack_require__(5);
-	var Observable_1 = __webpack_require__(38);
 	var Subject_1 = __webpack_require__(37);
+	var from_1 = __webpack_require__(412);
 	var of_1 = __webpack_require__(359);
-	var apply_redirects_1 = __webpack_require__(415);
-	var config_1 = __webpack_require__(419);
-	var create_router_state_1 = __webpack_require__(420);
-	var create_url_tree_1 = __webpack_require__(424);
-	var recognize_1 = __webpack_require__(425);
-	var resolve_1 = __webpack_require__(426);
-	var router_outlet_map_1 = __webpack_require__(429);
-	var router_state_1 = __webpack_require__(422);
-	var shared_1 = __webpack_require__(416);
-	var url_tree_1 = __webpack_require__(417);
-	var collection_1 = __webpack_require__(418);
+	var apply_redirects_1 = __webpack_require__(416);
+	var config_1 = __webpack_require__(429);
+	var create_router_state_1 = __webpack_require__(430);
+	var create_url_tree_1 = __webpack_require__(434);
+	var recognize_1 = __webpack_require__(435);
+	var resolve_1 = __webpack_require__(436);
+	var router_config_loader_1 = __webpack_require__(422);
+	var router_outlet_map_1 = __webpack_require__(438);
+	var router_state_1 = __webpack_require__(432);
+	var shared_1 = __webpack_require__(427);
+	var url_tree_1 = __webpack_require__(428);
+	var collection_1 = __webpack_require__(424);
 	/**
 	 * An event triggered when a navigation starts
+	 *
+	 * @stable
 	 */
 	var NavigationStart = (function () {
 	    function NavigationStart(id, url) {
@@ -53340,6 +53427,8 @@ webpackJsonp([0],[
 	exports.NavigationStart = NavigationStart;
 	/**
 	 * An event triggered when a navigation ends successfully
+	 *
+	 * @stable
 	 */
 	var NavigationEnd = (function () {
 	    function NavigationEnd(id, url, urlAfterRedirects) {
@@ -53355,6 +53444,8 @@ webpackJsonp([0],[
 	exports.NavigationEnd = NavigationEnd;
 	/**
 	 * An event triggered when a navigation is canceled
+	 *
+	 * @stable
 	 */
 	var NavigationCancel = (function () {
 	    function NavigationCancel(id, url) {
@@ -53367,6 +53458,8 @@ webpackJsonp([0],[
 	exports.NavigationCancel = NavigationCancel;
 	/**
 	 * An event triggered when a navigation fails due to unexpected error
+	 *
+	 * @stable
 	 */
 	var NavigationError = (function () {
 	    function NavigationError(id, url, error) {
@@ -53382,6 +53475,8 @@ webpackJsonp([0],[
 	exports.NavigationError = NavigationError;
 	/**
 	 * An event triggered when routes are recognized
+	 *
+	 * @stable
 	 */
 	var RoutesRecognized = (function () {
 	    function RoutesRecognized(id, url, urlAfterRedirects, state) {
@@ -53398,12 +53493,16 @@ webpackJsonp([0],[
 	exports.RoutesRecognized = RoutesRecognized;
 	/**
 	 * The `Router` is responsible for mapping URLs to components.
+	 *
+	 * See {@link Routes} for more details and examples.
+	 *
+	 * @stable
 	 */
 	var Router = (function () {
 	    /**
-	     * @internal
+	     * Creates the router service.
 	     */
-	    function Router(rootComponentType, resolver, urlSerializer, outletMap, location, injector, config) {
+	    function Router(rootComponentType, resolver, urlSerializer, outletMap, location, injector, loader, config) {
 	        this.rootComponentType = rootComponentType;
 	        this.resolver = resolver;
 	        this.urlSerializer = urlSerializer;
@@ -53411,17 +53510,24 @@ webpackJsonp([0],[
 	        this.location = location;
 	        this.injector = injector;
 	        this.navigationId = 0;
+	        /**
+	         * Indicates if at least one navigation happened.
+	         *
+	         * @experimental
+	         */
+	        this.navigated = false;
 	        this.resetConfig(config);
 	        this.routerEvents = new Subject_1.Subject();
 	        this.currentUrlTree = url_tree_1.createEmptyUrlTree();
+	        this.configLoader = new router_config_loader_1.RouterConfigLoader(loader);
 	        this.currentRouterState = router_state_1.createEmptyState(this.currentUrlTree, this.rootComponentType);
 	    }
 	    /**
-	     * @internal
+	     * Sets up the location change listener and performs the inital navigation
 	     */
 	    Router.prototype.initialNavigation = function () {
 	        this.setUpLocationChangeListener();
-	        this.navigateByUrl(this.location.path());
+	        this.navigateByUrl(this.location.path(true));
 	    };
 	    Object.defineProperty(Router.prototype, "routerState", {
 	        /**
@@ -53465,8 +53571,9 @@ webpackJsonp([0],[
 	        config_1.validateConfig(config);
 	        this.config = config;
 	    };
+	    Router.prototype.ngOnDestroy = function () { this.dispose(); };
 	    /**
-	     * @internal
+	     * Disposes of the router.
 	     */
 	    Router.prototype.dispose = function () { this.locationSubscription.unsubscribe(); };
 	    /**
@@ -53485,8 +53592,19 @@ webpackJsonp([0],[
 	     * // create /team/33;expand=true/user/11
 	     * router.createUrlTree(['/team', 33, {expand: true}, 'user', 11]);
 	     *
-	     * // you can collapse static fragments like this
+	     * // you can collapse static segments like this (this works only with the first passed-in value):
 	     * router.createUrlTree(['/team/33/user', userId]);
+	     *
+	     * If the first segment can contain slashes, and you do not want the router to split it, you
+	     * can do the following:
+	     *
+	     * router.createUrlTree([{segmentPath: '/one/two'}]);
+	     *
+	     * // create /team/33/(user/11//aux:chat)
+	     * router.createUrlTree(['/team', 33, {outlets: {primary: 'user/11', right: 'chat'}}]);
+	     *
+	     * // remove the right secondary node
+	     * router.createUrlTree(['/team', 33, {outlets: {primary: 'user/11', right: null}}]);
 	     *
 	     * // assuming the current url is `/team/33/user/11` and the route points to `user/11`
 	     *
@@ -53501,9 +53619,11 @@ webpackJsonp([0],[
 	     * ```
 	     */
 	    Router.prototype.createUrlTree = function (commands, _a) {
-	        var _b = _a === void 0 ? {} : _a, relativeTo = _b.relativeTo, queryParams = _b.queryParams, fragment = _b.fragment;
+	        var _b = _a === void 0 ? {} : _a, relativeTo = _b.relativeTo, queryParams = _b.queryParams, fragment = _b.fragment, preserveQueryParams = _b.preserveQueryParams, preserveFragment = _b.preserveFragment;
 	        var a = relativeTo ? relativeTo : this.routerState.root;
-	        return create_url_tree_1.createUrlTree(a, this.currentUrlTree, commands, queryParams, fragment);
+	        var q = preserveQueryParams ? this.currentUrlTree.queryParams : queryParams;
+	        var f = preserveFragment ? this.currentUrlTree.fragment : fragment;
+	        return create_url_tree_1.createUrlTree(a, this.currentUrlTree, commands, q, f);
 	    };
 	    /**
 	     * Navigate based on the provided url. This navigation is always absolute.
@@ -53517,15 +53637,22 @@ webpackJsonp([0],[
 	     *
 	     * ```
 	     * router.navigateByUrl("/team/33/user/11");
+	     *
+	     * // Navigate without updating the URL
+	     * router.navigateByUrl("/team/33/user/11", { skipLocationChange: true });
 	     * ```
+	     *
+	     * In opposite to `navigate`, `navigateByUrl` takes a whole URL
+	     * and does not apply any delta to the current one.
 	     */
-	    Router.prototype.navigateByUrl = function (url) {
+	    Router.prototype.navigateByUrl = function (url, extras) {
+	        if (extras === void 0) { extras = { skipLocationChange: false }; }
 	        if (url instanceof url_tree_1.UrlTree) {
-	            return this.scheduleNavigation(url, false);
+	            return this.scheduleNavigation(url, extras);
 	        }
 	        else {
 	            var urlTree = this.urlSerializer.parse(url);
-	            return this.scheduleNavigation(urlTree, false);
+	            return this.scheduleNavigation(urlTree, extras);
 	        }
 	    };
 	    /**
@@ -53541,11 +53668,17 @@ webpackJsonp([0],[
 	     *
 	     * ```
 	     * router.navigate(['team', 33, 'team', '11], {relativeTo: route});
+	     *
+	     * // Navigate without updating the URL
+	     * router.navigate(['team', 33, 'team', '11], {relativeTo: route, skipLocationChange: true });
 	     * ```
+	     *
+	     * In opposite to `navigateByUrl`, `navigate` always takes a delta
+	     * that is applied to the current URL.
 	     */
 	    Router.prototype.navigate = function (commands, extras) {
-	        if (extras === void 0) { extras = {}; }
-	        return this.scheduleNavigation(this.createUrlTree(commands, extras), false);
+	        if (extras === void 0) { extras = { skipLocationChange: false }; }
+	        return this.scheduleNavigation(this.createUrlTree(commands, extras), extras);
 	    };
 	    /**
 	     * Serializes a {@link UrlTree} into a string.
@@ -53555,17 +53688,36 @@ webpackJsonp([0],[
 	     * Parse a string into a {@link UrlTree}.
 	     */
 	    Router.prototype.parseUrl = function (url) { return this.urlSerializer.parse(url); };
-	    Router.prototype.scheduleNavigation = function (url, preventPushState) {
+	    /**
+	     * Returns if the url is activated or not.
+	     */
+	    Router.prototype.isActive = function (url, exact) {
+	        if (url instanceof url_tree_1.UrlTree) {
+	            return url_tree_1.containsTree(this.currentUrlTree, url, exact);
+	        }
+	        else {
+	            var urlTree = this.urlSerializer.parse(url);
+	            return url_tree_1.containsTree(this.currentUrlTree, urlTree, exact);
+	        }
+	    };
+	    Router.prototype.scheduleNavigation = function (url, extras) {
 	        var _this = this;
 	        var id = ++this.navigationId;
 	        this.routerEvents.next(new NavigationStart(id, this.serializeUrl(url)));
-	        return Promise.resolve().then(function (_) { return _this.runNavigate(url, preventPushState, id); });
+	        return Promise.resolve().then(function (_) { return _this.runNavigate(url, extras.skipLocationChange, id); });
 	    };
 	    Router.prototype.setUpLocationChangeListener = function () {
 	        var _this = this;
-	        this.locationSubscription = this.location.subscribe(function (change) {
-	            return _this.scheduleNavigation(_this.urlSerializer.parse(change['url']), change['pop']);
-	        });
+	        // Zone.current.wrap is needed because of the issue with RxJS scheduler,
+	        // which does not work properly with zone.js in IE and Safari
+	        this.locationSubscription = this.location.subscribe(Zone.current.wrap(function (change) {
+	            var tree = _this.urlSerializer.parse(change['url']);
+	            // we fire multiple events for a single URL change
+	            // we should navigate only once
+	            return _this.currentUrlTree.toString() !== tree.toString() ?
+	                _this.scheduleNavigation(tree, change['pop']) :
+	                null;
+	        }));
 	    };
 	    Router.prototype.runNavigate = function (url, preventPushState, id) {
 	        var _this = this;
@@ -53575,15 +53727,19 @@ webpackJsonp([0],[
 	            return Promise.resolve(false);
 	        }
 	        return new Promise(function (resolvePromise, rejectPromise) {
-	            var updatedUrl;
 	            var state;
-	            apply_redirects_1.applyRedirects(url, _this.config)
+	            var navigationIsSuccessful;
+	            var preActivation;
+	            var appliedUrl;
+	            var storedState = _this.currentRouterState;
+	            var storedUrl = _this.currentUrlTree;
+	            apply_redirects_1.applyRedirects(_this.injector, _this.configLoader, url, _this.config)
 	                .mergeMap(function (u) {
-	                updatedUrl = u;
-	                return recognize_1.recognize(_this.rootComponentType, _this.config, updatedUrl, _this.serializeUrl(updatedUrl));
+	                appliedUrl = u;
+	                return recognize_1.recognize(_this.rootComponentType, _this.config, appliedUrl, _this.serializeUrl(appliedUrl));
 	            })
 	                .mergeMap(function (newRouterStateSnapshot) {
-	                _this.routerEvents.next(new RoutesRecognized(id, _this.serializeUrl(url), _this.serializeUrl(updatedUrl), newRouterStateSnapshot));
+	                _this.routerEvents.next(new RoutesRecognized(id, _this.serializeUrl(url), _this.serializeUrl(appliedUrl), newRouterStateSnapshot));
 	                return resolve_1.resolve(_this.resolver, newRouterStateSnapshot);
 	            })
 	                .map(function (routerStateSnapshot) {
@@ -53591,21 +53747,32 @@ webpackJsonp([0],[
 	            })
 	                .map(function (newState) {
 	                state = newState;
+	                preActivation =
+	                    new PreActivation(state.snapshot, _this.currentRouterState.snapshot, _this.injector);
+	                preActivation.traverse(_this.outletMap);
 	            })
 	                .mergeMap(function (_) {
-	                return new GuardChecks(state.snapshot, _this.currentRouterState.snapshot, _this.injector)
-	                    .check(_this.outletMap);
+	                return preActivation.checkGuards();
+	            })
+	                .mergeMap(function (shouldActivate) {
+	                if (shouldActivate) {
+	                    return preActivation.resolveData().map(function () { return shouldActivate; });
+	                }
+	                else {
+	                    return of_1.of(shouldActivate);
+	                }
 	            })
 	                .forEach(function (shouldActivate) {
 	                if (!shouldActivate || id !== _this.navigationId) {
 	                    _this.routerEvents.next(new NavigationCancel(id, _this.serializeUrl(url)));
-	                    return Promise.resolve(false);
+	                    navigationIsSuccessful = false;
+	                    return;
 	                }
-	                new ActivateRoutes(state, _this.currentRouterState).activate(_this.outletMap);
-	                _this.currentUrlTree = updatedUrl;
+	                _this.currentUrlTree = appliedUrl;
 	                _this.currentRouterState = state;
+	                new ActivateRoutes(state, storedState).activate(_this.outletMap);
 	                if (!preventPushState) {
-	                    var path = _this.urlSerializer.serialize(updatedUrl);
+	                    var path = _this.urlSerializer.serialize(appliedUrl);
 	                    if (_this.location.isCurrentPathEqualTo(path)) {
 	                        _this.location.replaceState(path);
 	                    }
@@ -53613,12 +53780,15 @@ webpackJsonp([0],[
 	                        _this.location.go(path);
 	                    }
 	                }
-	                return Promise.resolve(true);
+	                navigationIsSuccessful = true;
 	            })
 	                .then(function () {
-	                _this.routerEvents.next(new NavigationEnd(id, _this.serializeUrl(url), _this.serializeUrl(updatedUrl)));
-	                resolvePromise(true);
+	                _this.navigated = true;
+	                _this.routerEvents.next(new NavigationEnd(id, _this.serializeUrl(url), _this.serializeUrl(appliedUrl)));
+	                resolvePromise(navigationIsSuccessful);
 	            }, function (e) {
+	                _this.currentRouterState = storedState;
+	                _this.currentUrlTree = storedUrl;
 	                _this.routerEvents.next(new NavigationError(id, _this.serializeUrl(url), e));
 	                rejectPromise(e);
 	            });
@@ -53628,9 +53798,14 @@ webpackJsonp([0],[
 	}());
 	exports.Router = Router;
 	var CanActivate = (function () {
-	    function CanActivate(route) {
-	        this.route = route;
+	    function CanActivate(path) {
+	        this.path = path;
 	    }
+	    Object.defineProperty(CanActivate.prototype, "route", {
+	        get: function () { return this.path[this.path.length - 1]; },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    return CanActivate;
 	}());
 	var CanDeactivate = (function () {
@@ -53640,27 +53815,31 @@ webpackJsonp([0],[
 	    }
 	    return CanDeactivate;
 	}());
-	var GuardChecks = (function () {
-	    function GuardChecks(future, curr, injector) {
+	var PreActivation = (function () {
+	    function PreActivation(future, curr, injector) {
 	        this.future = future;
 	        this.curr = curr;
 	        this.injector = injector;
 	        this.checks = [];
 	    }
-	    GuardChecks.prototype.check = function (parentOutletMap) {
-	        var _this = this;
+	    PreActivation.prototype.traverse = function (parentOutletMap) {
 	        var futureRoot = this.future._root;
 	        var currRoot = this.curr ? this.curr._root : null;
-	        this.traverseChildRoutes(futureRoot, currRoot, parentOutletMap);
+	        this.traverseChildRoutes(futureRoot, currRoot, parentOutletMap, [futureRoot.value]);
+	    };
+	    PreActivation.prototype.checkGuards = function () {
+	        var _this = this;
 	        if (this.checks.length === 0)
 	            return of_1.of(true);
-	        return Observable_1.Observable.from(this.checks)
+	        return from_1.from(this.checks)
 	            .map(function (s) {
 	            if (s instanceof CanActivate) {
-	                return _this.runCanActivate(s.route);
+	                return collection_1.andObservables(from_1.from([_this.runCanActivate(s.route), _this.runCanActivateChild(s.path)]));
 	            }
 	            else if (s instanceof CanDeactivate) {
-	                return _this.runCanDeactivate(s.component, s.route);
+	                // workaround https://github.com/Microsoft/TypeScript/issues/7271
+	                var s2 = s;
+	                return _this.runCanDeactivate(s2.component, s2.route);
 	            }
 	            else {
 	                throw new Error('Cannot be reached');
@@ -53669,30 +53848,45 @@ webpackJsonp([0],[
 	            .mergeAll()
 	            .every(function (result) { return result === true; });
 	    };
-	    GuardChecks.prototype.traverseChildRoutes = function (futureNode, currNode, outletMap) {
+	    PreActivation.prototype.resolveData = function () {
+	        var _this = this;
+	        if (this.checks.length === 0)
+	            return of_1.of(null);
+	        return from_1.from(this.checks)
+	            .mergeMap(function (s) {
+	            if (s instanceof CanActivate) {
+	                return _this.runResolve(s.route);
+	            }
+	            else {
+	                return of_1.of(null);
+	            }
+	        })
+	            .reduce(function (_, __) { return _; });
+	    };
+	    PreActivation.prototype.traverseChildRoutes = function (futureNode, currNode, outletMap, futurePath) {
 	        var _this = this;
 	        var prevChildren = nodeChildrenAsMap(currNode);
 	        futureNode.children.forEach(function (c) {
-	            _this.traverseRoutes(c, prevChildren[c.value.outlet], outletMap);
+	            _this.traverseRoutes(c, prevChildren[c.value.outlet], outletMap, futurePath.concat([c.value]));
 	            delete prevChildren[c.value.outlet];
 	        });
 	        collection_1.forEach(prevChildren, function (v, k) { return _this.deactivateOutletAndItChildren(v, outletMap._outlets[k]); });
 	    };
-	    GuardChecks.prototype.traverseRoutes = function (futureNode, currNode, parentOutletMap) {
+	    PreActivation.prototype.traverseRoutes = function (futureNode, currNode, parentOutletMap, futurePath) {
 	        var future = futureNode.value;
 	        var curr = currNode ? currNode.value : null;
 	        var outlet = parentOutletMap ? parentOutletMap._outlets[futureNode.value.outlet] : null;
 	        // reusing the node
 	        if (curr && future._routeConfig === curr._routeConfig) {
 	            if (!collection_1.shallowEqual(future.params, curr.params)) {
-	                this.checks.push(new CanDeactivate(outlet.component, curr), new CanActivate(future));
+	                this.checks.push(new CanDeactivate(outlet.component, curr), new CanActivate(futurePath));
 	            }
 	            // If we have a component, we need to go through an outlet.
 	            if (future.component) {
-	                this.traverseChildRoutes(futureNode, currNode, outlet ? outlet.outletMap : null);
+	                this.traverseChildRoutes(futureNode, currNode, outlet ? outlet.outletMap : null, futurePath);
 	            }
 	            else {
-	                this.traverseChildRoutes(futureNode, currNode, parentOutletMap);
+	                this.traverseChildRoutes(futureNode, currNode, parentOutletMap, futurePath);
 	            }
 	        }
 	        else {
@@ -53705,23 +53899,23 @@ webpackJsonp([0],[
 	                    this.deactivateOutletMap(parentOutletMap);
 	                }
 	            }
-	            this.checks.push(new CanActivate(future));
+	            this.checks.push(new CanActivate(futurePath));
 	            // If we have a component, we need to go through an outlet.
 	            if (future.component) {
-	                this.traverseChildRoutes(futureNode, null, outlet ? outlet.outletMap : null);
+	                this.traverseChildRoutes(futureNode, null, outlet ? outlet.outletMap : null, futurePath);
 	            }
 	            else {
-	                this.traverseChildRoutes(futureNode, null, parentOutletMap);
+	                this.traverseChildRoutes(futureNode, null, parentOutletMap, futurePath);
 	            }
 	        }
 	    };
-	    GuardChecks.prototype.deactivateOutletAndItChildren = function (route, outlet) {
+	    PreActivation.prototype.deactivateOutletAndItChildren = function (route, outlet) {
 	        if (outlet && outlet.isActivated) {
 	            this.deactivateOutletMap(outlet.outletMap);
 	            this.checks.push(new CanDeactivate(outlet.component, route));
 	        }
 	    };
-	    GuardChecks.prototype.deactivateOutletMap = function (outletMap) {
+	    PreActivation.prototype.deactivateOutletMap = function (outletMap) {
 	        var _this = this;
 	        collection_1.forEach(outletMap._outlets, function (v) {
 	            if (v.isActivated) {
@@ -53729,52 +53923,89 @@ webpackJsonp([0],[
 	            }
 	        });
 	    };
-	    GuardChecks.prototype.runCanActivate = function (future) {
+	    PreActivation.prototype.runCanActivate = function (future) {
 	        var _this = this;
 	        var canActivate = future._routeConfig ? future._routeConfig.canActivate : null;
 	        if (!canActivate || canActivate.length === 0)
 	            return of_1.of(true);
-	        return Observable_1.Observable.from(canActivate)
-	            .map(function (c) {
-	            var guard = _this.injector.get(c);
+	        var obs = from_1.from(canActivate).map(function (c) {
+	            var guard = _this.getToken(c, future, _this.future);
 	            if (guard.canActivate) {
-	                return wrapIntoObservable(guard.canActivate(future, _this.future));
+	                return collection_1.wrapIntoObservable(guard.canActivate(future, _this.future));
 	            }
 	            else {
-	                return wrapIntoObservable(guard(future, _this.future));
+	                return collection_1.wrapIntoObservable(guard(future, _this.future));
 	            }
-	        })
-	            .mergeAll()
-	            .every(function (result) { return result === true; });
+	        });
+	        return collection_1.andObservables(obs);
 	    };
-	    GuardChecks.prototype.runCanDeactivate = function (component, curr) {
+	    PreActivation.prototype.runCanActivateChild = function (path) {
+	        var _this = this;
+	        var future = path[path.length - 1];
+	        var canActivateChildGuards = path.slice(0, path.length - 1)
+	            .reverse()
+	            .map(function (p) { return _this.extractCanActivateChild(p); })
+	            .filter(function (_) { return _ !== null; });
+	        return collection_1.andObservables(from_1.from(canActivateChildGuards).map(function (d) {
+	            var obs = from_1.from(d.guards).map(function (c) {
+	                var guard = _this.getToken(c, c.node, _this.future);
+	                if (guard.canActivateChild) {
+	                    return collection_1.wrapIntoObservable(guard.canActivateChild(future, _this.future));
+	                }
+	                else {
+	                    return collection_1.wrapIntoObservable(guard(future, _this.future));
+	                }
+	            });
+	            return collection_1.andObservables(obs);
+	        }));
+	    };
+	    PreActivation.prototype.extractCanActivateChild = function (p) {
+	        var canActivateChild = p._routeConfig ? p._routeConfig.canActivateChild : null;
+	        if (!canActivateChild || canActivateChild.length === 0)
+	            return null;
+	        return { node: p, guards: canActivateChild };
+	    };
+	    PreActivation.prototype.runCanDeactivate = function (component, curr) {
 	        var _this = this;
 	        var canDeactivate = curr && curr._routeConfig ? curr._routeConfig.canDeactivate : null;
 	        if (!canDeactivate || canDeactivate.length === 0)
 	            return of_1.of(true);
-	        return Observable_1.Observable.from(canDeactivate)
+	        return from_1.from(canDeactivate)
 	            .map(function (c) {
-	            var guard = _this.injector.get(c);
+	            var guard = _this.getToken(c, curr, _this.curr);
 	            if (guard.canDeactivate) {
-	                return wrapIntoObservable(guard.canDeactivate(component, curr, _this.curr));
+	                return collection_1.wrapIntoObservable(guard.canDeactivate(component, curr, _this.curr));
 	            }
 	            else {
-	                return wrapIntoObservable(guard(component, curr, _this.curr));
+	                return collection_1.wrapIntoObservable(guard(component, curr, _this.curr));
 	            }
 	        })
 	            .mergeAll()
 	            .every(function (result) { return result === true; });
 	    };
-	    return GuardChecks;
+	    PreActivation.prototype.runResolve = function (future) {
+	        var resolve = future._resolve;
+	        return this.resolveNode(resolve.current, future).map(function (resolvedData) {
+	            resolve.resolvedData = resolvedData;
+	            future.data = collection_1.merge(future.data, resolve.flattenedResolvedData);
+	            return null;
+	        });
+	    };
+	    PreActivation.prototype.resolveNode = function (resolve, future) {
+	        var _this = this;
+	        return collection_1.waitForMap(resolve, function (k, v) {
+	            var resolver = _this.getToken(v, future, _this.future);
+	            return resolver.resolve ? collection_1.wrapIntoObservable(resolver.resolve(future, _this.future)) :
+	                collection_1.wrapIntoObservable(resolver(future, _this.future));
+	        });
+	    };
+	    PreActivation.prototype.getToken = function (token, snapshot, state) {
+	        var config = closestLoadedConfig(state, snapshot);
+	        var injector = config ? config.injector : this.injector;
+	        return injector.get(token);
+	    };
+	    return PreActivation;
 	}());
-	function wrapIntoObservable(value) {
-	    if (value instanceof Observable_1.Observable) {
-	        return value;
-	    }
-	    else {
-	        return of_1.of(value);
-	    }
-	}
 	var ActivateRoutes = (function () {
 	    function ActivateRoutes(futureState, currState) {
 	        this.futureState = futureState;
@@ -53783,7 +54014,7 @@ webpackJsonp([0],[
 	    ActivateRoutes.prototype.activate = function (parentOutletMap) {
 	        var futureRoot = this.futureState._root;
 	        var currRoot = this.currState ? this.currState._root : null;
-	        pushQueryParamsAndFragment(this.futureState);
+	        router_state_1.advanceActivatedRoute(this.futureState.root);
 	        this.activateChildRoutes(futureRoot, currRoot, parentOutletMap);
 	    };
 	    ActivateRoutes.prototype.activateChildRoutes = function (futureNode, currNode, outletMap) {
@@ -53838,11 +54069,20 @@ webpackJsonp([0],[
 	        }
 	    };
 	    ActivateRoutes.prototype.placeComponentIntoOutlet = function (outletMap, future, outlet) {
-	        var resolved = core_1.ReflectiveInjector.resolve([
-	            { provide: router_state_1.ActivatedRoute, useValue: future },
-	            { provide: router_outlet_map_1.RouterOutletMap, useValue: outletMap }
-	        ]);
-	        outlet.activate(future._futureSnapshot._resolvedComponentFactory, future, resolved, outletMap);
+	        var resolved = [{ provide: router_state_1.ActivatedRoute, useValue: future }, {
+	                provide: router_outlet_map_1.RouterOutletMap,
+	                useValue: outletMap
+	            }];
+	        var config = closestLoadedConfig(this.futureState.snapshot, future.snapshot);
+	        var loadedFactoryResolver = null;
+	        var loadedInjector = null;
+	        if (config) {
+	            loadedFactoryResolver = config.factoryResolver;
+	            loadedInjector = config.injector;
+	            resolved.push({ provide: core_1.ComponentFactoryResolver, useValue: loadedFactoryResolver });
+	        }
+	        ;
+	        outlet.activate(future, loadedFactoryResolver, loadedInjector, core_1.ReflectiveInjector.resolve(resolved), outletMap);
 	    };
 	    ActivateRoutes.prototype.deactivateOutletAndItChildren = function (outlet) {
 	        if (outlet && outlet.isActivated) {
@@ -53856,13 +54096,12 @@ webpackJsonp([0],[
 	    };
 	    return ActivateRoutes;
 	}());
-	function pushQueryParamsAndFragment(state) {
-	    if (!collection_1.shallowEqual(state.snapshot.queryParams, state.queryParams.value)) {
-	        state.queryParams.next(state.snapshot.queryParams);
-	    }
-	    if (state.snapshot.fragment !== state.fragment.value) {
-	        state.fragment.next(state.snapshot.fragment);
-	    }
+	function closestLoadedConfig(state, snapshot) {
+	    var b = state.pathFromRoot(snapshot).filter(function (s) {
+	        var config = s._routeConfig;
+	        return config && config._loadedConfig && s !== snapshot;
+	    });
+	    return b.length > 0 ? b[b.length - 1]._routeConfig._loadedConfig : null;
 	}
 	function nodeChildrenAsMap(node) {
 	    return node ? node.children.reduce(function (m, c) {
@@ -54194,12 +54433,111 @@ webpackJsonp([0],[
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var every_1 = __webpack_require__(409);
+	var reduce_1 = __webpack_require__(409);
+	Observable_1.Observable.prototype.reduce = reduce_1.reduce;
+	//# sourceMappingURL=reduce.js.map
+
+/***/ },
+/* 409 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var Subscriber_1 = __webpack_require__(43);
+	/**
+	 * Returns an Observable that applies a specified accumulator function to the first item emitted by a source Observable,
+	 * then feeds the result of that function along with the second item emitted by the source Observable into the same
+	 * function, and so on until all items have been emitted by the source Observable, and emits the final result from
+	 * the final call to your function as its sole item.
+	 * This technique, which is called "reduce" here, is sometimes called "aggregate," "fold," "accumulate," "compress," or
+	 * "inject" in other programming contexts.
+	 *
+	 * <img src="./img/reduce.png" width="100%">
+	 *
+	 * @param {initialValue} the initial (seed) accumulator value
+	 * @param {accumulator} an accumulator function to be invoked on each item emitted by the source Observable, the
+	 * result of which will be used in the next accumulator call.
+	 * @return {Observable} an Observable that emits a single item that is the result of accumulating the output from the
+	 * items emitted by the source Observable.
+	 * @method reduce
+	 * @owner Observable
+	 */
+	function reduce(project, seed) {
+	    return this.lift(new ReduceOperator(project, seed));
+	}
+	exports.reduce = reduce;
+	var ReduceOperator = (function () {
+	    function ReduceOperator(project, seed) {
+	        this.project = project;
+	        this.seed = seed;
+	    }
+	    ReduceOperator.prototype.call = function (subscriber, source) {
+	        return source._subscribe(new ReduceSubscriber(subscriber, this.project, this.seed));
+	    };
+	    return ReduceOperator;
+	}());
+	exports.ReduceOperator = ReduceOperator;
+	/**
+	 * We need this JSDoc comment for affecting ESDoc.
+	 * @ignore
+	 * @extends {Ignored}
+	 */
+	var ReduceSubscriber = (function (_super) {
+	    __extends(ReduceSubscriber, _super);
+	    function ReduceSubscriber(destination, project, seed) {
+	        _super.call(this, destination);
+	        this.hasValue = false;
+	        this.acc = seed;
+	        this.project = project;
+	        this.hasSeed = typeof seed !== 'undefined';
+	    }
+	    ReduceSubscriber.prototype._next = function (value) {
+	        if (this.hasValue || (this.hasValue = this.hasSeed)) {
+	            this._tryReduce(value);
+	        }
+	        else {
+	            this.acc = value;
+	            this.hasValue = true;
+	        }
+	    };
+	    ReduceSubscriber.prototype._tryReduce = function (value) {
+	        var result;
+	        try {
+	            result = this.project(this.acc, value);
+	        }
+	        catch (err) {
+	            this.destination.error(err);
+	            return;
+	        }
+	        this.acc = result;
+	    };
+	    ReduceSubscriber.prototype._complete = function () {
+	        if (this.hasValue || this.hasSeed) {
+	            this.destination.next(this.acc);
+	        }
+	        this.destination.complete();
+	    };
+	    return ReduceSubscriber;
+	}(Subscriber_1.Subscriber));
+	exports.ReduceSubscriber = ReduceSubscriber;
+	//# sourceMappingURL=reduce.js.map
+
+/***/ },
+/* 410 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var Observable_1 = __webpack_require__(38);
+	var every_1 = __webpack_require__(411);
 	Observable_1.Observable.prototype.every = every_1.every;
 	//# sourceMappingURL=every.js.map
 
 /***/ },
-/* 409 */
+/* 411 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -54273,26 +54611,16 @@ webpackJsonp([0],[
 	//# sourceMappingURL=every.js.map
 
 /***/ },
-/* 410 */
+/* 412 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var Observable_1 = __webpack_require__(38);
-	var from_1 = __webpack_require__(411);
-	Observable_1.Observable.from = from_1.from;
-	//# sourceMappingURL=from.js.map
-
-/***/ },
-/* 411 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var FromObservable_1 = __webpack_require__(412);
+	var FromObservable_1 = __webpack_require__(413);
 	exports.from = FromObservable_1.FromObservable.create;
 	//# sourceMappingURL=from.js.map
 
 /***/ },
-/* 412 */
+/* 413 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -54306,9 +54634,9 @@ webpackJsonp([0],[
 	var isPromise_1 = __webpack_require__(354);
 	var isScheduler_1 = __webpack_require__(362);
 	var PromiseObservable_1 = __webpack_require__(56);
-	var IteratorObservable_1 = __webpack_require__(413);
+	var IteratorObservable_1 = __webpack_require__(414);
 	var ArrayObservable_1 = __webpack_require__(360);
-	var ArrayLikeObservable_1 = __webpack_require__(414);
+	var ArrayLikeObservable_1 = __webpack_require__(415);
 	var observable_1 = __webpack_require__(41);
 	var iterator_1 = __webpack_require__(355);
 	var Observable_1 = __webpack_require__(38);
@@ -54374,7 +54702,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=FromObservable.js.map
 
 /***/ },
-/* 413 */
+/* 414 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -54572,7 +54900,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=IteratorObservable.js.map
 
 /***/ },
-/* 414 */
+/* 415 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -54652,7 +54980,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=ArrayLikeObservable.js.map
 
 /***/ },
-/* 415 */
+/* 416 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -54663,181 +54991,287 @@ webpackJsonp([0],[
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
+	__webpack_require__(417);
+	__webpack_require__(375);
+	__webpack_require__(420);
 	var Observable_1 = __webpack_require__(38);
+	var from_1 = __webpack_require__(412);
 	var of_1 = __webpack_require__(359);
-	var shared_1 = __webpack_require__(416);
-	var url_tree_1 = __webpack_require__(417);
-	var collection_1 = __webpack_require__(418);
+	var EmptyError_1 = __webpack_require__(419);
+	var router_config_loader_1 = __webpack_require__(422);
+	var shared_1 = __webpack_require__(427);
+	var url_tree_1 = __webpack_require__(428);
+	var collection_1 = __webpack_require__(424);
 	var NoMatch = (function () {
-	    function NoMatch(segment) {
-	        if (segment === void 0) { segment = null; }
-	        this.segment = segment;
+	    function NoMatch(segmentGroup) {
+	        if (segmentGroup === void 0) { segmentGroup = null; }
+	        this.segmentGroup = segmentGroup;
 	    }
 	    return NoMatch;
 	}());
-	var GlobalRedirect = (function () {
-	    function GlobalRedirect(paths) {
-	        this.paths = paths;
+	var AbsoluteRedirect = (function () {
+	    function AbsoluteRedirect(segments) {
+	        this.segments = segments;
 	    }
-	    return GlobalRedirect;
+	    return AbsoluteRedirect;
 	}());
-	function applyRedirects(urlTree, config) {
-	    try {
-	        return createUrlTree(urlTree, expandSegment(config, urlTree.root, shared_1.PRIMARY_OUTLET));
+	function noMatch(segmentGroup) {
+	    return new Observable_1.Observable(function (obs) { return obs.error(new NoMatch(segmentGroup)); });
+	}
+	function absoluteRedirect(segments) {
+	    return new Observable_1.Observable(function (obs) { return obs.error(new AbsoluteRedirect(segments)); });
+	}
+	function canLoadFails(route) {
+	    return new Observable_1.Observable(function (obs) { return obs.error(new Error("Cannot load children because the guard of the route \"path: '" + route.path + "'\" returned false")); });
+	}
+	function applyRedirects(injector, configLoader, urlTree, config) {
+	    return new ApplyRedirects(injector, configLoader, urlTree, config).apply();
+	}
+	exports.applyRedirects = applyRedirects;
+	var ApplyRedirects = (function () {
+	    function ApplyRedirects(injector, configLoader, urlTree, config) {
+	        this.injector = injector;
+	        this.configLoader = configLoader;
+	        this.urlTree = urlTree;
+	        this.config = config;
+	        this.allowRedirects = true;
 	    }
-	    catch (e) {
-	        if (e instanceof GlobalRedirect) {
-	            return createUrlTree(urlTree, new url_tree_1.UrlSegment([], (_a = {}, _a[shared_1.PRIMARY_OUTLET] = new url_tree_1.UrlSegment(e.paths, {}), _a)));
+	    ApplyRedirects.prototype.apply = function () {
+	        var _this = this;
+	        return this.expandSegmentGroup(this.injector, this.config, this.urlTree.root, shared_1.PRIMARY_OUTLET)
+	            .map(function (rootSegmentGroup) { return _this.createUrlTree(rootSegmentGroup); })
+	            .catch(function (e) {
+	            if (e instanceof AbsoluteRedirect) {
+	                // after an absolute redirect we do not apply any more redirects!
+	                _this.allowRedirects = false;
+	                var group = new url_tree_1.UrlSegmentGroup([], (_a = {}, _a[shared_1.PRIMARY_OUTLET] = new url_tree_1.UrlSegmentGroup(e.segments, {}), _a));
+	                // we need to run matching, so we can fetch all lazy-loaded modules
+	                return _this.match(group);
+	            }
+	            else if (e instanceof NoMatch) {
+	                throw _this.noMatchError(e);
+	            }
+	            else {
+	                throw e;
+	            }
+	            var _a;
+	        });
+	    };
+	    ApplyRedirects.prototype.match = function (segmentGroup) {
+	        var _this = this;
+	        return this.expandSegmentGroup(this.injector, this.config, segmentGroup, shared_1.PRIMARY_OUTLET)
+	            .map(function (rootSegmentGroup) { return _this.createUrlTree(rootSegmentGroup); })
+	            .catch(function (e) {
+	            if (e instanceof NoMatch) {
+	                throw _this.noMatchError(e);
+	            }
+	            else {
+	                throw e;
+	            }
+	        });
+	    };
+	    ApplyRedirects.prototype.noMatchError = function (e) {
+	        return new Error("Cannot match any routes: '" + e.segmentGroup + "'");
+	    };
+	    ApplyRedirects.prototype.createUrlTree = function (rootCandidate) {
+	        var root = rootCandidate.segments.length > 0 ?
+	            new url_tree_1.UrlSegmentGroup([], (_a = {}, _a[shared_1.PRIMARY_OUTLET] = rootCandidate, _a)) :
+	            rootCandidate;
+	        return new url_tree_1.UrlTree(root, this.urlTree.queryParams, this.urlTree.fragment);
+	        var _a;
+	    };
+	    ApplyRedirects.prototype.expandSegmentGroup = function (injector, routes, segmentGroup, outlet) {
+	        if (segmentGroup.segments.length === 0 && segmentGroup.hasChildren()) {
+	            return this.expandChildren(injector, routes, segmentGroup)
+	                .map(function (children) { return new url_tree_1.UrlSegmentGroup([], children); });
 	        }
-	        else if (e instanceof NoMatch) {
-	            return new Observable_1.Observable(function (obs) {
-	                return obs.error(new Error("Cannot match any routes: '" + e.segment + "'"));
+	        else {
+	            return this.expandSegment(injector, segmentGroup, routes, segmentGroup.segments, outlet, true);
+	        }
+	    };
+	    ApplyRedirects.prototype.expandChildren = function (injector, routes, segmentGroup) {
+	        var _this = this;
+	        return collection_1.waitForMap(segmentGroup.children, function (childOutlet, child) { return _this.expandSegmentGroup(injector, routes, child, childOutlet); });
+	    };
+	    ApplyRedirects.prototype.expandSegment = function (injector, segmentGroup, routes, segments, outlet, allowRedirects) {
+	        var _this = this;
+	        var processRoutes = of_1.of.apply(void 0, routes)
+	            .map(function (r) {
+	            return _this
+	                .expandSegmentAgainstRoute(injector, segmentGroup, routes, r, segments, outlet, allowRedirects)
+	                .catch(function (e) {
+	                if (e instanceof NoMatch)
+	                    return of_1.of(null);
+	                else
+	                    throw e;
+	            });
+	        })
+	            .concatAll();
+	        return processRoutes.first(function (s) { return !!s; }).catch(function (e, _) {
+	            if (e instanceof EmptyError_1.EmptyError) {
+	                throw new NoMatch(segmentGroup);
+	            }
+	            else {
+	                throw e;
+	            }
+	        });
+	    };
+	    ApplyRedirects.prototype.expandSegmentAgainstRoute = function (injector, segmentGroup, routes, route, paths, outlet, allowRedirects) {
+	        if (getOutlet(route) !== outlet)
+	            return noMatch(segmentGroup);
+	        if (route.redirectTo !== undefined && !(allowRedirects && this.allowRedirects))
+	            return noMatch(segmentGroup);
+	        if (route.redirectTo === undefined) {
+	            return this.matchSegmentAgainstRoute(injector, segmentGroup, route, paths);
+	        }
+	        else {
+	            return this.expandSegmentAgainstRouteUsingRedirect(injector, segmentGroup, routes, route, paths, outlet);
+	        }
+	    };
+	    ApplyRedirects.prototype.expandSegmentAgainstRouteUsingRedirect = function (injector, segmentGroup, routes, route, segments, outlet) {
+	        if (route.path === '**') {
+	            return this.expandWildCardWithParamsAgainstRouteUsingRedirect(route);
+	        }
+	        else {
+	            return this.expandRegularSegmentAgainstRouteUsingRedirect(injector, segmentGroup, routes, route, segments, outlet);
+	        }
+	    };
+	    ApplyRedirects.prototype.expandWildCardWithParamsAgainstRouteUsingRedirect = function (route) {
+	        var newSegments = applyRedirectCommands([], route.redirectTo, {});
+	        if (route.redirectTo.startsWith('/')) {
+	            return absoluteRedirect(newSegments);
+	        }
+	        else {
+	            return of_1.of(new url_tree_1.UrlSegmentGroup(newSegments, {}));
+	        }
+	    };
+	    ApplyRedirects.prototype.expandRegularSegmentAgainstRouteUsingRedirect = function (injector, segmentGroup, routes, route, segments, outlet) {
+	        var _a = match(segmentGroup, route, segments), matched = _a.matched, consumedSegments = _a.consumedSegments, lastChild = _a.lastChild, positionalParamSegments = _a.positionalParamSegments;
+	        if (!matched)
+	            return noMatch(segmentGroup);
+	        var newSegments = applyRedirectCommands(consumedSegments, route.redirectTo, positionalParamSegments);
+	        if (route.redirectTo.startsWith('/')) {
+	            return absoluteRedirect(newSegments);
+	        }
+	        else {
+	            return this.expandSegment(injector, segmentGroup, routes, newSegments.concat(segments.slice(lastChild)), outlet, false);
+	        }
+	    };
+	    ApplyRedirects.prototype.matchSegmentAgainstRoute = function (injector, rawSegmentGroup, route, segments) {
+	        var _this = this;
+	        if (route.path === '**') {
+	            return of_1.of(new url_tree_1.UrlSegmentGroup(segments, {}));
+	        }
+	        else {
+	            var _a = match(rawSegmentGroup, route, segments), matched = _a.matched, consumedSegments_1 = _a.consumedSegments, lastChild = _a.lastChild;
+	            if (!matched)
+	                return noMatch(rawSegmentGroup);
+	            var rawSlicedSegments_1 = segments.slice(lastChild);
+	            return this.getChildConfig(injector, route).mergeMap(function (routerConfig) {
+	                var childInjector = routerConfig.injector;
+	                var childConfig = routerConfig.routes;
+	                var _a = split(rawSegmentGroup, consumedSegments_1, rawSlicedSegments_1, childConfig), segmentGroup = _a.segmentGroup, slicedSegments = _a.slicedSegments;
+	                if (slicedSegments.length === 0 && segmentGroup.hasChildren()) {
+	                    return _this.expandChildren(childInjector, childConfig, segmentGroup)
+	                        .map(function (children) { return new url_tree_1.UrlSegmentGroup(consumedSegments_1, children); });
+	                }
+	                else if (childConfig.length === 0 && slicedSegments.length === 0) {
+	                    return of_1.of(new url_tree_1.UrlSegmentGroup(consumedSegments_1, {}));
+	                }
+	                else {
+	                    return _this
+	                        .expandSegment(childInjector, segmentGroup, childConfig, slicedSegments, shared_1.PRIMARY_OUTLET, true)
+	                        .map(function (cs) { return new url_tree_1.UrlSegmentGroup(consumedSegments_1.concat(cs.segments), cs.children); });
+	                }
+	            });
+	        }
+	    };
+	    ApplyRedirects.prototype.getChildConfig = function (injector, route) {
+	        var _this = this;
+	        if (route.children) {
+	            return of_1.of(new router_config_loader_1.LoadedRouterConfig(route.children, injector, null));
+	        }
+	        else if (route.loadChildren) {
+	            return runGuards(injector, route).mergeMap(function (shouldLoad) {
+	                if (shouldLoad) {
+	                    return _this.configLoader.load(injector, route.loadChildren).map(function (r) {
+	                        route._loadedConfig = r;
+	                        return r;
+	                    });
+	                }
+	                else {
+	                    return canLoadFails(route);
+	                }
 	            });
 	        }
 	        else {
-	            return new Observable_1.Observable(function (obs) { return obs.error(e); });
+	            return of_1.of(new router_config_loader_1.LoadedRouterConfig([], injector, null));
 	        }
-	    }
-	    var _a;
-	}
-	exports.applyRedirects = applyRedirects;
-	function createUrlTree(urlTree, rootCandidate) {
-	    var root = rootCandidate.pathsWithParams.length > 0 ?
-	        new url_tree_1.UrlSegment([], (_a = {}, _a[shared_1.PRIMARY_OUTLET] = rootCandidate, _a)) :
-	        rootCandidate;
-	    return of_1.of(new url_tree_1.UrlTree(root, urlTree.queryParams, urlTree.fragment));
-	    var _a;
-	}
-	function expandSegment(routes, segment, outlet) {
-	    if (segment.pathsWithParams.length === 0 && segment.hasChildren()) {
-	        return new url_tree_1.UrlSegment([], expandSegmentChildren(routes, segment));
-	    }
-	    else {
-	        return expandPathsWithParams(segment, routes, segment.pathsWithParams, outlet, true);
-	    }
-	}
-	function expandSegmentChildren(routes, segment) {
-	    return url_tree_1.mapChildren(segment, function (child, childOutlet) { return expandSegment(routes, child, childOutlet); });
-	}
-	function expandPathsWithParams(segment, routes, paths, outlet, allowRedirects) {
-	    for (var _i = 0, routes_1 = routes; _i < routes_1.length; _i++) {
-	        var r = routes_1[_i];
-	        try {
-	            return expandPathsWithParamsAgainstRoute(segment, routes, r, paths, outlet, allowRedirects);
-	        }
-	        catch (e) {
-	            if (!(e instanceof NoMatch))
-	                throw e;
-	        }
-	    }
-	    throw new NoMatch(segment);
-	}
-	function expandPathsWithParamsAgainstRoute(segment, routes, route, paths, outlet, allowRedirects) {
-	    if (getOutlet(route) !== outlet)
-	        throw new NoMatch();
-	    if (route.redirectTo !== undefined && !allowRedirects)
-	        throw new NoMatch();
-	    if (route.redirectTo !== undefined) {
-	        return expandPathsWithParamsAgainstRouteUsingRedirect(segment, routes, route, paths, outlet);
-	    }
-	    else {
-	        return matchPathsWithParamsAgainstRoute(segment, route, paths);
-	    }
-	}
-	function expandPathsWithParamsAgainstRouteUsingRedirect(segment, routes, route, paths, outlet) {
-	    if (route.path === '**') {
-	        return expandWildCardWithParamsAgainstRouteUsingRedirect(route);
-	    }
-	    else {
-	        return expandRegularPathWithParamsAgainstRouteUsingRedirect(segment, routes, route, paths, outlet);
-	    }
-	}
-	function expandWildCardWithParamsAgainstRouteUsingRedirect(route) {
-	    var newPaths = applyRedirectCommands([], route.redirectTo, {});
-	    if (route.redirectTo.startsWith('/')) {
-	        throw new GlobalRedirect(newPaths);
-	    }
-	    else {
-	        return new url_tree_1.UrlSegment(newPaths, {});
-	    }
-	}
-	function expandRegularPathWithParamsAgainstRouteUsingRedirect(segment, routes, route, paths, outlet) {
-	    var _a = match(segment, route, paths), consumedPaths = _a.consumedPaths, lastChild = _a.lastChild, positionalParamSegments = _a.positionalParamSegments;
-	    var newPaths = applyRedirectCommands(consumedPaths, route.redirectTo, positionalParamSegments);
-	    if (route.redirectTo.startsWith('/')) {
-	        throw new GlobalRedirect(newPaths);
-	    }
-	    else {
-	        return expandPathsWithParams(segment, routes, newPaths.concat(paths.slice(lastChild)), outlet, false);
-	    }
-	}
-	function matchPathsWithParamsAgainstRoute(rawSegment, route, paths) {
-	    if (route.path === '**') {
-	        return new url_tree_1.UrlSegment(paths, {});
-	    }
-	    else {
-	        var _a = match(rawSegment, route, paths), consumedPaths = _a.consumedPaths, lastChild = _a.lastChild;
-	        var childConfig = route.children ? route.children : [];
-	        var rawSlicedPath = paths.slice(lastChild);
-	        var _b = split(rawSegment, consumedPaths, rawSlicedPath, childConfig), segment = _b.segment, slicedPath = _b.slicedPath;
-	        if (slicedPath.length === 0 && segment.hasChildren()) {
-	            var children = expandSegmentChildren(childConfig, segment);
-	            return new url_tree_1.UrlSegment(consumedPaths, children);
-	        }
-	        else if (childConfig.length === 0 && slicedPath.length === 0) {
-	            return new url_tree_1.UrlSegment(consumedPaths, {});
+	    };
+	    return ApplyRedirects;
+	}());
+	function runGuards(injector, route) {
+	    var canLoad = route.canLoad;
+	    if (!canLoad || canLoad.length === 0)
+	        return of_1.of(true);
+	    var obs = from_1.from(canLoad).map(function (c) {
+	        var guard = injector.get(c);
+	        if (guard.canLoad) {
+	            return collection_1.wrapIntoObservable(guard.canLoad(route));
 	        }
 	        else {
-	            var cs = expandPathsWithParams(segment, childConfig, slicedPath, shared_1.PRIMARY_OUTLET, true);
-	            return new url_tree_1.UrlSegment(consumedPaths.concat(cs.pathsWithParams), cs.children);
+	            return collection_1.wrapIntoObservable(guard(route));
 	        }
-	    }
+	    });
+	    return collection_1.andObservables(obs);
 	}
-	function match(segment, route, paths) {
+	function match(segmentGroup, route, segments) {
+	    var noMatch = { matched: false, consumedSegments: [], lastChild: 0, positionalParamSegments: {} };
 	    if (route.path === '') {
-	        if (route.terminal && (segment.hasChildren() || paths.length > 0)) {
-	            throw new NoMatch();
+	        if ((route.terminal || route.pathMatch === 'full') &&
+	            (segmentGroup.hasChildren() || segments.length > 0)) {
+	            return { matched: false, consumedSegments: [], lastChild: 0, positionalParamSegments: {} };
 	        }
 	        else {
-	            return { consumedPaths: [], lastChild: 0, positionalParamSegments: {} };
+	            return { matched: true, consumedSegments: [], lastChild: 0, positionalParamSegments: {} };
 	        }
 	    }
 	    var path = route.path;
 	    var parts = path.split('/');
 	    var positionalParamSegments = {};
-	    var consumedPaths = [];
+	    var consumedSegments = [];
 	    var currentIndex = 0;
 	    for (var i = 0; i < parts.length; ++i) {
-	        if (currentIndex >= paths.length)
-	            throw new NoMatch();
-	        var current = paths[currentIndex];
+	        if (currentIndex >= segments.length)
+	            return noMatch;
+	        var current = segments[currentIndex];
 	        var p = parts[i];
 	        var isPosParam = p.startsWith(':');
 	        if (!isPosParam && p !== current.path)
-	            throw new NoMatch();
+	            return noMatch;
 	        if (isPosParam) {
 	            positionalParamSegments[p.substring(1)] = current;
 	        }
-	        consumedPaths.push(current);
+	        consumedSegments.push(current);
 	        currentIndex++;
 	    }
-	    if (route.terminal && (segment.hasChildren() || currentIndex < paths.length)) {
-	        throw new NoMatch();
+	    if (route.terminal && (segmentGroup.hasChildren() || currentIndex < segments.length)) {
+	        return { matched: false, consumedSegments: [], lastChild: 0, positionalParamSegments: {} };
 	    }
-	    return { consumedPaths: consumedPaths, lastChild: currentIndex, positionalParamSegments: positionalParamSegments };
+	    return { matched: true, consumedSegments: consumedSegments, lastChild: currentIndex, positionalParamSegments: positionalParamSegments };
 	}
-	function applyRedirectCommands(paths, redirectTo, posParams) {
+	function applyRedirectCommands(segments, redirectTo, posParams) {
 	    var r = redirectTo.startsWith('/') ? redirectTo.substring(1) : redirectTo;
 	    if (r === '') {
 	        return [];
 	    }
 	    else {
-	        return createPaths(redirectTo, r.split('/'), paths, posParams);
+	        return createSegments(redirectTo, r.split('/'), segments, posParams);
 	    }
 	}
-	function createPaths(redirectTo, parts, segments, posParams) {
+	function createSegments(redirectTo, parts, segments, posParams) {
 	    return parts.map(function (p) { return p.startsWith(':') ? findPosParam(p, posParams, redirectTo) :
-	        findOrCreatePath(p, segments); });
+	        findOrCreateSegment(p, segments); });
 	}
 	function findPosParam(part, posParams, redirectTo) {
 	    var paramName = part.substring(1);
@@ -54846,62 +55280,75 @@ webpackJsonp([0],[
 	        throw new Error("Cannot redirect to '" + redirectTo + "'. Cannot find '" + part + "'.");
 	    return pos;
 	}
-	function findOrCreatePath(part, paths) {
-	    var matchingIndex = paths.findIndex(function (s) { return s.path === part; });
-	    if (matchingIndex > -1) {
-	        var r = paths[matchingIndex];
-	        paths.splice(matchingIndex);
-	        return r;
+	function findOrCreateSegment(part, segments) {
+	    var idx = 0;
+	    for (var _i = 0, segments_1 = segments; _i < segments_1.length; _i++) {
+	        var s = segments_1[_i];
+	        if (s.path === part) {
+	            segments.splice(idx);
+	            return s;
+	        }
+	        idx++;
+	    }
+	    return new url_tree_1.UrlSegment(part, {});
+	}
+	function split(segmentGroup, consumedSegments, slicedSegments, config) {
+	    if (slicedSegments.length > 0 &&
+	        containsEmptyPathRedirectsWithNamedOutlets(segmentGroup, slicedSegments, config)) {
+	        var s = new url_tree_1.UrlSegmentGroup(consumedSegments, createChildrenForEmptySegments(config, new url_tree_1.UrlSegmentGroup(slicedSegments, segmentGroup.children)));
+	        return { segmentGroup: mergeTrivialChildren(s), slicedSegments: [] };
+	    }
+	    else if (slicedSegments.length === 0 &&
+	        containsEmptyPathRedirects(segmentGroup, slicedSegments, config)) {
+	        var s = new url_tree_1.UrlSegmentGroup(segmentGroup.segments, addEmptySegmentsToChildrenIfNeeded(segmentGroup, slicedSegments, config, segmentGroup.children));
+	        return { segmentGroup: mergeTrivialChildren(s), slicedSegments: slicedSegments };
 	    }
 	    else {
-	        return new url_tree_1.UrlPathWithParams(part, {});
+	        return { segmentGroup: segmentGroup, slicedSegments: slicedSegments };
 	    }
 	}
-	function split(segment, consumedPaths, slicedPath, config) {
-	    if (slicedPath.length > 0 &&
-	        containsEmptyPathRedirectsWithNamedOutlets(segment, slicedPath, config)) {
-	        var s = new url_tree_1.UrlSegment(consumedPaths, createChildrenForEmptyPaths(config, new url_tree_1.UrlSegment(slicedPath, segment.children)));
-	        return { segment: s, slicedPath: [] };
-	    }
-	    else if (slicedPath.length === 0 && containsEmptyPathRedirects(segment, slicedPath, config)) {
-	        var s = new url_tree_1.UrlSegment(segment.pathsWithParams, addEmptyPathsToChildrenIfNeeded(segment, slicedPath, config, segment.children));
-	        return { segment: s, slicedPath: slicedPath };
+	function mergeTrivialChildren(s) {
+	    if (s.numberOfChildren === 1 && s.children[shared_1.PRIMARY_OUTLET]) {
+	        var c = s.children[shared_1.PRIMARY_OUTLET];
+	        return new url_tree_1.UrlSegmentGroup(s.segments.concat(c.segments), c.children);
 	    }
 	    else {
-	        return { segment: segment, slicedPath: slicedPath };
+	        return s;
 	    }
 	}
-	function addEmptyPathsToChildrenIfNeeded(segment, slicedPath, routes, children) {
+	function addEmptySegmentsToChildrenIfNeeded(segmentGroup, slicedSegments, routes, children) {
 	    var res = {};
-	    for (var _i = 0, routes_2 = routes; _i < routes_2.length; _i++) {
-	        var r = routes_2[_i];
-	        if (emptyPathRedirect(segment, slicedPath, r) && !children[getOutlet(r)]) {
-	            res[getOutlet(r)] = new url_tree_1.UrlSegment([], {});
+	    for (var _i = 0, routes_1 = routes; _i < routes_1.length; _i++) {
+	        var r = routes_1[_i];
+	        if (emptyPathRedirect(segmentGroup, slicedSegments, r) && !children[getOutlet(r)]) {
+	            res[getOutlet(r)] = new url_tree_1.UrlSegmentGroup([], {});
 	        }
 	    }
 	    return collection_1.merge(children, res);
 	}
-	function createChildrenForEmptyPaths(routes, primarySegment) {
+	function createChildrenForEmptySegments(routes, primarySegmentGroup) {
 	    var res = {};
-	    res[shared_1.PRIMARY_OUTLET] = primarySegment;
-	    for (var _i = 0, routes_3 = routes; _i < routes_3.length; _i++) {
-	        var r = routes_3[_i];
-	        if (r.path === '') {
-	            res[getOutlet(r)] = new url_tree_1.UrlSegment([], {});
+	    res[shared_1.PRIMARY_OUTLET] = primarySegmentGroup;
+	    for (var _i = 0, routes_2 = routes; _i < routes_2.length; _i++) {
+	        var r = routes_2[_i];
+	        if (r.path === '' && getOutlet(r) !== shared_1.PRIMARY_OUTLET) {
+	            res[getOutlet(r)] = new url_tree_1.UrlSegmentGroup([], {});
 	        }
 	    }
 	    return res;
 	}
-	function containsEmptyPathRedirectsWithNamedOutlets(segment, slicedPath, routes) {
+	function containsEmptyPathRedirectsWithNamedOutlets(segmentGroup, slicedSegments, routes) {
 	    return routes
-	        .filter(function (r) { return emptyPathRedirect(segment, slicedPath, r) && getOutlet(r) !== shared_1.PRIMARY_OUTLET; })
+	        .filter(function (r) { return emptyPathRedirect(segmentGroup, slicedSegments, r) &&
+	        getOutlet(r) !== shared_1.PRIMARY_OUTLET; })
 	        .length > 0;
 	}
-	function containsEmptyPathRedirects(segment, slicedPath, routes) {
-	    return routes.filter(function (r) { return emptyPathRedirect(segment, slicedPath, r); }).length > 0;
+	function containsEmptyPathRedirects(segmentGroup, slicedSegments, routes) {
+	    return routes.filter(function (r) { return emptyPathRedirect(segmentGroup, slicedSegments, r); }).length > 0;
 	}
-	function emptyPathRedirect(segment, slicedPath, r) {
-	    if ((segment.hasChildren() || slicedPath.length > 0) && r.terminal)
+	function emptyPathRedirect(segmentGroup, slicedSegments, r) {
+	    if ((segmentGroup.hasChildren() || slicedSegments.length > 0) &&
+	        (r.terminal || r.pathMatch === 'full'))
 	        return false;
 	    return r.path === '' && r.redirectTo !== undefined;
 	}
@@ -54911,26 +55358,265 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 416 */
-/***/ function(module, exports) {
+/* 417 */
+/***/ function(module, exports, __webpack_require__) {
 
-	/**
-	 * @license
-	 * Copyright Google Inc. All Rights Reserved.
-	 *
-	 * Use of this source code is governed by an MIT-style license that can be
-	 * found in the LICENSE file at https://angular.io/license
-	 */
 	"use strict";
-	/**
-	 * Name of the primary outlet.
-	 * @type {string}
-	 */
-	exports.PRIMARY_OUTLET = 'PRIMARY_OUTLET';
-
+	var Observable_1 = __webpack_require__(38);
+	var first_1 = __webpack_require__(418);
+	Observable_1.Observable.prototype.first = first_1.first;
+	//# sourceMappingURL=first.js.map
 
 /***/ },
-/* 417 */
+/* 418 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var Subscriber_1 = __webpack_require__(43);
+	var EmptyError_1 = __webpack_require__(419);
+	/**
+	 * Emits only the first value (or the first value that meets some condition)
+	 * emitted by the source Observable.
+	 *
+	 * <span class="informal">Emits only the first value. Or emits only the first
+	 * value that passes some test.</span>
+	 *
+	 * <img src="./img/first.png" width="100%">
+	 *
+	 * If called with no arguments, `first` emits the first value of the source
+	 * Observable, then completes. If called with a `predicate` function, `first`
+	 * emits the first value of the source that matches the specified condition. It
+	 * may also take a `resultSelector` function to produce the output value from
+	 * the input value, and a `defaultValue` to emit in case the source completes
+	 * before it is able to emit a valid value. Throws an error if `defaultValue`
+	 * was not provided and a matching element is not found.
+	 *
+	 * @example <caption>Emit only the first click that happens on the DOM</caption>
+	 * var clicks = Rx.Observable.fromEvent(document, 'click');
+	 * var result = clicks.first();
+	 * result.subscribe(x => console.log(x));
+	 *
+	 * @example <caption>Emits the first click that happens on a DIV</caption>
+	 * var clicks = Rx.Observable.fromEvent(document, 'click');
+	 * var result = clicks.first(ev => ev.target.tagName === 'DIV');
+	 * result.subscribe(x => console.log(x));
+	 *
+	 * @see {@link filter}
+	 * @see {@link find}
+	 * @see {@link take}
+	 *
+	 * @throws {EmptyError} Delivers an EmptyError to the Observer's `error`
+	 * callback if the Observable completes before any `next` notification was sent.
+	 *
+	 * @param {function(value: T, index: number, source: Observable<T>): boolean} [predicate]
+	 * An optional function called with each item to test for condition matching.
+	 * @param {function(value: T, index: number): R} [resultSelector] A function to
+	 * produce the value on the output Observable based on the values
+	 * and the indices of the source Observable. The arguments passed to this
+	 * function are:
+	 * - `value`: the value that was emitted on the source.
+	 * - `index`: the "index" of the value from the source.
+	 * @param {R} [defaultValue] The default value emitted in case no valid value
+	 * was found on the source.
+	 * @return {Observable<T|R>} an Observable of the first item that matches the
+	 * condition.
+	 * @method first
+	 * @owner Observable
+	 */
+	function first(predicate, resultSelector, defaultValue) {
+	    return this.lift(new FirstOperator(predicate, resultSelector, defaultValue, this));
+	}
+	exports.first = first;
+	var FirstOperator = (function () {
+	    function FirstOperator(predicate, resultSelector, defaultValue, source) {
+	        this.predicate = predicate;
+	        this.resultSelector = resultSelector;
+	        this.defaultValue = defaultValue;
+	        this.source = source;
+	    }
+	    FirstOperator.prototype.call = function (observer, source) {
+	        return source._subscribe(new FirstSubscriber(observer, this.predicate, this.resultSelector, this.defaultValue, this.source));
+	    };
+	    return FirstOperator;
+	}());
+	/**
+	 * We need this JSDoc comment for affecting ESDoc.
+	 * @ignore
+	 * @extends {Ignored}
+	 */
+	var FirstSubscriber = (function (_super) {
+	    __extends(FirstSubscriber, _super);
+	    function FirstSubscriber(destination, predicate, resultSelector, defaultValue, source) {
+	        _super.call(this, destination);
+	        this.predicate = predicate;
+	        this.resultSelector = resultSelector;
+	        this.defaultValue = defaultValue;
+	        this.source = source;
+	        this.index = 0;
+	        this.hasCompleted = false;
+	    }
+	    FirstSubscriber.prototype._next = function (value) {
+	        var index = this.index++;
+	        if (this.predicate) {
+	            this._tryPredicate(value, index);
+	        }
+	        else {
+	            this._emit(value, index);
+	        }
+	    };
+	    FirstSubscriber.prototype._tryPredicate = function (value, index) {
+	        var result;
+	        try {
+	            result = this.predicate(value, index, this.source);
+	        }
+	        catch (err) {
+	            this.destination.error(err);
+	            return;
+	        }
+	        if (result) {
+	            this._emit(value, index);
+	        }
+	    };
+	    FirstSubscriber.prototype._emit = function (value, index) {
+	        if (this.resultSelector) {
+	            this._tryResultSelector(value, index);
+	            return;
+	        }
+	        this._emitFinal(value);
+	    };
+	    FirstSubscriber.prototype._tryResultSelector = function (value, index) {
+	        var result;
+	        try {
+	            result = this.resultSelector(value, index);
+	        }
+	        catch (err) {
+	            this.destination.error(err);
+	            return;
+	        }
+	        this._emitFinal(result);
+	    };
+	    FirstSubscriber.prototype._emitFinal = function (value) {
+	        var destination = this.destination;
+	        destination.next(value);
+	        destination.complete();
+	        this.hasCompleted = true;
+	    };
+	    FirstSubscriber.prototype._complete = function () {
+	        var destination = this.destination;
+	        if (!this.hasCompleted && typeof this.defaultValue !== 'undefined') {
+	            destination.next(this.defaultValue);
+	            destination.complete();
+	        }
+	        else if (!this.hasCompleted) {
+	            destination.error(new EmptyError_1.EmptyError);
+	        }
+	    };
+	    return FirstSubscriber;
+	}(Subscriber_1.Subscriber));
+	//# sourceMappingURL=first.js.map
+
+/***/ },
+/* 419 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	/**
+	 * An error thrown when an Observable or a sequence was queried but has no
+	 * elements.
+	 *
+	 * @see {@link first}
+	 * @see {@link last}
+	 * @see {@link single}
+	 *
+	 * @class EmptyError
+	 */
+	var EmptyError = (function (_super) {
+	    __extends(EmptyError, _super);
+	    function EmptyError() {
+	        _super.call(this, 'no elements in sequence');
+	        this.name = 'EmptyError';
+	    }
+	    return EmptyError;
+	}(Error));
+	exports.EmptyError = EmptyError;
+	//# sourceMappingURL=EmptyError.js.map
+
+/***/ },
+/* 420 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var Observable_1 = __webpack_require__(38);
+	var concatAll_1 = __webpack_require__(421);
+	Observable_1.Observable.prototype.concatAll = concatAll_1.concatAll;
+	//# sourceMappingURL=concatAll.js.map
+
+/***/ },
+/* 421 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var mergeAll_1 = __webpack_require__(407);
+	/**
+	 * Converts a higher-order Observable into a first-order Observable by
+	 * concatenating the inner Observables in order.
+	 *
+	 * <span class="informal">Flattens an Observable-of-Observables by putting one
+	 * inner Observable after the other.</span>
+	 *
+	 * <img src="./img/concatAll.png" width="100%">
+	 *
+	 * Joins every Observable emitted by the source (a higher-order Observable), in
+	 * a serial fashion. It subscribes to each inner Observable only after the
+	 * previous inner Observable has completed, and merges all of their values into
+	 * the returned observable.
+	 *
+	 * __Warning:__ If the source Observable emits Observables quickly and
+	 * endlessly, and the inner Observables it emits generally complete slower than
+	 * the source emits, you can run into memory issues as the incoming Observables
+	 * collect in an unbounded buffer.
+	 *
+	 * Note: `concatAll` is equivalent to `mergeAll` with concurrency parameter set
+	 * to `1`.
+	 *
+	 * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
+	 * var clicks = Rx.Observable.fromEvent(document, 'click');
+	 * var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(4));
+	 * var firstOrder = higherOrder.concatAll();
+	 * firstOrder.subscribe(x => console.log(x));
+	 *
+	 * @see {@link combineAll}
+	 * @see {@link concat}
+	 * @see {@link concatMap}
+	 * @see {@link concatMapTo}
+	 * @see {@link exhaust}
+	 * @see {@link mergeAll}
+	 * @see {@link switch}
+	 * @see {@link zipAll}
+	 *
+	 * @return {Observable} An Observable emitting values from all the inner
+	 * Observables concatenated.
+	 * @method concatAll
+	 * @owner Observable
+	 */
+	function concatAll() {
+	    return this.lift(new mergeAll_1.MergeAllOperator(1));
+	}
+	exports.concatAll = concatAll;
+	//# sourceMappingURL=concatAll.js.map
+
+/***/ },
+/* 422 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -54941,411 +55627,50 @@ webpackJsonp([0],[
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
-	var shared_1 = __webpack_require__(416);
-	var collection_1 = __webpack_require__(418);
-	function createEmptyUrlTree() {
-	    return new UrlTree(new UrlSegment([], {}), {}, null);
-	}
-	exports.createEmptyUrlTree = createEmptyUrlTree;
-	function containsTree(container, containee, exact) {
-	    if (exact) {
-	        return equalSegments(container.root, containee.root);
-	    }
-	    else {
-	        return containsSegment(container.root, containee.root);
-	    }
-	}
-	exports.containsTree = containsTree;
-	function equalSegments(container, containee) {
-	    if (!equalPath(container.pathsWithParams, containee.pathsWithParams))
-	        return false;
-	    if (Object.keys(container.children).length !== Object.keys(containee.children).length)
-	        return false;
-	    for (var c in containee.children) {
-	        if (!container.children[c])
-	            return false;
-	        if (!equalSegments(container.children[c], containee.children[c]))
-	            return false;
-	    }
-	    return true;
-	}
-	function containsSegment(container, containee) {
-	    return containsSegmentHelper(container, containee, containee.pathsWithParams);
-	}
-	function containsSegmentHelper(container, containee, containeePaths) {
-	    if (container.pathsWithParams.length > containeePaths.length) {
-	        var current = container.pathsWithParams.slice(0, containeePaths.length);
-	        if (!equalPath(current, containeePaths))
-	            return false;
-	        if (Object.keys(containee.children).length > 0)
-	            return false;
-	        return true;
-	    }
-	    else if (container.pathsWithParams.length === containeePaths.length) {
-	        if (!equalPath(container.pathsWithParams, containeePaths))
-	            return false;
-	        for (var c in containee.children) {
-	            if (!container.children[c])
-	                return false;
-	            if (!containsSegment(container.children[c], containee.children[c]))
-	                return false;
-	        }
-	        return true;
-	    }
-	    else {
-	        var current = containeePaths.slice(0, container.pathsWithParams.length);
-	        var next = containeePaths.slice(container.pathsWithParams.length);
-	        if (!equalPath(container.pathsWithParams, current))
-	            return false;
-	        return containsSegmentHelper(container.children[shared_1.PRIMARY_OUTLET], containee, next);
-	    }
-	}
+	var core_1 = __webpack_require__(5);
+	var fromPromise_1 = __webpack_require__(423);
+	var collection_1 = __webpack_require__(424);
 	/**
-	 * A URL in the tree form.
+	 * @deprecated use Routes
 	 */
-	var UrlTree = (function () {
-	    /**
-	     * @internal
-	     */
-	    function UrlTree(root, queryParams, fragment) {
-	        this.root = root;
-	        this.queryParams = queryParams;
-	        this.fragment = fragment;
+	exports.ROUTER_CONFIG = new core_1.OpaqueToken('ROUTER_CONFIG');
+	exports.ROUTES = new core_1.OpaqueToken('ROUTES');
+	var LoadedRouterConfig = (function () {
+	    function LoadedRouterConfig(routes, injector, factoryResolver) {
+	        this.routes = routes;
+	        this.injector = injector;
+	        this.factoryResolver = factoryResolver;
 	    }
-	    UrlTree.prototype.toString = function () { return new DefaultUrlSerializer().serialize(this); };
-	    return UrlTree;
+	    return LoadedRouterConfig;
 	}());
-	exports.UrlTree = UrlTree;
-	var UrlSegment = (function () {
-	    function UrlSegment(pathsWithParams, children) {
-	        var _this = this;
-	        this.pathsWithParams = pathsWithParams;
-	        this.children = children;
-	        this.parent = null;
-	        collection_1.forEach(children, function (v, k) { return v.parent = _this; });
+	exports.LoadedRouterConfig = LoadedRouterConfig;
+	var RouterConfigLoader = (function () {
+	    function RouterConfigLoader(loader) {
+	        this.loader = loader;
 	    }
-	    UrlSegment.prototype.hasChildren = function () { return Object.keys(this.children).length > 0; };
-	    UrlSegment.prototype.toString = function () { return serializePaths(this); };
-	    return UrlSegment;
+	    RouterConfigLoader.prototype.load = function (parentInjector, path) {
+	        return fromPromise_1.fromPromise(this.loader.load(path).then(function (r) {
+	            var ref = r.create(parentInjector);
+	            return new LoadedRouterConfig(collection_1.flatten(ref.injector.get(exports.ROUTES)), ref.injector, ref.componentFactoryResolver);
+	        }));
+	    };
+	    return RouterConfigLoader;
 	}());
-	exports.UrlSegment = UrlSegment;
-	var UrlPathWithParams = (function () {
-	    function UrlPathWithParams(path, parameters) {
-	        this.path = path;
-	        this.parameters = parameters;
-	    }
-	    UrlPathWithParams.prototype.toString = function () { return serializePath(this); };
-	    return UrlPathWithParams;
-	}());
-	exports.UrlPathWithParams = UrlPathWithParams;
-	function equalPathsWithParams(a, b) {
-	    if (a.length !== b.length)
-	        return false;
-	    for (var i = 0; i < a.length; ++i) {
-	        if (a[i].path !== b[i].path)
-	            return false;
-	        if (!collection_1.shallowEqual(a[i].parameters, b[i].parameters))
-	            return false;
-	    }
-	    return true;
-	}
-	exports.equalPathsWithParams = equalPathsWithParams;
-	function equalPath(a, b) {
-	    if (a.length !== b.length)
-	        return false;
-	    for (var i = 0; i < a.length; ++i) {
-	        if (a[i].path !== b[i].path)
-	            return false;
-	    }
-	    return true;
-	}
-	exports.equalPath = equalPath;
-	function mapChildren(segment, fn) {
-	    var newChildren = {};
-	    collection_1.forEach(segment.children, function (child, childOutlet) {
-	        if (childOutlet === shared_1.PRIMARY_OUTLET) {
-	            newChildren[childOutlet] = fn(child, childOutlet);
-	        }
-	    });
-	    collection_1.forEach(segment.children, function (child, childOutlet) {
-	        if (childOutlet !== shared_1.PRIMARY_OUTLET) {
-	            newChildren[childOutlet] = fn(child, childOutlet);
-	        }
-	    });
-	    return newChildren;
-	}
-	exports.mapChildren = mapChildren;
-	function mapChildrenIntoArray(segment, fn) {
-	    var res = [];
-	    collection_1.forEach(segment.children, function (child, childOutlet) {
-	        if (childOutlet === shared_1.PRIMARY_OUTLET) {
-	            res = res.concat(fn(child, childOutlet));
-	        }
-	    });
-	    collection_1.forEach(segment.children, function (child, childOutlet) {
-	        if (childOutlet !== shared_1.PRIMARY_OUTLET) {
-	            res = res.concat(fn(child, childOutlet));
-	        }
-	    });
-	    return res;
-	}
-	exports.mapChildrenIntoArray = mapChildrenIntoArray;
-	/**
-	 * Defines a way to serialize/deserialize a url tree.
-	 */
-	var UrlSerializer = (function () {
-	    function UrlSerializer() {
-	    }
-	    return UrlSerializer;
-	}());
-	exports.UrlSerializer = UrlSerializer;
-	/**
-	 * A default implementation of the serialization.
-	 */
-	var DefaultUrlSerializer = (function () {
-	    function DefaultUrlSerializer() {
-	    }
-	    DefaultUrlSerializer.prototype.parse = function (url) {
-	        var p = new UrlParser(url);
-	        return new UrlTree(p.parseRootSegment(), p.parseQueryParams(), p.parseFragment());
-	    };
-	    DefaultUrlSerializer.prototype.serialize = function (tree) {
-	        var segment = "/" + serializeSegment(tree.root, true);
-	        var query = serializeQueryParams(tree.queryParams);
-	        var fragment = tree.fragment !== null ? "#" + tree.fragment : '';
-	        return "" + segment + query + fragment;
-	    };
-	    return DefaultUrlSerializer;
-	}());
-	exports.DefaultUrlSerializer = DefaultUrlSerializer;
-	function serializePaths(segment) {
-	    return segment.pathsWithParams.map(function (p) { return serializePath(p); }).join('/');
-	}
-	exports.serializePaths = serializePaths;
-	function serializeSegment(segment, root) {
-	    if (segment.children[shared_1.PRIMARY_OUTLET] && root) {
-	        var primary = serializeSegment(segment.children[shared_1.PRIMARY_OUTLET], false);
-	        var children_1 = [];
-	        collection_1.forEach(segment.children, function (v, k) {
-	            if (k !== shared_1.PRIMARY_OUTLET) {
-	                children_1.push(k + ":" + serializeSegment(v, false));
-	            }
-	        });
-	        if (children_1.length > 0) {
-	            return primary + "(" + children_1.join('//') + ")";
-	        }
-	        else {
-	            return "" + primary;
-	        }
-	    }
-	    else if (segment.hasChildren() && !root) {
-	        var children = mapChildrenIntoArray(segment, function (v, k) {
-	            if (k === shared_1.PRIMARY_OUTLET) {
-	                return [serializeSegment(segment.children[shared_1.PRIMARY_OUTLET], false)];
-	            }
-	            else {
-	                return [(k + ":" + serializeSegment(v, false))];
-	            }
-	        });
-	        return serializePaths(segment) + "/(" + children.join('//') + ")";
-	    }
-	    else {
-	        return serializePaths(segment);
-	    }
-	}
-	function serializePath(path) {
-	    return "" + path.path + serializeParams(path.parameters);
-	}
-	exports.serializePath = serializePath;
-	function serializeParams(params) {
-	    return pairs(params).map(function (p) { return (";" + p.first + "=" + p.second); }).join('');
-	}
-	function serializeQueryParams(params) {
-	    var strs = pairs(params).map(function (p) { return (p.first + "=" + p.second); });
-	    return strs.length > 0 ? "?" + strs.join("&") : '';
-	}
-	var Pair = (function () {
-	    function Pair(first, second) {
-	        this.first = first;
-	        this.second = second;
-	    }
-	    return Pair;
-	}());
-	function pairs(obj) {
-	    var res = [];
-	    for (var prop in obj) {
-	        if (obj.hasOwnProperty(prop)) {
-	            res.push(new Pair(prop, obj[prop]));
-	        }
-	    }
-	    return res;
-	}
-	var SEGMENT_RE = /^[^\/\(\)\?;=&#]+/;
-	function matchPathWithParams(str) {
-	    SEGMENT_RE.lastIndex = 0;
-	    var match = SEGMENT_RE.exec(str);
-	    return match ? match[0] : '';
-	}
-	var QUERY_PARAM_RE = /^[^=\?&#]+/;
-	function matchQueryParams(str) {
-	    QUERY_PARAM_RE.lastIndex = 0;
-	    var match = SEGMENT_RE.exec(str);
-	    return match ? match[0] : '';
-	}
-	var QUERY_PARAM_VALUE_RE = /^[^\?&#]+/;
-	function matchUrlQueryParamValue(str) {
-	    QUERY_PARAM_VALUE_RE.lastIndex = 0;
-	    var match = QUERY_PARAM_VALUE_RE.exec(str);
-	    return match ? match[0] : '';
-	}
-	var UrlParser = (function () {
-	    function UrlParser(remaining) {
-	        this.remaining = remaining;
-	    }
-	    UrlParser.prototype.peekStartsWith = function (str) { return this.remaining.startsWith(str); };
-	    UrlParser.prototype.capture = function (str) {
-	        if (!this.remaining.startsWith(str)) {
-	            throw new Error("Expected \"" + str + "\".");
-	        }
-	        this.remaining = this.remaining.substring(str.length);
-	    };
-	    UrlParser.prototype.parseRootSegment = function () {
-	        if (this.remaining === '' || this.remaining === '/') {
-	            return new UrlSegment([], {});
-	        }
-	        else {
-	            return new UrlSegment([], this.parseSegmentChildren());
-	        }
-	    };
-	    UrlParser.prototype.parseSegmentChildren = function () {
-	        if (this.remaining.length == 0) {
-	            return {};
-	        }
-	        if (this.peekStartsWith('/')) {
-	            this.capture('/');
-	        }
-	        var paths = [this.parsePathWithParams()];
-	        while (this.peekStartsWith('/') && !this.peekStartsWith('//') && !this.peekStartsWith('/(')) {
-	            this.capture('/');
-	            paths.push(this.parsePathWithParams());
-	        }
-	        var children = {};
-	        if (this.peekStartsWith('/(')) {
-	            this.capture('/');
-	            children = this.parseParens(true);
-	        }
-	        var res = {};
-	        if (this.peekStartsWith('(')) {
-	            res = this.parseParens(false);
-	        }
-	        res[shared_1.PRIMARY_OUTLET] = new UrlSegment(paths, children);
-	        return res;
-	    };
-	    UrlParser.prototype.parsePathWithParams = function () {
-	        var path = matchPathWithParams(this.remaining);
-	        if (path === '' && this.peekStartsWith(';')) {
-	            throw new Error("Empty path url segment cannot have parameters: '" + this.remaining + "'.");
-	        }
-	        this.capture(path);
-	        var matrixParams = {};
-	        if (this.peekStartsWith(';')) {
-	            matrixParams = this.parseMatrixParams();
-	        }
-	        return new UrlPathWithParams(path, matrixParams);
-	    };
-	    UrlParser.prototype.parseQueryParams = function () {
-	        var params = {};
-	        if (this.peekStartsWith('?')) {
-	            this.capture('?');
-	            this.parseQueryParam(params);
-	            while (this.remaining.length > 0 && this.peekStartsWith('&')) {
-	                this.capture('&');
-	                this.parseQueryParam(params);
-	            }
-	        }
-	        return params;
-	    };
-	    UrlParser.prototype.parseFragment = function () {
-	        if (this.peekStartsWith('#')) {
-	            return this.remaining.substring(1);
-	        }
-	        else {
-	            return null;
-	        }
-	    };
-	    UrlParser.prototype.parseMatrixParams = function () {
-	        var params = {};
-	        while (this.remaining.length > 0 && this.peekStartsWith(';')) {
-	            this.capture(';');
-	            this.parseParam(params);
-	        }
-	        return params;
-	    };
-	    UrlParser.prototype.parseParam = function (params) {
-	        var key = matchPathWithParams(this.remaining);
-	        if (!key) {
-	            return;
-	        }
-	        this.capture(key);
-	        var value = 'true';
-	        if (this.peekStartsWith('=')) {
-	            this.capture('=');
-	            var valueMatch = matchPathWithParams(this.remaining);
-	            if (valueMatch) {
-	                value = valueMatch;
-	                this.capture(value);
-	            }
-	        }
-	        params[key] = value;
-	    };
-	    UrlParser.prototype.parseQueryParam = function (params) {
-	        var key = matchQueryParams(this.remaining);
-	        if (!key) {
-	            return;
-	        }
-	        this.capture(key);
-	        var value = 'true';
-	        if (this.peekStartsWith('=')) {
-	            this.capture('=');
-	            var valueMatch = matchUrlQueryParamValue(this.remaining);
-	            if (valueMatch) {
-	                value = valueMatch;
-	                this.capture(value);
-	            }
-	        }
-	        params[key] = value;
-	    };
-	    UrlParser.prototype.parseParens = function (allowPrimary) {
-	        var segments = {};
-	        this.capture('(');
-	        while (!this.peekStartsWith(')') && this.remaining.length > 0) {
-	            var path = matchPathWithParams(this.remaining);
-	            var outletName = void 0;
-	            if (path.indexOf(':') > -1) {
-	                outletName = path.substr(0, path.indexOf(':'));
-	                this.capture(outletName);
-	                this.capture(':');
-	            }
-	            else if (allowPrimary) {
-	                outletName = shared_1.PRIMARY_OUTLET;
-	            }
-	            var children = this.parseSegmentChildren();
-	            segments[outletName] = Object.keys(children).length === 1 ? children[shared_1.PRIMARY_OUTLET] :
-	                new UrlSegment([], children);
-	            if (this.peekStartsWith('//')) {
-	                this.capture('//');
-	            }
-	        }
-	        this.capture(')');
-	        return segments;
-	    };
-	    return UrlParser;
-	}());
+	exports.RouterConfigLoader = RouterConfigLoader;
 
 
 /***/ },
-/* 418 */
-/***/ function(module, exports) {
+/* 423 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var PromiseObservable_1 = __webpack_require__(56);
+	exports.fromPromise = PromiseObservable_1.PromiseObservable.create;
+	//# sourceMappingURL=fromPromise.js.map
+
+/***/ },
+/* 424 */
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * @license
@@ -55355,6 +55680,12 @@ webpackJsonp([0],[
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
+	__webpack_require__(420);
+	__webpack_require__(425);
+	var Observable_1 = __webpack_require__(38);
+	var fromPromise_1 = __webpack_require__(423);
+	var of_1 = __webpack_require__(359);
+	var shared_1 = __webpack_require__(427);
 	function shallowEqualArrays(a, b) {
 	    if (a.length !== b.length)
 	        return false;
@@ -55426,10 +55757,658 @@ webpackJsonp([0],[
 	    }
 	}
 	exports.forEach = forEach;
+	function waitForMap(obj, fn) {
+	    var waitFor = [];
+	    var res = {};
+	    forEach(obj, function (a, k) {
+	        if (k === shared_1.PRIMARY_OUTLET) {
+	            waitFor.push(fn(k, a).map(function (_) {
+	                res[k] = _;
+	                return _;
+	            }));
+	        }
+	    });
+	    forEach(obj, function (a, k) {
+	        if (k !== shared_1.PRIMARY_OUTLET) {
+	            waitFor.push(fn(k, a).map(function (_) {
+	                res[k] = _;
+	                return _;
+	            }));
+	        }
+	    });
+	    if (waitFor.length > 0) {
+	        return of_1.of.apply(void 0, waitFor).concatAll().last().map(function (last) { return res; });
+	    }
+	    else {
+	        return of_1.of(res);
+	    }
+	}
+	exports.waitForMap = waitForMap;
+	function andObservables(observables) {
+	    return observables.mergeAll().every(function (result) { return result === true; });
+	}
+	exports.andObservables = andObservables;
+	function wrapIntoObservable(value) {
+	    if (value instanceof Observable_1.Observable) {
+	        return value;
+	    }
+	    else if (value instanceof Promise) {
+	        return fromPromise_1.fromPromise(value);
+	    }
+	    else {
+	        return of_1.of(value);
+	    }
+	}
+	exports.wrapIntoObservable = wrapIntoObservable;
 
 
 /***/ },
-/* 419 */
+/* 425 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var Observable_1 = __webpack_require__(38);
+	var last_1 = __webpack_require__(426);
+	Observable_1.Observable.prototype.last = last_1.last;
+	//# sourceMappingURL=last.js.map
+
+/***/ },
+/* 426 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var Subscriber_1 = __webpack_require__(43);
+	var EmptyError_1 = __webpack_require__(419);
+	/**
+	 * Returns an Observable that emits only the last item emitted by the source Observable.
+	 * It optionally takes a predicate function as a parameter, in which case, rather than emitting
+	 * the last item from the source Observable, the resulting Observable will emit the last item
+	 * from the source Observable that satisfies the predicate.
+	 *
+	 * <img src="./img/last.png" width="100%">
+	 *
+	 * @throws {EmptyError} Delivers an EmptyError to the Observer's `error`
+	 * callback if the Observable completes before any `next` notification was sent.
+	 * @param {function} predicate - the condition any source emitted item has to satisfy.
+	 * @return {Observable} an Observable that emits only the last item satisfying the given condition
+	 * from the source, or an NoSuchElementException if no such items are emitted.
+	 * @throws - Throws if no items that match the predicate are emitted by the source Observable.
+	 * @method last
+	 * @owner Observable
+	 */
+	function last(predicate, resultSelector, defaultValue) {
+	    return this.lift(new LastOperator(predicate, resultSelector, defaultValue, this));
+	}
+	exports.last = last;
+	var LastOperator = (function () {
+	    function LastOperator(predicate, resultSelector, defaultValue, source) {
+	        this.predicate = predicate;
+	        this.resultSelector = resultSelector;
+	        this.defaultValue = defaultValue;
+	        this.source = source;
+	    }
+	    LastOperator.prototype.call = function (observer, source) {
+	        return source._subscribe(new LastSubscriber(observer, this.predicate, this.resultSelector, this.defaultValue, this.source));
+	    };
+	    return LastOperator;
+	}());
+	/**
+	 * We need this JSDoc comment for affecting ESDoc.
+	 * @ignore
+	 * @extends {Ignored}
+	 */
+	var LastSubscriber = (function (_super) {
+	    __extends(LastSubscriber, _super);
+	    function LastSubscriber(destination, predicate, resultSelector, defaultValue, source) {
+	        _super.call(this, destination);
+	        this.predicate = predicate;
+	        this.resultSelector = resultSelector;
+	        this.defaultValue = defaultValue;
+	        this.source = source;
+	        this.hasValue = false;
+	        this.index = 0;
+	        if (typeof defaultValue !== 'undefined') {
+	            this.lastValue = defaultValue;
+	            this.hasValue = true;
+	        }
+	    }
+	    LastSubscriber.prototype._next = function (value) {
+	        var index = this.index++;
+	        if (this.predicate) {
+	            this._tryPredicate(value, index);
+	        }
+	        else {
+	            if (this.resultSelector) {
+	                this._tryResultSelector(value, index);
+	                return;
+	            }
+	            this.lastValue = value;
+	            this.hasValue = true;
+	        }
+	    };
+	    LastSubscriber.prototype._tryPredicate = function (value, index) {
+	        var result;
+	        try {
+	            result = this.predicate(value, index, this.source);
+	        }
+	        catch (err) {
+	            this.destination.error(err);
+	            return;
+	        }
+	        if (result) {
+	            if (this.resultSelector) {
+	                this._tryResultSelector(value, index);
+	                return;
+	            }
+	            this.lastValue = value;
+	            this.hasValue = true;
+	        }
+	    };
+	    LastSubscriber.prototype._tryResultSelector = function (value, index) {
+	        var result;
+	        try {
+	            result = this.resultSelector(value, index);
+	        }
+	        catch (err) {
+	            this.destination.error(err);
+	            return;
+	        }
+	        this.lastValue = result;
+	        this.hasValue = true;
+	    };
+	    LastSubscriber.prototype._complete = function () {
+	        var destination = this.destination;
+	        if (this.hasValue) {
+	            destination.next(this.lastValue);
+	            destination.complete();
+	        }
+	        else {
+	            destination.error(new EmptyError_1.EmptyError);
+	        }
+	    };
+	    return LastSubscriber;
+	}(Subscriber_1.Subscriber));
+	//# sourceMappingURL=last.js.map
+
+/***/ },
+/* 427 */
+/***/ function(module, exports) {
+
+	/**
+	 * @license
+	 * Copyright Google Inc. All Rights Reserved.
+	 *
+	 * Use of this source code is governed by an MIT-style license that can be
+	 * found in the LICENSE file at https://angular.io/license
+	 */
+	"use strict";
+	/**
+	 * Name of the primary outlet.
+	 * @type {string}
+	 *
+	 * @experimental
+	 */
+	exports.PRIMARY_OUTLET = 'primary';
+
+
+/***/ },
+/* 428 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @license
+	 * Copyright Google Inc. All Rights Reserved.
+	 *
+	 * Use of this source code is governed by an MIT-style license that can be
+	 * found in the LICENSE file at https://angular.io/license
+	 */
+	"use strict";
+	var shared_1 = __webpack_require__(427);
+	var collection_1 = __webpack_require__(424);
+	function createEmptyUrlTree() {
+	    return new UrlTree(new UrlSegmentGroup([], {}), {}, null);
+	}
+	exports.createEmptyUrlTree = createEmptyUrlTree;
+	function containsTree(container, containee, exact) {
+	    if (exact) {
+	        return equalSegmentGroups(container.root, containee.root);
+	    }
+	    else {
+	        return containsSegmentGroup(container.root, containee.root);
+	    }
+	}
+	exports.containsTree = containsTree;
+	function equalSegmentGroups(container, containee) {
+	    if (!equalPath(container.segments, containee.segments))
+	        return false;
+	    if (container.numberOfChildren !== containee.numberOfChildren)
+	        return false;
+	    for (var c in containee.children) {
+	        if (!container.children[c])
+	            return false;
+	        if (!equalSegmentGroups(container.children[c], containee.children[c]))
+	            return false;
+	    }
+	    return true;
+	}
+	function containsSegmentGroup(container, containee) {
+	    return containsSegmentGroupHelper(container, containee, containee.segments);
+	}
+	function containsSegmentGroupHelper(container, containee, containeePaths) {
+	    if (container.segments.length > containeePaths.length) {
+	        var current = container.segments.slice(0, containeePaths.length);
+	        if (!equalPath(current, containeePaths))
+	            return false;
+	        if (containee.hasChildren())
+	            return false;
+	        return true;
+	    }
+	    else if (container.segments.length === containeePaths.length) {
+	        if (!equalPath(container.segments, containeePaths))
+	            return false;
+	        for (var c in containee.children) {
+	            if (!container.children[c])
+	                return false;
+	            if (!containsSegmentGroup(container.children[c], containee.children[c]))
+	                return false;
+	        }
+	        return true;
+	    }
+	    else {
+	        var current = containeePaths.slice(0, container.segments.length);
+	        var next = containeePaths.slice(container.segments.length);
+	        if (!equalPath(container.segments, current))
+	            return false;
+	        if (!container.children[shared_1.PRIMARY_OUTLET])
+	            return false;
+	        return containsSegmentGroupHelper(container.children[shared_1.PRIMARY_OUTLET], containee, next);
+	    }
+	}
+	/**
+	 * A URL in the tree form.
+	 *
+	 * @stable
+	 */
+	var UrlTree = (function () {
+	    /**
+	     * @internal
+	     */
+	    function UrlTree(root, queryParams, fragment) {
+	        this.root = root;
+	        this.queryParams = queryParams;
+	        this.fragment = fragment;
+	    }
+	    UrlTree.prototype.toString = function () { return new DefaultUrlSerializer().serialize(this); };
+	    return UrlTree;
+	}());
+	exports.UrlTree = UrlTree;
+	/**
+	 * @stable
+	 */
+	var UrlSegmentGroup = (function () {
+	    function UrlSegmentGroup(segments, children) {
+	        var _this = this;
+	        this.segments = segments;
+	        this.children = children;
+	        this.parent = null;
+	        collection_1.forEach(children, function (v, k) { return v.parent = _this; });
+	    }
+	    /**
+	     * Return true if the segment has child segments
+	     */
+	    UrlSegmentGroup.prototype.hasChildren = function () { return this.numberOfChildren > 0; };
+	    Object.defineProperty(UrlSegmentGroup.prototype, "numberOfChildren", {
+	        /**
+	         * Returns the number of child sements.
+	         */
+	        get: function () { return Object.keys(this.children).length; },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    UrlSegmentGroup.prototype.toString = function () { return serializePaths(this); };
+	    return UrlSegmentGroup;
+	}());
+	exports.UrlSegmentGroup = UrlSegmentGroup;
+	/**
+	 * @stable
+	 */
+	var UrlSegment = (function () {
+	    function UrlSegment(path, parameters) {
+	        this.path = path;
+	        this.parameters = parameters;
+	    }
+	    UrlSegment.prototype.toString = function () { return serializePath(this); };
+	    return UrlSegment;
+	}());
+	exports.UrlSegment = UrlSegment;
+	function equalSegments(a, b) {
+	    if (a.length !== b.length)
+	        return false;
+	    for (var i = 0; i < a.length; ++i) {
+	        if (a[i].path !== b[i].path)
+	            return false;
+	        if (!collection_1.shallowEqual(a[i].parameters, b[i].parameters))
+	            return false;
+	    }
+	    return true;
+	}
+	exports.equalSegments = equalSegments;
+	function equalPath(a, b) {
+	    if (a.length !== b.length)
+	        return false;
+	    for (var i = 0; i < a.length; ++i) {
+	        if (a[i].path !== b[i].path)
+	            return false;
+	    }
+	    return true;
+	}
+	exports.equalPath = equalPath;
+	function mapChildrenIntoArray(segment, fn) {
+	    var res = [];
+	    collection_1.forEach(segment.children, function (child, childOutlet) {
+	        if (childOutlet === shared_1.PRIMARY_OUTLET) {
+	            res = res.concat(fn(child, childOutlet));
+	        }
+	    });
+	    collection_1.forEach(segment.children, function (child, childOutlet) {
+	        if (childOutlet !== shared_1.PRIMARY_OUTLET) {
+	            res = res.concat(fn(child, childOutlet));
+	        }
+	    });
+	    return res;
+	}
+	exports.mapChildrenIntoArray = mapChildrenIntoArray;
+	/**
+	 * Defines a way to serialize/deserialize a url tree.
+	 *
+	 * @experimental
+	 */
+	var UrlSerializer = (function () {
+	    function UrlSerializer() {
+	    }
+	    return UrlSerializer;
+	}());
+	exports.UrlSerializer = UrlSerializer;
+	/**
+	 * A default implementation of the serialization.
+	 *
+	 * @experimental
+	 */
+	var DefaultUrlSerializer = (function () {
+	    function DefaultUrlSerializer() {
+	    }
+	    DefaultUrlSerializer.prototype.parse = function (url) {
+	        var p = new UrlParser(url);
+	        return new UrlTree(p.parseRootSegment(), p.parseQueryParams(), p.parseFragment());
+	    };
+	    DefaultUrlSerializer.prototype.serialize = function (tree) {
+	        var segment = "/" + serializeSegment(tree.root, true);
+	        var query = serializeQueryParams(tree.queryParams);
+	        var fragment = tree.fragment !== null && tree.fragment !== undefined ?
+	            "#" + encodeURIComponent(tree.fragment) :
+	            '';
+	        return "" + segment + query + fragment;
+	    };
+	    return DefaultUrlSerializer;
+	}());
+	exports.DefaultUrlSerializer = DefaultUrlSerializer;
+	function serializePaths(segment) {
+	    return segment.segments.map(function (p) { return serializePath(p); }).join('/');
+	}
+	exports.serializePaths = serializePaths;
+	function serializeSegment(segment, root) {
+	    if (segment.hasChildren() && root) {
+	        var primary = segment.children[shared_1.PRIMARY_OUTLET] ?
+	            serializeSegment(segment.children[shared_1.PRIMARY_OUTLET], false) :
+	            '';
+	        var children_1 = [];
+	        collection_1.forEach(segment.children, function (v, k) {
+	            if (k !== shared_1.PRIMARY_OUTLET) {
+	                children_1.push(k + ":" + serializeSegment(v, false));
+	            }
+	        });
+	        if (children_1.length > 0) {
+	            return primary + "(" + children_1.join('//') + ")";
+	        }
+	        else {
+	            return "" + primary;
+	        }
+	    }
+	    else if (segment.hasChildren() && !root) {
+	        var children = mapChildrenIntoArray(segment, function (v, k) {
+	            if (k === shared_1.PRIMARY_OUTLET) {
+	                return [serializeSegment(segment.children[shared_1.PRIMARY_OUTLET], false)];
+	            }
+	            else {
+	                return [(k + ":" + serializeSegment(v, false))];
+	            }
+	        });
+	        return serializePaths(segment) + "/(" + children.join('//') + ")";
+	    }
+	    else {
+	        return serializePaths(segment);
+	    }
+	}
+	function encode(s) {
+	    return encodeURIComponent(s);
+	}
+	exports.encode = encode;
+	function decode(s) {
+	    return decodeURIComponent(s);
+	}
+	exports.decode = decode;
+	function serializePath(path) {
+	    return "" + encode(path.path) + serializeParams(path.parameters);
+	}
+	exports.serializePath = serializePath;
+	function serializeParams(params) {
+	    return pairs(params).map(function (p) { return (";" + encode(p.first) + "=" + encode(p.second)); }).join('');
+	}
+	function serializeQueryParams(params) {
+	    var strs = pairs(params).map(function (p) { return (encode(p.first) + "=" + encode(p.second)); });
+	    return strs.length > 0 ? "?" + strs.join("&") : '';
+	}
+	var Pair = (function () {
+	    function Pair(first, second) {
+	        this.first = first;
+	        this.second = second;
+	    }
+	    return Pair;
+	}());
+	function pairs(obj) {
+	    var res = [];
+	    for (var prop in obj) {
+	        if (obj.hasOwnProperty(prop)) {
+	            res.push(new Pair(prop, obj[prop]));
+	        }
+	    }
+	    return res;
+	}
+	var SEGMENT_RE = /^[^\/\(\)\?;=&#]+/;
+	function matchSegments(str) {
+	    SEGMENT_RE.lastIndex = 0;
+	    var match = str.match(SEGMENT_RE);
+	    return match ? match[0] : '';
+	}
+	var QUERY_PARAM_RE = /^[^=\?&#]+/;
+	function matchQueryParams(str) {
+	    QUERY_PARAM_RE.lastIndex = 0;
+	    var match = str.match(SEGMENT_RE);
+	    return match ? match[0] : '';
+	}
+	var QUERY_PARAM_VALUE_RE = /^[^\?&#]+/;
+	function matchUrlQueryParamValue(str) {
+	    QUERY_PARAM_VALUE_RE.lastIndex = 0;
+	    var match = str.match(QUERY_PARAM_VALUE_RE);
+	    return match ? match[0] : '';
+	}
+	var UrlParser = (function () {
+	    function UrlParser(url) {
+	        this.url = url;
+	        this.remaining = url;
+	    }
+	    UrlParser.prototype.peekStartsWith = function (str) { return this.remaining.startsWith(str); };
+	    UrlParser.prototype.capture = function (str) {
+	        if (!this.remaining.startsWith(str)) {
+	            throw new Error("Expected \"" + str + "\".");
+	        }
+	        this.remaining = this.remaining.substring(str.length);
+	    };
+	    UrlParser.prototype.parseRootSegment = function () {
+	        if (this.remaining.startsWith('/')) {
+	            this.capture('/');
+	        }
+	        if (this.remaining === '' || this.remaining.startsWith('?') || this.remaining.startsWith('#')) {
+	            return new UrlSegmentGroup([], {});
+	        }
+	        else {
+	            return new UrlSegmentGroup([], this.parseChildren());
+	        }
+	    };
+	    UrlParser.prototype.parseChildren = function () {
+	        if (this.remaining.length == 0) {
+	            return {};
+	        }
+	        if (this.peekStartsWith('/')) {
+	            this.capture('/');
+	        }
+	        var paths = [];
+	        if (!this.peekStartsWith('(')) {
+	            paths.push(this.parseSegments());
+	        }
+	        while (this.peekStartsWith('/') && !this.peekStartsWith('//') && !this.peekStartsWith('/(')) {
+	            this.capture('/');
+	            paths.push(this.parseSegments());
+	        }
+	        var children = {};
+	        if (this.peekStartsWith('/(')) {
+	            this.capture('/');
+	            children = this.parseParens(true);
+	        }
+	        var res = {};
+	        if (this.peekStartsWith('(')) {
+	            res = this.parseParens(false);
+	        }
+	        if (paths.length > 0 || Object.keys(children).length > 0) {
+	            res[shared_1.PRIMARY_OUTLET] = new UrlSegmentGroup(paths, children);
+	        }
+	        return res;
+	    };
+	    UrlParser.prototype.parseSegments = function () {
+	        var path = matchSegments(this.remaining);
+	        if (path === '' && this.peekStartsWith(';')) {
+	            throw new Error("Empty path url segment cannot have parameters: '" + this.remaining + "'.");
+	        }
+	        this.capture(path);
+	        var matrixParams = {};
+	        if (this.peekStartsWith(';')) {
+	            matrixParams = this.parseMatrixParams();
+	        }
+	        return new UrlSegment(decode(path), matrixParams);
+	    };
+	    UrlParser.prototype.parseQueryParams = function () {
+	        var params = {};
+	        if (this.peekStartsWith('?')) {
+	            this.capture('?');
+	            this.parseQueryParam(params);
+	            while (this.remaining.length > 0 && this.peekStartsWith('&')) {
+	                this.capture('&');
+	                this.parseQueryParam(params);
+	            }
+	        }
+	        return params;
+	    };
+	    UrlParser.prototype.parseFragment = function () {
+	        if (this.peekStartsWith('#')) {
+	            return decode(this.remaining.substring(1));
+	        }
+	        else {
+	            return null;
+	        }
+	    };
+	    UrlParser.prototype.parseMatrixParams = function () {
+	        var params = {};
+	        while (this.remaining.length > 0 && this.peekStartsWith(';')) {
+	            this.capture(';');
+	            this.parseParam(params);
+	        }
+	        return params;
+	    };
+	    UrlParser.prototype.parseParam = function (params) {
+	        var key = matchSegments(this.remaining);
+	        if (!key) {
+	            return;
+	        }
+	        this.capture(key);
+	        var value = 'true';
+	        if (this.peekStartsWith('=')) {
+	            this.capture('=');
+	            var valueMatch = matchSegments(this.remaining);
+	            if (valueMatch) {
+	                value = valueMatch;
+	                this.capture(value);
+	            }
+	        }
+	        params[decode(key)] = decode(value);
+	    };
+	    UrlParser.prototype.parseQueryParam = function (params) {
+	        var key = matchQueryParams(this.remaining);
+	        if (!key) {
+	            return;
+	        }
+	        this.capture(key);
+	        var value = '';
+	        if (this.peekStartsWith('=')) {
+	            this.capture('=');
+	            var valueMatch = matchUrlQueryParamValue(this.remaining);
+	            if (valueMatch) {
+	                value = valueMatch;
+	                this.capture(value);
+	            }
+	        }
+	        params[decode(key)] = decode(value);
+	    };
+	    UrlParser.prototype.parseParens = function (allowPrimary) {
+	        var segments = {};
+	        this.capture('(');
+	        while (!this.peekStartsWith(')') && this.remaining.length > 0) {
+	            var path = matchSegments(this.remaining);
+	            var next = this.remaining[path.length];
+	            // if is is not one of these characters, then the segment was unescaped
+	            // or the group was not closed
+	            if (next !== '/' && next !== ')' && next !== ';') {
+	                throw new Error("Cannot parse url '" + this.url + "'");
+	            }
+	            var outletName = void 0;
+	            if (path.indexOf(':') > -1) {
+	                outletName = path.substr(0, path.indexOf(':'));
+	                this.capture(outletName);
+	                this.capture(':');
+	            }
+	            else if (allowPrimary) {
+	                outletName = shared_1.PRIMARY_OUTLET;
+	            }
+	            var children = this.parseChildren();
+	            segments[outletName] = Object.keys(children).length === 1 ? children[shared_1.PRIMARY_OUTLET] :
+	                new UrlSegmentGroup([], children);
+	            if (this.peekStartsWith('//')) {
+	                this.capture('//');
+	            }
+	        }
+	        this.capture(')');
+	        return segments;
+	    };
+	    return UrlParser;
+	}());
+
+
+/***/ },
+/* 429 */
 /***/ function(module, exports) {
 
 	/**
@@ -55445,14 +56424,24 @@ webpackJsonp([0],[
 	}
 	exports.validateConfig = validateConfig;
 	function validateNode(route) {
+	    if (Array.isArray(route)) {
+	        throw new Error("Invalid route configuration: Array cannot be specified");
+	    }
 	    if (!!route.redirectTo && !!route.children) {
 	        throw new Error("Invalid configuration of route '" + route.path + "': redirectTo and children cannot be used together");
+	    }
+	    if (!!route.redirectTo && !!route.loadChildren) {
+	        throw new Error("Invalid configuration of route '" + route.path + "': redirectTo and loadChildren cannot be used together");
+	    }
+	    if (!!route.children && !!route.loadChildren) {
+	        throw new Error("Invalid configuration of route '" + route.path + "': children and loadChildren cannot be used together");
 	    }
 	    if (!!route.redirectTo && !!route.component) {
 	        throw new Error("Invalid configuration of route '" + route.path + "': redirectTo and component cannot be used together");
 	    }
-	    if (route.redirectTo === undefined && !route.component && !route.children) {
-	        throw new Error("Invalid configuration of route '" + route.path + "': component, redirectTo, children must be provided");
+	    if (route.redirectTo === undefined && !route.component && !route.children &&
+	        !route.loadChildren) {
+	        throw new Error("Invalid configuration of route '" + route.path + "': one of the following must be provided (component or redirectTo or children or loadChildren)");
 	    }
 	    if (route.path === undefined) {
 	        throw new Error("Invalid route configuration: routes must have path specified");
@@ -55460,11 +56449,19 @@ webpackJsonp([0],[
 	    if (route.path.startsWith('/')) {
 	        throw new Error("Invalid route configuration of route '" + route.path + "': path cannot start with a slash");
 	    }
+	    if (route.path === '' && route.redirectTo !== undefined &&
+	        (route.terminal === undefined && route.pathMatch === undefined)) {
+	        var exp = "The default value of 'pathMatch' is 'prefix', but often the intent is to use 'full'.";
+	        throw new Error("Invalid route configuration of route '{path: \"" + route.path + "\", redirectTo: \"" + route.redirectTo + "\"}': please provide 'pathMatch'. " + exp);
+	    }
+	    if (route.pathMatch !== undefined && route.pathMatch !== 'full' && route.pathMatch !== 'prefix') {
+	        throw new Error("Invalid configuration of route '" + route.path + "': pathMatch can only be set to 'prefix' or 'full'");
+	    }
 	}
 
 
 /***/ },
-/* 420 */
+/* 430 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -55475,14 +56472,12 @@ webpackJsonp([0],[
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
-	var BehaviorSubject_1 = __webpack_require__(421);
-	var router_state_1 = __webpack_require__(422);
-	var tree_1 = __webpack_require__(423);
+	var BehaviorSubject_1 = __webpack_require__(431);
+	var router_state_1 = __webpack_require__(432);
+	var tree_1 = __webpack_require__(433);
 	function createRouterState(curr, prevState) {
 	    var root = createNode(curr._root, prevState ? prevState._root : undefined);
-	    var queryParams = prevState ? prevState.queryParams : new BehaviorSubject_1.BehaviorSubject(curr.queryParams);
-	    var fragment = prevState ? prevState.fragment : new BehaviorSubject_1.BehaviorSubject(curr.fragment);
-	    return new router_state_1.RouterState(root, queryParams, fragment, curr);
+	    return new router_state_1.RouterState(root, curr);
 	}
 	exports.createRouterState = createRouterState;
 	function createNode(curr, prevState) {
@@ -55500,17 +56495,17 @@ webpackJsonp([0],[
 	}
 	function createOrReuseChildren(curr, prevState) {
 	    return curr.children.map(function (child) {
-	        var index = prevState.children.findIndex(function (p) { return equalRouteSnapshots(p.value.snapshot, child.value); });
-	        if (index >= 0) {
-	            return createNode(child, prevState.children[index]);
+	        for (var _i = 0, _a = prevState.children; _i < _a.length; _i++) {
+	            var p = _a[_i];
+	            if (equalRouteSnapshots(p.value.snapshot, child.value)) {
+	                return createNode(child, p);
+	            }
 	        }
-	        else {
-	            return createNode(child);
-	        }
+	        return createNode(child);
 	    });
 	}
 	function createActivatedRoute(c) {
-	    return new router_state_1.ActivatedRoute(new BehaviorSubject_1.BehaviorSubject(c.url), new BehaviorSubject_1.BehaviorSubject(c.params), c.outlet, c.component, c);
+	    return new router_state_1.ActivatedRoute(new BehaviorSubject_1.BehaviorSubject(c.url), new BehaviorSubject_1.BehaviorSubject(c.params), new BehaviorSubject_1.BehaviorSubject(c.queryParams), new BehaviorSubject_1.BehaviorSubject(c.fragment), new BehaviorSubject_1.BehaviorSubject(c.data), c.outlet, c.component, c);
 	}
 	function equalRouteSnapshots(a, b) {
 	    return a._routeConfig === b._routeConfig;
@@ -55518,7 +56513,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 421 */
+/* 431 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -55577,7 +56572,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=BehaviorSubject.js.map
 
 /***/ },
-/* 422 */
+/* 432 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -55593,11 +56588,11 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var BehaviorSubject_1 = __webpack_require__(421);
-	var shared_1 = __webpack_require__(416);
-	var url_tree_1 = __webpack_require__(417);
-	var collection_1 = __webpack_require__(418);
-	var tree_1 = __webpack_require__(423);
+	var BehaviorSubject_1 = __webpack_require__(431);
+	var shared_1 = __webpack_require__(427);
+	var url_tree_1 = __webpack_require__(428);
+	var collection_1 = __webpack_require__(424);
+	var tree_1 = __webpack_require__(433);
 	/**
 	 * The state of the router.
 	 *
@@ -55612,44 +56607,62 @@ webpackJsonp([0],[
 	 *   }
 	 * }
 	 * ```
+	 *
+	 * @stable
 	 */
 	var RouterState = (function (_super) {
 	    __extends(RouterState, _super);
 	    /**
 	     * @internal
 	     */
-	    function RouterState(root, queryParams, fragment, snapshot) {
+	    function RouterState(root, snapshot) {
 	        _super.call(this, root);
-	        this.queryParams = queryParams;
-	        this.fragment = fragment;
 	        this.snapshot = snapshot;
+	        setRouterStateSnapshot(this, root);
 	    }
+	    Object.defineProperty(RouterState.prototype, "queryParams", {
+	        /**
+	          * @deprecated (Use root.queryParams)
+	          */
+	        get: function () { return this.root.queryParams; },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(RouterState.prototype, "fragment", {
+	        /**
+	         * @deprecated (Use root.fragment)
+	         */
+	        get: function () { return this.root.fragment; },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    RouterState.prototype.toString = function () { return this.snapshot.toString(); };
 	    return RouterState;
 	}(tree_1.Tree));
 	exports.RouterState = RouterState;
 	function createEmptyState(urlTree, rootComponent) {
 	    var snapshot = createEmptyStateSnapshot(urlTree, rootComponent);
-	    var emptyUrl = new BehaviorSubject_1.BehaviorSubject([new url_tree_1.UrlPathWithParams('', {})]);
+	    var emptyUrl = new BehaviorSubject_1.BehaviorSubject([new url_tree_1.UrlSegment('', {})]);
 	    var emptyParams = new BehaviorSubject_1.BehaviorSubject({});
+	    var emptyData = new BehaviorSubject_1.BehaviorSubject({});
 	    var emptyQueryParams = new BehaviorSubject_1.BehaviorSubject({});
 	    var fragment = new BehaviorSubject_1.BehaviorSubject('');
-	    var activated = new ActivatedRoute(emptyUrl, emptyParams, shared_1.PRIMARY_OUTLET, rootComponent, snapshot.root);
+	    var activated = new ActivatedRoute(emptyUrl, emptyParams, emptyQueryParams, fragment, emptyData, shared_1.PRIMARY_OUTLET, rootComponent, snapshot.root);
 	    activated.snapshot = snapshot.root;
-	    return new RouterState(new tree_1.TreeNode(activated, []), emptyQueryParams, fragment, snapshot);
+	    return new RouterState(new tree_1.TreeNode(activated, []), snapshot);
 	}
 	exports.createEmptyState = createEmptyState;
 	function createEmptyStateSnapshot(urlTree, rootComponent) {
 	    var emptyParams = {};
+	    var emptyData = {};
 	    var emptyQueryParams = {};
 	    var fragment = '';
-	    var activated = new ActivatedRouteSnapshot([], emptyParams, shared_1.PRIMARY_OUTLET, rootComponent, null, urlTree.root, -1);
-	    return new RouterStateSnapshot('', new tree_1.TreeNode(activated, []), emptyQueryParams, fragment);
+	    var activated = new ActivatedRouteSnapshot([], emptyParams, emptyQueryParams, fragment, emptyData, shared_1.PRIMARY_OUTLET, rootComponent, null, urlTree.root, -1, InheritedResolve.empty);
+	    return new RouterStateSnapshot('', new tree_1.TreeNode(activated, []));
 	}
 	/**
 	 * Contains the information about a component loaded in an outlet. The information is provided
-	 * through
-	 * the params and urlSegments observables.
+	 * through the params, urlSegments, and data observables.
 	 *
 	 * ### Usage
 	 *
@@ -55657,27 +56670,94 @@ webpackJsonp([0],[
 	 * class MyComponent {
 	 *   constructor(route: ActivatedRoute) {
 	 *     const id: Observable<string> = route.params.map(p => p.id);
+	 *     const data = route.data.map(d => d.user); //includes `data` and `resolve`
 	 *   }
 	 * }
 	 * ```
+	 *
+	 * @stable
 	 */
 	var ActivatedRoute = (function () {
 	    /**
 	     * @internal
 	     */
-	    function ActivatedRoute(url, params, outlet, component, futureSnapshot) {
+	    function ActivatedRoute(url, params, queryParams, fragment, data, outlet, component, futureSnapshot) {
 	        this.url = url;
 	        this.params = params;
+	        this.queryParams = queryParams;
+	        this.fragment = fragment;
+	        this.data = data;
 	        this.outlet = outlet;
 	        this.component = component;
 	        this._futureSnapshot = futureSnapshot;
 	    }
+	    Object.defineProperty(ActivatedRoute.prototype, "routeConfig", {
+	        get: function () { return this._futureSnapshot.routeConfig; },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ActivatedRoute.prototype, "root", {
+	        get: function () { return this._routerState.root; },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ActivatedRoute.prototype, "parent", {
+	        get: function () { return this._routerState.parent(this); },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ActivatedRoute.prototype, "firstChild", {
+	        get: function () { return this._routerState.firstChild(this); },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ActivatedRoute.prototype, "children", {
+	        get: function () { return this._routerState.children(this); },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ActivatedRoute.prototype, "pathFromRoot", {
+	        get: function () { return this._routerState.pathFromRoot(this); },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    ActivatedRoute.prototype.toString = function () {
 	        return this.snapshot ? this.snapshot.toString() : "Future(" + this._futureSnapshot + ")";
 	    };
 	    return ActivatedRoute;
 	}());
 	exports.ActivatedRoute = ActivatedRoute;
+	/**
+	 * @internal
+	 */
+	var InheritedResolve = (function () {
+	    function InheritedResolve(parent, current) {
+	        this.parent = parent;
+	        this.current = current;
+	        /**
+	         * @internal
+	         */
+	        this.resolvedData = {};
+	    }
+	    Object.defineProperty(InheritedResolve.prototype, "flattenedResolvedData", {
+	        /**
+	         * @internal
+	         */
+	        get: function () {
+	            return this.parent ? collection_1.merge(this.parent.flattenedResolvedData, this.resolvedData) :
+	                this.resolvedData;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(InheritedResolve, "empty", {
+	        get: function () { return new InheritedResolve(null, {}); },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    return InheritedResolve;
+	}());
+	exports.InheritedResolve = InheritedResolve;
 	/**
 	 * Contains the information about a component loaded in an outlet at a particular moment in time.
 	 *
@@ -55687,23 +56767,60 @@ webpackJsonp([0],[
 	 * class MyComponent {
 	 *   constructor(route: ActivatedRoute) {
 	 *     const id: string = route.snapshot.params.id;
+	 *     const data = route.snapshot.data;
 	 *   }
 	 * }
 	 * ```
+	 *
+	 * @stable
 	 */
 	var ActivatedRouteSnapshot = (function () {
 	    /**
 	     * @internal
 	     */
-	    function ActivatedRouteSnapshot(url, params, outlet, component, routeConfig, urlSegment, lastPathIndex) {
+	    function ActivatedRouteSnapshot(url, params, queryParams, fragment, data, outlet, component, routeConfig, urlSegment, lastPathIndex, resolve) {
 	        this.url = url;
 	        this.params = params;
+	        this.queryParams = queryParams;
+	        this.fragment = fragment;
+	        this.data = data;
 	        this.outlet = outlet;
 	        this.component = component;
 	        this._routeConfig = routeConfig;
 	        this._urlSegment = urlSegment;
 	        this._lastPathIndex = lastPathIndex;
+	        this._resolve = resolve;
 	    }
+	    Object.defineProperty(ActivatedRouteSnapshot.prototype, "routeConfig", {
+	        get: function () { return this._routeConfig; },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ActivatedRouteSnapshot.prototype, "root", {
+	        get: function () { return this._routerState.root; },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ActivatedRouteSnapshot.prototype, "parent", {
+	        get: function () { return this._routerState.parent(this); },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ActivatedRouteSnapshot.prototype, "firstChild", {
+	        get: function () { return this._routerState.firstChild(this); },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ActivatedRouteSnapshot.prototype, "children", {
+	        get: function () { return this._routerState.children(this); },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ActivatedRouteSnapshot.prototype, "pathFromRoot", {
+	        get: function () { return this._routerState.pathFromRoot(this); },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    ActivatedRouteSnapshot.prototype.toString = function () {
 	        var url = this.url.map(function (s) { return s.toString(); }).join('/');
 	        var matched = this._routeConfig ? this._routeConfig.path : '';
@@ -55724,22 +56841,43 @@ webpackJsonp([0],[
 	 *   }
 	 * }
 	 * ```
+	 *
+	 * @stable
 	 */
 	var RouterStateSnapshot = (function (_super) {
 	    __extends(RouterStateSnapshot, _super);
 	    /**
 	     * @internal
 	     */
-	    function RouterStateSnapshot(url, root, queryParams, fragment) {
+	    function RouterStateSnapshot(url, root) {
 	        _super.call(this, root);
 	        this.url = url;
-	        this.queryParams = queryParams;
-	        this.fragment = fragment;
+	        setRouterStateSnapshot(this, root);
 	    }
+	    Object.defineProperty(RouterStateSnapshot.prototype, "queryParams", {
+	        /**
+	         * @deprecated (Use root.queryParams)
+	         */
+	        get: function () { return this.root.queryParams; },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(RouterStateSnapshot.prototype, "fragment", {
+	        /**
+	         * @deprecated (Use root.fragment)
+	         */
+	        get: function () { return this.root.fragment; },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    RouterStateSnapshot.prototype.toString = function () { return serializeNode(this._root); };
 	    return RouterStateSnapshot;
 	}(tree_1.Tree));
 	exports.RouterStateSnapshot = RouterStateSnapshot;
+	function setRouterStateSnapshot(state, node) {
+	    node.value._routerState = state;
+	    node.children.forEach(function (c) { return setRouterStateSnapshot(state, c); });
+	}
 	function serializeNode(node) {
 	    var c = node.children.length > 0 ? " { " + node.children.map(serializeNode).join(", ") + " } " : '';
 	    return "" + node.value + c;
@@ -55751,8 +56889,15 @@ webpackJsonp([0],[
 	 */
 	function advanceActivatedRoute(route) {
 	    if (route.snapshot) {
+	        if (!collection_1.shallowEqual(route.snapshot.queryParams, route._futureSnapshot.queryParams)) {
+	            route.queryParams.next(route._futureSnapshot.queryParams);
+	        }
+	        if (route.snapshot.fragment !== route._futureSnapshot.fragment) {
+	            route.fragment.next(route._futureSnapshot.fragment);
+	        }
 	        if (!collection_1.shallowEqual(route.snapshot.params, route._futureSnapshot.params)) {
 	            route.params.next(route._futureSnapshot.params);
+	            route.data.next(route._futureSnapshot.data);
 	        }
 	        if (!collection_1.shallowEqualArrays(route.snapshot.url, route._futureSnapshot.url)) {
 	            route.url.next(route._futureSnapshot.url);
@@ -55761,13 +56906,15 @@ webpackJsonp([0],[
 	    }
 	    else {
 	        route.snapshot = route._futureSnapshot;
+	        // this is for resolved data
+	        route.data.next(route._futureSnapshot.data);
 	    }
 	}
 	exports.advanceActivatedRoute = advanceActivatedRoute;
 
 
 /***/ },
-/* 423 */
+/* 433 */
 /***/ function(module, exports) {
 
 	/**
@@ -55787,18 +56934,30 @@ webpackJsonp([0],[
 	        enumerable: true,
 	        configurable: true
 	    });
+	    /**
+	     * @deprecated (use ActivatedRoute.parent instead)
+	     */
 	    Tree.prototype.parent = function (t) {
 	        var p = this.pathFromRoot(t);
 	        return p.length > 1 ? p[p.length - 2] : null;
 	    };
+	    /**
+	     * @deprecated (use ActivatedRoute.children instead)
+	     */
 	    Tree.prototype.children = function (t) {
 	        var n = findNode(t, this._root);
 	        return n ? n.children.map(function (t) { return t.value; }) : [];
 	    };
+	    /**
+	     * @deprecated (use ActivatedRoute.firstChild instead)
+	     */
 	    Tree.prototype.firstChild = function (t) {
 	        var n = findNode(t, this._root);
 	        return n && n.children.length > 0 ? n.children[0].value : null;
 	    };
+	    /**
+	     * @deprecated
+	     */
 	    Tree.prototype.siblings = function (t) {
 	        var p = findPath(t, this._root, []);
 	        if (p.length < 2)
@@ -55806,8 +56965,10 @@ webpackJsonp([0],[
 	        var c = p[p.length - 2].children.map(function (c) { return c.value; });
 	        return c.filter(function (cc) { return cc !== t; });
 	    };
+	    /**
+	     * @deprecated (use ActivatedRoute.pathFromRoot instead)
+	     */
 	    Tree.prototype.pathFromRoot = function (t) { return findPath(t, this._root, []).map(function (s) { return s.value; }); };
-	    Tree.prototype.contains = function (tree) { return contains(this._root, tree._root); };
 	    return Tree;
 	}());
 	exports.Tree = Tree;
@@ -55830,27 +56991,10 @@ webpackJsonp([0],[
 	        var cc = _a[_i];
 	        var cloned = collected.slice(0);
 	        var r = findPath(expected, cc, cloned);
-	        if (r)
+	        if (r.length > 0)
 	            return r;
 	    }
 	    return [];
-	}
-	function contains(tree, subtree) {
-	    if (tree.value !== subtree.value)
-	        return false;
-	    var _loop_1 = function(subtreeNode) {
-	        var s = tree.children.filter(function (child) { return child.value === subtreeNode.value; });
-	        if (s.length === 0)
-	            return { value: false };
-	        if (!contains(s[0], subtreeNode))
-	            return { value: false };
-	    };
-	    for (var _i = 0, _a = subtree.children; _i < _a.length; _i++) {
-	        var subtreeNode = _a[_i];
-	        var state_1 = _loop_1(subtreeNode);
-	        if (typeof state_1 === "object") return state_1.value;
-	    }
-	    return true;
 	}
 	var TreeNode = (function () {
 	    function TreeNode(value, children) {
@@ -55864,7 +57008,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 424 */
+/* 434 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -55875,32 +57019,44 @@ webpackJsonp([0],[
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
-	var shared_1 = __webpack_require__(416);
-	var url_tree_1 = __webpack_require__(417);
-	var collection_1 = __webpack_require__(418);
+	var shared_1 = __webpack_require__(427);
+	var url_tree_1 = __webpack_require__(428);
+	var collection_1 = __webpack_require__(424);
 	function createUrlTree(route, urlTree, commands, queryParams, fragment) {
 	    if (commands.length === 0) {
 	        return tree(urlTree.root, urlTree.root, urlTree, queryParams, fragment);
 	    }
 	    var normalizedCommands = normalizeCommands(commands);
+	    validateCommands(normalizedCommands);
 	    if (navigateToRoot(normalizedCommands)) {
-	        return tree(urlTree.root, new url_tree_1.UrlSegment([], {}), urlTree, queryParams, fragment);
+	        return tree(urlTree.root, new url_tree_1.UrlSegmentGroup([], {}), urlTree, queryParams, fragment);
 	    }
 	    var startingPosition = findStartingPosition(normalizedCommands, urlTree, route);
-	    var segment = startingPosition.processChildren ?
-	        updateSegmentChildren(startingPosition.segment, startingPosition.index, normalizedCommands.commands) :
-	        updateSegment(startingPosition.segment, startingPosition.index, normalizedCommands.commands);
-	    return tree(startingPosition.segment, segment, urlTree, queryParams, fragment);
+	    var segmentGroup = startingPosition.processChildren ?
+	        updateSegmentGroupChildren(startingPosition.segmentGroup, startingPosition.index, normalizedCommands.commands) :
+	        updateSegmentGroup(startingPosition.segmentGroup, startingPosition.index, normalizedCommands.commands);
+	    return tree(startingPosition.segmentGroup, segmentGroup, urlTree, queryParams, fragment);
 	}
 	exports.createUrlTree = createUrlTree;
-	function tree(oldSegment, newSegment, urlTree, queryParams, fragment) {
-	    var q = queryParams ? stringify(queryParams) : urlTree.queryParams;
-	    var f = fragment ? fragment : urlTree.fragment;
-	    if (urlTree.root === oldSegment) {
-	        return new url_tree_1.UrlTree(newSegment, q, f);
+	function validateCommands(n) {
+	    if (n.isAbsolute && n.commands.length > 0 && isMatrixParams(n.commands[0])) {
+	        throw new Error('Root segment cannot have matrix parameters');
+	    }
+	    var c = n.commands.filter(function (c) { return typeof c === 'object' && c.outlets !== undefined; });
+	    if (c.length > 0 && c[0] !== n.commands[n.commands.length - 1]) {
+	        throw new Error('{outlets:{}} has to be the last command');
+	    }
+	}
+	function isMatrixParams(command) {
+	    return typeof command === 'object' && command.outlets === undefined &&
+	        command.segmentPath === undefined;
+	}
+	function tree(oldSegmentGroup, newSegmentGroup, urlTree, queryParams, fragment) {
+	    if (urlTree.root === oldSegmentGroup) {
+	        return new url_tree_1.UrlTree(newSegmentGroup, stringify(queryParams), fragment);
 	    }
 	    else {
-	        return new url_tree_1.UrlTree(replaceSegment(urlTree.root, oldSegment, newSegment), q, f);
+	        return new url_tree_1.UrlTree(replaceSegment(urlTree.root, oldSegmentGroup, newSegmentGroup), stringify(queryParams), fragment);
 	    }
 	}
 	function replaceSegment(current, oldSegment, newSegment) {
@@ -55913,7 +57069,7 @@ webpackJsonp([0],[
 	            children[outletName] = replaceSegment(c, oldSegment, newSegment);
 	        }
 	    });
-	    return new url_tree_1.UrlSegment(current.pathsWithParams, children);
+	    return new url_tree_1.UrlSegmentGroup(current.segments, children);
 	}
 	function navigateToRoot(normalizedChange) {
 	    return normalizedChange.isAbsolute && normalizedChange.commands.length === 1 &&
@@ -55934,17 +57090,33 @@ webpackJsonp([0],[
 	    var numberOfDoubleDots = 0;
 	    var isAbsolute = false;
 	    var res = [];
-	    for (var i = 0; i < commands.length; ++i) {
+	    var _loop_1 = function(i) {
 	        var c = commands[i];
+	        if (typeof c === 'object' && c.outlets !== undefined) {
+	            var r_1 = {};
+	            collection_1.forEach(c.outlets, function (commands, name) {
+	                if (typeof commands === 'string') {
+	                    r_1[name] = commands.split('/');
+	                }
+	                else {
+	                    r_1[name] = commands;
+	                }
+	            });
+	            res.push({ outlets: r_1 });
+	            return "continue";
+	        }
+	        if (typeof c === 'object' && c.segmentPath !== undefined) {
+	            res.push(c.segmentPath);
+	            return "continue";
+	        }
 	        if (!(typeof c === 'string')) {
 	            res.push(c);
-	            continue;
+	            return "continue";
 	        }
-	        var parts = c.split('/');
-	        for (var j = 0; j < parts.length; ++j) {
-	            var cc = parts[j];
-	            // first exp is treated in a special way
-	            if (i == 0) {
+	        if (i === 0) {
+	            var parts = c.split('/');
+	            for (var j = 0; j < parts.length; ++j) {
+	                var cc = parts[j];
 	                if (j == 0 && cc == '.') {
 	                }
 	                else if (j == 0 && cc == '') {
@@ -55957,18 +57129,19 @@ webpackJsonp([0],[
 	                    res.push(cc);
 	                }
 	            }
-	            else {
-	                if (cc != '') {
-	                    res.push(cc);
-	                }
-	            }
 	        }
+	        else {
+	            res.push(c);
+	        }
+	    };
+	    for (var i = 0; i < commands.length; ++i) {
+	        _loop_1(i);
 	    }
 	    return new NormalizedNavigationCommands(isAbsolute, numberOfDoubleDots, res);
 	}
 	var Position = (function () {
-	    function Position(segment, processChildren, index) {
-	        this.segment = segment;
+	    function Position(segmentGroup, processChildren, index) {
+	        this.segmentGroup = segmentGroup;
 	        this.processChildren = processChildren;
 	        this.index = index;
 	    }
@@ -55989,66 +57162,69 @@ webpackJsonp([0],[
 	    }
 	}
 	function getPath(command) {
-	    if (!(typeof command === 'string'))
-	        return command.toString();
-	    var parts = command.toString().split(':');
-	    return parts.length > 1 ? parts[1] : command;
+	    return "" + command;
 	}
-	function getOutlet(commands) {
-	    if (!(typeof commands[0] === 'string'))
-	        return shared_1.PRIMARY_OUTLET;
-	    var parts = commands[0].toString().split(':');
-	    return parts.length > 1 ? parts[0] : shared_1.PRIMARY_OUTLET;
+	function getOutlets(commands) {
+	    if (!(typeof commands[0] === 'object'))
+	        return (_a = {}, _a[shared_1.PRIMARY_OUTLET] = commands, _a);
+	    if (commands[0].outlets === undefined)
+	        return (_b = {}, _b[shared_1.PRIMARY_OUTLET] = commands, _b);
+	    return commands[0].outlets;
+	    var _a, _b;
 	}
-	function updateSegment(segment, startIndex, commands) {
-	    if (!segment) {
-	        segment = new url_tree_1.UrlSegment([], {});
+	function updateSegmentGroup(segmentGroup, startIndex, commands) {
+	    if (!segmentGroup) {
+	        segmentGroup = new url_tree_1.UrlSegmentGroup([], {});
 	    }
-	    if (segment.pathsWithParams.length === 0 && segment.hasChildren()) {
-	        return updateSegmentChildren(segment, startIndex, commands);
+	    if (segmentGroup.segments.length === 0 && segmentGroup.hasChildren()) {
+	        return updateSegmentGroupChildren(segmentGroup, startIndex, commands);
 	    }
-	    var m = prefixedWith(segment, startIndex, commands);
+	    var m = prefixedWith(segmentGroup, startIndex, commands);
 	    var slicedCommands = commands.slice(m.lastIndex);
 	    if (m.match && slicedCommands.length === 0) {
-	        return new url_tree_1.UrlSegment(segment.pathsWithParams, {});
+	        return new url_tree_1.UrlSegmentGroup(segmentGroup.segments, {});
 	    }
-	    else if (m.match && !segment.hasChildren()) {
-	        return createNewSegment(segment, startIndex, commands);
+	    else if (m.match && !segmentGroup.hasChildren()) {
+	        return createNewSegmentGroup(segmentGroup, startIndex, commands);
 	    }
 	    else if (m.match) {
-	        return updateSegmentChildren(segment, 0, slicedCommands);
+	        return updateSegmentGroupChildren(segmentGroup, 0, slicedCommands);
 	    }
 	    else {
-	        return createNewSegment(segment, startIndex, commands);
+	        return createNewSegmentGroup(segmentGroup, startIndex, commands);
 	    }
 	}
-	function updateSegmentChildren(segment, startIndex, commands) {
+	function updateSegmentGroupChildren(segmentGroup, startIndex, commands) {
 	    if (commands.length === 0) {
-	        return new url_tree_1.UrlSegment(segment.pathsWithParams, {});
+	        return new url_tree_1.UrlSegmentGroup(segmentGroup.segments, {});
 	    }
 	    else {
-	        var outlet_1 = getOutlet(commands);
+	        var outlets_1 = getOutlets(commands);
 	        var children_1 = {};
-	        children_1[outlet_1] = updateSegment(segment.children[outlet_1], startIndex, commands);
-	        collection_1.forEach(segment.children, function (child, childOutlet) {
-	            if (childOutlet !== outlet_1) {
+	        collection_1.forEach(outlets_1, function (commands, outlet) {
+	            if (commands !== null) {
+	                children_1[outlet] = updateSegmentGroup(segmentGroup.children[outlet], startIndex, commands);
+	            }
+	        });
+	        collection_1.forEach(segmentGroup.children, function (child, childOutlet) {
+	            if (outlets_1[childOutlet] === undefined) {
 	                children_1[childOutlet] = child;
 	            }
 	        });
-	        return new url_tree_1.UrlSegment(segment.pathsWithParams, children_1);
+	        return new url_tree_1.UrlSegmentGroup(segmentGroup.segments, children_1);
 	    }
 	}
-	function prefixedWith(segment, startIndex, commands) {
+	function prefixedWith(segmentGroup, startIndex, commands) {
 	    var currentCommandIndex = 0;
 	    var currentPathIndex = startIndex;
 	    var noMatch = { match: false, lastIndex: 0 };
-	    while (currentPathIndex < segment.pathsWithParams.length) {
+	    while (currentPathIndex < segmentGroup.segments.length) {
 	        if (currentCommandIndex >= commands.length)
 	            return noMatch;
-	        var path = segment.pathsWithParams[currentPathIndex];
+	        var path = segmentGroup.segments[currentPathIndex];
 	        var curr = getPath(commands[currentCommandIndex]);
 	        var next = currentCommandIndex < commands.length - 1 ? commands[currentCommandIndex + 1] : null;
-	        if (curr && next && (typeof next === 'object')) {
+	        if (curr && next && (typeof next === 'object') && next.outlets === undefined) {
 	            if (!compare(curr, next, path))
 	                return noMatch;
 	            currentCommandIndex += 2;
@@ -56062,42 +57238,55 @@ webpackJsonp([0],[
 	    }
 	    return { match: true, lastIndex: currentCommandIndex };
 	}
-	function createNewSegment(segment, startIndex, commands) {
-	    var paths = segment.pathsWithParams.slice(0, startIndex);
+	function createNewSegmentGroup(segmentGroup, startIndex, commands) {
+	    var paths = segmentGroup.segments.slice(0, startIndex);
 	    var i = 0;
 	    while (i < commands.length) {
+	        if (typeof commands[i] === 'object' && commands[i].outlets !== undefined) {
+	            var children = createNewSegmentChldren(commands[i].outlets);
+	            return new url_tree_1.UrlSegmentGroup(paths, children);
+	        }
 	        // if we start with an object literal, we need to reuse the path part from the segment
 	        if (i === 0 && (typeof commands[0] === 'object')) {
-	            var p = segment.pathsWithParams[startIndex];
-	            paths.push(new url_tree_1.UrlPathWithParams(p.path, commands[0]));
+	            var p = segmentGroup.segments[startIndex];
+	            paths.push(new url_tree_1.UrlSegment(p.path, commands[0]));
 	            i++;
 	            continue;
 	        }
 	        var curr = getPath(commands[i]);
 	        var next = (i < commands.length - 1) ? commands[i + 1] : null;
 	        if (curr && next && (typeof next === 'object')) {
-	            paths.push(new url_tree_1.UrlPathWithParams(curr, stringify(next)));
+	            paths.push(new url_tree_1.UrlSegment(curr, stringify(next)));
 	            i += 2;
 	        }
 	        else {
-	            paths.push(new url_tree_1.UrlPathWithParams(curr, {}));
+	            paths.push(new url_tree_1.UrlSegment(curr, {}));
 	            i++;
 	        }
 	    }
-	    return new url_tree_1.UrlSegment(paths, {});
+	    return new url_tree_1.UrlSegmentGroup(paths, {});
+	}
+	function createNewSegmentChldren(outlets) {
+	    var children = {};
+	    collection_1.forEach(outlets, function (commands, outlet) {
+	        if (commands !== null) {
+	            children[outlet] = createNewSegmentGroup(new url_tree_1.UrlSegmentGroup([], {}), 0, commands);
+	        }
+	    });
+	    return children;
 	}
 	function stringify(params) {
 	    var res = {};
 	    collection_1.forEach(params, function (v, k) { return res[k] = "" + v; });
 	    return res;
 	}
-	function compare(path, params, pathWithParams) {
-	    return path == pathWithParams.path && collection_1.shallowEqual(params, pathWithParams.parameters);
+	function compare(path, params, segment) {
+	    return path == segment.path && collection_1.shallowEqual(params, segment.parameters);
 	}
 
 
 /***/ },
-/* 425 */
+/* 435 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -56110,51 +57299,125 @@ webpackJsonp([0],[
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
 	var of_1 = __webpack_require__(359);
-	var router_state_1 = __webpack_require__(422);
-	var shared_1 = __webpack_require__(416);
-	var url_tree_1 = __webpack_require__(417);
-	var collection_1 = __webpack_require__(418);
-	var tree_1 = __webpack_require__(423);
+	var router_state_1 = __webpack_require__(432);
+	var shared_1 = __webpack_require__(427);
+	var url_tree_1 = __webpack_require__(428);
+	var collection_1 = __webpack_require__(424);
+	var tree_1 = __webpack_require__(433);
 	var NoMatch = (function () {
-	    function NoMatch(segment) {
-	        if (segment === void 0) { segment = null; }
-	        this.segment = segment;
+	    function NoMatch() {
 	    }
 	    return NoMatch;
 	}());
+	var InheritedFromParent = (function () {
+	    function InheritedFromParent(parent, snapshot, params, data, resolve) {
+	        this.parent = parent;
+	        this.snapshot = snapshot;
+	        this.params = params;
+	        this.data = data;
+	        this.resolve = resolve;
+	    }
+	    Object.defineProperty(InheritedFromParent.prototype, "allParams", {
+	        get: function () {
+	            return this.parent ? collection_1.merge(this.parent.allParams, this.params) : this.params;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(InheritedFromParent.prototype, "allData", {
+	        get: function () { return this.parent ? collection_1.merge(this.parent.allData, this.data) : this.data; },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    InheritedFromParent.empty = function (snapshot) {
+	        return new InheritedFromParent(null, snapshot, {}, {}, new router_state_1.InheritedResolve(null, {}));
+	    };
+	    return InheritedFromParent;
+	}());
 	function recognize(rootComponentType, config, urlTree, url) {
-	    try {
-	        var children = processSegment(config, urlTree.root, {}, shared_1.PRIMARY_OUTLET);
-	        var root = new router_state_1.ActivatedRouteSnapshot([], {}, shared_1.PRIMARY_OUTLET, rootComponentType, null, urlTree.root, -1);
-	        var rootNode = new tree_1.TreeNode(root, children);
-	        return of_1.of(new router_state_1.RouterStateSnapshot(url, rootNode, urlTree.queryParams, urlTree.fragment));
-	    }
-	    catch (e) {
-	        if (e instanceof NoMatch) {
-	            return new Observable_1.Observable(function (obs) {
-	                return obs.error(new Error("Cannot match any routes: '" + e.segment + "'"));
-	            });
-	        }
-	        else {
-	            return new Observable_1.Observable(function (obs) { return obs.error(e); });
-	        }
-	    }
+	    return new Recognizer(rootComponentType, config, urlTree, url).recognize();
 	}
 	exports.recognize = recognize;
-	function processSegment(config, segment, extraParams, outlet) {
-	    if (segment.pathsWithParams.length === 0 && segment.hasChildren()) {
-	        return processSegmentChildren(config, segment, extraParams);
+	var Recognizer = (function () {
+	    function Recognizer(rootComponentType, config, urlTree, url) {
+	        this.rootComponentType = rootComponentType;
+	        this.config = config;
+	        this.urlTree = urlTree;
+	        this.url = url;
 	    }
-	    else {
-	        return processPathsWithParams(config, segment, 0, segment.pathsWithParams, extraParams, outlet);
-	    }
-	}
-	function processSegmentChildren(config, segment, extraParams) {
-	    var children = url_tree_1.mapChildrenIntoArray(segment, function (child, childOutlet) { return processSegment(config, child, extraParams, childOutlet); });
-	    checkOutletNameUniqueness(children);
-	    sortActivatedRouteSnapshots(children);
-	    return children;
-	}
+	    Recognizer.prototype.recognize = function () {
+	        try {
+	            var rootSegmentGroup = split(this.urlTree.root, [], [], this.config).segmentGroup;
+	            var children = this.processSegmentGroup(this.config, rootSegmentGroup, InheritedFromParent.empty(null), shared_1.PRIMARY_OUTLET);
+	            var root = new router_state_1.ActivatedRouteSnapshot([], Object.freeze({}), Object.freeze(this.urlTree.queryParams), this.urlTree.fragment, {}, shared_1.PRIMARY_OUTLET, this.rootComponentType, null, this.urlTree.root, -1, router_state_1.InheritedResolve.empty);
+	            var rootNode = new tree_1.TreeNode(root, children);
+	            return of_1.of(new router_state_1.RouterStateSnapshot(this.url, rootNode));
+	        }
+	        catch (e) {
+	            return new Observable_1.Observable(function (obs) { return obs.error(e); });
+	        }
+	    };
+	    Recognizer.prototype.processSegmentGroup = function (config, segmentGroup, inherited, outlet) {
+	        if (segmentGroup.segments.length === 0 && segmentGroup.hasChildren()) {
+	            return this.processChildren(config, segmentGroup, inherited);
+	        }
+	        else {
+	            return this.processSegment(config, segmentGroup, 0, segmentGroup.segments, inherited, outlet);
+	        }
+	    };
+	    Recognizer.prototype.processChildren = function (config, segmentGroup, inherited) {
+	        var _this = this;
+	        var children = url_tree_1.mapChildrenIntoArray(segmentGroup, function (child, childOutlet) { return _this.processSegmentGroup(config, child, inherited, childOutlet); });
+	        checkOutletNameUniqueness(children);
+	        sortActivatedRouteSnapshots(children);
+	        return children;
+	    };
+	    Recognizer.prototype.processSegment = function (config, segmentGroup, pathIndex, segments, inherited, outlet) {
+	        for (var _i = 0, config_1 = config; _i < config_1.length; _i++) {
+	            var r = config_1[_i];
+	            try {
+	                return this.processSegmentAgainstRoute(r, segmentGroup, pathIndex, segments, inherited, outlet);
+	            }
+	            catch (e) {
+	                if (!(e instanceof NoMatch))
+	                    throw e;
+	            }
+	        }
+	        throw new NoMatch();
+	    };
+	    Recognizer.prototype.processSegmentAgainstRoute = function (route, rawSegment, pathIndex, segments, inherited, outlet) {
+	        if (route.redirectTo)
+	            throw new NoMatch();
+	        if ((route.outlet ? route.outlet : shared_1.PRIMARY_OUTLET) !== outlet)
+	            throw new NoMatch();
+	        var newInheritedResolve = new router_state_1.InheritedResolve(inherited.resolve, getResolve(route));
+	        if (route.path === '**') {
+	            var params = segments.length > 0 ? collection_1.last(segments).parameters : {};
+	            var snapshot_1 = new router_state_1.ActivatedRouteSnapshot(segments, Object.freeze(collection_1.merge(inherited.allParams, params)), Object.freeze(this.urlTree.queryParams), this.urlTree.fragment, collection_1.merge(inherited.allData, getData(route)), outlet, route.component, route, getSourceSegmentGroup(rawSegment), getPathIndexShift(rawSegment) + segments.length, newInheritedResolve);
+	            return [new tree_1.TreeNode(snapshot_1, [])];
+	        }
+	        var _a = match(rawSegment, route, segments, inherited.snapshot), consumedSegments = _a.consumedSegments, parameters = _a.parameters, lastChild = _a.lastChild;
+	        var rawSlicedSegments = segments.slice(lastChild);
+	        var childConfig = getChildConfig(route);
+	        var _b = split(rawSegment, consumedSegments, rawSlicedSegments, childConfig), segmentGroup = _b.segmentGroup, slicedSegments = _b.slicedSegments;
+	        var snapshot = new router_state_1.ActivatedRouteSnapshot(consumedSegments, Object.freeze(collection_1.merge(inherited.allParams, parameters)), Object.freeze(this.urlTree.queryParams), this.urlTree.fragment, collection_1.merge(inherited.allData, getData(route)), outlet, route.component, route, getSourceSegmentGroup(rawSegment), getPathIndexShift(rawSegment) + consumedSegments.length, newInheritedResolve);
+	        var newInherited = route.component ?
+	            InheritedFromParent.empty(snapshot) :
+	            new InheritedFromParent(inherited, snapshot, parameters, getData(route), newInheritedResolve);
+	        if (slicedSegments.length === 0 && segmentGroup.hasChildren()) {
+	            var children = this.processChildren(childConfig, segmentGroup, newInherited);
+	            return [new tree_1.TreeNode(snapshot, children)];
+	        }
+	        else if (childConfig.length === 0 && slicedSegments.length === 0) {
+	            return [new tree_1.TreeNode(snapshot, [])];
+	        }
+	        else {
+	            var children = this.processSegment(childConfig, segmentGroup, pathIndex + lastChild, slicedSegments, newInherited, shared_1.PRIMARY_OUTLET);
+	            return [new tree_1.TreeNode(snapshot, children)];
+	        }
+	    };
+	    return Recognizer;
+	}());
 	function sortActivatedRouteSnapshots(nodes) {
 	    nodes.sort(function (a, b) {
 	        if (a.value.outlet === shared_1.PRIMARY_OUTLET)
@@ -56164,64 +57427,37 @@ webpackJsonp([0],[
 	        return a.value.outlet.localeCompare(b.value.outlet);
 	    });
 	}
-	function processPathsWithParams(config, segment, pathIndex, paths, extraParams, outlet) {
-	    for (var _i = 0, config_1 = config; _i < config_1.length; _i++) {
-	        var r = config_1[_i];
-	        try {
-	            return processPathsWithParamsAgainstRoute(r, segment, pathIndex, paths, extraParams, outlet);
-	        }
-	        catch (e) {
-	            if (!(e instanceof NoMatch))
-	                throw e;
-	        }
+	function getChildConfig(route) {
+	    if (route.children) {
+	        return route.children;
 	    }
-	    throw new NoMatch(segment);
-	}
-	function processPathsWithParamsAgainstRoute(route, rawSegment, pathIndex, paths, parentExtraParams, outlet) {
-	    if (route.redirectTo)
-	        throw new NoMatch();
-	    if ((route.outlet ? route.outlet : shared_1.PRIMARY_OUTLET) !== outlet)
-	        throw new NoMatch();
-	    if (route.path === '**') {
-	        var params = paths.length > 0 ? collection_1.last(paths).parameters : {};
-	        var snapshot_1 = new router_state_1.ActivatedRouteSnapshot(paths, collection_1.merge(parentExtraParams, params), outlet, route.component, route, getSourceSegment(rawSegment), getPathIndexShift(rawSegment) - 1);
-	        return [new tree_1.TreeNode(snapshot_1, [])];
-	    }
-	    var _a = match(rawSegment, route, paths, parentExtraParams), consumedPaths = _a.consumedPaths, parameters = _a.parameters, extraParams = _a.extraParams, lastChild = _a.lastChild;
-	    var rawSlicedPath = paths.slice(lastChild);
-	    var childConfig = route.children ? route.children : [];
-	    var _b = split(rawSegment, consumedPaths, rawSlicedPath, childConfig), segment = _b.segment, slicedPath = _b.slicedPath;
-	    var snapshot = new router_state_1.ActivatedRouteSnapshot(consumedPaths, parameters, outlet, route.component, route, getSourceSegment(rawSegment), getPathIndexShift(rawSegment) + pathIndex + lastChild - 1);
-	    if (slicedPath.length === 0 && segment.hasChildren()) {
-	        var children = processSegmentChildren(childConfig, segment, extraParams);
-	        return [new tree_1.TreeNode(snapshot, children)];
-	    }
-	    else if (childConfig.length === 0 && slicedPath.length === 0) {
-	        return [new tree_1.TreeNode(snapshot, [])];
+	    else if (route.loadChildren) {
+	        return route._loadedConfig.routes;
 	    }
 	    else {
-	        var children = processPathsWithParams(childConfig, segment, pathIndex + lastChild, slicedPath, extraParams, shared_1.PRIMARY_OUTLET);
-	        return [new tree_1.TreeNode(snapshot, children)];
+	        return [];
 	    }
 	}
-	function match(segment, route, paths, parentExtraParams) {
+	function match(segmentGroup, route, segments, parent) {
 	    if (route.path === '') {
-	        if (route.terminal && (segment.hasChildren() || paths.length > 0)) {
+	        if ((route.terminal || route.pathMatch === 'full') &&
+	            (segmentGroup.hasChildren() || segments.length > 0)) {
 	            throw new NoMatch();
 	        }
 	        else {
-	            return { consumedPaths: [], lastChild: 0, parameters: {}, extraParams: {} };
+	            var params = parent ? parent.params : {};
+	            return { consumedSegments: [], lastChild: 0, parameters: params };
 	        }
 	    }
 	    var path = route.path;
 	    var parts = path.split('/');
 	    var posParameters = {};
-	    var consumedPaths = [];
+	    var consumedSegments = [];
 	    var currentIndex = 0;
 	    for (var i = 0; i < parts.length; ++i) {
-	        if (currentIndex >= paths.length)
+	        if (currentIndex >= segments.length)
 	            throw new NoMatch();
-	        var current = paths[currentIndex];
+	        var current = segments[currentIndex];
 	        var p = parts[i];
 	        var isPosParam = p.startsWith(':');
 	        if (!isPosParam && p !== current.path)
@@ -56229,15 +57465,15 @@ webpackJsonp([0],[
 	        if (isPosParam) {
 	            posParameters[p.substring(1)] = current.path;
 	        }
-	        consumedPaths.push(current);
+	        consumedSegments.push(current);
 	        currentIndex++;
 	    }
-	    if (route.terminal && (segment.hasChildren() || currentIndex < paths.length)) {
+	    if ((route.terminal || route.pathMatch === 'full') &&
+	        (segmentGroup.hasChildren() || currentIndex < segments.length)) {
 	        throw new NoMatch();
 	    }
-	    var parameters = collection_1.merge(parentExtraParams, collection_1.merge(posParameters, consumedPaths[consumedPaths.length - 1].parameters));
-	    var extraParams = route.component ? {} : parameters;
-	    return { consumedPaths: consumedPaths, lastChild: currentIndex, parameters: parameters, extraParams: extraParams };
+	    var parameters = collection_1.merge(posParameters, consumedSegments[consumedSegments.length - 1].parameters);
+	    return { consumedSegments: consumedSegments, lastChild: currentIndex, parameters: parameters };
 	}
 	function checkOutletNameUniqueness(nodes) {
 	    var names = {};
@@ -56251,89 +57487,101 @@ webpackJsonp([0],[
 	        names[n.value.outlet] = n.value;
 	    });
 	}
-	function getSourceSegment(segment) {
-	    var s = segment;
+	function getSourceSegmentGroup(segmentGroup) {
+	    var s = segmentGroup;
 	    while (s._sourceSegment) {
 	        s = s._sourceSegment;
 	    }
 	    return s;
 	}
-	function getPathIndexShift(segment) {
-	    var s = segment;
-	    var res = 0;
+	function getPathIndexShift(segmentGroup) {
+	    var s = segmentGroup;
+	    var res = (s._segmentIndexShift ? s._segmentIndexShift : 0);
 	    while (s._sourceSegment) {
 	        s = s._sourceSegment;
-	        res += segment._pathIndexShift;
+	        res += (s._segmentIndexShift ? s._segmentIndexShift : 0);
 	    }
-	    return res;
+	    return res - 1;
 	}
-	function split(segment, consumedPaths, slicedPath, config) {
-	    if (slicedPath.length > 0 &&
-	        containsEmptyPathMatchesWithNamedOutlets(segment, slicedPath, config)) {
-	        var s = new url_tree_1.UrlSegment(consumedPaths, createChildrenForEmptyPaths(segment, consumedPaths, config, new url_tree_1.UrlSegment(slicedPath, segment.children)));
-	        s._sourceSegment = segment;
-	        s._pathIndexShift = 0;
-	        return { segment: s, slicedPath: [] };
+	function split(segmentGroup, consumedSegments, slicedSegments, config) {
+	    if (slicedSegments.length > 0 &&
+	        containsEmptyPathMatchesWithNamedOutlets(segmentGroup, slicedSegments, config)) {
+	        var s = new url_tree_1.UrlSegmentGroup(consumedSegments, createChildrenForEmptyPaths(segmentGroup, consumedSegments, config, new url_tree_1.UrlSegmentGroup(slicedSegments, segmentGroup.children)));
+	        s._sourceSegment = segmentGroup;
+	        s._segmentIndexShift = consumedSegments.length;
+	        return { segmentGroup: s, slicedSegments: [] };
 	    }
-	    else if (slicedPath.length === 0 && containsEmptyPathMatches(segment, slicedPath, config)) {
-	        var s = new url_tree_1.UrlSegment(segment.pathsWithParams, addEmptyPathsToChildrenIfNeeded(segment, slicedPath, config, segment.children));
-	        s._sourceSegment = segment;
-	        s._pathIndexShift = 0;
-	        return { segment: s, slicedPath: slicedPath };
+	    else if (slicedSegments.length === 0 &&
+	        containsEmptyPathMatches(segmentGroup, slicedSegments, config)) {
+	        var s = new url_tree_1.UrlSegmentGroup(segmentGroup.segments, addEmptyPathsToChildrenIfNeeded(segmentGroup, slicedSegments, config, segmentGroup.children));
+	        s._sourceSegment = segmentGroup;
+	        s._segmentIndexShift = consumedSegments.length;
+	        return { segmentGroup: s, slicedSegments: slicedSegments };
 	    }
 	    else {
-	        return { segment: segment, slicedPath: slicedPath };
+	        var s = new url_tree_1.UrlSegmentGroup(segmentGroup.segments, segmentGroup.children);
+	        s._sourceSegment = segmentGroup;
+	        s._segmentIndexShift = consumedSegments.length;
+	        return { segmentGroup: s, slicedSegments: slicedSegments };
 	    }
 	}
-	function addEmptyPathsToChildrenIfNeeded(segment, slicedPath, routes, children) {
+	function addEmptyPathsToChildrenIfNeeded(segmentGroup, slicedSegments, routes, children) {
 	    var res = {};
 	    for (var _i = 0, routes_1 = routes; _i < routes_1.length; _i++) {
 	        var r = routes_1[_i];
-	        if (emptyPathMatch(segment, slicedPath, r) && !children[getOutlet(r)]) {
-	            var s = new url_tree_1.UrlSegment([], {});
-	            s._sourceSegment = segment;
-	            s._pathIndexShift = segment.pathsWithParams.length;
+	        if (emptyPathMatch(segmentGroup, slicedSegments, r) && !children[getOutlet(r)]) {
+	            var s = new url_tree_1.UrlSegmentGroup([], {});
+	            s._sourceSegment = segmentGroup;
+	            s._segmentIndexShift = segmentGroup.segments.length;
 	            res[getOutlet(r)] = s;
 	        }
 	    }
 	    return collection_1.merge(children, res);
 	}
-	function createChildrenForEmptyPaths(segment, consumedPaths, routes, primarySegment) {
+	function createChildrenForEmptyPaths(segmentGroup, consumedSegments, routes, primarySegment) {
 	    var res = {};
 	    res[shared_1.PRIMARY_OUTLET] = primarySegment;
-	    primarySegment._sourceSegment = segment;
-	    primarySegment._pathIndexShift = consumedPaths.length;
+	    primarySegment._sourceSegment = segmentGroup;
+	    primarySegment._segmentIndexShift = consumedSegments.length;
 	    for (var _i = 0, routes_2 = routes; _i < routes_2.length; _i++) {
 	        var r = routes_2[_i];
-	        if (r.path === '') {
-	            var s = new url_tree_1.UrlSegment([], {});
-	            s._sourceSegment = segment;
-	            s._pathIndexShift = consumedPaths.length;
+	        if (r.path === '' && getOutlet(r) !== shared_1.PRIMARY_OUTLET) {
+	            var s = new url_tree_1.UrlSegmentGroup([], {});
+	            s._sourceSegment = segmentGroup;
+	            s._segmentIndexShift = consumedSegments.length;
 	            res[getOutlet(r)] = s;
 	        }
 	    }
 	    return res;
 	}
-	function containsEmptyPathMatchesWithNamedOutlets(segment, slicedPath, routes) {
+	function containsEmptyPathMatchesWithNamedOutlets(segmentGroup, slicedSegments, routes) {
 	    return routes
-	        .filter(function (r) { return emptyPathMatch(segment, slicedPath, r) && getOutlet(r) !== shared_1.PRIMARY_OUTLET; })
+	        .filter(function (r) { return emptyPathMatch(segmentGroup, slicedSegments, r) &&
+	        getOutlet(r) !== shared_1.PRIMARY_OUTLET; })
 	        .length > 0;
 	}
-	function containsEmptyPathMatches(segment, slicedPath, routes) {
-	    return routes.filter(function (r) { return emptyPathMatch(segment, slicedPath, r); }).length > 0;
+	function containsEmptyPathMatches(segmentGroup, slicedSegments, routes) {
+	    return routes.filter(function (r) { return emptyPathMatch(segmentGroup, slicedSegments, r); }).length > 0;
 	}
-	function emptyPathMatch(segment, slicedPath, r) {
-	    if ((segment.hasChildren() || slicedPath.length > 0) && r.terminal)
+	function emptyPathMatch(segmentGroup, slicedSegments, r) {
+	    if ((segmentGroup.hasChildren() || slicedSegments.length > 0) &&
+	        (r.terminal || r.pathMatch === 'full'))
 	        return false;
 	    return r.path === '' && r.redirectTo === undefined;
 	}
 	function getOutlet(route) {
 	    return route.outlet ? route.outlet : shared_1.PRIMARY_OUTLET;
 	}
+	function getData(route) {
+	    return route.data ? route.data : {};
+	}
+	function getResolve(route) {
+	    return route.resolve ? route.resolve : {};
+	}
 
 
 /***/ },
-/* 426 */
+/* 436 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -56345,9 +57593,9 @@ webpackJsonp([0],[
 	 */
 	"use strict";
 	__webpack_require__(363);
-	__webpack_require__(427);
+	__webpack_require__(437);
 	var forkJoin_1 = __webpack_require__(350);
-	var fromPromise_1 = __webpack_require__(428);
+	var fromPromise_1 = __webpack_require__(423);
 	function resolve(resolver, state) {
 	    return resolveNode(resolver, state._root).map(function (_) { return state; });
 	}
@@ -56368,7 +57616,7 @@ webpackJsonp([0],[
 	    }
 	}
 	function resolveComponent(resolver, snapshot) {
-	    if (snapshot.component && snapshot._routeConfig) {
+	    if (snapshot.component && snapshot._routeConfig && typeof snapshot.component === 'string') {
 	        return resolver.resolveComponent(snapshot.component);
 	    }
 	    else {
@@ -56378,7 +57626,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 427 */
+/* 437 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56388,16 +57636,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=toPromise.js.map
 
 /***/ },
-/* 428 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var PromiseObservable_1 = __webpack_require__(56);
-	exports.fromPromise = PromiseObservable_1.PromiseObservable.create;
-	//# sourceMappingURL=fromPromise.js.map
-
-/***/ },
-/* 429 */
+/* 438 */
 /***/ function(module, exports) {
 
 	/**
@@ -56408,19 +57647,181 @@ webpackJsonp([0],[
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
+	/**
+	 * @stable
+	 */
 	var RouterOutletMap = (function () {
 	    function RouterOutletMap() {
 	        /** @internal */
 	        this._outlets = {};
 	    }
 	    RouterOutletMap.prototype.registerOutlet = function (name, outlet) { this._outlets[name] = outlet; };
+	    RouterOutletMap.prototype.removeOutlet = function (name) { this._outlets[name] = undefined; };
 	    return RouterOutletMap;
 	}());
 	exports.RouterOutletMap = RouterOutletMap;
 
 
 /***/ },
-/* 430 */
+/* 439 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @license
+	 * Copyright Google Inc. All Rights Reserved.
+	 *
+	 * Use of this source code is governed by an MIT-style license that can be
+	 * found in the LICENSE file at https://angular.io/license
+	 */
+	"use strict";
+	var common_1 = __webpack_require__(2);
+	var core_1 = __webpack_require__(5);
+	var router_1 = __webpack_require__(403);
+	var router_state_1 = __webpack_require__(432);
+	var RouterLink = (function () {
+	    function RouterLink(router, route, locationStrategy) {
+	        this.router = router;
+	        this.route = route;
+	        this.locationStrategy = locationStrategy;
+	        this.commands = [];
+	    }
+	    Object.defineProperty(RouterLink.prototype, "routerLink", {
+	        set: function (data) {
+	            if (Array.isArray(data)) {
+	                this.commands = data;
+	            }
+	            else {
+	                this.commands = [data];
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    RouterLink.prototype.onClick = function (button, ctrlKey, metaKey) {
+	        if (button !== 0 || ctrlKey || metaKey) {
+	            return true;
+	        }
+	        this.router.navigateByUrl(this.urlTree);
+	        return false;
+	    };
+	    Object.defineProperty(RouterLink.prototype, "urlTree", {
+	        get: function () {
+	            return this.router.createUrlTree(this.commands, {
+	                relativeTo: this.route,
+	                queryParams: this.queryParams,
+	                fragment: this.fragment,
+	                preserveQueryParams: toBool(this.preserveQueryParams),
+	                preserveFragment: toBool(this.preserveFragment)
+	            });
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /** @nocollapse */
+	    RouterLink.decorators = [
+	        { type: core_1.Directive, args: [{ selector: ':not(a)[routerLink]' },] },
+	    ];
+	    /** @nocollapse */
+	    RouterLink.ctorParameters = [
+	        { type: router_1.Router, },
+	        { type: router_state_1.ActivatedRoute, },
+	        { type: common_1.LocationStrategy, },
+	    ];
+	    /** @nocollapse */
+	    RouterLink.propDecorators = {
+	        'queryParams': [{ type: core_1.Input },],
+	        'fragment': [{ type: core_1.Input },],
+	        'preserveQueryParams': [{ type: core_1.Input },],
+	        'preserveFragment': [{ type: core_1.Input },],
+	        'routerLink': [{ type: core_1.Input },],
+	        'onClick': [{ type: core_1.HostListener, args: ['click', ['$event.button', '$event.ctrlKey', '$event.metaKey'],] },],
+	    };
+	    return RouterLink;
+	}());
+	exports.RouterLink = RouterLink;
+	var RouterLinkWithHref = (function () {
+	    function RouterLinkWithHref(router, route, locationStrategy) {
+	        var _this = this;
+	        this.router = router;
+	        this.route = route;
+	        this.locationStrategy = locationStrategy;
+	        this.commands = [];
+	        this.subscription = router.events.subscribe(function (s) {
+	            if (s instanceof router_1.NavigationEnd) {
+	                _this.updateTargetUrlAndHref();
+	            }
+	        });
+	    }
+	    Object.defineProperty(RouterLinkWithHref.prototype, "routerLink", {
+	        set: function (data) {
+	            if (Array.isArray(data)) {
+	                this.commands = data;
+	            }
+	            else {
+	                this.commands = [data];
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    RouterLinkWithHref.prototype.ngOnChanges = function (changes) { this.updateTargetUrlAndHref(); };
+	    RouterLinkWithHref.prototype.ngOnDestroy = function () { this.subscription.unsubscribe(); };
+	    RouterLinkWithHref.prototype.onClick = function (button, ctrlKey, metaKey) {
+	        if (button !== 0 || ctrlKey || metaKey) {
+	            return true;
+	        }
+	        if (typeof this.target === 'string' && this.target != '_self') {
+	            return true;
+	        }
+	        this.router.navigateByUrl(this.urlTree);
+	        return false;
+	    };
+	    RouterLinkWithHref.prototype.updateTargetUrlAndHref = function () {
+	        this.urlTree = this.router.createUrlTree(this.commands, {
+	            relativeTo: this.route,
+	            queryParams: this.queryParams,
+	            fragment: this.fragment,
+	            preserveQueryParams: toBool(this.preserveQueryParams),
+	            preserveFragment: toBool(this.preserveFragment)
+	        });
+	        if (this.urlTree) {
+	            this.href = this.locationStrategy.prepareExternalUrl(this.router.serializeUrl(this.urlTree));
+	        }
+	    };
+	    /** @nocollapse */
+	    RouterLinkWithHref.decorators = [
+	        { type: core_1.Directive, args: [{ selector: 'a[routerLink]' },] },
+	    ];
+	    /** @nocollapse */
+	    RouterLinkWithHref.ctorParameters = [
+	        { type: router_1.Router, },
+	        { type: router_state_1.ActivatedRoute, },
+	        { type: common_1.LocationStrategy, },
+	    ];
+	    /** @nocollapse */
+	    RouterLinkWithHref.propDecorators = {
+	        'target': [{ type: core_1.Input },],
+	        'queryParams': [{ type: core_1.Input },],
+	        'fragment': [{ type: core_1.Input },],
+	        'routerLinkOptions': [{ type: core_1.Input },],
+	        'preserveQueryParams': [{ type: core_1.Input },],
+	        'preserveFragment': [{ type: core_1.Input },],
+	        'href': [{ type: core_1.HostBinding },],
+	        'routerLink': [{ type: core_1.Input },],
+	        'onClick': [{ type: core_1.HostListener, args: ['click', ['$event.button', '$event.ctrlKey', '$event.metaKey'],] },],
+	    };
+	    return RouterLinkWithHref;
+	}());
+	exports.RouterLinkWithHref = RouterLinkWithHref;
+	function toBool(s) {
+	    if (s === '')
+	        return true;
+	    return !!s;
+	}
+
+
+/***/ },
+/* 440 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -56433,12 +57834,8 @@ webpackJsonp([0],[
 	"use strict";
 	var core_1 = __webpack_require__(5);
 	var router_1 = __webpack_require__(403);
-	var url_tree_1 = __webpack_require__(417);
-	var router_link_1 = __webpack_require__(402);
+	var router_link_1 = __webpack_require__(439);
 	var RouterLinkActive = (function () {
-	    /**
-	     * @internal
-	     */
 	    function RouterLinkActive(router, element, renderer) {
 	        var _this = this;
 	        this.router = router;
@@ -56455,6 +57852,7 @@ webpackJsonp([0],[
 	    RouterLinkActive.prototype.ngAfterContentInit = function () {
 	        var _this = this;
 	        this.links.changes.subscribe(function (s) { return _this.update(); });
+	        this.linksWithHrefs.changes.subscribe(function (s) { return _this.update(); });
 	        this.update();
 	    };
 	    Object.defineProperty(RouterLinkActive.prototype, "routerLinkActive", {
@@ -56473,13 +57871,17 @@ webpackJsonp([0],[
 	    RouterLinkActive.prototype.ngOnDestroy = function () { this.subscription.unsubscribe(); };
 	    RouterLinkActive.prototype.update = function () {
 	        var _this = this;
-	        if (!this.links || this.links.length === 0)
+	        if (!this.links || !this.linksWithHrefs || !this.router.navigated)
 	            return;
-	        var currentUrlTree = this.router.parseUrl(this.router.url);
-	        var isActive = this.links.reduce(function (res, link) {
-	            return res || url_tree_1.containsTree(currentUrlTree, link.urlTree, _this.routerLinkActiveOptions.exact);
+	        var isActiveLinks = this.reduceList(this.links);
+	        var isActiveLinksWithHrefs = this.reduceList(this.linksWithHrefs);
+	        this.classes.forEach(function (c) { return _this.renderer.setElementClass(_this.element.nativeElement, c, isActiveLinks || isActiveLinksWithHrefs); });
+	    };
+	    RouterLinkActive.prototype.reduceList = function (q) {
+	        var _this = this;
+	        return q.reduce(function (res, link) {
+	            return res || _this.router.isActive(link.urlTree, _this.routerLinkActiveOptions.exact);
 	        }, false);
-	        this.classes.forEach(function (c) { return _this.renderer.setElementClass(_this.element.nativeElement, c, isActive); });
 	    };
 	    /** @nocollapse */
 	    RouterLinkActive.decorators = [
@@ -56493,7 +57895,8 @@ webpackJsonp([0],[
 	    ];
 	    /** @nocollapse */
 	    RouterLinkActive.propDecorators = {
-	        'links': [{ type: core_1.ContentChildren, args: [router_link_1.RouterLink,] },],
+	        'links': [{ type: core_1.ContentChildren, args: [router_link_1.RouterLink, { descendants: true },] },],
+	        'linksWithHrefs': [{ type: core_1.ContentChildren, args: [router_link_1.RouterLinkWithHref, { descendants: true },] },],
 	        'routerLinkActiveOptions': [{ type: core_1.Input },],
 	        'routerLinkActive': [{ type: core_1.Input },],
 	    };
@@ -56503,7 +57906,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 431 */
+/* 441 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -56515,16 +57918,19 @@ webpackJsonp([0],[
 	 */
 	"use strict";
 	var core_1 = __webpack_require__(5);
-	var router_outlet_map_1 = __webpack_require__(429);
-	var shared_1 = __webpack_require__(416);
+	var router_outlet_map_1 = __webpack_require__(438);
+	var shared_1 = __webpack_require__(427);
 	var RouterOutlet = (function () {
-	    /**
-	     * @internal
-	     */
-	    function RouterOutlet(parentOutletMap, location, name) {
+	    function RouterOutlet(parentOutletMap, location, resolver, name) {
+	        this.parentOutletMap = parentOutletMap;
 	        this.location = location;
+	        this.resolver = resolver;
+	        this.name = name;
+	        this.activateEvents = new core_1.EventEmitter();
+	        this.deactivateEvents = new core_1.EventEmitter();
 	        parentOutletMap.registerOutlet(name ? name : shared_1.PRIMARY_OUTLET, this);
 	    }
+	    RouterOutlet.prototype.ngOnDestroy = function () { this.parentOutletMap.removeOutlet(this.name ? this.name : shared_1.PRIMARY_OUTLET); };
 	    Object.defineProperty(RouterOutlet.prototype, "isActivated", {
 	        get: function () { return !!this.activated; },
 	        enumerable: true,
@@ -56550,15 +57956,41 @@ webpackJsonp([0],[
 	    });
 	    RouterOutlet.prototype.deactivate = function () {
 	        if (this.activated) {
+	            var c = this.component;
 	            this.activated.destroy();
 	            this.activated = null;
+	            this.deactivateEvents.emit(c);
 	        }
 	    };
-	    RouterOutlet.prototype.activate = function (factory, activatedRoute, providers, outletMap) {
+	    RouterOutlet.prototype.activate = function (activatedRoute, loadedResolver, loadedInjector, providers, outletMap) {
 	        this.outletMap = outletMap;
 	        this._activatedRoute = activatedRoute;
-	        var inj = core_1.ReflectiveInjector.fromResolvedProviders(providers, this.location.parentInjector);
+	        var snapshot = activatedRoute._futureSnapshot;
+	        var component = snapshot._routeConfig.component;
+	        var factory;
+	        try {
+	            if (typeof component === 'string') {
+	                factory = snapshot._resolvedComponentFactory;
+	            }
+	            else if (loadedResolver) {
+	                factory = loadedResolver.resolveComponentFactory(component);
+	            }
+	            else {
+	                factory = this.resolver.resolveComponentFactory(component);
+	            }
+	        }
+	        catch (e) {
+	            if (!(e instanceof core_1.NoComponentFactoryError))
+	                throw e;
+	            var componentName = component ? component.name : null;
+	            console.warn("'" + componentName + "' not found in entryComponents array.  To ensure all components referred\n          to by the Routes are compiled, you must add '" + componentName + "' to the\n          'entryComponents' array of your application component. This will be required in a future\n          release of the router.");
+	            factory = snapshot._resolvedComponentFactory;
+	        }
+	        var injector = loadedInjector ? loadedInjector : this.location.parentInjector;
+	        var inj = core_1.ReflectiveInjector.fromResolvedProviders(providers, injector);
 	        this.activated = this.location.createComponent(factory, this.location.length, inj, []);
+	        this.activated.changeDetectorRef.detectChanges();
+	        this.activateEvents.emit(this.activated.instance);
 	    };
 	    /** @nocollapse */
 	    RouterOutlet.decorators = [
@@ -56568,57 +58000,21 @@ webpackJsonp([0],[
 	    RouterOutlet.ctorParameters = [
 	        { type: router_outlet_map_1.RouterOutletMap, },
 	        { type: core_1.ViewContainerRef, },
+	        { type: core_1.ComponentFactoryResolver, },
 	        { type: undefined, decorators: [{ type: core_1.Attribute, args: ['name',] },] },
 	    ];
+	    /** @nocollapse */
+	    RouterOutlet.propDecorators = {
+	        'activateEvents': [{ type: core_1.Output, args: ['activate',] },],
+	        'deactivateEvents': [{ type: core_1.Output, args: ['deactivate',] },],
+	    };
 	    return RouterOutlet;
 	}());
 	exports.RouterOutlet = RouterOutlet;
 
 
 /***/ },
-/* 432 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @license
-	 * Copyright Google Inc. All Rights Reserved.
-	 *
-	 * Use of this source code is governed by an MIT-style license that can be
-	 * found in the LICENSE file at https://angular.io/license
-	 */
-	"use strict";
-	var common_1 = __webpack_require__(2);
-	var platform_browser_1 = __webpack_require__(256);
-	var common_router_providers_1 = __webpack_require__(433);
-	/**
-	 * A list of {@link Provider}s. To use the router, you must add this to your application.
-	 *
-	 * ### Example
-	 *
-	 * ```
-	 * @Component({directives: [ROUTER_DIRECTIVES]})
-	 * class AppCmp {
-	 *   // ...
-	 * }
-	 *
-	 * const router = [
-	 *   {path: '/home', component: Home}
-	 * ];
-	 *
-	 * bootstrap(AppCmp, [provideRouter(router)]);
-	 * ```
-	 */
-	function provideRouter(config, opts) {
-	    if (opts === void 0) { opts = {}; }
-	    return [
-	        { provide: common_1.PlatformLocation, useClass: platform_browser_1.BrowserPlatformLocation }
-	    ].concat(common_router_providers_1.provideRouter(config, opts));
-	}
-	exports.provideRouter = provideRouter;
-
-
-/***/ },
-/* 433 */
+/* 442 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -56631,46 +58027,92 @@ webpackJsonp([0],[
 	"use strict";
 	var common_1 = __webpack_require__(2);
 	var core_1 = __webpack_require__(5);
+	var common_router_providers_1 = __webpack_require__(402);
+	var router_link_1 = __webpack_require__(439);
+	var router_link_active_1 = __webpack_require__(440);
+	var router_outlet_1 = __webpack_require__(441);
 	var router_1 = __webpack_require__(403);
-	var router_outlet_map_1 = __webpack_require__(429);
-	var router_state_1 = __webpack_require__(422);
-	var url_tree_1 = __webpack_require__(417);
-	exports.ROUTER_CONFIG = new core_1.OpaqueToken('ROUTER_CONFIG');
-	exports.ROUTER_OPTIONS = new core_1.OpaqueToken('ROUTER_OPTIONS');
-	function setupRouter(ref, resolver, urlSerializer, outletMap, location, injector, config, opts) {
-	    if (ref.componentTypes.length == 0) {
-	        throw new Error('Bootstrap at least one component before injecting Router.');
+	var router_config_loader_1 = __webpack_require__(422);
+	var router_outlet_map_1 = __webpack_require__(438);
+	var router_state_1 = __webpack_require__(432);
+	var url_tree_1 = __webpack_require__(428);
+	/**
+	 * @stable
+	 */
+	exports.ROUTER_DIRECTIVES = [router_outlet_1.RouterOutlet, router_link_1.RouterLink, router_link_1.RouterLinkWithHref, router_link_active_1.RouterLinkActive];
+	var pathLocationStrategy = {
+	    provide: common_1.LocationStrategy,
+	    useClass: common_1.PathLocationStrategy
+	};
+	var hashLocationStrategy = {
+	    provide: common_1.LocationStrategy,
+	    useClass: common_1.HashLocationStrategy
+	};
+	exports.ROUTER_PROVIDERS = [
+	    common_1.Location, { provide: url_tree_1.UrlSerializer, useClass: url_tree_1.DefaultUrlSerializer }, {
+	        provide: router_1.Router,
+	        useFactory: common_router_providers_1.setupRouter,
+	        deps: [
+	            core_1.ApplicationRef, core_1.ComponentResolver, url_tree_1.UrlSerializer, router_outlet_map_1.RouterOutletMap, common_1.Location, core_1.Injector,
+	            core_1.NgModuleFactoryLoader, router_config_loader_1.ROUTES, common_router_providers_1.ROUTER_CONFIGURATION
+	        ]
+	    },
+	    router_outlet_map_1.RouterOutletMap, { provide: router_state_1.ActivatedRoute, useFactory: common_router_providers_1.rootRoute, deps: [router_1.Router] },
+	    { provide: core_1.NgModuleFactoryLoader, useClass: core_1.SystemJsNgModuleLoader },
+	    { provide: common_router_providers_1.ROUTER_CONFIGURATION, useValue: { enableTracing: false } }
+	];
+	var RouterModule = (function () {
+	    function RouterModule() {
 	    }
-	    var componentType = ref.componentTypes[0];
-	    var r = new router_1.Router(componentType, resolver, urlSerializer, outletMap, location, injector, config);
-	    ref.registerDisposeListener(function () { return r.dispose(); });
-	    if (opts.enableTracing) {
-	        r.events.subscribe(function (e) {
-	            console.group("Router Event: " + e.constructor.name);
-	            console.log(e.toString());
-	            console.log(e);
-	            console.groupEnd();
-	        });
-	    }
-	    return r;
+	    RouterModule.forRoot = function (routes, config) {
+	        return {
+	            ngModule: RouterModule,
+	            providers: [
+	                exports.ROUTER_PROVIDERS, common_router_providers_1.provideRoutes(routes),
+	                { provide: common_router_providers_1.ROUTER_CONFIGURATION, useValue: config ? config : {} }, {
+	                    provide: common_1.LocationStrategy,
+	                    useFactory: provideLocationStrategy,
+	                    deps: [
+	                        common_1.PlatformLocation, [new core_1.Inject(common_1.APP_BASE_HREF), new core_1.Optional()], common_router_providers_1.ROUTER_CONFIGURATION
+	                    ]
+	                },
+	                common_router_providers_1.provideRouterInitializer()
+	            ]
+	        };
+	    };
+	    RouterModule.forChild = function (routes) {
+	        return { ngModule: RouterModule, providers: [common_router_providers_1.provideRoutes(routes)] };
+	    };
+	    /** @nocollapse */
+	    RouterModule.decorators = [
+	        { type: core_1.NgModule, args: [{ declarations: exports.ROUTER_DIRECTIVES, exports: exports.ROUTER_DIRECTIVES },] },
+	    ];
+	    return RouterModule;
+	}());
+	exports.RouterModule = RouterModule;
+	function provideLocationStrategy(platformLocationStrategy, baseHref, options) {
+	    if (options === void 0) { options = {}; }
+	    return options.useHash ? new common_1.HashLocationStrategy(platformLocationStrategy, baseHref) :
+	        new common_1.PathLocationStrategy(platformLocationStrategy, baseHref);
 	}
-	exports.setupRouter = setupRouter;
-	function setupRouterInitializer(injector) {
-	    // https://github.com/angular/angular/issues/9101
-	    // Delay the router instantiation to avoid circular dependency (ApplicationRef ->
-	    // APP_INITIALIZER -> Router)
-	    setTimeout(function () {
-	        var appRef = injector.get(core_1.ApplicationRef);
-	        if (appRef.componentTypes.length == 0) {
-	            appRef.registerBootstrapListener(function () { injector.get(router_1.Router).initialNavigation(); });
-	        }
-	        else {
-	            injector.get(router_1.Router).initialNavigation();
-	        }
-	    }, 0);
-	    return function () { return null; };
-	}
-	exports.setupRouterInitializer = setupRouterInitializer;
+	exports.provideLocationStrategy = provideLocationStrategy;
+
+
+/***/ },
+/* 443 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @license
+	 * Copyright Google Inc. All Rights Reserved.
+	 *
+	 * Use of this source code is governed by an MIT-style license that can be
+	 * found in the LICENSE file at https://angular.io/license
+	 */
+	"use strict";
+	var common_1 = __webpack_require__(2);
+	var platform_browser_1 = __webpack_require__(256);
+	var common_router_providers_1 = __webpack_require__(402);
 	/**
 	 * A list of {@link Provider}s. To use the router, you must add this to your application.
 	 *
@@ -56683,47 +58125,36 @@ webpackJsonp([0],[
 	 * }
 	 *
 	 * const router = [
-	 *   {path: '/home', component: Home}
+	 *   {path: 'home', component: Home}
 	 * ];
 	 *
-	 * bootstrap(AppCmp, [provideRouter(router)]);
+	 * bootstrap(AppCmp, [provideRouter(router, {enableTracing: true})]);
 	 * ```
+	 *
+	 * @experimental
 	 */
-	function provideRouter(_config, _opts) {
+	function provideRouter(config, opts) {
+	    if (opts === void 0) { opts = {}; }
 	    return [
-	        { provide: exports.ROUTER_CONFIG, useValue: _config }, { provide: exports.ROUTER_OPTIONS, useValue: _opts },
-	        common_1.Location, { provide: common_1.LocationStrategy, useClass: common_1.PathLocationStrategy },
-	        { provide: url_tree_1.UrlSerializer, useClass: url_tree_1.DefaultUrlSerializer },
-	        {
-	            provide: router_1.Router,
-	            useFactory: setupRouter,
-	            deps: [
-	                core_1.ApplicationRef, core_1.ComponentResolver, url_tree_1.UrlSerializer, router_outlet_map_1.RouterOutletMap, common_1.Location, core_1.Injector,
-	                exports.ROUTER_CONFIG, exports.ROUTER_OPTIONS
-	            ]
-	        },
-	        router_outlet_map_1.RouterOutletMap,
-	        { provide: router_state_1.ActivatedRoute, useFactory: function (r) { return r.routerState.root; }, deps: [router_1.Router] },
-	        // Trigger initial navigation
-	        { provide: core_1.APP_INITIALIZER, multi: true, useFactory: setupRouterInitializer, deps: [core_1.Injector] }
-	    ];
+	        { provide: common_1.PlatformLocation, useClass: platform_browser_1.BrowserPlatformLocation }
+	    ].concat(common_router_providers_1.provideRouter(config, opts));
 	}
 	exports.provideRouter = provideRouter;
 
 
 /***/ },
-/* 434 */
+/* 444 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(435));
+	__export(__webpack_require__(445));
 
 
 /***/ },
-/* 435 */
+/* 445 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56739,13 +58170,13 @@ webpackJsonp([0],[
 	var core_1 = __webpack_require__(5);
 	var router_1 = __webpack_require__(401);
 	var icon_1 = __webpack_require__(346);
-	var rxjs_1 = __webpack_require__(436);
-	var Humane = __webpack_require__(644);
-	var board_1 = __webpack_require__(645);
-	var sidebar_1 = __webpack_require__(741);
-	var toolbar_1 = __webpack_require__(749);
-	var services_1 = __webpack_require__(648);
-	var progress_circle_1 = __webpack_require__(722);
+	var rxjs_1 = __webpack_require__(446);
+	var Humane = __webpack_require__(646);
+	var board_1 = __webpack_require__(647);
+	var sidebar_1 = __webpack_require__(745);
+	var toolbar_1 = __webpack_require__(753);
+	var services_1 = __webpack_require__(650);
+	var progress_circle_1 = __webpack_require__(726);
 	var EditorComponent = (function () {
 	    function EditorComponent(router, route, dialogService, folderService, imageService, projectService, userService) {
 	        var _this = this;
@@ -56775,7 +58206,7 @@ webpackJsonp([0],[
 	            if (currentFolder && currentImage) {
 	            }
 	        });
-	        this.logo = __webpack_require__(753);
+	        this.logo = __webpack_require__(757);
 	    }
 	    EditorComponent.prototype.pushToGithub = function () {
 	        var _this = this;
@@ -56810,8 +58241,8 @@ webpackJsonp([0],[
 	    EditorComponent = __decorate([
 	        core_1.Component({
 	            selector: 'editor',
-	            template: __webpack_require__(754)(),
-	            styles: [__webpack_require__(755)],
+	            template: __webpack_require__(758)(),
+	            styles: [__webpack_require__(759)],
 	            directives: [
 	                board_1.BoardComponent,
 	                sidebar_1.SidebarComponent,
@@ -56828,7 +58259,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 436 */
+/* 446 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56843,95 +58274,94 @@ webpackJsonp([0],[
 	exports.Observable = Observable_1.Observable;
 	// statics
 	/* tslint:disable:no-use-before-declare */
-	__webpack_require__(437);
-	__webpack_require__(441);
-	__webpack_require__(444);
-	__webpack_require__(446);
-	__webpack_require__(449);
-	__webpack_require__(452);
-	__webpack_require__(349);
-	__webpack_require__(410);
+	__webpack_require__(447);
+	__webpack_require__(451);
 	__webpack_require__(454);
-	__webpack_require__(457);
-	__webpack_require__(460);
-	__webpack_require__(461);
-	__webpack_require__(467);
-	__webpack_require__(470);
+	__webpack_require__(456);
+	__webpack_require__(459);
+	__webpack_require__(462);
+	__webpack_require__(349);
+	__webpack_require__(464);
+	__webpack_require__(465);
+	__webpack_require__(468);
+	__webpack_require__(471);
 	__webpack_require__(472);
+	__webpack_require__(478);
+	__webpack_require__(481);
+	__webpack_require__(483);
 	__webpack_require__(358);
-	__webpack_require__(476);
-	__webpack_require__(479);
-	__webpack_require__(482);
-	__webpack_require__(486);
-	//operators
-	__webpack_require__(489);
-	__webpack_require__(491);
+	__webpack_require__(487);
+	__webpack_require__(490);
 	__webpack_require__(493);
-	__webpack_require__(495);
 	__webpack_require__(497);
-	__webpack_require__(499);
-	__webpack_require__(375);
+	//operators
+	__webpack_require__(500);
 	__webpack_require__(502);
 	__webpack_require__(504);
-	__webpack_require__(505);
 	__webpack_require__(506);
 	__webpack_require__(508);
 	__webpack_require__(510);
+	__webpack_require__(375);
 	__webpack_require__(513);
 	__webpack_require__(515);
+	__webpack_require__(516);
+	__webpack_require__(420);
 	__webpack_require__(517);
 	__webpack_require__(519);
-	__webpack_require__(521);
-	__webpack_require__(523);
-	__webpack_require__(525);
-	__webpack_require__(527);
+	__webpack_require__(522);
+	__webpack_require__(524);
+	__webpack_require__(526);
+	__webpack_require__(528);
+	__webpack_require__(530);
+	__webpack_require__(532);
+	__webpack_require__(534);
+	__webpack_require__(536);
 	__webpack_require__(367);
-	__webpack_require__(529);
+	__webpack_require__(538);
 	__webpack_require__(365);
 	__webpack_require__(373);
-	__webpack_require__(531);
-	__webpack_require__(534);
-	__webpack_require__(539);
-	__webpack_require__(541);
-	__webpack_require__(543);
+	__webpack_require__(417);
+	__webpack_require__(540);
 	__webpack_require__(545);
 	__webpack_require__(547);
-	__webpack_require__(408);
-	__webpack_require__(363);
 	__webpack_require__(549);
+	__webpack_require__(425);
 	__webpack_require__(551);
+	__webpack_require__(410);
+	__webpack_require__(363);
 	__webpack_require__(553);
+	__webpack_require__(555);
+	__webpack_require__(557);
 	__webpack_require__(406);
 	__webpack_require__(404);
-	__webpack_require__(554);
-	__webpack_require__(555);
-	__webpack_require__(556);
-	__webpack_require__(557);
+	__webpack_require__(558);
+	__webpack_require__(559);
 	__webpack_require__(560);
-	__webpack_require__(562);
+	__webpack_require__(561);
 	__webpack_require__(564);
 	__webpack_require__(566);
-	__webpack_require__(567);
-	__webpack_require__(569);
+	__webpack_require__(568);
 	__webpack_require__(570);
-	__webpack_require__(572);
+	__webpack_require__(571);
+	__webpack_require__(573);
+	__webpack_require__(408);
 	__webpack_require__(574);
 	__webpack_require__(576);
 	__webpack_require__(578);
 	__webpack_require__(580);
 	__webpack_require__(582);
-	__webpack_require__(369);
 	__webpack_require__(584);
+	__webpack_require__(369);
 	__webpack_require__(586);
 	__webpack_require__(588);
 	__webpack_require__(590);
 	__webpack_require__(592);
 	__webpack_require__(594);
-	__webpack_require__(603);
+	__webpack_require__(596);
 	__webpack_require__(605);
 	__webpack_require__(607);
 	__webpack_require__(609);
-	__webpack_require__(612);
+	__webpack_require__(611);
 	__webpack_require__(614);
 	__webpack_require__(616);
 	__webpack_require__(618);
@@ -56939,42 +58369,43 @@ webpackJsonp([0],[
 	__webpack_require__(622);
 	__webpack_require__(624);
 	__webpack_require__(626);
-	__webpack_require__(427);
 	__webpack_require__(628);
+	__webpack_require__(437);
 	__webpack_require__(630);
 	__webpack_require__(632);
 	__webpack_require__(634);
 	__webpack_require__(636);
 	__webpack_require__(638);
 	__webpack_require__(640);
-	__webpack_require__(641);
+	__webpack_require__(642);
+	__webpack_require__(643);
 	/* tslint:disable:no-unused-variable */
-	var Operator_1 = __webpack_require__(643);
+	var Operator_1 = __webpack_require__(645);
 	exports.Operator = Operator_1.Operator;
 	var Subscription_1 = __webpack_require__(45);
 	exports.Subscription = Subscription_1.Subscription;
 	var Subscriber_1 = __webpack_require__(43);
 	exports.Subscriber = Subscriber_1.Subscriber;
-	var AsyncSubject_1 = __webpack_require__(440);
+	var AsyncSubject_1 = __webpack_require__(450);
 	exports.AsyncSubject = AsyncSubject_1.AsyncSubject;
 	var ReplaySubject_1 = __webpack_require__(391);
 	exports.ReplaySubject = ReplaySubject_1.ReplaySubject;
-	var BehaviorSubject_1 = __webpack_require__(421);
+	var BehaviorSubject_1 = __webpack_require__(431);
 	exports.BehaviorSubject = BehaviorSubject_1.BehaviorSubject;
 	var ConnectableObservable_1 = __webpack_require__(372);
 	exports.ConnectableObservable = ConnectableObservable_1.ConnectableObservable;
 	var Notification_1 = __webpack_require__(397);
 	exports.Notification = Notification_1.Notification;
-	var EmptyError_1 = __webpack_require__(533);
+	var EmptyError_1 = __webpack_require__(419);
 	exports.EmptyError = EmptyError_1.EmptyError;
-	var ArgumentOutOfRangeError_1 = __webpack_require__(611);
+	var ArgumentOutOfRangeError_1 = __webpack_require__(613);
 	exports.ArgumentOutOfRangeError = ArgumentOutOfRangeError_1.ArgumentOutOfRangeError;
 	var ObjectUnsubscribedError_1 = __webpack_require__(55);
 	exports.ObjectUnsubscribedError = ObjectUnsubscribedError_1.ObjectUnsubscribedError;
 	var UnsubscriptionError_1 = __webpack_require__(50);
 	exports.UnsubscriptionError = UnsubscriptionError_1.UnsubscriptionError;
-	var asap_1 = __webpack_require__(597);
-	var async_1 = __webpack_require__(465);
+	var asap_1 = __webpack_require__(599);
+	var async_1 = __webpack_require__(476);
 	var queue_1 = __webpack_require__(392);
 	var rxSubscriber_1 = __webpack_require__(51);
 	var observable_1 = __webpack_require__(41);
@@ -57019,26 +58450,26 @@ webpackJsonp([0],[
 	//# sourceMappingURL=Rx.js.map
 
 /***/ },
-/* 437 */
+/* 447 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var bindCallback_1 = __webpack_require__(438);
+	var bindCallback_1 = __webpack_require__(448);
 	Observable_1.Observable.bindCallback = bindCallback_1.bindCallback;
 	//# sourceMappingURL=bindCallback.js.map
 
 /***/ },
-/* 438 */
+/* 448 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var BoundCallbackObservable_1 = __webpack_require__(439);
+	var BoundCallbackObservable_1 = __webpack_require__(449);
 	exports.bindCallback = BoundCallbackObservable_1.BoundCallbackObservable.create;
 	//# sourceMappingURL=bindCallback.js.map
 
 /***/ },
-/* 439 */
+/* 449 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57050,7 +58481,7 @@ webpackJsonp([0],[
 	var Observable_1 = __webpack_require__(38);
 	var tryCatch_1 = __webpack_require__(48);
 	var errorObject_1 = __webpack_require__(49);
-	var AsyncSubject_1 = __webpack_require__(440);
+	var AsyncSubject_1 = __webpack_require__(450);
 	/**
 	 * We need this JSDoc comment for affecting ESDoc.
 	 * @extends {Ignored}
@@ -57185,7 +58616,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=BoundCallbackObservable.js.map
 
 /***/ },
-/* 440 */
+/* 450 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57243,26 +58674,26 @@ webpackJsonp([0],[
 	//# sourceMappingURL=AsyncSubject.js.map
 
 /***/ },
-/* 441 */
+/* 451 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var bindNodeCallback_1 = __webpack_require__(442);
+	var bindNodeCallback_1 = __webpack_require__(452);
 	Observable_1.Observable.bindNodeCallback = bindNodeCallback_1.bindNodeCallback;
 	//# sourceMappingURL=bindNodeCallback.js.map
 
 /***/ },
-/* 442 */
+/* 452 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var BoundNodeCallbackObservable_1 = __webpack_require__(443);
+	var BoundNodeCallbackObservable_1 = __webpack_require__(453);
 	exports.bindNodeCallback = BoundNodeCallbackObservable_1.BoundNodeCallbackObservable.create;
 	//# sourceMappingURL=bindNodeCallback.js.map
 
 /***/ },
-/* 443 */
+/* 453 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57274,7 +58705,7 @@ webpackJsonp([0],[
 	var Observable_1 = __webpack_require__(38);
 	var tryCatch_1 = __webpack_require__(48);
 	var errorObject_1 = __webpack_require__(49);
-	var AsyncSubject_1 = __webpack_require__(440);
+	var AsyncSubject_1 = __webpack_require__(450);
 	/**
 	 * We need this JSDoc comment for affecting ESDoc.
 	 * @extends {Ignored}
@@ -57413,17 +58844,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=BoundNodeCallbackObservable.js.map
 
 /***/ },
-/* 444 */
+/* 454 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var combineLatest_1 = __webpack_require__(445);
+	var combineLatest_1 = __webpack_require__(455);
 	Observable_1.Observable.combineLatest = combineLatest_1.combineLatestStatic;
 	//# sourceMappingURL=combineLatest.js.map
 
 /***/ },
-/* 445 */
+/* 455 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57613,26 +59044,26 @@ webpackJsonp([0],[
 	//# sourceMappingURL=combineLatest.js.map
 
 /***/ },
-/* 446 */
+/* 456 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var concat_1 = __webpack_require__(447);
+	var concat_1 = __webpack_require__(457);
 	Observable_1.Observable.concat = concat_1.concat;
 	//# sourceMappingURL=concat.js.map
 
 /***/ },
-/* 447 */
+/* 457 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var concat_1 = __webpack_require__(448);
+	var concat_1 = __webpack_require__(458);
 	exports.concat = concat_1.concatStatic;
 	//# sourceMappingURL=concat.js.map
 
 /***/ },
-/* 448 */
+/* 458 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57745,26 +59176,26 @@ webpackJsonp([0],[
 	//# sourceMappingURL=concat.js.map
 
 /***/ },
-/* 449 */
+/* 459 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var defer_1 = __webpack_require__(450);
+	var defer_1 = __webpack_require__(460);
 	Observable_1.Observable.defer = defer_1.defer;
 	//# sourceMappingURL=defer.js.map
 
 /***/ },
-/* 450 */
+/* 460 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var DeferObservable_1 = __webpack_require__(451);
+	var DeferObservable_1 = __webpack_require__(461);
 	exports.defer = DeferObservable_1.DeferObservable.create;
 	//# sourceMappingURL=defer.js.map
 
 /***/ },
-/* 451 */
+/* 461 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57862,17 +59293,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=DeferObservable.js.map
 
 /***/ },
-/* 452 */
+/* 462 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var empty_1 = __webpack_require__(453);
+	var empty_1 = __webpack_require__(463);
 	Observable_1.Observable.empty = empty_1.empty;
 	//# sourceMappingURL=empty.js.map
 
 /***/ },
-/* 453 */
+/* 463 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57881,26 +59312,36 @@ webpackJsonp([0],[
 	//# sourceMappingURL=empty.js.map
 
 /***/ },
-/* 454 */
+/* 464 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var fromEvent_1 = __webpack_require__(455);
+	var from_1 = __webpack_require__(412);
+	Observable_1.Observable.from = from_1.from;
+	//# sourceMappingURL=from.js.map
+
+/***/ },
+/* 465 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var Observable_1 = __webpack_require__(38);
+	var fromEvent_1 = __webpack_require__(466);
 	Observable_1.Observable.fromEvent = fromEvent_1.fromEvent;
 	//# sourceMappingURL=fromEvent.js.map
 
 /***/ },
-/* 455 */
+/* 466 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var FromEventObservable_1 = __webpack_require__(456);
+	var FromEventObservable_1 = __webpack_require__(467);
 	exports.fromEvent = FromEventObservable_1.FromEventObservable.create;
 	//# sourceMappingURL=fromEvent.js.map
 
 /***/ },
-/* 456 */
+/* 467 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57999,26 +59440,26 @@ webpackJsonp([0],[
 	//# sourceMappingURL=FromEventObservable.js.map
 
 /***/ },
-/* 457 */
+/* 468 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var fromEventPattern_1 = __webpack_require__(458);
+	var fromEventPattern_1 = __webpack_require__(469);
 	Observable_1.Observable.fromEventPattern = fromEventPattern_1.fromEventPattern;
 	//# sourceMappingURL=fromEventPattern.js.map
 
 /***/ },
-/* 458 */
+/* 469 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var FromEventPatternObservable_1 = __webpack_require__(459);
+	var FromEventPatternObservable_1 = __webpack_require__(470);
 	exports.fromEventPattern = FromEventPatternObservable_1.FromEventPatternObservable.create;
 	//# sourceMappingURL=fromEventPattern.js.map
 
 /***/ },
-/* 459 */
+/* 470 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58084,36 +59525,36 @@ webpackJsonp([0],[
 	//# sourceMappingURL=FromEventPatternObservable.js.map
 
 /***/ },
-/* 460 */
+/* 471 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var fromPromise_1 = __webpack_require__(428);
+	var fromPromise_1 = __webpack_require__(423);
 	Observable_1.Observable.fromPromise = fromPromise_1.fromPromise;
 	//# sourceMappingURL=fromPromise.js.map
 
 /***/ },
-/* 461 */
+/* 472 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var interval_1 = __webpack_require__(462);
+	var interval_1 = __webpack_require__(473);
 	Observable_1.Observable.interval = interval_1.interval;
 	//# sourceMappingURL=interval.js.map
 
 /***/ },
-/* 462 */
+/* 473 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var IntervalObservable_1 = __webpack_require__(463);
+	var IntervalObservable_1 = __webpack_require__(474);
 	exports.interval = IntervalObservable_1.IntervalObservable.create;
 	//# sourceMappingURL=interval.js.map
 
 /***/ },
-/* 463 */
+/* 474 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58122,9 +59563,9 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var isNumeric_1 = __webpack_require__(464);
+	var isNumeric_1 = __webpack_require__(475);
 	var Observable_1 = __webpack_require__(38);
-	var async_1 = __webpack_require__(465);
+	var async_1 = __webpack_require__(476);
 	/**
 	 * We need this JSDoc comment for affecting ESDoc.
 	 * @extends {Ignored}
@@ -58206,7 +59647,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=IntervalObservable.js.map
 
 /***/ },
-/* 464 */
+/* 475 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58223,16 +59664,16 @@ webpackJsonp([0],[
 	//# sourceMappingURL=isNumeric.js.map
 
 /***/ },
-/* 465 */
+/* 476 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var AsyncScheduler_1 = __webpack_require__(466);
+	var AsyncScheduler_1 = __webpack_require__(477);
 	exports.async = new AsyncScheduler_1.AsyncScheduler();
 	//# sourceMappingURL=async.js.map
 
 /***/ },
-/* 466 */
+/* 477 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58257,26 +59698,26 @@ webpackJsonp([0],[
 	//# sourceMappingURL=AsyncScheduler.js.map
 
 /***/ },
-/* 467 */
+/* 478 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var merge_1 = __webpack_require__(468);
+	var merge_1 = __webpack_require__(479);
 	Observable_1.Observable.merge = merge_1.merge;
 	//# sourceMappingURL=merge.js.map
 
 /***/ },
-/* 468 */
+/* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var merge_1 = __webpack_require__(469);
+	var merge_1 = __webpack_require__(480);
 	exports.merge = merge_1.mergeStatic;
 	//# sourceMappingURL=merge.js.map
 
 /***/ },
-/* 469 */
+/* 480 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58411,17 +59852,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=merge.js.map
 
 /***/ },
-/* 470 */
+/* 481 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var race_1 = __webpack_require__(471);
+	var race_1 = __webpack_require__(482);
 	Observable_1.Observable.race = race_1.raceStatic;
 	//# sourceMappingURL=race.js.map
 
 /***/ },
-/* 471 */
+/* 482 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58535,26 +59976,26 @@ webpackJsonp([0],[
 	//# sourceMappingURL=race.js.map
 
 /***/ },
-/* 472 */
+/* 483 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var never_1 = __webpack_require__(473);
+	var never_1 = __webpack_require__(484);
 	Observable_1.Observable.never = never_1.never;
 	//# sourceMappingURL=never.js.map
 
 /***/ },
-/* 473 */
+/* 484 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var NeverObservable_1 = __webpack_require__(474);
+	var NeverObservable_1 = __webpack_require__(485);
 	exports.never = NeverObservable_1.NeverObservable.create;
 	//# sourceMappingURL=never.js.map
 
 /***/ },
-/* 474 */
+/* 485 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58564,7 +60005,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Observable_1 = __webpack_require__(38);
-	var noop_1 = __webpack_require__(475);
+	var noop_1 = __webpack_require__(486);
 	/**
 	 * We need this JSDoc comment for affecting ESDoc.
 	 * @extends {Ignored}
@@ -58618,7 +60059,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=NeverObservable.js.map
 
 /***/ },
-/* 475 */
+/* 486 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58628,26 +60069,26 @@ webpackJsonp([0],[
 	//# sourceMappingURL=noop.js.map
 
 /***/ },
-/* 476 */
+/* 487 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var range_1 = __webpack_require__(477);
+	var range_1 = __webpack_require__(488);
 	Observable_1.Observable.range = range_1.range;
 	//# sourceMappingURL=range.js.map
 
 /***/ },
-/* 477 */
+/* 488 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var RangeObservable_1 = __webpack_require__(478);
+	var RangeObservable_1 = __webpack_require__(489);
 	exports.range = RangeObservable_1.RangeObservable.create;
 	//# sourceMappingURL=range.js.map
 
 /***/ },
-/* 478 */
+/* 489 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58748,26 +60189,26 @@ webpackJsonp([0],[
 	//# sourceMappingURL=RangeObservable.js.map
 
 /***/ },
-/* 479 */
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var throw_1 = __webpack_require__(480);
+	var throw_1 = __webpack_require__(491);
 	Observable_1.Observable.throw = throw_1._throw;
 	//# sourceMappingURL=throw.js.map
 
 /***/ },
-/* 480 */
+/* 491 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var ErrorObservable_1 = __webpack_require__(481);
+	var ErrorObservable_1 = __webpack_require__(492);
 	exports._throw = ErrorObservable_1.ErrorObservable.create;
 	//# sourceMappingURL=throw.js.map
 
 /***/ },
-/* 481 */
+/* 492 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58854,26 +60295,26 @@ webpackJsonp([0],[
 	//# sourceMappingURL=ErrorObservable.js.map
 
 /***/ },
-/* 482 */
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var timer_1 = __webpack_require__(483);
+	var timer_1 = __webpack_require__(494);
 	Observable_1.Observable.timer = timer_1.timer;
 	//# sourceMappingURL=timer.js.map
 
 /***/ },
-/* 483 */
+/* 494 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var TimerObservable_1 = __webpack_require__(484);
+	var TimerObservable_1 = __webpack_require__(495);
 	exports.timer = TimerObservable_1.TimerObservable.create;
 	//# sourceMappingURL=timer.js.map
 
 /***/ },
-/* 484 */
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58882,11 +60323,11 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var isNumeric_1 = __webpack_require__(464);
+	var isNumeric_1 = __webpack_require__(475);
 	var Observable_1 = __webpack_require__(38);
-	var async_1 = __webpack_require__(465);
+	var async_1 = __webpack_require__(476);
 	var isScheduler_1 = __webpack_require__(362);
-	var isDate_1 = __webpack_require__(485);
+	var isDate_1 = __webpack_require__(496);
 	/**
 	 * We need this JSDoc comment for affecting ESDoc.
 	 * @extends {Ignored}
@@ -58985,7 +60426,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=TimerObservable.js.map
 
 /***/ },
-/* 485 */
+/* 496 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58996,26 +60437,26 @@ webpackJsonp([0],[
 	//# sourceMappingURL=isDate.js.map
 
 /***/ },
-/* 486 */
+/* 497 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var zip_1 = __webpack_require__(487);
+	var zip_1 = __webpack_require__(498);
 	Observable_1.Observable.zip = zip_1.zip;
 	//# sourceMappingURL=zip.js.map
 
 /***/ },
-/* 487 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var zip_1 = __webpack_require__(488);
+	var zip_1 = __webpack_require__(499);
 	exports.zip = zip_1.zipStatic;
 	//# sourceMappingURL=zip.js.map
 
 /***/ },
-/* 488 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59274,17 +60715,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=zip.js.map
 
 /***/ },
-/* 489 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var buffer_1 = __webpack_require__(490);
+	var buffer_1 = __webpack_require__(501);
 	Observable_1.Observable.prototype.buffer = buffer_1.buffer;
 	//# sourceMappingURL=buffer.js.map
 
 /***/ },
-/* 490 */
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59365,17 +60806,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=buffer.js.map
 
 /***/ },
-/* 491 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var bufferCount_1 = __webpack_require__(492);
+	var bufferCount_1 = __webpack_require__(503);
 	Observable_1.Observable.prototype.bufferCount = bufferCount_1.bufferCount;
 	//# sourceMappingURL=bufferCount.js.map
 
 /***/ },
-/* 492 */
+/* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59493,17 +60934,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=bufferCount.js.map
 
 /***/ },
-/* 493 */
+/* 504 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var bufferTime_1 = __webpack_require__(494);
+	var bufferTime_1 = __webpack_require__(505);
 	Observable_1.Observable.prototype.bufferTime = bufferTime_1.bufferTime;
 	//# sourceMappingURL=bufferTime.js.map
 
 /***/ },
-/* 494 */
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59513,7 +60954,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Subscriber_1 = __webpack_require__(43);
-	var async_1 = __webpack_require__(465);
+	var async_1 = __webpack_require__(476);
 	/**
 	 * Buffers the source Observable values for a specific time period.
 	 *
@@ -59656,17 +61097,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=bufferTime.js.map
 
 /***/ },
-/* 495 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var bufferToggle_1 = __webpack_require__(496);
+	var bufferToggle_1 = __webpack_require__(507);
 	Observable_1.Observable.prototype.bufferToggle = bufferToggle_1.bufferToggle;
 	//# sourceMappingURL=bufferToggle.js.map
 
 /***/ },
-/* 496 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59823,17 +61264,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=bufferToggle.js.map
 
 /***/ },
-/* 497 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var bufferWhen_1 = __webpack_require__(498);
+	var bufferWhen_1 = __webpack_require__(509);
 	Observable_1.Observable.prototype.bufferWhen = bufferWhen_1.bufferWhen;
 	//# sourceMappingURL=bufferWhen.js.map
 
 /***/ },
-/* 498 */
+/* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59960,21 +61401,21 @@ webpackJsonp([0],[
 	//# sourceMappingURL=bufferWhen.js.map
 
 /***/ },
-/* 499 */
+/* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var cache_1 = __webpack_require__(500);
+	var cache_1 = __webpack_require__(511);
 	Observable_1.Observable.prototype.cache = cache_1.cache;
 	//# sourceMappingURL=cache.js.map
 
 /***/ },
-/* 500 */
+/* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var publishReplay_1 = __webpack_require__(501);
+	var publishReplay_1 = __webpack_require__(512);
 	/**
 	 * @param bufferSize
 	 * @param windowTime
@@ -59992,7 +61433,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=cache.js.map
 
 /***/ },
-/* 501 */
+/* 512 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60015,21 +61456,21 @@ webpackJsonp([0],[
 	//# sourceMappingURL=publishReplay.js.map
 
 /***/ },
-/* 502 */
+/* 513 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var combineAll_1 = __webpack_require__(503);
+	var combineAll_1 = __webpack_require__(514);
 	Observable_1.Observable.prototype.combineAll = combineAll_1.combineAll;
 	//# sourceMappingURL=combineAll.js.map
 
 /***/ },
-/* 503 */
+/* 514 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var combineLatest_1 = __webpack_require__(445);
+	var combineLatest_1 = __webpack_require__(455);
 	/**
 	 * Converts a higher-order Observable into a first-order Observable by waiting
 	 * for the outer Observable to complete, then applying {@link combineLatest}.
@@ -60077,101 +61518,37 @@ webpackJsonp([0],[
 	//# sourceMappingURL=combineAll.js.map
 
 /***/ },
-/* 504 */
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var combineLatest_1 = __webpack_require__(445);
+	var combineLatest_1 = __webpack_require__(455);
 	Observable_1.Observable.prototype.combineLatest = combineLatest_1.combineLatest;
 	//# sourceMappingURL=combineLatest.js.map
 
 /***/ },
-/* 505 */
+/* 516 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var concat_1 = __webpack_require__(448);
+	var concat_1 = __webpack_require__(458);
 	Observable_1.Observable.prototype.concat = concat_1.concat;
 	//# sourceMappingURL=concat.js.map
 
 /***/ },
-/* 506 */
+/* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var concatAll_1 = __webpack_require__(507);
-	Observable_1.Observable.prototype.concatAll = concatAll_1.concatAll;
-	//# sourceMappingURL=concatAll.js.map
-
-/***/ },
-/* 507 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var mergeAll_1 = __webpack_require__(407);
-	/**
-	 * Converts a higher-order Observable into a first-order Observable by
-	 * concatenating the inner Observables in order.
-	 *
-	 * <span class="informal">Flattens an Observable-of-Observables by putting one
-	 * inner Observable after the other.</span>
-	 *
-	 * <img src="./img/concatAll.png" width="100%">
-	 *
-	 * Joins every Observable emitted by the source (a higher-order Observable), in
-	 * a serial fashion. It subscribes to each inner Observable only after the
-	 * previous inner Observable has completed, and merges all of their values into
-	 * the returned observable.
-	 *
-	 * __Warning:__ If the source Observable emits Observables quickly and
-	 * endlessly, and the inner Observables it emits generally complete slower than
-	 * the source emits, you can run into memory issues as the incoming Observables
-	 * collect in an unbounded buffer.
-	 *
-	 * Note: `concatAll` is equivalent to `mergeAll` with concurrency parameter set
-	 * to `1`.
-	 *
-	 * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
-	 * var clicks = Rx.Observable.fromEvent(document, 'click');
-	 * var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(4));
-	 * var firstOrder = higherOrder.concatAll();
-	 * firstOrder.subscribe(x => console.log(x));
-	 *
-	 * @see {@link combineAll}
-	 * @see {@link concat}
-	 * @see {@link concatMap}
-	 * @see {@link concatMapTo}
-	 * @see {@link exhaust}
-	 * @see {@link mergeAll}
-	 * @see {@link switch}
-	 * @see {@link zipAll}
-	 *
-	 * @return {Observable} An Observable emitting values from all the inner
-	 * Observables concatenated.
-	 * @method concatAll
-	 * @owner Observable
-	 */
-	function concatAll() {
-	    return this.lift(new mergeAll_1.MergeAllOperator(1));
-	}
-	exports.concatAll = concatAll;
-	//# sourceMappingURL=concatAll.js.map
-
-/***/ },
-/* 508 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var Observable_1 = __webpack_require__(38);
-	var concatMap_1 = __webpack_require__(509);
+	var concatMap_1 = __webpack_require__(518);
 	Observable_1.Observable.prototype.concatMap = concatMap_1.concatMap;
 	//# sourceMappingURL=concatMap.js.map
 
 /***/ },
-/* 509 */
+/* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60239,21 +61616,21 @@ webpackJsonp([0],[
 	//# sourceMappingURL=concatMap.js.map
 
 /***/ },
-/* 510 */
+/* 519 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var concatMapTo_1 = __webpack_require__(511);
+	var concatMapTo_1 = __webpack_require__(520);
 	Observable_1.Observable.prototype.concatMapTo = concatMapTo_1.concatMapTo;
 	//# sourceMappingURL=concatMapTo.js.map
 
 /***/ },
-/* 511 */
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var mergeMapTo_1 = __webpack_require__(512);
+	var mergeMapTo_1 = __webpack_require__(521);
 	/**
 	 * Projects each source value to the same Observable which is merged multiple
 	 * times in a serialized fashion on the output Observable.
@@ -60311,7 +61688,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=concatMapTo.js.map
 
 /***/ },
-/* 512 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60470,17 +61847,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=mergeMapTo.js.map
 
 /***/ },
-/* 513 */
+/* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var count_1 = __webpack_require__(514);
+	var count_1 = __webpack_require__(523);
 	Observable_1.Observable.prototype.count = count_1.count;
 	//# sourceMappingURL=count.js.map
 
 /***/ },
-/* 514 */
+/* 523 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60593,17 +61970,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=count.js.map
 
 /***/ },
-/* 515 */
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var dematerialize_1 = __webpack_require__(516);
+	var dematerialize_1 = __webpack_require__(525);
 	Observable_1.Observable.prototype.dematerialize = dematerialize_1.dematerialize;
 	//# sourceMappingURL=dematerialize.js.map
 
 /***/ },
-/* 516 */
+/* 525 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60652,17 +62029,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=dematerialize.js.map
 
 /***/ },
-/* 517 */
+/* 526 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var debounce_1 = __webpack_require__(518);
+	var debounce_1 = __webpack_require__(527);
 	Observable_1.Observable.prototype.debounce = debounce_1.debounce;
 	//# sourceMappingURL=debounce.js.map
 
 /***/ },
-/* 518 */
+/* 527 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60764,17 +62141,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=debounce.js.map
 
 /***/ },
-/* 519 */
+/* 528 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var debounceTime_1 = __webpack_require__(520);
+	var debounceTime_1 = __webpack_require__(529);
 	Observable_1.Observable.prototype.debounceTime = debounceTime_1.debounceTime;
 	//# sourceMappingURL=debounceTime.js.map
 
 /***/ },
-/* 520 */
+/* 529 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60784,7 +62161,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Subscriber_1 = __webpack_require__(43);
-	var async_1 = __webpack_require__(465);
+	var async_1 = __webpack_require__(476);
 	/**
 	 * Returns the source Observable delayed by the computed debounce duration,
 	 * with the duration lengthened if a new source item arrives before the delay
@@ -60863,17 +62240,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=debounceTime.js.map
 
 /***/ },
-/* 521 */
+/* 530 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var defaultIfEmpty_1 = __webpack_require__(522);
+	var defaultIfEmpty_1 = __webpack_require__(531);
 	Observable_1.Observable.prototype.defaultIfEmpty = defaultIfEmpty_1.defaultIfEmpty;
 	//# sourceMappingURL=defaultIfEmpty.js.map
 
 /***/ },
-/* 522 */
+/* 531 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60931,17 +62308,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=defaultIfEmpty.js.map
 
 /***/ },
-/* 523 */
+/* 532 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var delay_1 = __webpack_require__(524);
+	var delay_1 = __webpack_require__(533);
 	Observable_1.Observable.prototype.delay = delay_1.delay;
 	//# sourceMappingURL=delay.js.map
 
 /***/ },
-/* 524 */
+/* 533 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60950,8 +62327,8 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var async_1 = __webpack_require__(465);
-	var isDate_1 = __webpack_require__(485);
+	var async_1 = __webpack_require__(476);
+	var isDate_1 = __webpack_require__(496);
 	var Subscriber_1 = __webpack_require__(43);
 	var Notification_1 = __webpack_require__(397);
 	/**
@@ -61081,17 +62458,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=delay.js.map
 
 /***/ },
-/* 525 */
+/* 534 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var delayWhen_1 = __webpack_require__(526);
+	var delayWhen_1 = __webpack_require__(535);
 	Observable_1.Observable.prototype.delayWhen = delayWhen_1.delayWhen;
 	//# sourceMappingURL=delayWhen.js.map
 
 /***/ },
-/* 526 */
+/* 535 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -61250,17 +62627,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=delayWhen.js.map
 
 /***/ },
-/* 527 */
+/* 536 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var distinctUntilChanged_1 = __webpack_require__(528);
+	var distinctUntilChanged_1 = __webpack_require__(537);
 	Observable_1.Observable.prototype.distinctUntilChanged = distinctUntilChanged_1.distinctUntilChanged;
 	//# sourceMappingURL=distinctUntilChanged.js.map
 
 /***/ },
-/* 528 */
+/* 537 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -61342,17 +62719,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=distinctUntilChanged.js.map
 
 /***/ },
-/* 529 */
+/* 538 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var expand_1 = __webpack_require__(530);
+	var expand_1 = __webpack_require__(539);
 	Observable_1.Observable.prototype.expand = expand_1.expand;
 	//# sourceMappingURL=expand.js.map
 
 /***/ },
-/* 530 */
+/* 539 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -61472,211 +62849,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=expand.js.map
 
 /***/ },
-/* 531 */
+/* 540 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var first_1 = __webpack_require__(532);
-	Observable_1.Observable.prototype.first = first_1.first;
-	//# sourceMappingURL=first.js.map
-
-/***/ },
-/* 532 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var Subscriber_1 = __webpack_require__(43);
-	var EmptyError_1 = __webpack_require__(533);
-	/**
-	 * Emits only the first value (or the first value that meets some condition)
-	 * emitted by the source Observable.
-	 *
-	 * <span class="informal">Emits only the first value. Or emits only the first
-	 * value that passes some test.</span>
-	 *
-	 * <img src="./img/first.png" width="100%">
-	 *
-	 * If called with no arguments, `first` emits the first value of the source
-	 * Observable, then completes. If called with a `predicate` function, `first`
-	 * emits the first value of the source that matches the specified condition. It
-	 * may also take a `resultSelector` function to produce the output value from
-	 * the input value, and a `defaultValue` to emit in case the source completes
-	 * before it is able to emit a valid value. Throws an error if `defaultValue`
-	 * was not provided and a matching element is not found.
-	 *
-	 * @example <caption>Emit only the first click that happens on the DOM</caption>
-	 * var clicks = Rx.Observable.fromEvent(document, 'click');
-	 * var result = clicks.first();
-	 * result.subscribe(x => console.log(x));
-	 *
-	 * @example <caption>Emits the first click that happens on a DIV</caption>
-	 * var clicks = Rx.Observable.fromEvent(document, 'click');
-	 * var result = clicks.first(ev => ev.target.tagName === 'DIV');
-	 * result.subscribe(x => console.log(x));
-	 *
-	 * @see {@link filter}
-	 * @see {@link find}
-	 * @see {@link take}
-	 *
-	 * @throws {EmptyError} Delivers an EmptyError to the Observer's `error`
-	 * callback if the Observable completes before any `next` notification was sent.
-	 *
-	 * @param {function(value: T, index: number, source: Observable<T>): boolean} [predicate]
-	 * An optional function called with each item to test for condition matching.
-	 * @param {function(value: T, index: number): R} [resultSelector] A function to
-	 * produce the value on the output Observable based on the values
-	 * and the indices of the source Observable. The arguments passed to this
-	 * function are:
-	 * - `value`: the value that was emitted on the source.
-	 * - `index`: the "index" of the value from the source.
-	 * @param {R} [defaultValue] The default value emitted in case no valid value
-	 * was found on the source.
-	 * @return {Observable<T|R>} an Observable of the first item that matches the
-	 * condition.
-	 * @method first
-	 * @owner Observable
-	 */
-	function first(predicate, resultSelector, defaultValue) {
-	    return this.lift(new FirstOperator(predicate, resultSelector, defaultValue, this));
-	}
-	exports.first = first;
-	var FirstOperator = (function () {
-	    function FirstOperator(predicate, resultSelector, defaultValue, source) {
-	        this.predicate = predicate;
-	        this.resultSelector = resultSelector;
-	        this.defaultValue = defaultValue;
-	        this.source = source;
-	    }
-	    FirstOperator.prototype.call = function (observer, source) {
-	        return source._subscribe(new FirstSubscriber(observer, this.predicate, this.resultSelector, this.defaultValue, this.source));
-	    };
-	    return FirstOperator;
-	}());
-	/**
-	 * We need this JSDoc comment for affecting ESDoc.
-	 * @ignore
-	 * @extends {Ignored}
-	 */
-	var FirstSubscriber = (function (_super) {
-	    __extends(FirstSubscriber, _super);
-	    function FirstSubscriber(destination, predicate, resultSelector, defaultValue, source) {
-	        _super.call(this, destination);
-	        this.predicate = predicate;
-	        this.resultSelector = resultSelector;
-	        this.defaultValue = defaultValue;
-	        this.source = source;
-	        this.index = 0;
-	        this.hasCompleted = false;
-	    }
-	    FirstSubscriber.prototype._next = function (value) {
-	        var index = this.index++;
-	        if (this.predicate) {
-	            this._tryPredicate(value, index);
-	        }
-	        else {
-	            this._emit(value, index);
-	        }
-	    };
-	    FirstSubscriber.prototype._tryPredicate = function (value, index) {
-	        var result;
-	        try {
-	            result = this.predicate(value, index, this.source);
-	        }
-	        catch (err) {
-	            this.destination.error(err);
-	            return;
-	        }
-	        if (result) {
-	            this._emit(value, index);
-	        }
-	    };
-	    FirstSubscriber.prototype._emit = function (value, index) {
-	        if (this.resultSelector) {
-	            this._tryResultSelector(value, index);
-	            return;
-	        }
-	        this._emitFinal(value);
-	    };
-	    FirstSubscriber.prototype._tryResultSelector = function (value, index) {
-	        var result;
-	        try {
-	            result = this.resultSelector(value, index);
-	        }
-	        catch (err) {
-	            this.destination.error(err);
-	            return;
-	        }
-	        this._emitFinal(result);
-	    };
-	    FirstSubscriber.prototype._emitFinal = function (value) {
-	        var destination = this.destination;
-	        destination.next(value);
-	        destination.complete();
-	        this.hasCompleted = true;
-	    };
-	    FirstSubscriber.prototype._complete = function () {
-	        var destination = this.destination;
-	        if (!this.hasCompleted && typeof this.defaultValue !== 'undefined') {
-	            destination.next(this.defaultValue);
-	            destination.complete();
-	        }
-	        else if (!this.hasCompleted) {
-	            destination.error(new EmptyError_1.EmptyError);
-	        }
-	    };
-	    return FirstSubscriber;
-	}(Subscriber_1.Subscriber));
-	//# sourceMappingURL=first.js.map
-
-/***/ },
-/* 533 */
-/***/ function(module, exports) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	/**
-	 * An error thrown when an Observable or a sequence was queried but has no
-	 * elements.
-	 *
-	 * @see {@link first}
-	 * @see {@link last}
-	 * @see {@link single}
-	 *
-	 * @class EmptyError
-	 */
-	var EmptyError = (function (_super) {
-	    __extends(EmptyError, _super);
-	    function EmptyError() {
-	        _super.call(this, 'no elements in sequence');
-	        this.name = 'EmptyError';
-	    }
-	    return EmptyError;
-	}(Error));
-	exports.EmptyError = EmptyError;
-	//# sourceMappingURL=EmptyError.js.map
-
-/***/ },
-/* 534 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var Observable_1 = __webpack_require__(38);
-	var groupBy_1 = __webpack_require__(535);
+	var groupBy_1 = __webpack_require__(541);
 	Observable_1.Observable.prototype.groupBy = groupBy_1.groupBy;
 	//# sourceMappingURL=groupBy.js.map
 
 /***/ },
-/* 535 */
+/* 541 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -61689,8 +62872,8 @@ webpackJsonp([0],[
 	var Subscription_1 = __webpack_require__(45);
 	var Observable_1 = __webpack_require__(38);
 	var Subject_1 = __webpack_require__(37);
-	var Map_1 = __webpack_require__(536);
-	var FastMap_1 = __webpack_require__(538);
+	var Map_1 = __webpack_require__(542);
+	var FastMap_1 = __webpack_require__(544);
 	/**
 	 * Groups the items emitted by an Observable according to a specified criterion,
 	 * and emits these grouped items as `GroupedObservables`, one
@@ -61931,17 +63114,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=groupBy.js.map
 
 /***/ },
-/* 536 */
+/* 542 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var root_1 = __webpack_require__(39);
-	var MapPolyfill_1 = __webpack_require__(537);
+	var MapPolyfill_1 = __webpack_require__(543);
 	exports.Map = root_1.root.Map || (function () { return MapPolyfill_1.MapPolyfill; })();
 	//# sourceMappingURL=Map.js.map
 
 /***/ },
-/* 537 */
+/* 543 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -61993,7 +63176,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=MapPolyfill.js.map
 
 /***/ },
-/* 538 */
+/* 544 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -62029,17 +63212,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=FastMap.js.map
 
 /***/ },
-/* 539 */
+/* 545 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var ignoreElements_1 = __webpack_require__(540);
+	var ignoreElements_1 = __webpack_require__(546);
 	Observable_1.Observable.prototype.ignoreElements = ignoreElements_1.ignoreElements;
 	//# sourceMappingURL=ignoreElements.js.map
 
 /***/ },
-/* 540 */
+/* 546 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62049,7 +63232,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Subscriber_1 = __webpack_require__(43);
-	var noop_1 = __webpack_require__(475);
+	var noop_1 = __webpack_require__(486);
 	/**
 	 * Ignores all items emitted by the source Observable and only passes calls of `complete` or `error`.
 	 *
@@ -62091,17 +63274,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=ignoreElements.js.map
 
 /***/ },
-/* 541 */
+/* 547 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var audit_1 = __webpack_require__(542);
+	var audit_1 = __webpack_require__(548);
 	Observable_1.Observable.prototype.audit = audit_1.audit;
 	//# sourceMappingURL=audit.js.map
 
 /***/ },
-/* 542 */
+/* 548 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62182,17 +63365,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=audit.js.map
 
 /***/ },
-/* 543 */
+/* 549 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var auditTime_1 = __webpack_require__(544);
+	var auditTime_1 = __webpack_require__(550);
 	Observable_1.Observable.prototype.auditTime = auditTime_1.auditTime;
 	//# sourceMappingURL=auditTime.js.map
 
 /***/ },
-/* 544 */
+/* 550 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62201,7 +63384,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var async_1 = __webpack_require__(465);
+	var async_1 = __webpack_require__(476);
 	var Subscriber_1 = __webpack_require__(43);
 	/**
 	 * @param delay
@@ -62266,151 +63449,18 @@ webpackJsonp([0],[
 	//# sourceMappingURL=auditTime.js.map
 
 /***/ },
-/* 545 */
+/* 551 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var last_1 = __webpack_require__(546);
-	Observable_1.Observable.prototype.last = last_1.last;
-	//# sourceMappingURL=last.js.map
-
-/***/ },
-/* 546 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var Subscriber_1 = __webpack_require__(43);
-	var EmptyError_1 = __webpack_require__(533);
-	/**
-	 * Returns an Observable that emits only the last item emitted by the source Observable.
-	 * It optionally takes a predicate function as a parameter, in which case, rather than emitting
-	 * the last item from the source Observable, the resulting Observable will emit the last item
-	 * from the source Observable that satisfies the predicate.
-	 *
-	 * <img src="./img/last.png" width="100%">
-	 *
-	 * @throws {EmptyError} Delivers an EmptyError to the Observer's `error`
-	 * callback if the Observable completes before any `next` notification was sent.
-	 * @param {function} predicate - the condition any source emitted item has to satisfy.
-	 * @return {Observable} an Observable that emits only the last item satisfying the given condition
-	 * from the source, or an NoSuchElementException if no such items are emitted.
-	 * @throws - Throws if no items that match the predicate are emitted by the source Observable.
-	 * @method last
-	 * @owner Observable
-	 */
-	function last(predicate, resultSelector, defaultValue) {
-	    return this.lift(new LastOperator(predicate, resultSelector, defaultValue, this));
-	}
-	exports.last = last;
-	var LastOperator = (function () {
-	    function LastOperator(predicate, resultSelector, defaultValue, source) {
-	        this.predicate = predicate;
-	        this.resultSelector = resultSelector;
-	        this.defaultValue = defaultValue;
-	        this.source = source;
-	    }
-	    LastOperator.prototype.call = function (observer, source) {
-	        return source._subscribe(new LastSubscriber(observer, this.predicate, this.resultSelector, this.defaultValue, this.source));
-	    };
-	    return LastOperator;
-	}());
-	/**
-	 * We need this JSDoc comment for affecting ESDoc.
-	 * @ignore
-	 * @extends {Ignored}
-	 */
-	var LastSubscriber = (function (_super) {
-	    __extends(LastSubscriber, _super);
-	    function LastSubscriber(destination, predicate, resultSelector, defaultValue, source) {
-	        _super.call(this, destination);
-	        this.predicate = predicate;
-	        this.resultSelector = resultSelector;
-	        this.defaultValue = defaultValue;
-	        this.source = source;
-	        this.hasValue = false;
-	        this.index = 0;
-	        if (typeof defaultValue !== 'undefined') {
-	            this.lastValue = defaultValue;
-	            this.hasValue = true;
-	        }
-	    }
-	    LastSubscriber.prototype._next = function (value) {
-	        var index = this.index++;
-	        if (this.predicate) {
-	            this._tryPredicate(value, index);
-	        }
-	        else {
-	            if (this.resultSelector) {
-	                this._tryResultSelector(value, index);
-	                return;
-	            }
-	            this.lastValue = value;
-	            this.hasValue = true;
-	        }
-	    };
-	    LastSubscriber.prototype._tryPredicate = function (value, index) {
-	        var result;
-	        try {
-	            result = this.predicate(value, index, this.source);
-	        }
-	        catch (err) {
-	            this.destination.error(err);
-	            return;
-	        }
-	        if (result) {
-	            if (this.resultSelector) {
-	                this._tryResultSelector(value, index);
-	                return;
-	            }
-	            this.lastValue = value;
-	            this.hasValue = true;
-	        }
-	    };
-	    LastSubscriber.prototype._tryResultSelector = function (value, index) {
-	        var result;
-	        try {
-	            result = this.resultSelector(value, index);
-	        }
-	        catch (err) {
-	            this.destination.error(err);
-	            return;
-	        }
-	        this.lastValue = result;
-	        this.hasValue = true;
-	    };
-	    LastSubscriber.prototype._complete = function () {
-	        var destination = this.destination;
-	        if (this.hasValue) {
-	            destination.next(this.lastValue);
-	            destination.complete();
-	        }
-	        else {
-	            destination.error(new EmptyError_1.EmptyError);
-	        }
-	    };
-	    return LastSubscriber;
-	}(Subscriber_1.Subscriber));
-	//# sourceMappingURL=last.js.map
-
-/***/ },
-/* 547 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var Observable_1 = __webpack_require__(38);
-	var let_1 = __webpack_require__(548);
+	var let_1 = __webpack_require__(552);
 	Observable_1.Observable.prototype.let = let_1.letProto;
 	Observable_1.Observable.prototype.letBind = let_1.letProto;
 	//# sourceMappingURL=let.js.map
 
 /***/ },
-/* 548 */
+/* 552 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -62427,17 +63477,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=let.js.map
 
 /***/ },
-/* 549 */
+/* 553 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var mapTo_1 = __webpack_require__(550);
+	var mapTo_1 = __webpack_require__(554);
 	Observable_1.Observable.prototype.mapTo = mapTo_1.mapTo;
 	//# sourceMappingURL=mapTo.js.map
 
 /***/ },
-/* 550 */
+/* 554 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62505,17 +63555,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=mapTo.js.map
 
 /***/ },
-/* 551 */
+/* 555 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var materialize_1 = __webpack_require__(552);
+	var materialize_1 = __webpack_require__(556);
 	Observable_1.Observable.prototype.materialize = materialize_1.materialize;
 	//# sourceMappingURL=materialize.js.map
 
 /***/ },
-/* 552 */
+/* 556 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62581,28 +63631,28 @@ webpackJsonp([0],[
 	//# sourceMappingURL=materialize.js.map
 
 /***/ },
-/* 553 */
+/* 557 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var merge_1 = __webpack_require__(469);
+	var merge_1 = __webpack_require__(480);
 	Observable_1.Observable.prototype.merge = merge_1.merge;
 	//# sourceMappingURL=merge.js.map
 
 /***/ },
-/* 554 */
+/* 558 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var mergeMapTo_1 = __webpack_require__(512);
+	var mergeMapTo_1 = __webpack_require__(521);
 	Observable_1.Observable.prototype.flatMapTo = mergeMapTo_1.mergeMapTo;
 	Observable_1.Observable.prototype.mergeMapTo = mergeMapTo_1.mergeMapTo;
 	//# sourceMappingURL=mergeMapTo.js.map
 
 /***/ },
-/* 555 */
+/* 559 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62612,7 +63662,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=multicast.js.map
 
 /***/ },
-/* 556 */
+/* 560 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62622,21 +63672,21 @@ webpackJsonp([0],[
 	//# sourceMappingURL=observeOn.js.map
 
 /***/ },
-/* 557 */
+/* 561 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var partition_1 = __webpack_require__(558);
+	var partition_1 = __webpack_require__(562);
 	Observable_1.Observable.prototype.partition = partition_1.partition;
 	//# sourceMappingURL=partition.js.map
 
 /***/ },
-/* 558 */
+/* 562 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var not_1 = __webpack_require__(559);
+	var not_1 = __webpack_require__(563);
 	var filter_1 = __webpack_require__(366);
 	/**
 	 * @param predicate
@@ -62655,7 +63705,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=partition.js.map
 
 /***/ },
-/* 559 */
+/* 563 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -62671,17 +63721,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=not.js.map
 
 /***/ },
-/* 560 */
+/* 564 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var pluck_1 = __webpack_require__(561);
+	var pluck_1 = __webpack_require__(565);
 	Observable_1.Observable.prototype.pluck = pluck_1.pluck;
 	//# sourceMappingURL=pluck.js.map
 
 /***/ },
-/* 561 */
+/* 565 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62744,17 +63794,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=pluck.js.map
 
 /***/ },
-/* 562 */
+/* 566 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var publish_1 = __webpack_require__(563);
+	var publish_1 = __webpack_require__(567);
 	Observable_1.Observable.prototype.publish = publish_1.publish;
 	//# sourceMappingURL=publish.js.map
 
 /***/ },
-/* 563 */
+/* 567 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62777,21 +63827,21 @@ webpackJsonp([0],[
 	//# sourceMappingURL=publish.js.map
 
 /***/ },
-/* 564 */
+/* 568 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var publishBehavior_1 = __webpack_require__(565);
+	var publishBehavior_1 = __webpack_require__(569);
 	Observable_1.Observable.prototype.publishBehavior = publishBehavior_1.publishBehavior;
 	//# sourceMappingURL=publishBehavior.js.map
 
 /***/ },
-/* 565 */
+/* 569 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var BehaviorSubject_1 = __webpack_require__(421);
+	var BehaviorSubject_1 = __webpack_require__(431);
 	var multicast_1 = __webpack_require__(371);
 	/**
 	 * @param value
@@ -62806,31 +63856,31 @@ webpackJsonp([0],[
 	//# sourceMappingURL=publishBehavior.js.map
 
 /***/ },
-/* 566 */
+/* 570 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var publishReplay_1 = __webpack_require__(501);
+	var publishReplay_1 = __webpack_require__(512);
 	Observable_1.Observable.prototype.publishReplay = publishReplay_1.publishReplay;
 	//# sourceMappingURL=publishReplay.js.map
 
 /***/ },
-/* 567 */
+/* 571 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var publishLast_1 = __webpack_require__(568);
+	var publishLast_1 = __webpack_require__(572);
 	Observable_1.Observable.prototype.publishLast = publishLast_1.publishLast;
 	//# sourceMappingURL=publishLast.js.map
 
 /***/ },
-/* 568 */
+/* 572 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var AsyncSubject_1 = __webpack_require__(440);
+	var AsyncSubject_1 = __webpack_require__(450);
 	var multicast_1 = __webpack_require__(371);
 	/**
 	 * @return {ConnectableObservable<T>}
@@ -62844,126 +63894,27 @@ webpackJsonp([0],[
 	//# sourceMappingURL=publishLast.js.map
 
 /***/ },
-/* 569 */
+/* 573 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var race_1 = __webpack_require__(471);
+	var race_1 = __webpack_require__(482);
 	Observable_1.Observable.prototype.race = race_1.race;
 	//# sourceMappingURL=race.js.map
 
 /***/ },
-/* 570 */
+/* 574 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var reduce_1 = __webpack_require__(571);
-	Observable_1.Observable.prototype.reduce = reduce_1.reduce;
-	//# sourceMappingURL=reduce.js.map
-
-/***/ },
-/* 571 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var Subscriber_1 = __webpack_require__(43);
-	/**
-	 * Returns an Observable that applies a specified accumulator function to the first item emitted by a source Observable,
-	 * then feeds the result of that function along with the second item emitted by the source Observable into the same
-	 * function, and so on until all items have been emitted by the source Observable, and emits the final result from
-	 * the final call to your function as its sole item.
-	 * This technique, which is called "reduce" here, is sometimes called "aggregate," "fold," "accumulate," "compress," or
-	 * "inject" in other programming contexts.
-	 *
-	 * <img src="./img/reduce.png" width="100%">
-	 *
-	 * @param {initialValue} the initial (seed) accumulator value
-	 * @param {accumulator} an accumulator function to be invoked on each item emitted by the source Observable, the
-	 * result of which will be used in the next accumulator call.
-	 * @return {Observable} an Observable that emits a single item that is the result of accumulating the output from the
-	 * items emitted by the source Observable.
-	 * @method reduce
-	 * @owner Observable
-	 */
-	function reduce(project, seed) {
-	    return this.lift(new ReduceOperator(project, seed));
-	}
-	exports.reduce = reduce;
-	var ReduceOperator = (function () {
-	    function ReduceOperator(project, seed) {
-	        this.project = project;
-	        this.seed = seed;
-	    }
-	    ReduceOperator.prototype.call = function (subscriber, source) {
-	        return source._subscribe(new ReduceSubscriber(subscriber, this.project, this.seed));
-	    };
-	    return ReduceOperator;
-	}());
-	exports.ReduceOperator = ReduceOperator;
-	/**
-	 * We need this JSDoc comment for affecting ESDoc.
-	 * @ignore
-	 * @extends {Ignored}
-	 */
-	var ReduceSubscriber = (function (_super) {
-	    __extends(ReduceSubscriber, _super);
-	    function ReduceSubscriber(destination, project, seed) {
-	        _super.call(this, destination);
-	        this.hasValue = false;
-	        this.acc = seed;
-	        this.project = project;
-	        this.hasSeed = typeof seed !== 'undefined';
-	    }
-	    ReduceSubscriber.prototype._next = function (value) {
-	        if (this.hasValue || (this.hasValue = this.hasSeed)) {
-	            this._tryReduce(value);
-	        }
-	        else {
-	            this.acc = value;
-	            this.hasValue = true;
-	        }
-	    };
-	    ReduceSubscriber.prototype._tryReduce = function (value) {
-	        var result;
-	        try {
-	            result = this.project(this.acc, value);
-	        }
-	        catch (err) {
-	            this.destination.error(err);
-	            return;
-	        }
-	        this.acc = result;
-	    };
-	    ReduceSubscriber.prototype._complete = function () {
-	        if (this.hasValue || this.hasSeed) {
-	            this.destination.next(this.acc);
-	        }
-	        this.destination.complete();
-	    };
-	    return ReduceSubscriber;
-	}(Subscriber_1.Subscriber));
-	exports.ReduceSubscriber = ReduceSubscriber;
-	//# sourceMappingURL=reduce.js.map
-
-/***/ },
-/* 572 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var Observable_1 = __webpack_require__(38);
-	var repeat_1 = __webpack_require__(573);
+	var repeat_1 = __webpack_require__(575);
 	Observable_1.Observable.prototype.repeat = repeat_1.repeat;
 	//# sourceMappingURL=repeat.js.map
 
 /***/ },
-/* 573 */
+/* 575 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63043,17 +63994,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=repeat.js.map
 
 /***/ },
-/* 574 */
+/* 576 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var retry_1 = __webpack_require__(575);
+	var retry_1 = __webpack_require__(577);
 	Observable_1.Observable.prototype.retry = retry_1.retry;
 	//# sourceMappingURL=retry.js.map
 
 /***/ },
-/* 575 */
+/* 577 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63127,17 +64078,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=retry.js.map
 
 /***/ },
-/* 576 */
+/* 578 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var retryWhen_1 = __webpack_require__(577);
+	var retryWhen_1 = __webpack_require__(579);
 	Observable_1.Observable.prototype.retryWhen = retryWhen_1.retryWhen;
 	//# sourceMappingURL=retryWhen.js.map
 
 /***/ },
-/* 577 */
+/* 579 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63248,17 +64199,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=retryWhen.js.map
 
 /***/ },
-/* 578 */
+/* 580 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var sample_1 = __webpack_require__(579);
+	var sample_1 = __webpack_require__(581);
 	Observable_1.Observable.prototype.sample = sample_1.sample;
 	//# sourceMappingURL=sample.js.map
 
 /***/ },
-/* 579 */
+/* 581 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63328,17 +64279,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=sample.js.map
 
 /***/ },
-/* 580 */
+/* 582 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var sampleTime_1 = __webpack_require__(581);
+	var sampleTime_1 = __webpack_require__(583);
 	Observable_1.Observable.prototype.sampleTime = sampleTime_1.sampleTime;
 	//# sourceMappingURL=sampleTime.js.map
 
 /***/ },
-/* 581 */
+/* 583 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63348,7 +64299,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Subscriber_1 = __webpack_require__(43);
-	var async_1 = __webpack_require__(465);
+	var async_1 = __webpack_require__(476);
 	/**
 	 * @param delay
 	 * @param scheduler
@@ -63405,17 +64356,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=sampleTime.js.map
 
 /***/ },
-/* 582 */
+/* 584 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var scan_1 = __webpack_require__(583);
+	var scan_1 = __webpack_require__(585);
 	Observable_1.Observable.prototype.scan = scan_1.scan;
 	//# sourceMappingURL=scan.js.map
 
 /***/ },
-/* 583 */
+/* 585 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63527,17 +64478,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=scan.js.map
 
 /***/ },
-/* 584 */
+/* 586 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var single_1 = __webpack_require__(585);
+	var single_1 = __webpack_require__(587);
 	Observable_1.Observable.prototype.single = single_1.single;
 	//# sourceMappingURL=single.js.map
 
 /***/ },
-/* 585 */
+/* 587 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63547,7 +64498,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Subscriber_1 = __webpack_require__(43);
-	var EmptyError_1 = __webpack_require__(533);
+	var EmptyError_1 = __webpack_require__(419);
 	/**
 	 * Returns an Observable that emits the single item emitted by the source Observable that matches a specified
 	 * predicate, if that Observable emits one such item. If the source Observable emits more than one such item or no
@@ -63637,17 +64588,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=single.js.map
 
 /***/ },
-/* 586 */
+/* 588 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var skip_1 = __webpack_require__(587);
+	var skip_1 = __webpack_require__(589);
 	Observable_1.Observable.prototype.skip = skip_1.skip;
 	//# sourceMappingURL=skip.js.map
 
 /***/ },
-/* 587 */
+/* 589 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63703,17 +64654,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=skip.js.map
 
 /***/ },
-/* 588 */
+/* 590 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var skipUntil_1 = __webpack_require__(589);
+	var skipUntil_1 = __webpack_require__(591);
 	Observable_1.Observable.prototype.skipUntil = skipUntil_1.skipUntil;
 	//# sourceMappingURL=skipUntil.js.map
 
 /***/ },
-/* 589 */
+/* 591 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63789,17 +64740,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=skipUntil.js.map
 
 /***/ },
-/* 590 */
+/* 592 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var skipWhile_1 = __webpack_require__(591);
+	var skipWhile_1 = __webpack_require__(593);
 	Observable_1.Observable.prototype.skipWhile = skipWhile_1.skipWhile;
 	//# sourceMappingURL=skipWhile.js.map
 
 /***/ },
-/* 591 */
+/* 593 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63870,24 +64821,24 @@ webpackJsonp([0],[
 	//# sourceMappingURL=skipWhile.js.map
 
 /***/ },
-/* 592 */
+/* 594 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var startWith_1 = __webpack_require__(593);
+	var startWith_1 = __webpack_require__(595);
 	Observable_1.Observable.prototype.startWith = startWith_1.startWith;
 	//# sourceMappingURL=startWith.js.map
 
 /***/ },
-/* 593 */
+/* 595 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var ArrayObservable_1 = __webpack_require__(360);
 	var ScalarObservable_1 = __webpack_require__(361);
 	var EmptyObservable_1 = __webpack_require__(352);
-	var concat_1 = __webpack_require__(448);
+	var concat_1 = __webpack_require__(458);
 	var isScheduler_1 = __webpack_require__(362);
 	/**
 	 * Returns an Observable that emits the items in a specified Iterable before it begins to emit items emitted by the
@@ -63928,21 +64879,21 @@ webpackJsonp([0],[
 	//# sourceMappingURL=startWith.js.map
 
 /***/ },
-/* 594 */
+/* 596 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var subscribeOn_1 = __webpack_require__(595);
+	var subscribeOn_1 = __webpack_require__(597);
 	Observable_1.Observable.prototype.subscribeOn = subscribeOn_1.subscribeOn;
 	//# sourceMappingURL=subscribeOn.js.map
 
 /***/ },
-/* 595 */
+/* 597 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var SubscribeOnObservable_1 = __webpack_require__(596);
+	var SubscribeOnObservable_1 = __webpack_require__(598);
 	/**
 	 * Asynchronously subscribes Observers to this Observable on the specified Scheduler.
 	 *
@@ -63962,7 +64913,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=subscribeOn.js.map
 
 /***/ },
-/* 596 */
+/* 598 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63972,8 +64923,8 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Observable_1 = __webpack_require__(38);
-	var asap_1 = __webpack_require__(597);
-	var isNumeric_1 = __webpack_require__(464);
+	var asap_1 = __webpack_require__(599);
+	var isNumeric_1 = __webpack_require__(475);
 	/**
 	 * We need this JSDoc comment for affecting ESDoc.
 	 * @extends {Ignored}
@@ -64018,16 +64969,16 @@ webpackJsonp([0],[
 	//# sourceMappingURL=SubscribeOnObservable.js.map
 
 /***/ },
-/* 597 */
+/* 599 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var AsapScheduler_1 = __webpack_require__(598);
+	var AsapScheduler_1 = __webpack_require__(600);
 	exports.asap = new AsapScheduler_1.AsapScheduler();
 	//# sourceMappingURL=asap.js.map
 
 /***/ },
-/* 598 */
+/* 600 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -64036,7 +64987,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var AsapAction_1 = __webpack_require__(599);
+	var AsapAction_1 = __webpack_require__(601);
 	var QueueScheduler_1 = __webpack_require__(393);
 	var AsapScheduler = (function (_super) {
 	    __extends(AsapScheduler, _super);
@@ -64052,7 +65003,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=AsapScheduler.js.map
 
 /***/ },
-/* 599 */
+/* 601 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -64061,7 +65012,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Immediate_1 = __webpack_require__(600);
+	var Immediate_1 = __webpack_require__(602);
 	var FutureAction_1 = __webpack_require__(395);
 	/**
 	 * We need this JSDoc comment for affecting ESDoc.
@@ -64108,7 +65059,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=AsapAction.js.map
 
 /***/ },
-/* 600 */
+/* 602 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(clearImmediate, setImmediate) {/**
@@ -64320,13 +65271,13 @@ webpackJsonp([0],[
 	exports.ImmediateDefinition = ImmediateDefinition;
 	exports.Immediate = new ImmediateDefinition(root_1.root);
 	//# sourceMappingURL=Immediate.js.map
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(601).clearImmediate, __webpack_require__(601).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(603).clearImmediate, __webpack_require__(603).setImmediate))
 
 /***/ },
-/* 601 */
+/* 603 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(602).nextTick;
+	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(604).nextTick;
 	var apply = Function.prototype.apply;
 	var slice = Array.prototype.slice;
 	var immediateIds = {};
@@ -64402,21 +65353,21 @@ webpackJsonp([0],[
 	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
 	  delete immediateIds[id];
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(601).setImmediate, __webpack_require__(601).clearImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(603).setImmediate, __webpack_require__(603).clearImmediate))
 
 /***/ },
-/* 602 */,
-/* 603 */
+/* 604 */,
+/* 605 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var switch_1 = __webpack_require__(604);
+	var switch_1 = __webpack_require__(606);
 	Observable_1.Observable.prototype.switch = switch_1._switch;
 	//# sourceMappingURL=switch.js.map
 
 /***/ },
-/* 604 */
+/* 606 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -64529,17 +65480,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=switch.js.map
 
 /***/ },
-/* 605 */
+/* 607 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var switchMap_1 = __webpack_require__(606);
+	var switchMap_1 = __webpack_require__(608);
 	Observable_1.Observable.prototype.switchMap = switchMap_1.switchMap;
 	//# sourceMappingURL=switchMap.js.map
 
 /***/ },
-/* 606 */
+/* 608 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -64683,17 +65634,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=switchMap.js.map
 
 /***/ },
-/* 607 */
+/* 609 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var switchMapTo_1 = __webpack_require__(608);
+	var switchMapTo_1 = __webpack_require__(610);
 	Observable_1.Observable.prototype.switchMapTo = switchMapTo_1.switchMapTo;
 	//# sourceMappingURL=switchMapTo.js.map
 
 /***/ },
-/* 608 */
+/* 610 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -64824,17 +65775,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=switchMapTo.js.map
 
 /***/ },
-/* 609 */
+/* 611 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var take_1 = __webpack_require__(610);
+	var take_1 = __webpack_require__(612);
 	Observable_1.Observable.prototype.take = take_1.take;
 	//# sourceMappingURL=take.js.map
 
 /***/ },
-/* 610 */
+/* 612 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -64844,7 +65795,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Subscriber_1 = __webpack_require__(43);
-	var ArgumentOutOfRangeError_1 = __webpack_require__(611);
+	var ArgumentOutOfRangeError_1 = __webpack_require__(613);
 	var EmptyObservable_1 = __webpack_require__(352);
 	/**
 	 * @throws {ArgumentOutOfRangeError} When using `take(i)`, it delivers an
@@ -64902,7 +65853,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=take.js.map
 
 /***/ },
-/* 611 */
+/* 613 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -64933,17 +65884,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=ArgumentOutOfRangeError.js.map
 
 /***/ },
-/* 612 */
+/* 614 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var takeLast_1 = __webpack_require__(613);
+	var takeLast_1 = __webpack_require__(615);
 	Observable_1.Observable.prototype.takeLast = takeLast_1.takeLast;
 	//# sourceMappingURL=takeLast.js.map
 
 /***/ },
-/* 613 */
+/* 615 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -64953,7 +65904,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Subscriber_1 = __webpack_require__(43);
-	var ArgumentOutOfRangeError_1 = __webpack_require__(611);
+	var ArgumentOutOfRangeError_1 = __webpack_require__(613);
 	var EmptyObservable_1 = __webpack_require__(352);
 	/**
 	 * @throws {ArgumentOutOfRangeError} When using `takeLast(i)`, it delivers an
@@ -65027,17 +65978,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=takeLast.js.map
 
 /***/ },
-/* 614 */
+/* 616 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var takeUntil_1 = __webpack_require__(615);
+	var takeUntil_1 = __webpack_require__(617);
 	Observable_1.Observable.prototype.takeUntil = takeUntil_1.takeUntil;
 	//# sourceMappingURL=takeUntil.js.map
 
 /***/ },
-/* 615 */
+/* 617 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65090,17 +66041,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=takeUntil.js.map
 
 /***/ },
-/* 616 */
+/* 618 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var takeWhile_1 = __webpack_require__(617);
+	var takeWhile_1 = __webpack_require__(619);
 	Observable_1.Observable.prototype.takeWhile = takeWhile_1.takeWhile;
 	//# sourceMappingURL=takeWhile.js.map
 
 /***/ },
-/* 617 */
+/* 619 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65167,17 +66118,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=takeWhile.js.map
 
 /***/ },
-/* 618 */
+/* 620 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var throttle_1 = __webpack_require__(619);
+	var throttle_1 = __webpack_require__(621);
 	Observable_1.Observable.prototype.throttle = throttle_1.throttle;
 	//# sourceMappingURL=throttle.js.map
 
 /***/ },
-/* 619 */
+/* 621 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65258,17 +66209,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=throttle.js.map
 
 /***/ },
-/* 620 */
+/* 622 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var throttleTime_1 = __webpack_require__(621);
+	var throttleTime_1 = __webpack_require__(623);
 	Observable_1.Observable.prototype.throttleTime = throttleTime_1.throttleTime;
 	//# sourceMappingURL=throttleTime.js.map
 
 /***/ },
-/* 621 */
+/* 623 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65278,7 +66229,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Subscriber_1 = __webpack_require__(43);
-	var async_1 = __webpack_require__(465);
+	var async_1 = __webpack_require__(476);
 	/**
 	 * @param delay
 	 * @param scheduler
@@ -65336,17 +66287,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=throttleTime.js.map
 
 /***/ },
-/* 622 */
+/* 624 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var timeout_1 = __webpack_require__(623);
+	var timeout_1 = __webpack_require__(625);
 	Observable_1.Observable.prototype.timeout = timeout_1.timeout;
 	//# sourceMappingURL=timeout.js.map
 
 /***/ },
-/* 623 */
+/* 625 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65355,8 +66306,8 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var async_1 = __webpack_require__(465);
-	var isDate_1 = __webpack_require__(485);
+	var async_1 = __webpack_require__(476);
+	var isDate_1 = __webpack_require__(496);
 	var Subscriber_1 = __webpack_require__(43);
 	/**
 	 * @param due
@@ -65453,17 +66404,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=timeout.js.map
 
 /***/ },
-/* 624 */
+/* 626 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var timeoutWith_1 = __webpack_require__(625);
+	var timeoutWith_1 = __webpack_require__(627);
 	Observable_1.Observable.prototype.timeoutWith = timeoutWith_1.timeoutWith;
 	//# sourceMappingURL=timeoutWith.js.map
 
 /***/ },
-/* 625 */
+/* 627 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65472,8 +66423,8 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var async_1 = __webpack_require__(465);
-	var isDate_1 = __webpack_require__(485);
+	var async_1 = __webpack_require__(476);
+	var isDate_1 = __webpack_require__(496);
 	var OuterSubscriber_1 = __webpack_require__(357);
 	var subscribeToResult_1 = __webpack_require__(353);
 	/**
@@ -65578,17 +66529,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=timeoutWith.js.map
 
 /***/ },
-/* 626 */
+/* 628 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var toArray_1 = __webpack_require__(627);
+	var toArray_1 = __webpack_require__(629);
 	Observable_1.Observable.prototype.toArray = toArray_1.toArray;
 	//# sourceMappingURL=toArray.js.map
 
 /***/ },
-/* 627 */
+/* 629 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65638,17 +66589,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=toArray.js.map
 
 /***/ },
-/* 628 */
+/* 630 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var window_1 = __webpack_require__(629);
+	var window_1 = __webpack_require__(631);
 	Observable_1.Observable.prototype.window = window_1.window;
 	//# sourceMappingURL=window.js.map
 
 /***/ },
-/* 629 */
+/* 631 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65758,17 +66709,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=window.js.map
 
 /***/ },
-/* 630 */
+/* 632 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var windowCount_1 = __webpack_require__(631);
+	var windowCount_1 = __webpack_require__(633);
 	Observable_1.Observable.prototype.windowCount = windowCount_1.windowCount;
 	//# sourceMappingURL=windowCount.js.map
 
 /***/ },
-/* 631 */
+/* 633 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65899,17 +66850,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=windowCount.js.map
 
 /***/ },
-/* 632 */
+/* 634 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var windowTime_1 = __webpack_require__(633);
+	var windowTime_1 = __webpack_require__(635);
 	Observable_1.Observable.prototype.windowTime = windowTime_1.windowTime;
 	//# sourceMappingURL=windowTime.js.map
 
 /***/ },
-/* 633 */
+/* 635 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65920,7 +66871,7 @@ webpackJsonp([0],[
 	};
 	var Subscriber_1 = __webpack_require__(43);
 	var Subject_1 = __webpack_require__(37);
-	var async_1 = __webpack_require__(465);
+	var async_1 = __webpack_require__(476);
 	/**
 	 * Branch out the source Observable values as a nested Observable periodically
 	 * in time.
@@ -66084,17 +67035,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=windowTime.js.map
 
 /***/ },
-/* 634 */
+/* 636 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var windowToggle_1 = __webpack_require__(635);
+	var windowToggle_1 = __webpack_require__(637);
 	Observable_1.Observable.prototype.windowToggle = windowToggle_1.windowToggle;
 	//# sourceMappingURL=windowToggle.js.map
 
 /***/ },
-/* 635 */
+/* 637 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66279,17 +67230,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=windowToggle.js.map
 
 /***/ },
-/* 636 */
+/* 638 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var windowWhen_1 = __webpack_require__(637);
+	var windowWhen_1 = __webpack_require__(639);
 	Observable_1.Observable.prototype.windowWhen = windowWhen_1.windowWhen;
 	//# sourceMappingURL=windowWhen.js.map
 
 /***/ },
-/* 637 */
+/* 639 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66422,17 +67373,17 @@ webpackJsonp([0],[
 	//# sourceMappingURL=windowWhen.js.map
 
 /***/ },
-/* 638 */
+/* 640 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(38);
-	var withLatestFrom_1 = __webpack_require__(639);
+	var withLatestFrom_1 = __webpack_require__(641);
 	Observable_1.Observable.prototype.withLatestFrom = withLatestFrom_1.withLatestFrom;
 	//# sourceMappingURL=withLatestFrom.js.map
 
 /***/ },
-/* 639 */
+/* 641 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66567,31 +67518,31 @@ webpackJsonp([0],[
 	//# sourceMappingURL=withLatestFrom.js.map
 
 /***/ },
-/* 640 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var Observable_1 = __webpack_require__(38);
-	var zip_1 = __webpack_require__(488);
-	Observable_1.Observable.prototype.zip = zip_1.zipProto;
-	//# sourceMappingURL=zip.js.map
-
-/***/ },
-/* 641 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var Observable_1 = __webpack_require__(38);
-	var zipAll_1 = __webpack_require__(642);
-	Observable_1.Observable.prototype.zipAll = zipAll_1.zipAll;
-	//# sourceMappingURL=zipAll.js.map
-
-/***/ },
 /* 642 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var zip_1 = __webpack_require__(488);
+	var Observable_1 = __webpack_require__(38);
+	var zip_1 = __webpack_require__(499);
+	Observable_1.Observable.prototype.zip = zip_1.zipProto;
+	//# sourceMappingURL=zip.js.map
+
+/***/ },
+/* 643 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var Observable_1 = __webpack_require__(38);
+	var zipAll_1 = __webpack_require__(644);
+	Observable_1.Observable.prototype.zipAll = zipAll_1.zipAll;
+	//# sourceMappingURL=zipAll.js.map
+
+/***/ },
+/* 644 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var zip_1 = __webpack_require__(499);
 	/**
 	 * @param project
 	 * @return {Observable<R>|WebSocketSubject<T>|Observable<T>}
@@ -66605,7 +67556,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=zipAll.js.map
 
 /***/ },
-/* 643 */
+/* 645 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66622,7 +67573,7 @@ webpackJsonp([0],[
 	//# sourceMappingURL=Operator.js.map
 
 /***/ },
-/* 644 */
+/* 646 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -66866,18 +67817,18 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 645 */
+/* 647 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(646));
+	__export(__webpack_require__(648));
 
 
 /***/ },
-/* 646 */
+/* 648 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -66892,16 +67843,16 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var http_1 = __webpack_require__(325);
-	var _ = __webpack_require__(647);
-	var Humane = __webpack_require__(644);
-	var services_1 = __webpack_require__(648);
-	var image_bar_1 = __webpack_require__(727);
-	var models_1 = __webpack_require__(660);
-	var area_1 = __webpack_require__(735);
-	var sliced_image_1 = __webpack_require__(729);
-	var progress_circle_1 = __webpack_require__(722);
-	var tooltip_directive_1 = __webpack_require__(707);
-	var analytics_service_1 = __webpack_require__(675);
+	var _ = __webpack_require__(649);
+	var Humane = __webpack_require__(646);
+	var services_1 = __webpack_require__(650);
+	var image_bar_1 = __webpack_require__(731);
+	var models_1 = __webpack_require__(662);
+	var area_1 = __webpack_require__(739);
+	var sliced_image_1 = __webpack_require__(733);
+	var progress_circle_1 = __webpack_require__(726);
+	var tooltip_directive_1 = __webpack_require__(711);
+	var analytics_service_1 = __webpack_require__(677);
 	var BoardComponent = (function () {
 	    function BoardComponent(http, ga, areaService, rawImageService, imageService, folderService, renderer, dialogService) {
 	        var _this = this;
@@ -67144,8 +68095,8 @@ webpackJsonp([0],[
 	    BoardComponent = __decorate([
 	        core_1.Component({
 	            selector: 'board',
-	            styles: [__webpack_require__(739)],
-	            template: __webpack_require__(740)(),
+	            styles: [__webpack_require__(743)],
+	            template: __webpack_require__(744)(),
 	            directives: [
 	                area_1.AreaComponent,
 	                image_bar_1.ImageBarComponent,
@@ -67162,10 +68113,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 647 */
+/* 649 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
+	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global, module) {/**
 	 * @license
 	 * lodash <https://lodash.com/>
 	 * Copyright jQuery Foundation and other contributors <https://jquery.org/>
@@ -67179,7 +68130,7 @@ webpackJsonp([0],[
 	  var undefined;
 
 	  /** Used as the semantic version number. */
-	  var VERSION = '4.13.1';
+	  var VERSION = '4.15.0';
 
 	  /** Used as the size to enable large array optimizations. */
 	  var LARGE_ARRAY_SIZE = 200;
@@ -67193,7 +68144,7 @@ webpackJsonp([0],[
 	  /** Used as the internal argument placeholder. */
 	  var PLACEHOLDER = '__lodash_placeholder__';
 
-	  /** Used to compose bitmasks for wrapper metadata. */
+	  /** Used to compose bitmasks for function metadata. */
 	  var BIND_FLAG = 1,
 	      BIND_KEY_FLAG = 2,
 	      CURRY_BOUND_FLAG = 4,
@@ -67232,6 +68183,19 @@ webpackJsonp([0],[
 	  var MAX_ARRAY_LENGTH = 4294967295,
 	      MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1,
 	      HALF_MAX_ARRAY_LENGTH = MAX_ARRAY_LENGTH >>> 1;
+
+	  /** Used to associate wrap methods with their bit flags. */
+	  var wrapFlags = [
+	    ['ary', ARY_FLAG],
+	    ['bind', BIND_FLAG],
+	    ['bindKey', BIND_KEY_FLAG],
+	    ['curry', CURRY_FLAG],
+	    ['curryRight', CURRY_RIGHT_FLAG],
+	    ['flip', FLIP_FLAG],
+	    ['partial', PARTIAL_FLAG],
+	    ['partialRight', PARTIAL_RIGHT_FLAG],
+	    ['rearg', REARG_FLAG]
+	  ];
 
 	  /** `Object#toString` result references. */
 	  var argsTag = '[object Arguments]',
@@ -67283,11 +68247,12 @@ webpackJsonp([0],[
 	  /** Used to match property names within property paths. */
 	  var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
 	      reIsPlainProp = /^\w*$/,
-	      rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(\.|\[\])(?:\4|$))/g;
+	      reLeadingDot = /^\./,
+	      rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
 
 	  /**
 	   * Used to match `RegExp`
-	   * [syntax characters](http://ecma-international.org/ecma-262/6.0/#sec-patterns).
+	   * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
 	   */
 	  var reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
 	      reHasRegExpChar = RegExp(reRegExpChar.source);
@@ -67297,15 +68262,20 @@ webpackJsonp([0],[
 	      reTrimStart = /^\s+/,
 	      reTrimEnd = /\s+$/;
 
-	  /** Used to match non-compound words composed of alphanumeric characters. */
-	  var reBasicWord = /[a-zA-Z0-9]+/g;
+	  /** Used to match wrap detail comments. */
+	  var reWrapComment = /\{(?:\n\/\* \[wrapped with .+\] \*\/)?\n?/,
+	      reWrapDetails = /\{\n\/\* \[wrapped with (.+)\] \*/,
+	      reSplitDetails = /,? & /;
+
+	  /** Used to match words composed of alphanumeric characters. */
+	  var reAsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
 
 	  /** Used to match backslashes in property paths. */
 	  var reEscapeChar = /\\(\\)?/g;
 
 	  /**
 	   * Used to match
-	   * [ES template delimiters](http://ecma-international.org/ecma-262/6.0/#sec-template-literal-lexical-components).
+	   * [ES template delimiters](http://ecma-international.org/ecma-262/7.0/#sec-template-literal-lexical-components).
 	   */
 	  var reEsTemplate = /\$\{([^\\}]*(?:\\.[^\\}]*)*)\}/g;
 
@@ -67330,8 +68300,8 @@ webpackJsonp([0],[
 	  /** Used to detect unsigned integer values. */
 	  var reIsUint = /^(?:0|[1-9]\d*)$/;
 
-	  /** Used to match latin-1 supplementary letters (excluding mathematical operators). */
-	  var reLatin1 = /[\xc0-\xd6\xd8-\xde\xdf-\xf6\xf8-\xff]/g;
+	  /** Used to match Latin Unicode letters (excluding mathematical operators). */
+	  var reLatin = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g;
 
 	  /** Used to ensure capturing order of template delimiters. */
 	  var reNoMatch = /($^)/;
@@ -67392,10 +68362,10 @@ webpackJsonp([0],[
 	  var reComboMark = RegExp(rsCombo, 'g');
 
 	  /** Used to match [string symbols](https://mathiasbynens.be/notes/javascript-unicode). */
-	  var reComplexSymbol = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g');
+	  var reUnicode = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g');
 
 	  /** Used to match complex or compound words. */
-	  var reComplexWord = RegExp([
+	  var reUnicodeWord = RegExp([
 	    rsUpper + '?' + rsLower + '+' + rsOptLowerContr + '(?=' + [rsBreak, rsUpper, '$'].join('|') + ')',
 	    rsUpperMisc + '+' + rsOptUpperContr + '(?=' + [rsBreak, rsUpper + rsLowerMisc, '$'].join('|') + ')',
 	    rsUpper + '?' + rsLowerMisc + '+' + rsOptLowerContr,
@@ -67405,18 +68375,18 @@ webpackJsonp([0],[
 	  ].join('|'), 'g');
 
 	  /** Used to detect strings with [zero-width joiners or code points from the astral planes](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/). */
-	  var reHasComplexSymbol = RegExp('[' + rsZWJ + rsAstralRange  + rsComboMarksRange + rsComboSymbolsRange + rsVarRange + ']');
+	  var reHasUnicode = RegExp('[' + rsZWJ + rsAstralRange  + rsComboMarksRange + rsComboSymbolsRange + rsVarRange + ']');
 
 	  /** Used to detect strings that need a more robust regexp to match words. */
-	  var reHasComplexWord = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
+	  var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
 
 	  /** Used to assign default `context` object properties. */
 	  var contextProps = [
 	    'Array', 'Buffer', 'DataView', 'Date', 'Error', 'Float32Array', 'Float64Array',
 	    'Function', 'Int8Array', 'Int16Array', 'Int32Array', 'Map', 'Math', 'Object',
-	    'Promise', 'Reflect', 'RegExp', 'Set', 'String', 'Symbol', 'TypeError',
-	    'Uint8Array', 'Uint8ClampedArray', 'Uint16Array', 'Uint32Array', 'WeakMap',
-	    '_', 'isFinite', 'parseInt', 'setTimeout'
+	    'Promise', 'RegExp', 'Set', 'String', 'Symbol', 'TypeError', 'Uint8Array',
+	    'Uint8ClampedArray', 'Uint16Array', 'Uint32Array', 'WeakMap',
+	    '_', 'clearTimeout', 'isFinite', 'parseInt', 'setTimeout'
 	  ];
 
 	  /** Used to make template sourceURLs easier to identify. */
@@ -67454,16 +68424,17 @@ webpackJsonp([0],[
 	  cloneableTags[errorTag] = cloneableTags[funcTag] =
 	  cloneableTags[weakMapTag] = false;
 
-	  /** Used to map latin-1 supplementary letters to basic latin letters. */
+	  /** Used to map Latin Unicode letters to basic Latin letters. */
 	  var deburredLetters = {
+	    // Latin-1 Supplement block.
 	    '\xc0': 'A',  '\xc1': 'A', '\xc2': 'A', '\xc3': 'A', '\xc4': 'A', '\xc5': 'A',
 	    '\xe0': 'a',  '\xe1': 'a', '\xe2': 'a', '\xe3': 'a', '\xe4': 'a', '\xe5': 'a',
 	    '\xc7': 'C',  '\xe7': 'c',
 	    '\xd0': 'D',  '\xf0': 'd',
 	    '\xc8': 'E',  '\xc9': 'E', '\xca': 'E', '\xcb': 'E',
 	    '\xe8': 'e',  '\xe9': 'e', '\xea': 'e', '\xeb': 'e',
-	    '\xcC': 'I',  '\xcd': 'I', '\xce': 'I', '\xcf': 'I',
-	    '\xeC': 'i',  '\xed': 'i', '\xee': 'i', '\xef': 'i',
+	    '\xcc': 'I',  '\xcd': 'I', '\xce': 'I', '\xcf': 'I',
+	    '\xec': 'i',  '\xed': 'i', '\xee': 'i', '\xef': 'i',
 	    '\xd1': 'N',  '\xf1': 'n',
 	    '\xd2': 'O',  '\xd3': 'O', '\xd4': 'O', '\xd5': 'O', '\xd6': 'O', '\xd8': 'O',
 	    '\xf2': 'o',  '\xf3': 'o', '\xf4': 'o', '\xf5': 'o', '\xf6': 'o', '\xf8': 'o',
@@ -67472,7 +68443,43 @@ webpackJsonp([0],[
 	    '\xdd': 'Y',  '\xfd': 'y', '\xff': 'y',
 	    '\xc6': 'Ae', '\xe6': 'ae',
 	    '\xde': 'Th', '\xfe': 'th',
-	    '\xdf': 'ss'
+	    '\xdf': 'ss',
+	    // Latin Extended-A block.
+	    '\u0100': 'A',  '\u0102': 'A', '\u0104': 'A',
+	    '\u0101': 'a',  '\u0103': 'a', '\u0105': 'a',
+	    '\u0106': 'C',  '\u0108': 'C', '\u010a': 'C', '\u010c': 'C',
+	    '\u0107': 'c',  '\u0109': 'c', '\u010b': 'c', '\u010d': 'c',
+	    '\u010e': 'D',  '\u0110': 'D', '\u010f': 'd', '\u0111': 'd',
+	    '\u0112': 'E',  '\u0114': 'E', '\u0116': 'E', '\u0118': 'E', '\u011a': 'E',
+	    '\u0113': 'e',  '\u0115': 'e', '\u0117': 'e', '\u0119': 'e', '\u011b': 'e',
+	    '\u011c': 'G',  '\u011e': 'G', '\u0120': 'G', '\u0122': 'G',
+	    '\u011d': 'g',  '\u011f': 'g', '\u0121': 'g', '\u0123': 'g',
+	    '\u0124': 'H',  '\u0126': 'H', '\u0125': 'h', '\u0127': 'h',
+	    '\u0128': 'I',  '\u012a': 'I', '\u012c': 'I', '\u012e': 'I', '\u0130': 'I',
+	    '\u0129': 'i',  '\u012b': 'i', '\u012d': 'i', '\u012f': 'i', '\u0131': 'i',
+	    '\u0134': 'J',  '\u0135': 'j',
+	    '\u0136': 'K',  '\u0137': 'k', '\u0138': 'k',
+	    '\u0139': 'L',  '\u013b': 'L', '\u013d': 'L', '\u013f': 'L', '\u0141': 'L',
+	    '\u013a': 'l',  '\u013c': 'l', '\u013e': 'l', '\u0140': 'l', '\u0142': 'l',
+	    '\u0143': 'N',  '\u0145': 'N', '\u0147': 'N', '\u014a': 'N',
+	    '\u0144': 'n',  '\u0146': 'n', '\u0148': 'n', '\u014b': 'n',
+	    '\u014c': 'O',  '\u014e': 'O', '\u0150': 'O',
+	    '\u014d': 'o',  '\u014f': 'o', '\u0151': 'o',
+	    '\u0154': 'R',  '\u0156': 'R', '\u0158': 'R',
+	    '\u0155': 'r',  '\u0157': 'r', '\u0159': 'r',
+	    '\u015a': 'S',  '\u015c': 'S', '\u015e': 'S', '\u0160': 'S',
+	    '\u015b': 's',  '\u015d': 's', '\u015f': 's', '\u0161': 's',
+	    '\u0162': 'T',  '\u0164': 'T', '\u0166': 'T',
+	    '\u0163': 't',  '\u0165': 't', '\u0167': 't',
+	    '\u0168': 'U',  '\u016a': 'U', '\u016c': 'U', '\u016e': 'U', '\u0170': 'U', '\u0172': 'U',
+	    '\u0169': 'u',  '\u016b': 'u', '\u016d': 'u', '\u016f': 'u', '\u0171': 'u', '\u0173': 'u',
+	    '\u0174': 'W',  '\u0175': 'w',
+	    '\u0176': 'Y',  '\u0177': 'y', '\u0178': 'Y',
+	    '\u0179': 'Z',  '\u017b': 'Z', '\u017d': 'Z',
+	    '\u017a': 'z',  '\u017c': 'z', '\u017e': 'z',
+	    '\u0132': 'IJ', '\u0133': 'ij',
+	    '\u0152': 'Oe', '\u0153': 'oe',
+	    '\u0149': "'n", '\u017f': 'ss'
 	  };
 
 	  /** Used to map characters to HTML entities. */
@@ -67509,26 +68516,41 @@ webpackJsonp([0],[
 	  var freeParseFloat = parseFloat,
 	      freeParseInt = parseInt;
 
+	  /** Detect free variable `global` from Node.js. */
+	  var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+	  /** Detect free variable `self`. */
+	  var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+	  /** Used as a reference to the global object. */
+	  var root = freeGlobal || freeSelf || Function('return this')();
+
 	  /** Detect free variable `exports`. */
-	  var freeExports = typeof exports == 'object' && exports;
+	  var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
 
 	  /** Detect free variable `module`. */
-	  var freeModule = freeExports && typeof module == 'object' && module;
+	  var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
 
 	  /** Detect the popular CommonJS extension `module.exports`. */
 	  var moduleExports = freeModule && freeModule.exports === freeExports;
 
-	  /** Detect free variable `global` from Node.js. */
-	  var freeGlobal = checkGlobal(typeof global == 'object' && global);
+	  /** Detect free variable `process` from Node.js. */
+	  var freeProcess = moduleExports && freeGlobal.process;
 
-	  /** Detect free variable `self`. */
-	  var freeSelf = checkGlobal(typeof self == 'object' && self);
+	  /** Used to access faster Node.js helpers. */
+	  var nodeUtil = (function() {
+	    try {
+	      return freeProcess && freeProcess.binding('util');
+	    } catch (e) {}
+	  }());
 
-	  /** Detect `this` as the global object. */
-	  var thisGlobal = checkGlobal(typeof this == 'object' && this);
-
-	  /** Used as a reference to the global object. */
-	  var root = freeGlobal || freeSelf || thisGlobal || Function('return this')();
+	  /* Node.js helper references. */
+	  var nodeIsArrayBuffer = nodeUtil && nodeUtil.isArrayBuffer,
+	      nodeIsDate = nodeUtil && nodeUtil.isDate,
+	      nodeIsMap = nodeUtil && nodeUtil.isMap,
+	      nodeIsRegExp = nodeUtil && nodeUtil.isRegExp,
+	      nodeIsSet = nodeUtil && nodeUtil.isSet,
+	      nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
 
 	  /*--------------------------------------------------------------------------*/
 
@@ -67541,7 +68563,7 @@ webpackJsonp([0],[
 	   * @returns {Object} Returns `map`.
 	   */
 	  function addMapEntry(map, pair) {
-	    // Don't return `Map#set` because it doesn't return the map instance in IE 11.
+	    // Don't return `map.set` because it's not chainable in IE 11.
 	    map.set(pair[0], pair[1]);
 	    return map;
 	  }
@@ -67555,6 +68577,7 @@ webpackJsonp([0],[
 	   * @returns {Object} Returns `set`.
 	   */
 	  function addSetEntry(set, value) {
+	    // Don't return `set.add` because it's not chainable in IE 11.
 	    set.add(value);
 	    return set;
 	  }
@@ -67570,8 +68593,7 @@ webpackJsonp([0],[
 	   * @returns {*} Returns the result of `func`.
 	   */
 	  function apply(func, thisArg, args) {
-	    var length = args.length;
-	    switch (length) {
+	    switch (args.length) {
 	      case 0: return func.call(thisArg);
 	      case 1: return func.call(thisArg, args[0]);
 	      case 2: return func.call(thisArg, args[0], args[1]);
@@ -67693,7 +68715,7 @@ webpackJsonp([0],[
 	   * specifying an index to search from.
 	   *
 	   * @private
-	   * @param {Array} [array] The array to search.
+	   * @param {Array} [array] The array to inspect.
 	   * @param {*} target The value to search for.
 	   * @returns {boolean} Returns `true` if `target` is found, else `false`.
 	   */
@@ -67706,7 +68728,7 @@ webpackJsonp([0],[
 	   * This function is like `arrayIncludes` except that it accepts a comparator.
 	   *
 	   * @private
-	   * @param {Array} [array] The array to search.
+	   * @param {Array} [array] The array to inspect.
 	   * @param {*} target The value to search for.
 	   * @param {Function} comparator The comparator invoked per element.
 	   * @returns {boolean} Returns `true` if `target` is found, else `false`.
@@ -67833,12 +68855,43 @@ webpackJsonp([0],[
 	  }
 
 	  /**
+	   * Gets the size of an ASCII `string`.
+	   *
+	   * @private
+	   * @param {string} string The string inspect.
+	   * @returns {number} Returns the string size.
+	   */
+	  var asciiSize = baseProperty('length');
+
+	  /**
+	   * Converts an ASCII `string` to an array.
+	   *
+	   * @private
+	   * @param {string} string The string to convert.
+	   * @returns {Array} Returns the converted array.
+	   */
+	  function asciiToArray(string) {
+	    return string.split('');
+	  }
+
+	  /**
+	   * Splits an ASCII `string` into an array of its words.
+	   *
+	   * @private
+	   * @param {string} The string to inspect.
+	   * @returns {Array} Returns the words of `string`.
+	   */
+	  function asciiWords(string) {
+	    return string.match(reAsciiWord) || [];
+	  }
+
+	  /**
 	   * The base implementation of methods like `_.findKey` and `_.findLastKey`,
 	   * without support for iteratee shorthands, which iterates over `collection`
 	   * using `eachFunc`.
 	   *
 	   * @private
-	   * @param {Array|Object} collection The collection to search.
+	   * @param {Array|Object} collection The collection to inspect.
 	   * @param {Function} predicate The function invoked per iteration.
 	   * @param {Function} eachFunc The function to iterate over `collection`.
 	   * @returns {*} Returns the found element or its key, else `undefined`.
@@ -67859,7 +68912,7 @@ webpackJsonp([0],[
 	   * support for iteratee shorthands.
 	   *
 	   * @private
-	   * @param {Array} array The array to search.
+	   * @param {Array} array The array to inspect.
 	   * @param {Function} predicate The function invoked per iteration.
 	   * @param {number} fromIndex The index to search from.
 	   * @param {boolean} [fromRight] Specify iterating from right to left.
@@ -67881,14 +68934,14 @@ webpackJsonp([0],[
 	   * The base implementation of `_.indexOf` without `fromIndex` bounds checks.
 	   *
 	   * @private
-	   * @param {Array} array The array to search.
+	   * @param {Array} array The array to inspect.
 	   * @param {*} value The value to search for.
 	   * @param {number} fromIndex The index to search from.
 	   * @returns {number} Returns the index of the matched value, else `-1`.
 	   */
 	  function baseIndexOf(array, value, fromIndex) {
 	    if (value !== value) {
-	      return indexOfNaN(array, fromIndex);
+	      return baseFindIndex(array, baseIsNaN, fromIndex);
 	    }
 	    var index = fromIndex - 1,
 	        length = array.length;
@@ -67905,7 +68958,7 @@ webpackJsonp([0],[
 	   * This function is like `baseIndexOf` except that it accepts a comparator.
 	   *
 	   * @private
-	   * @param {Array} array The array to search.
+	   * @param {Array} array The array to inspect.
 	   * @param {*} value The value to search for.
 	   * @param {number} fromIndex The index to search from.
 	   * @param {Function} comparator The comparator invoked per element.
@@ -67924,6 +68977,17 @@ webpackJsonp([0],[
 	  }
 
 	  /**
+	   * The base implementation of `_.isNaN` without support for number objects.
+	   *
+	   * @private
+	   * @param {*} value The value to check.
+	   * @returns {boolean} Returns `true` if `value` is `NaN`, else `false`.
+	   */
+	  function baseIsNaN(value) {
+	    return value !== value;
+	  }
+
+	  /**
 	   * The base implementation of `_.mean` and `_.meanBy` without support for
 	   * iteratee shorthands.
 	   *
@@ -67935,6 +68999,32 @@ webpackJsonp([0],[
 	  function baseMean(array, iteratee) {
 	    var length = array ? array.length : 0;
 	    return length ? (baseSum(array, iteratee) / length) : NAN;
+	  }
+
+	  /**
+	   * The base implementation of `_.property` without support for deep paths.
+	   *
+	   * @private
+	   * @param {string} key The key of the property to get.
+	   * @returns {Function} Returns the new accessor function.
+	   */
+	  function baseProperty(key) {
+	    return function(object) {
+	      return object == null ? undefined : object[key];
+	    };
+	  }
+
+	  /**
+	   * The base implementation of `_.propertyOf` without support for deep paths.
+	   *
+	   * @private
+	   * @param {Object} object The object to query.
+	   * @returns {Function} Returns the new accessor function.
+	   */
+	  function basePropertyOf(object) {
+	    return function(key) {
+	      return object == null ? undefined : object[key];
+	    };
 	  }
 
 	  /**
@@ -68037,7 +69127,7 @@ webpackJsonp([0],[
 	  }
 
 	  /**
-	   * The base implementation of `_.unary` without support for storing wrapper metadata.
+	   * The base implementation of `_.unary` without support for storing metadata.
 	   *
 	   * @private
 	   * @param {Function} func The function to cap arguments for.
@@ -68111,17 +69201,6 @@ webpackJsonp([0],[
 	  }
 
 	  /**
-	   * Checks if `value` is a global object.
-	   *
-	   * @private
-	   * @param {*} value The value to check.
-	   * @returns {null|Object} Returns `value` if it's a global object, else `null`.
-	   */
-	  function checkGlobal(value) {
-	    return (value && value.Object === Object) ? value : null;
-	  }
-
-	  /**
 	   * Gets the number of `placeholder` occurrences in `array`.
 	   *
 	   * @private
@@ -68142,15 +69221,14 @@ webpackJsonp([0],[
 	  }
 
 	  /**
-	   * Used by `_.deburr` to convert latin-1 supplementary letters to basic latin letters.
+	   * Used by `_.deburr` to convert Latin-1 Supplement and Latin Extended-A
+	   * letters to basic Latin letters.
 	   *
 	   * @private
 	   * @param {string} letter The matched letter to deburr.
 	   * @returns {string} Returns the deburred letter.
 	   */
-	  function deburrLetter(letter) {
-	    return deburredLetters[letter];
-	  }
+	  var deburrLetter = basePropertyOf(deburredLetters);
 
 	  /**
 	   * Used by `_.escape` to convert characters to HTML entities.
@@ -68159,9 +69237,7 @@ webpackJsonp([0],[
 	   * @param {string} chr The matched character to escape.
 	   * @returns {string} Returns the escaped character.
 	   */
-	  function escapeHtmlChar(chr) {
-	    return htmlEscapes[chr];
-	  }
+	  var escapeHtmlChar = basePropertyOf(htmlEscapes);
 
 	  /**
 	   * Used by `_.template` to escape characters for inclusion in compiled string literals.
@@ -68187,25 +69263,25 @@ webpackJsonp([0],[
 	  }
 
 	  /**
-	   * Gets the index at which the first occurrence of `NaN` is found in `array`.
+	   * Checks if `string` contains Unicode symbols.
 	   *
 	   * @private
-	   * @param {Array} array The array to search.
-	   * @param {number} fromIndex The index to search from.
-	   * @param {boolean} [fromRight] Specify iterating from right to left.
-	   * @returns {number} Returns the index of the matched `NaN`, else `-1`.
+	   * @param {string} string The string to inspect.
+	   * @returns {boolean} Returns `true` if a symbol is found, else `false`.
 	   */
-	  function indexOfNaN(array, fromIndex, fromRight) {
-	    var length = array.length,
-	        index = fromIndex + (fromRight ? 1 : -1);
+	  function hasUnicode(string) {
+	    return reHasUnicode.test(string);
+	  }
 
-	    while ((fromRight ? index-- : ++index < length)) {
-	      var other = array[index];
-	      if (other !== other) {
-	        return index;
-	      }
-	    }
-	    return -1;
+	  /**
+	   * Checks if `string` contains a word composed of Unicode symbols.
+	   *
+	   * @private
+	   * @param {string} string The string to inspect.
+	   * @returns {boolean} Returns `true` if a word is found, else `false`.
+	   */
+	  function hasUnicodeWord(string) {
+	    return reHasUnicodeWord.test(string);
 	  }
 
 	  /**
@@ -68259,6 +69335,20 @@ webpackJsonp([0],[
 	      result[++index] = [key, value];
 	    });
 	    return result;
+	  }
+
+	  /**
+	   * Creates a unary function that invokes `func` with its argument transformed.
+	   *
+	   * @private
+	   * @param {Function} func The function to wrap.
+	   * @param {Function} transform The argument transform.
+	   * @returns {Function} Returns the new function.
+	   */
+	  function overArg(func, transform) {
+	    return function(arg) {
+	      return func(transform(arg));
+	    };
 	  }
 
 	  /**
@@ -68328,14 +69418,9 @@ webpackJsonp([0],[
 	   * @returns {number} Returns the string size.
 	   */
 	  function stringSize(string) {
-	    if (!(string && reHasComplexSymbol.test(string))) {
-	      return string.length;
-	    }
-	    var result = reComplexSymbol.lastIndex = 0;
-	    while (reComplexSymbol.test(string)) {
-	      result++;
-	    }
-	    return result;
+	    return hasUnicode(string)
+	      ? unicodeSize(string)
+	      : asciiSize(string);
 	  }
 
 	  /**
@@ -68346,7 +69431,9 @@ webpackJsonp([0],[
 	   * @returns {Array} Returns the converted array.
 	   */
 	  function stringToArray(string) {
-	    return string.match(reComplexSymbol);
+	    return hasUnicode(string)
+	      ? unicodeToArray(string)
+	      : asciiToArray(string);
 	  }
 
 	  /**
@@ -68356,8 +69443,43 @@ webpackJsonp([0],[
 	   * @param {string} chr The matched character to unescape.
 	   * @returns {string} Returns the unescaped character.
 	   */
-	  function unescapeHtmlChar(chr) {
-	    return htmlUnescapes[chr];
+	  var unescapeHtmlChar = basePropertyOf(htmlUnescapes);
+
+	  /**
+	   * Gets the size of a Unicode `string`.
+	   *
+	   * @private
+	   * @param {string} string The string inspect.
+	   * @returns {number} Returns the string size.
+	   */
+	  function unicodeSize(string) {
+	    var result = reUnicode.lastIndex = 0;
+	    while (reUnicode.test(string)) {
+	      result++;
+	    }
+	    return result;
+	  }
+
+	  /**
+	   * Converts a Unicode `string` to an array.
+	   *
+	   * @private
+	   * @param {string} string The string to convert.
+	   * @returns {Array} Returns the converted array.
+	   */
+	  function unicodeToArray(string) {
+	    return string.match(reUnicode) || [];
+	  }
+
+	  /**
+	   * Splits a Unicode `string` into an array of its words.
+	   *
+	   * @private
+	   * @param {string} The string to inspect.
+	   * @returns {Array} Returns the words of `string`.
+	   */
+	  function unicodeWords(string) {
+	    return string.match(reUnicodeWord) || [];
 	  }
 
 	  /*--------------------------------------------------------------------------*/
@@ -68399,19 +69521,23 @@ webpackJsonp([0],[
 	   * var defer = _.runInContext({ 'setTimeout': setImmediate }).defer;
 	   */
 	  function runInContext(context) {
-	    context = context ? _.defaults({}, context, _.pick(root, contextProps)) : root;
+	    context = context ? _.defaults(root.Object(), context, _.pick(root, contextProps)) : root;
 
 	    /** Built-in constructor references. */
-	    var Date = context.Date,
+	    var Array = context.Array,
+	        Date = context.Date,
 	        Error = context.Error,
+	        Function = context.Function,
 	        Math = context.Math,
+	        Object = context.Object,
 	        RegExp = context.RegExp,
+	        String = context.String,
 	        TypeError = context.TypeError;
 
 	    /** Used for built-in method references. */
-	    var arrayProto = context.Array.prototype,
-	        objectProto = context.Object.prototype,
-	        stringProto = context.String.prototype;
+	    var arrayProto = Array.prototype,
+	        funcProto = Function.prototype,
+	        objectProto = Object.prototype;
 
 	    /** Used to detect overreaching core-js shims. */
 	    var coreJsData = context['__core-js_shared__'];
@@ -68423,7 +69549,7 @@ webpackJsonp([0],[
 	    }());
 
 	    /** Used to resolve the decompiled source of functions. */
-	    var funcToString = context.Function.prototype.toString;
+	    var funcToString = funcProto.toString;
 
 	    /** Used to check objects for own properties. */
 	    var hasOwnProperty = objectProto.hasOwnProperty;
@@ -68436,7 +69562,7 @@ webpackJsonp([0],[
 
 	    /**
 	     * Used to resolve the
-	     * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	     * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
 	     * of values.
 	     */
 	    var objectToString = objectProto.toString;
@@ -68452,33 +69578,33 @@ webpackJsonp([0],[
 
 	    /** Built-in value references. */
 	    var Buffer = moduleExports ? context.Buffer : undefined,
-	        Reflect = context.Reflect,
 	        Symbol = context.Symbol,
 	        Uint8Array = context.Uint8Array,
-	        enumerate = Reflect ? Reflect.enumerate : undefined,
-	        getOwnPropertySymbols = Object.getOwnPropertySymbols,
-	        iteratorSymbol = typeof (iteratorSymbol = Symbol && Symbol.iterator) == 'symbol' ? iteratorSymbol : undefined,
+	        getPrototype = overArg(Object.getPrototypeOf, Object),
+	        iteratorSymbol = Symbol ? Symbol.iterator : undefined,
 	        objectCreate = Object.create,
 	        propertyIsEnumerable = objectProto.propertyIsEnumerable,
-	        splice = arrayProto.splice;
+	        splice = arrayProto.splice,
+	        spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
 
-	    /** Built-in method references that are mockable. */
-	    var setTimeout = function(func, wait) { return context.setTimeout.call(root, func, wait); };
+	    /** Mocked built-ins. */
+	    var ctxClearTimeout = context.clearTimeout !== root.clearTimeout && context.clearTimeout,
+	        ctxNow = Date && Date.now !== root.Date.now && Date.now,
+	        ctxSetTimeout = context.setTimeout !== root.setTimeout && context.setTimeout;
 
 	    /* Built-in method references for those with the same name as other `lodash` methods. */
 	    var nativeCeil = Math.ceil,
 	        nativeFloor = Math.floor,
-	        nativeGetPrototype = Object.getPrototypeOf,
+	        nativeGetSymbols = Object.getOwnPropertySymbols,
+	        nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined,
 	        nativeIsFinite = context.isFinite,
 	        nativeJoin = arrayProto.join,
-	        nativeKeys = Object.keys,
+	        nativeKeys = overArg(Object.keys, Object),
 	        nativeMax = Math.max,
 	        nativeMin = Math.min,
 	        nativeParseInt = context.parseInt,
 	        nativeRandom = Math.random,
-	        nativeReplace = stringProto.replace,
-	        nativeReverse = arrayProto.reverse,
-	        nativeSplit = stringProto.split;
+	        nativeReverse = arrayProto.reverse;
 
 	    /* Built-in method references that are verified to be native. */
 	    var DataView = getNative(context, 'DataView'),
@@ -68487,6 +69613,14 @@ webpackJsonp([0],[
 	        Set = getNative(context, 'Set'),
 	        WeakMap = getNative(context, 'WeakMap'),
 	        nativeCreate = getNative(Object, 'create');
+
+	    /* Used to set `toString` methods. */
+	    var defineProperty = (function() {
+	      var func = getNative(Object, 'defineProperty'),
+	          name = getNative.name;
+
+	      return (name && name.length > 2) ? func : undefined;
+	    }());
 
 	    /** Used to store function metadata. */
 	    var metaMap = WeakMap && new WeakMap;
@@ -68577,16 +69711,16 @@ webpackJsonp([0],[
 	     *
 	     * The wrapper methods that are **not** chainable by default are:
 	     * `add`, `attempt`, `camelCase`, `capitalize`, `ceil`, `clamp`, `clone`,
-	     * `cloneDeep`, `cloneDeepWith`, `cloneWith`, `deburr`, `divide`, `each`,
-	     * `eachRight`, `endsWith`, `eq`, `escape`, `escapeRegExp`, `every`, `find`,
-	     * `findIndex`, `findKey`, `findLast`, `findLastIndex`, `findLastKey`, `first`,
-	     * `floor`, `forEach`, `forEachRight`, `forIn`, `forInRight`, `forOwn`,
-	     * `forOwnRight`, `get`, `gt`, `gte`, `has`, `hasIn`, `head`, `identity`,
-	     * `includes`, `indexOf`, `inRange`, `invoke`, `isArguments`, `isArray`,
-	     * `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`, `isBoolean`,
-	     * `isBuffer`, `isDate`, `isElement`, `isEmpty`, `isEqual`, `isEqualWith`,
-	     * `isError`, `isFinite`, `isFunction`, `isInteger`, `isLength`, `isMap`,
-	     * `isMatch`, `isMatchWith`, `isNaN`, `isNative`, `isNil`, `isNull`,
+	     * `cloneDeep`, `cloneDeepWith`, `cloneWith`, `conformsTo`, `deburr`,
+	     * `defaultTo`, `divide`, `each`, `eachRight`, `endsWith`, `eq`, `escape`,
+	     * `escapeRegExp`, `every`, `find`, `findIndex`, `findKey`, `findLast`,
+	     * `findLastIndex`, `findLastKey`, `first`, `floor`, `forEach`, `forEachRight`,
+	     * `forIn`, `forInRight`, `forOwn`, `forOwnRight`, `get`, `gt`, `gte`, `has`,
+	     * `hasIn`, `head`, `identity`, `includes`, `indexOf`, `inRange`, `invoke`,
+	     * `isArguments`, `isArray`, `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`,
+	     * `isBoolean`, `isBuffer`, `isDate`, `isElement`, `isEmpty`, `isEqual`,
+	     * `isEqualWith`, `isError`, `isFinite`, `isFunction`, `isInteger`, `isLength`,
+	     * `isMap`, `isMatch`, `isMatchWith`, `isNaN`, `isNative`, `isNil`, `isNull`,
 	     * `isNumber`, `isObject`, `isObjectLike`, `isPlainObject`, `isRegExp`,
 	     * `isSafeInteger`, `isSet`, `isString`, `isUndefined`, `isTypedArray`,
 	     * `isWeakMap`, `isWeakSet`, `join`, `kebabCase`, `last`, `lastIndexOf`,
@@ -69289,8 +70423,13 @@ webpackJsonp([0],[
 	     */
 	    function stackSet(key, value) {
 	      var cache = this.__data__;
-	      if (cache instanceof ListCache && cache.__data__.length == LARGE_ARRAY_SIZE) {
-	        cache = this.__data__ = new MapCache(cache.__data__);
+	      if (cache instanceof ListCache) {
+	        var pairs = cache.__data__;
+	        if (!Map || (pairs.length < LARGE_ARRAY_SIZE - 1)) {
+	          pairs.push([key, value]);
+	          return this;
+	        }
+	        cache = this.__data__ = new MapCache(pairs);
 	      }
 	      cache.set(key, value);
 	      return this;
@@ -69304,6 +70443,33 @@ webpackJsonp([0],[
 	    Stack.prototype.set = stackSet;
 
 	    /*------------------------------------------------------------------------*/
+
+	    /**
+	     * Creates an array of the enumerable property names of the array-like `value`.
+	     *
+	     * @private
+	     * @param {*} value The value to query.
+	     * @param {boolean} inherited Specify returning inherited property names.
+	     * @returns {Array} Returns the array of property names.
+	     */
+	    function arrayLikeKeys(value, inherited) {
+	      // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
+	      // Safari 9 makes `arguments.length` enumerable in strict mode.
+	      var result = (isArray(value) || isArguments(value))
+	        ? baseTimes(value.length, String)
+	        : [];
+
+	      var length = result.length,
+	          skipIndexes = !!length;
+
+	      for (var key in value) {
+	        if ((inherited || hasOwnProperty.call(value, key)) &&
+	            !(skipIndexes && (key == 'length' || isIndex(key, length)))) {
+	          result.push(key);
+	        }
+	      }
+	      return result;
+	    }
 
 	    /**
 	     * Used by `_.defaults` to customize its `_.assignIn` use.
@@ -69341,7 +70507,7 @@ webpackJsonp([0],[
 
 	    /**
 	     * Assigns `value` to `key` of `object` if the existing value is not equivalent
-	     * using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+	     * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
 	     * for equality comparisons.
 	     *
 	     * @private
@@ -69361,7 +70527,7 @@ webpackJsonp([0],[
 	     * Gets the index at which the `key` is found in `array` of key-value pairs.
 	     *
 	     * @private
-	     * @param {Array} array The array to search.
+	     * @param {Array} array The array to inspect.
 	     * @param {*} key The key to search for.
 	     * @returns {number} Returns the index of the matched value, else `-1`.
 	     */
@@ -69427,7 +70593,7 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * The base implementation of `_.clamp` which doesn't coerce arguments to numbers.
+	     * The base implementation of `_.clamp` which doesn't coerce arguments.
 	     *
 	     * @private
 	     * @param {number} number The number to clamp.
@@ -69511,12 +70677,12 @@ webpackJsonp([0],[
 	      if (!isArr) {
 	        var props = isFull ? getAllKeys(value) : keys(value);
 	      }
-	      // Recursively populate clone (susceptible to call stack limits).
 	      arrayEach(props || value, function(subValue, key) {
 	        if (props) {
 	          key = subValue;
 	          subValue = value[key];
 	        }
+	        // Recursively populate clone (susceptible to call stack limits).
 	        assignValue(result, key, baseClone(subValue, isDeep, isFull, customizer, key, value, stack));
 	      });
 	      return result;
@@ -69530,26 +70696,36 @@ webpackJsonp([0],[
 	     * @returns {Function} Returns the new spec function.
 	     */
 	    function baseConforms(source) {
-	      var props = keys(source),
-	          length = props.length;
-
+	      var props = keys(source);
 	      return function(object) {
-	        if (object == null) {
-	          return !length;
-	        }
-	        var index = length;
-	        while (index--) {
-	          var key = props[index],
-	              predicate = source[key],
-	              value = object[key];
-
-	          if ((value === undefined &&
-	              !(key in Object(object))) || !predicate(value)) {
-	            return false;
-	          }
-	        }
-	        return true;
+	        return baseConformsTo(object, source, props);
 	      };
+	    }
+
+	    /**
+	     * The base implementation of `_.conformsTo` which accepts `props` to check.
+	     *
+	     * @private
+	     * @param {Object} object The object to inspect.
+	     * @param {Object} source The object of property predicates to conform to.
+	     * @returns {boolean} Returns `true` if `object` conforms, else `false`.
+	     */
+	    function baseConformsTo(object, source, props) {
+	      var length = props.length;
+	      if (object == null) {
+	        return !length;
+	      }
+	      object = Object(object);
+	      while (length--) {
+	        var key = props[length],
+	            predicate = source[key],
+	            value = object[key];
+
+	        if ((value === undefined && !(key in object)) || !predicate(value)) {
+	          return false;
+	        }
+	      }
+	      return true;
 	    }
 
 	    /**
@@ -69565,14 +70741,14 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * The base implementation of `_.delay` and `_.defer` which accepts an array
-	     * of `func` arguments.
+	     * The base implementation of `_.delay` and `_.defer` which accepts `args`
+	     * to provide to `func`.
 	     *
 	     * @private
 	     * @param {Function} func The function to delay.
 	     * @param {number} wait The number of milliseconds to delay invocation.
-	     * @param {Object} args The arguments to provide to `func`.
-	     * @returns {number} Returns the timer id.
+	     * @param {Array} args The arguments to provide to `func`.
+	     * @returns {number|Object} Returns the timer id or timeout object.
 	     */
 	    function baseDelay(func, wait, args) {
 	      if (typeof func != 'function') {
@@ -69885,7 +71061,18 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * The base implementation of `_.gt` which doesn't coerce arguments to numbers.
+	     * The base implementation of `getTag`.
+	     *
+	     * @private
+	     * @param {*} value The value to query.
+	     * @returns {string} Returns the `toStringTag`.
+	     */
+	    function baseGetTag(value) {
+	      return objectToString.call(value);
+	    }
+
+	    /**
+	     * The base implementation of `_.gt` which doesn't coerce arguments.
 	     *
 	     * @private
 	     * @param {*} value The value to compare.
@@ -69906,12 +71093,7 @@ webpackJsonp([0],[
 	     * @returns {boolean} Returns `true` if `key` exists, else `false`.
 	     */
 	    function baseHas(object, key) {
-	      // Avoid a bug in IE 10-11 where objects with a [[Prototype]] of `null`,
-	      // that are composed entirely of index properties, return `false` for
-	      // `hasOwnProperty` checks of them.
-	      return object != null &&
-	        (hasOwnProperty.call(object, key) ||
-	          (typeof object == 'object' && key in object && getPrototype(object) === null));
+	      return object != null && hasOwnProperty.call(object, key);
 	    }
 
 	    /**
@@ -69927,7 +71109,7 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * The base implementation of `_.inRange` which doesn't coerce arguments to numbers.
+	     * The base implementation of `_.inRange` which doesn't coerce arguments.
 	     *
 	     * @private
 	     * @param {number} number The number to check.
@@ -70041,6 +71223,28 @@ webpackJsonp([0],[
 	    }
 
 	    /**
+	     * The base implementation of `_.isArrayBuffer` without Node.js optimizations.
+	     *
+	     * @private
+	     * @param {*} value The value to check.
+	     * @returns {boolean} Returns `true` if `value` is an array buffer, else `false`.
+	     */
+	    function baseIsArrayBuffer(value) {
+	      return isObjectLike(value) && objectToString.call(value) == arrayBufferTag;
+	    }
+
+	    /**
+	     * The base implementation of `_.isDate` without Node.js optimizations.
+	     *
+	     * @private
+	     * @param {*} value The value to check.
+	     * @returns {boolean} Returns `true` if `value` is a date object, else `false`.
+	     */
+	    function baseIsDate(value) {
+	      return isObjectLike(value) && objectToString.call(value) == dateTag;
+	    }
+
+	    /**
 	     * The base implementation of `_.isEqual` which supports partial comparisons
 	     * and tracks traversed objects.
 	     *
@@ -70124,6 +71328,17 @@ webpackJsonp([0],[
 	    }
 
 	    /**
+	     * The base implementation of `_.isMap` without Node.js optimizations.
+	     *
+	     * @private
+	     * @param {*} value The value to check.
+	     * @returns {boolean} Returns `true` if `value` is a map, else `false`.
+	     */
+	    function baseIsMap(value) {
+	      return isObjectLike(value) && getTag(value) == mapTag;
+	    }
+
+	    /**
 	     * The base implementation of `_.isMatch` without support for iteratee shorthands.
 	     *
 	     * @private
@@ -70194,6 +71409,40 @@ webpackJsonp([0],[
 	    }
 
 	    /**
+	     * The base implementation of `_.isRegExp` without Node.js optimizations.
+	     *
+	     * @private
+	     * @param {*} value The value to check.
+	     * @returns {boolean} Returns `true` if `value` is a regexp, else `false`.
+	     */
+	    function baseIsRegExp(value) {
+	      return isObject(value) && objectToString.call(value) == regexpTag;
+	    }
+
+	    /**
+	     * The base implementation of `_.isSet` without Node.js optimizations.
+	     *
+	     * @private
+	     * @param {*} value The value to check.
+	     * @returns {boolean} Returns `true` if `value` is a set, else `false`.
+	     */
+	    function baseIsSet(value) {
+	      return isObjectLike(value) && getTag(value) == setTag;
+	    }
+
+	    /**
+	     * The base implementation of `_.isTypedArray` without Node.js optimizations.
+	     *
+	     * @private
+	     * @param {*} value The value to check.
+	     * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+	     */
+	    function baseIsTypedArray(value) {
+	      return isObjectLike(value) &&
+	        isLength(value.length) && !!typedArrayTags[objectToString.call(value)];
+	    }
+
+	    /**
 	     * The base implementation of `_.iteratee`.
 	     *
 	     * @private
@@ -70218,44 +71467,49 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * The base implementation of `_.keys` which doesn't skip the constructor
-	     * property of prototypes or treat sparse arrays as dense.
+	     * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
 	     *
 	     * @private
 	     * @param {Object} object The object to query.
 	     * @returns {Array} Returns the array of property names.
 	     */
 	    function baseKeys(object) {
-	      return nativeKeys(Object(object));
+	      if (!isPrototype(object)) {
+	        return nativeKeys(object);
+	      }
+	      var result = [];
+	      for (var key in Object(object)) {
+	        if (hasOwnProperty.call(object, key) && key != 'constructor') {
+	          result.push(key);
+	        }
+	      }
+	      return result;
 	    }
 
 	    /**
-	     * The base implementation of `_.keysIn` which doesn't skip the constructor
-	     * property of prototypes or treat sparse arrays as dense.
+	     * The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
 	     *
 	     * @private
 	     * @param {Object} object The object to query.
 	     * @returns {Array} Returns the array of property names.
 	     */
 	    function baseKeysIn(object) {
-	      object = object == null ? object : Object(object);
+	      if (!isObject(object)) {
+	        return nativeKeysIn(object);
+	      }
+	      var isProto = isPrototype(object),
+	          result = [];
 
-	      var result = [];
 	      for (var key in object) {
-	        result.push(key);
+	        if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+	          result.push(key);
+	        }
 	      }
 	      return result;
 	    }
 
-	    // Fallback for IE < 9 with es6-shim.
-	    if (enumerate && !propertyIsEnumerable.call({ 'valueOf': 1 }, 'valueOf')) {
-	      baseKeysIn = function(object) {
-	        return iteratorToArray(enumerate(object));
-	      };
-	    }
-
 	    /**
-	     * The base implementation of `_.lt` which doesn't coerce arguments to numbers.
+	     * The base implementation of `_.lt` which doesn't coerce arguments.
 	     *
 	     * @private
 	     * @param {*} value The value to compare.
@@ -70338,7 +71592,7 @@ webpackJsonp([0],[
 	        return;
 	      }
 	      if (!(isArray(source) || isTypedArray(source))) {
-	        var props = keysIn(source);
+	        var props = baseKeysIn(source);
 	      }
 	      arrayEach(props || source, function(srcValue, key) {
 	        if (props) {
@@ -70422,18 +71676,17 @@ webpackJsonp([0],[
 	          isCommon = false;
 	        }
 	      }
-	      stack.set(srcValue, newValue);
-
 	      if (isCommon) {
 	        // Recursively merge objects and arrays (susceptible to call stack limits).
+	        stack.set(srcValue, newValue);
 	        mergeFunc(newValue, srcValue, srcIndex, customizer, stack);
+	        stack['delete'](srcValue);
 	      }
-	      stack['delete'](srcValue);
 	      assignMergeValue(object, key, newValue);
 	    }
 
 	    /**
-	     * The base implementation of `_.nth` which doesn't coerce `n` to an integer.
+	     * The base implementation of `_.nth` which doesn't coerce arguments.
 	     *
 	     * @private
 	     * @param {Array} array The array to query.
@@ -70485,12 +71738,9 @@ webpackJsonp([0],[
 	     */
 	    function basePick(object, props) {
 	      object = Object(object);
-	      return arrayReduce(props, function(result, key) {
-	        if (key in object) {
-	          result[key] = object[key];
-	        }
-	        return result;
-	      }, {});
+	      return basePickBy(object, props, function(value, key) {
+	        return key in object;
+	      });
 	    }
 
 	    /**
@@ -70498,12 +71748,12 @@ webpackJsonp([0],[
 	     *
 	     * @private
 	     * @param {Object} object The source object.
+	     * @param {string[]} props The property identifiers to pick from.
 	     * @param {Function} predicate The function invoked per property.
 	     * @returns {Object} Returns the new object.
 	     */
-	    function basePickBy(object, predicate) {
+	    function basePickBy(object, props, predicate) {
 	      var index = -1,
-	          props = getAllKeysIn(object),
 	          length = props.length,
 	          result = {};
 
@@ -70516,19 +71766,6 @@ webpackJsonp([0],[
 	        }
 	      }
 	      return result;
-	    }
-
-	    /**
-	     * The base implementation of `_.property` without support for deep paths.
-	     *
-	     * @private
-	     * @param {string} key The key of the property to get.
-	     * @returns {Function} Returns the new accessor function.
-	     */
-	    function baseProperty(key) {
-	      return function(object) {
-	        return object == null ? undefined : object[key];
-	      };
 	    }
 
 	    /**
@@ -70633,7 +71870,7 @@ webpackJsonp([0],[
 
 	    /**
 	     * The base implementation of `_.range` and `_.rangeRight` which doesn't
-	     * coerce arguments to numbers.
+	     * coerce arguments.
 	     *
 	     * @private
 	     * @param {number} start The start of the range.
@@ -70683,16 +71920,48 @@ webpackJsonp([0],[
 	    }
 
 	    /**
+	     * The base implementation of `_.rest` which doesn't validate or coerce arguments.
+	     *
+	     * @private
+	     * @param {Function} func The function to apply a rest parameter to.
+	     * @param {number} [start=func.length-1] The start position of the rest parameter.
+	     * @returns {Function} Returns the new function.
+	     */
+	    function baseRest(func, start) {
+	      start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
+	      return function() {
+	        var args = arguments,
+	            index = -1,
+	            length = nativeMax(args.length - start, 0),
+	            array = Array(length);
+
+	        while (++index < length) {
+	          array[index] = args[start + index];
+	        }
+	        index = -1;
+	        var otherArgs = Array(start + 1);
+	        while (++index < start) {
+	          otherArgs[index] = args[index];
+	        }
+	        otherArgs[start] = array;
+	        return apply(func, this, otherArgs);
+	      };
+	    }
+
+	    /**
 	     * The base implementation of `_.set`.
 	     *
 	     * @private
-	     * @param {Object} object The object to query.
+	     * @param {Object} object The object to modify.
 	     * @param {Array|string} path The path of the property to set.
 	     * @param {*} value The value to set.
 	     * @param {Function} [customizer] The function to customize path creation.
 	     * @returns {Object} Returns `object`.
 	     */
 	    function baseSet(object, path, value, customizer) {
+	      if (!isObject(object)) {
+	        return object;
+	      }
 	      path = isKey(path, object) ? [path] : castPath(path);
 
 	      var index = -1,
@@ -70701,20 +71970,19 @@ webpackJsonp([0],[
 	          nested = object;
 
 	      while (nested != null && ++index < length) {
-	        var key = toKey(path[index]);
-	        if (isObject(nested)) {
-	          var newValue = value;
-	          if (index != lastIndex) {
-	            var objValue = nested[key];
-	            newValue = customizer ? customizer(objValue, key, nested) : undefined;
-	            if (newValue === undefined) {
-	              newValue = objValue == null
-	                ? (isIndex(path[index + 1]) ? [] : {})
-	                : objValue;
-	            }
+	        var key = toKey(path[index]),
+	            newValue = value;
+
+	        if (index != lastIndex) {
+	          var objValue = nested[key];
+	          newValue = customizer ? customizer(objValue, key, nested) : undefined;
+	          if (newValue === undefined) {
+	            newValue = isObject(objValue)
+	              ? objValue
+	              : (isIndex(path[index + 1]) ? [] : {});
 	          }
-	          assignValue(nested, key, newValue);
 	        }
+	        assignValue(nested, key, newValue);
 	        nested = nested[key];
 	      }
 	      return object;
@@ -71007,14 +72275,14 @@ webpackJsonp([0],[
 	      object = parent(object, path);
 
 	      var key = toKey(last(path));
-	      return !(object != null && baseHas(object, key)) || delete object[key];
+	      return !(object != null && hasOwnProperty.call(object, key)) || delete object[key];
 	    }
 
 	    /**
 	     * The base implementation of `_.update`.
 	     *
 	     * @private
-	     * @param {Object} object The object to query.
+	     * @param {Object} object The object to modify.
 	     * @param {Array|string} path The path of the property to update.
 	     * @param {Function} updater The function to produce the updated value.
 	     * @param {Function} [customizer] The function to customize path creation.
@@ -71161,6 +72429,16 @@ webpackJsonp([0],[
 	      end = end === undefined ? length : end;
 	      return (!start && end >= length) ? array : baseSlice(array, start, end);
 	    }
+
+	    /**
+	     * A simple wrapper around the global [`clearTimeout`](https://mdn.io/clearTimeout).
+	     *
+	     * @private
+	     * @param {number|Object} id The timer id or timeout object of the timer to clear.
+	     */
+	    var clearTimeout = ctxClearTimeout || function(id) {
+	      return root.clearTimeout(id);
+	    };
 
 	    /**
 	     * Creates a clone of  `buffer`.
@@ -71461,9 +72739,9 @@ webpackJsonp([0],[
 
 	        var newValue = customizer
 	          ? customizer(object[key], source[key], key, object, source)
-	          : source[key];
+	          : undefined;
 
-	        assignValue(object, key, newValue);
+	        assignValue(object, key, newValue === undefined ? source[key] : newValue);
 	      }
 	      return object;
 	    }
@@ -71493,7 +72771,7 @@ webpackJsonp([0],[
 	        var func = isArray(collection) ? arrayAggregator : baseAggregator,
 	            accumulator = initializer ? initializer() : {};
 
-	        return func(collection, setter, getIteratee(iteratee), accumulator);
+	        return func(collection, setter, getIteratee(iteratee, 2), accumulator);
 	      };
 	    }
 
@@ -71505,7 +72783,7 @@ webpackJsonp([0],[
 	     * @returns {Function} Returns the new assigner function.
 	     */
 	    function createAssigner(assigner) {
-	      return rest(function(object, sources) {
+	      return baseRest(function(object, sources) {
 	        var index = -1,
 	            length = sources.length,
 	            customizer = length > 1 ? sources[length - 1] : undefined,
@@ -71589,14 +72867,13 @@ webpackJsonp([0],[
 	     *
 	     * @private
 	     * @param {Function} func The function to wrap.
-	     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
-	     *  for more details.
+	     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
 	     * @param {*} [thisArg] The `this` binding of `func`.
 	     * @returns {Function} Returns the new wrapped function.
 	     */
-	    function createBaseWrapper(func, bitmask, thisArg) {
+	    function createBind(func, bitmask, thisArg) {
 	      var isBind = bitmask & BIND_FLAG,
-	          Ctor = createCtorWrapper(func);
+	          Ctor = createCtor(func);
 
 	      function wrapper() {
 	        var fn = (this && this !== root && this instanceof wrapper) ? Ctor : func;
@@ -71616,7 +72893,7 @@ webpackJsonp([0],[
 	      return function(string) {
 	        string = toString(string);
 
-	        var strSymbols = reHasComplexSymbol.test(string)
+	        var strSymbols = hasUnicode(string)
 	          ? stringToArray(string)
 	          : undefined;
 
@@ -71653,10 +72930,10 @@ webpackJsonp([0],[
 	     * @param {Function} Ctor The constructor to wrap.
 	     * @returns {Function} Returns the new wrapped function.
 	     */
-	    function createCtorWrapper(Ctor) {
+	    function createCtor(Ctor) {
 	      return function() {
 	        // Use a `switch` statement to work with class constructors. See
-	        // http://ecma-international.org/ecma-262/6.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist
+	        // http://ecma-international.org/ecma-262/7.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist
 	        // for more details.
 	        var args = arguments;
 	        switch (args.length) {
@@ -71683,13 +72960,12 @@ webpackJsonp([0],[
 	     *
 	     * @private
 	     * @param {Function} func The function to wrap.
-	     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
-	     *  for more details.
+	     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
 	     * @param {number} arity The arity of `func`.
 	     * @returns {Function} Returns the new wrapped function.
 	     */
-	    function createCurryWrapper(func, bitmask, arity) {
-	      var Ctor = createCtorWrapper(func);
+	    function createCurry(func, bitmask, arity) {
+	      var Ctor = createCtor(func);
 
 	      function wrapper() {
 	        var length = arguments.length,
@@ -71706,8 +72982,8 @@ webpackJsonp([0],[
 
 	        length -= holders.length;
 	        if (length < arity) {
-	          return createRecurryWrapper(
-	            func, bitmask, createHybridWrapper, wrapper.placeholder, undefined,
+	          return createRecurry(
+	            func, bitmask, createHybrid, wrapper.placeholder, undefined,
 	            args, holders, undefined, undefined, arity - length);
 	        }
 	        var fn = (this && this !== root && this instanceof wrapper) ? Ctor : func;
@@ -71726,18 +73002,13 @@ webpackJsonp([0],[
 	    function createFind(findIndexFunc) {
 	      return function(collection, predicate, fromIndex) {
 	        var iterable = Object(collection);
-	        predicate = getIteratee(predicate, 3);
 	        if (!isArrayLike(collection)) {
-	          var props = keys(collection);
+	          var iteratee = getIteratee(predicate, 3);
+	          collection = keys(collection);
+	          predicate = function(key) { return iteratee(iterable[key], key, iterable); };
 	        }
-	        var index = findIndexFunc(props || collection, function(value, key) {
-	          if (props) {
-	            key = value;
-	            value = iterable[key];
-	          }
-	          return predicate(value, key, iterable);
-	        }, fromIndex);
-	        return index > -1 ? collection[props ? props[index] : index] : undefined;
+	        var index = findIndexFunc(collection, predicate, fromIndex);
+	        return index > -1 ? iterable[iteratee ? collection[index] : index] : undefined;
 	      };
 	    }
 
@@ -71749,7 +73020,7 @@ webpackJsonp([0],[
 	     * @returns {Function} Returns the new flow function.
 	     */
 	    function createFlow(fromRight) {
-	      return rest(function(funcs) {
+	      return baseRest(function(funcs) {
 	        funcs = baseFlatten(funcs, 1);
 
 	        var length = funcs.length,
@@ -71811,8 +73082,7 @@ webpackJsonp([0],[
 	     *
 	     * @private
 	     * @param {Function|string} func The function or method name to wrap.
-	     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
-	     *  for more details.
+	     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
 	     * @param {*} [thisArg] The `this` binding of `func`.
 	     * @param {Array} [partials] The arguments to prepend to those provided to
 	     *  the new function.
@@ -71825,13 +73095,13 @@ webpackJsonp([0],[
 	     * @param {number} [arity] The arity of `func`.
 	     * @returns {Function} Returns the new wrapped function.
 	     */
-	    function createHybridWrapper(func, bitmask, thisArg, partials, holders, partialsRight, holdersRight, argPos, ary, arity) {
+	    function createHybrid(func, bitmask, thisArg, partials, holders, partialsRight, holdersRight, argPos, ary, arity) {
 	      var isAry = bitmask & ARY_FLAG,
 	          isBind = bitmask & BIND_FLAG,
 	          isBindKey = bitmask & BIND_KEY_FLAG,
 	          isCurried = bitmask & (CURRY_FLAG | CURRY_RIGHT_FLAG),
 	          isFlip = bitmask & FLIP_FLAG,
-	          Ctor = isBindKey ? undefined : createCtorWrapper(func);
+	          Ctor = isBindKey ? undefined : createCtor(func);
 
 	      function wrapper() {
 	        var length = arguments.length,
@@ -71854,8 +73124,8 @@ webpackJsonp([0],[
 	        length -= holdersCount;
 	        if (isCurried && length < arity) {
 	          var newHolders = replaceHolders(args, placeholder);
-	          return createRecurryWrapper(
-	            func, bitmask, createHybridWrapper, wrapper.placeholder, thisArg,
+	          return createRecurry(
+	            func, bitmask, createHybrid, wrapper.placeholder, thisArg,
 	            args, newHolders, argPos, ary, arity - length
 	          );
 	        }
@@ -71872,7 +73142,7 @@ webpackJsonp([0],[
 	          args.length = ary;
 	        }
 	        if (this && this !== root && this instanceof wrapper) {
-	          fn = Ctor || createCtorWrapper(fn);
+	          fn = Ctor || createCtor(fn);
 	        }
 	        return fn.apply(thisBinding, args);
 	      }
@@ -71898,13 +73168,14 @@ webpackJsonp([0],[
 	     *
 	     * @private
 	     * @param {Function} operator The function to perform the operation.
+	     * @param {number} [defaultValue] The value used for `undefined` arguments.
 	     * @returns {Function} Returns the new mathematical operation function.
 	     */
-	    function createMathOperation(operator) {
+	    function createMathOperation(operator, defaultValue) {
 	      return function(value, other) {
 	        var result;
 	        if (value === undefined && other === undefined) {
-	          return 0;
+	          return defaultValue;
 	        }
 	        if (value !== undefined) {
 	          result = value;
@@ -71934,12 +73205,12 @@ webpackJsonp([0],[
 	     * @returns {Function} Returns the new over function.
 	     */
 	    function createOver(arrayFunc) {
-	      return rest(function(iteratees) {
+	      return baseRest(function(iteratees) {
 	        iteratees = (iteratees.length == 1 && isArray(iteratees[0]))
 	          ? arrayMap(iteratees[0], baseUnary(getIteratee()))
-	          : arrayMap(baseFlatten(iteratees, 1, isFlattenableIteratee), baseUnary(getIteratee()));
+	          : arrayMap(baseFlatten(iteratees, 1), baseUnary(getIteratee()));
 
-	        return rest(function(args) {
+	        return baseRest(function(args) {
 	          var thisArg = this;
 	          return arrayFunc(iteratees, function(iteratee) {
 	            return apply(iteratee, thisArg, args);
@@ -71965,7 +73236,7 @@ webpackJsonp([0],[
 	        return charsLength ? baseRepeat(chars, length) : chars;
 	      }
 	      var result = baseRepeat(chars, nativeCeil(length / stringSize(chars)));
-	      return reHasComplexSymbol.test(chars)
+	      return hasUnicode(chars)
 	        ? castSlice(stringToArray(result), 0, length).join('')
 	        : result.slice(0, length);
 	    }
@@ -71976,16 +73247,15 @@ webpackJsonp([0],[
 	     *
 	     * @private
 	     * @param {Function} func The function to wrap.
-	     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
-	     *  for more details.
+	     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
 	     * @param {*} thisArg The `this` binding of `func`.
 	     * @param {Array} partials The arguments to prepend to those provided to
 	     *  the new function.
 	     * @returns {Function} Returns the new wrapped function.
 	     */
-	    function createPartialWrapper(func, bitmask, thisArg, partials) {
+	    function createPartial(func, bitmask, thisArg, partials) {
 	      var isBind = bitmask & BIND_FLAG,
-	          Ctor = createCtorWrapper(func);
+	          Ctor = createCtor(func);
 
 	      function wrapper() {
 	        var argsIndex = -1,
@@ -72019,15 +73289,14 @@ webpackJsonp([0],[
 	          end = step = undefined;
 	        }
 	        // Ensure the sign of `-0` is preserved.
-	        start = toNumber(start);
-	        start = start === start ? start : 0;
+	        start = toFinite(start);
 	        if (end === undefined) {
 	          end = start;
 	          start = 0;
 	        } else {
-	          end = toNumber(end) || 0;
+	          end = toFinite(end);
 	        }
-	        step = step === undefined ? (start < end ? 1 : -1) : (toNumber(step) || 0);
+	        step = step === undefined ? (start < end ? 1 : -1) : toFinite(step);
 	        return baseRange(start, end, step, fromRight);
 	      };
 	    }
@@ -72054,8 +73323,7 @@ webpackJsonp([0],[
 	     *
 	     * @private
 	     * @param {Function} func The function to wrap.
-	     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
-	     *  for more details.
+	     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
 	     * @param {Function} wrapFunc The function to create the `func` wrapper.
 	     * @param {*} placeholder The placeholder value.
 	     * @param {*} [thisArg] The `this` binding of `func`.
@@ -72067,7 +73335,7 @@ webpackJsonp([0],[
 	     * @param {number} [arity] The arity of `func`.
 	     * @returns {Function} Returns the new wrapped function.
 	     */
-	    function createRecurryWrapper(func, bitmask, wrapFunc, placeholder, thisArg, partials, holders, argPos, ary, arity) {
+	    function createRecurry(func, bitmask, wrapFunc, placeholder, thisArg, partials, holders, argPos, ary, arity) {
 	      var isCurry = bitmask & CURRY_FLAG,
 	          newHolders = isCurry ? holders : undefined,
 	          newHoldersRight = isCurry ? undefined : holders,
@@ -72090,7 +73358,7 @@ webpackJsonp([0],[
 	        setData(result, newData);
 	      }
 	      result.placeholder = placeholder;
-	      return result;
+	      return setWrapToString(result, func, bitmask);
 	    }
 
 	    /**
@@ -72119,7 +73387,7 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * Creates a set of `values`.
+	     * Creates a set object of `values`.
 	     *
 	     * @private
 	     * @param {Array} values The values to add to the set.
@@ -72155,7 +73423,7 @@ webpackJsonp([0],[
 	     *
 	     * @private
 	     * @param {Function|string} func The function or method name to wrap.
-	     * @param {number} bitmask The bitmask of wrapper flags.
+	     * @param {number} bitmask The bitmask flags.
 	     *  The bitmask may be composed of the following flags:
 	     *     1 - `_.bind`
 	     *     2 - `_.bindKey`
@@ -72175,7 +73443,7 @@ webpackJsonp([0],[
 	     * @param {number} [arity] The arity of `func`.
 	     * @returns {Function} Returns the new wrapped function.
 	     */
-	    function createWrapper(func, bitmask, thisArg, partials, holders, argPos, ary, arity) {
+	    function createWrap(func, bitmask, thisArg, partials, holders, argPos, ary, arity) {
 	      var isBindKey = bitmask & BIND_KEY_FLAG;
 	      if (!isBindKey && typeof func != 'function') {
 	        throw new TypeError(FUNC_ERROR_TEXT);
@@ -72218,16 +73486,16 @@ webpackJsonp([0],[
 	        bitmask &= ~(CURRY_FLAG | CURRY_RIGHT_FLAG);
 	      }
 	      if (!bitmask || bitmask == BIND_FLAG) {
-	        var result = createBaseWrapper(func, bitmask, thisArg);
+	        var result = createBind(func, bitmask, thisArg);
 	      } else if (bitmask == CURRY_FLAG || bitmask == CURRY_RIGHT_FLAG) {
-	        result = createCurryWrapper(func, bitmask, arity);
+	        result = createCurry(func, bitmask, arity);
 	      } else if ((bitmask == PARTIAL_FLAG || bitmask == (BIND_FLAG | PARTIAL_FLAG)) && !holders.length) {
-	        result = createPartialWrapper(func, bitmask, thisArg, partials);
+	        result = createPartial(func, bitmask, thisArg, partials);
 	      } else {
-	        result = createHybridWrapper.apply(undefined, newData);
+	        result = createHybrid.apply(undefined, newData);
 	      }
 	      var setter = data ? baseSetData : setData;
-	      return setter(result, newData);
+	      return setWrapToString(setter(result, newData), func, bitmask);
 	    }
 
 	    /**
@@ -72254,7 +73522,7 @@ webpackJsonp([0],[
 	      }
 	      // Assume cyclic values are equal.
 	      var stacked = stack.get(array);
-	      if (stacked) {
+	      if (stacked && stack.get(other)) {
 	        return stacked == other;
 	      }
 	      var index = -1,
@@ -72262,6 +73530,7 @@ webpackJsonp([0],[
 	          seen = (bitmask & UNORDERED_COMPARE_FLAG) ? new SetCache : undefined;
 
 	      stack.set(array, other);
+	      stack.set(other, array);
 
 	      // Ignore non-index properties.
 	      while (++index < arrLength) {
@@ -72300,6 +73569,7 @@ webpackJsonp([0],[
 	        }
 	      }
 	      stack['delete'](array);
+	      stack['delete'](other);
 	      return result;
 	    }
 
@@ -72340,22 +73610,18 @@ webpackJsonp([0],[
 
 	        case boolTag:
 	        case dateTag:
-	          // Coerce dates and booleans to numbers, dates to milliseconds and
-	          // booleans to `1` or `0` treating invalid dates coerced to `NaN` as
-	          // not equal.
-	          return +object == +other;
+	        case numberTag:
+	          // Coerce booleans to `1` or `0` and dates to milliseconds.
+	          // Invalid dates are coerced to `NaN`.
+	          return eq(+object, +other);
 
 	        case errorTag:
 	          return object.name == other.name && object.message == other.message;
 
-	        case numberTag:
-	          // Treat `NaN` vs. `NaN` as equal.
-	          return (object != +object) ? other != +other : object == +other;
-
 	        case regexpTag:
 	        case stringTag:
 	          // Coerce regexes to strings and treat strings, primitives and objects,
-	          // as equal. See http://www.ecma-international.org/ecma-262/6.0/#sec-regexp.prototype.tostring
+	          // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
 	          // for more details.
 	          return object == (other + '');
 
@@ -72375,10 +73641,12 @@ webpackJsonp([0],[
 	            return stacked == other;
 	          }
 	          bitmask |= UNORDERED_COMPARE_FLAG;
-	          stack.set(object, other);
 
 	          // Recursively compare objects (susceptible to call stack limits).
-	          return equalArrays(convert(object), convert(other), equalFunc, customizer, bitmask, stack);
+	          stack.set(object, other);
+	          var result = equalArrays(convert(object), convert(other), equalFunc, customizer, bitmask, stack);
+	          stack['delete'](object);
+	          return result;
 
 	        case symbolTag:
 	          if (symbolValueOf) {
@@ -72415,17 +73683,18 @@ webpackJsonp([0],[
 	      var index = objLength;
 	      while (index--) {
 	        var key = objProps[index];
-	        if (!(isPartial ? key in other : baseHas(other, key))) {
+	        if (!(isPartial ? key in other : hasOwnProperty.call(other, key))) {
 	          return false;
 	        }
 	      }
 	      // Assume cyclic values are equal.
 	      var stacked = stack.get(object);
-	      if (stacked) {
+	      if (stacked && stack.get(other)) {
 	        return stacked == other;
 	      }
 	      var result = true;
 	      stack.set(object, other);
+	      stack.set(other, object);
 
 	      var skipCtor = isPartial;
 	      while (++index < objLength) {
@@ -72461,6 +73730,7 @@ webpackJsonp([0],[
 	        }
 	      }
 	      stack['delete'](object);
+	      stack['delete'](other);
 	      return result;
 	    }
 
@@ -72550,19 +73820,6 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * Gets the "length" property value of `object`.
-	     *
-	     * **Note:** This function is used to avoid a
-	     * [JIT bug](https://bugs.webkit.org/show_bug.cgi?id=142792) that affects
-	     * Safari on at least iOS 8.1-8.3 ARM64.
-	     *
-	     * @private
-	     * @param {Object} object The object to query.
-	     * @returns {*} Returns the "length" value.
-	     */
-	    var getLength = baseProperty('length');
-
-	    /**
 	     * Gets the data for `map`.
 	     *
 	     * @private
@@ -72611,33 +73868,13 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * Gets the `[[Prototype]]` of `value`.
-	     *
-	     * @private
-	     * @param {*} value The value to query.
-	     * @returns {null|Object} Returns the `[[Prototype]]`.
-	     */
-	    function getPrototype(value) {
-	      return nativeGetPrototype(Object(value));
-	    }
-
-	    /**
 	     * Creates an array of the own enumerable symbol properties of `object`.
 	     *
 	     * @private
 	     * @param {Object} object The object to query.
 	     * @returns {Array} Returns the array of symbols.
 	     */
-	    function getSymbols(object) {
-	      // Coerce `object` to an object to avoid non-object errors in V8.
-	      // See https://bugs.chromium.org/p/v8/issues/detail?id=3443 for more details.
-	      return getOwnPropertySymbols(Object(object));
-	    }
-
-	    // Fallback for IE < 11.
-	    if (!getOwnPropertySymbols) {
-	      getSymbols = stubArray;
-	    }
+	    var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
 
 	    /**
 	     * Creates an array of the own and inherited enumerable symbol properties
@@ -72647,7 +73884,7 @@ webpackJsonp([0],[
 	     * @param {Object} object The object to query.
 	     * @returns {Array} Returns the array of symbols.
 	     */
-	    var getSymbolsIn = !getOwnPropertySymbols ? getSymbols : function(object) {
+	    var getSymbolsIn = !nativeGetSymbols ? stubArray : function(object) {
 	      var result = [];
 	      while (object) {
 	        arrayPush(result, getSymbols(object));
@@ -72663,12 +73900,10 @@ webpackJsonp([0],[
 	     * @param {*} value The value to query.
 	     * @returns {string} Returns the `toStringTag`.
 	     */
-	    function getTag(value) {
-	      return objectToString.call(value);
-	    }
+	    var getTag = baseGetTag;
 
 	    // Fallback for data views, maps, sets, and weak maps in IE 11,
-	    // for data views in Edge, and promises in Node.js.
+	    // for data views in Edge < 14, and promises in Node.js.
 	    if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
 	        (Map && getTag(new Map) != mapTag) ||
 	        (Promise && getTag(Promise.resolve()) != promiseTag) ||
@@ -72721,6 +73956,18 @@ webpackJsonp([0],[
 	    }
 
 	    /**
+	     * Extracts wrapper details from the `source` body comment.
+	     *
+	     * @private
+	     * @param {string} source The source to inspect.
+	     * @returns {Array} Returns the wrapper details.
+	     */
+	    function getWrapDetails(source) {
+	      var match = source.match(reWrapDetails);
+	      return match ? match[1].split(reSplitDetails) : [];
+	    }
+
+	    /**
 	     * Checks if `path` exists on `object`.
 	     *
 	     * @private
@@ -72748,7 +73995,7 @@ webpackJsonp([0],[
 	      }
 	      var length = object ? object.length : 0;
 	      return !!length && isLength(length) && isIndex(key, length) &&
-	        (isArray(object) || isString(object) || isArguments(object));
+	        (isArray(object) || isArguments(object));
 	    }
 
 	    /**
@@ -72833,20 +74080,20 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * Creates an array of index keys for `object` values of arrays,
-	     * `arguments` objects, and strings, otherwise `null` is returned.
+	     * Inserts wrapper `details` in a comment at the top of the `source` body.
 	     *
 	     * @private
-	     * @param {Object} object The object to query.
-	     * @returns {Array|null} Returns index keys, else `null`.
+	     * @param {string} source The source to modify.
+	     * @returns {Array} details The details to insert.
+	     * @returns {string} Returns the modified source.
 	     */
-	    function indexKeys(object) {
-	      var length = object ? object.length : undefined;
-	      if (isLength(length) &&
-	          (isArray(object) || isString(object) || isArguments(object))) {
-	        return baseTimes(length, String);
-	      }
-	      return null;
+	    function insertWrapDetails(source, details) {
+	      var length = details.length,
+	          lastIndex = length - 1;
+
+	      details[lastIndex] = (length > 1 ? '& ' : '') + details[lastIndex];
+	      details = details.join(length > 2 ? ', ' : ' ');
+	      return source.replace(reWrapComment, '{\n/* [wrapped with ' + details + '] */\n');
 	    }
 
 	    /**
@@ -72857,19 +74104,8 @@ webpackJsonp([0],[
 	     * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
 	     */
 	    function isFlattenable(value) {
-	      return isArray(value) || isArguments(value);
-	    }
-
-	    /**
-	     * Checks if `value` is a flattenable array and not a `_.matchesProperty`
-	     * iteratee shorthand.
-	     *
-	     * @private
-	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
-	     */
-	    function isFlattenableIteratee(value) {
-	      return isArray(value) && !(value.length == 2 && !isFunction(value[0]));
+	      return isArray(value) || isArguments(value) ||
+	        !!(spreadableSymbol && value && value[spreadableSymbol]);
 	    }
 
 	    /**
@@ -73119,9 +74355,31 @@ webpackJsonp([0],[
 	     */
 	    function mergeDefaults(objValue, srcValue, key, object, source, stack) {
 	      if (isObject(objValue) && isObject(srcValue)) {
-	        baseMerge(objValue, srcValue, undefined, mergeDefaults, stack.set(srcValue, objValue));
+	        // Recursively merge objects and arrays (susceptible to call stack limits).
+	        stack.set(srcValue, objValue);
+	        baseMerge(objValue, srcValue, undefined, mergeDefaults, stack);
+	        stack['delete'](srcValue);
 	      }
 	      return objValue;
+	    }
+
+	    /**
+	     * This function is like
+	     * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+	     * except that it includes inherited enumerable properties.
+	     *
+	     * @private
+	     * @param {Object} object The object to query.
+	     * @returns {Array} Returns the array of property names.
+	     */
+	    function nativeKeysIn(object) {
+	      var result = [];
+	      if (object != null) {
+	        for (var key in Object(object)) {
+	          result.push(key);
+	        }
+	      }
+	      return result;
 	    }
 
 	    /**
@@ -73193,6 +74451,37 @@ webpackJsonp([0],[
 	    }());
 
 	    /**
+	     * A simple wrapper around the global [`setTimeout`](https://mdn.io/setTimeout).
+	     *
+	     * @private
+	     * @param {Function} func The function to delay.
+	     * @param {number} wait The number of milliseconds to delay invocation.
+	     * @returns {number|Object} Returns the timer id or timeout object.
+	     */
+	    var setTimeout = ctxSetTimeout || function(func, wait) {
+	      return root.setTimeout(func, wait);
+	    };
+
+	    /**
+	     * Sets the `toString` method of `wrapper` to mimic the source of `reference`
+	     * with wrapper details in a comment at the top of the source body.
+	     *
+	     * @private
+	     * @param {Function} wrapper The function to modify.
+	     * @param {Function} reference The reference function.
+	     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+	     * @returns {Function} Returns `wrapper`.
+	     */
+	    var setWrapToString = !defineProperty ? identity : function(wrapper, reference, bitmask) {
+	      var source = (reference + '');
+	      return defineProperty(wrapper, 'toString', {
+	        'configurable': true,
+	        'enumerable': false,
+	        'value': constant(insertWrapDetails(source, updateWrapDetails(getWrapDetails(source), bitmask)))
+	      });
+	    };
+
+	    /**
 	     * Converts `string` to a property path array.
 	     *
 	     * @private
@@ -73200,8 +74489,13 @@ webpackJsonp([0],[
 	     * @returns {Array} Returns the property path array.
 	     */
 	    var stringToPath = memoize(function(string) {
+	      string = toString(string);
+
 	      var result = [];
-	      toString(string).replace(rePropName, function(match, number, quote, string) {
+	      if (reLeadingDot.test(string)) {
+	        result.push('');
+	      }
+	      string.replace(rePropName, function(match, number, quote, string) {
 	        result.push(quote ? string.replace(reEscapeChar, '$1') : (number || match));
 	      });
 	      return result;
@@ -73239,6 +74533,24 @@ webpackJsonp([0],[
 	        } catch (e) {}
 	      }
 	      return '';
+	    }
+
+	    /**
+	     * Updates wrapper `details` based on `bitmask` flags.
+	     *
+	     * @private
+	     * @returns {Array} details The details to modify.
+	     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+	     * @returns {Array} Returns `details`.
+	     */
+	    function updateWrapDetails(details, bitmask) {
+	      arrayEach(wrapFlags, function(pair) {
+	        var value = '_.' + pair[0];
+	        if ((bitmask & pair[1]) && !arrayIncludes(details, value)) {
+	          details.push(value);
+	        }
+	      });
+	      return details.sort();
 	    }
 
 	    /**
@@ -73369,10 +74681,12 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * Creates an array of unique `array` values not included in the other given
-	     * arrays using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+	     * Creates an array of `array` values not included in the other given arrays
+	     * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
 	     * for equality comparisons. The order of result values is determined by the
 	     * order they occur in the first array.
+	     *
+	     * **Note:** Unlike `_.pullAll`, this method returns a new array.
 	     *
 	     * @static
 	     * @memberOf _
@@ -73387,7 +74701,7 @@ webpackJsonp([0],[
 	     * _.difference([2, 1], [2, 3]);
 	     * // => [1]
 	     */
-	    var difference = rest(function(array, values) {
+	    var difference = baseRest(function(array, values) {
 	      return isArrayLikeObject(array)
 	        ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true))
 	        : [];
@@ -73399,14 +74713,15 @@ webpackJsonp([0],[
 	     * by which they're compared. Result values are chosen from the first array.
 	     * The iteratee is invoked with one argument: (value).
 	     *
+	     * **Note:** Unlike `_.pullAllBy`, this method returns a new array.
+	     *
 	     * @static
 	     * @memberOf _
 	     * @since 4.0.0
 	     * @category Array
 	     * @param {Array} array The array to inspect.
 	     * @param {...Array} [values] The values to exclude.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The iteratee invoked per element.
+	     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
 	     * @returns {Array} Returns the new array of filtered values.
 	     * @example
 	     *
@@ -73417,13 +74732,13 @@ webpackJsonp([0],[
 	     * _.differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x');
 	     * // => [{ 'x': 2 }]
 	     */
-	    var differenceBy = rest(function(array, values) {
+	    var differenceBy = baseRest(function(array, values) {
 	      var iteratee = last(values);
 	      if (isArrayLikeObject(iteratee)) {
 	        iteratee = undefined;
 	      }
 	      return isArrayLikeObject(array)
-	        ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), getIteratee(iteratee))
+	        ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), getIteratee(iteratee, 2))
 	        : [];
 	    });
 
@@ -73432,6 +74747,8 @@ webpackJsonp([0],[
 	     * which is invoked to compare elements of `array` to `values`. Result values
 	     * are chosen from the first array. The comparator is invoked with two arguments:
 	     * (arrVal, othVal).
+	     *
+	     * **Note:** Unlike `_.pullAllWith`, this method returns a new array.
 	     *
 	     * @static
 	     * @memberOf _
@@ -73448,7 +74765,7 @@ webpackJsonp([0],[
 	     * _.differenceWith(objects, [{ 'x': 1, 'y': 2 }], _.isEqual);
 	     * // => [{ 'x': 2, 'y': 1 }]
 	     */
-	    var differenceWith = rest(function(array, values) {
+	    var differenceWith = baseRest(function(array, values) {
 	      var comparator = last(values);
 	      if (isArrayLikeObject(comparator)) {
 	        comparator = undefined;
@@ -73537,8 +74854,7 @@ webpackJsonp([0],[
 	     * @since 3.0.0
 	     * @category Array
 	     * @param {Array} array The array to query.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
-	     *  The function invoked per iteration.
+	     * @param {Function} [predicate=_.identity] The function invoked per iteration.
 	     * @returns {Array} Returns the slice of `array`.
 	     * @example
 	     *
@@ -73579,7 +74895,7 @@ webpackJsonp([0],[
 	     * @since 3.0.0
 	     * @category Array
 	     * @param {Array} array The array to query.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
+	     * @param {Function} [predicate=_.identity]
 	     *  The function invoked per iteration.
 	     * @returns {Array} Returns the slice of `array`.
 	     * @example
@@ -73660,8 +74976,8 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 1.1.0
 	     * @category Array
-	     * @param {Array} array The array to search.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
+	     * @param {Array} array The array to inspect.
+	     * @param {Function} [predicate=_.identity]
 	     *  The function invoked per iteration.
 	     * @param {number} [fromIndex=0] The index to search from.
 	     * @returns {number} Returns the index of the found element, else `-1`.
@@ -73708,8 +75024,8 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 2.0.0
 	     * @category Array
-	     * @param {Array} array The array to search.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
+	     * @param {Array} array The array to inspect.
+	     * @param {Function} [predicate=_.identity]
 	     *  The function invoked per iteration.
 	     * @param {number} [fromIndex=array.length-1] The index to search from.
 	     * @returns {number} Returns the index of the found element, else `-1`.
@@ -73830,8 +75146,8 @@ webpackJsonp([0],[
 	     * @returns {Object} Returns the new object.
 	     * @example
 	     *
-	     * _.fromPairs([['fred', 30], ['barney', 40]]);
-	     * // => { 'fred': 30, 'barney': 40 }
+	     * _.fromPairs([['a', 1], ['b', 2]]);
+	     * // => { 'a': 1, 'b': 2 }
 	     */
 	    function fromPairs(pairs) {
 	      var index = -1,
@@ -73869,7 +75185,7 @@ webpackJsonp([0],[
 
 	    /**
 	     * Gets the index at which the first occurrence of `value` is found in `array`
-	     * using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+	     * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
 	     * for equality comparisons. If `fromIndex` is negative, it's used as the
 	     * offset from the end of `array`.
 	     *
@@ -73877,7 +75193,7 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 0.1.0
 	     * @category Array
-	     * @param {Array} array The array to search.
+	     * @param {Array} array The array to inspect.
 	     * @param {*} value The value to search for.
 	     * @param {number} [fromIndex=0] The index to search from.
 	     * @returns {number} Returns the index of the matched value, else `-1`.
@@ -73917,12 +75233,13 @@ webpackJsonp([0],[
 	     * // => [1, 2]
 	     */
 	    function initial(array) {
-	      return dropRight(array, 1);
+	      var length = array ? array.length : 0;
+	      return length ? baseSlice(array, 0, -1) : [];
 	    }
 
 	    /**
 	     * Creates an array of unique values that are included in all given arrays
-	     * using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+	     * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
 	     * for equality comparisons. The order of result values is determined by the
 	     * order they occur in the first array.
 	     *
@@ -73937,7 +75254,7 @@ webpackJsonp([0],[
 	     * _.intersection([2, 1], [2, 3]);
 	     * // => [2]
 	     */
-	    var intersection = rest(function(arrays) {
+	    var intersection = baseRest(function(arrays) {
 	      var mapped = arrayMap(arrays, castArrayLikeObject);
 	      return (mapped.length && mapped[0] === arrays[0])
 	        ? baseIntersection(mapped)
@@ -73955,8 +75272,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Array
 	     * @param {...Array} [arrays] The arrays to inspect.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The iteratee invoked per element.
+	     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
 	     * @returns {Array} Returns the new array of intersecting values.
 	     * @example
 	     *
@@ -73967,7 +75283,7 @@ webpackJsonp([0],[
 	     * _.intersectionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
 	     * // => [{ 'x': 1 }]
 	     */
-	    var intersectionBy = rest(function(arrays) {
+	    var intersectionBy = baseRest(function(arrays) {
 	      var iteratee = last(arrays),
 	          mapped = arrayMap(arrays, castArrayLikeObject);
 
@@ -73977,7 +75293,7 @@ webpackJsonp([0],[
 	        mapped.pop();
 	      }
 	      return (mapped.length && mapped[0] === arrays[0])
-	        ? baseIntersection(mapped, getIteratee(iteratee))
+	        ? baseIntersection(mapped, getIteratee(iteratee, 2))
 	        : [];
 	    });
 
@@ -74002,7 +75318,7 @@ webpackJsonp([0],[
 	     * _.intersectionWith(objects, others, _.isEqual);
 	     * // => [{ 'x': 1, 'y': 2 }]
 	     */
-	    var intersectionWith = rest(function(arrays) {
+	    var intersectionWith = baseRest(function(arrays) {
 	      var comparator = last(arrays),
 	          mapped = arrayMap(arrays, castArrayLikeObject);
 
@@ -74062,7 +75378,7 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 0.1.0
 	     * @category Array
-	     * @param {Array} array The array to search.
+	     * @param {Array} array The array to inspect.
 	     * @param {*} value The value to search for.
 	     * @param {number} [fromIndex=array.length-1] The index to search from.
 	     * @returns {number} Returns the index of the matched value, else `-1`.
@@ -74090,7 +75406,7 @@ webpackJsonp([0],[
 	        ) + 1;
 	      }
 	      if (value !== value) {
-	        return indexOfNaN(array, index - 1, true);
+	        return baseFindIndex(array, baseIsNaN, index - 1, true);
 	      }
 	      while (index--) {
 	        if (array[index] === value) {
@@ -74127,7 +75443,7 @@ webpackJsonp([0],[
 
 	    /**
 	     * Removes all given values from `array` using
-	     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+	     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
 	     * for equality comparisons.
 	     *
 	     * **Note:** Unlike `_.without`, this method mutates `array`. Use `_.remove`
@@ -74148,7 +75464,7 @@ webpackJsonp([0],[
 	     * console.log(array);
 	     * // => ['b', 'b']
 	     */
-	    var pull = rest(pullAll);
+	    var pull = baseRest(pullAll);
 
 	    /**
 	     * This method is like `_.pull` except that it accepts an array of values to remove.
@@ -74189,7 +75505,7 @@ webpackJsonp([0],[
 	     * @category Array
 	     * @param {Array} array The array to modify.
 	     * @param {Array} values The values to remove.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     * @param {Function} [iteratee=_.identity]
 	     *  The iteratee invoked per element.
 	     * @returns {Array} Returns `array`.
 	     * @example
@@ -74202,7 +75518,7 @@ webpackJsonp([0],[
 	     */
 	    function pullAllBy(array, values, iteratee) {
 	      return (array && array.length && values && values.length)
-	        ? basePullAll(array, values, getIteratee(iteratee))
+	        ? basePullAll(array, values, getIteratee(iteratee, 2))
 	        : array;
 	    }
 
@@ -74259,7 +75575,7 @@ webpackJsonp([0],[
 	     * console.log(pulled);
 	     * // => ['b', 'd']
 	     */
-	    var pullAt = rest(function(array, indexes) {
+	    var pullAt = baseRest(function(array, indexes) {
 	      indexes = baseFlatten(indexes, 1);
 
 	      var length = array ? array.length : 0,
@@ -74285,7 +75601,7 @@ webpackJsonp([0],[
 	     * @since 2.0.0
 	     * @category Array
 	     * @param {Array} array The array to modify.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
+	     * @param {Function} [predicate=_.identity]
 	     *  The function invoked per iteration.
 	     * @returns {Array} Returns the new array of removed elements.
 	     * @example
@@ -74413,7 +75729,7 @@ webpackJsonp([0],[
 	     * @category Array
 	     * @param {Array} array The sorted array to inspect.
 	     * @param {*} value The value to evaluate.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     * @param {Function} [iteratee=_.identity]
 	     *  The iteratee invoked per element.
 	     * @returns {number} Returns the index at which `value` should be inserted
 	     *  into `array`.
@@ -74429,7 +75745,7 @@ webpackJsonp([0],[
 	     * // => 0
 	     */
 	    function sortedIndexBy(array, value, iteratee) {
-	      return baseSortedIndexBy(array, value, getIteratee(iteratee));
+	      return baseSortedIndexBy(array, value, getIteratee(iteratee, 2));
 	    }
 
 	    /**
@@ -74440,7 +75756,7 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 4.0.0
 	     * @category Array
-	     * @param {Array} array The array to search.
+	     * @param {Array} array The array to inspect.
 	     * @param {*} value The value to search for.
 	     * @returns {number} Returns the index of the matched value, else `-1`.
 	     * @example
@@ -74492,7 +75808,7 @@ webpackJsonp([0],[
 	     * @category Array
 	     * @param {Array} array The sorted array to inspect.
 	     * @param {*} value The value to evaluate.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     * @param {Function} [iteratee=_.identity]
 	     *  The iteratee invoked per element.
 	     * @returns {number} Returns the index at which `value` should be inserted
 	     *  into `array`.
@@ -74508,7 +75824,7 @@ webpackJsonp([0],[
 	     * // => 1
 	     */
 	    function sortedLastIndexBy(array, value, iteratee) {
-	      return baseSortedIndexBy(array, value, getIteratee(iteratee), true);
+	      return baseSortedIndexBy(array, value, getIteratee(iteratee, 2), true);
 	    }
 
 	    /**
@@ -74519,7 +75835,7 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 4.0.0
 	     * @category Array
-	     * @param {Array} array The array to search.
+	     * @param {Array} array The array to inspect.
 	     * @param {*} value The value to search for.
 	     * @returns {number} Returns the index of the matched value, else `-1`.
 	     * @example
@@ -74577,7 +75893,7 @@ webpackJsonp([0],[
 	     */
 	    function sortedUniqBy(array, iteratee) {
 	      return (array && array.length)
-	        ? baseSortedUniq(array, getIteratee(iteratee))
+	        ? baseSortedUniq(array, getIteratee(iteratee, 2))
 	        : [];
 	    }
 
@@ -74596,7 +75912,8 @@ webpackJsonp([0],[
 	     * // => [2, 3]
 	     */
 	    function tail(array) {
-	      return drop(array, 1);
+	      var length = array ? array.length : 0;
+	      return length ? baseSlice(array, 1, length) : [];
 	    }
 
 	    /**
@@ -74677,7 +75994,7 @@ webpackJsonp([0],[
 	     * @since 3.0.0
 	     * @category Array
 	     * @param {Array} array The array to query.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
+	     * @param {Function} [predicate=_.identity]
 	     *  The function invoked per iteration.
 	     * @returns {Array} Returns the slice of `array`.
 	     * @example
@@ -74719,7 +76036,7 @@ webpackJsonp([0],[
 	     * @since 3.0.0
 	     * @category Array
 	     * @param {Array} array The array to query.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
+	     * @param {Function} [predicate=_.identity]
 	     *  The function invoked per iteration.
 	     * @returns {Array} Returns the slice of `array`.
 	     * @example
@@ -74753,7 +76070,7 @@ webpackJsonp([0],[
 
 	    /**
 	     * Creates an array of unique values, in order, from all given arrays using
-	     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+	     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
 	     * for equality comparisons.
 	     *
 	     * @static
@@ -74767,14 +76084,15 @@ webpackJsonp([0],[
 	     * _.union([2], [1, 2]);
 	     * // => [2, 1]
 	     */
-	    var union = rest(function(arrays) {
+	    var union = baseRest(function(arrays) {
 	      return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true));
 	    });
 
 	    /**
 	     * This method is like `_.union` except that it accepts `iteratee` which is
 	     * invoked for each element of each `arrays` to generate the criterion by
-	     * which uniqueness is computed. The iteratee is invoked with one argument:
+	     * which uniqueness is computed. Result values are chosen from the first
+	     * array in which the value occurs. The iteratee is invoked with one argument:
 	     * (value).
 	     *
 	     * @static
@@ -74782,7 +76100,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Array
 	     * @param {...Array} [arrays] The arrays to inspect.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     * @param {Function} [iteratee=_.identity]
 	     *  The iteratee invoked per element.
 	     * @returns {Array} Returns the new array of combined values.
 	     * @example
@@ -74794,17 +76112,18 @@ webpackJsonp([0],[
 	     * _.unionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
 	     * // => [{ 'x': 1 }, { 'x': 2 }]
 	     */
-	    var unionBy = rest(function(arrays) {
+	    var unionBy = baseRest(function(arrays) {
 	      var iteratee = last(arrays);
 	      if (isArrayLikeObject(iteratee)) {
 	        iteratee = undefined;
 	      }
-	      return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true), getIteratee(iteratee));
+	      return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true), getIteratee(iteratee, 2));
 	    });
 
 	    /**
 	     * This method is like `_.union` except that it accepts `comparator` which
-	     * is invoked to compare elements of `arrays`. The comparator is invoked
+	     * is invoked to compare elements of `arrays`. Result values are chosen from
+	     * the first array in which the value occurs. The comparator is invoked
 	     * with two arguments: (arrVal, othVal).
 	     *
 	     * @static
@@ -74822,7 +76141,7 @@ webpackJsonp([0],[
 	     * _.unionWith(objects, others, _.isEqual);
 	     * // => [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
 	     */
-	    var unionWith = rest(function(arrays) {
+	    var unionWith = baseRest(function(arrays) {
 	      var comparator = last(arrays);
 	      if (isArrayLikeObject(comparator)) {
 	        comparator = undefined;
@@ -74832,7 +76151,7 @@ webpackJsonp([0],[
 
 	    /**
 	     * Creates a duplicate-free version of an array, using
-	     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+	     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
 	     * for equality comparisons, in which only the first occurrence of each
 	     * element is kept.
 	     *
@@ -74863,7 +76182,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Array
 	     * @param {Array} array The array to inspect.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     * @param {Function} [iteratee=_.identity]
 	     *  The iteratee invoked per element.
 	     * @returns {Array} Returns the new duplicate free array.
 	     * @example
@@ -74877,7 +76196,7 @@ webpackJsonp([0],[
 	     */
 	    function uniqBy(array, iteratee) {
 	      return (array && array.length)
-	        ? baseUniq(array, getIteratee(iteratee))
+	        ? baseUniq(array, getIteratee(iteratee, 2))
 	        : [];
 	    }
 
@@ -74919,11 +76238,11 @@ webpackJsonp([0],[
 	     * @returns {Array} Returns the new array of regrouped elements.
 	     * @example
 	     *
-	     * var zipped = _.zip(['fred', 'barney'], [30, 40], [true, false]);
-	     * // => [['fred', 30, true], ['barney', 40, false]]
+	     * var zipped = _.zip(['a', 'b'], [1, 2], [true, false]);
+	     * // => [['a', 1, true], ['b', 2, false]]
 	     *
 	     * _.unzip(zipped);
-	     * // => [['fred', 'barney'], [30, 40], [true, false]]
+	     * // => [['a', 'b'], [1, 2], [true, false]]
 	     */
 	    function unzip(array) {
 	      if (!(array && array.length)) {
@@ -74977,8 +76296,10 @@ webpackJsonp([0],[
 
 	    /**
 	     * Creates an array excluding all given values using
-	     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+	     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
 	     * for equality comparisons.
+	     *
+	     * **Note:** Unlike `_.pull`, this method returns a new array.
 	     *
 	     * @static
 	     * @memberOf _
@@ -74993,7 +76314,7 @@ webpackJsonp([0],[
 	     * _.without([2, 1, 2, 3], 1, 2);
 	     * // => [3]
 	     */
-	    var without = rest(function(array, values) {
+	    var without = baseRest(function(array, values) {
 	      return isArrayLikeObject(array)
 	        ? baseDifference(array, values)
 	        : [];
@@ -75017,7 +76338,7 @@ webpackJsonp([0],[
 	     * _.xor([2, 1], [2, 3]);
 	     * // => [1, 3]
 	     */
-	    var xor = rest(function(arrays) {
+	    var xor = baseRest(function(arrays) {
 	      return baseXor(arrayFilter(arrays, isArrayLikeObject));
 	    });
 
@@ -75032,7 +76353,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Array
 	     * @param {...Array} [arrays] The arrays to inspect.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     * @param {Function} [iteratee=_.identity]
 	     *  The iteratee invoked per element.
 	     * @returns {Array} Returns the new array of filtered values.
 	     * @example
@@ -75044,12 +76365,12 @@ webpackJsonp([0],[
 	     * _.xorBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
 	     * // => [{ 'x': 2 }]
 	     */
-	    var xorBy = rest(function(arrays) {
+	    var xorBy = baseRest(function(arrays) {
 	      var iteratee = last(arrays);
 	      if (isArrayLikeObject(iteratee)) {
 	        iteratee = undefined;
 	      }
-	      return baseXor(arrayFilter(arrays, isArrayLikeObject), getIteratee(iteratee));
+	      return baseXor(arrayFilter(arrays, isArrayLikeObject), getIteratee(iteratee, 2));
 	    });
 
 	    /**
@@ -75072,7 +76393,7 @@ webpackJsonp([0],[
 	     * _.xorWith(objects, others, _.isEqual);
 	     * // => [{ 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
 	     */
-	    var xorWith = rest(function(arrays) {
+	    var xorWith = baseRest(function(arrays) {
 	      var comparator = last(arrays);
 	      if (isArrayLikeObject(comparator)) {
 	        comparator = undefined;
@@ -75093,10 +76414,10 @@ webpackJsonp([0],[
 	     * @returns {Array} Returns the new array of grouped elements.
 	     * @example
 	     *
-	     * _.zip(['fred', 'barney'], [30, 40], [true, false]);
-	     * // => [['fred', 30, true], ['barney', 40, false]]
+	     * _.zip(['a', 'b'], [1, 2], [true, false]);
+	     * // => [['a', 1, true], ['b', 2, false]]
 	     */
-	    var zip = rest(unzip);
+	    var zip = baseRest(unzip);
 
 	    /**
 	     * This method is like `_.fromPairs` except that it accepts two arrays,
@@ -75156,7 +76477,7 @@ webpackJsonp([0],[
 	     * });
 	     * // => [111, 222]
 	     */
-	    var zipWith = rest(function(arrays) {
+	    var zipWith = baseRest(function(arrays) {
 	      var length = arrays.length,
 	          iteratee = length > 1 ? arrays[length - 1] : undefined;
 
@@ -75272,7 +76593,7 @@ webpackJsonp([0],[
 	     * _(object).at(['a[0].b.c', 'a[1]']).value();
 	     * // => [3, 4]
 	     */
-	    var wrapperAt = rest(function(paths) {
+	    var wrapperAt = baseRest(function(paths) {
 	      paths = baseFlatten(paths, 1);
 	      var length = paths.length,
 	          start = length ? paths[0] : 0,
@@ -75525,7 +76846,7 @@ webpackJsonp([0],[
 	     * @since 0.5.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     * @param {Function} [iteratee=_.identity]
 	     *  The iteratee to transform keys.
 	     * @returns {Object} Returns the composed aggregate object.
 	     * @example
@@ -75546,12 +76867,17 @@ webpackJsonp([0],[
 	     * Iteration is stopped once `predicate` returns falsey. The predicate is
 	     * invoked with three arguments: (value, index|key, collection).
 	     *
+	     * **Note:** This method returns `true` for
+	     * [empty collections](https://en.wikipedia.org/wiki/Empty_set) because
+	     * [everything is true](https://en.wikipedia.org/wiki/Vacuous_truth) of
+	     * elements of empty collections.
+	     *
 	     * @static
 	     * @memberOf _
 	     * @since 0.1.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
+	     * @param {Function} [predicate=_.identity]
 	     *  The function invoked per iteration.
 	     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
 	     * @returns {boolean} Returns `true` if all elements pass the predicate check,
@@ -75591,12 +76917,14 @@ webpackJsonp([0],[
 	     * `predicate` returns truthy for. The predicate is invoked with three
 	     * arguments: (value, index|key, collection).
 	     *
+	     * **Note:** Unlike `_.remove`, this method returns a new array.
+	     *
 	     * @static
 	     * @memberOf _
 	     * @since 0.1.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
+	     * @param {Function} [predicate=_.identity]
 	     *  The function invoked per iteration.
 	     * @returns {Array} Returns the new filtered array.
 	     * @see _.reject
@@ -75636,8 +76964,8 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 0.1.0
 	     * @category Collection
-	     * @param {Array|Object} collection The collection to search.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
+	     * @param {Array|Object} collection The collection to inspect.
+	     * @param {Function} [predicate=_.identity]
 	     *  The function invoked per iteration.
 	     * @param {number} [fromIndex=0] The index to search from.
 	     * @returns {*} Returns the matched element, else `undefined`.
@@ -75674,8 +77002,8 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 2.0.0
 	     * @category Collection
-	     * @param {Array|Object} collection The collection to search.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
+	     * @param {Array|Object} collection The collection to inspect.
+	     * @param {Function} [predicate=_.identity]
 	     *  The function invoked per iteration.
 	     * @param {number} [fromIndex=collection.length-1] The index to search from.
 	     * @returns {*} Returns the matched element, else `undefined`.
@@ -75698,7 +77026,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     * @param {Function} [iteratee=_.identity]
 	     *  The function invoked per iteration.
 	     * @returns {Array} Returns the new flattened array.
 	     * @example
@@ -75723,7 +77051,7 @@ webpackJsonp([0],[
 	     * @since 4.7.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     * @param {Function} [iteratee=_.identity]
 	     *  The function invoked per iteration.
 	     * @returns {Array} Returns the new flattened array.
 	     * @example
@@ -75748,7 +77076,7 @@ webpackJsonp([0],[
 	     * @since 4.7.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     * @param {Function} [iteratee=_.identity]
 	     *  The function invoked per iteration.
 	     * @param {number} [depth=1] The maximum recursion depth.
 	     * @returns {Array} Returns the new flattened array.
@@ -75838,7 +77166,7 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     * @param {Function} [iteratee=_.identity]
 	     *  The iteratee to transform keys.
 	     * @returns {Object} Returns the composed aggregate object.
 	     * @example
@@ -75861,7 +77189,7 @@ webpackJsonp([0],[
 	    /**
 	     * Checks if `value` is in `collection`. If `collection` is a string, it's
 	     * checked for a substring of `value`, otherwise
-	     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+	     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
 	     * is used for equality comparisons. If `fromIndex` is negative, it's used as
 	     * the offset from the end of `collection`.
 	     *
@@ -75869,7 +77197,7 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 0.1.0
 	     * @category Collection
-	     * @param {Array|Object|string} collection The collection to search.
+	     * @param {Array|Object|string} collection The collection to inspect.
 	     * @param {*} value The value to search for.
 	     * @param {number} [fromIndex=0] The index to search from.
 	     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.reduce`.
@@ -75882,10 +77210,10 @@ webpackJsonp([0],[
 	     * _.includes([1, 2, 3], 1, 2);
 	     * // => false
 	     *
-	     * _.includes({ 'user': 'fred', 'age': 40 }, 'fred');
+	     * _.includes({ 'a': 1, 'b': 2 }, 1);
 	     * // => true
 	     *
-	     * _.includes('pebbles', 'eb');
+	     * _.includes('abcd', 'bc');
 	     * // => true
 	     */
 	    function includes(collection, value, fromIndex, guard) {
@@ -75904,8 +77232,8 @@ webpackJsonp([0],[
 	    /**
 	     * Invokes the method at `path` of each element in `collection`, returning
 	     * an array of the results of each invoked method. Any additional arguments
-	     * are provided to each invoked method. If `methodName` is a function, it's
-	     * invoked for and `this` bound to, each element in `collection`.
+	     * are provided to each invoked method. If `path` is a function, it's invoked
+	     * for, and `this` bound to, each element in `collection`.
 	     *
 	     * @static
 	     * @memberOf _
@@ -75924,7 +77252,7 @@ webpackJsonp([0],[
 	     * _.invokeMap([123, 456], String.prototype.split, '');
 	     * // => [['1', '2', '3'], ['4', '5', '6']]
 	     */
-	    var invokeMap = rest(function(collection, path, args) {
+	    var invokeMap = baseRest(function(collection, path, args) {
 	      var index = -1,
 	          isFunc = typeof path == 'function',
 	          isProp = isKey(path),
@@ -75948,7 +77276,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
+	     * @param {Function} [iteratee=_.identity]
 	     *  The iteratee to transform keys.
 	     * @returns {Object} Returns the composed aggregate object.
 	     * @example
@@ -75989,8 +77317,7 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The function invoked per iteration.
+	     * @param {Function} [iteratee=_.identity] The function invoked per iteration.
 	     * @returns {Array} Returns the new mapped array.
 	     * @example
 	     *
@@ -76072,8 +77399,7 @@ webpackJsonp([0],[
 	     * @since 3.0.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
-	     *  The function invoked per iteration.
+	     * @param {Function} [predicate=_.identity] The function invoked per iteration.
 	     * @returns {Array} Returns the array of grouped elements.
 	     * @example
 	     *
@@ -76184,8 +77510,7 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
-	     *  The function invoked per iteration.
+	     * @param {Function} [predicate=_.identity] The function invoked per iteration.
 	     * @returns {Array} Returns the new filtered array.
 	     * @see _.filter
 	     * @example
@@ -76212,10 +77537,7 @@ webpackJsonp([0],[
 	     */
 	    function reject(collection, predicate) {
 	      var func = isArray(collection) ? arrayFilter : baseFilter;
-	      predicate = getIteratee(predicate, 3);
-	      return func(collection, function(value, index, collection) {
-	        return !predicate(value, index, collection);
-	      });
+	      return func(collection, negate(getIteratee(predicate, 3)));
 	    }
 
 	    /**
@@ -76308,7 +77630,7 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 0.1.0
 	     * @category Collection
-	     * @param {Array|Object} collection The collection to inspect.
+	     * @param {Array|Object|string} collection The collection to inspect.
 	     * @returns {number} Returns the collection size.
 	     * @example
 	     *
@@ -76326,16 +77648,13 @@ webpackJsonp([0],[
 	        return 0;
 	      }
 	      if (isArrayLike(collection)) {
-	        var result = collection.length;
-	        return (result && isString(collection)) ? stringSize(collection) : result;
+	        return isString(collection) ? stringSize(collection) : collection.length;
 	      }
-	      if (isObjectLike(collection)) {
-	        var tag = getTag(collection);
-	        if (tag == mapTag || tag == setTag) {
-	          return collection.size;
-	        }
+	      var tag = getTag(collection);
+	      if (tag == mapTag || tag == setTag) {
+	        return collection.size;
 	      }
-	      return keys(collection).length;
+	      return baseKeys(collection).length;
 	    }
 
 	    /**
@@ -76348,8 +77667,7 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
-	     *  The function invoked per iteration.
+	     * @param {Function} [predicate=_.identity] The function invoked per iteration.
 	     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
 	     * @returns {boolean} Returns `true` if any element passes the predicate check,
 	     *  else `false`.
@@ -76394,8 +77712,8 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Collection
 	     * @param {Array|Object} collection The collection to iterate over.
-	     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-	     *  [iteratees=[_.identity]] The iteratees to sort by.
+	     * @param {...(Function|Function[])} [iteratees=[_.identity]]
+	     *  The iteratees to sort by.
 	     * @returns {Array} Returns the new sorted array.
 	     * @example
 	     *
@@ -76417,7 +77735,7 @@ webpackJsonp([0],[
 	     * });
 	     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
 	     */
-	    var sortBy = rest(function(collection, iteratees) {
+	    var sortBy = baseRest(function(collection, iteratees) {
 	      if (collection == null) {
 	        return [];
 	      }
@@ -76427,11 +77745,7 @@ webpackJsonp([0],[
 	      } else if (length > 2 && isIterateeCall(iteratees[0], iteratees[1], iteratees[2])) {
 	        iteratees = [iteratees[0]];
 	      }
-	      iteratees = (iteratees.length == 1 && isArray(iteratees[0]))
-	        ? iteratees[0]
-	        : baseFlatten(iteratees, 1, isFlattenableIteratee);
-
-	      return baseOrderBy(collection, iteratees, []);
+	      return baseOrderBy(collection, baseFlatten(iteratees, 1), []);
 	    });
 
 	    /*------------------------------------------------------------------------*/
@@ -76452,9 +77766,9 @@ webpackJsonp([0],[
 	     * }, _.now());
 	     * // => Logs the number of milliseconds it took for the deferred invocation.
 	     */
-	    function now() {
-	      return Date.now();
-	    }
+	    var now = ctxNow || function() {
+	      return root.Date.now();
+	    };
 
 	    /*------------------------------------------------------------------------*/
 
@@ -76514,7 +77828,7 @@ webpackJsonp([0],[
 	    function ary(func, n, guard) {
 	      n = guard ? undefined : n;
 	      n = (func && n == null) ? func.length : n;
-	      return createWrapper(func, ARY_FLAG, undefined, undefined, undefined, undefined, n);
+	      return createWrap(func, ARY_FLAG, undefined, undefined, undefined, undefined, n);
 	    }
 
 	    /**
@@ -76532,7 +77846,7 @@ webpackJsonp([0],[
 	     * @example
 	     *
 	     * jQuery(element).on('click', _.before(5, addContactToList));
-	     * // => allows adding up to 4 contacts to the list
+	     * // => Allows adding up to 4 contacts to the list.
 	     */
 	    function before(n, func) {
 	      var result;
@@ -76571,9 +77885,9 @@ webpackJsonp([0],[
 	     * @returns {Function} Returns the new bound function.
 	     * @example
 	     *
-	     * var greet = function(greeting, punctuation) {
+	     * function greet(greeting, punctuation) {
 	     *   return greeting + ' ' + this.user + punctuation;
-	     * };
+	     * }
 	     *
 	     * var object = { 'user': 'fred' };
 	     *
@@ -76586,13 +77900,13 @@ webpackJsonp([0],[
 	     * bound('hi');
 	     * // => 'hi fred!'
 	     */
-	    var bind = rest(function(func, thisArg, partials) {
+	    var bind = baseRest(function(func, thisArg, partials) {
 	      var bitmask = BIND_FLAG;
 	      if (partials.length) {
 	        var holders = replaceHolders(partials, getHolder(bind));
 	        bitmask |= PARTIAL_FLAG;
 	      }
-	      return createWrapper(func, bitmask, thisArg, partials, holders);
+	      return createWrap(func, bitmask, thisArg, partials, holders);
 	    });
 
 	    /**
@@ -76640,13 +77954,13 @@ webpackJsonp([0],[
 	     * bound('hi');
 	     * // => 'hiya fred!'
 	     */
-	    var bindKey = rest(function(object, key, partials) {
+	    var bindKey = baseRest(function(object, key, partials) {
 	      var bitmask = BIND_FLAG | BIND_KEY_FLAG;
 	      if (partials.length) {
 	        var holders = replaceHolders(partials, getHolder(bindKey));
 	        bitmask |= PARTIAL_FLAG;
 	      }
-	      return createWrapper(key, bitmask, object, partials, holders);
+	      return createWrap(key, bitmask, object, partials, holders);
 	    });
 
 	    /**
@@ -76692,7 +78006,7 @@ webpackJsonp([0],[
 	     */
 	    function curry(func, arity, guard) {
 	      arity = guard ? undefined : arity;
-	      var result = createWrapper(func, CURRY_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
+	      var result = createWrap(func, CURRY_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
 	      result.placeholder = curry.placeholder;
 	      return result;
 	    }
@@ -76737,7 +78051,7 @@ webpackJsonp([0],[
 	     */
 	    function curryRight(func, arity, guard) {
 	      arity = guard ? undefined : arity;
-	      var result = createWrapper(func, CURRY_RIGHT_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
+	      var result = createWrap(func, CURRY_RIGHT_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
 	      result.placeholder = curryRight.placeholder;
 	      return result;
 	    }
@@ -76747,14 +78061,18 @@ webpackJsonp([0],[
 	     * milliseconds have elapsed since the last time the debounced function was
 	     * invoked. The debounced function comes with a `cancel` method to cancel
 	     * delayed `func` invocations and a `flush` method to immediately invoke them.
-	     * Provide an options object to indicate whether `func` should be invoked on
-	     * the leading and/or trailing edge of the `wait` timeout. The `func` is invoked
-	     * with the last arguments provided to the debounced function. Subsequent calls
-	     * to the debounced function return the result of the last `func` invocation.
+	     * Provide `options` to indicate whether `func` should be invoked on the
+	     * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+	     * with the last arguments provided to the debounced function. Subsequent
+	     * calls to the debounced function return the result of the last `func`
+	     * invocation.
 	     *
-	     * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
-	     * on the trailing edge of the timeout only if the debounced function is
-	     * invoked more than once during the `wait` timeout.
+	     * **Note:** If `leading` and `trailing` options are `true`, `func` is
+	     * invoked on the trailing edge of the timeout only if the debounced function
+	     * is invoked more than once during the `wait` timeout.
+	     *
+	     * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+	     * until to the next tick, similar to `setTimeout` with a timeout of `0`.
 	     *
 	     * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
 	     * for details over the differences between `_.debounce` and `_.throttle`.
@@ -76875,6 +78193,9 @@ webpackJsonp([0],[
 	      }
 
 	      function cancel() {
+	        if (timerId !== undefined) {
+	          clearTimeout(timerId);
+	        }
 	        lastInvokeTime = 0;
 	        lastArgs = lastCallTime = lastThis = timerId = undefined;
 	      }
@@ -76929,7 +78250,7 @@ webpackJsonp([0],[
 	     * }, 'deferred');
 	     * // => Logs 'deferred' after one or more milliseconds.
 	     */
-	    var defer = rest(function(func, args) {
+	    var defer = baseRest(function(func, args) {
 	      return baseDelay(func, 1, args);
 	    });
 
@@ -76952,7 +78273,7 @@ webpackJsonp([0],[
 	     * }, 1000, 'later');
 	     * // => Logs 'later' after one second.
 	     */
-	    var delay = rest(function(func, wait, args) {
+	    var delay = baseRest(function(func, wait, args) {
 	      return baseDelay(func, toNumber(wait) || 0, args);
 	    });
 
@@ -76975,7 +78296,7 @@ webpackJsonp([0],[
 	     * // => ['d', 'c', 'b', 'a']
 	     */
 	    function flip(func) {
-	      return createWrapper(func, FLIP_FLAG);
+	      return createWrap(func, FLIP_FLAG);
 	    }
 
 	    /**
@@ -76988,7 +78309,7 @@ webpackJsonp([0],[
 	     * **Note:** The cache is exposed as the `cache` property on the memoized
 	     * function. Its creation may be customized by replacing the `_.memoize.Cache`
 	     * constructor with one whose instances implement the
-	     * [`Map`](http://ecma-international.org/ecma-262/6.0/#sec-properties-of-the-map-prototype-object)
+	     * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
 	     * method interface of `delete`, `get`, `has`, and `set`.
 	     *
 	     * @static
@@ -77070,7 +78391,14 @@ webpackJsonp([0],[
 	        throw new TypeError(FUNC_ERROR_TEXT);
 	      }
 	      return function() {
-	        return !predicate.apply(this, arguments);
+	        var args = arguments;
+	        switch (args.length) {
+	          case 0: return !predicate.call(this);
+	          case 1: return !predicate.call(this, args[0]);
+	          case 2: return !predicate.call(this, args[0], args[1]);
+	          case 3: return !predicate.call(this, args[0], args[1], args[2]);
+	        }
+	        return !predicate.apply(this, args);
 	      };
 	    }
 
@@ -77090,23 +78418,22 @@ webpackJsonp([0],[
 	     * var initialize = _.once(createApplication);
 	     * initialize();
 	     * initialize();
-	     * // `initialize` invokes `createApplication` once
+	     * // => `createApplication` is invoked once
 	     */
 	    function once(func) {
 	      return before(2, func);
 	    }
 
 	    /**
-	     * Creates a function that invokes `func` with arguments transformed by
-	     * corresponding `transforms`.
+	     * Creates a function that invokes `func` with its arguments transformed.
 	     *
 	     * @static
 	     * @since 4.0.0
 	     * @memberOf _
 	     * @category Function
 	     * @param {Function} func The function to wrap.
-	     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-	     *  [transforms[_.identity]] The functions to transform.
+	     * @param {...(Function|Function[])} [transforms=[_.identity]]
+	     *  The argument transforms.
 	     * @returns {Function} Returns the new function.
 	     * @example
 	     *
@@ -77128,13 +78455,13 @@ webpackJsonp([0],[
 	     * func(10, 5);
 	     * // => [100, 10]
 	     */
-	    var overArgs = rest(function(func, transforms) {
+	    var overArgs = baseRest(function(func, transforms) {
 	      transforms = (transforms.length == 1 && isArray(transforms[0]))
 	        ? arrayMap(transforms[0], baseUnary(getIteratee()))
-	        : arrayMap(baseFlatten(transforms, 1, isFlattenableIteratee), baseUnary(getIteratee()));
+	        : arrayMap(baseFlatten(transforms, 1), baseUnary(getIteratee()));
 
 	      var funcsLength = transforms.length;
-	      return rest(function(args) {
+	      return baseRest(function(args) {
 	        var index = -1,
 	            length = nativeMin(args.length, funcsLength);
 
@@ -77165,9 +78492,9 @@ webpackJsonp([0],[
 	     * @returns {Function} Returns the new partially applied function.
 	     * @example
 	     *
-	     * var greet = function(greeting, name) {
+	     * function greet(greeting, name) {
 	     *   return greeting + ' ' + name;
-	     * };
+	     * }
 	     *
 	     * var sayHelloTo = _.partial(greet, 'hello');
 	     * sayHelloTo('fred');
@@ -77178,9 +78505,9 @@ webpackJsonp([0],[
 	     * greetFred('hi');
 	     * // => 'hi fred'
 	     */
-	    var partial = rest(function(func, partials) {
+	    var partial = baseRest(function(func, partials) {
 	      var holders = replaceHolders(partials, getHolder(partial));
-	      return createWrapper(func, PARTIAL_FLAG, undefined, partials, holders);
+	      return createWrap(func, PARTIAL_FLAG, undefined, partials, holders);
 	    });
 
 	    /**
@@ -77202,9 +78529,9 @@ webpackJsonp([0],[
 	     * @returns {Function} Returns the new partially applied function.
 	     * @example
 	     *
-	     * var greet = function(greeting, name) {
+	     * function greet(greeting, name) {
 	     *   return greeting + ' ' + name;
-	     * };
+	     * }
 	     *
 	     * var greetFred = _.partialRight(greet, 'fred');
 	     * greetFred('hi');
@@ -77215,9 +78542,9 @@ webpackJsonp([0],[
 	     * sayHelloTo('fred');
 	     * // => 'hello fred'
 	     */
-	    var partialRight = rest(function(func, partials) {
+	    var partialRight = baseRest(function(func, partials) {
 	      var holders = replaceHolders(partials, getHolder(partialRight));
-	      return createWrapper(func, PARTIAL_RIGHT_FLAG, undefined, partials, holders);
+	      return createWrap(func, PARTIAL_RIGHT_FLAG, undefined, partials, holders);
 	    });
 
 	    /**
@@ -77242,8 +78569,8 @@ webpackJsonp([0],[
 	     * rearged('b', 'c', 'a')
 	     * // => ['a', 'b', 'c']
 	     */
-	    var rearg = rest(function(func, indexes) {
-	      return createWrapper(func, REARG_FLAG, undefined, undefined, undefined, baseFlatten(indexes, 1));
+	    var rearg = baseRest(function(func, indexes) {
+	      return createWrap(func, REARG_FLAG, undefined, undefined, undefined, baseFlatten(indexes, 1));
 	    });
 
 	    /**
@@ -77275,35 +78602,14 @@ webpackJsonp([0],[
 	      if (typeof func != 'function') {
 	        throw new TypeError(FUNC_ERROR_TEXT);
 	      }
-	      start = nativeMax(start === undefined ? (func.length - 1) : toInteger(start), 0);
-	      return function() {
-	        var args = arguments,
-	            index = -1,
-	            length = nativeMax(args.length - start, 0),
-	            array = Array(length);
-
-	        while (++index < length) {
-	          array[index] = args[start + index];
-	        }
-	        switch (start) {
-	          case 0: return func.call(this, array);
-	          case 1: return func.call(this, args[0], array);
-	          case 2: return func.call(this, args[0], args[1], array);
-	        }
-	        var otherArgs = Array(start + 1);
-	        index = -1;
-	        while (++index < start) {
-	          otherArgs[index] = args[index];
-	        }
-	        otherArgs[start] = array;
-	        return apply(func, this, otherArgs);
-	      };
+	      start = start === undefined ? start : toInteger(start);
+	      return baseRest(func, start);
 	    }
 
 	    /**
 	     * Creates a function that invokes `func` with the `this` binding of the
 	     * create function and an array of arguments much like
-	     * [`Function#apply`](http://www.ecma-international.org/ecma-262/6.0/#sec-function.prototype.apply).
+	     * [`Function#apply`](http://www.ecma-international.org/ecma-262/7.0/#sec-function.prototype.apply).
 	     *
 	     * **Note:** This method is based on the
 	     * [spread operator](https://mdn.io/spread_operator).
@@ -77339,7 +78645,7 @@ webpackJsonp([0],[
 	        throw new TypeError(FUNC_ERROR_TEXT);
 	      }
 	      start = start === undefined ? 0 : nativeMax(toInteger(start), 0);
-	      return rest(function(args) {
+	      return baseRest(function(args) {
 	        var array = args[start],
 	            otherArgs = castSlice(args, 0, start);
 
@@ -77354,8 +78660,8 @@ webpackJsonp([0],[
 	     * Creates a throttled function that only invokes `func` at most once per
 	     * every `wait` milliseconds. The throttled function comes with a `cancel`
 	     * method to cancel delayed `func` invocations and a `flush` method to
-	     * immediately invoke them. Provide an options object to indicate whether
-	     * `func` should be invoked on the leading and/or trailing edge of the `wait`
+	     * immediately invoke them. Provide `options` to indicate whether `func`
+	     * should be invoked on the leading and/or trailing edge of the `wait`
 	     * timeout. The `func` is invoked with the last arguments provided to the
 	     * throttled function. Subsequent calls to the throttled function return the
 	     * result of the last `func` invocation.
@@ -77363,6 +78669,9 @@ webpackJsonp([0],[
 	     * **Note:** If `leading` and `trailing` options are `true`, `func` is
 	     * invoked on the trailing edge of the timeout only if the throttled function
 	     * is invoked more than once during the `wait` timeout.
+	     *
+	     * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+	     * until to the next tick, similar to `setTimeout` with a timeout of `0`.
 	     *
 	     * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
 	     * for details over the differences between `_.throttle` and `_.debounce`.
@@ -77429,10 +78738,10 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * Creates a function that provides `value` to the wrapper function as its
-	     * first argument. Any additional arguments provided to the function are
-	     * appended to those provided to the wrapper function. The wrapper is invoked
-	     * with the `this` binding of the created function.
+	     * Creates a function that provides `value` to `wrapper` as its first
+	     * argument. Any additional arguments provided to the function are appended
+	     * to those provided to the `wrapper`. The wrapper is invoked with the `this`
+	     * binding of the created function.
 	     *
 	     * @static
 	     * @memberOf _
@@ -77618,8 +78927,36 @@ webpackJsonp([0],[
 	    }
 
 	    /**
+	     * Checks if `object` conforms to `source` by invoking the predicate
+	     * properties of `source` with the corresponding property values of `object`.
+	     *
+	     * **Note:** This method is equivalent to `_.conforms` when `source` is
+	     * partially applied.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.14.0
+	     * @category Lang
+	     * @param {Object} object The object to inspect.
+	     * @param {Object} source The object of property predicates to conform to.
+	     * @returns {boolean} Returns `true` if `object` conforms, else `false`.
+	     * @example
+	     *
+	     * var object = { 'a': 1, 'b': 2 };
+	     *
+	     * _.conformsTo(object, { 'b': function(n) { return n > 1; } });
+	     * // => true
+	     *
+	     * _.conformsTo(object, { 'b': function(n) { return n > 2; } });
+	     * // => false
+	     */
+	    function conformsTo(object, source) {
+	      return source == null || baseConformsTo(object, source, keys(source));
+	    }
+
+	    /**
 	     * Performs a
-	     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+	     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
 	     * comparison between two values to determine if they are equivalent.
 	     *
 	     * @static
@@ -77631,8 +78968,8 @@ webpackJsonp([0],[
 	     * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
 	     * @example
 	     *
-	     * var object = { 'user': 'fred' };
-	     * var other = { 'user': 'fred' };
+	     * var object = { 'a': 1 };
+	     * var other = { 'a': 1 };
 	     *
 	     * _.eq(object, object);
 	     * // => true
@@ -77713,7 +79050,7 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
+	     * @returns {boolean} Returns `true` if `value` is an `arguments` object,
 	     *  else `false`.
 	     * @example
 	     *
@@ -77724,7 +79061,7 @@ webpackJsonp([0],[
 	     * // => false
 	     */
 	    function isArguments(value) {
-	      // Safari 8.1 incorrectly makes `arguments.callee` enumerable in strict mode.
+	      // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
 	      return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
 	        (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
 	    }
@@ -77735,11 +79072,9 @@ webpackJsonp([0],[
 	     * @static
 	     * @memberOf _
 	     * @since 0.1.0
-	     * @type {Function}
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is an array, else `false`.
 	     * @example
 	     *
 	     * _.isArray([1, 2, 3]);
@@ -77764,8 +79099,7 @@ webpackJsonp([0],[
 	     * @since 4.3.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is an array buffer, else `false`.
 	     * @example
 	     *
 	     * _.isArrayBuffer(new ArrayBuffer(2));
@@ -77774,9 +79108,7 @@ webpackJsonp([0],[
 	     * _.isArrayBuffer(new Array(2));
 	     * // => false
 	     */
-	    function isArrayBuffer(value) {
-	      return isObjectLike(value) && objectToString.call(value) == arrayBufferTag;
-	    }
+	    var isArrayBuffer = nodeIsArrayBuffer ? baseUnary(nodeIsArrayBuffer) : baseIsArrayBuffer;
 
 	    /**
 	     * Checks if `value` is array-like. A value is considered array-like if it's
@@ -77804,7 +79136,7 @@ webpackJsonp([0],[
 	     * // => false
 	     */
 	    function isArrayLike(value) {
-	      return value != null && isLength(getLength(value)) && !isFunction(value);
+	      return value != null && isLength(value.length) && !isFunction(value);
 	    }
 
 	    /**
@@ -77844,8 +79176,7 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a boolean, else `false`.
 	     * @example
 	     *
 	     * _.isBoolean(false);
@@ -77876,9 +79207,7 @@ webpackJsonp([0],[
 	     * _.isBuffer(new Uint8Array(2));
 	     * // => false
 	     */
-	    var isBuffer = !Buffer ? stubFalse : function(value) {
-	      return value instanceof Buffer;
-	    };
+	    var isBuffer = nativeIsBuffer || stubFalse;
 
 	    /**
 	     * Checks if `value` is classified as a `Date` object.
@@ -77888,8 +79217,7 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a date object, else `false`.
 	     * @example
 	     *
 	     * _.isDate(new Date);
@@ -77898,9 +79226,7 @@ webpackJsonp([0],[
 	     * _.isDate('Mon April 23 2012');
 	     * // => false
 	     */
-	    function isDate(value) {
-	      return isObjectLike(value) && objectToString.call(value) == dateTag;
-	    }
+	    var isDate = nodeIsDate ? baseUnary(nodeIsDate) : baseIsDate;
 
 	    /**
 	     * Checks if `value` is likely a DOM element.
@@ -77910,8 +79236,7 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is a DOM element,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a DOM element, else `false`.
 	     * @example
 	     *
 	     * _.isElement(document.body);
@@ -77959,22 +79284,23 @@ webpackJsonp([0],[
 	     */
 	    function isEmpty(value) {
 	      if (isArrayLike(value) &&
-	          (isArray(value) || isString(value) || isFunction(value.splice) ||
-	            isArguments(value) || isBuffer(value))) {
+	          (isArray(value) || typeof value == 'string' ||
+	            typeof value.splice == 'function' || isBuffer(value) || isArguments(value))) {
 	        return !value.length;
 	      }
-	      if (isObjectLike(value)) {
-	        var tag = getTag(value);
-	        if (tag == mapTag || tag == setTag) {
-	          return !value.size;
-	        }
+	      var tag = getTag(value);
+	      if (tag == mapTag || tag == setTag) {
+	        return !value.size;
+	      }
+	      if (nonEnumShadows || isPrototype(value)) {
+	        return !nativeKeys(value).length;
 	      }
 	      for (var key in value) {
 	        if (hasOwnProperty.call(value, key)) {
 	          return false;
 	        }
 	      }
-	      return !(nonEnumShadows && keys(value).length);
+	      return true;
 	    }
 
 	    /**
@@ -77993,12 +79319,11 @@ webpackJsonp([0],[
 	     * @category Lang
 	     * @param {*} value The value to compare.
 	     * @param {*} other The other value to compare.
-	     * @returns {boolean} Returns `true` if the values are equivalent,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
 	     * @example
 	     *
-	     * var object = { 'user': 'fred' };
-	     * var other = { 'user': 'fred' };
+	     * var object = { 'a': 1 };
+	     * var other = { 'a': 1 };
 	     *
 	     * _.isEqual(object, other);
 	     * // => true
@@ -78023,8 +79348,7 @@ webpackJsonp([0],[
 	     * @param {*} value The value to compare.
 	     * @param {*} other The other value to compare.
 	     * @param {Function} [customizer] The function to customize comparisons.
-	     * @returns {boolean} Returns `true` if the values are equivalent,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
 	     * @example
 	     *
 	     * function isGreeting(value) {
@@ -78058,8 +79382,7 @@ webpackJsonp([0],[
 	     * @since 3.0.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is an error object,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is an error object, else `false`.
 	     * @example
 	     *
 	     * _.isError(new Error);
@@ -78087,8 +79410,7 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is a finite number,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a finite number, else `false`.
 	     * @example
 	     *
 	     * _.isFinite(3);
@@ -78115,8 +79437,7 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a function, else `false`.
 	     * @example
 	     *
 	     * _.isFunction(_);
@@ -78127,8 +79448,7 @@ webpackJsonp([0],[
 	     */
 	    function isFunction(value) {
 	      // The use of `Object#toString` avoids issues with the `typeof` operator
-	      // in Safari 8 which returns 'object' for typed array and weak map constructors,
-	      // and PhantomJS 1.9 which returns 'function' for `NodeList` instances.
+	      // in Safari 8-9 which returns 'object' for typed array and other constructors.
 	      var tag = isObject(value) ? objectToString.call(value) : '';
 	      return tag == funcTag || tag == genTag;
 	    }
@@ -78166,16 +79486,15 @@ webpackJsonp([0],[
 	    /**
 	     * Checks if `value` is a valid array-like length.
 	     *
-	     * **Note:** This function is loosely based on
-	     * [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
+	     * **Note:** This method is loosely based on
+	     * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
 	     *
 	     * @static
 	     * @memberOf _
 	     * @since 4.0.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is a valid length,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
 	     * @example
 	     *
 	     * _.isLength(3);
@@ -78197,7 +79516,7 @@ webpackJsonp([0],[
 
 	    /**
 	     * Checks if `value` is the
-	     * [language type](http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types)
+	     * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
 	     * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
 	     *
 	     * @static
@@ -78261,8 +79580,7 @@ webpackJsonp([0],[
 	     * @since 4.3.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a map, else `false`.
 	     * @example
 	     *
 	     * _.isMap(new Map);
@@ -78271,16 +79589,18 @@ webpackJsonp([0],[
 	     * _.isMap(new WeakMap);
 	     * // => false
 	     */
-	    function isMap(value) {
-	      return isObjectLike(value) && getTag(value) == mapTag;
-	    }
+	    var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
 
 	    /**
 	     * Performs a partial deep comparison between `object` and `source` to
-	     * determine if `object` contains equivalent property values. This method is
-	     * equivalent to a `_.matches` function when `source` is partially applied.
+	     * determine if `object` contains equivalent property values.
 	     *
-	     * **Note:** This method supports comparing the same values as `_.isEqual`.
+	     * **Note:** This method is equivalent to `_.matches` when `source` is
+	     * partially applied.
+	     *
+	     * Partial comparisons will match empty array and empty object `source`
+	     * values against any array or object value, respectively. See `_.isEqual`
+	     * for a list of supported value comparisons.
 	     *
 	     * @static
 	     * @memberOf _
@@ -78291,12 +79611,12 @@ webpackJsonp([0],[
 	     * @returns {boolean} Returns `true` if `object` is a match, else `false`.
 	     * @example
 	     *
-	     * var object = { 'user': 'fred', 'age': 40 };
+	     * var object = { 'a': 1, 'b': 2 };
 	     *
-	     * _.isMatch(object, { 'age': 40 });
+	     * _.isMatch(object, { 'b': 2 });
 	     * // => true
 	     *
-	     * _.isMatch(object, { 'age': 36 });
+	     * _.isMatch(object, { 'b': 1 });
 	     * // => false
 	     */
 	    function isMatch(object, source) {
@@ -78378,13 +79698,13 @@ webpackJsonp([0],[
 	    /**
 	     * Checks if `value` is a pristine native function.
 	     *
-	     * **Note:** This method can't reliably detect native functions in the
-	     * presence of the `core-js` package because `core-js` circumvents this kind
-	     * of detection. Despite multiple requests, the `core-js` maintainer has made
-	     * it clear: any attempt to fix the detection will be obstructed. As a result,
-	     * we're left with little choice but to throw an error. Unfortunately, this
-	     * also affects packages, like [babel-polyfill](https://www.npmjs.com/package/babel-polyfill),
-	     * which rely on `core-js`.
+	     * **Note:** This method can't reliably detect native functions in the presence
+	     * of the core-js package because core-js circumvents this kind of detection.
+	     * Despite multiple requests, the core-js maintainer has made it clear: any
+	     * attempt to fix the detection will be obstructed. As a result, we're left
+	     * with little choice but to throw an error. Unfortunately, this also affects
+	     * packages, like [babel-polyfill](https://www.npmjs.com/package/babel-polyfill),
+	     * which rely on core-js.
 	     *
 	     * @static
 	     * @memberOf _
@@ -78403,7 +79723,7 @@ webpackJsonp([0],[
 	     */
 	    function isNative(value) {
 	      if (isMaskable(value)) {
-	        throw new Error('This method is not supported with `core-js`. Try https://github.com/es-shims.');
+	        throw new Error('This method is not supported with core-js. Try https://github.com/es-shims.');
 	      }
 	      return baseIsNative(value);
 	    }
@@ -78464,8 +79784,7 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a number, else `false`.
 	     * @example
 	     *
 	     * _.isNumber(3);
@@ -78494,8 +79813,7 @@ webpackJsonp([0],[
 	     * @since 0.8.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is a plain object,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
 	     * @example
 	     *
 	     * function Foo() {
@@ -78536,8 +79854,7 @@ webpackJsonp([0],[
 	     * @since 0.1.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a regexp, else `false`.
 	     * @example
 	     *
 	     * _.isRegExp(/abc/);
@@ -78546,9 +79863,7 @@ webpackJsonp([0],[
 	     * _.isRegExp('/abc/');
 	     * // => false
 	     */
-	    function isRegExp(value) {
-	      return isObject(value) && objectToString.call(value) == regexpTag;
-	    }
+	    var isRegExp = nodeIsRegExp ? baseUnary(nodeIsRegExp) : baseIsRegExp;
 
 	    /**
 	     * Checks if `value` is a safe integer. An integer is safe if it's an IEEE-754
@@ -78562,8 +79877,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is a safe integer,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a safe integer, else `false`.
 	     * @example
 	     *
 	     * _.isSafeInteger(3);
@@ -78590,8 +79904,7 @@ webpackJsonp([0],[
 	     * @since 4.3.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a set, else `false`.
 	     * @example
 	     *
 	     * _.isSet(new Set);
@@ -78600,9 +79913,7 @@ webpackJsonp([0],[
 	     * _.isSet(new WeakSet);
 	     * // => false
 	     */
-	    function isSet(value) {
-	      return isObjectLike(value) && getTag(value) == setTag;
-	    }
+	    var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
 
 	    /**
 	     * Checks if `value` is classified as a `String` primitive or object.
@@ -78612,8 +79923,7 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a string, else `false`.
 	     * @example
 	     *
 	     * _.isString('abc');
@@ -78635,8 +79945,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
 	     * @example
 	     *
 	     * _.isSymbol(Symbol.iterator);
@@ -78658,8 +79967,7 @@ webpackJsonp([0],[
 	     * @since 3.0.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
 	     * @example
 	     *
 	     * _.isTypedArray(new Uint8Array);
@@ -78668,10 +79976,7 @@ webpackJsonp([0],[
 	     * _.isTypedArray([]);
 	     * // => false
 	     */
-	    function isTypedArray(value) {
-	      return isObjectLike(value) &&
-	        isLength(value.length) && !!typedArrayTags[objectToString.call(value)];
-	    }
+	    var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
 
 	    /**
 	     * Checks if `value` is `undefined`.
@@ -78702,8 +80007,7 @@ webpackJsonp([0],[
 	     * @since 4.3.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a weak map, else `false`.
 	     * @example
 	     *
 	     * _.isWeakMap(new WeakMap);
@@ -78724,8 +80028,7 @@ webpackJsonp([0],[
 	     * @since 4.3.0
 	     * @category Lang
 	     * @param {*} value The value to check.
-	     * @returns {boolean} Returns `true` if `value` is correctly classified,
-	     *  else `false`.
+	     * @returns {boolean} Returns `true` if `value` is a weak set, else `false`.
 	     * @example
 	     *
 	     * _.isWeakSet(new WeakSet);
@@ -78868,7 +80171,7 @@ webpackJsonp([0],[
 	     * Converts `value` to an integer.
 	     *
 	     * **Note:** This method is loosely based on
-	     * [`ToInteger`](http://www.ecma-international.org/ecma-262/6.0/#sec-tointeger).
+	     * [`ToInteger`](http://www.ecma-international.org/ecma-262/7.0/#sec-tointeger).
 	     *
 	     * @static
 	     * @memberOf _
@@ -78902,7 +80205,7 @@ webpackJsonp([0],[
 	     * array-like object.
 	     *
 	     * **Note:** This method is based on
-	     * [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
+	     * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
 	     *
 	     * @static
 	     * @memberOf _
@@ -78959,7 +80262,7 @@ webpackJsonp([0],[
 	        return NAN;
 	      }
 	      if (isObject(value)) {
-	        var other = isFunction(value.valueOf) ? value.valueOf() : value;
+	        var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
 	        value = isObject(other) ? (other + '') : other;
 	      }
 	      if (typeof value != 'string') {
@@ -79074,18 +80377,18 @@ webpackJsonp([0],[
 	     * @example
 	     *
 	     * function Foo() {
-	     *   this.c = 3;
+	     *   this.a = 1;
 	     * }
 	     *
 	     * function Bar() {
-	     *   this.e = 5;
+	     *   this.c = 3;
 	     * }
 	     *
-	     * Foo.prototype.d = 4;
-	     * Bar.prototype.f = 6;
+	     * Foo.prototype.b = 2;
+	     * Bar.prototype.d = 4;
 	     *
-	     * _.assign({ 'a': 1 }, new Foo, new Bar);
-	     * // => { 'a': 1, 'c': 3, 'e': 5 }
+	     * _.assign({ 'a': 0 }, new Foo, new Bar);
+	     * // => { 'a': 1, 'c': 3 }
 	     */
 	    var assign = createAssigner(function(object, source) {
 	      if (nonEnumShadows || isPrototype(source) || isArrayLike(source)) {
@@ -79117,27 +80420,21 @@ webpackJsonp([0],[
 	     * @example
 	     *
 	     * function Foo() {
-	     *   this.b = 2;
+	     *   this.a = 1;
 	     * }
 	     *
 	     * function Bar() {
-	     *   this.d = 4;
+	     *   this.c = 3;
 	     * }
 	     *
-	     * Foo.prototype.c = 3;
-	     * Bar.prototype.e = 5;
+	     * Foo.prototype.b = 2;
+	     * Bar.prototype.d = 4;
 	     *
-	     * _.assignIn({ 'a': 1 }, new Foo, new Bar);
-	     * // => { 'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5 }
+	     * _.assignIn({ 'a': 0 }, new Foo, new Bar);
+	     * // => { 'a': 1, 'b': 2, 'c': 3, 'd': 4 }
 	     */
 	    var assignIn = createAssigner(function(object, source) {
-	      if (nonEnumShadows || isPrototype(source) || isArrayLike(source)) {
-	        copyObject(source, keysIn(source), object);
-	        return;
-	      }
-	      for (var key in source) {
-	        assignValue(object, key, source[key]);
-	      }
+	      copyObject(source, keysIn(source), object);
 	    });
 
 	    /**
@@ -79222,7 +80519,7 @@ webpackJsonp([0],[
 	     * _.at(object, ['a[0].b.c', 'a[1]']);
 	     * // => [3, 4]
 	     */
-	    var at = rest(function(object, paths) {
+	    var at = baseRest(function(object, paths) {
 	      return baseAt(object, baseFlatten(paths, 1));
 	    });
 
@@ -79283,10 +80580,10 @@ webpackJsonp([0],[
 	     * @see _.defaultsDeep
 	     * @example
 	     *
-	     * _.defaults({ 'user': 'barney' }, { 'age': 36 }, { 'user': 'fred' });
-	     * // => { 'user': 'barney', 'age': 36 }
+	     * _.defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
+	     * // => { 'a': 1, 'b': 2 }
 	     */
-	    var defaults = rest(function(args) {
+	    var defaults = baseRest(function(args) {
 	      args.push(undefined, assignInDefaults);
 	      return apply(assignInWith, undefined, args);
 	    });
@@ -79307,11 +80604,10 @@ webpackJsonp([0],[
 	     * @see _.defaults
 	     * @example
 	     *
-	     * _.defaultsDeep({ 'user': { 'name': 'barney' } }, { 'user': { 'name': 'fred', 'age': 36 } });
-	     * // => { 'user': { 'name': 'barney', 'age': 36 } }
-	     *
+	     * _.defaultsDeep({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } });
+	     * // => { 'a': { 'b': 2, 'c': 3 } }
 	     */
-	    var defaultsDeep = rest(function(args) {
+	    var defaultsDeep = baseRest(function(args) {
 	      args.push(undefined, mergeDefaults);
 	      return apply(mergeWith, undefined, args);
 	    });
@@ -79324,9 +80620,8 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 1.1.0
 	     * @category Object
-	     * @param {Object} object The object to search.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
-	     *  The function invoked per iteration.
+	     * @param {Object} object The object to inspect.
+	     * @param {Function} [predicate=_.identity] The function invoked per iteration.
 	     * @returns {string|undefined} Returns the key of the matched element,
 	     *  else `undefined`.
 	     * @example
@@ -79364,9 +80659,8 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 2.0.0
 	     * @category Object
-	     * @param {Object} object The object to search.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
-	     *  The function invoked per iteration.
+	     * @param {Object} object The object to inspect.
+	     * @param {Function} [predicate=_.identity] The function invoked per iteration.
 	     * @returns {string|undefined} Returns the key of the matched element,
 	     *  else `undefined`.
 	     * @example
@@ -79580,7 +80874,7 @@ webpackJsonp([0],[
 
 	    /**
 	     * Gets the value at `path` of `object`. If the resolved value is
-	     * `undefined`, the `defaultValue` is used in its place.
+	     * `undefined`, the `defaultValue` is returned in its place.
 	     *
 	     * @static
 	     * @memberOf _
@@ -79703,8 +80997,7 @@ webpackJsonp([0],[
 	     * @since 4.1.0
 	     * @category Object
 	     * @param {Object} object The object to invert.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The iteratee invoked per element.
+	     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
 	     * @returns {Object} Returns the new inverted object.
 	     * @example
 	     *
@@ -79744,13 +81037,13 @@ webpackJsonp([0],[
 	     * _.invoke(object, 'a[0].b.c.slice', 1, 3);
 	     * // => [2, 3]
 	     */
-	    var invoke = rest(baseInvoke);
+	    var invoke = baseRest(baseInvoke);
 
 	    /**
 	     * Creates an array of the own enumerable property names of `object`.
 	     *
 	     * **Note:** Non-object values are coerced to objects. See the
-	     * [ES spec](http://ecma-international.org/ecma-262/6.0/#sec-object.keys)
+	     * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
 	     * for more details.
 	     *
 	     * @static
@@ -79775,23 +81068,7 @@ webpackJsonp([0],[
 	     * // => ['0', '1']
 	     */
 	    function keys(object) {
-	      var isProto = isPrototype(object);
-	      if (!(isProto || isArrayLike(object))) {
-	        return baseKeys(object);
-	      }
-	      var indexes = indexKeys(object),
-	          skipIndexes = !!indexes,
-	          result = indexes || [],
-	          length = result.length;
-
-	      for (var key in object) {
-	        if (baseHas(object, key) &&
-	            !(skipIndexes && (key == 'length' || isIndex(key, length))) &&
-	            !(isProto && key == 'constructor')) {
-	          result.push(key);
-	        }
-	      }
-	      return result;
+	      return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
 	    }
 
 	    /**
@@ -79818,23 +81095,7 @@ webpackJsonp([0],[
 	     * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
 	     */
 	    function keysIn(object) {
-	      var index = -1,
-	          isProto = isPrototype(object),
-	          props = baseKeysIn(object),
-	          propsLength = props.length,
-	          indexes = indexKeys(object),
-	          skipIndexes = !!indexes,
-	          result = indexes || [],
-	          length = result.length;
-
-	      while (++index < propsLength) {
-	        var key = props[index];
-	        if (!(skipIndexes && (key == 'length' || isIndex(key, length))) &&
-	            !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-	          result.push(key);
-	        }
-	      }
-	      return result;
+	      return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
 	    }
 
 	    /**
@@ -79848,8 +81109,7 @@ webpackJsonp([0],[
 	     * @since 3.8.0
 	     * @category Object
 	     * @param {Object} object The object to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The function invoked per iteration.
+	     * @param {Function} [iteratee=_.identity] The function invoked per iteration.
 	     * @returns {Object} Returns the new mapped object.
 	     * @see _.mapValues
 	     * @example
@@ -79880,8 +81140,7 @@ webpackJsonp([0],[
 	     * @since 2.4.0
 	     * @category Object
 	     * @param {Object} object The object to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The function invoked per iteration.
+	     * @param {Function} [iteratee=_.identity] The function invoked per iteration.
 	     * @returns {Object} Returns the new mapped object.
 	     * @see _.mapKeys
 	     * @example
@@ -79928,16 +81187,16 @@ webpackJsonp([0],[
 	     * @returns {Object} Returns `object`.
 	     * @example
 	     *
-	     * var users = {
-	     *   'data': [{ 'user': 'barney' }, { 'user': 'fred' }]
+	     * var object = {
+	     *   'a': [{ 'b': 2 }, { 'd': 4 }]
 	     * };
 	     *
-	     * var ages = {
-	     *   'data': [{ 'age': 36 }, { 'age': 40 }]
+	     * var other = {
+	     *   'a': [{ 'c': 3 }, { 'e': 5 }]
 	     * };
 	     *
-	     * _.merge(users, ages);
-	     * // => { 'data': [{ 'user': 'barney', 'age': 36 }, { 'user': 'fred', 'age': 40 }] }
+	     * _.merge(object, other);
+	     * // => { 'a': [{ 'b': 2, 'c': 3 }, { 'd': 4, 'e': 5 }] }
 	     */
 	    var merge = createAssigner(function(object, source, srcIndex) {
 	      baseMerge(object, source, srcIndex);
@@ -79968,18 +81227,11 @@ webpackJsonp([0],[
 	     *   }
 	     * }
 	     *
-	     * var object = {
-	     *   'fruits': ['apple'],
-	     *   'vegetables': ['beet']
-	     * };
-	     *
-	     * var other = {
-	     *   'fruits': ['banana'],
-	     *   'vegetables': ['carrot']
-	     * };
+	     * var object = { 'a': [1], 'b': [2] };
+	     * var other = { 'a': [3], 'b': [4] };
 	     *
 	     * _.mergeWith(object, other, customizer);
-	     * // => { 'fruits': ['apple', 'banana'], 'vegetables': ['beet', 'carrot'] }
+	     * // => { 'a': [1, 3], 'b': [2, 4] }
 	     */
 	    var mergeWith = createAssigner(function(object, source, srcIndex, customizer) {
 	      baseMerge(object, source, srcIndex, customizer);
@@ -80004,7 +81256,7 @@ webpackJsonp([0],[
 	     * _.omit(object, ['a', 'c']);
 	     * // => { 'b': '2' }
 	     */
-	    var omit = rest(function(object, props) {
+	    var omit = baseRest(function(object, props) {
 	      if (object == null) {
 	        return {};
 	      }
@@ -80023,8 +81275,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Object
 	     * @param {Object} object The source object.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
-	     *  The function invoked per property.
+	     * @param {Function} [predicate=_.identity] The function invoked per property.
 	     * @returns {Object} Returns the new object.
 	     * @example
 	     *
@@ -80034,10 +81285,7 @@ webpackJsonp([0],[
 	     * // => { 'b': '2' }
 	     */
 	    function omitBy(object, predicate) {
-	      predicate = getIteratee(predicate);
-	      return basePickBy(object, function(value, key) {
-	        return !predicate(value, key);
-	      });
+	      return pickBy(object, negate(getIteratee(predicate)));
 	    }
 
 	    /**
@@ -80057,7 +81305,7 @@ webpackJsonp([0],[
 	     * _.pick(object, ['a', 'c']);
 	     * // => { 'a': 1, 'c': 3 }
 	     */
-	    var pick = rest(function(object, props) {
+	    var pick = baseRest(function(object, props) {
 	      return object == null ? {} : basePick(object, arrayMap(baseFlatten(props, 1), toKey));
 	    });
 
@@ -80070,8 +81318,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Object
 	     * @param {Object} object The source object.
-	     * @param {Array|Function|Object|string} [predicate=_.identity]
-	     *  The function invoked per property.
+	     * @param {Function} [predicate=_.identity] The function invoked per property.
 	     * @returns {Object} Returns the new object.
 	     * @example
 	     *
@@ -80081,7 +81328,7 @@ webpackJsonp([0],[
 	     * // => { 'a': 1, 'c': 3 }
 	     */
 	    function pickBy(object, predicate) {
-	      return object == null ? {} : basePickBy(object, getIteratee(predicate));
+	      return object == null ? {} : basePickBy(object, getAllKeysIn(object), getIteratee(predicate));
 	    }
 
 	    /**
@@ -80525,12 +81772,12 @@ webpackJsonp([0],[
 	     * // => true
 	     */
 	    function inRange(number, start, end) {
-	      start = toNumber(start) || 0;
+	      start = toFinite(start);
 	      if (end === undefined) {
 	        end = start;
 	        start = 0;
 	      } else {
-	        end = toNumber(end) || 0;
+	        end = toFinite(end);
 	      }
 	      number = toNumber(number);
 	      return baseInRange(number, start, end);
@@ -80586,12 +81833,12 @@ webpackJsonp([0],[
 	        upper = 1;
 	      }
 	      else {
-	        lower = toNumber(lower) || 0;
+	        lower = toFinite(lower);
 	        if (upper === undefined) {
 	          upper = lower;
 	          lower = 0;
 	        } else {
-	          upper = toNumber(upper) || 0;
+	          upper = toFinite(upper);
 	        }
 	      }
 	      if (lower > upper) {
@@ -80654,8 +81901,9 @@ webpackJsonp([0],[
 
 	    /**
 	     * Deburrs `string` by converting
-	     * [latin-1 supplementary letters](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)#Character_table)
-	     * to basic latin letters and removing
+	     * [Latin-1 Supplement](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)#Character_table)
+	     * and [Latin Extended-A](https://en.wikipedia.org/wiki/Latin_Extended-A)
+	     * letters to basic Latin letters and removing
 	     * [combining diacritical marks](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks).
 	     *
 	     * @static
@@ -80671,7 +81919,7 @@ webpackJsonp([0],[
 	     */
 	    function deburr(string) {
 	      string = toString(string);
-	      return string && string.replace(reLatin1, deburrLetter).replace(reComboMark, '');
+	      return string && string.replace(reLatin, deburrLetter).replace(reComboMark, '');
 	    }
 
 	    /**
@@ -80681,7 +81929,7 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 3.0.0
 	     * @category String
-	     * @param {string} [string=''] The string to search.
+	     * @param {string} [string=''] The string to inspect.
 	     * @param {string} [target] The string to search for.
 	     * @param {number} [position=string.length] The position to search up to.
 	     * @returns {boolean} Returns `true` if `string` ends with `target`,
@@ -80706,8 +81954,9 @@ webpackJsonp([0],[
 	        ? length
 	        : baseClamp(toInteger(position), 0, length);
 
+	      var end = position;
 	      position -= target.length;
-	      return position >= 0 && string.indexOf(target, position) == position;
+	      return position >= 0 && string.slice(position, end) == target;
 	    }
 
 	    /**
@@ -81036,7 +82285,7 @@ webpackJsonp([0],[
 	      var args = arguments,
 	          string = toString(args[0]);
 
-	      return args.length < 3 ? string : nativeReplace.call(string, args[1], args[2]);
+	      return args.length < 3 ? string : string.replace(args[1], args[2]);
 	    }
 
 	    /**
@@ -81097,11 +82346,11 @@ webpackJsonp([0],[
 	            (separator != null && !isRegExp(separator))
 	          )) {
 	        separator = baseToString(separator);
-	        if (separator == '' && reHasComplexSymbol.test(string)) {
+	        if (!separator && hasUnicode(string)) {
 	          return castSlice(stringToArray(string), 0, limit);
 	        }
 	      }
-	      return nativeSplit.call(string, separator, limit);
+	      return string.split(separator, limit);
 	    }
 
 	    /**
@@ -81136,7 +82385,7 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 3.0.0
 	     * @category String
-	     * @param {string} [string=''] The string to search.
+	     * @param {string} [string=''] The string to inspect.
 	     * @param {string} [target] The string to search for.
 	     * @param {number} [position=0] The position to search from.
 	     * @returns {boolean} Returns `true` if `string` starts with `target`,
@@ -81155,7 +82404,8 @@ webpackJsonp([0],[
 	    function startsWith(string, target, position) {
 	      string = toString(string);
 	      position = baseClamp(toInteger(position), 0, string.length);
-	      return string.lastIndexOf(baseToString(target), position) == position;
+	      target = baseToString(target);
+	      return string.slice(position, position + target.length) == target;
 	    }
 
 	    /**
@@ -81572,7 +82822,7 @@ webpackJsonp([0],[
 	      string = toString(string);
 
 	      var strLength = string.length;
-	      if (reHasComplexSymbol.test(string)) {
+	      if (hasUnicode(string)) {
 	        var strSymbols = stringToArray(string);
 	        strLength = strSymbols.length;
 	      }
@@ -81709,7 +82959,7 @@ webpackJsonp([0],[
 	      pattern = guard ? undefined : pattern;
 
 	      if (pattern === undefined) {
-	        pattern = reHasComplexWord.test(string) ? reComplexWord : reBasicWord;
+	        return hasUnicodeWord(string) ? unicodeWords(string) : asciiWords(string);
 	      }
 	      return string.match(pattern) || [];
 	    }
@@ -81738,7 +82988,7 @@ webpackJsonp([0],[
 	     *   elements = [];
 	     * }
 	     */
-	    var attempt = rest(function(func, args) {
+	    var attempt = baseRest(function(func, args) {
 	      try {
 	        return apply(func, undefined, args);
 	      } catch (e) {
@@ -81763,16 +83013,16 @@ webpackJsonp([0],[
 	     *
 	     * var view = {
 	     *   'label': 'docs',
-	     *   'onClick': function() {
+	     *   'click': function() {
 	     *     console.log('clicked ' + this.label);
 	     *   }
 	     * };
 	     *
-	     * _.bindAll(view, ['onClick']);
-	     * jQuery(element).on('click', view.onClick);
+	     * _.bindAll(view, ['click']);
+	     * jQuery(element).on('click', view.click);
 	     * // => Logs 'clicked docs' when clicked.
 	     */
-	    var bindAll = rest(function(object, methodNames) {
+	    var bindAll = baseRest(function(object, methodNames) {
 	      arrayEach(baseFlatten(methodNames, 1), function(key) {
 	        key = toKey(key);
 	        object[key] = bind(object[key], object);
@@ -81797,7 +83047,7 @@ webpackJsonp([0],[
 	     * var func = _.cond([
 	     *   [_.matches({ 'a': 1 }),           _.constant('matches A')],
 	     *   [_.conforms({ 'b': _.isNumber }), _.constant('matches B')],
-	     *   [_.constant(true),                _.constant('no match')]
+	     *   [_.stubTrue,                      _.constant('no match')]
 	     * ]);
 	     *
 	     * func({ 'a': 1, 'b': 2 });
@@ -81820,7 +83070,7 @@ webpackJsonp([0],[
 	        return [toIteratee(pair[0]), pair[1]];
 	      });
 
-	      return rest(function(args) {
+	      return baseRest(function(args) {
 	        var index = -1;
 	        while (++index < length) {
 	          var pair = pairs[index];
@@ -81836,6 +83086,9 @@ webpackJsonp([0],[
 	     * the corresponding property values of a given object, returning `true` if
 	     * all predicates return truthy, else `false`.
 	     *
+	     * **Note:** The created function is equivalent to `_.conformsTo` with
+	     * `source` partially applied.
+	     *
 	     * @static
 	     * @memberOf _
 	     * @since 4.0.0
@@ -81844,13 +83097,13 @@ webpackJsonp([0],[
 	     * @returns {Function} Returns the new spec function.
 	     * @example
 	     *
-	     * var users = [
-	     *   { 'user': 'barney', 'age': 36 },
-	     *   { 'user': 'fred',   'age': 40 }
+	     * var objects = [
+	     *   { 'a': 2, 'b': 1 },
+	     *   { 'a': 1, 'b': 2 }
 	     * ];
 	     *
-	     * _.filter(users, _.conforms({ 'age': function(n) { return n > 38; } }));
-	     * // => [{ 'user': 'fred', 'age': 40 }]
+	     * _.filter(objects, _.conforms({ 'b': function(n) { return n > 1; } }));
+	     * // => [{ 'a': 1, 'b': 2 }]
 	     */
 	    function conforms(source) {
 	      return baseConforms(baseClone(source, true));
@@ -81882,6 +83135,30 @@ webpackJsonp([0],[
 	    }
 
 	    /**
+	     * Checks `value` to determine whether a default value should be returned in
+	     * its place. The `defaultValue` is returned if `value` is `NaN`, `null`,
+	     * or `undefined`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @since 4.14.0
+	     * @category Util
+	     * @param {*} value The value to check.
+	     * @param {*} defaultValue The default value.
+	     * @returns {*} Returns the resolved value.
+	     * @example
+	     *
+	     * _.defaultTo(1, 10);
+	     * // => 1
+	     *
+	     * _.defaultTo(undefined, 10);
+	     * // => 10
+	     */
+	    function defaultTo(value, defaultValue) {
+	      return (value == null || value !== value) ? defaultValue : value;
+	    }
+
+	    /**
 	     * Creates a function that returns the result of invoking the given functions
 	     * with the `this` binding of the created function, where each successive
 	     * invocation is supplied the return value of the previous.
@@ -81890,7 +83167,7 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 3.0.0
 	     * @category Util
-	     * @param {...(Function|Function[])} [funcs] Functions to invoke.
+	     * @param {...(Function|Function[])} [funcs] The functions to invoke.
 	     * @returns {Function} Returns the new composite function.
 	     * @see _.flowRight
 	     * @example
@@ -81913,7 +83190,7 @@ webpackJsonp([0],[
 	     * @since 3.0.0
 	     * @memberOf _
 	     * @category Util
-	     * @param {...(Function|Function[])} [funcs] Functions to invoke.
+	     * @param {...(Function|Function[])} [funcs] The functions to invoke.
 	     * @returns {Function} Returns the new composite function.
 	     * @see _.flow
 	     * @example
@@ -81929,7 +83206,7 @@ webpackJsonp([0],[
 	    var flowRight = createFlow(true);
 
 	    /**
-	     * This method returns the first argument given to it.
+	     * This method returns the first argument it receives.
 	     *
 	     * @static
 	     * @since 0.1.0
@@ -81939,7 +83216,7 @@ webpackJsonp([0],[
 	     * @returns {*} Returns `value`.
 	     * @example
 	     *
-	     * var object = { 'user': 'fred' };
+	     * var object = { 'a': 1 };
 	     *
 	     * console.log(_.identity(object) === object);
 	     * // => true
@@ -81997,10 +83274,14 @@ webpackJsonp([0],[
 	    /**
 	     * Creates a function that performs a partial deep comparison between a given
 	     * object and `source`, returning `true` if the given object has equivalent
-	     * property values, else `false`. The created function is equivalent to
-	     * `_.isMatch` with a `source` partially applied.
+	     * property values, else `false`.
 	     *
-	     * **Note:** This method supports comparing the same values as `_.isEqual`.
+	     * **Note:** The created function is equivalent to `_.isMatch` with `source`
+	     * partially applied.
+	     *
+	     * Partial comparisons will match empty array and empty object `source`
+	     * values against any array or object value, respectively. See `_.isEqual`
+	     * for a list of supported value comparisons.
 	     *
 	     * @static
 	     * @memberOf _
@@ -82010,13 +83291,13 @@ webpackJsonp([0],[
 	     * @returns {Function} Returns the new spec function.
 	     * @example
 	     *
-	     * var users = [
-	     *   { 'user': 'barney', 'age': 36, 'active': true },
-	     *   { 'user': 'fred',   'age': 40, 'active': false }
+	     * var objects = [
+	     *   { 'a': 1, 'b': 2, 'c': 3 },
+	     *   { 'a': 4, 'b': 5, 'c': 6 }
 	     * ];
 	     *
-	     * _.filter(users, _.matches({ 'age': 40, 'active': false }));
-	     * // => [{ 'user': 'fred', 'age': 40, 'active': false }]
+	     * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
+	     * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
 	     */
 	    function matches(source) {
 	      return baseMatches(baseClone(source, true));
@@ -82027,7 +83308,9 @@ webpackJsonp([0],[
 	     * value at `path` of a given object to `srcValue`, returning `true` if the
 	     * object value is equivalent, else `false`.
 	     *
-	     * **Note:** This method supports comparing the same values as `_.isEqual`.
+	     * **Note:** Partial comparisons will match empty array and empty object
+	     * `srcValue` values against any array or object value, respectively. See
+	     * `_.isEqual` for a list of supported value comparisons.
 	     *
 	     * @static
 	     * @memberOf _
@@ -82038,13 +83321,13 @@ webpackJsonp([0],[
 	     * @returns {Function} Returns the new spec function.
 	     * @example
 	     *
-	     * var users = [
-	     *   { 'user': 'barney' },
-	     *   { 'user': 'fred' }
+	     * var objects = [
+	     *   { 'a': 1, 'b': 2, 'c': 3 },
+	     *   { 'a': 4, 'b': 5, 'c': 6 }
 	     * ];
 	     *
-	     * _.find(users, _.matchesProperty('user', 'fred'));
-	     * // => { 'user': 'fred' }
+	     * _.find(objects, _.matchesProperty('a', 4));
+	     * // => { 'a': 4, 'b': 5, 'c': 6 }
 	     */
 	    function matchesProperty(path, srcValue) {
 	      return baseMatchesProperty(path, baseClone(srcValue, true));
@@ -82074,7 +83357,7 @@ webpackJsonp([0],[
 	     * _.map(objects, _.method(['a', 'b']));
 	     * // => [2, 1]
 	     */
-	    var method = rest(function(path, args) {
+	    var method = baseRest(function(path, args) {
 	      return function(object) {
 	        return baseInvoke(object, path, args);
 	      };
@@ -82103,7 +83386,7 @@ webpackJsonp([0],[
 	     * _.map([['a', '2'], ['c', '0']], _.methodOf(object));
 	     * // => [2, 0]
 	     */
-	    var methodOf = rest(function(object, args) {
+	    var methodOf = baseRest(function(object, args) {
 	      return function(path) {
 	        return baseInvoke(object, path, args);
 	      };
@@ -82202,7 +83485,7 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * A method that returns `undefined`.
+	     * This method returns `undefined`.
 	     *
 	     * @static
 	     * @memberOf _
@@ -82239,7 +83522,7 @@ webpackJsonp([0],[
 	     */
 	    function nthArg(n) {
 	      n = toInteger(n);
-	      return rest(function(args) {
+	      return baseRest(function(args) {
 	        return baseNth(args, n);
 	      });
 	    }
@@ -82252,8 +83535,8 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 4.0.0
 	     * @category Util
-	     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-	     *  [iteratees=[_.identity]] The iteratees to invoke.
+	     * @param {...(Function|Function[])} [iteratees=[_.identity]]
+	     *  The iteratees to invoke.
 	     * @returns {Function} Returns the new function.
 	     * @example
 	     *
@@ -82272,8 +83555,8 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 4.0.0
 	     * @category Util
-	     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-	     *  [predicates=[_.identity]] The predicates to check.
+	     * @param {...(Function|Function[])} [predicates=[_.identity]]
+	     *  The predicates to check.
 	     * @returns {Function} Returns the new function.
 	     * @example
 	     *
@@ -82298,8 +83581,8 @@ webpackJsonp([0],[
 	     * @memberOf _
 	     * @since 4.0.0
 	     * @category Util
-	     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-	     *  [predicates=[_.identity]] The predicates to check.
+	     * @param {...(Function|Function[])} [predicates=[_.identity]]
+	     *  The predicates to check.
 	     * @returns {Function} Returns the new function.
 	     * @example
 	     *
@@ -82451,7 +83734,7 @@ webpackJsonp([0],[
 	    var rangeRight = createRange(true);
 
 	    /**
-	     * A method that returns a new empty array.
+	     * This method returns a new empty array.
 	     *
 	     * @static
 	     * @memberOf _
@@ -82473,7 +83756,7 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * A method that returns `false`.
+	     * This method returns `false`.
 	     *
 	     * @static
 	     * @memberOf _
@@ -82490,7 +83773,7 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * A method that returns a new empty object.
+	     * This method returns a new empty object.
 	     *
 	     * @static
 	     * @memberOf _
@@ -82512,7 +83795,7 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * A method that returns an empty string.
+	     * This method returns an empty string.
 	     *
 	     * @static
 	     * @memberOf _
@@ -82529,7 +83812,7 @@ webpackJsonp([0],[
 	    }
 
 	    /**
-	     * A method that returns `true`.
+	     * This method returns `true`.
 	     *
 	     * @static
 	     * @memberOf _
@@ -82647,7 +83930,7 @@ webpackJsonp([0],[
 	     */
 	    var add = createMathOperation(function(augend, addend) {
 	      return augend + addend;
-	    });
+	    }, 0);
 
 	    /**
 	     * Computes `number` rounded up to `precision`.
@@ -82689,7 +83972,7 @@ webpackJsonp([0],[
 	     */
 	    var divide = createMathOperation(function(dividend, divisor) {
 	      return dividend / divisor;
-	    });
+	    }, 1);
 
 	    /**
 	     * Computes `number` rounded down to `precision`.
@@ -82748,8 +84031,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Math
 	     * @param {Array} array The array to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The iteratee invoked per element.
+	     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
 	     * @returns {*} Returns the maximum value.
 	     * @example
 	     *
@@ -82764,7 +84046,7 @@ webpackJsonp([0],[
 	     */
 	    function maxBy(array, iteratee) {
 	      return (array && array.length)
-	        ? baseExtremum(array, getIteratee(iteratee), baseGt)
+	        ? baseExtremum(array, getIteratee(iteratee, 2), baseGt)
 	        : undefined;
 	    }
 
@@ -82796,8 +84078,7 @@ webpackJsonp([0],[
 	     * @since 4.7.0
 	     * @category Math
 	     * @param {Array} array The array to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The iteratee invoked per element.
+	     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
 	     * @returns {number} Returns the mean.
 	     * @example
 	     *
@@ -82811,7 +84092,7 @@ webpackJsonp([0],[
 	     * // => 5
 	     */
 	    function meanBy(array, iteratee) {
-	      return baseMean(array, getIteratee(iteratee));
+	      return baseMean(array, getIteratee(iteratee, 2));
 	    }
 
 	    /**
@@ -82848,8 +84129,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Math
 	     * @param {Array} array The array to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The iteratee invoked per element.
+	     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
 	     * @returns {*} Returns the minimum value.
 	     * @example
 	     *
@@ -82864,7 +84144,7 @@ webpackJsonp([0],[
 	     */
 	    function minBy(array, iteratee) {
 	      return (array && array.length)
-	        ? baseExtremum(array, getIteratee(iteratee), baseLt)
+	        ? baseExtremum(array, getIteratee(iteratee, 2), baseLt)
 	        : undefined;
 	    }
 
@@ -82885,7 +84165,7 @@ webpackJsonp([0],[
 	     */
 	    var multiply = createMathOperation(function(multiplier, multiplicand) {
 	      return multiplier * multiplicand;
-	    });
+	    }, 1);
 
 	    /**
 	     * Computes `number` rounded to `precision`.
@@ -82927,7 +84207,7 @@ webpackJsonp([0],[
 	     */
 	    var subtract = createMathOperation(function(minuend, subtrahend) {
 	      return minuend - subtrahend;
-	    });
+	    }, 0);
 
 	    /**
 	     * Computes the sum of the values in `array`.
@@ -82959,8 +84239,7 @@ webpackJsonp([0],[
 	     * @since 4.0.0
 	     * @category Math
 	     * @param {Array} array The array to iterate over.
-	     * @param {Array|Function|Object|string} [iteratee=_.identity]
-	     *  The iteratee invoked per element.
+	     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
 	     * @returns {number} Returns the sum.
 	     * @example
 	     *
@@ -82975,7 +84254,7 @@ webpackJsonp([0],[
 	     */
 	    function sumBy(array, iteratee) {
 	      return (array && array.length)
-	        ? baseSum(array, getIteratee(iteratee))
+	        ? baseSum(array, getIteratee(iteratee, 2))
 	        : 0;
 	    }
 
@@ -83154,7 +84433,9 @@ webpackJsonp([0],[
 	    lodash.cloneDeep = cloneDeep;
 	    lodash.cloneDeepWith = cloneDeepWith;
 	    lodash.cloneWith = cloneWith;
+	    lodash.conformsTo = conformsTo;
 	    lodash.deburr = deburr;
+	    lodash.defaultTo = defaultTo;
 	    lodash.divide = divide;
 	    lodash.endsWith = endsWith;
 	    lodash.eq = eq;
@@ -83395,7 +84676,7 @@ webpackJsonp([0],[
 	      return this.reverse().find(predicate);
 	    };
 
-	    LazyWrapper.prototype.invokeMap = rest(function(path, args) {
+	    LazyWrapper.prototype.invokeMap = baseRest(function(path, args) {
 	      if (typeof path == 'function') {
 	        return new LazyWrapper(this);
 	      }
@@ -83405,10 +84686,7 @@ webpackJsonp([0],[
 	    });
 
 	    LazyWrapper.prototype.reject = function(predicate) {
-	      predicate = getIteratee(predicate, 3);
-	      return this.filter(function(value) {
-	        return !predicate(value);
-	      });
+	      return this.filter(negate(getIteratee(predicate)));
 	    };
 
 	    LazyWrapper.prototype.slice = function(start, end) {
@@ -83512,7 +84790,7 @@ webpackJsonp([0],[
 	      }
 	    });
 
-	    realNames[createHybridWrapper(undefined, BIND_KEY_FLAG).name] = [{
+	    realNames[createHybrid(undefined, BIND_KEY_FLAG).name] = [{
 	      'name': 'wrapper',
 	      'func': undefined
 	    }];
@@ -83531,6 +84809,9 @@ webpackJsonp([0],[
 	    lodash.prototype.reverse = wrapperReverse;
 	    lodash.prototype.toJSON = lodash.prototype.valueOf = lodash.prototype.value = wrapperValue;
 
+	    // Add lazy aliases.
+	    lodash.prototype.first = lodash.prototype.head;
+
 	    if (iteratorSymbol) {
 	      lodash.prototype[iteratorSymbol] = wrapperToIterator;
 	    }
@@ -83542,22 +84823,21 @@ webpackJsonp([0],[
 	  // Export lodash.
 	  var _ = runInContext();
 
-	  // Expose Lodash on the free variable `window` or `self` when available so it's
-	  // globally accessible, even when bundled with Browserify, Webpack, etc. This
-	  // also prevents errors in cases where Lodash is loaded by a script tag in the
-	  // presence of an AMD loader. See http://requirejs.org/docs/errors.html#mismatch
-	  // for more details. Use `_.noConflict` to remove Lodash from the global object.
-	  (freeSelf || {})._ = _;
-
-	  // Some AMD build optimizers like r.js check for condition patterns like the following:
+	  // Some AMD build optimizers, like r.js, check for condition patterns like:
 	  if (true) {
+	    // Expose Lodash on the global object to prevent errors when Lodash is
+	    // loaded by a script tag in the presence of an AMD loader.
+	    // See http://requirejs.org/docs/errors.html#mismatch for more details.
+	    // Use `_.noConflict` to remove Lodash from the global object.
+	    root._ = _;
+
 	    // Define as an anonymous module so, through path mapping, it can be
 	    // referenced as the "underscore" module.
 	    !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
 	      return _;
 	    }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  }
-	  // Check for `exports` after `define` in case a build optimizer adds an `exports` object.
+	  // Check for `exports` after `define` in case a build optimizer adds it.
 	  else if (freeModule) {
 	    // Export for Node.js.
 	    (freeModule.exports = _)._ = _;
@@ -83570,33 +84850,33 @@ webpackJsonp([0],[
 	  }
 	}.call(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(40)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(40)(module)))
 
 /***/ },
-/* 648 */
+/* 650 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(649));
-	__export(__webpack_require__(650));
-	__export(__webpack_require__(658));
-	__export(__webpack_require__(670));
-	__export(__webpack_require__(659));
+	__export(__webpack_require__(651));
+	__export(__webpack_require__(652));
+	__export(__webpack_require__(660));
 	__export(__webpack_require__(672));
-	__export(__webpack_require__(673));
-	__export(__webpack_require__(671));
-	__export(__webpack_require__(676));
+	__export(__webpack_require__(661));
 	__export(__webpack_require__(674));
-	__export(__webpack_require__(723));
-	__export(__webpack_require__(726));
-	__export(__webpack_require__(709));
+	__export(__webpack_require__(675));
+	__export(__webpack_require__(673));
+	__export(__webpack_require__(678));
+	__export(__webpack_require__(676));
+	__export(__webpack_require__(727));
+	__export(__webpack_require__(730));
+	__export(__webpack_require__(713));
 
 
 /***/ },
-/* 649 */
+/* 651 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -83617,7 +84897,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 650 */
+/* 652 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -83630,10 +84910,10 @@ webpackJsonp([0],[
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var _ = __webpack_require__(647);
+	var _ = __webpack_require__(649);
 	var core_1 = __webpack_require__(5);
-	var rxjs_1 = __webpack_require__(436);
-	var constructor_utils_1 = __webpack_require__(651);
+	var rxjs_1 = __webpack_require__(446);
+	var constructor_utils_1 = __webpack_require__(653);
 	var BaseService = (function () {
 	    function BaseService(entityType, ClassT) {
 	        var _this = this;
@@ -83748,16 +85028,16 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 651 */
+/* 653 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	var ConstructorUtils_1 = __webpack_require__(652);
-	__export(__webpack_require__(652));
+	var ConstructorUtils_1 = __webpack_require__(654);
 	__export(__webpack_require__(654));
+	__export(__webpack_require__(656));
 	var constructorUtils = new ConstructorUtils_1.ConstructorUtils();
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.default = constructorUtils;
@@ -83780,11 +85060,11 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 652 */
+/* 654 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var MetadataStorage_1 = __webpack_require__(653);
+	var MetadataStorage_1 = __webpack_require__(655);
 	var ConstructorUtils = (function () {
 	    function ConstructorUtils() {
 	    }
@@ -83967,7 +85247,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 653 */
+/* 655 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -84014,13 +85294,13 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 654 */
+/* 656 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var MetadataStorage_1 = __webpack_require__(653);
-	var TypeMetadata_1 = __webpack_require__(655);
-	var SkipMetadata_1 = __webpack_require__(657);
+	var MetadataStorage_1 = __webpack_require__(655);
+	var TypeMetadata_1 = __webpack_require__(657);
+	var SkipMetadata_1 = __webpack_require__(659);
 	/**
 	 * Specifies a type of the property.
 	 */
@@ -84059,7 +85339,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 655 */
+/* 657 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84068,7 +85348,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var PropertyMetadata_1 = __webpack_require__(656);
+	var PropertyMetadata_1 = __webpack_require__(658);
 	var TypeMetadata = (function (_super) {
 	    __extends(TypeMetadata, _super);
 	    function TypeMetadata(target, key, reflectedType, typeFunction, isArray) {
@@ -84104,7 +85384,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 656 */
+/* 658 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -84133,7 +85413,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 657 */
+/* 659 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84142,7 +85422,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var PropertyMetadata_1 = __webpack_require__(656);
+	var PropertyMetadata_1 = __webpack_require__(658);
 	var SkipMetadata = (function (_super) {
 	    __extends(SkipMetadata, _super);
 	    function SkipMetadata(target, key, options) {
@@ -84176,7 +85456,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 658 */
+/* 660 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84195,9 +85475,9 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var base_service_1 = __webpack_require__(650);
-	var folder_service_1 = __webpack_require__(659);
-	var models_1 = __webpack_require__(660);
+	var base_service_1 = __webpack_require__(652);
+	var folder_service_1 = __webpack_require__(661);
+	var models_1 = __webpack_require__(662);
 	var AreaService = (function (_super) {
 	    __extends(AreaService, _super);
 	    function AreaService(folderService) {
@@ -84220,7 +85500,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 659 */
+/* 661 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84239,8 +85519,8 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var base_service_1 = __webpack_require__(650);
-	var models_1 = __webpack_require__(660);
+	var base_service_1 = __webpack_require__(652);
+	var models_1 = __webpack_require__(662);
 	var FolderService = (function (_super) {
 	    __extends(FolderService, _super);
 	    function FolderService() {
@@ -84267,15 +85547,13 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 660 */
+/* 662 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(661));
-	__export(__webpack_require__(662));
 	__export(__webpack_require__(663));
 	__export(__webpack_require__(664));
 	__export(__webpack_require__(665));
@@ -84283,14 +85561,16 @@ webpackJsonp([0],[
 	__export(__webpack_require__(667));
 	__export(__webpack_require__(668));
 	__export(__webpack_require__(669));
+	__export(__webpack_require__(670));
+	__export(__webpack_require__(671));
 
 
 /***/ },
-/* 661 */
+/* 663 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var services_1 = __webpack_require__(648);
+	var services_1 = __webpack_require__(650);
 	var BaseModel = (function () {
 	    function BaseModel() {
 	        if (!this._id) {
@@ -84306,7 +85586,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 662 */
+/* 664 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84315,7 +85595,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var base_model_1 = __webpack_require__(661);
+	var base_model_1 = __webpack_require__(663);
 	var Area = (function (_super) {
 	    __extends(Area, _super);
 	    function Area(folderId, imageId, x, y, width, height) {
@@ -84426,7 +85706,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 663 */
+/* 665 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84435,7 +85715,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var base_model_1 = __webpack_require__(661);
+	var base_model_1 = __webpack_require__(663);
 	var File = (function (_super) {
 	    __extends(File, _super);
 	    function File(folderId, templateId, name) {
@@ -84450,7 +85730,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 664 */
+/* 666 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84459,7 +85739,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var base_model_1 = __webpack_require__(661);
+	var base_model_1 = __webpack_require__(663);
 	var Folder = (function (_super) {
 	    __extends(Folder, _super);
 	    function Folder(folderId, name) {
@@ -84473,7 +85753,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 665 */
+/* 667 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84482,7 +85762,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var base_model_1 = __webpack_require__(661);
+	var base_model_1 = __webpack_require__(663);
 	var Image = (function (_super) {
 	    __extends(Image, _super);
 	    function Image(folderId, rawImageId, name, x, y, width, height) {
@@ -84510,7 +85790,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 666 */
+/* 668 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84519,8 +85799,8 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var base_model_1 = __webpack_require__(661);
-	var services_1 = __webpack_require__(648);
+	var base_model_1 = __webpack_require__(663);
+	var services_1 = __webpack_require__(650);
 	var RawImage = (function (_super) {
 	    __extends(RawImage, _super);
 	    function RawImage(_id, url, width, height, name) {
@@ -84539,7 +85819,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 667 */
+/* 669 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84548,7 +85828,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var base_model_1 = __webpack_require__(661);
+	var base_model_1 = __webpack_require__(663);
 	var Template = (function (_super) {
 	    __extends(Template, _super);
 	    function Template(extension, content) {
@@ -84562,7 +85842,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 668 */
+/* 670 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -84581,7 +85861,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 669 */
+/* 671 */
 /***/ function(module, exports) {
 
 	// import { BaseModel } from "./base.model";
@@ -84595,7 +85875,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 670 */
+/* 672 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84614,10 +85894,10 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var base_service_1 = __webpack_require__(650);
-	var models_1 = __webpack_require__(660);
-	var folder_service_1 = __webpack_require__(659);
-	var template_service_1 = __webpack_require__(671);
+	var base_service_1 = __webpack_require__(652);
+	var models_1 = __webpack_require__(662);
+	var folder_service_1 = __webpack_require__(661);
+	var template_service_1 = __webpack_require__(673);
 	var FileService = (function (_super) {
 	    __extends(FileService, _super);
 	    function FileService(templateService, folderService) {
@@ -84663,7 +85943,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 671 */
+/* 673 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84682,8 +85962,8 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var base_service_1 = __webpack_require__(650);
-	var models_1 = __webpack_require__(660);
+	var base_service_1 = __webpack_require__(652);
+	var models_1 = __webpack_require__(662);
 	var TemplateService = (function (_super) {
 	    __extends(TemplateService, _super);
 	    function TemplateService() {
@@ -84702,7 +85982,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 672 */
+/* 674 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84721,10 +86001,10 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var models_1 = __webpack_require__(660);
-	var base_service_1 = __webpack_require__(650);
-	var raw_image_service_1 = __webpack_require__(673);
-	var folder_service_1 = __webpack_require__(659);
+	var models_1 = __webpack_require__(662);
+	var base_service_1 = __webpack_require__(652);
+	var raw_image_service_1 = __webpack_require__(675);
+	var folder_service_1 = __webpack_require__(661);
 	var ImageService = (function (_super) {
 	    __extends(ImageService, _super);
 	    function ImageService(folderService, rawImageService) {
@@ -84776,7 +86056,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 673 */
+/* 675 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84795,11 +86075,11 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var Humane = __webpack_require__(644);
-	var models_1 = __webpack_require__(660);
-	var base_service_ts_1 = __webpack_require__(650);
-	var http_service_ts_1 = __webpack_require__(674);
-	var analytics_service_1 = __webpack_require__(675);
+	var Humane = __webpack_require__(646);
+	var models_1 = __webpack_require__(662);
+	var base_service_ts_1 = __webpack_require__(652);
+	var http_service_ts_1 = __webpack_require__(676);
+	var analytics_service_1 = __webpack_require__(677);
 	// import {NgZone} from '@angular/core'
 	var RawImageService = (function (_super) {
 	    __extends(RawImageService, _super);
@@ -84883,7 +86163,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 674 */
+/* 676 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84937,7 +86217,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 675 */
+/* 677 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84971,7 +86251,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 676 */
+/* 678 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84985,8 +86265,8 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var bootstrap_1 = __webpack_require__(677);
-	var dialogs_1 = __webpack_require__(687);
+	var bootstrap_1 = __webpack_require__(679);
+	var dialogs_1 = __webpack_require__(689);
 	var DialogService = (function () {
 	    function DialogService(modal) {
 	        this.modal = modal;
@@ -85051,37 +86331,37 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 677 */
+/* 679 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var core_1 = __webpack_require__(5);
-	var modal_1 = __webpack_require__(678);
-	var modal_backdrop_1 = __webpack_require__(679);
-	var one_button_preset_1 = __webpack_require__(681);
-	var two_button_preset_1 = __webpack_require__(686);
+	var modal_1 = __webpack_require__(680);
+	var modal_backdrop_1 = __webpack_require__(681);
+	var one_button_preset_1 = __webpack_require__(683);
+	var two_button_preset_1 = __webpack_require__(688);
 	var angular2_modal_1 = __webpack_require__(379);
-	var modal_context_1 = __webpack_require__(683);
+	var modal_context_1 = __webpack_require__(685);
 	exports.BSModalContext = modal_context_1.BSModalContext;
 	exports.BSModalContextBuilder = modal_context_1.BSModalContextBuilder;
-	var modal_backdrop_2 = __webpack_require__(679);
+	var modal_backdrop_2 = __webpack_require__(681);
 	exports.BSModalBackdrop = modal_backdrop_2.BSModalBackdrop;
-	var modal_container_1 = __webpack_require__(680);
+	var modal_container_1 = __webpack_require__(682);
 	exports.BSModalContainer = modal_container_1.BSModalContainer;
-	var message_modal_1 = __webpack_require__(684);
+	var message_modal_1 = __webpack_require__(686);
 	exports.BSMessageModal = message_modal_1.BSMessageModal;
-	var modal_footer_1 = __webpack_require__(685);
+	var modal_footer_1 = __webpack_require__(687);
 	exports.BSModalFooter = modal_footer_1.BSModalFooter;
-	var message_modal_preset_1 = __webpack_require__(682);
+	var message_modal_preset_1 = __webpack_require__(684);
 	exports.MessageModalPresetBuilder = message_modal_preset_1.MessageModalPresetBuilder;
 	var modal_open_context_1 = __webpack_require__(388);
 	exports.ModalOpenContext = modal_open_context_1.ModalOpenContext;
 	exports.ModalOpenContextBuilder = modal_open_context_1.ModalOpenContextBuilder;
-	var one_button_preset_2 = __webpack_require__(681);
+	var one_button_preset_2 = __webpack_require__(683);
 	exports.OneButtonPresetBuilder = one_button_preset_2.OneButtonPresetBuilder;
-	var two_button_preset_2 = __webpack_require__(686);
+	var two_button_preset_2 = __webpack_require__(688);
 	exports.TwoButtonPresetBuilder = two_button_preset_2.TwoButtonPresetBuilder;
-	var modal_2 = __webpack_require__(678);
+	var modal_2 = __webpack_require__(680);
 	exports.Modal = modal_2.Modal;
 	exports.BS_MODAL_PROVIDERS = angular2_modal_1.MODAL_PROVIDERS.concat([
 	    new core_1.Provider(angular2_modal_1.Modal, { useClass: modal_1.Modal }),
@@ -85096,7 +86376,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 678 */
+/* 680 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85105,7 +86385,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 679 */
+/* 681 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85120,7 +86400,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var angular2_modal_1 = __webpack_require__(379);
-	var modal_container_1 = __webpack_require__(680);
+	var modal_container_1 = __webpack_require__(682);
 	var dialogRefCount = 0;
 	/**
 	 * Represents the modal backdrop.
@@ -85165,7 +86445,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 680 */
+/* 682 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85180,7 +86460,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var angular2_modal_1 = __webpack_require__(379);
-	var modal_1 = __webpack_require__(678);
+	var modal_1 = __webpack_require__(680);
 	var utils_1 = __webpack_require__(387);
 	/**
 	 * A component that acts as a top level container for an open modal window.
@@ -85249,7 +86529,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 681 */
+/* 683 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85258,7 +86538,7 @@ webpackJsonp([0],[
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var message_modal_preset_1 = __webpack_require__(682);
+	var message_modal_preset_1 = __webpack_require__(684);
 	var utils_1 = __webpack_require__(387);
 	/**
 	 * A Preset for a classic 1 button modal window.
@@ -85286,7 +86566,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 682 */
+/* 684 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85296,8 +86576,8 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var fluent_assign_1 = __webpack_require__(380);
-	var modal_context_1 = __webpack_require__(683);
-	var message_modal_1 = __webpack_require__(684);
+	var modal_context_1 = __webpack_require__(685);
+	var message_modal_1 = __webpack_require__(686);
 	var utils_1 = __webpack_require__(387);
 	var DEFAULT_VALUES = {
 	    component: message_modal_1.BSMessageModal,
@@ -85342,7 +86622,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 683 */
+/* 685 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85391,7 +86671,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 684 */
+/* 686 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85406,7 +86686,7 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var angular2_modal_1 = __webpack_require__(379);
-	var modal_footer_1 = __webpack_require__(685);
+	var modal_footer_1 = __webpack_require__(687);
 	/**
 	 * A Component representing a generic bootstrap modal content element.
 	 *
@@ -85455,7 +86735,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 685 */
+/* 687 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85509,7 +86789,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 686 */
+/* 688 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85519,7 +86799,7 @@ webpackJsonp([0],[
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var utils_1 = __webpack_require__(387);
-	var message_modal_preset_1 = __webpack_require__(682);
+	var message_modal_preset_1 = __webpack_require__(684);
 	/**
 	 * A Preset for a classic 2 button modal window.
 	 */
@@ -85551,32 +86831,32 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 687 */
+/* 689 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(688));
-	__export(__webpack_require__(712));
+	__export(__webpack_require__(690));
 	__export(__webpack_require__(716));
 	__export(__webpack_require__(720));
+	__export(__webpack_require__(724));
 
 
 /***/ },
-/* 688 */
+/* 690 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(689));
+	__export(__webpack_require__(691));
 
 
 /***/ },
-/* 689 */
+/* 691 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85589,18 +86869,18 @@ webpackJsonp([0],[
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var _ = __webpack_require__(647);
+	var _ = __webpack_require__(649);
 	var core_1 = __webpack_require__(5);
-	var angular2_modal_1 = __webpack_require__(690);
-	var button_1 = __webpack_require__(691);
+	var angular2_modal_1 = __webpack_require__(692);
+	var button_1 = __webpack_require__(693);
 	var icon_1 = __webpack_require__(346);
-	var input_1 = __webpack_require__(692);
-	var checkbox_1 = __webpack_require__(694);
-	var radio_1 = __webpack_require__(695);
-	var Humane = __webpack_require__(644);
-	var directives_1 = __webpack_require__(697);
-	var services_1 = __webpack_require__(648);
-	var analytics_service_1 = __webpack_require__(675);
+	var input_1 = __webpack_require__(697);
+	var checkbox_1 = __webpack_require__(698);
+	var radio_1 = __webpack_require__(699);
+	var Humane = __webpack_require__(646);
+	var directives_1 = __webpack_require__(701);
+	var services_1 = __webpack_require__(650);
+	var analytics_service_1 = __webpack_require__(677);
 	var ComponentDialogComponent = (function () {
 	    function ComponentDialogComponent(dialog, ga, folderService, detector) {
 	        var _this = this;
@@ -85677,8 +86957,8 @@ webpackJsonp([0],[
 	    ComponentDialogComponent = __decorate([
 	        core_1.Component({
 	            selector: 'component-dialog',
-	            template: __webpack_require__(710)(),
-	            styles: [__webpack_require__(711)],
+	            template: __webpack_require__(714)(),
+	            styles: [__webpack_require__(715)],
 	            directives: [
 	                button_1.MdButton,
 	                input_1.MdInput,
@@ -85700,7 +86980,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 690 */
+/* 692 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85712,7 +86992,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 691 */
+/* 693 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85731,17 +87011,21 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	// TODO(jelbourn): Ink ripples.
+	var common_1 = __webpack_require__(2);
+	var field_value_1 = __webpack_require__(694);
+	var ripple_1 = __webpack_require__(695);
 	// TODO(jelbourn): Make the `isMouseDown` stuff done with one global listener.
 	// TODO(kara): Convert attribute selectors to classes when attr maps become available
 	var MdButton = (function () {
-	    function MdButton(elementRef, renderer) {
-	        this.elementRef = elementRef;
-	        this.renderer = renderer;
+	    function MdButton(_elementRef, _renderer) {
+	        this._elementRef = _elementRef;
+	        this._renderer = _renderer;
 	        /** Whether the button has focus from the keyboard (not the mouse). Used for class binding. */
-	        this.isKeyboardFocused = false;
+	        this._isKeyboardFocused = false;
 	        /** Whether a mousedown has occurred on this element in the last 100ms. */
-	        this.isMouseDown = false;
+	        this._isMouseDown = false;
+	        /** Whether the ripple effect on click should be disabled. */
+	        this.disableRipple = false;
 	    }
 	    Object.defineProperty(MdButton.prototype, "color", {
 	        get: function () {
@@ -85753,15 +87037,14 @@ webpackJsonp([0],[
 	        enumerable: true,
 	        configurable: true
 	    });
-	    /** @internal */
-	    MdButton.prototype.setMousedown = function () {
+	    MdButton.prototype._setMousedown = function () {
 	        var _this = this;
 	        // We only *show* the focus style when focus has come to the button via the keyboard.
 	        // The Material Design spec is silent on this topic, and without doing this, the
 	        // button continues to look :active after clicking.
 	        // @see http://marcysutton.com/button-focus-hell/
-	        this.isMouseDown = true;
-	        setTimeout(function () { _this.isMouseDown = false; }, 100);
+	        this._isMouseDown = true;
+	        setTimeout(function () { _this._isMouseDown = false; }, 100);
 	    };
 	    MdButton.prototype._updateColor = function (newColor) {
 	        this._setElementColor(this._color, false);
@@ -85770,35 +87053,48 @@ webpackJsonp([0],[
 	    };
 	    MdButton.prototype._setElementColor = function (color, isAdd) {
 	        if (color != null && color != '') {
-	            this.renderer.setElementClass(this.elementRef.nativeElement, "md-" + color, isAdd);
+	            this._renderer.setElementClass(this._elementRef.nativeElement, "md-" + color, isAdd);
 	        }
 	    };
-	    /** @internal */
-	    MdButton.prototype.setKeyboardFocus = function () {
-	        this.isKeyboardFocused = !this.isMouseDown;
+	    MdButton.prototype._setKeyboardFocus = function () {
+	        this._isKeyboardFocused = !this._isMouseDown;
 	    };
-	    /** @internal */
-	    MdButton.prototype.removeKeyboardFocus = function () {
-	        this.isKeyboardFocused = false;
+	    MdButton.prototype._removeKeyboardFocus = function () {
+	        this._isKeyboardFocused = false;
 	    };
 	    /** TODO(hansl): e2e test this function. */
 	    MdButton.prototype.focus = function () {
-	        this.elementRef.nativeElement.focus();
+	        this._elementRef.nativeElement.focus();
 	    };
+	    MdButton.prototype.getHostElement = function () {
+	        return this._elementRef.nativeElement;
+	    };
+	    MdButton.prototype.isRoundButton = function () {
+	        var el = this._elementRef.nativeElement;
+	        return el.hasAttribute('md-icon-button') ||
+	            el.hasAttribute('md-fab') ||
+	            el.hasAttribute('md-mini-fab');
+	    };
+	    MdButton.prototype.isRippleEnabled = function () {
+	        return !this.disableRipple;
+	    };
+	    __decorate([
+	        core_1.Input(),
+	        field_value_1.BooleanFieldValue(), 
+	        __metadata('design:type', Boolean)
+	    ], MdButton.prototype, "disableRipple", void 0);
 	    MdButton = __decorate([
-	        core_1.Component({
-	            moduleId: module.id,
-	            selector: 'button[md-button], button[md-raised-button], button[md-icon-button], ' +
+	        core_1.Component({            selector: 'button[md-button], button[md-raised-button], button[md-icon-button], ' +
 	                'button[md-fab], button[md-mini-fab]',
 	            inputs: ['color'],
 	            host: {
-	                '[class.md-button-focus]': 'isKeyboardFocused',
-	                '(mousedown)': 'setMousedown()',
-	                '(focus)': 'setKeyboardFocus()',
-	                '(blur)': 'removeKeyboardFocus()',
+	                '[class.md-button-focus]': '_isKeyboardFocused',
+	                '(mousedown)': '_setMousedown()',
+	                '(focus)': '_setKeyboardFocus()',
+	                '(blur)': '_removeKeyboardFocus()',
 	            },
-	            template: "<span class=\"md-button-wrapper\"><ng-content></ng-content></span> ",
-	            styles: ["/** * A collection of mixins and CSS classes that can be used to apply elevation to a material * element. * See: https://www.google.com/design/spec/what-is-material/elevation-shadows.html * Examples: * * * .md-foo { *   @include $md-elevation(2); * *   &:active { *     @include $md-elevation(8); *   } * } * * <div id=\"external-card\" class=\"md-elevation-z2\"><p>Some content</p></div> * * For an explanation of the design behind how elevation is implemented, see the design doc at * https://goo.gl/Kq0k9Z. */ /** * The css property used for elevation. In most cases this should not be changed. It is exposed * as a variable for abstraction / easy use when needing to reference the property directly, for * example in a will-change rule. */ /** The default duration value for elevation transitions. */ /** The default easing value for elevation transitions. */ /** * Applies the correct css rules to an element to give it the elevation specified by $zValue. * The $zValue must be between 0 and 24. */ /** * Returns a string that can be used as the value for a transition property for elevation. * Calling this function directly is useful in situations where a component needs to transition * more than one property. * * .foo { *   transition: md-elevation-transition-property-value(), opacity 100ms ease; *   will-change: $md-elevation-property, opacity; * } */ /** * Applies the correct css rules needed to have an element transition between elevations. * This mixin should be applied to elements whose elevation values will change depending on their * context (e.g. when active or disabled). */ /** Applies a property to an md-button element for each of the supported palettes. */ /** Applies a focus style to an md-button element for each of the supported palettes. */ [md-raised-button], [md-fab], [md-mini-fab], [md-button], [md-icon-button] { box-sizing: border-box; position: relative; background: transparent; text-align: center; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; outline: none; border: none; display: inline-block; white-space: nowrap; text-decoration: none; vertical-align: baseline; font-size: 14px; font-family: Roboto, \"Helvetica Neue\", sans-serif; font-weight: 500; color: currentColor; margin: 0; min-width: 88px; line-height: 36px; padding: 0 16px; border-radius: 3px; } .md-primary[md-raised-button], .md-primary[md-fab], .md-primary[md-mini-fab], .md-primary[md-button], .md-primary[md-icon-button] { color: #009688; } .md-accent[md-raised-button], .md-accent[md-fab], .md-accent[md-mini-fab], .md-accent[md-button], .md-accent[md-icon-button] { color: #9c27b0; } .md-warn[md-raised-button], .md-warn[md-fab], .md-warn[md-mini-fab], .md-warn[md-button], .md-warn[md-icon-button] { color: #f44336; } .md-primary[disabled][md-raised-button], .md-primary[disabled][md-fab], .md-primary[disabled][md-mini-fab], .md-primary[disabled][md-button], .md-primary[disabled][md-icon-button], .md-accent[disabled][md-raised-button], .md-accent[disabled][md-fab], .md-accent[disabled][md-mini-fab], .md-accent[disabled][md-button], .md-accent[disabled][md-icon-button], .md-warn[disabled][md-raised-button], .md-warn[disabled][md-fab], .md-warn[disabled][md-mini-fab], .md-warn[disabled][md-button], .md-warn[disabled][md-icon-button], [disabled][disabled][md-raised-button], [disabled][disabled][md-fab], [disabled][disabled][md-mini-fab], [disabled][disabled][md-button], [disabled][disabled][md-icon-button] { color: rgba(0, 0, 0, 0.38); } [disabled][md-raised-button], [disabled][md-fab], [disabled][md-mini-fab], [disabled][md-button], [disabled][md-icon-button] { cursor: default; } .md-button-focus[md-raised-button]::after, .md-button-focus[md-fab]::after, .md-button-focus[md-mini-fab]::after, .md-button-focus[md-button]::after, .md-button-focus[md-icon-button]::after { position: absolute; top: 0; left: 0; bottom: 0; right: 0; content: ''; background-color: rgba(0, 0, 0, 0.12); border-radius: inherit; pointer-events: none; } .md-button-focus.md-primary[md-raised-button]::after, .md-button-focus.md-primary[md-fab]::after, .md-button-focus.md-primary[md-mini-fab]::after, .md-button-focus.md-primary[md-button]::after, .md-button-focus.md-primary[md-icon-button]::after { background-color: rgba(0, 150, 136, 0.12); } .md-button-focus.md-accent[md-raised-button]::after, .md-button-focus.md-accent[md-fab]::after, .md-button-focus.md-accent[md-mini-fab]::after, .md-button-focus.md-accent[md-button]::after, .md-button-focus.md-accent[md-icon-button]::after { background-color: rgba(156, 39, 176, 0.12); } .md-button-focus.md-warn[md-raised-button]::after, .md-button-focus.md-warn[md-fab]::after, .md-button-focus.md-warn[md-mini-fab]::after, .md-button-focus.md-warn[md-button]::after, .md-button-focus.md-warn[md-icon-button]::after { background-color: rgba(244, 67, 54, 0.12); } [md-raised-button], [md-fab], [md-mini-fab] { box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12); background-color: #fafafa; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); -webkit-transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1); transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1); } .md-primary[md-raised-button], .md-primary[md-fab], .md-primary[md-mini-fab] { color: white; } .md-accent[md-raised-button], .md-accent[md-fab], .md-accent[md-mini-fab] { color: rgba(255, 255, 255, 0.870588); } .md-warn[md-raised-button], .md-warn[md-fab], .md-warn[md-mini-fab] { color: white; } .md-primary[disabled][md-raised-button], .md-primary[disabled][md-fab], .md-primary[disabled][md-mini-fab], .md-accent[disabled][md-raised-button], .md-accent[disabled][md-fab], .md-accent[disabled][md-mini-fab], .md-warn[disabled][md-raised-button], .md-warn[disabled][md-fab], .md-warn[disabled][md-mini-fab], [disabled][disabled][md-raised-button], [disabled][disabled][md-fab], [disabled][disabled][md-mini-fab] { color: rgba(0, 0, 0, 0.38); } .md-primary[md-raised-button], .md-primary[md-fab], .md-primary[md-mini-fab] { background-color: #009688; } .md-accent[md-raised-button], .md-accent[md-fab], .md-accent[md-mini-fab] { background-color: #9c27b0; } .md-warn[md-raised-button], .md-warn[md-fab], .md-warn[md-mini-fab] { background-color: #f44336; } .md-primary[disabled][md-raised-button], .md-primary[disabled][md-fab], .md-primary[disabled][md-mini-fab], .md-accent[disabled][md-raised-button], .md-accent[disabled][md-fab], .md-accent[disabled][md-mini-fab], .md-warn[disabled][md-raised-button], .md-warn[disabled][md-fab], .md-warn[disabled][md-mini-fab], [disabled][disabled][md-raised-button], [disabled][disabled][md-fab], [disabled][disabled][md-mini-fab] { background-color: rgba(0, 0, 0, 0.12); } [md-raised-button]:active, [md-fab]:active, [md-mini-fab]:active { box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12); } [disabled][md-raised-button], [disabled][md-fab], [disabled][md-mini-fab] { box-shadow: none; } [md-button][disabled]:hover.md-primary, [md-button][disabled]:hover.md-accent, [md-button][disabled]:hover.md-warn, [md-button][disabled]:hover:hover { background-color: transparent; } [md-fab] { min-width: 0; border-radius: 50%; background-color: #9c27b0; color: rgba(255, 255, 255, 0.870588); width: 56px; height: 56px; padding: 0; } [md-fab] i, [md-fab] md-icon { padding: 16px 0; } [md-mini-fab] { min-width: 0; border-radius: 50%; background-color: #9c27b0; color: rgba(255, 255, 255, 0.870588); width: 40px; height: 40px; padding: 0; } [md-mini-fab] i, [md-mini-fab] md-icon { padding: 8px 0; } [md-icon-button] { min-width: 0; padding: 0; width: 40px; height: 40px; line-height: 24px; border-radius: 50%; } [md-icon-button] .md-button-wrapper > * { vertical-align: middle; } [md-button]:hover::after, [md-icon-button]:hover::after { position: absolute; top: 0; left: 0; bottom: 0; right: 0; content: ''; background-color: rgba(0, 0, 0, 0.12); border-radius: inherit; pointer-events: none; } [md-button]:hover.md-primary::after, [md-icon-button]:hover.md-primary::after { background-color: rgba(0, 150, 136, 0.12); } [md-button]:hover.md-accent::after, [md-icon-button]:hover.md-accent::after { background-color: rgba(156, 39, 176, 0.12); } [md-button]:hover.md-warn::after, [md-icon-button]:hover.md-warn::after { background-color: rgba(244, 67, 54, 0.12); } @media screen and (-ms-high-contrast: active) { .md-raised-button, .md-fab, .md-mini-fab { border: 1px solid #fff; } } "],
+	            template: "<span class=\"md-button-wrapper\"><ng-content></ng-content></span> <div md-ripple *ngIf=\"isRippleEnabled()\" class=\"md-button-ripple\" [class.md-button-ripple-round]=\"isRoundButton()\" [md-ripple-trigger]=\"getHostElement()\" [md-ripple-color]=\"isRoundButton() ? 'rgba(255, 255, 255, 0.2)' : ''\" md-ripple-background-color=\"rgba(0, 0, 0, 0)\"></div> ",
+	            styles: ["/** * A collection of mixins and CSS classes that can be used to apply elevation to a material * element. * See: https://www.google.com/design/spec/what-is-material/elevation-shadows.html * Examples: * * * .md-foo { *   @include $md-elevation(2); * *   &:active { *     @include $md-elevation(8); *   } * } * * <div id=\"external-card\" class=\"md-elevation-z2\"><p>Some content</p></div> * * For an explanation of the design behind how elevation is implemented, see the design doc at * https://goo.gl/Kq0k9Z. */ /** * The css property used for elevation. In most cases this should not be changed. It is exposed * as a variable for abstraction / easy use when needing to reference the property directly, for * example in a will-change rule. */ /** The default duration value for elevation transitions. */ /** The default easing value for elevation transitions. */ /** * Applies the correct css rules to an element to give it the elevation specified by $zValue. * The $zValue must be between 0 and 24. */ /** * Returns a string that can be used as the value for a transition property for elevation. * Calling this function directly is useful in situations where a component needs to transition * more than one property. * * .foo { *   transition: md-elevation-transition-property-value(), opacity 100ms ease; *   will-change: $md-elevation-property, opacity; * } */ /** * Applies the correct css rules needed to have an element transition between elevations. * This mixin should be applied to elements whose elevation values will change depending on their * context (e.g. when active or disabled). */ /** * This mixin overrides default button styles like the gray background, * the border, and the outline. */ /** Applies a property to an md-button element for each of the supported palettes. */ /** Applies a focus style to an md-button element for each of the supported palettes. */ [md-raised-button], [md-fab], [md-mini-fab], [md-button], [md-icon-button] { box-sizing: border-box; position: relative; background: transparent; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; outline: none; border: none; display: inline-block; white-space: nowrap; text-decoration: none; vertical-align: baseline; font-size: 14px; font-family: Roboto, \"Helvetica Neue\", sans-serif; font-weight: 500; color: currentColor; text-align: center; margin: 0; min-width: 88px; line-height: 36px; padding: 0 16px; border-radius: 3px; } .md-primary[md-raised-button], .md-primary[md-fab], .md-primary[md-mini-fab], .md-primary[md-button], .md-primary[md-icon-button] { color: #009688; } .md-accent[md-raised-button], .md-accent[md-fab], .md-accent[md-mini-fab], .md-accent[md-button], .md-accent[md-icon-button] { color: #9c27b0; } .md-warn[md-raised-button], .md-warn[md-fab], .md-warn[md-mini-fab], .md-warn[md-button], .md-warn[md-icon-button] { color: #f44336; } .md-primary[disabled][md-raised-button], .md-primary[disabled][md-fab], .md-primary[disabled][md-mini-fab], .md-primary[disabled][md-button], .md-primary[disabled][md-icon-button], .md-accent[disabled][md-raised-button], .md-accent[disabled][md-fab], .md-accent[disabled][md-mini-fab], .md-accent[disabled][md-button], .md-accent[disabled][md-icon-button], .md-warn[disabled][md-raised-button], .md-warn[disabled][md-fab], .md-warn[disabled][md-mini-fab], .md-warn[disabled][md-button], .md-warn[disabled][md-icon-button], [disabled][disabled][md-raised-button], [disabled][disabled][md-fab], [disabled][disabled][md-mini-fab], [disabled][disabled][md-button], [disabled][disabled][md-icon-button] { color: rgba(0, 0, 0, 0.38); } [disabled][md-raised-button], [disabled][md-fab], [disabled][md-mini-fab], [disabled][md-button], [disabled][md-icon-button] { cursor: default; } .md-button-focus[md-raised-button]::after, .md-button-focus[md-fab]::after, .md-button-focus[md-mini-fab]::after, .md-button-focus[md-button]::after, .md-button-focus[md-icon-button]::after { position: absolute; top: 0; left: 0; bottom: 0; right: 0; content: ''; background-color: rgba(0, 0, 0, 0.12); border-radius: inherit; pointer-events: none; } .md-button-focus.md-primary[md-raised-button]::after, .md-button-focus.md-primary[md-fab]::after, .md-button-focus.md-primary[md-mini-fab]::after, .md-button-focus.md-primary[md-button]::after, .md-button-focus.md-primary[md-icon-button]::after { background-color: rgba(0, 150, 136, 0.12); } .md-button-focus.md-accent[md-raised-button]::after, .md-button-focus.md-accent[md-fab]::after, .md-button-focus.md-accent[md-mini-fab]::after, .md-button-focus.md-accent[md-button]::after, .md-button-focus.md-accent[md-icon-button]::after { background-color: rgba(156, 39, 176, 0.12); } .md-button-focus.md-warn[md-raised-button]::after, .md-button-focus.md-warn[md-fab]::after, .md-button-focus.md-warn[md-mini-fab]::after, .md-button-focus.md-warn[md-button]::after, .md-button-focus.md-warn[md-icon-button]::after { background-color: rgba(244, 67, 54, 0.12); } [md-raised-button], [md-fab], [md-mini-fab] { box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12); background-color: #fafafa; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); -webkit-transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1); transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1); } .md-primary[md-raised-button], .md-primary[md-fab], .md-primary[md-mini-fab] { color: white; } .md-accent[md-raised-button], .md-accent[md-fab], .md-accent[md-mini-fab] { color: rgba(255, 255, 255, 0.870588); } .md-warn[md-raised-button], .md-warn[md-fab], .md-warn[md-mini-fab] { color: white; } .md-primary[disabled][md-raised-button], .md-primary[disabled][md-fab], .md-primary[disabled][md-mini-fab], .md-accent[disabled][md-raised-button], .md-accent[disabled][md-fab], .md-accent[disabled][md-mini-fab], .md-warn[disabled][md-raised-button], .md-warn[disabled][md-fab], .md-warn[disabled][md-mini-fab], [disabled][disabled][md-raised-button], [disabled][disabled][md-fab], [disabled][disabled][md-mini-fab] { color: rgba(0, 0, 0, 0.38); } .md-primary[md-raised-button], .md-primary[md-fab], .md-primary[md-mini-fab] { background-color: #009688; } .md-accent[md-raised-button], .md-accent[md-fab], .md-accent[md-mini-fab] { background-color: #9c27b0; } .md-warn[md-raised-button], .md-warn[md-fab], .md-warn[md-mini-fab] { background-color: #f44336; } .md-primary[disabled][md-raised-button], .md-primary[disabled][md-fab], .md-primary[disabled][md-mini-fab], .md-accent[disabled][md-raised-button], .md-accent[disabled][md-fab], .md-accent[disabled][md-mini-fab], .md-warn[disabled][md-raised-button], .md-warn[disabled][md-fab], .md-warn[disabled][md-mini-fab], [disabled][disabled][md-raised-button], [disabled][disabled][md-fab], [disabled][disabled][md-mini-fab] { background-color: rgba(0, 0, 0, 0.12); } [md-raised-button]:active, [md-fab]:active, [md-mini-fab]:active { box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12); } [disabled][md-raised-button], [disabled][md-fab], [disabled][md-mini-fab] { box-shadow: none; } [md-button][disabled]:hover.md-primary, [md-button][disabled]:hover.md-accent, [md-button][disabled]:hover.md-warn, [md-button][disabled]:hover:hover { background-color: transparent; } [md-fab] { min-width: 0; border-radius: 50%; background-color: #9c27b0; color: rgba(255, 255, 255, 0.870588); width: 56px; height: 56px; padding: 0; } [md-fab] i, [md-fab] md-icon { padding: 16px 0; } [md-mini-fab] { min-width: 0; border-radius: 50%; background-color: #9c27b0; color: rgba(255, 255, 255, 0.870588); width: 40px; height: 40px; padding: 0; } [md-mini-fab] i, [md-mini-fab] md-icon { padding: 8px 0; } [md-icon-button] { min-width: 0; padding: 0; width: 40px; height: 40px; line-height: 24px; border-radius: 50%; } [md-icon-button] .md-button-wrapper > * { vertical-align: middle; } .md-button-ripple { position: absolute; top: 0; left: 0; bottom: 0; right: 0; } .md-button-ripple-round { border-radius: 50%; z-index: 1; } [md-button]:hover::after, [md-icon-button]:hover::after { position: absolute; top: 0; left: 0; bottom: 0; right: 0; content: ''; background-color: rgba(0, 0, 0, 0.12); border-radius: inherit; pointer-events: none; } [md-button]:hover.md-primary::after, [md-icon-button]:hover.md-primary::after { background-color: rgba(0, 150, 136, 0.12); } [md-button]:hover.md-accent::after, [md-icon-button]:hover.md-accent::after { background-color: rgba(156, 39, 176, 0.12); } [md-button]:hover.md-warn::after, [md-icon-button]:hover.md-warn::after { background-color: rgba(244, 67, 54, 0.12); } @media screen and (-ms-high-contrast: active) { .md-raised-button, .md-fab, .md-mini-fab { border: 1px solid #fff; } } "],
 	            encapsulation: core_1.ViewEncapsulation.None,
 	            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
 	        }), 
@@ -85836,8 +87132,7 @@ webpackJsonp([0],[
 	        enumerable: true,
 	        configurable: true
 	    });
-	    /** @internal */
-	    MdAnchor.prototype.haltDisabledEvents = function (event) {
+	    MdAnchor.prototype._haltDisabledEvents = function (event) {
 	        // A disabled button shouldn't apply any actions
 	        if (this.disabled) {
 	            event.preventDefault();
@@ -85858,19 +87153,17 @@ webpackJsonp([0],[
 	        __metadata('design:type', Object)
 	    ], MdAnchor.prototype, "disabled", null);
 	    MdAnchor = __decorate([
-	        core_1.Component({
-	            moduleId: module.id,
-	            selector: 'a[md-button], a[md-raised-button], a[md-icon-button], a[md-fab], a[md-mini-fab]',
+	        core_1.Component({            selector: 'a[md-button], a[md-raised-button], a[md-icon-button], a[md-fab], a[md-mini-fab]',
 	            inputs: ['color'],
 	            host: {
-	                '[class.md-button-focus]': 'isKeyboardFocused',
-	                '(mousedown)': 'setMousedown()',
-	                '(focus)': 'setKeyboardFocus()',
-	                '(blur)': 'removeKeyboardFocus()',
-	                '(click)': 'haltDisabledEvents($event)',
+	                '[class.md-button-focus]': '_isKeyboardFocused',
+	                '(mousedown)': '_setMousedown()',
+	                '(focus)': '_setKeyboardFocus()',
+	                '(blur)': '_removeKeyboardFocus()',
+	                '(click)': '_haltDisabledEvents($event)',
 	            },
-	            template: "<span class=\"md-button-wrapper\"><ng-content></ng-content></span> ",
-	            styles: ["/** * A collection of mixins and CSS classes that can be used to apply elevation to a material * element. * See: https://www.google.com/design/spec/what-is-material/elevation-shadows.html * Examples: * * * .md-foo { *   @include $md-elevation(2); * *   &:active { *     @include $md-elevation(8); *   } * } * * <div id=\"external-card\" class=\"md-elevation-z2\"><p>Some content</p></div> * * For an explanation of the design behind how elevation is implemented, see the design doc at * https://goo.gl/Kq0k9Z. */ /** * The css property used for elevation. In most cases this should not be changed. It is exposed * as a variable for abstraction / easy use when needing to reference the property directly, for * example in a will-change rule. */ /** The default duration value for elevation transitions. */ /** The default easing value for elevation transitions. */ /** * Applies the correct css rules to an element to give it the elevation specified by $zValue. * The $zValue must be between 0 and 24. */ /** * Returns a string that can be used as the value for a transition property for elevation. * Calling this function directly is useful in situations where a component needs to transition * more than one property. * * .foo { *   transition: md-elevation-transition-property-value(), opacity 100ms ease; *   will-change: $md-elevation-property, opacity; * } */ /** * Applies the correct css rules needed to have an element transition between elevations. * This mixin should be applied to elements whose elevation values will change depending on their * context (e.g. when active or disabled). */ /** Applies a property to an md-button element for each of the supported palettes. */ /** Applies a focus style to an md-button element for each of the supported palettes. */ [md-raised-button], [md-fab], [md-mini-fab], [md-button], [md-icon-button] { box-sizing: border-box; position: relative; background: transparent; text-align: center; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; outline: none; border: none; display: inline-block; white-space: nowrap; text-decoration: none; vertical-align: baseline; font-size: 14px; font-family: Roboto, \"Helvetica Neue\", sans-serif; font-weight: 500; color: currentColor; margin: 0; min-width: 88px; line-height: 36px; padding: 0 16px; border-radius: 3px; } .md-primary[md-raised-button], .md-primary[md-fab], .md-primary[md-mini-fab], .md-primary[md-button], .md-primary[md-icon-button] { color: #009688; } .md-accent[md-raised-button], .md-accent[md-fab], .md-accent[md-mini-fab], .md-accent[md-button], .md-accent[md-icon-button] { color: #9c27b0; } .md-warn[md-raised-button], .md-warn[md-fab], .md-warn[md-mini-fab], .md-warn[md-button], .md-warn[md-icon-button] { color: #f44336; } .md-primary[disabled][md-raised-button], .md-primary[disabled][md-fab], .md-primary[disabled][md-mini-fab], .md-primary[disabled][md-button], .md-primary[disabled][md-icon-button], .md-accent[disabled][md-raised-button], .md-accent[disabled][md-fab], .md-accent[disabled][md-mini-fab], .md-accent[disabled][md-button], .md-accent[disabled][md-icon-button], .md-warn[disabled][md-raised-button], .md-warn[disabled][md-fab], .md-warn[disabled][md-mini-fab], .md-warn[disabled][md-button], .md-warn[disabled][md-icon-button], [disabled][disabled][md-raised-button], [disabled][disabled][md-fab], [disabled][disabled][md-mini-fab], [disabled][disabled][md-button], [disabled][disabled][md-icon-button] { color: rgba(0, 0, 0, 0.38); } [disabled][md-raised-button], [disabled][md-fab], [disabled][md-mini-fab], [disabled][md-button], [disabled][md-icon-button] { cursor: default; } .md-button-focus[md-raised-button]::after, .md-button-focus[md-fab]::after, .md-button-focus[md-mini-fab]::after, .md-button-focus[md-button]::after, .md-button-focus[md-icon-button]::after { position: absolute; top: 0; left: 0; bottom: 0; right: 0; content: ''; background-color: rgba(0, 0, 0, 0.12); border-radius: inherit; pointer-events: none; } .md-button-focus.md-primary[md-raised-button]::after, .md-button-focus.md-primary[md-fab]::after, .md-button-focus.md-primary[md-mini-fab]::after, .md-button-focus.md-primary[md-button]::after, .md-button-focus.md-primary[md-icon-button]::after { background-color: rgba(0, 150, 136, 0.12); } .md-button-focus.md-accent[md-raised-button]::after, .md-button-focus.md-accent[md-fab]::after, .md-button-focus.md-accent[md-mini-fab]::after, .md-button-focus.md-accent[md-button]::after, .md-button-focus.md-accent[md-icon-button]::after { background-color: rgba(156, 39, 176, 0.12); } .md-button-focus.md-warn[md-raised-button]::after, .md-button-focus.md-warn[md-fab]::after, .md-button-focus.md-warn[md-mini-fab]::after, .md-button-focus.md-warn[md-button]::after, .md-button-focus.md-warn[md-icon-button]::after { background-color: rgba(244, 67, 54, 0.12); } [md-raised-button], [md-fab], [md-mini-fab] { box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12); background-color: #fafafa; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); -webkit-transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1); transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1); } .md-primary[md-raised-button], .md-primary[md-fab], .md-primary[md-mini-fab] { color: white; } .md-accent[md-raised-button], .md-accent[md-fab], .md-accent[md-mini-fab] { color: rgba(255, 255, 255, 0.870588); } .md-warn[md-raised-button], .md-warn[md-fab], .md-warn[md-mini-fab] { color: white; } .md-primary[disabled][md-raised-button], .md-primary[disabled][md-fab], .md-primary[disabled][md-mini-fab], .md-accent[disabled][md-raised-button], .md-accent[disabled][md-fab], .md-accent[disabled][md-mini-fab], .md-warn[disabled][md-raised-button], .md-warn[disabled][md-fab], .md-warn[disabled][md-mini-fab], [disabled][disabled][md-raised-button], [disabled][disabled][md-fab], [disabled][disabled][md-mini-fab] { color: rgba(0, 0, 0, 0.38); } .md-primary[md-raised-button], .md-primary[md-fab], .md-primary[md-mini-fab] { background-color: #009688; } .md-accent[md-raised-button], .md-accent[md-fab], .md-accent[md-mini-fab] { background-color: #9c27b0; } .md-warn[md-raised-button], .md-warn[md-fab], .md-warn[md-mini-fab] { background-color: #f44336; } .md-primary[disabled][md-raised-button], .md-primary[disabled][md-fab], .md-primary[disabled][md-mini-fab], .md-accent[disabled][md-raised-button], .md-accent[disabled][md-fab], .md-accent[disabled][md-mini-fab], .md-warn[disabled][md-raised-button], .md-warn[disabled][md-fab], .md-warn[disabled][md-mini-fab], [disabled][disabled][md-raised-button], [disabled][disabled][md-fab], [disabled][disabled][md-mini-fab] { background-color: rgba(0, 0, 0, 0.12); } [md-raised-button]:active, [md-fab]:active, [md-mini-fab]:active { box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12); } [disabled][md-raised-button], [disabled][md-fab], [disabled][md-mini-fab] { box-shadow: none; } [md-button][disabled]:hover.md-primary, [md-button][disabled]:hover.md-accent, [md-button][disabled]:hover.md-warn, [md-button][disabled]:hover:hover { background-color: transparent; } [md-fab] { min-width: 0; border-radius: 50%; background-color: #9c27b0; color: rgba(255, 255, 255, 0.870588); width: 56px; height: 56px; padding: 0; } [md-fab] i, [md-fab] md-icon { padding: 16px 0; } [md-mini-fab] { min-width: 0; border-radius: 50%; background-color: #9c27b0; color: rgba(255, 255, 255, 0.870588); width: 40px; height: 40px; padding: 0; } [md-mini-fab] i, [md-mini-fab] md-icon { padding: 8px 0; } [md-icon-button] { min-width: 0; padding: 0; width: 40px; height: 40px; line-height: 24px; border-radius: 50%; } [md-icon-button] .md-button-wrapper > * { vertical-align: middle; } [md-button]:hover::after, [md-icon-button]:hover::after { position: absolute; top: 0; left: 0; bottom: 0; right: 0; content: ''; background-color: rgba(0, 0, 0, 0.12); border-radius: inherit; pointer-events: none; } [md-button]:hover.md-primary::after, [md-icon-button]:hover.md-primary::after { background-color: rgba(0, 150, 136, 0.12); } [md-button]:hover.md-accent::after, [md-icon-button]:hover.md-accent::after { background-color: rgba(156, 39, 176, 0.12); } [md-button]:hover.md-warn::after, [md-icon-button]:hover.md-warn::after { background-color: rgba(244, 67, 54, 0.12); } @media screen and (-ms-high-contrast: active) { .md-raised-button, .md-fab, .md-mini-fab { border: 1px solid #fff; } } "],
+	            template: "<span class=\"md-button-wrapper\"><ng-content></ng-content></span> <div md-ripple *ngIf=\"isRippleEnabled()\" class=\"md-button-ripple\" [class.md-button-ripple-round]=\"isRoundButton()\" [md-ripple-trigger]=\"getHostElement()\" [md-ripple-color]=\"isRoundButton() ? 'rgba(255, 255, 255, 0.2)' : ''\" md-ripple-background-color=\"rgba(0, 0, 0, 0)\"></div> ",
+	            styles: ["/** * A collection of mixins and CSS classes that can be used to apply elevation to a material * element. * See: https://www.google.com/design/spec/what-is-material/elevation-shadows.html * Examples: * * * .md-foo { *   @include $md-elevation(2); * *   &:active { *     @include $md-elevation(8); *   } * } * * <div id=\"external-card\" class=\"md-elevation-z2\"><p>Some content</p></div> * * For an explanation of the design behind how elevation is implemented, see the design doc at * https://goo.gl/Kq0k9Z. */ /** * The css property used for elevation. In most cases this should not be changed. It is exposed * as a variable for abstraction / easy use when needing to reference the property directly, for * example in a will-change rule. */ /** The default duration value for elevation transitions. */ /** The default easing value for elevation transitions. */ /** * Applies the correct css rules to an element to give it the elevation specified by $zValue. * The $zValue must be between 0 and 24. */ /** * Returns a string that can be used as the value for a transition property for elevation. * Calling this function directly is useful in situations where a component needs to transition * more than one property. * * .foo { *   transition: md-elevation-transition-property-value(), opacity 100ms ease; *   will-change: $md-elevation-property, opacity; * } */ /** * Applies the correct css rules needed to have an element transition between elevations. * This mixin should be applied to elements whose elevation values will change depending on their * context (e.g. when active or disabled). */ /** * This mixin overrides default button styles like the gray background, * the border, and the outline. */ /** Applies a property to an md-button element for each of the supported palettes. */ /** Applies a focus style to an md-button element for each of the supported palettes. */ [md-raised-button], [md-fab], [md-mini-fab], [md-button], [md-icon-button] { box-sizing: border-box; position: relative; background: transparent; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; outline: none; border: none; display: inline-block; white-space: nowrap; text-decoration: none; vertical-align: baseline; font-size: 14px; font-family: Roboto, \"Helvetica Neue\", sans-serif; font-weight: 500; color: currentColor; text-align: center; margin: 0; min-width: 88px; line-height: 36px; padding: 0 16px; border-radius: 3px; } .md-primary[md-raised-button], .md-primary[md-fab], .md-primary[md-mini-fab], .md-primary[md-button], .md-primary[md-icon-button] { color: #009688; } .md-accent[md-raised-button], .md-accent[md-fab], .md-accent[md-mini-fab], .md-accent[md-button], .md-accent[md-icon-button] { color: #9c27b0; } .md-warn[md-raised-button], .md-warn[md-fab], .md-warn[md-mini-fab], .md-warn[md-button], .md-warn[md-icon-button] { color: #f44336; } .md-primary[disabled][md-raised-button], .md-primary[disabled][md-fab], .md-primary[disabled][md-mini-fab], .md-primary[disabled][md-button], .md-primary[disabled][md-icon-button], .md-accent[disabled][md-raised-button], .md-accent[disabled][md-fab], .md-accent[disabled][md-mini-fab], .md-accent[disabled][md-button], .md-accent[disabled][md-icon-button], .md-warn[disabled][md-raised-button], .md-warn[disabled][md-fab], .md-warn[disabled][md-mini-fab], .md-warn[disabled][md-button], .md-warn[disabled][md-icon-button], [disabled][disabled][md-raised-button], [disabled][disabled][md-fab], [disabled][disabled][md-mini-fab], [disabled][disabled][md-button], [disabled][disabled][md-icon-button] { color: rgba(0, 0, 0, 0.38); } [disabled][md-raised-button], [disabled][md-fab], [disabled][md-mini-fab], [disabled][md-button], [disabled][md-icon-button] { cursor: default; } .md-button-focus[md-raised-button]::after, .md-button-focus[md-fab]::after, .md-button-focus[md-mini-fab]::after, .md-button-focus[md-button]::after, .md-button-focus[md-icon-button]::after { position: absolute; top: 0; left: 0; bottom: 0; right: 0; content: ''; background-color: rgba(0, 0, 0, 0.12); border-radius: inherit; pointer-events: none; } .md-button-focus.md-primary[md-raised-button]::after, .md-button-focus.md-primary[md-fab]::after, .md-button-focus.md-primary[md-mini-fab]::after, .md-button-focus.md-primary[md-button]::after, .md-button-focus.md-primary[md-icon-button]::after { background-color: rgba(0, 150, 136, 0.12); } .md-button-focus.md-accent[md-raised-button]::after, .md-button-focus.md-accent[md-fab]::after, .md-button-focus.md-accent[md-mini-fab]::after, .md-button-focus.md-accent[md-button]::after, .md-button-focus.md-accent[md-icon-button]::after { background-color: rgba(156, 39, 176, 0.12); } .md-button-focus.md-warn[md-raised-button]::after, .md-button-focus.md-warn[md-fab]::after, .md-button-focus.md-warn[md-mini-fab]::after, .md-button-focus.md-warn[md-button]::after, .md-button-focus.md-warn[md-icon-button]::after { background-color: rgba(244, 67, 54, 0.12); } [md-raised-button], [md-fab], [md-mini-fab] { box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12); background-color: #fafafa; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); -webkit-transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1); transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1); } .md-primary[md-raised-button], .md-primary[md-fab], .md-primary[md-mini-fab] { color: white; } .md-accent[md-raised-button], .md-accent[md-fab], .md-accent[md-mini-fab] { color: rgba(255, 255, 255, 0.870588); } .md-warn[md-raised-button], .md-warn[md-fab], .md-warn[md-mini-fab] { color: white; } .md-primary[disabled][md-raised-button], .md-primary[disabled][md-fab], .md-primary[disabled][md-mini-fab], .md-accent[disabled][md-raised-button], .md-accent[disabled][md-fab], .md-accent[disabled][md-mini-fab], .md-warn[disabled][md-raised-button], .md-warn[disabled][md-fab], .md-warn[disabled][md-mini-fab], [disabled][disabled][md-raised-button], [disabled][disabled][md-fab], [disabled][disabled][md-mini-fab] { color: rgba(0, 0, 0, 0.38); } .md-primary[md-raised-button], .md-primary[md-fab], .md-primary[md-mini-fab] { background-color: #009688; } .md-accent[md-raised-button], .md-accent[md-fab], .md-accent[md-mini-fab] { background-color: #9c27b0; } .md-warn[md-raised-button], .md-warn[md-fab], .md-warn[md-mini-fab] { background-color: #f44336; } .md-primary[disabled][md-raised-button], .md-primary[disabled][md-fab], .md-primary[disabled][md-mini-fab], .md-accent[disabled][md-raised-button], .md-accent[disabled][md-fab], .md-accent[disabled][md-mini-fab], .md-warn[disabled][md-raised-button], .md-warn[disabled][md-fab], .md-warn[disabled][md-mini-fab], [disabled][disabled][md-raised-button], [disabled][disabled][md-fab], [disabled][disabled][md-mini-fab] { background-color: rgba(0, 0, 0, 0.12); } [md-raised-button]:active, [md-fab]:active, [md-mini-fab]:active { box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12); } [disabled][md-raised-button], [disabled][md-fab], [disabled][md-mini-fab] { box-shadow: none; } [md-button][disabled]:hover.md-primary, [md-button][disabled]:hover.md-accent, [md-button][disabled]:hover.md-warn, [md-button][disabled]:hover:hover { background-color: transparent; } [md-fab] { min-width: 0; border-radius: 50%; background-color: #9c27b0; color: rgba(255, 255, 255, 0.870588); width: 56px; height: 56px; padding: 0; } [md-fab] i, [md-fab] md-icon { padding: 16px 0; } [md-mini-fab] { min-width: 0; border-radius: 50%; background-color: #9c27b0; color: rgba(255, 255, 255, 0.870588); width: 40px; height: 40px; padding: 0; } [md-mini-fab] i, [md-mini-fab] md-icon { padding: 8px 0; } [md-icon-button] { min-width: 0; padding: 0; width: 40px; height: 40px; line-height: 24px; border-radius: 50%; } [md-icon-button] .md-button-wrapper > * { vertical-align: middle; } .md-button-ripple { position: absolute; top: 0; left: 0; bottom: 0; right: 0; } .md-button-ripple-round { border-radius: 50%; z-index: 1; } [md-button]:hover::after, [md-icon-button]:hover::after { position: absolute; top: 0; left: 0; bottom: 0; right: 0; content: ''; background-color: rgba(0, 0, 0, 0.12); border-radius: inherit; pointer-events: none; } [md-button]:hover.md-primary::after, [md-icon-button]:hover.md-primary::after { background-color: rgba(0, 150, 136, 0.12); } [md-button]:hover.md-accent::after, [md-icon-button]:hover.md-accent::after { background-color: rgba(156, 39, 176, 0.12); } [md-button]:hover.md-warn::after, [md-icon-button]:hover.md-warn::after { background-color: rgba(244, 67, 54, 0.12); } @media screen and (-ms-high-contrast: active) { .md-raised-button, .md-fab, .md-mini-fab { border: 1px solid #fff; } } "],
 	            encapsulation: core_1.ViewEncapsulation.None
 	        }), 
 	        __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer])
@@ -85878,11 +87171,399 @@ webpackJsonp([0],[
 	    return MdAnchor;
 	}(MdButton));
 	exports.MdAnchor = MdAnchor;
+	/** @deprecated */
 	exports.MD_BUTTON_DIRECTIVES = [MdButton, MdAnchor];
+	var MdButtonModule = (function () {
+	    function MdButtonModule() {
+	    }
+	    MdButtonModule = __decorate([
+	        core_1.NgModule({
+	            imports: [common_1.CommonModule, ripple_1.MdRippleModule],
+	            exports: exports.MD_BUTTON_DIRECTIVES,
+	            declarations: exports.MD_BUTTON_DIRECTIVES,
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], MdButtonModule);
+	    return MdButtonModule;
+	}());
+	exports.MdButtonModule = MdButtonModule;
 	//# sourceMappingURL=button.js.map
 
 /***/ },
-/* 692 */
+/* 694 */
+/***/ function(module, exports) {
+
+	"use strict";
+	/**
+	 * Annotation Factory that allows HTML style boolean attributes. For example,
+	 * a field declared like this:
+
+	 * @Directive({ selector: 'component' }) class MyComponent {
+	 *   @Input() @BooleanFieldValueFactory() myField: boolean;
+	 * }
+	 *
+	 * You could set it up this way:
+	 *   <component myField>
+	 * or:
+	 *   <component myField="">
+	 * @deprecated
+	 */
+	function booleanFieldValueFactory() {
+	    return function booleanFieldValueMetadata(target, key) {
+	        var defaultValue = target[key];
+	        var localKey = "__md_private_symbol_" + key;
+	        target[localKey] = defaultValue;
+	        Object.defineProperty(target, key, {
+	            get: function () { return this[localKey]; },
+	            set: function (value) {
+	                this[localKey] = value != null && "" + value !== 'false';
+	            }
+	        });
+	    };
+	}
+	exports.BooleanFieldValue = booleanFieldValueFactory;
+	//# sourceMappingURL=field-value.js.map
+
+/***/ },
+/* 695 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(5);
+	var ripple_renderer_1 = __webpack_require__(696);
+	var MdRipple = (function () {
+	    function MdRipple(_elementRef) {
+	        var _this = this;
+	        /**
+	         * If set, the radius in pixels of foreground ripples when fully expanded. If unset, the radius
+	         * will be the distance from the center of the ripple to the furthest corner of the host element's
+	         * bounding rectangle.
+	         */
+	        this.maxRadius = 0;
+	        /**
+	         * If set, the normal duration of ripple animations is divided by this value. For example,
+	         * setting it to 0.5 will cause the animations to take twice as long.
+	         */
+	        this.speedFactor = 1;
+	        // These event handlers are attached to the element that triggers the ripple animations.
+	        var eventHandlers = new Map();
+	        eventHandlers.set('mousedown', function (event) { return _this._mouseDown(event); });
+	        eventHandlers.set('click', function (event) { return _this._click(event); });
+	        eventHandlers.set('mouseleave', function (event) { return _this._mouseLeave(event); });
+	        this._rippleRenderer = new ripple_renderer_1.RippleRenderer(_elementRef, eventHandlers);
+	    }
+	    /** TODO: internal */
+	    MdRipple.prototype.ngOnInit = function () {
+	        // If no trigger element was explicity set, use the host element
+	        if (!this.trigger) {
+	            this._rippleRenderer.setTriggerElementToHost();
+	        }
+	    };
+	    /** TODO: internal */
+	    MdRipple.prototype.ngOnDestroy = function () {
+	        // Remove event listeners on the trigger element.
+	        this._rippleRenderer.clearTriggerElement();
+	    };
+	    /** TODO: internal */
+	    MdRipple.prototype.ngOnChanges = function (changes) {
+	        // If the trigger element changed (or is being initially set), add event listeners to it.
+	        var changedInputs = Object.keys(changes);
+	        if (changedInputs.indexOf('trigger') !== -1) {
+	            this._rippleRenderer.setTriggerElement(this.trigger);
+	        }
+	    };
+	    /**
+	     * Responds to the start of a ripple animation trigger by fading the background in.
+	     */
+	    MdRipple.prototype.start = function () {
+	        this._rippleRenderer.fadeInRippleBackground(this.backgroundColor);
+	    };
+	    /**
+	     * Responds to the end of a ripple animation trigger by fading the background out, and creating a
+	     * foreground ripple that expands from the event location (or from the center of the element if
+	     * the "centered" property is set or forceCenter is true).
+	     */
+	    MdRipple.prototype.end = function (left, top, forceCenter) {
+	        var _this = this;
+	        if (forceCenter === void 0) { forceCenter = true; }
+	        this._rippleRenderer.createForegroundRipple(left, top, this.color, this.centered || forceCenter, this.maxRadius, this.speedFactor, function (ripple, e) { return _this._rippleTransitionEnded(ripple, e); });
+	        this._rippleRenderer.fadeOutRippleBackground();
+	    };
+	    MdRipple.prototype._rippleTransitionEnded = function (ripple, event) {
+	        if (event.propertyName === 'opacity') {
+	            // If the ripple finished expanding, start fading it out. If it finished fading out,
+	            // remove it from the DOM.
+	            switch (ripple.state) {
+	                case ripple_renderer_1.ForegroundRippleState.EXPANDING:
+	                    this._rippleRenderer.fadeOutForegroundRipple(ripple.rippleElement);
+	                    ripple.state = ripple_renderer_1.ForegroundRippleState.FADING_OUT;
+	                    break;
+	                case ripple_renderer_1.ForegroundRippleState.FADING_OUT:
+	                    this._rippleRenderer.removeRippleFromDom(ripple.rippleElement);
+	                    break;
+	            }
+	        }
+	    };
+	    /**
+	     * Called when the trigger element receives a mousedown event. Starts the ripple animation by
+	     * fading in the background.
+	     */
+	    MdRipple.prototype._mouseDown = function (event) {
+	        if (!this.disabled && event.button === 0) {
+	            this.start();
+	        }
+	    };
+	    /**
+	     * Called when the trigger element receives a click event. Creates a foreground ripple and
+	     * runs its animation.
+	     */
+	    MdRipple.prototype._click = function (event) {
+	        if (!this.disabled && event.button === 0) {
+	            // If screen and page positions are all 0, this was probably triggered by a keypress.
+	            // In that case, use the center of the bounding rect as the ripple origin.
+	            // FIXME: This fails on IE11, which still sets pageX/Y and screenX/Y on keyboard clicks.
+	            var isKeyEvent = (event.screenX === 0 && event.screenY === 0 && event.pageX === 0 && event.pageY === 0);
+	            this.end(event.pageX, event.pageY, isKeyEvent);
+	        }
+	    };
+	    /**
+	     * Called when the trigger element receives a mouseleave event. Fades out the background.
+	     */
+	    MdRipple.prototype._mouseLeave = function (event) {
+	        // We can always fade out the background here; It's a no-op if it was already inactive.
+	        this._rippleRenderer.fadeOutRippleBackground();
+	    };
+	    __decorate([
+	        core_1.Input('md-ripple-trigger'), 
+	        __metadata('design:type', Object)
+	    ], MdRipple.prototype, "trigger", void 0);
+	    __decorate([
+	        core_1.Input('md-ripple-centered'), 
+	        __metadata('design:type', Boolean)
+	    ], MdRipple.prototype, "centered", void 0);
+	    __decorate([
+	        core_1.Input('md-ripple-disabled'), 
+	        __metadata('design:type', Boolean)
+	    ], MdRipple.prototype, "disabled", void 0);
+	    __decorate([
+	        core_1.Input('md-ripple-max-radius'), 
+	        __metadata('design:type', Number)
+	    ], MdRipple.prototype, "maxRadius", void 0);
+	    __decorate([
+	        core_1.Input('md-ripple-speed-factor'), 
+	        __metadata('design:type', Number)
+	    ], MdRipple.prototype, "speedFactor", void 0);
+	    __decorate([
+	        core_1.Input('md-ripple-color'), 
+	        __metadata('design:type', String)
+	    ], MdRipple.prototype, "color", void 0);
+	    __decorate([
+	        core_1.Input('md-ripple-background-color'), 
+	        __metadata('design:type', String)
+	    ], MdRipple.prototype, "backgroundColor", void 0);
+	    __decorate([
+	        core_1.HostBinding('class.md-ripple-focused'),
+	        core_1.Input('md-ripple-focused'), 
+	        __metadata('design:type', Boolean)
+	    ], MdRipple.prototype, "focused", void 0);
+	    __decorate([
+	        core_1.HostBinding('class.md-ripple-unbounded'),
+	        core_1.Input('md-ripple-unbounded'), 
+	        __metadata('design:type', Boolean)
+	    ], MdRipple.prototype, "unbounded", void 0);
+	    MdRipple = __decorate([
+	        core_1.Directive({
+	            selector: '[md-ripple]',
+	        }), 
+	        __metadata('design:paramtypes', [core_1.ElementRef])
+	    ], MdRipple);
+	    return MdRipple;
+	}());
+	exports.MdRipple = MdRipple;
+	/** @deprecated */
+	exports.MD_RIPPLE_DIRECTIVES = [MdRipple];
+	var MdRippleModule = (function () {
+	    function MdRippleModule() {
+	    }
+	    MdRippleModule = __decorate([
+	        core_1.NgModule({
+	            exports: exports.MD_RIPPLE_DIRECTIVES,
+	            declarations: exports.MD_RIPPLE_DIRECTIVES,
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], MdRippleModule);
+	    return MdRippleModule;
+	}());
+	exports.MdRippleModule = MdRippleModule;
+	//# sourceMappingURL=ripple.js.map
+
+/***/ },
+/* 696 */
+/***/ function(module, exports) {
+
+	"use strict";
+	/** TODO: internal */
+	(function (ForegroundRippleState) {
+	    ForegroundRippleState[ForegroundRippleState["NEW"] = 0] = "NEW";
+	    ForegroundRippleState[ForegroundRippleState["EXPANDING"] = 1] = "EXPANDING";
+	    ForegroundRippleState[ForegroundRippleState["FADING_OUT"] = 2] = "FADING_OUT";
+	})(exports.ForegroundRippleState || (exports.ForegroundRippleState = {}));
+	var ForegroundRippleState = exports.ForegroundRippleState;
+	/**
+	 * Wrapper for a foreground ripple DOM element and its animation state.
+	 * TODO: internal
+	 */
+	var ForegroundRipple = (function () {
+	    function ForegroundRipple(rippleElement) {
+	        this.rippleElement = rippleElement;
+	        this.state = ForegroundRippleState.NEW;
+	    }
+	    return ForegroundRipple;
+	}());
+	exports.ForegroundRipple = ForegroundRipple;
+	var RIPPLE_SPEED_PX_PER_SECOND = 1000;
+	var MIN_RIPPLE_FILL_TIME_SECONDS = 0.1;
+	var MAX_RIPPLE_FILL_TIME_SECONDS = 0.3;
+	/**
+	 * Returns the distance from the point (x, y) to the furthest corner of a rectangle.
+	 */
+	var distanceToFurthestCorner = function (x, y, rect) {
+	    var distX = Math.max(Math.abs(x - rect.left), Math.abs(x - rect.right));
+	    var distY = Math.max(Math.abs(y - rect.top), Math.abs(y - rect.bottom));
+	    return Math.sqrt(distX * distX + distY * distY);
+	};
+	/**
+	 * Helper service that performs DOM manipulations. Not intended to be used outside this module.
+	 * The constructor takes a reference to the ripple directive's host element and a map of DOM
+	 * event handlers to be installed on the element that triggers ripple animations.
+	 * This will eventually become a custom renderer once Angular support exists.
+	 * TODO: internal
+	 */
+	var RippleRenderer = (function () {
+	    function RippleRenderer(_elementRef, _eventHandlers) {
+	        this._eventHandlers = _eventHandlers;
+	        this._rippleElement = _elementRef.nativeElement;
+	        // It might be nice to delay creating the background until it's needed, but doing this in
+	        // fadeInRippleBackground causes the first click event to not be handled reliably.
+	        this._backgroundDiv = document.createElement('div');
+	        this._backgroundDiv.classList.add('md-ripple-background');
+	        this._rippleElement.appendChild(this._backgroundDiv);
+	    }
+	    /**
+	     * Installs event handlers on the given trigger element, and removes event handlers from the
+	     * previous trigger if needed.
+	     */
+	    RippleRenderer.prototype.setTriggerElement = function (newTrigger) {
+	        var _this = this;
+	        if (this._triggerElement !== newTrigger) {
+	            if (this._triggerElement) {
+	                this._eventHandlers.forEach(function (eventHandler, eventName) {
+	                    _this._triggerElement.removeEventListener(eventName, eventHandler);
+	                });
+	            }
+	            this._triggerElement = newTrigger;
+	            if (this._triggerElement) {
+	                this._eventHandlers.forEach(function (eventHandler, eventName) {
+	                    _this._triggerElement.addEventListener(eventName, eventHandler);
+	                });
+	            }
+	        }
+	    };
+	    /**
+	     * Installs event handlers on the host element of the md-ripple directive.
+	     */
+	    RippleRenderer.prototype.setTriggerElementToHost = function () {
+	        this.setTriggerElement(this._rippleElement);
+	    };
+	    /**
+	     * Removes event handlers from the current trigger element if needed.
+	     */
+	    RippleRenderer.prototype.clearTriggerElement = function () {
+	        this.setTriggerElement(null);
+	    };
+	    /**
+	     * Creates a foreground ripple and sets its animation to expand and fade in from the position
+	     * given by rippleOriginLeft and rippleOriginTop (or from the center of the <md-ripple>
+	     * bounding rect if centered is true).
+	     */
+	    RippleRenderer.prototype.createForegroundRipple = function (rippleOriginLeft, rippleOriginTop, color, centered, radius, speedFactor, transitionEndCallback) {
+	        var parentRect = this._rippleElement.getBoundingClientRect();
+	        // Create a foreground ripple div with the size and position of the fully expanded ripple.
+	        // When the div is created, it's given a transform style that causes the ripple to be displayed
+	        // small and centered on the event location (or the center of the bounding rect if the centered
+	        // argument is true). Removing that transform causes the ripple to animate to its natural size.
+	        var startX = centered ? (parentRect.left + parentRect.width / 2) : rippleOriginLeft;
+	        var startY = centered ? (parentRect.top + parentRect.height / 2) : rippleOriginTop;
+	        var offsetX = startX - parentRect.left;
+	        var offsetY = startY - parentRect.top;
+	        var maxRadius = radius > 0 ? radius : distanceToFurthestCorner(startX, startY, parentRect);
+	        var rippleDiv = document.createElement('div');
+	        this._rippleElement.appendChild(rippleDiv);
+	        rippleDiv.classList.add('md-ripple-foreground');
+	        rippleDiv.style.left = (offsetX - maxRadius) + "px";
+	        rippleDiv.style.top = (offsetY - maxRadius) + "px";
+	        rippleDiv.style.width = 2 * maxRadius + "px";
+	        rippleDiv.style.height = rippleDiv.style.width;
+	        // If color input is not set, this will default to the background color defined in CSS.
+	        rippleDiv.style.backgroundColor = color;
+	        // Start the ripple tiny.
+	        rippleDiv.style.transform = "scale(0.001)";
+	        var fadeInSeconds = (1 / (speedFactor || 1)) * Math.max(MIN_RIPPLE_FILL_TIME_SECONDS, Math.min(MAX_RIPPLE_FILL_TIME_SECONDS, maxRadius / RIPPLE_SPEED_PX_PER_SECOND));
+	        rippleDiv.style.transitionDuration = fadeInSeconds + "s";
+	        // https://timtaubert.de/blog/2012/09/css-transitions-for-dynamically-created-dom-elements/
+	        window.getComputedStyle(rippleDiv).opacity;
+	        rippleDiv.classList.add('md-ripple-fade-in');
+	        // Clearing the transform property causes the ripple to animate to its full size.
+	        rippleDiv.style.transform = '';
+	        var ripple = new ForegroundRipple(rippleDiv);
+	        ripple.state = ForegroundRippleState.EXPANDING;
+	        rippleDiv.addEventListener('transitionend', function (event) { return transitionEndCallback(ripple, event); });
+	    };
+	    /**
+	     * Fades out a foreground ripple after it has fully expanded and faded in.
+	     */
+	    RippleRenderer.prototype.fadeOutForegroundRipple = function (ripple) {
+	        ripple.classList.remove('md-ripple-fade-in');
+	        ripple.classList.add('md-ripple-fade-out');
+	    };
+	    /**
+	     * Removes a foreground ripple from the DOM after it has faded out.
+	     */
+	    RippleRenderer.prototype.removeRippleFromDom = function (ripple) {
+	        ripple.parentElement.removeChild(ripple);
+	    };
+	    /**
+	     * Fades in the ripple background.
+	     */
+	    RippleRenderer.prototype.fadeInRippleBackground = function (color) {
+	        this._backgroundDiv.classList.add('md-ripple-active');
+	        // If color is not set, this will default to the background color defined in CSS.
+	        this._backgroundDiv.style.backgroundColor = color;
+	    };
+	    /**
+	     * Fades out the ripple background.
+	     */
+	    RippleRenderer.prototype.fadeOutRippleBackground = function () {
+	        if (this._backgroundDiv) {
+	            this._backgroundDiv.classList.remove('md-ripple-active');
+	        }
+	    };
+	    return RippleRenderer;
+	}());
+	exports.RippleRenderer = RippleRenderer;
+	//# sourceMappingURL=ripple-renderer.js.map
+
+/***/ },
+/* 697 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85901,15 +87582,17 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
+	var forms_1 = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"@angular/forms\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	var common_1 = __webpack_require__(2);
-	var field_value_1 = __webpack_require__(693);
+	var field_value_1 = __webpack_require__(694);
 	var error_1 = __webpack_require__(347);
 	var Observable_1 = __webpack_require__(38);
 	var noop = function () { };
-	exports.MD_INPUT_CONTROL_VALUE_ACCESSOR = new core_1.Provider(common_1.NG_VALUE_ACCESSOR, {
+	exports.MD_INPUT_CONTROL_VALUE_ACCESSOR = {
+	    provide: forms_1.NG_VALUE_ACCESSOR,
 	    useExisting: core_1.forwardRef(function () { return MdInput; }),
 	    multi: true
-	});
+	};
 	// Invalid input type. Using one of these will throw an MdInputUnsupportedTypeError.
 	var MD_INPUT_INVALID_INPUT_TYPE = [
 	    'file',
@@ -86080,24 +87763,20 @@ webpackJsonp([0],[
 	    MdInput.prototype.focus = function () {
 	        this._inputElement.nativeElement.focus();
 	    };
-	    /** @internal */
-	    MdInput.prototype.handleFocus = function (event) {
+	    MdInput.prototype._handleFocus = function (event) {
 	        this._focused = true;
 	        this._focusEmitter.emit(event);
 	    };
-	    /** @internal */
-	    MdInput.prototype.handleBlur = function (event) {
+	    MdInput.prototype._handleBlur = function (event) {
 	        this._focused = false;
 	        this._onTouchedCallback();
 	        this._blurEmitter.emit(event);
 	    };
-	    /** @internal */
-	    MdInput.prototype.handleChange = function (event) {
+	    MdInput.prototype._handleChange = function (event) {
 	        this.value = event.target.value;
 	        this._onTouchedCallback();
 	    };
-	    /** @internal */
-	    MdInput.prototype.hasPlaceholder = function () {
+	    MdInput.prototype._hasPlaceholder = function () {
 	        return !!this.placeholder || this._placeholderChild != null;
 	    };
 	    /**
@@ -86236,6 +87915,14 @@ webpackJsonp([0],[
 	        __metadata('design:type', String)
 	    ], MdInput.prototype, "autoComplete", void 0);
 	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', String)
+	    ], MdInput.prototype, "autoCorrect", void 0);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', String)
+	    ], MdInput.prototype, "autoCapitalize", void 0);
+	    __decorate([
 	        core_1.Input(),
 	        field_value_1.BooleanFieldValue(), 
 	        __metadata('design:type', Boolean)
@@ -86255,7 +87942,7 @@ webpackJsonp([0],[
 	    ], MdInput.prototype, "list", void 0);
 	    __decorate([
 	        core_1.Input(), 
-	        __metadata('design:type', String)
+	        __metadata('design:type', Object)
 	    ], MdInput.prototype, "max", void 0);
 	    __decorate([
 	        core_1.Input(), 
@@ -86263,7 +87950,7 @@ webpackJsonp([0],[
 	    ], MdInput.prototype, "maxLength", void 0);
 	    __decorate([
 	        core_1.Input(), 
-	        __metadata('design:type', String)
+	        __metadata('design:type', Object)
 	    ], MdInput.prototype, "min", void 0);
 	    __decorate([
 	        core_1.Input(), 
@@ -86325,13 +88012,10 @@ webpackJsonp([0],[
 	        __metadata('design:type', core_1.ElementRef)
 	    ], MdInput.prototype, "_inputElement", void 0);
 	    MdInput = __decorate([
-	        core_1.Component({
-	            moduleId: module.id,
-	            selector: 'md-input',
-	            template: "<div class=\"md-input-wrapper\"> <div class=\"md-input-table\"> <div class=\"md-input-prefix\"><ng-content select=\"[md-prefix]\"></ng-content></div> <div class=\"md-input-infix\"> <input #input aria-target class=\"md-input-element\" [class.md-end]=\"align == 'end'\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledBy\" [attr.aria-disabled]=\"ariaDisabled\" [attr.aria-required]=\"ariaRequired\" [attr.aria-invalid]=\"ariaInvalid\" [attr.autocomplete]=\"autoComplete\" [autofocus]=\"autoFocus\" [disabled]=\"disabled\" [id]=\"inputId\" [attr.list]=\"list\" [attr.max]=\"max\" [attr.maxlength]=\"maxLength\" [attr.min]=\"min\" [attr.minlength]=\"minLength\" [readonly]=\"readOnly\" [required]=\"required\" [spellcheck]=\"spellCheck\" [attr.step]=\"step\" [attr.tabindex]=\"tabIndex\" [type]=\"type\" [attr.name]=\"name\" (focus)=\"handleFocus($event)\" (blur)=\"handleBlur($event)\" [(ngModel)]=\"value\" (change)=\"handleChange($event)\"> <label class=\"md-input-placeholder\" [attr.for]=\"inputId\" [class.md-empty]=\"empty\" [class.md-focused]=\"focused\" [class.md-float]=\"floatingPlaceholder\" [class.md-accent]=\"dividerColor == 'accent'\" [class.md-warn]=\"dividerColor == 'warn'\" *ngIf=\"hasPlaceholder()\"> <ng-content select=\"md-placeholder\"></ng-content> {{placeholder}} <span class=\"md-placeholder-required\" *ngIf=\"required\">*</span> </label> </div> <div class=\"md-input-suffix\"><ng-content select=\"[md-suffix]\"></ng-content></div> </div> <div class=\"md-input-underline\" [class.md-disabled]=\"disabled\"> <span class=\"md-input-ripple\" [class.md-focused]=\"focused\" [class.md-accent]=\"dividerColor == 'accent'\" [class.md-warn]=\"dividerColor == 'warn'\"></span> </div> <div *ngIf=\"hintLabel != ''\" class=\"md-hint\">{{hintLabel}}</div> <ng-content select=\"md-hint\"></ng-content> </div> ",
-	            styles: ["/** * Mixin that creates a new stacking context. * see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context */ /** * This mixin hides an element visually. * That means it's still accessible for screen-readers but not visible in view. */ /** * Forces an element to grow to fit floated contents; used as as an alternative to * `overflow: hidden;` because it doesn't cut off contents. */ /** * A mixin, which generates temporary ink ripple on a given component. * When $bindToParent is set to true, it will check for the focused class on the same selector as you included * that mixin. * It is also possible to specify the color palette of the temporary ripple. By default it uses the * accent palette for its background. */ /** * Undo the red box-shadow glow added by Firefox on invalid inputs. * See https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-ui-invalid */ :-moz-ui-invalid { box-shadow: none; } /** * Applies a floating placeholder above the input itself. */ :host { display: inline-block; position: relative; font-family: Roboto, \"Helvetica Neue\", sans-serif; overflow: hidden; text-align: left; } :host .md-input-wrapper { margin: 16px 0; } :host .md-input-table { display: inline-table; -ms-flex-flow: column; flex-flow: column; vertical-align: bottom; width: 100%; } :host .md-input-table > * { display: table-cell; } :host .md-input-element { font: inherit; background: transparent; border: none; outline: none; padding: 0; width: 100%; } :host .md-input-element.md-end { text-align: right; } :host .md-input-infix { position: relative; } :host .md-input-placeholder { position: absolute; left: 0; top: 0; font-size: 100%; pointer-events: none; color: rgba(0, 0, 0, 0.38); z-index: 1; width: 100%; display: none; white-space: nowrap; text-overflow: ellipsis; overflow-x: hidden; -webkit-transform: translateY(0); transform: translateY(0); -webkit-transform-origin: bottom left; transform-origin: bottom left; -webkit-transition: scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1), color 400ms cubic-bezier(0.25, 0.8, 0.25, 1), width 400ms cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); transition: scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1), color 400ms cubic-bezier(0.25, 0.8, 0.25, 1), width 400ms cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1), color 400ms cubic-bezier(0.25, 0.8, 0.25, 1), width 400ms cubic-bezier(0.25, 0.8, 0.25, 1); transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1), color 400ms cubic-bezier(0.25, 0.8, 0.25, 1), width 400ms cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); } :host .md-input-placeholder.md-empty { display: block; cursor: text; } :host .md-input-placeholder.md-float:not(.md-empty), :host .md-input-placeholder.md-float.md-focused { display: block; padding-bottom: 5px; -webkit-transform: translateY(-100%) scale(0.75); transform: translateY(-100%) scale(0.75); width: 133.33333%; } :host .md-input-placeholder.md-float:not(.md-empty) .md-placeholder-required, :host .md-input-placeholder.md-float.md-focused .md-placeholder-required { color: #9c27b0; } :host .md-input-placeholder.md-focused { color: #009688; } :host .md-input-placeholder.md-focused.md-accent { color: #9c27b0; } :host .md-input-placeholder.md-focused.md-warn { color: #f44336; } :host input:-webkit-autofill + .md-input-placeholder { display: block; padding-bottom: 5px; -webkit-transform: translateY(-100%) scale(0.75); transform: translateY(-100%) scale(0.75); width: 133.33333%; } :host input:-webkit-autofill + .md-input-placeholder .md-placeholder-required { color: #9c27b0; } :host .md-input-underline { position: absolute; height: 1px; width: 100%; margin-top: 4px; border-top: 1px solid rgba(0, 0, 0, 0.38); } :host .md-input-underline.md-disabled { border-top: 0; background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 33%, transparent 0%); background-image: linear-gradient(to right, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 33%, transparent 0%); background-position: 0; background-size: 4px 1px; background-repeat: repeat-x; } :host .md-input-underline .md-input-ripple { position: absolute; height: 2px; z-index: 1; background-color: #009688; top: -1px; width: 100%; -webkit-transform-origin: top; transform-origin: top; opacity: 0; -webkit-transform: scaleY(0); transform: scaleY(0); -webkit-transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1); transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); } :host .md-input-underline .md-input-ripple.md-accent { background-color: #9c27b0; } :host .md-input-underline .md-input-ripple.md-warn { background-color: #f44336; } :host .md-input-underline .md-input-ripple.md-focused { opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1); } :host .md-hint { position: absolute; font-size: 75%; bottom: -0.5em; } :host .md-hint.md-right { right: 0; } :host-context([dir='rtl']) { text-align: right; } :host-context([dir='rtl']) .md-input-placeholder { -webkit-transform-origin: bottom right; transform-origin: bottom right; } :host-context([dir='rtl']) .md-input-element.md-end { text-align: left; } :host-context([dir='rtl']) .md-hint { right: 0; left: auto; } :host-context([dir='rtl']) .md-hint.md-right { right: auto; left: 0; } "],
+	        core_1.Component({            selector: 'md-input',
+	            template: "<div class=\"md-input-wrapper\"> <div class=\"md-input-table\"> <div class=\"md-input-prefix\"><ng-content select=\"[md-prefix]\"></ng-content></div> <div class=\"md-input-infix\"> <input #input aria-target class=\"md-input-element\" [class.md-end]=\"align == 'end'\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledBy\" [attr.aria-disabled]=\"ariaDisabled\" [attr.aria-required]=\"ariaRequired\" [attr.aria-invalid]=\"ariaInvalid\" [attr.autocomplete]=\"autoComplete\" [attr.autocorrect]=\"autoCorrect\" [attr.autocapitalize]=\"autoCapitalize\" [autofocus]=\"autoFocus\" [disabled]=\"disabled\" [id]=\"inputId\" [attr.list]=\"list\" [attr.max]=\"max\" [attr.maxlength]=\"maxLength\" [attr.min]=\"min\" [attr.minlength]=\"minLength\" [readonly]=\"readOnly\" [required]=\"required\" [spellcheck]=\"spellCheck\" [attr.step]=\"step\" [attr.tabindex]=\"tabIndex\" [type]=\"type\" [attr.name]=\"name\" (focus)=\"_handleFocus($event)\" (blur)=\"_handleBlur($event)\" [(ngModel)]=\"value\" (change)=\"_handleChange($event)\"> <label class=\"md-input-placeholder\" [attr.for]=\"inputId\" [class.md-empty]=\"empty\" [class.md-focused]=\"focused\" [class.md-float]=\"floatingPlaceholder\" [class.md-accent]=\"dividerColor == 'accent'\" [class.md-warn]=\"dividerColor == 'warn'\" *ngIf=\"_hasPlaceholder()\"> <ng-content select=\"md-placeholder\"></ng-content> {{placeholder}} <span class=\"md-placeholder-required\" *ngIf=\"required\">*</span> </label> </div> <div class=\"md-input-suffix\"><ng-content select=\"[md-suffix]\"></ng-content></div> </div> <div class=\"md-input-underline\" [class.md-disabled]=\"disabled\"> <span class=\"md-input-ripple\" [class.md-focused]=\"focused\" [class.md-accent]=\"dividerColor == 'accent'\" [class.md-warn]=\"dividerColor == 'warn'\"></span> </div> <div *ngIf=\"hintLabel != ''\" class=\"md-hint\">{{hintLabel}}</div> <ng-content select=\"md-hint\"></ng-content> </div> ",
+	            styles: ["/** * Mixin that creates a new stacking context. * see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context */ /** * This mixin hides an element visually. * That means it's still accessible for screen-readers but not visible in view. */ /** * Forces an element to grow to fit floated contents; used as as an alternative to * `overflow: hidden;` because it doesn't cut off contents. */ /** * A mixin, which generates temporary ink ripple on a given component. * When $bindToParent is set to true, it will check for the focused class on the same selector as you included * that mixin. * It is also possible to specify the color palette of the temporary ripple. By default it uses the * accent palette for its background. */ /** * Undo the red box-shadow glow added by Firefox on invalid inputs. * See https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-ui-invalid */ :-moz-ui-invalid { box-shadow: none; } /** * Applies a floating placeholder above the input itself. */ :host { display: inline-block; position: relative; font-family: Roboto, \"Helvetica Neue\", sans-serif; text-align: left; } :host .md-input-wrapper { margin: 16px 0; } :host .md-input-table { display: inline-table; -ms-flex-flow: column; flex-flow: column; vertical-align: bottom; width: 100%; } :host .md-input-table > * { display: table-cell; } :host .md-input-element { font: inherit; background: transparent; border: none; outline: none; padding: 0; width: 100%; } :host .md-input-element.md-end { text-align: right; } :host .md-input-infix { position: relative; } :host .md-input-placeholder { position: absolute; left: 0; top: 0; font-size: 100%; pointer-events: none; color: rgba(0, 0, 0, 0.38); z-index: 1; width: 100%; display: none; white-space: nowrap; text-overflow: ellipsis; overflow-x: hidden; -webkit-transform: translateY(0); transform: translateY(0); -webkit-transform-origin: bottom left; transform-origin: bottom left; -webkit-transition: scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1), color 400ms cubic-bezier(0.25, 0.8, 0.25, 1), width 400ms cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); transition: scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1), color 400ms cubic-bezier(0.25, 0.8, 0.25, 1), width 400ms cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1), color 400ms cubic-bezier(0.25, 0.8, 0.25, 1), width 400ms cubic-bezier(0.25, 0.8, 0.25, 1); transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1), color 400ms cubic-bezier(0.25, 0.8, 0.25, 1), width 400ms cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); } :host .md-input-placeholder.md-empty { display: block; cursor: text; } :host .md-input-placeholder.md-float:not(.md-empty), :host .md-input-placeholder.md-float.md-focused { display: block; padding-bottom: 5px; -webkit-transform: translateY(-100%) scale(0.75); transform: translateY(-100%) scale(0.75); width: 133.33333%; } :host .md-input-placeholder.md-float:not(.md-empty) .md-placeholder-required, :host .md-input-placeholder.md-float.md-focused .md-placeholder-required { color: #9c27b0; } :host .md-input-placeholder.md-focused { color: #009688; } :host .md-input-placeholder.md-focused.md-accent { color: #9c27b0; } :host .md-input-placeholder.md-focused.md-warn { color: #f44336; } :host input:-webkit-autofill + .md-input-placeholder { display: block; padding-bottom: 5px; -webkit-transform: translateY(-100%) scale(0.75); transform: translateY(-100%) scale(0.75); width: 133.33333%; } :host input:-webkit-autofill + .md-input-placeholder .md-placeholder-required { color: #9c27b0; } :host .md-input-underline { position: absolute; height: 1px; width: 100%; margin-top: 4px; border-top: 1px solid rgba(0, 0, 0, 0.38); } :host .md-input-underline.md-disabled { border-top: 0; background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 33%, transparent 0%); background-image: linear-gradient(to right, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 33%, transparent 0%); background-position: 0; background-size: 4px 1px; background-repeat: repeat-x; } :host .md-input-underline .md-input-ripple { position: absolute; height: 2px; z-index: 1; background-color: #009688; top: -1px; width: 100%; -webkit-transform-origin: top; transform-origin: top; opacity: 0; -webkit-transform: scaleY(0); transform: scaleY(0); -webkit-transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1); transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); } :host .md-input-underline .md-input-ripple.md-accent { background-color: #9c27b0; } :host .md-input-underline .md-input-ripple.md-warn { background-color: #f44336; } :host .md-input-underline .md-input-ripple.md-focused { opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1); } :host .md-hint { position: absolute; font-size: 75%; bottom: -0.5em; } :host .md-hint.md-right { right: 0; } :host-context([dir='rtl']) { text-align: right; } :host-context([dir='rtl']) .md-input-placeholder { -webkit-transform-origin: bottom right; transform-origin: bottom right; } :host-context([dir='rtl']) .md-input-element.md-end { text-align: left; } :host-context([dir='rtl']) .md-hint { right: 0; left: auto; } :host-context([dir='rtl']) .md-hint.md-right { right: auto; left: 0; } "],
 	            providers: [exports.MD_INPUT_CONTROL_VALUE_ACCESSOR],
-	            directives: [common_1.NgIf, common_1.NgModel],
 	            host: { '(click)': 'focus()' }
 	        }), 
 	        __metadata('design:paramtypes', [])
@@ -86339,45 +88023,26 @@ webpackJsonp([0],[
 	    return MdInput;
 	}());
 	exports.MdInput = MdInput;
+	/** @deprecated */
 	exports.MD_INPUT_DIRECTIVES = [MdPlaceholder, MdInput, MdHint];
+	var MdInputModule = (function () {
+	    function MdInputModule() {
+	    }
+	    MdInputModule = __decorate([
+	        core_1.NgModule({
+	            declarations: exports.MD_INPUT_DIRECTIVES,
+	            imports: [common_1.CommonModule, forms_1.FormsModule],
+	            exports: exports.MD_INPUT_DIRECTIVES,
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], MdInputModule);
+	    return MdInputModule;
+	}());
+	exports.MdInputModule = MdInputModule;
 	//# sourceMappingURL=input.js.map
 
 /***/ },
-/* 693 */
-/***/ function(module, exports) {
-
-	"use strict";
-	/**
-	 * Annotation Factory that allows HTML style boolean attributes. For example,
-	 * a field declared like this:
-
-	 * @Directive({ selector: 'component' }) class MyComponent {
-	 *   @Input() @BooleanFieldValueFactory() myField: boolean;
-	 * }
-	 *
-	 * You could set it up this way:
-	 *   <component myField>
-	 * or:
-	 *   <component myField="">
-	 */
-	function booleanFieldValueFactory() {
-	    return function booleanFieldValueMetadata(target, key) {
-	        var defaultValue = target[key];
-	        var localKey = "__md_private_symbol_" + key;
-	        target[localKey] = defaultValue;
-	        Object.defineProperty(target, key, {
-	            get: function () { return this[localKey]; },
-	            set: function (value) {
-	                this[localKey] = value != null && "" + value !== 'false';
-	            }
-	        });
-	    };
-	}
-	exports.BooleanFieldValue = booleanFieldValueFactory;
-	//# sourceMappingURL=field-value.js.map
-
-/***/ },
-/* 694 */
+/* 698 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -86391,19 +88056,20 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var common_1 = __webpack_require__(2);
+	var forms_1 = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"@angular/forms\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	/**
 	 * Monotonically increasing integer used to auto-generate unique ids for checkbox components.
 	 */
 	var nextId = 0;
 	/**
 	 * Provider Expression that allows md-checkbox to register as a ControlValueAccessor. This allows it
-	 * to support [(ngModel)] and ngControl.
+	 * to support [(ngModel)].
 	 */
-	exports.MD_CHECKBOX_CONTROL_VALUE_ACCESSOR = new core_1.Provider(common_1.NG_VALUE_ACCESSOR, {
+	exports.MD_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
+	    provide: forms_1.NG_VALUE_ACCESSOR,
 	    useExisting: core_1.forwardRef(function () { return MdCheckbox; }),
 	    multi: true
-	});
+	};
 	/**
 	 * Represents the different states that require custom transitions between them.
 	 */
@@ -86466,8 +88132,6 @@ webpackJsonp([0],[
 	        this.change = new core_1.EventEmitter();
 	        /** Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor. */
 	        this.onTouched = function () { };
-	        /** Whether the `checked` state has been set to its initial value. */
-	        this._isInitialized = false;
 	        this._currentAnimationClass = '';
 	        this._currentCheckState = TransitionCheckState.Init;
 	        this._checked = false;
@@ -86496,19 +88160,11 @@ webpackJsonp([0],[
 	                this._indeterminate = false;
 	                this._checked = checked;
 	                this._transitionCheckState(this._checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
-	                // Only fire a change event if this isn't the first time the checked property is ever set.
-	                if (this._isInitialized) {
-	                    this._emitChangeEvent();
-	                }
 	            }
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
-	    /** TODO: internal */
-	    MdCheckbox.prototype.ngAfterContentInit = function () {
-	        this._isInitialized = true;
-	    };
 	    Object.defineProperty(MdCheckbox.prototype, "indeterminate", {
 	        /**
 	         * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
@@ -86578,18 +88234,12 @@ webpackJsonp([0],[
 	        this._controlValueAccessorChangeFn(this.checked);
 	        this.change.emit(event);
 	    };
-	    /**
-	     * Informs the component when the input has focus so that we can style accordingly
-	     * @internal
-	     */
-	    MdCheckbox.prototype.onInputFocus = function () {
+	    /** Informs the component when the input has focus so that we can style accordingly */
+	    MdCheckbox.prototype._onInputFocus = function () {
 	        this.hasFocus = true;
 	    };
-	    /**
-	     * Informs the component when we lose focus in order to style accordingly
-	     * @internal
-	     */
-	    MdCheckbox.prototype.onInputBlur = function () {
+	    /** Informs the component when we lose focus in order to style accordingly */
+	    MdCheckbox.prototype._onInputBlur = function () {
 	        this.hasFocus = false;
 	        this.onTouched();
 	    };
@@ -86603,19 +88253,21 @@ webpackJsonp([0],[
 	     * Event handler for checkbox input element.
 	     * Toggles checked state if element is not disabled.
 	     * @param event
-	     * @internal
 	     */
-	    MdCheckbox.prototype.onInteractionEvent = function (event) {
+	    MdCheckbox.prototype._onInteractionEvent = function (event) {
 	        // We always have to stop propagation on the change event.
 	        // Otherwise the change event, from the input element, will bubble up and
 	        // emit its event object to the `change` output.
 	        event.stopPropagation();
 	        if (!this.disabled) {
 	            this.toggle();
+	            // Emit our custom change event if the native input emitted one.
+	            // It is important to only emit it, if the native input triggered one, because
+	            // we don't want to trigger a change event, when the `checked` variable changes for example.
+	            this._emitChangeEvent();
 	        }
 	    };
-	    /** @internal */
-	    MdCheckbox.prototype.onInputClick = function (event) {
+	    MdCheckbox.prototype._onInputClick = function (event) {
 	        // We have to stop propagation for click events on the visual hidden input element.
 	        // By default, when a user clicks on a label element, a generated click event will be
 	        // dispatched on the associated input element. Since we are using a label element as our
@@ -86693,11 +88345,9 @@ webpackJsonp([0],[
 	        __metadata('design:type', Object)
 	    ], MdCheckbox.prototype, "indeterminate", null);
 	    MdCheckbox = __decorate([
-	        core_1.Component({
-	            moduleId: module.id,
-	            selector: 'md-checkbox',
-	            template: "<label class=\"md-checkbox-layout\"> <div class=\"md-checkbox-inner-container\"> <input class=\"md-checkbox-input\" type=\"checkbox\" [id]=\"inputId\" [checked]=\"checked\" [disabled]=\"disabled\" [name]=\"name\" [tabIndex]=\"tabindex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledby\" (focus)=\"onInputFocus()\" (blur)=\"onInputBlur()\" (change)=\"onInteractionEvent($event)\" (click)=\"onInputClick($event)\"> <div class=\"md-ink-ripple\"></div> <div class=\"md-checkbox-frame\"></div> <div class=\"md-checkbox-background\"> <svg version=\"1.1\" class=\"md-checkbox-checkmark\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" xml:space=\"preserve\"> <path class=\"md-checkbox-checkmark-path\" fill=\"none\" stroke=\"white\" d=\"M4.1,12.7 9,17.6 20.3,6.3\"/> </svg> <!-- Element for rendering the indeterminate state checkbox. --> <div class=\"md-checkbox-mixedmark\"></div> </div> </div> <span class=\"md-checkbox-label\"> <ng-content></ng-content> </span> </label> ",
-	            styles: ["/** * Mixin that creates a new stacking context. * see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context */ /** * This mixin hides an element visually. * That means it's still accessible for screen-readers but not visible in view. */ /** * Forces an element to grow to fit floated contents; used as as an alternative to * `overflow: hidden;` because it doesn't cut off contents. */ /** * A mixin, which generates temporary ink ripple on a given component. * When $bindToParent is set to true, it will check for the focused class on the same selector as you included * that mixin. * It is also possible to specify the color palette of the temporary ripple. By default it uses the * accent palette for its background. */ /** The width/height of the checkbox element. */ /** The width of the line used to draw the checkmark / mixedmark. */ /** The width of the checkbox border shown when the checkbox is unchecked. */ /** The color of the checkbox border. */ /** The color of the checkbox's checkmark / mixedmark. */ /** The color that is used as the checkbox background when it is checked. */ /** The base duration used for the majority of transitions for the checkbox. */ /** The amount of spacing between the checkbox and its label. */ /** * Fades in the background of the checkbox when it goes from unchecked -> {checked,indeterminate}. */ @-webkit-keyframes md-checkbox-fade-in-background { 0% { opacity: 0; } 50% { opacity: 1; } } @keyframes md-checkbox-fade-in-background { 0% { opacity: 0; } 50% { opacity: 1; } } /** * Fades out the background of the checkbox when it goes from {checked,indeterminate} -> unchecked. */ @-webkit-keyframes md-checkbox-fade-out-background { 0%, 50% { opacity: 1; } 100% { opacity: 0; } } @keyframes md-checkbox-fade-out-background { 0%, 50% { opacity: 1; } 100% { opacity: 0; } } /** * \"Draws\" in the checkmark when the checkbox goes from unchecked -> checked. */ @-webkit-keyframes md-checkbox-unchecked-checked-checkmark-path { 0%, 50% { stroke-dashoffset: 22.91026; } 50% { -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); } 100% { stroke-dashoffset: 0; } } @keyframes md-checkbox-unchecked-checked-checkmark-path { 0%, 50% { stroke-dashoffset: 22.91026; } 50% { -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); } 100% { stroke-dashoffset: 0; } } /** * Horizontally expands the mixedmark when the checkbox goes from unchecked -> indeterminate. */ @-webkit-keyframes md-checkbox-unchecked-indeterminate-mixedmark { 0%, 68.2% { -webkit-transform: scaleX(0); transform: scaleX(0); } 68.2% { -webkit-animation-timing-function: cubic-bezier(0, 0, 0, 1); animation-timing-function: cubic-bezier(0, 0, 0, 1); } 100% { -webkit-transform: scaleX(1); transform: scaleX(1); } } @keyframes md-checkbox-unchecked-indeterminate-mixedmark { 0%, 68.2% { -webkit-transform: scaleX(0); transform: scaleX(0); } 68.2% { -webkit-animation-timing-function: cubic-bezier(0, 0, 0, 1); animation-timing-function: cubic-bezier(0, 0, 0, 1); } 100% { -webkit-transform: scaleX(1); transform: scaleX(1); } } /** * \"Erases\" the checkmark when the checkbox goes from checked -> unchecked. */ @-webkit-keyframes md-checkbox-checked-unchecked-checkmark-path { from { -webkit-animation-timing-function: cubic-bezier(0.4, 0, 1, 1); animation-timing-function: cubic-bezier(0.4, 0, 1, 1); stroke-dashoffset: 0; } to { stroke-dashoffset: -22.91026; } } @keyframes md-checkbox-checked-unchecked-checkmark-path { from { -webkit-animation-timing-function: cubic-bezier(0.4, 0, 1, 1); animation-timing-function: cubic-bezier(0.4, 0, 1, 1); stroke-dashoffset: 0; } to { stroke-dashoffset: -22.91026; } } /** * Rotates and fades out the checkmark when the checkbox goes from checked -> indeterminate. This * animation helps provide the illusion of the checkmark \"morphing\" into the mixedmark. */ @-webkit-keyframes md-checkbox-checked-indeterminate-checkmark { from { -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); opacity: 1; -webkit-transform: rotate(0deg); transform: rotate(0deg); } to { opacity: 0; -webkit-transform: rotate(45deg); transform: rotate(45deg); } } @keyframes md-checkbox-checked-indeterminate-checkmark { from { -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); opacity: 1; -webkit-transform: rotate(0deg); transform: rotate(0deg); } to { opacity: 0; -webkit-transform: rotate(45deg); transform: rotate(45deg); } } /** * Rotates and fades the checkmark back into position when the checkbox goes from indeterminate -> * checked. This animation helps provide the illusion that the mixedmark is \"morphing\" into the * checkmark. */ @-webkit-keyframes md-checkbox-indeterminate-checked-checkmark { from { -webkit-animation-timing-function: cubic-bezier(0.14, 0, 0, 1); animation-timing-function: cubic-bezier(0.14, 0, 0, 1); opacity: 0; -webkit-transform: rotate(45deg); transform: rotate(45deg); } to { opacity: 1; -webkit-transform: rotate(360deg); transform: rotate(360deg); } } @keyframes md-checkbox-indeterminate-checked-checkmark { from { -webkit-animation-timing-function: cubic-bezier(0.14, 0, 0, 1); animation-timing-function: cubic-bezier(0.14, 0, 0, 1); opacity: 0; -webkit-transform: rotate(45deg); transform: rotate(45deg); } to { opacity: 1; -webkit-transform: rotate(360deg); transform: rotate(360deg); } } /** * Rotates and fades in the mixedmark when the checkbox goes from checked -> indeterminate. This * animation, similar to md-checkbox-checked-indeterminate-checkmark, helps provide an illusion * of \"morphing\" from checkmark -> mixedmark. */ @-webkit-keyframes md-checkbox-checked-indeterminate-mixedmark { from { -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); opacity: 0; -webkit-transform: rotate(-45deg); transform: rotate(-45deg); } to { opacity: 1; -webkit-transform: rotate(0deg); transform: rotate(0deg); } } @keyframes md-checkbox-checked-indeterminate-mixedmark { from { -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); opacity: 0; -webkit-transform: rotate(-45deg); transform: rotate(-45deg); } to { opacity: 1; -webkit-transform: rotate(0deg); transform: rotate(0deg); } } /** * Rotates and fades out the mixedmark when the checkbox goes from indeterminate -> checked. This * animation, similar to md-checkbox-indeterminate-checked-checkmark, helps provide an illusion * of \"morphing\" from mixedmark -> checkmark. */ @-webkit-keyframes md-checkbox-indeterminate-checked-mixedmark { from { -webkit-animation-timing-function: cubic-bezier(0.14, 0, 0, 1); animation-timing-function: cubic-bezier(0.14, 0, 0, 1); opacity: 1; -webkit-transform: rotate(0deg); transform: rotate(0deg); } to { opacity: 0; -webkit-transform: rotate(315deg); transform: rotate(315deg); } } @keyframes md-checkbox-indeterminate-checked-mixedmark { from { -webkit-animation-timing-function: cubic-bezier(0.14, 0, 0, 1); animation-timing-function: cubic-bezier(0.14, 0, 0, 1); opacity: 1; -webkit-transform: rotate(0deg); transform: rotate(0deg); } to { opacity: 0; -webkit-transform: rotate(315deg); transform: rotate(315deg); } } /** * Horizontally collapses and fades out the mixedmark when the checkbox goes from indeterminate -> * unchecked. */ @-webkit-keyframes md-checkbox-indeterminate-unchecked-mixedmark { 0% { -webkit-animation-timing-function: linear; animation-timing-function: linear; opacity: 1; -webkit-transform: scaleX(1); transform: scaleX(1); } 32.8%, 100% { opacity: 0; -webkit-transform: scaleX(0); transform: scaleX(0); } } @keyframes md-checkbox-indeterminate-unchecked-mixedmark { 0% { -webkit-animation-timing-function: linear; animation-timing-function: linear; opacity: 1; -webkit-transform: scaleX(1); transform: scaleX(1); } 32.8%, 100% { opacity: 0; -webkit-transform: scaleX(0); transform: scaleX(0); } } /** * Applied to elements that cover the checkbox's entire inner container. */ .md-checkbox-frame, .md-checkbox-background, .md-checkbox-checkmark { bottom: 0; left: 0; position: absolute; right: 0; top: 0; } /** * Applied to elements that are considered \"marks\" within the checkbox, e.g. the checkmark and * the mixedmark. */ .md-checkbox-checkmark, .md-checkbox-mixedmark { width: calc(100% - 4px); } /** * Applied to elements that appear to make up the outer box of the checkmark, such as the frame * that contains the border and the actual background element that contains the marks. */ .md-checkbox-frame, .md-checkbox-background { border-radius: 2px; box-sizing: border-box; pointer-events: none; } md-checkbox, md-checkbox label { cursor: pointer; } .md-checkbox-layout { -webkit-box-align: baseline; -ms-flex-align: baseline; align-items: baseline; display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; } .md-checkbox-inner-container { display: inline-block; height: 20px; line-height: 0; margin: auto; margin-right: 8px; -webkit-box-ordinal-group: 1; -ms-flex-order: 0; order: 0; position: relative; vertical-align: middle; white-space: nowrap; width: 20px; } [dir='rtl'] .md-checkbox-inner-container { margin-left: 8px; margin-right: auto; } .md-checkbox-layout .md-checkbox-label { line-height: 24px; } .md-checkbox-frame { background-color: transparent; border: 2px solid rgba(0, 0, 0, 0.54); -webkit-transition: border-color 90ms cubic-bezier(0, 0, 0.2, 0.1); transition: border-color 90ms cubic-bezier(0, 0, 0.2, 0.1); will-change: border-color; } .md-checkbox-background { -webkit-box-align: center; -ms-flex-align: center; align-items: center; display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-transition: background-color 90ms cubic-bezier(0, 0, 0.2, 0.1), opacity 90ms cubic-bezier(0, 0, 0.2, 0.1); transition: background-color 90ms cubic-bezier(0, 0, 0.2, 0.1), opacity 90ms cubic-bezier(0, 0, 0.2, 0.1); will-change: background-color, opacity; } .md-checkbox-checkmark { fill: #fafafa; width: 100%; } .md-checkbox-checkmark-path { stroke: #fafafa !important; stroke-dashoffset: 22.91026; stroke-dasharray: 22.91026; stroke-width: 2.66667px; } .md-checkbox-mixedmark { background-color: #fafafa; height: 2px; opacity: 0; -webkit-transform: scaleX(0) rotate(0deg); transform: scaleX(0) rotate(0deg); } .md-checkbox-align-end .md-checkbox-inner-container { -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; margin-left: 8px; margin-right: auto; } [dir='rtl'] .md-checkbox-align-end .md-checkbox-inner-container { margin-left: auto; margin-right: 8px; } .md-checkbox-checked .md-checkbox-checkmark { opacity: 1; } .md-checkbox-checked .md-checkbox-checkmark-path { stroke-dashoffset: 0; } .md-checkbox-checked .md-checkbox-mixedmark { -webkit-transform: scaleX(1) rotate(-45deg); transform: scaleX(1) rotate(-45deg); } .md-checkbox-checked .md-checkbox-background { background-color: #9c27b0; } .md-checkbox-indeterminate .md-checkbox-background { background-color: #9c27b0; } .md-checkbox-indeterminate .md-checkbox-checkmark { opacity: 0; -webkit-transform: rotate(45deg); transform: rotate(45deg); } .md-checkbox-indeterminate .md-checkbox-checkmark-path { stroke-dashoffset: 0; } .md-checkbox-indeterminate .md-checkbox-mixedmark { opacity: 1; -webkit-transform: scaleX(1) rotate(0deg); transform: scaleX(1) rotate(0deg); } .md-checkbox-unchecked .md-checkbox-background { background-color: transparent; } .md-checkbox-disabled { cursor: default; } .md-checkbox-disabled.md-checkbox-checked .md-checkbox-background, .md-checkbox-disabled.md-checkbox-indeterminate .md-checkbox-background { background-color: #b0b0b0; } .md-checkbox-disabled:not(.md-checkbox-checked) .md-checkbox-frame { border-color: #b0b0b0; } .md-checkbox-anim-unchecked-checked .md-checkbox-background { -webkit-animation: 180ms linear 0ms md-checkbox-fade-in-background; animation: 180ms linear 0ms md-checkbox-fade-in-background; } .md-checkbox-anim-unchecked-checked .md-checkbox-checkmark-path { -webkit-animation: 180ms linear 0ms md-checkbox-unchecked-checked-checkmark-path; animation: 180ms linear 0ms md-checkbox-unchecked-checked-checkmark-path; } .md-checkbox-anim-unchecked-indeterminate .md-checkbox-background { -webkit-animation: 180ms linear 0ms md-checkbox-fade-in-background; animation: 180ms linear 0ms md-checkbox-fade-in-background; } .md-checkbox-anim-unchecked-indeterminate .md-checkbox-mixedmark { -webkit-animation: 90ms linear 0ms md-checkbox-unchecked-indeterminate-mixedmark; animation: 90ms linear 0ms md-checkbox-unchecked-indeterminate-mixedmark; } .md-checkbox-anim-checked-unchecked .md-checkbox-background { -webkit-animation: 180ms linear 0ms md-checkbox-fade-out-background; animation: 180ms linear 0ms md-checkbox-fade-out-background; } .md-checkbox-anim-checked-unchecked .md-checkbox-checkmark-path { -webkit-animation: 90ms linear 0ms md-checkbox-checked-unchecked-checkmark-path; animation: 90ms linear 0ms md-checkbox-checked-unchecked-checkmark-path; } .md-checkbox-anim-checked-indeterminate .md-checkbox-checkmark { -webkit-animation: 90ms linear 0ms md-checkbox-checked-indeterminate-checkmark; animation: 90ms linear 0ms md-checkbox-checked-indeterminate-checkmark; } .md-checkbox-anim-checked-indeterminate .md-checkbox-mixedmark { -webkit-animation: 90ms linear 0ms md-checkbox-checked-indeterminate-mixedmark; animation: 90ms linear 0ms md-checkbox-checked-indeterminate-mixedmark; } .md-checkbox-anim-indeterminate-checked .md-checkbox-checkmark { -webkit-animation: 500ms linear 0ms md-checkbox-indeterminate-checked-checkmark; animation: 500ms linear 0ms md-checkbox-indeterminate-checked-checkmark; } .md-checkbox-anim-indeterminate-checked .md-checkbox-mixedmark { -webkit-animation: 500ms linear 0ms md-checkbox-indeterminate-checked-mixedmark; animation: 500ms linear 0ms md-checkbox-indeterminate-checked-mixedmark; } .md-checkbox-anim-indeterminate-unchecked .md-checkbox-background { -webkit-animation: 180ms linear 0ms md-checkbox-fade-out-background; animation: 180ms linear 0ms md-checkbox-fade-out-background; } .md-checkbox-anim-indeterminate-unchecked .md-checkbox-mixedmark { -webkit-animation: 300ms linear 0ms md-checkbox-indeterminate-unchecked-mixedmark; animation: 300ms linear 0ms md-checkbox-indeterminate-unchecked-mixedmark; } .md-checkbox-input { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; text-transform: none; width: 1px; } .md-ink-ripple { border-radius: 50%; opacity: 0; height: 48px; left: 50%; overflow: hidden; pointer-events: none; position: absolute; top: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); -webkit-transition: opacity ease 280ms, background-color ease 280ms; transition: opacity ease 280ms, background-color ease 280ms; width: 48px; } .md-checkbox-focused .md-ink-ripple { opacity: 1; background-color: rgba(156, 39, 176, 0.26); } .md-checkbox-disabled .md-ink-ripple { background-color: #000; } "],
+	        core_1.Component({            selector: 'md-checkbox',
+	            template: "<label class=\"md-checkbox-layout\"> <div class=\"md-checkbox-inner-container\"> <input class=\"md-checkbox-input\" type=\"checkbox\" [id]=\"inputId\" [checked]=\"checked\" [disabled]=\"disabled\" [name]=\"name\" [tabIndex]=\"tabindex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledby\" (focus)=\"_onInputFocus()\" (blur)=\"_onInputBlur()\" (change)=\"_onInteractionEvent($event)\" (click)=\"_onInputClick($event)\"> <div class=\"md-ink-ripple\"></div> <div class=\"md-checkbox-frame\"></div> <div class=\"md-checkbox-background\"> <svg version=\"1.1\" class=\"md-checkbox-checkmark\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" xml:space=\"preserve\"> <path class=\"md-checkbox-checkmark-path\" fill=\"none\" stroke=\"white\" d=\"M4.1,12.7 9,17.6 20.3,6.3\"/> </svg> <!-- Element for rendering the indeterminate state checkbox. --> <div class=\"md-checkbox-mixedmark\"></div> </div> </div> <span class=\"md-checkbox-label\"> <ng-content></ng-content> </span> </label> ",
+	            styles: ["/** * Mixin that creates a new stacking context. * see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context */ /** * This mixin hides an element visually. * That means it's still accessible for screen-readers but not visible in view. */ /** * Forces an element to grow to fit floated contents; used as as an alternative to * `overflow: hidden;` because it doesn't cut off contents. */ /** * A mixin, which generates temporary ink ripple on a given component. * When $bindToParent is set to true, it will check for the focused class on the same selector as you included * that mixin. * It is also possible to specify the color palette of the temporary ripple. By default it uses the * accent palette for its background. */ /** The width/height of the checkbox element. */ /** The width of the line used to draw the checkmark / mixedmark. */ /** The width of the checkbox border shown when the checkbox is unchecked. */ /** The color of the checkbox border. */ /** The color of the checkbox's checkmark / mixedmark. */ /** The color that is used as the checkbox background when it is checked. */ /** The base duration used for the majority of transitions for the checkbox. */ /** The amount of spacing between the checkbox and its label. */ /** * Fades in the background of the checkbox when it goes from unchecked -> {checked,indeterminate}. */ @-webkit-keyframes md-checkbox-fade-in-background { 0% { opacity: 0; } 50% { opacity: 1; } } @keyframes md-checkbox-fade-in-background { 0% { opacity: 0; } 50% { opacity: 1; } } /** * Fades out the background of the checkbox when it goes from {checked,indeterminate} -> unchecked. */ @-webkit-keyframes md-checkbox-fade-out-background { 0%, 50% { opacity: 1; } 100% { opacity: 0; } } @keyframes md-checkbox-fade-out-background { 0%, 50% { opacity: 1; } 100% { opacity: 0; } } /** * \"Draws\" in the checkmark when the checkbox goes from unchecked -> checked. */ @-webkit-keyframes md-checkbox-unchecked-checked-checkmark-path { 0%, 50% { stroke-dashoffset: 22.91026; } 50% { -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); } 100% { stroke-dashoffset: 0; } } @keyframes md-checkbox-unchecked-checked-checkmark-path { 0%, 50% { stroke-dashoffset: 22.91026; } 50% { -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); } 100% { stroke-dashoffset: 0; } } /** * Horizontally expands the mixedmark when the checkbox goes from unchecked -> indeterminate. */ @-webkit-keyframes md-checkbox-unchecked-indeterminate-mixedmark { 0%, 68.2% { -webkit-transform: scaleX(0); transform: scaleX(0); } 68.2% { -webkit-animation-timing-function: cubic-bezier(0, 0, 0, 1); animation-timing-function: cubic-bezier(0, 0, 0, 1); } 100% { -webkit-transform: scaleX(1); transform: scaleX(1); } } @keyframes md-checkbox-unchecked-indeterminate-mixedmark { 0%, 68.2% { -webkit-transform: scaleX(0); transform: scaleX(0); } 68.2% { -webkit-animation-timing-function: cubic-bezier(0, 0, 0, 1); animation-timing-function: cubic-bezier(0, 0, 0, 1); } 100% { -webkit-transform: scaleX(1); transform: scaleX(1); } } /** * \"Erases\" the checkmark when the checkbox goes from checked -> unchecked. */ @-webkit-keyframes md-checkbox-checked-unchecked-checkmark-path { from { -webkit-animation-timing-function: cubic-bezier(0.4, 0, 1, 1); animation-timing-function: cubic-bezier(0.4, 0, 1, 1); stroke-dashoffset: 0; } to { stroke-dashoffset: -22.91026; } } @keyframes md-checkbox-checked-unchecked-checkmark-path { from { -webkit-animation-timing-function: cubic-bezier(0.4, 0, 1, 1); animation-timing-function: cubic-bezier(0.4, 0, 1, 1); stroke-dashoffset: 0; } to { stroke-dashoffset: -22.91026; } } /** * Rotates and fades out the checkmark when the checkbox goes from checked -> indeterminate. This * animation helps provide the illusion of the checkmark \"morphing\" into the mixedmark. */ @-webkit-keyframes md-checkbox-checked-indeterminate-checkmark { from { -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); opacity: 1; -webkit-transform: rotate(0deg); transform: rotate(0deg); } to { opacity: 0; -webkit-transform: rotate(45deg); transform: rotate(45deg); } } @keyframes md-checkbox-checked-indeterminate-checkmark { from { -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); opacity: 1; -webkit-transform: rotate(0deg); transform: rotate(0deg); } to { opacity: 0; -webkit-transform: rotate(45deg); transform: rotate(45deg); } } /** * Rotates and fades the checkmark back into position when the checkbox goes from indeterminate -> * checked. This animation helps provide the illusion that the mixedmark is \"morphing\" into the * checkmark. */ @-webkit-keyframes md-checkbox-indeterminate-checked-checkmark { from { -webkit-animation-timing-function: cubic-bezier(0.14, 0, 0, 1); animation-timing-function: cubic-bezier(0.14, 0, 0, 1); opacity: 0; -webkit-transform: rotate(45deg); transform: rotate(45deg); } to { opacity: 1; -webkit-transform: rotate(360deg); transform: rotate(360deg); } } @keyframes md-checkbox-indeterminate-checked-checkmark { from { -webkit-animation-timing-function: cubic-bezier(0.14, 0, 0, 1); animation-timing-function: cubic-bezier(0.14, 0, 0, 1); opacity: 0; -webkit-transform: rotate(45deg); transform: rotate(45deg); } to { opacity: 1; -webkit-transform: rotate(360deg); transform: rotate(360deg); } } /** * Rotates and fades in the mixedmark when the checkbox goes from checked -> indeterminate. This * animation, similar to md-checkbox-checked-indeterminate-checkmark, helps provide an illusion * of \"morphing\" from checkmark -> mixedmark. */ @-webkit-keyframes md-checkbox-checked-indeterminate-mixedmark { from { -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); opacity: 0; -webkit-transform: rotate(-45deg); transform: rotate(-45deg); } to { opacity: 1; -webkit-transform: rotate(0deg); transform: rotate(0deg); } } @keyframes md-checkbox-checked-indeterminate-mixedmark { from { -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1); opacity: 0; -webkit-transform: rotate(-45deg); transform: rotate(-45deg); } to { opacity: 1; -webkit-transform: rotate(0deg); transform: rotate(0deg); } } /** * Rotates and fades out the mixedmark when the checkbox goes from indeterminate -> checked. This * animation, similar to md-checkbox-indeterminate-checked-checkmark, helps provide an illusion * of \"morphing\" from mixedmark -> checkmark. */ @-webkit-keyframes md-checkbox-indeterminate-checked-mixedmark { from { -webkit-animation-timing-function: cubic-bezier(0.14, 0, 0, 1); animation-timing-function: cubic-bezier(0.14, 0, 0, 1); opacity: 1; -webkit-transform: rotate(0deg); transform: rotate(0deg); } to { opacity: 0; -webkit-transform: rotate(315deg); transform: rotate(315deg); } } @keyframes md-checkbox-indeterminate-checked-mixedmark { from { -webkit-animation-timing-function: cubic-bezier(0.14, 0, 0, 1); animation-timing-function: cubic-bezier(0.14, 0, 0, 1); opacity: 1; -webkit-transform: rotate(0deg); transform: rotate(0deg); } to { opacity: 0; -webkit-transform: rotate(315deg); transform: rotate(315deg); } } /** * Horizontally collapses and fades out the mixedmark when the checkbox goes from indeterminate -> * unchecked. */ @-webkit-keyframes md-checkbox-indeterminate-unchecked-mixedmark { 0% { -webkit-animation-timing-function: linear; animation-timing-function: linear; opacity: 1; -webkit-transform: scaleX(1); transform: scaleX(1); } 32.8%, 100% { opacity: 0; -webkit-transform: scaleX(0); transform: scaleX(0); } } @keyframes md-checkbox-indeterminate-unchecked-mixedmark { 0% { -webkit-animation-timing-function: linear; animation-timing-function: linear; opacity: 1; -webkit-transform: scaleX(1); transform: scaleX(1); } 32.8%, 100% { opacity: 0; -webkit-transform: scaleX(0); transform: scaleX(0); } } /** * Applied to elements that cover the checkbox's entire inner container. */ .md-checkbox-frame, .md-checkbox-background, .md-checkbox-checkmark { bottom: 0; left: 0; position: absolute; right: 0; top: 0; } /** * Applied to elements that are considered \"marks\" within the checkbox, e.g. the checkmark and * the mixedmark. */ .md-checkbox-checkmark, .md-checkbox-mixedmark { width: calc(100% - 4px); } /** * Applied to elements that appear to make up the outer box of the checkmark, such as the frame * that contains the border and the actual background element that contains the marks. */ .md-checkbox-frame, .md-checkbox-background { border-radius: 2px; box-sizing: border-box; pointer-events: none; } md-checkbox { cursor: pointer; } .md-checkbox-layout { cursor: inherit; -webkit-box-align: baseline; -ms-flex-align: baseline; align-items: baseline; display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; } .md-checkbox-inner-container { display: inline-block; height: 20px; line-height: 0; margin: auto; margin-right: 8px; -webkit-box-ordinal-group: 1; -ms-flex-order: 0; order: 0; position: relative; vertical-align: middle; white-space: nowrap; width: 20px; } [dir='rtl'] .md-checkbox-inner-container { margin-left: 8px; margin-right: auto; } .md-checkbox-layout .md-checkbox-label { line-height: 24px; } .md-checkbox-frame { background-color: transparent; border: 2px solid rgba(0, 0, 0, 0.54); -webkit-transition: border-color 90ms cubic-bezier(0, 0, 0.2, 0.1); transition: border-color 90ms cubic-bezier(0, 0, 0.2, 0.1); will-change: border-color; } .md-checkbox-background { -webkit-box-align: center; -ms-flex-align: center; align-items: center; display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-transition: background-color 90ms cubic-bezier(0, 0, 0.2, 0.1), opacity 90ms cubic-bezier(0, 0, 0.2, 0.1); transition: background-color 90ms cubic-bezier(0, 0, 0.2, 0.1), opacity 90ms cubic-bezier(0, 0, 0.2, 0.1); will-change: background-color, opacity; } .md-checkbox-checkmark { fill: #fafafa; width: 100%; } .md-checkbox-checkmark-path { stroke: #fafafa !important; stroke-dashoffset: 22.91026; stroke-dasharray: 22.91026; stroke-width: 2.66667px; } .md-checkbox-mixedmark { background-color: #fafafa; height: 2px; opacity: 0; -webkit-transform: scaleX(0) rotate(0deg); transform: scaleX(0) rotate(0deg); } .md-checkbox-align-end .md-checkbox-inner-container { -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; margin-left: 8px; margin-right: auto; } [dir='rtl'] .md-checkbox-align-end .md-checkbox-inner-container { margin-left: auto; margin-right: 8px; } .md-checkbox-checked .md-checkbox-checkmark { opacity: 1; } .md-checkbox-checked .md-checkbox-checkmark-path { stroke-dashoffset: 0; } .md-checkbox-checked .md-checkbox-mixedmark { -webkit-transform: scaleX(1) rotate(-45deg); transform: scaleX(1) rotate(-45deg); } .md-checkbox-checked .md-checkbox-background { background-color: #9c27b0; } .md-checkbox-indeterminate .md-checkbox-background { background-color: #9c27b0; } .md-checkbox-indeterminate .md-checkbox-checkmark { opacity: 0; -webkit-transform: rotate(45deg); transform: rotate(45deg); } .md-checkbox-indeterminate .md-checkbox-checkmark-path { stroke-dashoffset: 0; } .md-checkbox-indeterminate .md-checkbox-mixedmark { opacity: 1; -webkit-transform: scaleX(1) rotate(0deg); transform: scaleX(1) rotate(0deg); } .md-checkbox-unchecked .md-checkbox-background { background-color: transparent; } .md-checkbox-disabled { cursor: default; } .md-checkbox-disabled.md-checkbox-checked .md-checkbox-background, .md-checkbox-disabled.md-checkbox-indeterminate .md-checkbox-background { background-color: #b0b0b0; } .md-checkbox-disabled:not(.md-checkbox-checked) .md-checkbox-frame { border-color: #b0b0b0; } .md-checkbox-anim-unchecked-checked .md-checkbox-background { -webkit-animation: 180ms linear 0ms md-checkbox-fade-in-background; animation: 180ms linear 0ms md-checkbox-fade-in-background; } .md-checkbox-anim-unchecked-checked .md-checkbox-checkmark-path { -webkit-animation: 180ms linear 0ms md-checkbox-unchecked-checked-checkmark-path; animation: 180ms linear 0ms md-checkbox-unchecked-checked-checkmark-path; } .md-checkbox-anim-unchecked-indeterminate .md-checkbox-background { -webkit-animation: 180ms linear 0ms md-checkbox-fade-in-background; animation: 180ms linear 0ms md-checkbox-fade-in-background; } .md-checkbox-anim-unchecked-indeterminate .md-checkbox-mixedmark { -webkit-animation: 90ms linear 0ms md-checkbox-unchecked-indeterminate-mixedmark; animation: 90ms linear 0ms md-checkbox-unchecked-indeterminate-mixedmark; } .md-checkbox-anim-checked-unchecked .md-checkbox-background { -webkit-animation: 180ms linear 0ms md-checkbox-fade-out-background; animation: 180ms linear 0ms md-checkbox-fade-out-background; } .md-checkbox-anim-checked-unchecked .md-checkbox-checkmark-path { -webkit-animation: 90ms linear 0ms md-checkbox-checked-unchecked-checkmark-path; animation: 90ms linear 0ms md-checkbox-checked-unchecked-checkmark-path; } .md-checkbox-anim-checked-indeterminate .md-checkbox-checkmark { -webkit-animation: 90ms linear 0ms md-checkbox-checked-indeterminate-checkmark; animation: 90ms linear 0ms md-checkbox-checked-indeterminate-checkmark; } .md-checkbox-anim-checked-indeterminate .md-checkbox-mixedmark { -webkit-animation: 90ms linear 0ms md-checkbox-checked-indeterminate-mixedmark; animation: 90ms linear 0ms md-checkbox-checked-indeterminate-mixedmark; } .md-checkbox-anim-indeterminate-checked .md-checkbox-checkmark { -webkit-animation: 500ms linear 0ms md-checkbox-indeterminate-checked-checkmark; animation: 500ms linear 0ms md-checkbox-indeterminate-checked-checkmark; } .md-checkbox-anim-indeterminate-checked .md-checkbox-mixedmark { -webkit-animation: 500ms linear 0ms md-checkbox-indeterminate-checked-mixedmark; animation: 500ms linear 0ms md-checkbox-indeterminate-checked-mixedmark; } .md-checkbox-anim-indeterminate-unchecked .md-checkbox-background { -webkit-animation: 180ms linear 0ms md-checkbox-fade-out-background; animation: 180ms linear 0ms md-checkbox-fade-out-background; } .md-checkbox-anim-indeterminate-unchecked .md-checkbox-mixedmark { -webkit-animation: 300ms linear 0ms md-checkbox-indeterminate-unchecked-mixedmark; animation: 300ms linear 0ms md-checkbox-indeterminate-unchecked-mixedmark; } .md-checkbox-input { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; text-transform: none; width: 1px; } .md-ink-ripple { border-radius: 50%; opacity: 0; height: 48px; left: 50%; overflow: hidden; pointer-events: none; position: absolute; top: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); -webkit-transition: opacity ease 280ms, background-color ease 280ms; transition: opacity ease 280ms, background-color ease 280ms; width: 48px; } .md-checkbox-focused .md-ink-ripple { opacity: 1; background-color: rgba(156, 39, 176, 0.26); } .md-checkbox-disabled .md-ink-ripple { background-color: #000; } "],
 	            host: {
 	                '[class.md-checkbox-indeterminate]': 'indeterminate',
 	                '[class.md-checkbox-checked]': 'checked',
@@ -86714,11 +88364,25 @@ webpackJsonp([0],[
 	    return MdCheckbox;
 	}());
 	exports.MdCheckbox = MdCheckbox;
+	/** @deprecated */
 	exports.MD_CHECKBOX_DIRECTIVES = [MdCheckbox];
+	var MdCheckboxModule = (function () {
+	    function MdCheckboxModule() {
+	    }
+	    MdCheckboxModule = __decorate([
+	        core_1.NgModule({
+	            exports: exports.MD_CHECKBOX_DIRECTIVES,
+	            declarations: exports.MD_CHECKBOX_DIRECTIVES,
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], MdCheckboxModule);
+	    return MdCheckboxModule;
+	}());
+	exports.MdCheckboxModule = MdCheckboxModule;
 	//# sourceMappingURL=checkbox.js.map
 
 /***/ },
-/* 695 */
+/* 699 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -86735,19 +88399,20 @@ webpackJsonp([0],[
 	    return function (target, key) { decorator(target, key, paramIndex); }
 	};
 	var core_1 = __webpack_require__(5);
-	var common_1 = __webpack_require__(2);
-	var unique_selection_dispatcher_1 = __webpack_require__(696);
+	var forms_1 = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"@angular/forms\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var unique_selection_dispatcher_1 = __webpack_require__(700);
 	// Re-exports.
-	var unique_selection_dispatcher_2 = __webpack_require__(696);
+	var unique_selection_dispatcher_2 = __webpack_require__(700);
 	exports.MdUniqueSelectionDispatcher = unique_selection_dispatcher_2.MdUniqueSelectionDispatcher;
 	/**
 	 * Provider Expression that allows md-radio-group to register as a ControlValueAccessor. This
 	 * allows it to support [(ngModel)] and ngControl.
 	 */
-	exports.MD_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = new core_1.Provider(common_1.NG_VALUE_ACCESSOR, {
+	exports.MD_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
+	    provide: forms_1.NG_VALUE_ACCESSOR,
 	    useExisting: core_1.forwardRef(function () { return MdRadioGroup; }),
 	    multi: true
-	});
+	};
 	// TODO(mtlin):
 	// Ink ripple is currently placeholder.
 	// Determine motion spec for button transitions.
@@ -86857,9 +88522,8 @@ webpackJsonp([0],[
 	    /**
 	     * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
 	     * radio buttons upon their blur.
-	     * @internal
 	     */
-	    MdRadioGroup.prototype.touch = function () {
+	    MdRadioGroup.prototype._touch = function () {
 	        if (this.onTouched) {
 	            this.onTouched();
 	        }
@@ -86993,9 +88657,6 @@ webpackJsonp([0],[
 	                // Notify all radio buttons with the same name to un-check.
 	                this.radioDispatcher.notify(this.id, this.name);
 	            }
-	            if (newCheckedState != this._checked) {
-	                this._emitChangeEvent();
-	            }
 	            this._checked = newCheckedState;
 	            if (newCheckedState && this.radioGroup && this.radioGroup.value != this.value) {
 	                this.radioGroup.selected = this;
@@ -87057,51 +88718,46 @@ webpackJsonp([0],[
 	        event.value = this._value;
 	        this.change.emit(event);
 	    };
-	    /** @internal */
-	    MdRadioButton.prototype.onClick = function (event) {
-	        if (this.disabled) {
-	            event.preventDefault();
-	            event.stopPropagation();
-	            return;
-	        }
-	        if (this.radioGroup != null) {
-	            // Propagate the change one-way via the group, which will in turn mark this
-	            // button as checked.
-	            this.radioGroup.selected = this;
-	            this.radioGroup.touch();
-	        }
-	        else {
-	            this.checked = true;
-	        }
-	    };
 	    /**
 	     * We use a hidden native input field to handle changes to focus state via keyboard navigation,
 	     * with visual rendering done separately. The native element is kept in sync with the overall
 	     * state of the component.
-	     * @internal
 	     */
-	    MdRadioButton.prototype.onInputFocus = function () {
+	    MdRadioButton.prototype._onInputFocus = function () {
 	        this._isFocused = true;
 	    };
-	    /** @internal */
-	    MdRadioButton.prototype.onInputBlur = function () {
+	    /** TODO: internal */
+	    MdRadioButton.prototype._onInputBlur = function () {
 	        this._isFocused = false;
 	        if (this.radioGroup) {
-	            this.radioGroup.touch();
+	            this.radioGroup._touch();
 	        }
 	    };
+	    /** TODO: internal */
+	    MdRadioButton.prototype._onInputClick = function (event) {
+	        // We have to stop propagation for click events on the visual hidden input element.
+	        // By default, when a user clicks on a label element, a generated click event will be
+	        // dispatched on the associated input element. Since we are using a label element as our
+	        // root container, the click event on the `radio-button` will be executed twice.
+	        // The real click event will bubble up, and the generated click event also tries to bubble up.
+	        // This will lead to multiple click events.
+	        // Preventing bubbling for the second event will solve that issue.
+	        event.stopPropagation();
+	    };
 	    /**
-	     * Checks the radio due to an interaction with the underlying native <input type="radio">
-	     * @internal
+	     * Triggered when the radio button received a click or the input recognized any change.
+	     * Clicking on a label element, will trigger a change event on the associated input.
+	     * TODO: internal
 	     */
-	    MdRadioButton.prototype.onInputChange = function (event) {
+	    MdRadioButton.prototype._onInputChange = function (event) {
 	        // We always have to stop propagation on the change event.
 	        // Otherwise the change event, from the input element, will bubble up and
 	        // emit its event object to the `change` output.
 	        event.stopPropagation();
 	        this.checked = true;
+	        this._emitChangeEvent();
 	        if (this.radioGroup) {
-	            this.radioGroup.touch();
+	            this.radioGroup._touch();
 	        }
 	    };
 	    __decorate([
@@ -87148,15 +88804,10 @@ webpackJsonp([0],[
 	        __metadata('design:type', Boolean)
 	    ], MdRadioButton.prototype, "disabled", null);
 	    MdRadioButton = __decorate([
-	        core_1.Component({
-	            moduleId: module.id,
-	            selector: 'md-radio-button',
-	            template: "<!-- TODO(jelbourn): render the radio on either side of the content --> <!-- TODO(mtlin): Evaluate trade-offs of using native radio vs. cost of additional bindings. --> <label [attr.for]=\"inputId\" class=\"md-radio-label\"> <!-- The actual 'radio' part of the control. --> <div class=\"md-radio-container\"> <div class=\"md-radio-outer-circle\"></div> <div class=\"md-radio-inner-circle\"></div> <div class=\"md-ink-ripple\"></div> </div> <input #input class=\"md-radio-input\" type=\"radio\" [id]=\"inputId\" [checked]=\"checked\" [disabled]=\"disabled\" [name]=\"name\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledby\" (change)=\"onInputChange($event)\" (focus)=\"onInputFocus()\" (blur)=\"onInputBlur()\" /> <!-- The label content for radio control. --> <div class=\"md-radio-label-content\" [class.md-radio-align-end]=\"align == 'end'\"> <ng-content></ng-content> </div> </label> ",
+	        core_1.Component({            selector: 'md-radio-button',
+	            template: "<!-- TODO(jelbourn): render the radio on either side of the content --> <!-- TODO(mtlin): Evaluate trade-offs of using native radio vs. cost of additional bindings. --> <label [attr.for]=\"inputId\" class=\"md-radio-label\"> <!-- The actual 'radio' part of the control. --> <div class=\"md-radio-container\"> <div class=\"md-radio-outer-circle\"></div> <div class=\"md-radio-inner-circle\"></div> <div class=\"md-ink-ripple\"></div> </div> <input #input class=\"md-radio-input\" type=\"radio\" [id]=\"inputId\" [checked]=\"checked\" [disabled]=\"disabled\" [name]=\"name\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledby\" (change)=\"_onInputChange($event)\" (focus)=\"_onInputFocus()\" (blur)=\"_onInputBlur()\" (click)=\"_onInputClick($event)\"> <!-- The label content for radio control. --> <div class=\"md-radio-label-content\" [class.md-radio-align-end]=\"align == 'end'\"> <ng-content></ng-content> </div> </label> ",
 	            styles: ["/** * Mixin that creates a new stacking context. * see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context */ /** * This mixin hides an element visually. * That means it's still accessible for screen-readers but not visible in view. */ /** * Forces an element to grow to fit floated contents; used as as an alternative to * `overflow: hidden;` because it doesn't cut off contents. */ /** * A mixin, which generates temporary ink ripple on a given component. * When $bindToParent is set to true, it will check for the focused class on the same selector as you included * that mixin. * It is also possible to specify the color palette of the temporary ripple. By default it uses the * accent palette for its background. */ md-radio-button { display: inline-block; } .md-radio-label { cursor: pointer; display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; -webkit-box-align: baseline; -ms-flex-align: baseline; align-items: baseline; white-space: nowrap; } .md-radio-container { box-sizing: border-box; display: inline-block; height: 20px; position: relative; width: 20px; top: 2px; } .md-radio-outer-circle { border-color: rgba(0, 0, 0, 0.54); border: solid 2px; border-radius: 50%; box-sizing: border-box; height: 20px; left: 0; position: absolute; top: 0; -webkit-transition: border-color ease 280ms; transition: border-color ease 280ms; width: 20px; } .md-radio-checked .md-radio-outer-circle { border-color: #9c27b0; } .md-radio-disabled .md-radio-outer-circle { border-color: rgba(0, 0, 0, 0.38); } .md-radio-inner-circle { background-color: #9c27b0; border-radius: 50%; box-sizing: border-box; height: 20px; left: 0; position: absolute; top: 0; -webkit-transition: background-color ease 280ms, -webkit-transform ease 280ms; transition: background-color ease 280ms, -webkit-transform ease 280ms; transition: transform ease 280ms, background-color ease 280ms; transition: transform ease 280ms, background-color ease 280ms, -webkit-transform ease 280ms; -webkit-transform: scale(0); transform: scale(0); width: 20px; } .md-radio-checked .md-radio-inner-circle { -webkit-transform: scale(0.5); transform: scale(0.5); } .md-radio-disabled .md-radio-inner-circle { background-color: rgba(0, 0, 0, 0.38); } .md-radio-label-content { display: inline-block; -webkit-box-ordinal-group: 1; -ms-flex-order: 0; order: 0; line-height: inherit; padding-left: 8px; padding-right: 0; } [dir='rtl'] .md-radio-label-content { padding-right: 8px; padding-left: 0; } .md-radio-label-content.md-radio-align-end { -webkit-box-ordinal-group: 0; -ms-flex-order: -1; order: -1; padding-left: 0; padding-right: 8px; } [dir='rtl'] .md-radio-label-content.md-radio-align-end { padding-right: 0; padding-left: 8px; } .md-radio-input { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; text-transform: none; width: 1px; } .md-radio-disabled, .md-radio-disabled .md-radio-label { cursor: default; } .md-ink-ripple { border-radius: 50%; opacity: 0; height: 48px; left: 50%; overflow: hidden; pointer-events: none; position: absolute; top: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); -webkit-transition: opacity ease 280ms, background-color ease 280ms; transition: opacity ease 280ms, background-color ease 280ms; width: 48px; } .md-radio-focused .md-ink-ripple { opacity: 1; background-color: rgba(156, 39, 176, 0.26); } .md-radio-disabled .md-ink-ripple { background-color: #000; } "],
-	            encapsulation: core_1.ViewEncapsulation.None,
-	            host: {
-	                '(click)': 'onClick($event)'
-	            }
+	            encapsulation: core_1.ViewEncapsulation.None
 	        }),
 	        __param(0, core_1.Optional()), 
 	        __metadata('design:paramtypes', [MdRadioGroup, unique_selection_dispatcher_1.MdUniqueSelectionDispatcher])
@@ -87164,11 +88815,26 @@ webpackJsonp([0],[
 	    return MdRadioButton;
 	}());
 	exports.MdRadioButton = MdRadioButton;
+	/** @deprecated */
 	exports.MD_RADIO_DIRECTIVES = [MdRadioGroup, MdRadioButton];
+	var MdRadioModule = (function () {
+	    function MdRadioModule() {
+	    }
+	    MdRadioModule = __decorate([
+	        core_1.NgModule({
+	            exports: exports.MD_RADIO_DIRECTIVES,
+	            declarations: exports.MD_RADIO_DIRECTIVES,
+	            providers: [unique_selection_dispatcher_1.MdUniqueSelectionDispatcher]
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], MdRadioModule);
+	    return MdRadioModule;
+	}());
+	exports.MdRadioModule = MdRadioModule;
 	//# sourceMappingURL=radio.js.map
 
 /***/ },
-/* 696 */
+/* 700 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87216,31 +88882,31 @@ webpackJsonp([0],[
 	//# sourceMappingURL=unique-selection-dispatcher.js.map
 
 /***/ },
-/* 697 */
+/* 701 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(698));
+	__export(__webpack_require__(702));
 
 
 /***/ },
-/* 698 */
+/* 702 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(699));
-	__export(__webpack_require__(700));
-	__export(__webpack_require__(707));
+	__export(__webpack_require__(703));
+	__export(__webpack_require__(704));
+	__export(__webpack_require__(711));
 
 
 /***/ },
-/* 699 */
+/* 703 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87254,7 +88920,7 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var _ = __webpack_require__(647);
+	var _ = __webpack_require__(649);
 	var TooltipOptions = (function () {
 	    function TooltipOptions(options) {
 	        _.assign(this, options);
@@ -87269,7 +88935,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 700 */
+/* 704 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87285,12 +88951,12 @@ webpackJsonp([0],[
 	var __param = (this && this.__param) || function (paramIndex, decorator) {
 	    return function (target, key) { decorator(target, key, paramIndex); }
 	};
-	var _ = __webpack_require__(647);
+	var _ = __webpack_require__(649);
 	var core_1 = __webpack_require__(5);
 	var common_1 = __webpack_require__(2);
-	var tooltip_options_class_1 = __webpack_require__(699);
-	var PositionService_1 = __webpack_require__(701);
-	var EscapeHtml_1 = __webpack_require__(702);
+	var tooltip_options_class_1 = __webpack_require__(703);
+	var PositionService_1 = __webpack_require__(705);
+	var EscapeHtml_1 = __webpack_require__(706);
 	var TooltipContainerComponent = (function () {
 	    function TooltipContainerComponent(element, options) {
 	        this.top = '0';
@@ -87330,8 +88996,8 @@ webpackJsonp([0],[
 	            selector: 'tooltip-container',
 	            directives: [common_1.NgClass, common_1.NgStyle],
 	            pipes: [EscapeHtml_1.EscapeHtmlPipe],
-	            template: __webpack_require__(703)(),
-	            styles: [__webpack_require__(706)]
+	            template: __webpack_require__(707)(),
+	            styles: [__webpack_require__(710)]
 	        }),
 	        __param(1, core_1.Inject(tooltip_options_class_1.TooltipOptions)), 
 	        __metadata('design:paramtypes', [core_1.ElementRef, tooltip_options_class_1.TooltipOptions])
@@ -87342,7 +89008,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 701 */
+/* 705 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -87499,7 +89165,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 702 */
+/* 706 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87536,10 +89202,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 703 */
+/* 707 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -87550,7 +89216,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 704 */
+/* 708 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87770,7 +89436,7 @@ webpackJsonp([0],[
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(705).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(709).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -87802,19 +89468,19 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 705 */
+/* 709 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 706 */
+/* 710 */
 /***/ function(module, exports) {
 
 	module.exports = ".tooltip {\n  position: absolute;\n  padding: 5px 15px;\n  border-radius: 5px;\n  background: rgba(0, 0, 0, 0.8);\n  border: 1px solid gray;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  color: white;\n  z-index: 100;\n}\n\n.tooltip-inner {\n  white-space: nowrap;\n  font-size: 12px;\n}\n\n.tooltip-top::after {\n  content: ' ';\n  position: absolute;\n  top: 100%;\n  /* At the bottom of the tooltip */\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px;\n  border-style: solid;\n  border-color: rgba(0, 0, 0, 0.4) transparent transparent transparent;\n}\n\n.tooltip-left::after {\n  content: ' ';\n  position: absolute;\n  top: 50%;\n  right: 100%;\n  /* To the left of the tooltip */\n  margin-top: -5px;\n  border-width: 5px;\n  border-style: solid;\n  border-color: transparent rgba(0, 0, 0, 0.4) transparent transparent;\n}"
 
 /***/ },
-/* 707 */
+/* 711 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87828,9 +89494,9 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var tooltip_options_class_1 = __webpack_require__(699);
-	var tooltip_component_1 = __webpack_require__(708);
-	var tooltip_service_1 = __webpack_require__(709);
+	var tooltip_options_class_1 = __webpack_require__(703);
+	var tooltip_component_1 = __webpack_require__(712);
+	var tooltip_service_1 = __webpack_require__(713);
 	var TooltipDirective = (function () {
 	    function TooltipDirective(viewContainerRef, injector, ComponentResolver, tooltipService) {
 	        this.viewContainerRef = viewContainerRef;
@@ -87950,18 +89616,18 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 708 */
+/* 712 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(700));
+	__export(__webpack_require__(704));
 
 
 /***/ },
-/* 709 */
+/* 713 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87993,10 +89659,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 710 */
+/* 714 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88007,24 +89673,24 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 711 */
+/* 715 */
 /***/ function(module, exports) {
 
 	module.exports = ".column.info {\n  -webkit-box-flex: 0;\n      -ms-flex-positive: 0;\n          flex-grow: 0;\n  cursor: pointer;\n}"
 
 /***/ },
-/* 712 */
+/* 716 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(713));
+	__export(__webpack_require__(717));
 
 
 /***/ },
-/* 713 */
+/* 717 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88038,10 +89704,10 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var angular2_modal_1 = __webpack_require__(690);
-	var button_1 = __webpack_require__(691);
-	var input_1 = __webpack_require__(692);
-	var Humane = __webpack_require__(644);
+	var angular2_modal_1 = __webpack_require__(692);
+	var button_1 = __webpack_require__(693);
+	var input_1 = __webpack_require__(697);
+	var Humane = __webpack_require__(646);
 	var GithubDialogComponent = (function () {
 	    function GithubDialogComponent(dialog) {
 	        this.dialog = dialog;
@@ -88070,8 +89736,8 @@ webpackJsonp([0],[
 	    GithubDialogComponent = __decorate([
 	        core_1.Component({
 	            selector: 'github-dialog',
-	            template: __webpack_require__(714)(),
-	            styles: [__webpack_require__(715)],
+	            template: __webpack_require__(718)(),
+	            styles: [__webpack_require__(719)],
 	            directives: [
 	                button_1.MdButton,
 	                input_1.MdInput,
@@ -88086,10 +89752,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 714 */
+/* 718 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88100,24 +89766,24 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 715 */
+/* 719 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 716 */
+/* 720 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(717));
+	__export(__webpack_require__(721));
 
 
 /***/ },
-/* 717 */
+/* 721 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88135,12 +89801,12 @@ webpackJsonp([0],[
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var _ = __webpack_require__(647);
+	var _ = __webpack_require__(649);
 	var core_1 = __webpack_require__(5);
-	var angular2_modal_1 = __webpack_require__(690);
-	var bootstrap_1 = __webpack_require__(677);
-	var models_1 = __webpack_require__(660);
-	var button_1 = __webpack_require__(691);
+	var angular2_modal_1 = __webpack_require__(692);
+	var bootstrap_1 = __webpack_require__(679);
+	var models_1 = __webpack_require__(662);
+	var button_1 = __webpack_require__(693);
 	var icon_1 = __webpack_require__(346);
 	var ConfirmDialogComponent = (function () {
 	    function ConfirmDialogComponent(dialog) {
@@ -88163,8 +89829,8 @@ webpackJsonp([0],[
 	    ConfirmDialogComponent = __decorate([
 	        core_1.Component({
 	            selector: 'confirm-dialog',
-	            template: __webpack_require__(718)(),
-	            styles: [__webpack_require__(719)],
+	            template: __webpack_require__(722)(),
+	            styles: [__webpack_require__(723)],
 	            directives: [
 	                button_1.MdButton,
 	                icon_1.MdIcon
@@ -88200,10 +89866,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 718 */
+/* 722 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88214,24 +89880,24 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 719 */
+/* 723 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 720 */
+/* 724 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(721));
+	__export(__webpack_require__(725));
 
 
 /***/ },
-/* 721 */
+/* 725 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88244,17 +89910,17 @@ webpackJsonp([0],[
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var _ = __webpack_require__(647);
+	var _ = __webpack_require__(649);
 	var core_1 = __webpack_require__(5);
-	var angular2_modal_1 = __webpack_require__(690);
-	var button_1 = __webpack_require__(691);
-	var input_1 = __webpack_require__(692);
-	var checkbox_1 = __webpack_require__(694);
-	var radio_1 = __webpack_require__(695);
-	var progress_circle_1 = __webpack_require__(722);
-	var Humane = __webpack_require__(644);
-	var user_service_1 = __webpack_require__(723);
-	var analytics_service_1 = __webpack_require__(675);
+	var angular2_modal_1 = __webpack_require__(692);
+	var button_1 = __webpack_require__(693);
+	var input_1 = __webpack_require__(697);
+	var checkbox_1 = __webpack_require__(698);
+	var radio_1 = __webpack_require__(699);
+	var progress_circle_1 = __webpack_require__(726);
+	var Humane = __webpack_require__(646);
+	var user_service_1 = __webpack_require__(727);
+	var analytics_service_1 = __webpack_require__(677);
 	var ExportDialogComponent = (function () {
 	    function ExportDialogComponent(dialog, ga, userService) {
 	        this.dialog = dialog;
@@ -88300,8 +89966,8 @@ webpackJsonp([0],[
 	    ExportDialogComponent = __decorate([
 	        core_1.Component({
 	            selector: 'export-dialog',
-	            template: __webpack_require__(724)(),
-	            styles: [__webpack_require__(725)],
+	            template: __webpack_require__(728)(),
+	            styles: [__webpack_require__(729)],
 	            directives: [
 	                button_1.MdButton,
 	                input_1.MdInput,
@@ -88322,7 +89988,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 722 */
+/* 726 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88362,13 +90028,11 @@ webpackJsonp([0],[
 	        this._lastAnimationId = 0;
 	        this._mode = 'determinate';
 	    }
-	    Object.defineProperty(MdProgressCircle.prototype, "ariaValueMin", {
+	    Object.defineProperty(MdProgressCircle.prototype, "_ariaValueMin", {
 	        /**
 	         * Values for aria max and min are only defined as numbers when in a determinate mode.  We do this
 	         * because voiceover does not report the progress indicator as indeterminate if the aria min
 	         * and/or max value are number values.
-	         *
-	         * @internal
 	         */
 	        get: function () {
 	            return this.mode == 'determinate' ? 0 : null;
@@ -88376,8 +90040,7 @@ webpackJsonp([0],[
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(MdProgressCircle.prototype, "ariaValueMax", {
-	        /** @internal */
+	    Object.defineProperty(MdProgressCircle.prototype, "_ariaValueMax", {
 	        get: function () {
 	            return this.mode == 'determinate' ? 100 : null;
 	        },
@@ -88385,11 +90048,11 @@ webpackJsonp([0],[
 	        configurable: true
 	    });
 	    Object.defineProperty(MdProgressCircle.prototype, "interdeterminateInterval", {
-	        /** @internal */
+	        /** TODO: internal */
 	        get: function () {
 	            return this._interdeterminateInterval;
 	        },
-	        /** @internal */
+	        /** TODO: internal */
 	        set: function (interval) {
 	            clearInterval(this._interdeterminateInterval);
 	            this._interdeterminateInterval = interval;
@@ -88398,6 +90061,7 @@ webpackJsonp([0],[
 	        configurable: true
 	    });
 	    Object.defineProperty(MdProgressCircle.prototype, "currentPath", {
+	        /** TODO: internal */
 	        get: function () {
 	            return this._currentPath;
 	        },
@@ -88465,15 +90129,15 @@ webpackJsonp([0],[
 	    MdProgressCircle.prototype._animateCircle = function (animateFrom, animateTo, ease, duration, rotation) {
 	        var _this = this;
 	        var id = ++this._lastAnimationId;
-	        var startTime = now();
+	        var startTime = Date.now();
 	        var changeInValue = animateTo - animateFrom;
 	        // No need to animate it if the values are the same
 	        if (animateTo === animateFrom) {
 	            this.currentPath = getSvgArc(animateTo, rotation);
 	        }
 	        else {
-	            var animation_1 = function (currentTime) {
-	                var elapsedTime = Math.max(0, Math.min((currentTime || now()) - startTime, duration));
+	            var animation_1 = function () {
+	                var elapsedTime = Math.max(0, Math.min(Date.now() - startTime, duration));
 	                _this.currentPath = getSvgArc(ease(elapsedTime, animateFrom, changeInValue, duration), rotation);
 	                // Prevent overlapping animations by checking if a new animation has been called for and
 	                // if the animation has lasted long than the animation duration.
@@ -88523,13 +90187,11 @@ webpackJsonp([0],[
 	        __metadata('design:type', Object)
 	    ], MdProgressCircle.prototype, "mode", null);
 	    MdProgressCircle = __decorate([
-	        core_1.Component({
-	            moduleId: module.id,
-	            selector: 'md-progress-circle',
+	        core_1.Component({            selector: 'md-progress-circle',
 	            host: {
 	                'role': 'progressbar',
-	                '[attr.aria-valuemin]': 'ariaValueMin',
-	                '[attr.aria-valuemax]': 'ariaValueMax',
+	                '[attr.aria-valuemin]': '_ariaValueMin',
+	                '[attr.aria-valuemax]': '_ariaValueMax',
 	            },
 	            template: "<!-- preserveAspectRatio of xMidYMid meet as the center of the viewport is the circle's center.  The center of the circle with remain at the center of the md-progress-circle element containing the SVG. --> <svg viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid meet\"> <path [attr.d]=\"currentPath\"></path> </svg> ",
 	            styles: ["/* Animation Durations */ /** Component sizing */ :host { display: block; /** Height and width are provided for md-progress-circle to act as a default. The height and width are expected to be overwritten by application css. */ height: 100px; width: 100px; /** SVG's viewBox is defined as 0 0 100 100, this means that all SVG children will placed based on a 100px by 100px box.  Additionally all SVG sizes and locations are in reference to this viewBox. */ } :host svg { height: 100%; width: 100%; -webkit-transform-origin: center; transform-origin: center; } :host path { fill: transparent; stroke: #00897b; /** Stroke width of 10px defines stroke as 10% of the viewBox */ stroke-width: 10px; } :host[color='accent'] path { stroke: #8e24aa; } :host[color='warn'] path { stroke: #e53935; } :host[mode='indeterminate'] { -webkit-animation-duration: 5250ms, 2887.5ms; animation-duration: 5250ms, 2887.5ms; -webkit-animation-name: md-progress-circle-sporadic-rotate, md-progress-circle-linear-rotate; animation-name: md-progress-circle-sporadic-rotate, md-progress-circle-linear-rotate; -webkit-animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1), linear; animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1), linear; -webkit-animation-iteration-count: infinite; animation-iteration-count: infinite; -webkit-transition: none; transition: none; } /** Animations for indeterminate mode */ @-webkit-keyframes md-progress-circle-linear-rotate { 0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } } @keyframes md-progress-circle-linear-rotate { 0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } } @-webkit-keyframes md-progress-circle-sporadic-rotate { 12.5% { -webkit-transform: rotate(135deg); transform: rotate(135deg); } 25% { -webkit-transform: rotate(270deg); transform: rotate(270deg); } 37.5% { -webkit-transform: rotate(405deg); transform: rotate(405deg); } 50% { -webkit-transform: rotate(540deg); transform: rotate(540deg); } 62.5% { -webkit-transform: rotate(675deg); transform: rotate(675deg); } 75% { -webkit-transform: rotate(810deg); transform: rotate(810deg); } 87.5% { -webkit-transform: rotate(945deg); transform: rotate(945deg); } 100% { -webkit-transform: rotate(1080deg); transform: rotate(1080deg); } } @keyframes md-progress-circle-sporadic-rotate { 12.5% { -webkit-transform: rotate(135deg); transform: rotate(135deg); } 25% { -webkit-transform: rotate(270deg); transform: rotate(270deg); } 37.5% { -webkit-transform: rotate(405deg); transform: rotate(405deg); } 50% { -webkit-transform: rotate(540deg); transform: rotate(540deg); } 62.5% { -webkit-transform: rotate(675deg); transform: rotate(675deg); } 75% { -webkit-transform: rotate(810deg); transform: rotate(810deg); } 87.5% { -webkit-transform: rotate(945deg); transform: rotate(945deg); } 100% { -webkit-transform: rotate(1080deg); transform: rotate(1080deg); } } "],
@@ -88553,9 +90215,7 @@ webpackJsonp([0],[
 	        this.mode = 'indeterminate';
 	    }
 	    MdSpinner = __decorate([
-	        core_1.Component({
-	            moduleId: module.id,
-	            selector: 'md-spinner',
+	        core_1.Component({            selector: 'md-spinner',
 	            host: {
 	                'role': 'progressbar',
 	                'mode': 'indeterminate',
@@ -88574,15 +90234,6 @@ webpackJsonp([0],[
 	/** Clamps a value to be between 0 and 100. */
 	function clamp(v) {
 	    return Math.max(0, Math.min(100, v));
-	}
-	/**
-	 * Returns the current timestamp either based on the performance global or a date object.
-	 */
-	function now() {
-	    if (window.performance && window.performance.now) {
-	        return window.performance.now();
-	    }
-	    return Date.now();
 	}
 	/**
 	 * Converts Polar coordinates to Cartesian.
@@ -88638,11 +90289,25 @@ webpackJsonp([0],[
 	    }
 	    return "M" + start + "A" + pathRadius + "," + pathRadius + " 0 " + largeArcFlag + "," + arcSweep + " " + end;
 	}
+	/** @deprecated */
 	exports.MD_PROGRESS_CIRCLE_DIRECTIVES = [MdProgressCircle, MdSpinner];
+	var MdProgressCircleModule = (function () {
+	    function MdProgressCircleModule() {
+	    }
+	    MdProgressCircleModule = __decorate([
+	        core_1.NgModule({
+	            exports: exports.MD_PROGRESS_CIRCLE_DIRECTIVES,
+	            declarations: exports.MD_PROGRESS_CIRCLE_DIRECTIVES,
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], MdProgressCircleModule);
+	    return MdProgressCircleModule;
+	}());
+	exports.MdProgressCircleModule = MdProgressCircleModule;
 	//# sourceMappingURL=progress-circle.js.map
 
 /***/ },
-/* 723 */
+/* 727 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88656,8 +90321,8 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var BehaviorSubject_1 = __webpack_require__(421);
-	var http_service_ts_1 = __webpack_require__(674);
+	var BehaviorSubject_1 = __webpack_require__(431);
+	var http_service_ts_1 = __webpack_require__(676);
 	var UserService = (function () {
 	    function UserService(httpService) {
 	        this.httpService = httpService;
@@ -88683,10 +90348,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 724 */
+/* 728 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -88697,13 +90362,13 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 725 */
+/* 729 */
 /***/ function(module, exports) {
 
 	module.exports = ".row.h-center {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n              -ms-grid-row-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: #fff;\n  text-align: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  color: black;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.loading .content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.choose {\n  -webkit-transition: 200ms all ease-in-out;\n  transition: 200ms all ease-in-out;\n  cursor: pointer;\n  text-align: center;\n  padding: 15px;\n}\n\n.choose .fa {\n  -webkit-transition: 200ms all ease-in-out;\n  transition: 200ms all ease-in-out;\n  background: white;\n  display: block;\n  margin: 0 10px;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  padding: 15px;\n  border-radius: 50%;\n  height: 100px;\n  width: 100px;\n  text-align: center;\n  font-size: 64px;\n  color: #006064;\n}\n\n.choose:hover {\n  color: #006064;\n}\n\n.choose:hover .fa {\n  background: #006064;\n  color: white;\n}\n\n.choose.disabled,\n.choose.disabled .fa {\n  color: #aaa;\n  cursor: not-allowed;\n}\n\n.choose.disabled:hover {\n  color: #aaa;\n}\n\n.choose.disabled:hover .fa {\n  color: #aaa;\n  background: white;\n}\n\n.choose.active {\n  background: #006064;\n  color: white;\n}\n\n.choose.active .fa {\n  background: white;\n  color: #006064;\n}"
 
 /***/ },
-/* 726 */
+/* 730 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88717,8 +90382,8 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var http_service_ts_1 = __webpack_require__(674);
-	var folder_service_ts_1 = __webpack_require__(659);
+	var http_service_ts_1 = __webpack_require__(676);
+	var folder_service_ts_1 = __webpack_require__(661);
 	var ProjectService = (function () {
 	    function ProjectService(folderService, httpService) {
 	        this.folderService = folderService;
@@ -88741,18 +90406,18 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 727 */
+/* 731 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(728));
+	__export(__webpack_require__(732));
 
 
 /***/ },
-/* 728 */
+/* 732 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88767,12 +90432,12 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var icon_1 = __webpack_require__(346);
-	var progress_circle_1 = __webpack_require__(722);
-	var _ = __webpack_require__(647);
-	var services_1 = __webpack_require__(648);
-	var sliced_image_1 = __webpack_require__(729);
-	var directives_1 = __webpack_require__(697);
-	var analytics_service_1 = __webpack_require__(675);
+	var progress_circle_1 = __webpack_require__(726);
+	var _ = __webpack_require__(649);
+	var services_1 = __webpack_require__(650);
+	var sliced_image_1 = __webpack_require__(733);
+	var directives_1 = __webpack_require__(701);
+	var analytics_service_1 = __webpack_require__(677);
 	var ImageBarComponent = (function () {
 	    function ImageBarComponent(imageService, ga, rawImageService, folderService, el, dialogService) {
 	        var _this = this;
@@ -88888,8 +90553,8 @@ webpackJsonp([0],[
 	    ImageBarComponent = __decorate([
 	        core_1.Component({
 	            selector: 'image-bar',
-	            template: __webpack_require__(733)(),
-	            styles: [__webpack_require__(734)],
+	            template: __webpack_require__(737)(),
+	            styles: [__webpack_require__(738)],
 	            directives: [sliced_image_1.SlicedImageComponent, icon_1.MD_ICON_DIRECTIVES, progress_circle_1.MD_PROGRESS_CIRCLE_DIRECTIVES, directives_1.TooltipDirective]
 	        }), 
 	        __metadata('design:paramtypes', [services_1.ImageService, analytics_service_1.AnalyticsService, services_1.RawImageService, services_1.FolderService, core_1.ElementRef, services_1.DialogService])
@@ -88900,18 +90565,18 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 729 */
+/* 733 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(730));
+	__export(__webpack_require__(734));
 
 
 /***/ },
-/* 730 */
+/* 734 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88925,9 +90590,9 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(5);
-	var _1 = __webpack_require__(660);
-	var services_1 = __webpack_require__(648);
-	var tooltip_directive_1 = __webpack_require__(707);
+	var _1 = __webpack_require__(662);
+	var services_1 = __webpack_require__(650);
+	var tooltip_directive_1 = __webpack_require__(711);
 	var SlicedImageComponent = (function () {
 	    function SlicedImageComponent(imageService, el, ngZone) {
 	        this.imageService = imageService;
@@ -88995,8 +90660,8 @@ webpackJsonp([0],[
 	    SlicedImageComponent = __decorate([
 	        core_1.Component({
 	            selector: 'sliced-image',
-	            styles: [__webpack_require__(731)],
-	            template: __webpack_require__(732)(),
+	            styles: [__webpack_require__(735)],
+	            template: __webpack_require__(736)(),
 	            directives: [tooltip_directive_1.TooltipDirective]
 	        }), 
 	        __metadata('design:paramtypes', [services_1.ImageService, core_1.ElementRef, core_1.NgZone])
@@ -89007,16 +90672,16 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 731 */
+/* 735 */
 /***/ function(module, exports) {
 
 	module.exports = ":host {\n  text-align: center;\n}\n\n.sliced-image {\n  position: relative;\n}\n\ncanvas {\n  cursor: crosshair;\n}\n\n.thumbnail {\n  cursor: pointer;\n}"
 
 /***/ },
-/* 732 */
+/* 736 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89027,10 +90692,10 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 733 */
+/* 737 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89041,24 +90706,24 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 734 */
+/* 738 */
 /***/ function(module, exports) {
 
 	module.exports = "@-webkit-keyframes activate {\n  0% {\n    transfoem: scale(1);\n  }\n\n  50% {\n    -webkit-transform: scale(1.1);\n            transform: scale(1.1);\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n  }\n}\n\n@keyframes activate {\n  0% {\n    transfoem: scale(1);\n  }\n\n  50% {\n    -webkit-transform: scale(1.1);\n            transform: scale(1.1);\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n  }\n}\n\n.image-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  position: relative;\n}\n\n.image-bar .box {\n  margin: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.image-bar .imageBox {\n  margin: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  color: rgba(0, 0, 0, 0.54);\n  font-size: 16px;\n  line-height: normal;\n  cursor: pointer;\n  width: 190px;\n  position: relative;\n  -webkit-transition: 300ms all ease-in-out;\n  transition: 300ms all ease-in-out;\n  -webkit-transform: scale(1);\n          transform: scale(1);\n  background-color: white;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n}\n\n.image-bar .imageBox.currentImage {\n  -webkit-animation-name: activate;\n          animation-name: activate;\n  -webkit-animation-duration: 300ms;\n          animation-duration: 300ms;\n  border: 1px solid rgba(0, 96, 100, 0.54);\n  box-shadow: 0 2px 5px 0 rgba(0, 96, 100, 0.54), 0 3px 3px -2px rgba(0, 96, 100, 0.6), 0 2px 8px 0 rgba(0, 96, 100, 0.52);\n}\n\n.image-bar .imageBox.currentImage .text {\n  color: #006064;\n}\n\n.image-bar .imageBox.currentImage .text .deleteIcon {\n  color: rgba(0, 0, 0, 0.54);\n}\n\n.image-bar .imageBox:hover .text {\n  color: #006064;\n}\n\n.image-bar .imageBox:hover .text .deleteIcon {\n  color: rgba(0, 0, 0, 0.54);\n}\n\n.image-bar .imageBox .text {\n  padding: 3px 5px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n\n.image-bar .imageBox .text .name {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n\n.image-bar .imageBox .text .name:hover .editIcon {\n  visibility: visible;\n  opacity: 0.5;\n}\n\n.image-bar .imageBox .text .name:hover .editIcon:hover {\n  opacity: 1;\n}\n\n.image-bar .imageBox .nameHelper {\n  display: inline-block;\n  vertical-align: middle;\n  width: 119px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  cursor: text;\n  border-bottom: 1px solid transparent;\n  padding-left: 5px;\n  white-space: nowrap;\n}\n\n.image-bar .imageBox .nameHelper:hover {\n  color: rgba(0, 0, 0, 0.3);\n}\n\n.image-bar .imageBox .imageNameInput {\n  border: none;\n  padding: 0;\n  padding-left: 5px;\n  font-family: Lato;\n  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);\n  color: rgba(0, 0, 0, 0.3);\n  font-size: 16px;\n  width: calc(100% - 10px);\n  box-sizing: border-box;\n  height: 24px;\n  margin-right: 5px;\n}\n\n.image-bar .imageBox .editIcon {\n  font-size: 16px;\n  margin-left: 5px;\n  vertical-align: middle;\n  width: auto;\n  height: auto;\n  visibility: hidden;\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n  opacity: 0;\n  -webkit-transition: opacity 230ms;\n  transition: opacity 230ms;\n}\n\n.image-bar .imageBox .deleteIcon {\n  font-size: 20px;\n  cursor: pointer;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 20px;\n          flex: 0 0 20px;\n  width: 20px;\n  height: 20px;\n}\n\n.image-bar .imageBox .deleteIcon:hover {\n  color: #006064 !important;\n}\n\n.image-bar .imageBox .add {\n  line-height: 50%;\n  font-size: 72px;\n  text-align: center;\n  margin-bottom: 5px;\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n}\n\n.image-bar .imageBox.placeholder {\n  padding: 15px;\n  border: 2px dashed rgba(0, 0, 0, 0.2);\n  background-color: transparent;\n  box-shadow: none;\n  color: rgba(0, 0, 0, 0.3);\n  -webkit-transition: border-color 230ms;\n  transition: border-color 230ms;\n}\n\n.image-bar .imageBox.placeholder .text {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  border-top: none;\n}\n\n.image-bar .imageBox.placeholder:hover,\n.image-bar .imageBox.placeholder.hover {\n  border-color: #006064;\n}\n\n.image-bar .imageBox.placeholder:hover .add,\n.image-bar .imageBox.placeholder.hover .add {\n  color: #006064;\n}\n\n.image-bar .thumbnail {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  width: 100%;\n  max-height: calc(100% - 36px);\n}\n\n.image-bar .hiddenInput {\n  display: none;\n}\n\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: rgba(255, 255, 255, 0.8);\n  text-align: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  color: black;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  z-index: 10;\n}\n\n.loading .content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}"
 
 /***/ },
-/* 735 */
+/* 739 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(736));
+	__export(__webpack_require__(740));
 
 
 /***/ },
-/* 736 */
+/* 740 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -89073,9 +90738,9 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var icon_1 = __webpack_require__(346);
-	var models_1 = __webpack_require__(660);
-	var services_1 = __webpack_require__(648);
-	var analytics_service_1 = __webpack_require__(675);
+	var models_1 = __webpack_require__(662);
+	var services_1 = __webpack_require__(650);
+	var analytics_service_1 = __webpack_require__(677);
 	var AreaComponent = (function () {
 	    function AreaComponent(folderService, ga, dialogService, areaService) {
 	        this.folderService = folderService;
@@ -89128,8 +90793,8 @@ webpackJsonp([0],[
 	    AreaComponent = __decorate([
 	        core_1.Component({
 	            selector: 'area',
-	            styles: [__webpack_require__(737)],
-	            template: __webpack_require__(738)(),
+	            styles: [__webpack_require__(741)],
+	            template: __webpack_require__(742)(),
 	            directives: [icon_1.MD_ICON_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [services_1.FolderService, analytics_service_1.AnalyticsService, services_1.DialogService, services_1.AreaService])
@@ -89140,16 +90805,16 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 737 */
+/* 741 */
 /***/ function(module, exports) {
 
 	module.exports = ".c-area {\n  position: absolute;\n  border: 1px dotted black;\n  background-color: rgba(202, 202, 202, 0.4);\n  -webkit-transition: background-color 230ms;\n  transition: background-color 230ms;\n  cursor: default;\n}\n\n.c-area .wrapper {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n\n.c-area .delete {\n  position: absolute;\n  top: 2px;\n  right: 2px;\n  color: transparent;\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n  cursor: pointer;\n  font-size: 16px;\n}\n\n.c-area .goToComponent {\n  border: 1px solid white;\n  padding: 2% 3%;\n  text-align: center;\n  color: white;\n  text-transform: uppercase;\n  opacity: 0;\n  cursor: pointer;\n  -webkit-transition: opacity 230ms;\n  transition: opacity 230ms;\n  font-size: 10px;\n}\n\n.c-area:hover {\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.c-area:hover .delete {\n  color: rgba(255, 255, 255, 0.8);\n}\n\n.c-area:hover .delete:hover {\n  color: white;\n}\n\n.c-area:hover .goToComponent {\n  opacity: 1;\n}\n\n.c-area--hover {\n  border: 1px solid cyan;\n}\n\n.c-area--invalid {\n  background-color: rgba(255, 0, 0, 0.1);\n  border-color: red;\n}"
 
 /***/ },
-/* 738 */
+/* 742 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89160,16 +90825,16 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 739 */
+/* 743 */
 /***/ function(module, exports) {
 
 	module.exports = ".board {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: hidden;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  background: #fafafa;\n}\n\n.board .imageBox {\n  position: relative;\n}\n\n.board .workingSpace {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.board .imageContainer {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.board .imageContainer .boardImage {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n\n.board image-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 130px;\n          flex: 0 0 130px;\n  overflow: auto;\n  position: relative;\n  z-index: 2;\n}\n\n.board sliced-image {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n\n.board .toolbar {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 50px;\n          flex: 0 0 50px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.2);\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 0 20px;\n  background: white;\n  font-size: 16px;\n  box-sizing: content-box;\n}\n\n.board .toolbar .title.active {\n  color: #006064;\n  cursor: pointer;\n}\n\n.board .toolbar .title.active:hover {\n  color: rgba(0, 0, 0, 0.3);\n}\n\n.board .toolbar .input {\n  border: none;\n  padding: 0;\n  margin: 0;\n  font-size: 16px;\n  font-family: Lato;\n  color: rgba(0, 0, 0, 0.3);\n  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);\n}\n\n.board .toolbar .childrenSymbol {\n  color: #006064;\n  padding: 0 20px;\n}\n\n.board .toolbar .areaTitle {\n  color: #006064;\n  cursor: pointer;\n}\n\n.board .fileUploadPlaceholder {\n  margin: 50px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  border: 3px dashed rgba(0, 0, 0, 0.2);\n  border-radius: 10px;\n  color: rgba(0, 0, 0, 0.54);\n  cursor: pointer;\n  -webkit-transition: border-color 230ms;\n  transition: border-color 230ms;\n}\n\n.board .fileUploadPlaceholder i {\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n}\n\n.board .fileUploadPlaceholder:hover {\n  border-color: #006064;\n}\n\n.board .fileUploadPlaceholder:hover i {\n  color: #006064;\n}\n\n.board .fileUploadPlaceholder .centerWrapper {\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  cursor: pointer;\n}\n\n.board .fileUploadPlaceholder .noImage {\n  font-weight: bold;\n}\n\n.board .hiddenInput {\n  display: none;\n}\n\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: rgba(255, 255, 255, 0.8);\n  text-align: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  color: black;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  z-index: 10;\n}\n\n.loading .content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}"
 
 /***/ },
-/* 740 */
+/* 744 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89180,18 +90845,18 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 741 */
+/* 745 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(742));
+	__export(__webpack_require__(746));
 
 
 /***/ },
-/* 742 */
+/* 746 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -89206,11 +90871,11 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var icon_1 = __webpack_require__(346);
-	var component_element_1 = __webpack_require__(743);
-	var services_1 = __webpack_require__(648);
-	var models_1 = __webpack_require__(660);
-	var dialog_service_1 = __webpack_require__(676);
-	var analytics_service_1 = __webpack_require__(675);
+	var component_element_1 = __webpack_require__(747);
+	var services_1 = __webpack_require__(650);
+	var models_1 = __webpack_require__(662);
+	var dialog_service_1 = __webpack_require__(678);
+	var analytics_service_1 = __webpack_require__(677);
 	var SidebarComponent = (function () {
 	    function SidebarComponent(fileService, ga, folderService, dialogService) {
 	        var _this = this;
@@ -89237,8 +90902,8 @@ webpackJsonp([0],[
 	    SidebarComponent = __decorate([
 	        core_1.Component({
 	            selector: 'sidebar',
-	            styles: [__webpack_require__(747)],
-	            template: __webpack_require__(748)(),
+	            styles: [__webpack_require__(751)],
+	            template: __webpack_require__(752)(),
 	            providers: [],
 	            directives: [
 	                component_element_1.ComponentElementComponent,
@@ -89253,18 +90918,18 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 743 */
+/* 747 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(744));
+	__export(__webpack_require__(748));
 
 
 /***/ },
-/* 744 */
+/* 748 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -89279,9 +90944,9 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var icon_1 = __webpack_require__(346);
-	var services_1 = __webpack_require__(648);
-	var models_1 = __webpack_require__(660);
-	var analytics_service_1 = __webpack_require__(675);
+	var services_1 = __webpack_require__(650);
+	var models_1 = __webpack_require__(662);
+	var analytics_service_1 = __webpack_require__(677);
 	var ComponentElementComponent = (function () {
 	    function ComponentElementComponent(imageService, ga, folderService, fileService, dialogService) {
 	        var _this = this;
@@ -89361,8 +91026,8 @@ webpackJsonp([0],[
 	    ComponentElementComponent = __decorate([
 	        core_1.Component({
 	            selector: 'component-element',
-	            styles: [__webpack_require__(745)],
-	            template: __webpack_require__(746)(),
+	            styles: [__webpack_require__(749)],
+	            template: __webpack_require__(750)(),
 	            directives: [ComponentElementComponent, icon_1.MD_ICON_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [services_1.ImageService, analytics_service_1.AnalyticsService, services_1.FolderService, services_1.FileService, services_1.DialogService])
@@ -89373,16 +91038,16 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 745 */
+/* 749 */
 /***/ function(module, exports) {
 
 	module.exports = ":host {\n  display: block;\n}\n\n.c-flexContainer {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: rgba(0, 0, 0, 0.54);\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  position: relative;\n  height: 30px;\n}\n\n.c-flexContainer .toggleFolder {\n  margin: 0 5px 0 1px;\n  cursor: pointer;\n  position: relative;\n  width: 19px;\n  height: 19px;\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  border-radius: 50%;\n  background: #006064;\n  color: white;\n  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n}\n\n.c-flexContainer .folderName {\n  height: auto;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -webkit-transition: color 230ms;\n  transition: color 230ms;\n  cursor: pointer;\n}\n\n.c-flexContainer .input {\n  border: none;\n  padding: 0;\n  margin: 0;\n  font-size: 16px;\n  font-family: Lato;\n  color: rgba(0, 0, 0, 0.3);\n  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-weight: bold;\n}\n\n.c-flexContainer .edit,\n.c-flexContainer .delete {\n  cursor: pointer;\n  opacity: 0.2;\n  -webkit-transition: opacity 230ms;\n  transition: opacity 230ms;\n}\n\n.c-flexContainer .delete:hover {\n  opacity: 1;\n}\n\n.c-flexContainer .edit {\n  opacity: 0;\n}\n\n.c-flexContainer.editing .edit {\n  visibility: hidden;\n}\n\nul,\nli {\n  margin: 0 0 0 5px;\n  padding: 0;\n}\n\nul {\n  margin: 0 0 0 20px;\n  list-style: none;\n  line-height: 20px;\n}\n\nul component-element {\n  margin-left: 5px;\n}\n\nul li.closed,\nul component-element.closed {\n  overflow: hidden;\n  height: 0;\n}\n\nul li.selected > .c-flexContainer {\n  font-weight: bolder;\n  color: #006064;\n}\n\nul li.selected > .c-flexContainer > .folderName ~ .edit {\n  opacity: 0.2;\n}\n\nul li.selected > .c-flexContainer > .folderName ~ .edit:hover {\n  opacity: 1;\n}\n\nul li.selected > .c-flexContainer > .folderName:hover {\n  cursor: text;\n  color: rgba(0, 0, 0, 0.3);\n}\n\nul li.selected > .c-flexContainer > .folderName:hover ~ .edit {\n  opacity: 1;\n}\n\nul li.selected > .c-flexContainer.root > .folderName:hover {\n  cursor: pointer;\n}\n\nul__counter md-icon {\n  vertical-align: middle;\n  margin-left: 5px;\n}\n\nul li,\nul component-element {\n  font-size: 16px;\n  position: relative;\n}\n\nul li::before,\nul component-element::before {\n  position: absolute;\n  left: -15px;\n  top: 0;\n  content: '';\n  display: block;\n  border-left: 1px solid #bcbcbc;\n  height: 10px;\n  border-bottom: 1px solid #bcbcbc;\n  width: 10px;\n}\n\nul li::after,\nul component-element::after {\n  position: absolute;\n  left: -15px;\n  bottom: -7px;\n  content: '';\n  display: block;\n  border-left: 1px solid #bcbcbc;\n  height: 100%;\n}\n\nul li.folder,\nul component-element.folder {\n  margin: 0 0 0 -20px;\n}\n\nul li.root::before,\nul component-element.root::before {\n  display: none;\n}\n\nul li.root::after,\nul component-element.root::after {\n  display: none;\n}\n\nul li.file {\n  color: #bcbcbc;\n}\n\nul li:last-child::after {\n  display: none;\n}"
 
 /***/ },
-/* 746 */
+/* 750 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89393,16 +91058,16 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 747 */
+/* 751 */
 /***/ function(module, exports) {
 
 	module.exports = ".sidebar {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  background: #fff;\n  border-right: 1px solid #e0e0e0;\n  padding: 15px;\n  position: relative;\n  z-index: 1;\n}\n\n.create {\n  cursor: pointer;\n  padding-bottom: 10px;\n}\n\n.create:hover {\n  color: #006064;\n}\n\n.create .addIcon {\n  vertical-align: middle;\n}\n\n.create .addTitle {\n  display: inline-block;\n  vertical-align: middle;\n}"
 
 /***/ },
-/* 748 */
+/* 752 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89413,18 +91078,18 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 749 */
+/* 753 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(750));
+	__export(__webpack_require__(754));
 
 
 /***/ },
-/* 750 */
+/* 754 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -89444,8 +91109,8 @@ webpackJsonp([0],[
 	    ToolbarComponent = __decorate([
 	        core_1.Component({
 	            selector: 'toolbar',
-	            template: __webpack_require__(751)(),
-	            styles: [__webpack_require__(752)]
+	            template: __webpack_require__(755)(),
+	            styles: [__webpack_require__(756)]
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], ToolbarComponent);
@@ -89455,10 +91120,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 751 */
+/* 755 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89469,22 +91134,22 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 752 */
+/* 756 */
 /***/ function(module, exports) {
 
 	module.exports = ":host {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  width: 100%;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  z-index: 2;\n}"
 
 /***/ },
-/* 753 */
+/* 757 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "img/angular.svg";
 
 /***/ },
-/* 754 */
+/* 758 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89495,13 +91160,13 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 755 */
+/* 759 */
 /***/ function(module, exports) {
 
 	module.exports = ":host,\n.editor {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n:host {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n.editor {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n\nsidebar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 300px;\n          flex: 0 0 300px;\n}\n\nboard {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  overflow: auto;\n}\n\n.export {\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  right: 20px;\n  top: 50%;\n  height: 30px;\n  margin-top: -15px;\n}\n\n.export .fa {\n  margin: 0 10px;\n}\n\n.c-header,\n.c-toolbar {\n  padding: 0 25px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1 0 auto;\n          flex: 1 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.c-header {\n  height: 60px;\n  background: #006064;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  position: relative;\n  z-index: 2;\n}\n\n.c-toolbar {\n  height: 50px;\n  background-color: rgba(0, 0, 0, 0.05);\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.06);\n  position: relative;\n  z-index: 3;\n}\n\n.angular {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: white;\n  font-size: 21px;\n}\n\n.angular img {\n  margin-right: 10px;\n}\n\nmd-icon {\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n}\n\nmd-icon.disabled {\n  color: rgba(0, 0, 0, 0.26);\n  cursor: default;\n}\n\nmd-icon.disabled:hover {\n  color: rgba(0, 0, 0, 0.26);\n}\n\nmd-icon:hover {\n  color: #006064;\n}\n\n.left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 1 auto;\n          flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.folderName {\n  margin-right: 10px;\n}\n\n.editFolderName {\n  cursor: pointer;\n}\n\n.right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 1 auto;\n          flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.right md-icon {\n  padding: 0 5px;\n  margin: 0 10px;\n}\n\n.separator {\n  border-right: 1px solid rgba(0, 0, 0, 0.1);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  height: 100%;\n  margin: 0 10px;\n}\n\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: rgba(255, 255, 255, 0.8);\n  text-align: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  color: black;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  z-index: 10;\n}\n\n.loading .content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}"
 
 /***/ },
-/* 756 */
+/* 760 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -89516,10 +91181,10 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(5);
 	var router_1 = __webpack_require__(401);
-	var bootstrap_1 = __webpack_require__(677);
+	var bootstrap_1 = __webpack_require__(679);
 	// Strange, but true: this method would work but throws an error: 'cannot find module'
 	// import * as Humane from 'humane-js/humane.js';
-	var services_1 = __webpack_require__(648);
+	var services_1 = __webpack_require__(650);
 	var AppComponent = (function () {
 	    function AppComponent(modal, viewContainer, tooltipService) {
 	        this.modal = modal;
@@ -89540,8 +91205,8 @@ webpackJsonp([0],[
 	            ]),
 	            pipes: [],
 	            directives: [router_1.ROUTER_DIRECTIVES],
-	            template: __webpack_require__(757)(),
-	            styles: [__webpack_require__(758)]
+	            template: __webpack_require__(761)(),
+	            styles: [__webpack_require__(762)]
 	        }), 
 	        __metadata('design:paramtypes', [bootstrap_1.Modal, core_1.ViewContainerRef, services_1.TooltipService])
 	    ], AppComponent);
@@ -89551,10 +91216,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 757 */
+/* 761 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(704);
+	var jade = __webpack_require__(708);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -89565,22 +91230,22 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 758 */
+/* 762 */
 /***/ function(module, exports) {
 
 	module.exports = ":host,\n.app-router,\nmain {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n.mobile-screen {\n  display: none;\n}\n\n@media (max-width: 730px) {\n  .mobile-screen {\n    background-color: #006064;\n    color: white;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-flow: column;\n        flex-flow: column;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n  }\n\n  .mobile-screen a {\n    color: #feffb4;\n  }\n\n  .app-router {\n    display: none;\n  }\n}"
 
 /***/ },
-/* 759 */
+/* 763 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(760);
+	var content = __webpack_require__(764);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(780)(content, {});
+	var update = __webpack_require__(784)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -89597,124 +91262,124 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 760 */
+/* 764 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(761)();
+	exports = module.exports = __webpack_require__(765)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "* {\n  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(762) + ") format(\"woff2\"), url(" + __webpack_require__(763) + ") format(\"woff\"), url(" + __webpack_require__(764) + ") format(\"truetype\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(765) + ") format(\"woff2\"), url(" + __webpack_require__(766) + ") format(\"woff\"), url(" + __webpack_require__(767) + ") format(\"truetype\");\n  font-weight: bold;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(768) + ") format(\"woff2\"), url(" + __webpack_require__(769) + ") format(\"woff\"), url(" + __webpack_require__(770) + ") format(\"truetype\");\n  font-weight: normal;\n  font-style: italic;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(771) + ") format(\"woff2\"), url(" + __webpack_require__(772) + ") format(\"woff\"), url(" + __webpack_require__(773) + ") format(\"truetype\");\n  font-weight: 300;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'CircularStd';\n  src: url(" + __webpack_require__(774) + ") format(\"woff2\"), url(" + __webpack_require__(775) + ") format(\"woff\"), url(" + __webpack_require__(776) + ") format(\"truetype\");\n  font-weight: bold;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'BudacodeIcons';\n  src: url(" + __webpack_require__(777) + ") format(\"woff2\"), url(" + __webpack_require__(778) + ") format(\"woff\"), url(" + __webpack_require__(779) + ") format(\"ttf\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n.h-fill-remaining {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.h-flex-end {\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n              -ms-grid-row-align: flex-end;\n          align-items: flex-end;\n}\n\n.h-flex-align-center {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n              -ms-grid-row-align: center;\n          align-items: center;\n}\n\n* {\n  outline: none;\n  box-sizing: border-box;\n}\n\nhtml,\nbody {\n  margin: 0;\n  max-height: 100%;\n  min-height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  background-color: #fafafa;\n  overflow: hidden;\n}\n\nhtml {\n  box-sizing: border-box;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: inherit;\n}\n\n@-moz-viewport {\n  width: device-width;\n}\n\n@-ms-viewport {\n  width: device-width;\n}\n\n@-o-viewport {\n  width: device-width;\n}\n\n@-webkit-viewport {\n  width: device-width;\n}\n\n@viewport {\n  width: device-width;\n}\n\nhtml {\n  font-size: 10px;\n  -webkit-tap-highlight-color: transparent;\n}\n\nbody {\n  font-family: \"Lato\";\n  font-size: 16px;\n  line-height: 24px;\n  color: #2e3233;\n  background-color: #fff;\n  margin: 0;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin-top: 0;\n  margin-bottom: 5px;\n}\n\np {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nabbr[title],\nabbr[data-original-title] {\n  cursor: help;\n  border-bottom: 1px dotted #eee;\n}\n\naddress {\n  margin-bottom: 10px;\n  font-style: normal;\n  line-height: inherit;\n}\n\nol,\nul,\ndl {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nol ol,\nul ul,\nol ul,\nul ol {\n  margin-bottom: 0;\n}\n\ndt {\n  font-weight: bold;\n}\n\ndd {\n  margin-bottom: 5px;\n  margin-left: 0;\n}\n\nblockquote {\n  margin: 0 0 10px;\n}\n\na.linkPrimary {\n  color: #006064;\n}\n\na.linkPrimary:hover {\n  color: #006064;\n  text-decoration: underline;\n}\n\na {\n  color: #fff;\n  text-decoration: none;\n}\n\na:focus,\na:hover {\n  color: #feffb4;\n  text-decoration: underline;\n}\n\npre {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nfigure {\n  margin: 0 0 10px;\n}\n\nimg {\n  vertical-align: middle;\n}\n\n[role='button'] {\n  cursor: pointer;\n}\n\ntable {\n  background-color: transparent;\n}\n\ncaption {\n  padding-top: 0;\n  padding-bottom: 0;\n  color: #eee;\n  text-align: left;\n  caption-side: bottom;\n}\n\nth {\n  text-align: left;\n}\n\nlabel {\n  display: inline-block;\n  margin-bottom: 5px;\n}\n\ninput,\nbutton,\nselect,\ntextarea {\n  margin: 0;\n  line-height: inherit;\n  border-radius: 0;\n}\n\ntextarea {\n  resize: vertical;\n}\n\nfieldset {\n  min-width: 0;\n  padding: 0;\n  margin: 0;\n  border: 0;\n}\n\nlegend {\n  display: block;\n  width: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n  font-size: 15px;\n  line-height: inherit;\n}\n\ninput[type='search'] {\n  box-sizing: inherit;\n  -webkit-appearance: none;\n}\n\noutput {\n  display: inline-block;\n}\n\n.dialogBackground {\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  z-index: 49;\n  -webkit-animation: fadeIn 500ms forwards;\n          animation: fadeIn 500ms forwards;\n}\n\n.dialog {\n  width: 660px;\n  position: fixed;\n  top: 20%;\n  left: calc(50% - 330px);\n  padding: 20px;\n  background-color: #fff;\n  z-index: 50;\n  box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);\n  -webkit-animation: slideDown ease-out 500ms forwards;\n          animation: slideDown ease-out 500ms forwards;\n}\n\n.dialog .flexContainer {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 100%;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n\n.dialog .flexContainer .row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  margin: 5px;\n}\n\n.dialog .flexContainer .addition {\n  margin-top: 20px;\n}\n\n.dialog .flexContainer .md-button-wrapper button {\n  margin-right: 10px;\n}\n\n.dialog .flexContainer .md-button-wrapper button:last-child {\n  margin-right: 0;\n}\n\n.dialog .flexContainer .row--rightAligned {\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n\n.dialog .flexContainer .row--rightAligned .column {\n  -webkit-box-flex: 0;\n      -ms-flex-positive: 0;\n          flex-grow: 0;\n}\n\n.dialog .flexContainer .column {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n\n.dialog .flexContainer .column:not(:first-of-type) {\n  margin-left: 20px;\n}\n\n.dialog md-radio-button,\n.dialog md-checkbox {\n  margin: 5px 8px;\n}\n\n.dialog select {\n  margin-left: 20px;\n}\n\n.modal-sm .dialog {\n  width: 260px;\n  left: calc(50% - 130px);\n}\n\n@-webkit-keyframes fadeIn {\n  from {\n    background-color: transparent;\n  }\n\n  to {\n    background: rgba(0, 0, 0, 0.3);\n  }\n}\n\n@keyframes fadeIn {\n  from {\n    background-color: transparent;\n  }\n\n  to {\n    background: rgba(0, 0, 0, 0.3);\n  }\n}\n\n@-webkit-keyframes slideDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate(0, -50px);\n            transform: translate(0, -50px);\n  }\n\n  40% {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n}\n\n@keyframes slideDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate(0, -50px);\n            transform: translate(0, -50px);\n  }\n\n  40% {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n}", ""]);
+	exports.push([module.id, "* {\n  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(766) + ") format(\"woff2\"), url(" + __webpack_require__(767) + ") format(\"woff\"), url(" + __webpack_require__(768) + ") format(\"truetype\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(769) + ") format(\"woff2\"), url(" + __webpack_require__(770) + ") format(\"woff\"), url(" + __webpack_require__(771) + ") format(\"truetype\");\n  font-weight: bold;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(772) + ") format(\"woff2\"), url(" + __webpack_require__(773) + ") format(\"woff\"), url(" + __webpack_require__(774) + ") format(\"truetype\");\n  font-weight: normal;\n  font-style: italic;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(775) + ") format(\"woff2\"), url(" + __webpack_require__(776) + ") format(\"woff\"), url(" + __webpack_require__(777) + ") format(\"truetype\");\n  font-weight: 300;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'CircularStd';\n  src: url(" + __webpack_require__(778) + ") format(\"woff2\"), url(" + __webpack_require__(779) + ") format(\"woff\"), url(" + __webpack_require__(780) + ") format(\"truetype\");\n  font-weight: bold;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'BudacodeIcons';\n  src: url(" + __webpack_require__(781) + ") format(\"woff2\"), url(" + __webpack_require__(782) + ") format(\"woff\"), url(" + __webpack_require__(783) + ") format(\"ttf\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n.h-fill-remaining {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.h-flex-end {\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n              -ms-grid-row-align: flex-end;\n          align-items: flex-end;\n}\n\n.h-flex-align-center {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n              -ms-grid-row-align: center;\n          align-items: center;\n}\n\n* {\n  outline: none;\n  box-sizing: border-box;\n}\n\nhtml,\nbody {\n  margin: 0;\n  max-height: 100%;\n  min-height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  background-color: #fafafa;\n  overflow: hidden;\n}\n\nhtml {\n  box-sizing: border-box;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: inherit;\n}\n\n@-moz-viewport {\n  width: device-width;\n}\n\n@-ms-viewport {\n  width: device-width;\n}\n\n@-o-viewport {\n  width: device-width;\n}\n\n@-webkit-viewport {\n  width: device-width;\n}\n\n@viewport {\n  width: device-width;\n}\n\nhtml {\n  font-size: 10px;\n  -webkit-tap-highlight-color: transparent;\n}\n\nbody {\n  font-family: \"Lato\";\n  font-size: 16px;\n  line-height: 24px;\n  color: #2e3233;\n  background-color: #fff;\n  margin: 0;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin-top: 0;\n  margin-bottom: 5px;\n}\n\np {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nabbr[title],\nabbr[data-original-title] {\n  cursor: help;\n  border-bottom: 1px dotted #eee;\n}\n\naddress {\n  margin-bottom: 10px;\n  font-style: normal;\n  line-height: inherit;\n}\n\nol,\nul,\ndl {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nol ol,\nul ul,\nol ul,\nul ol {\n  margin-bottom: 0;\n}\n\ndt {\n  font-weight: bold;\n}\n\ndd {\n  margin-bottom: 5px;\n  margin-left: 0;\n}\n\nblockquote {\n  margin: 0 0 10px;\n}\n\na.linkPrimary {\n  color: #006064;\n}\n\na.linkPrimary:hover {\n  color: #006064;\n  text-decoration: underline;\n}\n\na {\n  color: #fff;\n  text-decoration: none;\n}\n\na:focus,\na:hover {\n  color: #feffb4;\n  text-decoration: underline;\n}\n\npre {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nfigure {\n  margin: 0 0 10px;\n}\n\nimg {\n  vertical-align: middle;\n}\n\n[role='button'] {\n  cursor: pointer;\n}\n\ntable {\n  background-color: transparent;\n}\n\ncaption {\n  padding-top: 0;\n  padding-bottom: 0;\n  color: #eee;\n  text-align: left;\n  caption-side: bottom;\n}\n\nth {\n  text-align: left;\n}\n\nlabel {\n  display: inline-block;\n  margin-bottom: 5px;\n}\n\ninput,\nbutton,\nselect,\ntextarea {\n  margin: 0;\n  line-height: inherit;\n  border-radius: 0;\n}\n\ntextarea {\n  resize: vertical;\n}\n\nfieldset {\n  min-width: 0;\n  padding: 0;\n  margin: 0;\n  border: 0;\n}\n\nlegend {\n  display: block;\n  width: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n  font-size: 15px;\n  line-height: inherit;\n}\n\ninput[type='search'] {\n  box-sizing: inherit;\n  -webkit-appearance: none;\n}\n\noutput {\n  display: inline-block;\n}\n\n.dialogBackground {\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  z-index: 49;\n  -webkit-animation: fadeIn 500ms forwards;\n          animation: fadeIn 500ms forwards;\n}\n\n.dialog {\n  width: 660px;\n  position: fixed;\n  top: 20%;\n  left: calc(50% - 330px);\n  padding: 20px;\n  background-color: #fff;\n  z-index: 50;\n  box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);\n  -webkit-animation: slideDown ease-out 500ms forwards;\n          animation: slideDown ease-out 500ms forwards;\n}\n\n.dialog .flexContainer {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 100%;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n\n.dialog .flexContainer .row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  margin: 5px;\n}\n\n.dialog .flexContainer .addition {\n  margin-top: 20px;\n}\n\n.dialog .flexContainer .md-button-wrapper button {\n  margin-right: 10px;\n}\n\n.dialog .flexContainer .md-button-wrapper button:last-child {\n  margin-right: 0;\n}\n\n.dialog .flexContainer .row--rightAligned {\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n\n.dialog .flexContainer .row--rightAligned .column {\n  -webkit-box-flex: 0;\n      -ms-flex-positive: 0;\n          flex-grow: 0;\n}\n\n.dialog .flexContainer .column {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n\n.dialog .flexContainer .column:not(:first-of-type) {\n  margin-left: 20px;\n}\n\n.dialog md-radio-button,\n.dialog md-checkbox {\n  margin: 5px 8px;\n}\n\n.dialog select {\n  margin-left: 20px;\n}\n\n.modal-sm .dialog {\n  width: 260px;\n  left: calc(50% - 130px);\n}\n\n@-webkit-keyframes fadeIn {\n  from {\n    background-color: transparent;\n  }\n\n  to {\n    background: rgba(0, 0, 0, 0.3);\n  }\n}\n\n@keyframes fadeIn {\n  from {\n    background-color: transparent;\n  }\n\n  to {\n    background: rgba(0, 0, 0, 0.3);\n  }\n}\n\n@-webkit-keyframes slideDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate(0, -50px);\n            transform: translate(0, -50px);\n  }\n\n  40% {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n}\n\n@keyframes slideDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate(0, -50px);\n            transform: translate(0, -50px);\n  }\n\n  40% {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0);\n  }\n}", ""]);
 
 	// exports
 
 
 /***/ },
-/* 761 */,
-/* 762 */
+/* 765 */,
+/* 766 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-regular-webfont.woff2";
 
 /***/ },
-/* 763 */
+/* 767 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-regular-webfont.woff";
 
 /***/ },
-/* 764 */
+/* 768 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-regular-webfont.ttf";
 
 /***/ },
-/* 765 */
+/* 769 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-bold-webfont.woff2";
 
 /***/ },
-/* 766 */
+/* 770 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-bold-webfont.woff";
 
 /***/ },
-/* 767 */
+/* 771 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-bold-webfont.ttf";
 
 /***/ },
-/* 768 */
+/* 772 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-italic-webfont.woff2";
 
 /***/ },
-/* 769 */
+/* 773 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-italic-webfont.woff";
 
 /***/ },
-/* 770 */
+/* 774 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-italic-webfont.ttf";
 
 /***/ },
-/* 771 */
+/* 775 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-light-webfont.woff2";
 
 /***/ },
-/* 772 */
+/* 776 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-light-webfont.woff";
 
 /***/ },
-/* 773 */
+/* 777 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-light-webfont.ttf";
 
 /***/ },
-/* 774 */
+/* 778 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/CircularStd-Bold.woff2";
 
 /***/ },
-/* 775 */
+/* 779 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/CircularStd-Bold.woff";
 
 /***/ },
-/* 776 */
+/* 780 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/CircularStd-Bold.ttf";
 
 /***/ },
-/* 777 */
+/* 781 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/BudacodeIcons.woff2";
 
 /***/ },
-/* 778 */
+/* 782 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/BudacodeIcons.woff";
 
 /***/ },
-/* 779 */
+/* 783 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/BudacodeIcons.ttf";
