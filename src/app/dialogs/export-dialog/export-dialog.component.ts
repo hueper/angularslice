@@ -5,7 +5,7 @@ import { BSModalContext } from "angular2-modal/plugins/bootstrap";
 import { MdButton } from "@angular2-material/button";
 import { MdInput } from "@angular2-material/input";
 import { MdCheckbox } from "@angular2-material/checkbox";
-import { MdRadioButton, MdRadioGroup, MdRadioDispatcher } from "@angular2-material/radio";
+import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio";
 import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 
 const Humane = require('humane-js');
@@ -28,24 +28,23 @@ import Timer = NodeJS.Timer;
     MD_PROGRESS_CIRCLE_DIRECTIVES
   ],
   providers: [
-    MdRadioDispatcher,
   ]
 })
 export class ExportDialogComponent implements ModalComponent<BSModalContext> {
   protected activeSelect: string;
   protected loading: boolean = false;
-  
+
   constructor(public dialog: DialogRef<BSModalContext>,
               private ga: AnalyticsService,
               private userService: UserService) {
   }
-  
+
   noop(type: string, $event) {
     this.ga.eventTrack('exportProject', { category: type });
     this.dialog.close(type);
   }
-  
-  
+
+
   githubAuth() {
     this.ga.eventTrack('exportProject', { category: 'github' });
     this.loading = true;
@@ -58,12 +57,12 @@ export class ExportDialogComponent implements ModalComponent<BSModalContext> {
       }
     }, 500);
   }
-  
+
   windowClosed() {
     this.userService.pollUser().subscribe(res => {
       let user = res.data as User;
       let accessToken = _.get(user, 'oauthData.github.accessToken', false);
-      
+
       if (accessToken) {
         this.dialog.close('github');
         //TODO: the user authentication was successfull, we can do whatever we want ;)
@@ -74,7 +73,7 @@ export class ExportDialogComponent implements ModalComponent<BSModalContext> {
       }
     });
   }
-  
+
   close() {
     this.dialog.dismiss();
   }

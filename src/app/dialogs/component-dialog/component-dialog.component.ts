@@ -6,7 +6,7 @@ import { MdButton } from "@angular2-material/button";
 import { MD_ICON_DIRECTIVES } from "@angular2-material/icon/icon";
 import { MdInput } from "@angular2-material/input";
 import { MdCheckbox } from "@angular2-material/checkbox";
-import { MdRadioButton, MdRadioGroup, MdRadioDispatcher } from "@angular2-material/radio";
+import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio";
 import { Subscription } from "rxjs";
 
 const Humane = require('humane-js');
@@ -30,18 +30,17 @@ import { AnalyticsService } from "../../shared/services/analytics.service";
     TooltipDirective
   ],
   providers: [
-    MdRadioDispatcher
   ]
 })
 export class ComponentDialogComponent implements ModalComponent<BSModalContext>, OnDestroy, AfterViewInit {
   component: any;
-  
+
   @ViewChild('componentName') private componentName: any;
-  
+
   public folders: any[];
   private subscriptions: Subscription[] = [];
   private hasImage: boolean = true;
-  
+
   constructor(public dialog: DialogRef<BSModalContext>,
               private ga: AnalyticsService,
               private folderService: FolderService,
@@ -51,18 +50,18 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
     ).subscribe((folders: any[]) => {
       this.folders = folders;
       console.log("this.folders => ", this.folders);
-  
+
     }));
     this.component = {
       type: 'new',
       attach: true,
       folder: null,
     };
-    
-    
+
+
     this.hasImage = this.dialog.context['hasImage'];
   }
-  
+
   eventHandler(event) {
     if (event.which === 13) {
       event.preventDefault();
@@ -70,24 +69,24 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
       return false;
     }
   }
-  
+
   ngOnDestroy() {
     _.each(this.subscriptions, subscription => {
       subscription.unsubscribe();
     });
   }
-  
+
   changeAttachImage(event) {
     this.component.attach = event.checked;
     if (!event.checked) {
       this.ga.eventTrack('selectNoImage', { category: 'areaDialog' });
     }
   }
-  
+
   changeExistingComponent() {
     this.ga.eventTrack('selectExistingComponent', { category: 'areaDialog' });
   }
-  
+
   send() {
     if (this.component.type === 'new' && !this.component.newFolderName) {
       Humane.log('Component name is missing', { timeout: 4000, clickToClose: true });
@@ -96,17 +95,17 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
     if (!this.component.newImageName) {
       this.component.newImageName = this.component.newFolderName;
     }
-    
-    
+
+
     console.log("this.component => ", this.component);
-    
+
     let result = {
       action: 'save',
       data: this.component
     };
     this.dialog.close(result);
   }
-  
+
   ngAfterViewInit(): any {
     if (!this.hasImage) {
       if (this.componentName) {
@@ -115,7 +114,7 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
       }
     }
   }
-  
+
   close() {
     this.dialog.dismiss();
   }
