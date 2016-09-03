@@ -1,29 +1,17 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MD_ICON_DIRECTIVES } from '@angular2-material/icon';
 import { Observable } from 'rxjs';
 
 const Humane = require('humane-js');
 
-import { BoardComponent } from "../board";
-import { SidebarComponent } from "../sidebar";
-import { ToolbarComponent } from "../toolbar";
 import { DialogService, ImageService, FolderService, ProjectService, UserService } from "../shared/services";
 import { Folder } from "../shared/models";
-import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 
 
 @Component({
   selector: 'editor',
-  template: require('./editor.component.jade')(),
+  template: require('./editor.component.pug')(),
   styles: [require('./editor.component.scss')],
-  directives: [
-    BoardComponent,
-    SidebarComponent,
-    ToolbarComponent,
-    MD_ICON_DIRECTIVES,
-    MD_PROGRESS_CIRCLE_DIRECTIVES
-  ]
 })
 export class EditorComponent {
   logo: any;
@@ -68,7 +56,7 @@ export class EditorComponent {
               private projectService: ProjectService,
               private userService: UserService) {
 
-    this.sub = this.router.routerState.queryParams.take(1)
+    this.sub = this.route.queryParams.take(1)
                    .subscribe(params => {
                      if (params['folderId']) {
                        this.folderService.setCurrentById(params['folderId']);

@@ -3,21 +3,12 @@ import { Component, OnDestroy } from '@angular/core';
 import { ModalComponent, DialogRef } from 'angular2-modal';
 import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
 import { ConfirmData } from '../../shared/models';
-import { MdButton } from '@angular2-material/button';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'confirm-dialog',
-  template: require('./confirm-dialog.jade')(),
+  template: require('./confirm-dialog.pug')(),
   styles: [require('./confirm-dialog.component.scss')],
-  directives: [
-    MdButton,
-    MdIcon
-  ],
-  providers: [
-    MdIconRegistry,
-  ]
 })
 export class ConfirmDialogComponent implements ModalComponent<ConfirmDialogData>, OnDestroy {
   private subscriptions: Subscription[] = [];

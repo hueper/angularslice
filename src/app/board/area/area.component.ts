@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
 
 
 import { Area } from '../../shared/models';
@@ -10,8 +9,7 @@ import { AnalyticsService } from "../../shared/services/analytics.service";
 @Component({
   selector: 'area',
   styles: [require('./area.component.scss')],
-  template: require('./area.component.jade')(),
-  directives: [MD_ICON_DIRECTIVES]
+  template: require('./area.component.pug')(),
 })
 export class AreaComponent {
 

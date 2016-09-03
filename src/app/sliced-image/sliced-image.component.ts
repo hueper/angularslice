@@ -6,8 +6,7 @@ import { TooltipDirective } from "../shared/directives/tooltip/tooltip.directive
 @Component({
   selector: 'sliced-image',
   styles: [require('./sliced-image.component.scss')],
-  template: require('./sliced-image.component.jade')(),
-  directives: [TooltipDirective]
+  template: require('./sliced-image.component.pug')(),
 })
 
 export class SlicedImageComponent implements AfterViewInit, OnChanges {

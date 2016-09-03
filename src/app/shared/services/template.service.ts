@@ -13,7 +13,7 @@ import {Component} from '@angular/core';
 
 @Component({
   selector: '{{name}}',
-  template: require('./{{name}}.jade')(),
+  template: require('./{{name}}.pug')(),
   styles: [ require('./{{name}}.scss') ],
   providers: [],
   pipes: [],

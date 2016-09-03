@@ -2,20 +2,12 @@ import { Component } from '@angular/core';
 import { ModalComponent, DialogRef } from 'angular2-modal';
 import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
 
-import { MdButton } from '@angular2-material/button';
-import { MdInput } from '@angular2-material/input';
-
 const Humane = require('humane-js');
 
 @Component({
   selector: 'github-dialog',
-  template: require('./github-dialog.jade')(),
+  template: require('./github-dialog.pug')(),
   styles: [require('./github-dialog.component.scss')],
-  directives: [
-    MdButton,
-    MdInput,
-  ],
-  providers: []
 })
 export class GithubDialogComponent implements ModalComponent<BSModalContext> {
   componentData: any = {

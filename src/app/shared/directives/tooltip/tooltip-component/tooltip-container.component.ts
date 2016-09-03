@@ -6,20 +6,16 @@ import {
   Inject,
   AfterViewInit,
   HostListener
-  
+
 } from '@angular/core';
-import { NgClass, NgStyle } from '@angular/common';
 
 import { TooltipOptions } from '../tooltip-options.class';
 
 import { positionService } from '../PositionService';
-import { EscapeHtmlPipe } from "../../../pipes/EscapeHtml";
 
 @Component({
   selector: 'tooltip-container',
-  directives: [NgClass, NgStyle],
-  pipes: [EscapeHtmlPipe],
-  template: require('./tooltip-container.component.jade')(),
+  template: require('./tooltip-container.component.pug')(),
   styles: [require('./tooltip-container.component.scss')]
 })
 export class TooltipContainerComponent implements AfterViewInit {
@@ -36,10 +32,10 @@ export class TooltipContainerComponent implements AfterViewInit {
   private followCursor: boolean;
   private hostEl: ElementRef;
   private state: string;
-  
+
   private element: ElementRef;
   private cdr: ChangeDetectorRef;
-  
+
   public constructor(element: ElementRef,
                      @Inject(TooltipOptions) options: TooltipOptions) {
     this.element = element;
@@ -48,7 +44,7 @@ export class TooltipContainerComponent implements AfterViewInit {
     this.classMap[options.placement] = true;
     this.classMap['tooltip-' + options.placement] = true;
   }
-  
+
   public ngAfterViewInit(): void {
     let p = positionService
       .positionElements(
@@ -59,20 +55,20 @@ export class TooltipContainerComponent implements AfterViewInit {
       this.top = p.top + 'px';
       this.left = p.left + 'px';
     }
-    
+
     this.state = 'in';
-    
+
   }
-  
-  
+
+
   @HostListener('mousemove', ["$event", "$target"])
   move(event, target) {
     if (!this.followCursor) {
       return;
     }
-    
+
     this.top = (event.clientY - 22) + 'px';
     this.left = (event.clientX + 25) + 'px';
-    
+
   }
 }

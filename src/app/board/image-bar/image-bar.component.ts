@@ -1,20 +1,15 @@
 import { Component, OnDestroy, ElementRef } from "@angular/core";
-import { MD_ICON_DIRECTIVES } from "@angular2-material/icon";
-import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 import * as _ from "lodash";
 import { Subscription } from "rxjs/Rx";
 
 import { ImageService, FolderService, DialogService, RawImageService } from "../../shared/services";
 import { Image, Folder } from "../../shared/models";
-import { SlicedImageComponent } from "../../sliced-image";
-import { TooltipDirective } from '../../shared/directives';
 import { AnalyticsService } from "../../shared/services/analytics.service";
 
 @Component({
   selector: 'image-bar',
-  template: require('./image-bar.component.jade')(),
+  template: require('./image-bar.component.pug')(),
   styles: [require('./image-bar.component.scss')],
-  directives: [SlicedImageComponent, MD_ICON_DIRECTIVES, MD_PROGRESS_CIRCLE_DIRECTIVES, TooltipDirective]
 })
 export class ImageBarComponent implements OnDestroy {
 

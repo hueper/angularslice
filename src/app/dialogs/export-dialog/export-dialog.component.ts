@@ -2,11 +2,6 @@ import * as _ from "lodash";
 import { Component } from "@angular/core";
 import { ModalComponent, DialogRef } from "angular2-modal";
 import { BSModalContext } from "angular2-modal/plugins/bootstrap";
-import { MdButton } from "@angular2-material/button";
-import { MdInput } from "@angular2-material/input";
-import { MdCheckbox } from "@angular2-material/checkbox";
-import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio";
-import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
 
 const Humane = require('humane-js');
 
@@ -17,18 +12,8 @@ import Timer = NodeJS.Timer;
 
 @Component({
   selector: 'export-dialog',
-  template: require('./export-dialog.jade')(),
+  template: require('./export-dialog.pug')(),
   styles: [require('./export-dialog.component.scss')],
-  directives: [
-    MdButton,
-    MdInput,
-    MdCheckbox,
-    MdRadioGroup,
-    MdRadioButton,
-    MD_PROGRESS_CIRCLE_DIRECTIVES
-  ],
-  providers: [
-  ]
 })
 export class ExportDialogComponent implements ModalComponent<BSModalContext> {
   protected activeSelect: string;

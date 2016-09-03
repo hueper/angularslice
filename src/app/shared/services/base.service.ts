@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject, Observable } from 'rxjs';
-import { plainToConstructorArray } from 'constructor-utils';
+import { plainToClass } from 'class-transformer';
 
 import { BaseModel } from '../models';
 
@@ -27,7 +27,7 @@ export class BaseService<T extends BaseModel> {
       let storedData = JSON.parse(localStorage.getItem(this.entityType));
       if (storedData) {
         // Instantiate the elements
-        storedData = plainToConstructorArray(ClassT, storedData);
+        storedData = plainToClass(ClassT, storedData as Object[]);
         // console.log(storedData);
         this.dataSource.next(storedData);
         // console.log('READ', this.entityType, storedData);

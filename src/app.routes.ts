@@ -1,11 +1,12 @@
-import { provideRouter, RouterConfig } from '@angular/router';
-
+import { Routes, RouterModule } from '@angular/router';
 import { EditorComponent } from './app/editor';
 
-const routes: RouterConfig = [
+const appRoutes: Routes = [
   { path: '', component: EditorComponent },
 ];
 
-export const APP_ROUTER_PROVIDERS = [
-  provideRouter(routes)
+export const appRoutingProviders: any[] = [
+
 ];
+
+export const routing: any = RouterModule.forRoot(appRoutes);

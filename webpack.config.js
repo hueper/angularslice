@@ -45,11 +45,11 @@ var webpackConfig = {
 
   module: {
     loaders: [
-      {test: /\.jade$/, loader: 'jade-loader'},
+      {test: /\.pug$/, loader: 'pug-loader'},
       {test: /\.ts$/, loader: 'awesome-typescript-loader'},
       {test: /\.css$/, loaders: ['style', 'css']},
-      {test: /^(?!.*component).*\.scss$/, loaders: ['style', 'css', 'autoprefixer', 'resolve-url', 'sass']},
-      {test: /\.component.scss$/, loaders: ['raw', 'extract', 'css', 'autoprefixer', 'resolve-url', 'sass']},
+      {test: /^(?!.*component).*\.scss$/, loaders: ['style', 'css', 'postcss', 'resolve-url', 'sass']},
+      {test: /\.component.scss$/, loaders: ['raw', 'extract', 'css', 'postcss', 'resolve-url', 'sass']},
       {test: [/ionicons\.svg/, /ionicons\.eot/, /\.ttf/, /\.woff/], loader: 'file-loader?name=fonts/[name].[ext]'},
       {test: /\.(png|jpg|jpeg|svg|gif)$/, loader: 'file-loader?name=img/[name].[ext]'},
       {test: /\.otf$/, loader: 'file-loader?name=fonts/[name].[ext]'}

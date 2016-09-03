@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ViewContainerRef } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Modal } from 'angular2-modal/plugins/bootstrap';
+import { Overlay } from 'angular2-modal';
 // Strange, but true: this method would work but throws an error: 'cannot find module'
 // import * as Humane from 'humane-js/humane.js';
 
@@ -12,19 +12,18 @@ import { TooltipService, DialogService } from "./shared/services";
   providers: [
     DialogService,
   ],
-  pipes: [],
-  directives: [ROUTER_DIRECTIVES],
-  template: require('./app.component.jade')(),
+  template: require('./app.component.pug')(),
   styles: [require('./app.component.scss')]
 })
 export class AppComponent implements AfterViewInit {
 
   constructor(
+              private overlay: Overlay,
               private modal: Modal,
               private viewContainer: ViewContainerRef,
               private tooltipService: TooltipService
   ) {
-    modal.defaultViewContainer = viewContainer;
+    overlay.defaultViewContainer = viewContainer;
     tooltipService.viewContainer = viewContainer;
   }
 

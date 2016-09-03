@@ -2,35 +2,17 @@ import * as _ from "lodash";
 import { Component, OnDestroy, AfterViewInit, ViewChild, ChangeDetectorRef } from "@angular/core";
 import { ModalComponent, DialogRef } from "angular2-modal";
 import { BSModalContext } from "angular2-modal/plugins/bootstrap";
-import { MdButton } from "@angular2-material/button";
-import { MD_ICON_DIRECTIVES } from "@angular2-material/icon/icon";
-import { MdInput } from "@angular2-material/input";
-import { MdCheckbox } from "@angular2-material/checkbox";
-import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio";
 import { Subscription } from "rxjs";
 
 const Humane = require('humane-js');
 
-import { Folder } from "../../shared/models";
-import { TooltipDirective } from "../../shared/directives";
 import { FolderService } from "../../shared/services";
 import { AnalyticsService } from "../../shared/services/analytics.service";
 
 @Component({
   selector: 'component-dialog',
-  template: require('./component-dialog.jade')(),
+  template: require('./component-dialog.pug')(),
   styles: [require('./component-dialog.component.scss')],
-  directives: [
-    MdButton,
-    MdInput,
-    MdCheckbox,
-    MdRadioGroup,
-    MdRadioButton,
-    MD_ICON_DIRECTIVES,
-    TooltipDirective
-  ],
-  providers: [
-  ]
 })
 export class ComponentDialogComponent implements ModalComponent<BSModalContext>, OnDestroy, AfterViewInit {
   component: any;

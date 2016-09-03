@@ -1,7 +1,6 @@
 import {
   Directive, Input, HostListener,
-  ComponentRef, Provider, ReflectiveInjector, ViewContainerRef, ComponentResolver, Injector, ApplicationRef
-
+  ComponentRef, Provider, ReflectiveInjector, ViewContainerRef, ComponentFactoryResolver, Injector, ApplicationRef
 } from '@angular/core';
 
 import { TooltipOptions } from './tooltip-options.class';
@@ -27,7 +26,7 @@ export class TooltipDirective {
 
   public constructor(public viewContainerRef: ViewContainerRef,
                      protected injector: Injector,
-                     protected ComponentResolver: ComponentResolver,
+                     protected ComponentFactoryResolver: ComponentFactoryResolver,
                      protected tooltipService: TooltipService) {
   }
 
@@ -54,9 +53,12 @@ export class TooltipDirective {
     let binding = ReflectiveInjector.resolveAndCreate([
       new Provider(TooltipOptions, { useValue: options })
     ], this.injector);
-    this.tooltip = this.ComponentResolver.resolveComponent(TooltipContainerComponent).then(componentFactory => {
+
+    let componentFactory = this.ComponentFactoryResolver.resolveComponentFactory(TooltipContainerComponent);
+
+    this.tooltip = new Promise((resolve, reject) => {
       this.cRef = this.tooltipService.showTooltip(componentFactory, binding);
-      return this.cRef;
+      resolve(this.cRef);
     });
   }
 
