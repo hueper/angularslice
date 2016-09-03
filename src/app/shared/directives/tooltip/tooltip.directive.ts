@@ -51,7 +51,7 @@ export class TooltipDirective {
     });
 
     let binding = ReflectiveInjector.resolveAndCreate([
-      new Provider(TooltipOptions, { useValue: options })
+      { provide: TooltipOptions, useValue: options }
     ], this.injector);
 
     let componentFactory = this.ComponentFactoryResolver.resolveComponentFactory(TooltipContainerComponent);

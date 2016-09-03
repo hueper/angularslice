@@ -5,12 +5,7 @@ import { Subscription } from "rxjs";
 const Humane = require('humane-js');
 
 import { AreaService, ImageService, RawImageService, FolderService, DialogService } from "../shared/services";
-import { ImageBarComponent } from "./image-bar";
 import { Area, Folder, Image, NewArea } from "../shared/models";
-import { AreaComponent } from "./area";
-import { SlicedImageComponent } from "../sliced-image";
-import { MD_PROGRESS_CIRCLE_DIRECTIVES } from "@angular2-material/progress-circle/progress-circle";
-import { TooltipDirective } from "../shared/directives/tooltip/tooltip.directive";
 import { AnalyticsService } from "../shared/services/analytics.service";
 
 

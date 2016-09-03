@@ -6,7 +6,7 @@ import { APP_BASE_HREF } from "@angular/common";
 import { HttpModule } from "@angular/http";
 
 
-import { MD_ICON_DIRECTIVES, MdIconRegistry } from "@angular2-material/icon";
+import { MdIconRegistry } from "@angular2-material/icon";
 import { ModalModule } from "angular2-modal/angular2-modal.module";
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import { Angulartics2 } from 'angulartics2';
@@ -35,6 +35,8 @@ import { BoardComponent } from "./board/board.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { EscapeHtmlPipe } from "./shared/pipes/EscapeHtml";
 import { ComponentElementComponent } from "./sidebar/component-element/component-element.component";
+import { EditorComponent } from "./editor/editor.component";
+import { ToolbarComponent } from "./toolbar/toolbar.component";
 
 import { MdButton } from "@angular2-material/button";
 import { MdInput } from "@angular2-material/input";
@@ -46,9 +48,11 @@ import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio";
     AppComponent,
     AreaComponent,
     BoardComponent,
+    EditorComponent,
     SidebarComponent,
     ImageBarComponent,
     SlicedImageComponent,
+    ToolbarComponent,
     TooltipDirective,
     MdButton,
     MdInput,

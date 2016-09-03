@@ -21,3 +21,9 @@ A possible dev url: [http://localhost:3001/projects/1/views/1](http://localhost:
 ## Branching
 
   Follow the recommended [git flow](http://nvie.com/posts/a-successful-git-branching-model/) branching model!
+  
+## Changelog
+  
+### 2016-09-03, Angular 2 RC.6
+  Had to manually rewrite a line in node_modules/@angular2-material/core/gestures/MdGEstureConfig.d.ts ->
+  Switch HammerManager to any.

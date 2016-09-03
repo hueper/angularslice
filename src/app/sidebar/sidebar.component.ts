@@ -1,8 +1,6 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs/Rx";
-import { MD_ICON_DIRECTIVES } from "@angular2-material/icon"
 
-import { ComponentElementComponent } from "./component-element";
 import { FolderService, FileService } from "../shared/services";
 import { Folder, File } from "../shared/models";
 import { DialogService } from "../shared/services/dialog.service";
