@@ -5,7 +5,7 @@ webpackJsonp([0],[
 	"use strict";
 	var platform_browser_dynamic_1 = __webpack_require__(1);
 	var app_module_1 = __webpack_require__(24);
-	__webpack_require__(487);
+	__webpack_require__(490);
 	platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1.AppModule);
 
 
@@ -38007,10 +38007,12 @@ webpackJsonp([0],[
 	var sidebar_component_1 = __webpack_require__(476);
 	var EscapeHtml_1 = __webpack_require__(479);
 	var component_element_component_1 = __webpack_require__(480);
-	var button_1 = __webpack_require__(483);
-	var input_1 = __webpack_require__(484);
-	var checkbox_1 = __webpack_require__(485);
-	var radio_1 = __webpack_require__(486);
+	var editor_component_1 = __webpack_require__(453);
+	var toolbar_component_1 = __webpack_require__(483);
+	var button_1 = __webpack_require__(486);
+	var input_1 = __webpack_require__(487);
+	var checkbox_1 = __webpack_require__(488);
+	var radio_1 = __webpack_require__(489);
 	var AppModule = (function () {
 	    function AppModule() {
 	    }
@@ -38020,9 +38022,11 @@ webpackJsonp([0],[
 	                app_component_1.AppComponent,
 	                area_component_1.AreaComponent,
 	                board_component_1.BoardComponent,
+	                editor_component_1.EditorComponent,
 	                sidebar_component_1.SidebarComponent,
 	                image_bar_component_1.ImageBarComponent,
 	                sliced_image_component_1.SlicedImageComponent,
+	                toolbar_component_1.ToolbarComponent,
 	                tooltip_directive_1.TooltipDirective,
 	                button_1.MdButton,
 	                input_1.MdInput,
@@ -90050,7 +90054,7 @@ webpackJsonp([0],[
 	            hostEl: this.viewContainerRef.element
 	        });
 	        var binding = core_1.ReflectiveInjector.resolveAndCreate([
-	            new Provider(tooltip_options_class_1.TooltipOptions, { useValue: options })
+	            { provide: tooltip_options_class_1.TooltipOptions, useValue: options }
 	        ], this.injector);
 	        var componentFactory = this.ComponentFactoryResolver.resolveComponentFactory(tooltip_component_1.TooltipContainerComponent);
 	        this.tooltip = new Promise(function (resolve, reject) {
@@ -91302,6 +91306,52 @@ webpackJsonp([0],[
 /* 483 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(3);
+	var ToolbarComponent = (function () {
+	    function ToolbarComponent() {
+	    }
+	    ToolbarComponent = __decorate([
+	        core_1.Component({
+	            selector: 'toolbar',
+	            template: __webpack_require__(484)(),
+	            styles: [__webpack_require__(485)]
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], ToolbarComponent);
+	    return ToolbarComponent;
+	}());
+	exports.ToolbarComponent = ToolbarComponent;
+
+
+/***/ },
+/* 484 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var pug = __webpack_require__(425);
+
+	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cng-content\u003E\u003C\u002Fng-content\u003E";;return pug_html;};
+	module.exports = template;
+
+/***/ },
+/* 485 */
+/***/ function(module, exports) {
+
+	module.exports = ":host {\n  display: flex;\n  flex: 0 0 auto;\n  width: 100%;\n  flex-direction: column;\n  z-index: 2;\n}"
+
+/***/ },
+/* 486 */
+/***/ function(module, exports, __webpack_require__) {
+
 	(function (global, factory) {
 	     true ? factory(exports, __webpack_require__(3), __webpack_require__(23), __webpack_require__(447)) :
 	    typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common', '@angular2-material/core'], factory) :
@@ -91506,7 +91556,7 @@ webpackJsonp([0],[
 	})));
 
 /***/ },
-/* 484 */
+/* 487 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function (global, factory) {
@@ -91993,7 +92043,7 @@ webpackJsonp([0],[
 	})));
 
 /***/ },
-/* 485 */
+/* 488 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function (global, factory) {
@@ -92344,7 +92394,7 @@ webpackJsonp([0],[
 	})));
 
 /***/ },
-/* 486 */
+/* 489 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function (global, factory) {
@@ -92806,16 +92856,16 @@ webpackJsonp([0],[
 	})));
 
 /***/ },
-/* 487 */
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(488);
+	var content = __webpack_require__(491);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(508)(content, {});
+	var update = __webpack_require__(511)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -92832,124 +92882,124 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 488 */
+/* 491 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(489)();
+	exports = module.exports = __webpack_require__(492)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "* {\n  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(490) + ") format(\"woff2\"), url(" + __webpack_require__(491) + ") format(\"woff\"), url(" + __webpack_require__(492) + ") format(\"truetype\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(493) + ") format(\"woff2\"), url(" + __webpack_require__(494) + ") format(\"woff\"), url(" + __webpack_require__(495) + ") format(\"truetype\");\n  font-weight: bold;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(496) + ") format(\"woff2\"), url(" + __webpack_require__(497) + ") format(\"woff\"), url(" + __webpack_require__(498) + ") format(\"truetype\");\n  font-weight: normal;\n  font-style: italic;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(499) + ") format(\"woff2\"), url(" + __webpack_require__(500) + ") format(\"woff\"), url(" + __webpack_require__(501) + ") format(\"truetype\");\n  font-weight: 300;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'CircularStd';\n  src: url(" + __webpack_require__(502) + ") format(\"woff2\"), url(" + __webpack_require__(503) + ") format(\"woff\"), url(" + __webpack_require__(504) + ") format(\"truetype\");\n  font-weight: bold;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'BudacodeIcons';\n  src: url(" + __webpack_require__(505) + ") format(\"woff2\"), url(" + __webpack_require__(506) + ") format(\"woff\"), url(" + __webpack_require__(507) + ") format(\"ttf\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n.h-fill-remaining {\n  flex: 1 1 auto;\n}\n\n.h-flex-end {\n  align-items: flex-end;\n}\n\n.h-flex-align-center {\n  align-items: center;\n}\n\n* {\n  outline: none;\n  box-sizing: border-box;\n}\n\nhtml,\nbody {\n  margin: 0;\n  max-height: 100%;\n  min-height: 100%;\n  display: flex;\n  flex: 1;\n  flex-direction: column;\n  background-color: #fafafa;\n  overflow: hidden;\n}\n\nhtml {\n  box-sizing: border-box;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: inherit;\n}\n\n@-moz-viewport {\n  width: device-width;\n}\n\n@-ms-viewport {\n  width: device-width;\n}\n\n@-o-viewport {\n  width: device-width;\n}\n\n@-webkit-viewport {\n  width: device-width;\n}\n\n@viewport {\n  width: device-width;\n}\n\nhtml {\n  font-size: 10px;\n  -webkit-tap-highlight-color: transparent;\n}\n\nbody {\n  font-family: \"Lato\";\n  font-size: 16px;\n  line-height: 24px;\n  color: #2e3233;\n  background-color: #fff;\n  margin: 0;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin-top: 0;\n  margin-bottom: 5px;\n}\n\np {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nabbr[title],\nabbr[data-original-title] {\n  cursor: help;\n  border-bottom: 1px dotted #eee;\n}\n\naddress {\n  margin-bottom: 10px;\n  font-style: normal;\n  line-height: inherit;\n}\n\nol,\nul,\ndl {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nol ol,\nul ul,\nol ul,\nul ol {\n  margin-bottom: 0;\n}\n\ndt {\n  font-weight: bold;\n}\n\ndd {\n  margin-bottom: 5px;\n  margin-left: 0;\n}\n\nblockquote {\n  margin: 0 0 10px;\n}\n\na.linkPrimary {\n  color: #006064;\n}\n\na.linkPrimary:hover {\n  color: #006064;\n  text-decoration: underline;\n}\n\na {\n  color: #fff;\n  text-decoration: none;\n}\n\na:focus,\na:hover {\n  color: #feffb4;\n  text-decoration: underline;\n}\n\npre {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nfigure {\n  margin: 0 0 10px;\n}\n\nimg {\n  vertical-align: middle;\n}\n\n[role='button'] {\n  cursor: pointer;\n}\n\ntable {\n  background-color: transparent;\n}\n\ncaption {\n  padding-top: 0;\n  padding-bottom: 0;\n  color: #eee;\n  text-align: left;\n  caption-side: bottom;\n}\n\nth {\n  text-align: left;\n}\n\nlabel {\n  display: inline-block;\n  margin-bottom: 5px;\n}\n\ninput,\nbutton,\nselect,\ntextarea {\n  margin: 0;\n  line-height: inherit;\n  border-radius: 0;\n}\n\ntextarea {\n  resize: vertical;\n}\n\nfieldset {\n  min-width: 0;\n  padding: 0;\n  margin: 0;\n  border: 0;\n}\n\nlegend {\n  display: block;\n  width: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n  font-size: 15px;\n  line-height: inherit;\n}\n\ninput[type='search'] {\n  box-sizing: inherit;\n  -webkit-appearance: none;\n}\n\noutput {\n  display: inline-block;\n}\n\n.dialogBackground {\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  z-index: 49;\n  animation: fadeIn 500ms forwards;\n}\n\n.dialog {\n  width: 660px;\n  position: fixed;\n  top: 20%;\n  left: calc(50% - 330px);\n  padding: 20px;\n  background-color: #fff;\n  z-index: 50;\n  box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);\n  animation: slideDown ease-out 500ms forwards;\n}\n\n.dialog .flexContainer {\n  display: flex;\n  width: 100%;\n  flex-direction: column;\n  flex-wrap: wrap;\n  justify-content: flex-start;\n}\n\n.dialog .flexContainer .row {\n  display: flex;\n  flex-direction: row;\n  margin: 5px;\n}\n\n.dialog .flexContainer .addition {\n  margin-top: 20px;\n}\n\n.dialog .flexContainer .md-button-wrapper button {\n  margin-right: 10px;\n}\n\n.dialog .flexContainer .md-button-wrapper button:last-child {\n  margin-right: 0;\n}\n\n.dialog .flexContainer .row--rightAligned {\n  justify-content: flex-end;\n}\n\n.dialog .flexContainer .row--rightAligned .column {\n  flex-grow: 0;\n}\n\n.dialog .flexContainer .column {\n  display: flex;\n  flex-direction: column;\n  flex-grow: 1;\n}\n\n.dialog .flexContainer .column:not(:first-of-type) {\n  margin-left: 20px;\n}\n\n.dialog md-radio-button,\n.dialog md-checkbox {\n  margin: 5px 8px;\n}\n\n.dialog select {\n  margin-left: 20px;\n}\n\n.modal-sm .dialog {\n  width: 260px;\n  left: calc(50% - 130px);\n}\n\n@keyframes fadeIn {\n  from {\n    background-color: transparent;\n  }\n\n  to {\n    background: rgba(0, 0, 0, 0.3);\n  }\n}\n\n@keyframes slideDown {\n  from {\n    opacity: 0;\n    transform: translate(0, -50px);\n  }\n\n  40% {\n    opacity: 1;\n  }\n\n  to {\n    transform: translate(0, 0);\n  }\n}", ""]);
+	exports.push([module.id, "* {\n  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(493) + ") format(\"woff2\"), url(" + __webpack_require__(494) + ") format(\"woff\"), url(" + __webpack_require__(495) + ") format(\"truetype\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(496) + ") format(\"woff2\"), url(" + __webpack_require__(497) + ") format(\"woff\"), url(" + __webpack_require__(498) + ") format(\"truetype\");\n  font-weight: bold;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(499) + ") format(\"woff2\"), url(" + __webpack_require__(500) + ") format(\"woff\"), url(" + __webpack_require__(501) + ") format(\"truetype\");\n  font-weight: normal;\n  font-style: italic;\n}\n\n@font-face {\n  font-family: 'Lato';\n  src: url(" + __webpack_require__(502) + ") format(\"woff2\"), url(" + __webpack_require__(503) + ") format(\"woff\"), url(" + __webpack_require__(504) + ") format(\"truetype\");\n  font-weight: 300;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'CircularStd';\n  src: url(" + __webpack_require__(505) + ") format(\"woff2\"), url(" + __webpack_require__(506) + ") format(\"woff\"), url(" + __webpack_require__(507) + ") format(\"truetype\");\n  font-weight: bold;\n  font-style: normal;\n}\n\n@font-face {\n  font-family: 'BudacodeIcons';\n  src: url(" + __webpack_require__(508) + ") format(\"woff2\"), url(" + __webpack_require__(509) + ") format(\"woff\"), url(" + __webpack_require__(510) + ") format(\"ttf\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n.h-fill-remaining {\n  flex: 1 1 auto;\n}\n\n.h-flex-end {\n  align-items: flex-end;\n}\n\n.h-flex-align-center {\n  align-items: center;\n}\n\n* {\n  outline: none;\n  box-sizing: border-box;\n}\n\nhtml,\nbody {\n  margin: 0;\n  max-height: 100%;\n  min-height: 100%;\n  display: flex;\n  flex: 1;\n  flex-direction: column;\n  background-color: #fafafa;\n  overflow: hidden;\n}\n\nhtml {\n  box-sizing: border-box;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: inherit;\n}\n\n@-moz-viewport {\n  width: device-width;\n}\n\n@-ms-viewport {\n  width: device-width;\n}\n\n@-o-viewport {\n  width: device-width;\n}\n\n@-webkit-viewport {\n  width: device-width;\n}\n\n@viewport {\n  width: device-width;\n}\n\nhtml {\n  font-size: 10px;\n  -webkit-tap-highlight-color: transparent;\n}\n\nbody {\n  font-family: \"Lato\";\n  font-size: 16px;\n  line-height: 24px;\n  color: #2e3233;\n  background-color: #fff;\n  margin: 0;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin-top: 0;\n  margin-bottom: 5px;\n}\n\np {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nabbr[title],\nabbr[data-original-title] {\n  cursor: help;\n  border-bottom: 1px dotted #eee;\n}\n\naddress {\n  margin-bottom: 10px;\n  font-style: normal;\n  line-height: inherit;\n}\n\nol,\nul,\ndl {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nol ol,\nul ul,\nol ul,\nul ol {\n  margin-bottom: 0;\n}\n\ndt {\n  font-weight: bold;\n}\n\ndd {\n  margin-bottom: 5px;\n  margin-left: 0;\n}\n\nblockquote {\n  margin: 0 0 10px;\n}\n\na.linkPrimary {\n  color: #006064;\n}\n\na.linkPrimary:hover {\n  color: #006064;\n  text-decoration: underline;\n}\n\na {\n  color: #fff;\n  text-decoration: none;\n}\n\na:focus,\na:hover {\n  color: #feffb4;\n  text-decoration: underline;\n}\n\npre {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nfigure {\n  margin: 0 0 10px;\n}\n\nimg {\n  vertical-align: middle;\n}\n\n[role='button'] {\n  cursor: pointer;\n}\n\ntable {\n  background-color: transparent;\n}\n\ncaption {\n  padding-top: 0;\n  padding-bottom: 0;\n  color: #eee;\n  text-align: left;\n  caption-side: bottom;\n}\n\nth {\n  text-align: left;\n}\n\nlabel {\n  display: inline-block;\n  margin-bottom: 5px;\n}\n\ninput,\nbutton,\nselect,\ntextarea {\n  margin: 0;\n  line-height: inherit;\n  border-radius: 0;\n}\n\ntextarea {\n  resize: vertical;\n}\n\nfieldset {\n  min-width: 0;\n  padding: 0;\n  margin: 0;\n  border: 0;\n}\n\nlegend {\n  display: block;\n  width: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n  font-size: 15px;\n  line-height: inherit;\n}\n\ninput[type='search'] {\n  box-sizing: inherit;\n  -webkit-appearance: none;\n}\n\noutput {\n  display: inline-block;\n}\n\n.dialogBackground {\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  z-index: 49;\n  animation: fadeIn 500ms forwards;\n}\n\n.dialog {\n  width: 660px;\n  position: fixed;\n  top: 20%;\n  left: calc(50% - 330px);\n  padding: 20px;\n  background-color: #fff;\n  z-index: 50;\n  box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);\n  animation: slideDown ease-out 500ms forwards;\n}\n\n.dialog .flexContainer {\n  display: flex;\n  width: 100%;\n  flex-direction: column;\n  flex-wrap: wrap;\n  justify-content: flex-start;\n}\n\n.dialog .flexContainer .row {\n  display: flex;\n  flex-direction: row;\n  margin: 5px;\n}\n\n.dialog .flexContainer .addition {\n  margin-top: 20px;\n}\n\n.dialog .flexContainer .md-button-wrapper button {\n  margin-right: 10px;\n}\n\n.dialog .flexContainer .md-button-wrapper button:last-child {\n  margin-right: 0;\n}\n\n.dialog .flexContainer .row--rightAligned {\n  justify-content: flex-end;\n}\n\n.dialog .flexContainer .row--rightAligned .column {\n  flex-grow: 0;\n}\n\n.dialog .flexContainer .column {\n  display: flex;\n  flex-direction: column;\n  flex-grow: 1;\n}\n\n.dialog .flexContainer .column:not(:first-of-type) {\n  margin-left: 20px;\n}\n\n.dialog md-radio-button,\n.dialog md-checkbox {\n  margin: 5px 8px;\n}\n\n.dialog select {\n  margin-left: 20px;\n}\n\n.modal-sm .dialog {\n  width: 260px;\n  left: calc(50% - 130px);\n}\n\n@keyframes fadeIn {\n  from {\n    background-color: transparent;\n  }\n\n  to {\n    background: rgba(0, 0, 0, 0.3);\n  }\n}\n\n@keyframes slideDown {\n  from {\n    opacity: 0;\n    transform: translate(0, -50px);\n  }\n\n  40% {\n    opacity: 1;\n  }\n\n  to {\n    transform: translate(0, 0);\n  }\n}", ""]);
 
 	// exports
 
 
 /***/ },
-/* 489 */,
-/* 490 */
+/* 492 */,
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-regular-webfont.woff2";
 
 /***/ },
-/* 491 */
+/* 494 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-regular-webfont.woff";
 
 /***/ },
-/* 492 */
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-regular-webfont.ttf";
 
 /***/ },
-/* 493 */
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-bold-webfont.woff2";
 
 /***/ },
-/* 494 */
+/* 497 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-bold-webfont.woff";
 
 /***/ },
-/* 495 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-bold-webfont.ttf";
 
 /***/ },
-/* 496 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-italic-webfont.woff2";
 
 /***/ },
-/* 497 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-italic-webfont.woff";
 
 /***/ },
-/* 498 */
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-italic-webfont.ttf";
 
 /***/ },
-/* 499 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-light-webfont.woff2";
 
 /***/ },
-/* 500 */
+/* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-light-webfont.woff";
 
 /***/ },
-/* 501 */
+/* 504 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/lato-light-webfont.ttf";
 
 /***/ },
-/* 502 */
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/CircularStd-Bold.woff2";
 
 /***/ },
-/* 503 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/CircularStd-Bold.woff";
 
 /***/ },
-/* 504 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/CircularStd-Bold.ttf";
 
 /***/ },
-/* 505 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/BudacodeIcons.woff2";
 
 /***/ },
-/* 506 */
+/* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/BudacodeIcons.woff";
 
 /***/ },
-/* 507 */
+/* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "fonts/BudacodeIcons.ttf";
