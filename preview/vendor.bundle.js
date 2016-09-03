@@ -5,13 +5,13 @@ webpackJsonp([2],{
 
 	"use strict";
 	// CSS
-	__webpack_require__(1145);
+	__webpack_require__(815);
 	// require('humane-js/themes/libnotify.css');
 	// require('humane-js/themes/original.css');
 	// JS
-	__webpack_require__(1147);
-	__webpack_require__(1148);
-	__webpack_require__(1171);
+	__webpack_require__(817);
+	__webpack_require__(818);
+	__webpack_require__(841);
 	// import 'expose?ga!./ga.js';
 	// For vendors for example jQuery, Lodash, angular2-jwt import them here
 	// Also see src/typings.d.ts as you also need to run `typings install x` where `x` is your module
@@ -19,7 +19,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 72:
+/***/ 7:
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -36,7 +36,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 604:
+/***/ 331:
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -50,25 +50,40 @@ webpackJsonp([2],{
 	var cachedSetTimeout;
 	var cachedClearTimeout;
 
+	function defaultSetTimout() {
+	    throw new Error('setTimeout has not been defined');
+	}
+	function defaultClearTimeout () {
+	    throw new Error('clearTimeout has not been defined');
+	}
 	(function () {
 	    try {
-	        cachedSetTimeout = setTimeout;
-	    } catch (e) {
-	        cachedSetTimeout = function () {
-	            throw new Error('setTimeout is not defined');
+	        if (typeof setTimeout === 'function') {
+	            cachedSetTimeout = setTimeout;
+	        } else {
+	            cachedSetTimeout = defaultSetTimout;
 	        }
+	    } catch (e) {
+	        cachedSetTimeout = defaultSetTimout;
 	    }
 	    try {
-	        cachedClearTimeout = clearTimeout;
-	    } catch (e) {
-	        cachedClearTimeout = function () {
-	            throw new Error('clearTimeout is not defined');
+	        if (typeof clearTimeout === 'function') {
+	            cachedClearTimeout = clearTimeout;
+	        } else {
+	            cachedClearTimeout = defaultClearTimeout;
 	        }
+	    } catch (e) {
+	        cachedClearTimeout = defaultClearTimeout;
 	    }
 	} ())
 	function runTimeout(fun) {
 	    if (cachedSetTimeout === setTimeout) {
 	        //normal enviroments in sane situations
+	        return setTimeout(fun, 0);
+	    }
+	    // if setTimeout wasn't available but was latter defined
+	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+	        cachedSetTimeout = setTimeout;
 	        return setTimeout(fun, 0);
 	    }
 	    try {
@@ -89,6 +104,11 @@ webpackJsonp([2],{
 	function runClearTimeout(marker) {
 	    if (cachedClearTimeout === clearTimeout) {
 	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
+	    }
+	    // if clearTimeout wasn't available but was latter defined
+	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+	        cachedClearTimeout = clearTimeout;
 	        return clearTimeout(marker);
 	    }
 	    try {
@@ -203,7 +223,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 819:
+/***/ 489:
 /***/ function(module, exports) {
 
 	/*
@@ -260,7 +280,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 838:
+/***/ 508:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -513,16 +533,16 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1145:
+/***/ 815:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(1146);
+	var content = __webpack_require__(816);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(838)(content, {});
+	var update = __webpack_require__(508)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -540,10 +560,10 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1146:
+/***/ 816:
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(819)();
+	exports = module.exports = __webpack_require__(489)();
 	// imports
 
 
@@ -555,7 +575,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1147:
+/***/ 817:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/******/ (function(modules) { // webpackBootstrap
@@ -619,7 +639,7 @@ webpackJsonp([2],{
 		timers_1.patchTimer(_global, set, clear, 'Timeout');
 		timers_1.patchTimer(_global, set, clear, 'Interval');
 		timers_1.patchTimer(_global, set, clear, 'Immediate');
-		timers_1.patchTimer(_global, 'request', 'cancelMacroTask', 'AnimationFrame');
+		timers_1.patchTimer(_global, 'request', 'cancel', 'AnimationFrame');
 		timers_1.patchTimer(_global, 'mozRequest', 'mozCancel', 'AnimationFrame');
 		timers_1.patchTimer(_global, 'webkitRequest', 'webkitCancel', 'AnimationFrame');
 		for (var i = 0; i < blockingMethods.length; i++) {
@@ -648,7 +668,7 @@ webpackJsonp([2],{
 		    function scheduleTask(task) {
 		        var data = task.data;
 		        data.target.addEventListener('readystatechange', function () {
-		            if (data.target.readyState === XMLHttpRequest.DONE) {
+		            if (data.target.readyState === data.target.DONE) {
 		                if (!data.aborted) {
 		                    task.invoke();
 		                }
@@ -710,6 +730,9 @@ webpackJsonp([2],{
 		/* WEBPACK VAR INJECTION */(function(global) {;
 		;
 		var Zone = (function (global) {
+		    if (global.Zone) {
+		        throw new Error('Zone already loaded.');
+		    }
 		    var Zone = (function () {
 		        function Zone(parent, zoneSpec) {
 		            this._properties = null;
@@ -743,13 +766,19 @@ webpackJsonp([2],{
 		        });
 		        ;
 		        Zone.prototype.get = function (key) {
+		            var zone = this.getZoneWith(key);
+		            if (zone)
+		                return zone._properties[key];
+		        };
+		        Zone.prototype.getZoneWith = function (key) {
 		            var current = this;
 		            while (current) {
 		                if (current._properties.hasOwnProperty(key)) {
-		                    return current._properties[key];
+		                    return current;
 		                }
 		                current = current._parent;
 		            }
+		            return null;
 		        };
 		        Zone.prototype.fork = function (zoneSpec) {
 		            if (!zoneSpec)
@@ -979,14 +1008,26 @@ webpackJsonp([2],{
 		            this.callback = callback;
 		            var self = this;
 		            this.invoke = function () {
+		                _numberOfNestedTaskFrames++;
 		                try {
 		                    return zone.runTask(self, this, arguments);
 		                }
 		                finally {
-		                    drainMicroTaskQueue();
+		                    if (_numberOfNestedTaskFrames == 1) {
+		                        drainMicroTaskQueue();
+		                    }
+		                    _numberOfNestedTaskFrames--;
 		                }
 		            };
 		        }
+		        ZoneTask.prototype.toString = function () {
+		            if (this.data && typeof this.data.handleId !== 'undefined') {
+		                return this.data.handleId;
+		            }
+		            else {
+		                return this.toString();
+		            }
+		        };
 		        return ZoneTask;
 		    }());
 		    function __symbol__(name) { return '__zone_symbol__' + name; }
@@ -999,9 +1040,11 @@ webpackJsonp([2],{
 		    var _microTaskQueue = [];
 		    var _isDrainingMicrotaskQueue = false;
 		    var _uncaughtPromiseErrors = [];
-		    var _drainScheduled = false;
+		    var _numberOfNestedTaskFrames = 0;
 		    function scheduleQueueDrain() {
-		        if (!_drainScheduled && !_currentTask && _microTaskQueue.length == 0) {
+		        // if we are not running in any task, and there has not been anything scheduled
+		        // we must bootstrap the initial task creation by manually scheduling the drain
+		        if (_numberOfNestedTaskFrames == 0 && _microTaskQueue.length == 0) {
 		            // We are not running in Task, so we need to kickstart the microtask queue.
 		            if (global[symbolPromise]) {
 		                global[symbolPromise].resolve(0)[symbolThen](drainMicroTaskQueue);
@@ -1018,7 +1061,7 @@ webpackJsonp([2],{
 		    function consoleError(e) {
 		        var rejection = e && e.rejection;
 		        if (rejection) {
-		            console.error('Unhandled Promise rejection:', rejection instanceof Error ? rejection.message : rejection, '; Zone:', e.zone.name, '; Task:', e.task && e.task.source, '; Value:', rejection);
+		            console.error('Unhandled Promise rejection:', rejection instanceof Error ? rejection.message : rejection, '; Zone:', e.zone.name, '; Task:', e.task && e.task.source, '; Value:', rejection, rejection instanceof Error ? rejection.stack : undefined);
 		        }
 		        console.error(e);
 		    }
@@ -1039,10 +1082,8 @@ webpackJsonp([2],{
 		                }
 		            }
 		            while (_uncaughtPromiseErrors.length) {
-		                var uncaughtPromiseErrors = _uncaughtPromiseErrors;
-		                _uncaughtPromiseErrors = [];
-		                var _loop_1 = function(i) {
-		                    var uncaughtPromiseError = uncaughtPromiseErrors[i];
+		                var _loop_1 = function() {
+		                    var uncaughtPromiseError = _uncaughtPromiseErrors.shift();
 		                    try {
 		                        uncaughtPromiseError.zone.runGuarded(function () { throw uncaughtPromiseError; });
 		                    }
@@ -1050,12 +1091,11 @@ webpackJsonp([2],{
 		                        consoleError(e);
 		                    }
 		                };
-		                for (var i = 0; i < uncaughtPromiseErrors.length; i++) {
-		                    _loop_1(i);
+		                while (_uncaughtPromiseErrors.length) {
+		                    _loop_1();
 		                }
 		            }
 		            _isDrainingMicrotaskQueue = false;
-		            _drainScheduled = false;
 		        }
 		    }
 		    function isThenable(value) {
@@ -1138,6 +1178,9 @@ webpackJsonp([2],{
 		    var ZoneAwarePromise = (function () {
 		        function ZoneAwarePromise(executor) {
 		            var promise = this;
+		            if (!(promise instanceof ZoneAwarePromise)) {
+		                throw new Error('Must be an instanceof Promise.');
+		            }
 		            promise[symbolState] = UNRESOLVED;
 		            promise[symbolValue] = []; // queue;
 		            try {
@@ -1195,7 +1238,7 @@ webpackJsonp([2],{
 		            return promise;
 		        };
 		        ZoneAwarePromise.prototype.then = function (onFulfilled, onRejected) {
-		            var chainPromise = new ZoneAwarePromise(null);
+		            var chainPromise = new this.constructor(null);
 		            var zone = Zone.current;
 		            if (this[symbolState] == UNRESOLVED) {
 		                this[symbolValue].push(zone, chainPromise, onFulfilled, onRejected);
@@ -1223,6 +1266,8 @@ webpackJsonp([2],{
 		            }).then(onResolve, onReject);
 		        };
 		    }
+		    // This is not part of public API, but it is usefull for tests, so we expose it.
+		    Promise[Zone.__symbol__('uncaughtPromiseErrors')] = _uncaughtPromiseErrors;
 		    return global.Zone = Zone;
 		})(typeof window === 'undefined' ? global : window);
 
@@ -1235,7 +1280,7 @@ webpackJsonp([2],{
 		"use strict";
 		var utils_1 = __webpack_require__(3);
 		var WTF_ISSUE_555 = 'Anchor,Area,Audio,BR,Base,BaseFont,Body,Button,Canvas,Content,DList,Directory,Div,Embed,FieldSet,Font,Form,Frame,FrameSet,HR,Head,Heading,Html,IFrame,Image,Input,Keygen,LI,Label,Legend,Link,Map,Marquee,Media,Menu,Meta,Meter,Mod,OList,Object,OptGroup,Option,Output,Paragraph,Pre,Progress,Quote,Script,Select,Source,Span,Style,TableCaption,TableCell,TableCol,Table,TableRow,TableSection,TextArea,Title,Track,UList,Unknown,Video';
-		var NO_EVENT_TARGET = 'ApplicationCache,EventSource,FileReader,InputMethodContext,MediaController,MessagePort,Node,Performance,SVGElementInstance,SharedWorker,TextTrack,TextTrackCue,TextTrackList,WebKitNamedFlow,Worker,WorkerGlobalScope,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload,IDBRequest,IDBOpenDBRequest,IDBDatabase,IDBTransaction,IDBCursor,DBIndex'.split(',');
+		var NO_EVENT_TARGET = 'ApplicationCache,EventSource,FileReader,InputMethodContext,MediaController,MessagePort,Node,Performance,SVGElementInstance,SharedWorker,TextTrack,TextTrackCue,TextTrackList,WebKitNamedFlow,Window,Worker,WorkerGlobalScope,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload,IDBRequest,IDBOpenDBRequest,IDBDatabase,IDBTransaction,IDBCursor,DBIndex'.split(',');
 		var EVENT_TARGET = 'EventTarget';
 		function eventTargetPatch(_global) {
 		    var apis = [];
@@ -1337,8 +1382,9 @@ webpackJsonp([2],{
 		            this[_prop] = null;
 		        }
 		    };
+		    // The getter would return undefined for unassigned properties but the default value of an unassigned property is null
 		    desc.get = function () {
-		        return this[_prop];
+		        return this[_prop] || null;
 		    };
 		    Object.defineProperty(obj, prop, desc);
 		}
@@ -1506,6 +1552,9 @@ webpackJsonp([2],{
 		    var instance = new OriginalClass(function () { });
 		    var prop;
 		    for (prop in instance) {
+		        // https://bugs.webkit.org/show_bug.cgi?id=44721
+		        if (className === 'XMLHttpRequest' && prop === 'responseBlob')
+		            continue;
 		        (function (prop) {
 		            if (typeof instance[prop] === 'function') {
 		                _global[className].prototype[prop] = function () {
@@ -1589,10 +1638,11 @@ webpackJsonp([2],{
 		        if (isUnconfigurable(obj, prop)) {
 		            throw new TypeError('Cannot assign to read only property \'' + prop + '\' of ' + obj);
 		        }
+		        var originalConfigurableFlag = desc.configurable;
 		        if (prop !== 'prototype') {
 		            desc = rewriteDescriptor(obj, prop, desc);
 		        }
-		        return _defineProperty(obj, prop, desc);
+		        return _tryDefineProperty(obj, prop, desc, originalConfigurableFlag);
 		    };
 		    Object.defineProperties = function (obj, props) {
 		        Object.keys(props).forEach(function (prop) {
@@ -1601,7 +1651,7 @@ webpackJsonp([2],{
 		        return obj;
 		    };
 		    Object.create = function (obj, proto) {
-		        if (typeof proto === 'object') {
+		        if (typeof proto === 'object' && !Object.isFrozen(proto)) {
 		            Object.keys(proto).forEach(function (prop) {
 		                proto[prop] = rewriteDescriptor(obj, prop, proto[prop]);
 		            });
@@ -1619,8 +1669,9 @@ webpackJsonp([2],{
 		exports.propertyPatch = propertyPatch;
 		;
 		function _redefineProperty(obj, prop, desc) {
+		    var originalConfigurableFlag = desc.configurable;
 		    desc = rewriteDescriptor(obj, prop, desc);
-		    return _defineProperty(obj, prop, desc);
+		    return _tryDefineProperty(obj, prop, desc, originalConfigurableFlag);
 		}
 		exports._redefineProperty = _redefineProperty;
 		;
@@ -1636,6 +1687,26 @@ webpackJsonp([2],{
 		        obj[unconfigurablesKey][prop] = true;
 		    }
 		    return desc;
+		}
+		function _tryDefineProperty(obj, prop, desc, originalConfigurableFlag) {
+		    try {
+		        return _defineProperty(obj, prop, desc);
+		    }
+		    catch (e) {
+		        if (desc.configurable) {
+		            // In case of errors, when the configurable flag was likely set by rewriteDescriptor(), let's retry with the original flag value
+		            if (typeof originalConfigurableFlag == 'undefined') {
+		                delete desc.configurable;
+		            }
+		            else {
+		                desc.configurable = originalConfigurableFlag;
+		            }
+		            return _defineProperty(obj, prop, desc);
+		        }
+		        else {
+		            throw e;
+		        }
+		    }
 		}
 
 
@@ -1847,7 +1918,17 @@ webpackJsonp([2],{
 		                delay: (nameSuffix === 'Timeout' || nameSuffix === 'Interval') ? args[1] || 0 : null,
 		                args: args
 		            };
-		            return zone.scheduleMacroTask(setName, args[0], options, scheduleTask, clearTask);
+		            var task = zone.scheduleMacroTask(setName, args[0], options, scheduleTask, clearTask);
+		            if (!task) {
+		                return task;
+		            }
+		            // Node.js must additionally support the ref and unref functions.
+		            var handle = task.data.handleId;
+		            if (handle.ref && handle.unref) {
+		                task.ref = handle.ref.bind(handle);
+		                task.unref = handle.unref.bind(handle);
+		            }
+		            return task;
 		        }
 		        else {
 		            // cause an error by calling it directly.
@@ -1873,11 +1954,11 @@ webpackJsonp([2],{
 
 	/***/ }
 	/******/ ]);
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(604)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(331)))
 
 /***/ },
 
-/***/ 1148:
+/***/ 818:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*! *****************************************************************************
@@ -2719,7 +2800,7 @@ webpackJsonp([2],{
 	    function CreateWeakMapPolyfill() {
 	        var UUID_SIZE = 16;
 	        var isNode = typeof global !== "undefined" && Object.prototype.toString.call(global.process) === '[object process]';
-	        var nodeCrypto = isNode && __webpack_require__(1149);
+	        var nodeCrypto = isNode && __webpack_require__(819);
 	        var hasOwn = Object.prototype.hasOwnProperty;
 	        var keys = {};
 	        var rootKey = CreateUniqueKey();
@@ -2846,10 +2927,10 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1149:
+/***/ 819:
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var rng = __webpack_require__(1154)
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var rng = __webpack_require__(824)
 
 	function error () {
 	  var m = [].slice.call(arguments).join(' ')
@@ -2860,9 +2941,9 @@ webpackJsonp([2],{
 	    ].join('\n'))
 	}
 
-	exports.createHash = __webpack_require__(1156)
+	exports.createHash = __webpack_require__(826)
 
-	exports.createHmac = __webpack_require__(1168)
+	exports.createHmac = __webpack_require__(838)
 
 	exports.randomBytes = function(size, callback) {
 	  if (callback && callback.call) {
@@ -2883,7 +2964,7 @@ webpackJsonp([2],{
 	  return ['sha1', 'sha256', 'sha512', 'md5', 'rmd160']
 	}
 
-	var p = __webpack_require__(1169)(exports)
+	var p = __webpack_require__(839)(exports)
 	exports.pbkdf2 = p.pbkdf2
 	exports.pbkdf2Sync = p.pbkdf2Sync
 
@@ -2903,11 +2984,11 @@ webpackJsonp([2],{
 	  }
 	})
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1150).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(820).Buffer))
 
 /***/ },
 
-/***/ 1150:
+/***/ 820:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -2920,9 +3001,9 @@ webpackJsonp([2],{
 
 	'use strict'
 
-	var base64 = __webpack_require__(1151)
-	var ieee754 = __webpack_require__(1152)
-	var isArray = __webpack_require__(1153)
+	var base64 = __webpack_require__(821)
+	var ieee754 = __webpack_require__(822)
+	var isArray = __webpack_require__(823)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -4700,11 +4781,11 @@ webpackJsonp([2],{
 	  return val !== val // eslint-disable-line no-self-compare
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1150).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(820).Buffer, (function() { return this; }())))
 
 /***/ },
 
-/***/ 1151:
+/***/ 821:
 /***/ function(module, exports) {
 
 	'use strict'
@@ -4820,7 +4901,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1152:
+/***/ 822:
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -4911,7 +4992,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1153:
+/***/ 823:
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -4923,13 +5004,13 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1154:
+/***/ 824:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, Buffer) {(function() {
 	  var g = ('undefined' === typeof window ? global : window) || {}
 	  _crypto = (
-	    g.crypto || g.msCrypto || __webpack_require__(1155)
+	    g.crypto || g.msCrypto || __webpack_require__(825)
 	  )
 	  module.exports = function(size) {
 	    // Modern Browsers
@@ -4953,24 +5034,24 @@ webpackJsonp([2],{
 	  }
 	}())
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(1150).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(820).Buffer))
 
 /***/ },
 
-/***/ 1155:
+/***/ 825:
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
 
-/***/ 1156:
+/***/ 826:
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(1157)
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(827)
 
-	var md5 = toConstructor(__webpack_require__(1165))
-	var rmd160 = toConstructor(__webpack_require__(1167))
+	var md5 = toConstructor(__webpack_require__(835))
+	var rmd160 = toConstructor(__webpack_require__(837))
 
 	function toConstructor (fn) {
 	  return function () {
@@ -4998,11 +5079,11 @@ webpackJsonp([2],{
 	  return createHash(alg)
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1150).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(820).Buffer))
 
 /***/ },
 
-/***/ 1157:
+/***/ 827:
 /***/ function(module, exports, __webpack_require__) {
 
 	var exports = module.exports = function (alg) {
@@ -5011,17 +5092,17 @@ webpackJsonp([2],{
 	  return new Alg()
 	}
 
-	var Buffer = __webpack_require__(1150).Buffer
-	var Hash   = __webpack_require__(1158)(Buffer)
+	var Buffer = __webpack_require__(820).Buffer
+	var Hash   = __webpack_require__(828)(Buffer)
 
-	exports.sha1 = __webpack_require__(1159)(Buffer, Hash)
-	exports.sha256 = __webpack_require__(1163)(Buffer, Hash)
-	exports.sha512 = __webpack_require__(1164)(Buffer, Hash)
+	exports.sha1 = __webpack_require__(829)(Buffer, Hash)
+	exports.sha256 = __webpack_require__(833)(Buffer, Hash)
+	exports.sha512 = __webpack_require__(834)(Buffer, Hash)
 
 
 /***/ },
 
-/***/ 1158:
+/***/ 828:
 /***/ function(module, exports) {
 
 	module.exports = function (Buffer) {
@@ -5105,7 +5186,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1159:
+/***/ 829:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -5117,7 +5198,7 @@ webpackJsonp([2],{
 	 * See http://pajhome.org.uk/crypt/md5 for details.
 	 */
 
-	var inherits = __webpack_require__(1160).inherits
+	var inherits = __webpack_require__(830).inherits
 
 	module.exports = function (Buffer, Hash) {
 
@@ -5250,7 +5331,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1160:
+/***/ 830:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -5778,7 +5859,7 @@ webpackJsonp([2],{
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(1161);
+	exports.isBuffer = __webpack_require__(831);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -5822,7 +5903,7 @@ webpackJsonp([2],{
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(1162);
+	exports.inherits = __webpack_require__(832);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -5840,11 +5921,11 @@ webpackJsonp([2],{
 	  return Object.prototype.hasOwnProperty.call(obj, prop);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(604)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(331)))
 
 /***/ },
 
-/***/ 1161:
+/***/ 831:
 /***/ function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -5856,7 +5937,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1162:
+/***/ 832:
 /***/ function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -5886,7 +5967,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1163:
+/***/ 833:
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -5898,7 +5979,7 @@ webpackJsonp([2],{
 	 *
 	 */
 
-	var inherits = __webpack_require__(1160).inherits
+	var inherits = __webpack_require__(830).inherits
 
 	module.exports = function (Buffer, Hash) {
 
@@ -6040,10 +6121,10 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1164:
+/***/ 834:
 /***/ function(module, exports, __webpack_require__) {
 
-	var inherits = __webpack_require__(1160).inherits
+	var inherits = __webpack_require__(830).inherits
 
 	module.exports = function (Buffer, Hash) {
 	  var K = [
@@ -6291,7 +6372,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1165:
+/***/ 835:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -6303,7 +6384,7 @@ webpackJsonp([2],{
 	 * See http://pajhome.org.uk/crypt/md5 for more info.
 	 */
 
-	var helpers = __webpack_require__(1166);
+	var helpers = __webpack_require__(836);
 
 	/*
 	 * Calculate the MD5 of an array of little-endian words, and a bit length
@@ -6453,7 +6534,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1166:
+/***/ 836:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {var intSize = 4;
@@ -6491,11 +6572,11 @@ webpackJsonp([2],{
 
 	module.exports = { hash: hash };
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1150).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(820).Buffer))
 
 /***/ },
 
-/***/ 1167:
+/***/ 837:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {
@@ -6704,14 +6785,14 @@ webpackJsonp([2],{
 
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1150).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(820).Buffer))
 
 /***/ },
 
-/***/ 1168:
+/***/ 838:
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(1156)
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(826)
 
 	var zeroBuffer = new Buffer(128)
 	zeroBuffer.fill(0)
@@ -6755,14 +6836,14 @@ webpackJsonp([2],{
 	}
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1150).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(820).Buffer))
 
 /***/ },
 
-/***/ 1169:
+/***/ 839:
 /***/ function(module, exports, __webpack_require__) {
 
-	var pbkdf2Export = __webpack_require__(1170)
+	var pbkdf2Export = __webpack_require__(840)
 
 	module.exports = function (crypto, exports) {
 	  exports = exports || {}
@@ -6778,7 +6859,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 1170:
+/***/ 840:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = function(crypto) {
@@ -6866,19 +6947,19 @@ webpackJsonp([2],{
 	  }
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1150).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(820).Buffer))
 
 /***/ },
 
-/***/ 1171:
+/***/ 841:
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["_"] = __webpack_require__(1172);
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["_"] = __webpack_require__(842);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
 
-/***/ 1172:
+/***/ 842:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -23615,7 +23696,7 @@ webpackJsonp([2],{
 	  }
 	}.call(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(72)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(7)(module)))
 
 /***/ }
 
