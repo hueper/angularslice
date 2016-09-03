@@ -1,4 +1,4 @@
-# Angular Slicer
+# Angular Slice
 
 Angular Slicer project. Generate Angular 2 project structures with ease.
 
