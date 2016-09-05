@@ -78812,11 +78812,15 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
+	var angular2_modal_1 = __webpack_require__(28);
 	var bootstrap_1 = __webpack_require__(26);
+	var providers_1 = __webpack_require__(35);
 	var dialogs_1 = __webpack_require__(421);
 	var DialogService = (function () {
-	    function DialogService(modal) {
+	    function DialogService(overlay, vcRef, modal) {
+	        this.overlay = overlay;
 	        this.modal = modal;
+	        overlay.defaultViewContainer = vcRef;
 	    }
 	    DialogService.prototype.openGithubDialog = function () {
 	        var data = new bootstrap_1.BSModalContext();
@@ -78857,20 +78861,29 @@ webpackJsonp([0],[
 	        });
 	    };
 	    DialogService.prototype.openConfirmDialog = function () {
-	        var data = new dialogs_1.ConfirmDialogData();
+	        console.log(this.overlay);
 	        return this.modal
-	            .open(dialogs_1.ConfirmDialogComponent, data)
-	            .then(function (dialog) {
-	            return dialog.result;
-	        })
-	            .catch(function (err) {
-	            console.log(err);
-	            return null;
-	        });
+	            .open(dialogs_1.ConfirmDialogComponent, new dialogs_1.ConfirmDialogData());
+	        // .alert()
+	        // .size('lg')
+	        // .showClose(true)
+	        // .title('A simple Alert style modal window')
+	        // .body(require('../../dialogs/confirm-dialog/confirm-dialog.pug'))
+	        // .open();
+	        // const data = new ConfirmDialogData();
+	        // return this.modal
+	        //            .open(ConfirmDialogComponent, data)
+	        //            .then(dialog => {
+	        //              return dialog.result;
+	        //            })
+	        //            .catch(err => {
+	        //              console.log(err);
+	        //              return null;
+	        //            });
 	    };
 	    DialogService = __decorate([
 	        core_1.Injectable(), 
-	        __metadata('design:paramtypes', [bootstrap_1.Modal])
+	        __metadata('design:paramtypes', [angular2_modal_1.Overlay, core_1.ViewContainerRef, providers_1.Modal])
 	    ], DialogService);
 	    return DialogService;
 	}());
@@ -90057,8 +90070,8 @@ webpackJsonp([0],[
 	        var binding = core_1.ReflectiveInjector.resolveAndCreate([
 	            { provide: tooltip_options_class_1.TooltipOptions, useValue: options }
 	        ], this.injector);
-	        var componentFactory = this.ComponentFactoryResolver.resolveComponentFactory(tooltip_component_1.TooltipContainerComponent);
 	        this.tooltip = new Promise(function (resolve, reject) {
+	            var componentFactory = _this.ComponentFactoryResolver.resolveComponentFactory(tooltip_component_1.TooltipContainerComponent);
 	            _this.cRef = _this.tooltipService.showTooltip(componentFactory, binding);
 	            resolve(_this.cRef);
 	        });
@@ -90534,12 +90547,16 @@ webpackJsonp([0],[
 	};
 	var core_1 = __webpack_require__(3);
 	var _ = __webpack_require__(77);
+	var providers_1 = __webpack_require__(35);
+	var angular2_modal_1 = __webpack_require__(28);
 	var services_1 = __webpack_require__(74);
 	var analytics_service_1 = __webpack_require__(417);
 	var ImageBarComponent = (function () {
-	    function ImageBarComponent(imageService, ga, rawImageService, folderService, el, dialogService) {
+	    function ImageBarComponent(imageService, overlay, modal, vcRef, ga, rawImageService, folderService, el, dialogService) {
 	        var _this = this;
 	        this.imageService = imageService;
+	        this.overlay = overlay;
+	        this.modal = modal;
 	        this.ga = ga;
 	        this.rawImageService = rawImageService;
 	        this.folderService = folderService;
@@ -90550,6 +90567,7 @@ webpackJsonp([0],[
 	        this.hover = false;
 	        this.editImage = {};
 	        this.image = {};
+	        overlay.defaultViewContainer = vcRef;
 	        this.subscriptions.push(this.folderService.currentSource.subscribe(function (currentSource) {
 	            _this.currentFolder = currentSource;
 	            if (_this.imagesSubscribe) {
@@ -90597,6 +90615,11 @@ webpackJsonp([0],[
 	    };
 	    ImageBarComponent.prototype.deleteImage = function (image) {
 	        var _this = this;
+	        // return this.modal.open(ConfirmDialogComponent, new ConfirmDialogData()).then((result) => {
+	        //   if (result) {
+	        //     this.imageService.delete(image);
+	        //   }
+	        // });
 	        this.ga.eventTrack('deleteImage', { category: 'manually' });
 	        // Confirm Dialog
 	        this.dialogService.openConfirmDialog().then(function (result) {
@@ -90655,7 +90678,7 @@ webpackJsonp([0],[
 	            template: __webpack_require__(468)(),
 	            styles: [__webpack_require__(469)],
 	        }), 
-	        __metadata('design:paramtypes', [services_1.ImageService, analytics_service_1.AnalyticsService, services_1.RawImageService, services_1.FolderService, core_1.ElementRef, services_1.DialogService])
+	        __metadata('design:paramtypes', [services_1.ImageService, angular2_modal_1.Overlay, providers_1.Modal, core_1.ViewContainerRef, analytics_service_1.AnalyticsService, services_1.RawImageService, services_1.FolderService, core_1.ElementRef, services_1.DialogService])
 	    ], ImageBarComponent);
 	    return ImageBarComponent;
 	}());
@@ -90668,7 +90691,7 @@ webpackJsonp([0],[
 
 	var pug = __webpack_require__(425);
 
-	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"image-bar\"\u003E\u003Cdiv class=\"box\"\u003E\u003Cinput class=\"hiddenInput\" id=\"file\" type=\"file\" (change)=\"loadFile($event)\"\u003E\u003Clabel class=\"imageBox placeholder\" #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"file\"\u003E\u003Cdiv class=\"add\"\u003E+\u003C\u002Fdiv\u003E\u003Cdiv class=\"text\"\u003Edrag image here\u003C\u002Fdiv\u003E\u003Cdiv class=\"loadingContainer\" [hidden]=\"!loading\"\u003E\u003Cdiv class=\"loading\"\u003E\u003Cdiv class=\"content\"\u003E\u003Cmd-progress-circle mode=\"indeterminate\"\u003ELoading, please wait!\u003C\u002Fmd-progress-circle\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003Cdiv class=\"imageBox\" *ngFor=\"let image of images\" [ngClass]=\"{currentImage: currentImage &amp;&amp; currentImage._id == image._id }\" tooltip=\"{{image.name}}\" tooltipAppendToBody=\"true\" tooltipEnable=\"false\"\u003E\u003Csliced-image class=\"thumbnail\" (click)=\"setBoardImage(image)\" [image]=\"image\" [thumbnail]=\"true\"\u003E\u003C\u002Fsliced-image\u003E\u003Cdiv class=\"text\"\u003E\u003Cdiv class=\"name\"\u003E\u003Cdiv class=\"nameHelper\" *ngIf=\"!editImage[image._id]\" (click)=\"setEditName(image._id, imageEdit)\"\u003E{{ image.name }}\u003C\u002Fdiv\u003E\u003Cinput class=\"input imageNameInput\" #imageEdit [hidden]=\"!editImage[image._id]\" [(ngModel)]=\"image.name\" (blur)=\"saveImage(image)\" (keydown)=\"imageKeyDown($event)\"\u003E\u003Cmd-icon class=\"editIcon\" *ngIf=\"!editImage[image._id]\" (click)=\"editImage[image._id] = true\"\u003Eedit\u003C\u002Fmd-icon\u003E\u003C\u002Fdiv\u003E\u003Cmd-icon class=\"deleteIcon\" (click)=\"deleteImage(image)\"\u003Edelete\u003C\u002Fmd-icon\u003E\u003C!--i.material-icons delete--\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
+	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"image-bar\"\u003E\u003Cdiv class=\"box\"\u003E\u003Cinput class=\"hiddenInput\" id=\"file\" type=\"file\" (change)=\"loadFile($event)\"\u003E\u003Clabel class=\"imageBox placeholder\" #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"file\"\u003E\u003Cdiv class=\"add\"\u003E+\u003C\u002Fdiv\u003E\u003Cdiv class=\"text\"\u003Edrag image here\u003C\u002Fdiv\u003E\u003Cdiv class=\"loadingContainer\" [hidden]=\"!loading\"\u003E\u003Cdiv class=\"loading\"\u003E\u003Cdiv class=\"content\"\u003E\u003Cmd-progress-circle mode=\"indeterminate\"\u003ELoading, please wait!\u003C\u002Fmd-progress-circle\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003Cdiv class=\"imageBox\" *ngFor=\"let image of images\" [ngClass]=\"{currentImage: currentImage &amp;&amp; currentImage._id == image._id }\"\u003E\u003C!--tooltip='{{image.name}}', tooltipAppendToBody='true', tooltipEnable='false'--\u003E\u003Csliced-image class=\"thumbnail\" (click)=\"setBoardImage(image)\" [image]=\"image\" [thumbnail]=\"true\"\u003E\u003C\u002Fsliced-image\u003E\u003Cdiv class=\"text\"\u003E\u003Cdiv class=\"name\"\u003E\u003Cdiv class=\"nameHelper\" *ngIf=\"!editImage[image._id]\" (click)=\"setEditName(image._id, imageEdit)\"\u003E{{ image.name }}\u003C\u002Fdiv\u003E\u003Cinput class=\"input imageNameInput\" #imageEdit [hidden]=\"!editImage[image._id]\" [(ngModel)]=\"image.name\" (blur)=\"saveImage(image)\" (keydown)=\"imageKeyDown($event)\"\u003E\u003Cmd-icon class=\"editIcon\" *ngIf=\"!editImage[image._id]\" (click)=\"editImage[image._id] = true\"\u003Eedit\u003C\u002Fmd-icon\u003E\u003C\u002Fdiv\u003E\u003Cmd-icon class=\"deleteIcon\" (click)=\"deleteImage(image)\"\u003Edelete\u003C\u002Fmd-icon\u003E\u003C!--i.material-icons delete--\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
 	module.exports = template;
 
 /***/ },
@@ -90783,7 +90806,7 @@ webpackJsonp([0],[
 
 	var pug = __webpack_require__(425);
 
-	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"sliced-image\"\u003E\u003Ccanvas class=\"image\" #canvas [ngClass]=\"{thumbnail: thumbnail}\" tooltip=\"Select the biggest components first\" tooltipTimeout=\"1\" tooltipFollowCursor=\"true\" tooltipAppendToBody=\"true\" tooltipPlacement=\"left\" tooltipEnable=\"{{ !thumbnail }}\"\u003E\u003C\u002Fcanvas\u003E\u003Cng-content\u003E\u003C\u002Fng-content\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
+	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"sliced-image\"\u003E\u003Ccanvas class=\"image\" #canvas [ngClass]=\"{thumbnail: thumbnail}\"\u003E\u003C\u002Fcanvas\u003E\u003C!--tooltip='Select the biggest components first', tooltipTimeout='1',--\u003E\u003C!--tooltipFollowCursor='true',--\u003E\u003C!--tooltipAppendToBody='true', tooltipPlacement='left',--\u003E\u003C!--tooltipEnable='{{ !thumbnail }}'--\u003E\u003Cng-content\u003E\u003C\u002Fng-content\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
 	module.exports = template;
 
 /***/ },
