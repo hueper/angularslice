@@ -29,4 +29,5 @@
           input.input.imageNameInput(#imageEdit, [hidden]='!editImage[image._id]', [(ngModel)]='image.name', (blur)='saveImage(image)', (keydown)='imageKeyDown($event)')
           md-icon.editIcon(*ngIf='!editImage[image._id]', (click)='editImage[image._id] = true') edit
         md-icon.deleteIcon((click)='deleteImage(image)') delete
+        //i.material-icons delete
 

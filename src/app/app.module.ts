@@ -40,6 +40,7 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { TooltipContainerComponent } from "./shared/directives/tooltip/tooltip-component/tooltip-container.component";
 
 import { MdButton } from "@angular2-material/button";
+import { MdIcon } from "@angular2-material/icon";
 import { MdInput } from "@angular2-material/input";
 import { MdCheckbox } from "@angular2-material/checkbox";
 import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio";
@@ -58,6 +59,7 @@ import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio";
     TooltipDirective,
     MdButton,
     MdInput,
+    MdIcon,
     MdCheckbox,
     MdRadioGroup,
     MdRadioButton,
