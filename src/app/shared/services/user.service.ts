@@ -10,19 +10,19 @@ export class UserService {
   userSource: BehaviorSubject<User> = new BehaviorSubject(null);
 
   constructor(private httpService: HttpService) {
-    this.pollUser();
+    // this.pollUser();
   }
 
-  pollUser(): Observable<HttpResponse<User>> {
-    let observable = this.httpService.get('/users/me')
-                         .map(res => res.json());
-
-    observable.subscribe((res: HttpResponse<User>) => {
-      this.userSource.next(res.data);
-    });
-
-    return observable;
-  }
+  // pollUser(): Observable<HttpResponse<User>> {
+  //   let observable = this.httpService.get('/users/me')
+  //                        .map(res => res.json());
+  //
+  //   observable.subscribe((res: HttpResponse<User>) => {
+  //     this.userSource.next(res.data);
+  //   });
+  //
+  //   return observable;
+  // }
 
 
 }

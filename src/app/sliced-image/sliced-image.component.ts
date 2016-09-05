@@ -1,7 +1,6 @@
 import { Component, Input, ElementRef, ViewChild, AfterViewInit, OnChanges, NgZone } from "@angular/core";
 import { Image } from "../shared/models/";
 import { ImageService } from "../shared/services";
-import { TooltipDirective } from "../shared/directives/tooltip/tooltip.directive";
 
 @Component({
   selector: 'sliced-image',

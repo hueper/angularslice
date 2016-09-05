@@ -16,6 +16,6 @@ export class ProjectService {
       repositoryName: repoName
     }
 
-    return this.httpService.post('/generate', params).map(res => res.json());
+    // return this.httpService.post('/generate', params).map(res => res.json());
   }
 }

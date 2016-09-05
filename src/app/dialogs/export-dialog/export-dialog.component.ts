@@ -1,4 +1,3 @@
-import * as _ from "lodash";
 import { Component } from "@angular/core";
 import { ModalComponent, DialogRef } from "angular2-modal";
 import { BSModalContext } from "angular2-modal/plugins/bootstrap";
@@ -6,7 +5,6 @@ import { BSModalContext } from "angular2-modal/plugins/bootstrap";
 const Humane = require('humane-js');
 
 import { UserService } from "../../shared/services/user.service";
-import { User } from "../../shared/models/user.model";
 import { AnalyticsService } from "../../shared/services/analytics.service";
 import Timer = NodeJS.Timer;
 
@@ -44,19 +42,19 @@ export class ExportDialogComponent implements ModalComponent<BSModalContext> {
   }
 
   windowClosed() {
-    this.userService.pollUser().subscribe(res => {
-      let user = res.data as User;
-      let accessToken = _.get(user, 'oauthData.github.accessToken', false);
-
-      if (accessToken) {
-        this.dialog.close('github');
-        //TODO: the user authentication was successfull, we can do whatever we want ;)
-      } else {
-        this.loading = false;
-        Humane.log(`Sorry, we couldn't authenticate you. Please try again.`, { addnCls: 'humane-error' });
-        this.close();
-      }
-    });
+    // this.userService.pollUser().subscribe(res => {
+    //   let user = res.data as User;
+    //   let accessToken = _.get(user, 'oauthData.github.accessToken', false);
+    //
+    //   if (accessToken) {
+    //     this.dialog.close('github');
+    //     //TODO: the user authentication was successfull, we can do whatever we want ;)
+    //   } else {
+    //     this.loading = false;
+    //     Humane.log(`Sorry, we couldn't authenticate you. Please try again.`, { addnCls: 'humane-error' });
+    //     this.close();
+    //   }
+    // });
   }
 
   close() {

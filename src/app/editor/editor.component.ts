@@ -21,18 +21,24 @@ export class EditorComponent {
 
   pushToGithub() {
     this.dialogService.openGithubDialog().then((res) => {
-      this.loading = true;
-      this.projectService.generate(res).subscribe((res: any) => {
-        if (res.success) {
-          Humane.log('Awesome');
-        } else {
-          // TODO: the request was dismissed
-        }
-        this.loading = false;
-      });
+      // this.loading = true;
+      // this.projectService.generate(res).subscribe((res: any) => {
+      //   if (res.success) {
+      //     Humane.log('Awesome');
+      //   } else {
+      //     TODO: the request was dismissed
+        // }
+        // this.loading = false;
+      // });
     }).catch(err=> {
 
     });
+  }
+
+  reset() {
+    localStorage.clear();
+    console.log('LocalStorage is cleared');
+    location.reload();
   }
 
   export() {

@@ -19,15 +19,17 @@ export class RawImageService extends BaseService<RawImage> {
   }
 
   delete(rawImage: RawImage) {
-    return this.httpService.delete(`/rawImages/${rawImage._id}`)
-               .map(res => res.json())
-               .share()
-               .subscribe((res: any) => {
-                 if (res.success) {
-                   // Delete locally
-                   super.delete(rawImage);
-                 }
-               });
+    // localStorage.removeItem(rawImage._id);
+    super.delete(rawImage);
+    // return this.httpService.delete(`/rawImages/${rawImage._id}`)
+    //            .map(res => res.json())
+    //            .share()
+    //            .subscribe((res: any) => {
+    //              if (res.success) {
+    //                Delete locally
+                   // super.delete(rawImage);
+                 // }
+               // });
   }
 
   create(rawImage: RawImage) {
@@ -71,18 +73,21 @@ export class RawImageService extends BaseService<RawImage> {
             formData.append('height', height);
             formData.append('target', file, fileType);
 
-            this.httpService.post('/rawImages/upload', formData)
-                .map(res => res.json())
-                .subscribe((res: any) => {
-                  const data = res.data;
+            this.create(new RawImage(Math.random().toString(), image.src, width, height, file.name));
+            resolve(true);
 
-                  if (res.success) {
-                    this.create(new RawImage(data._id, data.url, data.width, data.height, file.name));
-                    resolve(res);
-                  } else {
-                    Humane.log('Sorry, something baaad happened o.O');
-                  }
-                });
+            // this.httpService.post('/rawImages/upload', formData)
+            //     .map(res => res.json())
+            //     .subscribe((res: any) => {
+            //       const data = res.data;
+            //
+            //       if (res.success) {
+            //         this.create(new RawImage(data._id, data.url, data.width, data.height, file.name));
+            //         resolve(res);
+            //       } else {
+            //         Humane.log('Sorry, something baaad happened o.O');
+            //       }
+            //     });
 
           });
         };

@@ -3,6 +3,9 @@ toolbar
     a.angular(href='./')
       img(src='{{ logo }}')
       | SLICE
+    .reset((click)='reset()')
+      i.fa.fa-trash
+      | Reset project
     .export((click)='export()')
       i.fa.fa-floppy-o
       | Export project

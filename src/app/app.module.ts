@@ -37,6 +37,7 @@ import { EscapeHtmlPipe } from "./shared/pipes/EscapeHtml";
 import { ComponentElementComponent } from "./sidebar/component-element/component-element.component";
 import { EditorComponent } from "./editor/editor.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
+import { TooltipContainerComponent } from "./shared/directives/tooltip/tooltip-component/tooltip-container.component";
 
 import { MdButton } from "@angular2-material/button";
 import { MdInput } from "@angular2-material/input";
@@ -53,6 +54,7 @@ import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio";
     ImageBarComponent,
     SlicedImageComponent,
     ToolbarComponent,
+    TooltipContainerComponent,
     TooltipDirective,
     MdButton,
     MdInput,

@@ -25,6 +25,18 @@ board {
   overflow: auto;
 }
 
+.reset {
+  color: white;
+  cursor: pointer;
+  margin-left: 30px;
+  //top: 50%;
+  height: 30px;
+  //margin-top: -15px;
+  & .fa {
+    margin: 0 10px;
+  }
+}
+
 .export {
   color: white;
   cursor: pointer;
