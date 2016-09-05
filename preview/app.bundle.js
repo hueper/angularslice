@@ -38009,7 +38009,9 @@ webpackJsonp([0],[
 	var component_element_component_1 = __webpack_require__(480);
 	var editor_component_1 = __webpack_require__(453);
 	var toolbar_component_1 = __webpack_require__(483);
+	var tooltip_container_component_1 = __webpack_require__(460);
 	var button_1 = __webpack_require__(486);
+	var icon_2 = __webpack_require__(446);
 	var input_1 = __webpack_require__(487);
 	var checkbox_1 = __webpack_require__(488);
 	var radio_1 = __webpack_require__(489);
@@ -38027,9 +38029,11 @@ webpackJsonp([0],[
 	                image_bar_component_1.ImageBarComponent,
 	                sliced_image_component_1.SlicedImageComponent,
 	                toolbar_component_1.ToolbarComponent,
+	                tooltip_container_component_1.TooltipContainerComponent,
 	                tooltip_directive_1.TooltipDirective,
 	                button_1.MdButton,
 	                input_1.MdInput,
+	                icon_2.MdIcon,
 	                checkbox_1.MdCheckbox,
 	                radio_1.MdRadioGroup,
 	                radio_1.MdRadioButton,
@@ -75879,16 +75883,17 @@ webpackJsonp([0],[
 	        this.ngZone = ngZone;
 	    }
 	    RawImageService.prototype.delete = function (rawImage) {
-	        var _this = this;
-	        return this.httpService.delete("/rawImages/" + rawImage._id)
-	            .map(function (res) { return res.json(); })
-	            .share()
-	            .subscribe(function (res) {
-	            if (res.success) {
-	                // Delete locally
-	                _super.prototype.delete.call(_this, rawImage);
-	            }
-	        });
+	        // localStorage.removeItem(rawImage._id);
+	        _super.prototype.delete.call(this, rawImage);
+	        // return this.httpService.delete(`/rawImages/${rawImage._id}`)
+	        //            .map(res => res.json())
+	        //            .share()
+	        //            .subscribe((res: any) => {
+	        //              if (res.success) {
+	        //                Delete locally
+	        // super.delete(rawImage);
+	        // }
+	        // });
 	    };
 	    RawImageService.prototype.create = function (rawImage) {
 	        _super.prototype.create.call(this, rawImage);
@@ -75921,18 +75926,20 @@ webpackJsonp([0],[
 	                        formData.append('width', width);
 	                        formData.append('height', height);
 	                        formData.append('target', file, fileType);
-	                        _this.httpService.post('/rawImages/upload', formData)
-	                            .map(function (res) { return res.json(); })
-	                            .subscribe(function (res) {
-	                            var data = res.data;
-	                            if (res.success) {
-	                                _this.create(new models_1.RawImage(data._id, data.url, data.width, data.height, file.name));
-	                                resolve(res);
-	                            }
-	                            else {
-	                                Humane.log('Sorry, something baaad happened o.O');
-	                            }
-	                        });
+	                        _this.create(new models_1.RawImage(Math.random().toString(), image.src, width, height, file.name));
+	                        resolve(true);
+	                        // this.httpService.post('/rawImages/upload', formData)
+	                        //     .map(res => res.json())
+	                        //     .subscribe((res: any) => {
+	                        //       const data = res.data;
+	                        //
+	                        //       if (res.success) {
+	                        //         this.create(new RawImage(data._id, data.url, data.width, data.height, file.name));
+	                        //         resolve(res);
+	                        //       } else {
+	                        //         Humane.log('Sorry, something baaad happened o.O');
+	                        //       }
+	                        //     });
 	                    });
 	                };
 	            }, false);
@@ -79488,7 +79495,6 @@ webpackJsonp([0],[
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var _ = __webpack_require__(77);
 	var core_1 = __webpack_require__(3);
 	var angular2_modal_1 = __webpack_require__(28);
 	var Humane = __webpack_require__(414);
@@ -79519,19 +79525,19 @@ webpackJsonp([0],[
 	        }, 500);
 	    };
 	    ExportDialogComponent.prototype.windowClosed = function () {
-	        var _this = this;
-	        this.userService.pollUser().subscribe(function (res) {
-	            var user = res.data;
-	            var accessToken = _.get(user, 'oauthData.github.accessToken', false);
-	            if (accessToken) {
-	                _this.dialog.close('github');
-	            }
-	            else {
-	                _this.loading = false;
-	                Humane.log("Sorry, we couldn't authenticate you. Please try again.", { addnCls: 'humane-error' });
-	                _this.close();
-	            }
-	        });
+	        // this.userService.pollUser().subscribe(res => {
+	        //   let user = res.data as User;
+	        //   let accessToken = _.get(user, 'oauthData.github.accessToken', false);
+	        //
+	        //   if (accessToken) {
+	        //     this.dialog.close('github');
+	        //     //TODO: the user authentication was successfull, we can do whatever we want ;)
+	        //   } else {
+	        //     this.loading = false;
+	        //     Humane.log(`Sorry, we couldn't authenticate you. Please try again.`, { addnCls: 'humane-error' });
+	        //     this.close();
+	        //   }
+	        // });
 	    };
 	    ExportDialogComponent.prototype.close = function () {
 	        this.dialog.dismiss();
@@ -79570,17 +79576,8 @@ webpackJsonp([0],[
 	    function UserService(httpService) {
 	        this.httpService = httpService;
 	        this.userSource = new BehaviorSubject_1.BehaviorSubject(null);
-	        this.pollUser();
+	        // this.pollUser();
 	    }
-	    UserService.prototype.pollUser = function () {
-	        var _this = this;
-	        var observable = this.httpService.get('/users/me')
-	            .map(function (res) { return res.json(); });
-	        observable.subscribe(function (res) {
-	            _this.userSource.next(res.data);
-	        });
-	        return observable;
-	    };
 	    UserService = __decorate([
 	        core_1.Injectable(), 
 	        __metadata('design:paramtypes', [http_service_ts_1.HttpService])
@@ -79632,7 +79629,7 @@ webpackJsonp([0],[
 	            folders: this.folderService.dataSource.getValue(),
 	            repositoryName: repoName
 	        };
-	        return this.httpService.post('/generate', params).map(function (res) { return res.json(); });
+	        // return this.httpService.post('/generate', params).map(res => res.json());
 	    };
 	    ProjectService = __decorate([
 	        core_1.Injectable(), 
@@ -89941,19 +89938,23 @@ webpackJsonp([0],[
 	        this.logo = __webpack_require__(454);
 	    }
 	    EditorComponent.prototype.pushToGithub = function () {
-	        var _this = this;
 	        this.dialogService.openGithubDialog().then(function (res) {
-	            _this.loading = true;
-	            _this.projectService.generate(res).subscribe(function (res) {
-	                if (res.success) {
-	                    Humane.log('Awesome');
-	                }
-	                else {
-	                }
-	                _this.loading = false;
-	            });
+	            // this.loading = true;
+	            // this.projectService.generate(res).subscribe((res: any) => {
+	            //   if (res.success) {
+	            //     Humane.log('Awesome');
+	            //   } else {
+	            //     TODO: the request was dismissed
+	            // }
+	            // this.loading = false;
+	            // });
 	        }).catch(function (err) {
 	        });
+	    };
+	    EditorComponent.prototype.reset = function () {
+	        localStorage.clear();
+	        console.log('LocalStorage is cleared');
+	        location.reload();
 	    };
 	    EditorComponent.prototype.export = function () {
 	        var _this = this;
@@ -89995,14 +89996,14 @@ webpackJsonp([0],[
 
 	var pug = __webpack_require__(425);
 
-	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Ctoolbar\u003E\u003Cdiv class=\"c-header\"\u003E\u003Ca class=\"angular\" href=\".\u002F\"\u003E\u003Cimg src=\"{{ logo }}\"\u003ESLICE\u003C\u002Fa\u003E\u003Cdiv class=\"export\" (click)=\"export()\"\u003E\u003Ci class=\"fa fa-floppy-o\"\u003E\u003C\u002Fi\u003EExport project\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Ftoolbar\u003E\u003Cdiv class=\"editor\"\u003E\u003Csidebar\u003E\u003C\u002Fsidebar\u003E\u003Cboard\u003E\u003C\u002Fboard\u003E\u003C\u002Fdiv\u003E\u003C!--footer--\u003E\u003Cdiv class=\"loadingContainer\" [hidden]=\"!loading\"\u003E\u003Cdiv class=\"loading\"\u003E\u003Cdiv class=\"content\"\u003E\u003Cmd-progress-circle mode=\"indeterminate\"\u003ELoading, please wait!\u003C\u002Fmd-progress-circle\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
+	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Ctoolbar\u003E\u003Cdiv class=\"c-header\"\u003E\u003Ca class=\"angular\" href=\".\u002F\"\u003E\u003Cimg src=\"{{ logo }}\"\u003ESLICE\u003C\u002Fa\u003E\u003Cdiv class=\"reset\" (click)=\"reset()\"\u003E\u003Ci class=\"fa fa-trash\"\u003E\u003C\u002Fi\u003EReset project\u003C\u002Fdiv\u003E\u003Cdiv class=\"export\" (click)=\"export()\"\u003E\u003Ci class=\"fa fa-floppy-o\"\u003E\u003C\u002Fi\u003EExport project\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Ftoolbar\u003E\u003Cdiv class=\"editor\"\u003E\u003Csidebar\u003E\u003C\u002Fsidebar\u003E\u003Cboard\u003E\u003C\u002Fboard\u003E\u003C\u002Fdiv\u003E\u003C!--footer--\u003E\u003Cdiv class=\"loadingContainer\" [hidden]=\"!loading\"\u003E\u003Cdiv class=\"loading\"\u003E\u003Cdiv class=\"content\"\u003E\u003Cmd-progress-circle mode=\"indeterminate\"\u003ELoading, please wait!\u003C\u002Fmd-progress-circle\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
 	module.exports = template;
 
 /***/ },
 /* 456 */
 /***/ function(module, exports) {
 
-	module.exports = ":host,\n.editor {\n  display: flex;\n  flex: 1;\n}\n\n:host {\n  flex-direction: column;\n}\n\n.editor {\n  flex-direction: row;\n}\n\nsidebar {\n  display: flex;\n  flex: 0 0 300px;\n}\n\nboard {\n  display: flex;\n  flex-grow: 1;\n  overflow: auto;\n}\n\n.export {\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  right: 20px;\n  top: 50%;\n  height: 30px;\n  margin-top: -15px;\n}\n\n.export .fa {\n  margin: 0 10px;\n}\n\n.c-header,\n.c-toolbar {\n  padding: 0 25px;\n  display: flex;\n  flex: 1 0 auto;\n  flex-direction: row;\n  align-items: center;\n}\n\n.c-header {\n  height: 60px;\n  background: #006064;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  position: relative;\n  z-index: 2;\n}\n\n.c-toolbar {\n  height: 50px;\n  background-color: rgba(0, 0, 0, 0.05);\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.06);\n  position: relative;\n  z-index: 3;\n}\n\n.angular {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  color: white;\n  font-size: 21px;\n}\n\n.angular img {\n  margin-right: 10px;\n}\n\nmd-icon {\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n}\n\nmd-icon.disabled {\n  color: rgba(0, 0, 0, 0.26);\n  cursor: default;\n}\n\nmd-icon.disabled:hover {\n  color: rgba(0, 0, 0, 0.26);\n}\n\nmd-icon:hover {\n  color: #006064;\n}\n\n.left {\n  display: flex;\n  flex: 0 1 auto;\n  flex-direction: row;\n  height: 100%;\n  align-items: center;\n}\n\n.folderName {\n  margin-right: 10px;\n}\n\n.editFolderName {\n  cursor: pointer;\n}\n\n.right {\n  display: flex;\n  flex: 0 1 auto;\n  flex-direction: row;\n  height: 100%;\n  align-items: center;\n}\n\n.right md-icon {\n  padding: 0 5px;\n  margin: 0 10px;\n}\n\n.separator {\n  border-right: 1px solid rgba(0, 0, 0, 0.1);\n  display: flex;\n  flex: 1;\n  height: 100%;\n  margin: 0 10px;\n}\n\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: rgba(255, 255, 255, 0.8);\n  text-align: center;\n  justify-content: center;\n  flex-direction: column;\n  color: black;\n  display: flex;\n  z-index: 10;\n}\n\n.loading .content {\n  display: flex;\n  flex: 1;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}"
+	module.exports = ":host,\n.editor {\n  display: flex;\n  flex: 1;\n}\n\n:host {\n  flex-direction: column;\n}\n\n.editor {\n  flex-direction: row;\n}\n\nsidebar {\n  display: flex;\n  flex: 0 0 300px;\n}\n\nboard {\n  display: flex;\n  flex-grow: 1;\n  overflow: auto;\n}\n\n.reset {\n  color: white;\n  cursor: pointer;\n  margin-left: 30px;\n  height: 30px;\n}\n\n.reset .fa {\n  margin: 0 10px;\n}\n\n.export {\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  right: 20px;\n  top: 50%;\n  height: 30px;\n  margin-top: -15px;\n}\n\n.export .fa {\n  margin: 0 10px;\n}\n\n.c-header,\n.c-toolbar {\n  padding: 0 25px;\n  display: flex;\n  flex: 1 0 auto;\n  flex-direction: row;\n  align-items: center;\n}\n\n.c-header {\n  height: 60px;\n  background: #006064;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n  position: relative;\n  z-index: 2;\n}\n\n.c-toolbar {\n  height: 50px;\n  background-color: rgba(0, 0, 0, 0.05);\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.06);\n  position: relative;\n  z-index: 3;\n}\n\n.angular {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  color: white;\n  font-size: 21px;\n}\n\n.angular img {\n  margin-right: 10px;\n}\n\nmd-icon {\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n}\n\nmd-icon.disabled {\n  color: rgba(0, 0, 0, 0.26);\n  cursor: default;\n}\n\nmd-icon.disabled:hover {\n  color: rgba(0, 0, 0, 0.26);\n}\n\nmd-icon:hover {\n  color: #006064;\n}\n\n.left {\n  display: flex;\n  flex: 0 1 auto;\n  flex-direction: row;\n  height: 100%;\n  align-items: center;\n}\n\n.folderName {\n  margin-right: 10px;\n}\n\n.editFolderName {\n  cursor: pointer;\n}\n\n.right {\n  display: flex;\n  flex: 0 1 auto;\n  flex-direction: row;\n  height: 100%;\n  align-items: center;\n}\n\n.right md-icon {\n  padding: 0 5px;\n  margin: 0 10px;\n}\n\n.separator {\n  border-right: 1px solid rgba(0, 0, 0, 0.1);\n  display: flex;\n  flex: 1;\n  height: 100%;\n  margin: 0 10px;\n}\n\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: rgba(255, 255, 255, 0.8);\n  text-align: center;\n  justify-content: center;\n  flex-direction: column;\n  color: black;\n  display: flex;\n  z-index: 10;\n}\n\n.loading .content {\n  display: flex;\n  flex: 1;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}"
 
 /***/ },
 /* 457 */
@@ -90667,7 +90668,7 @@ webpackJsonp([0],[
 
 	var pug = __webpack_require__(425);
 
-	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"image-bar\"\u003E\u003Cdiv class=\"box\"\u003E\u003Cinput class=\"hiddenInput\" id=\"file\" type=\"file\" (change)=\"loadFile($event)\"\u003E\u003Clabel class=\"imageBox placeholder\" #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"file\"\u003E\u003Cdiv class=\"add\"\u003E+\u003C\u002Fdiv\u003E\u003Cdiv class=\"text\"\u003Edrag image here\u003C\u002Fdiv\u003E\u003Cdiv class=\"loadingContainer\" [hidden]=\"!loading\"\u003E\u003Cdiv class=\"loading\"\u003E\u003Cdiv class=\"content\"\u003E\u003Cmd-progress-circle mode=\"indeterminate\"\u003ELoading, please wait!\u003C\u002Fmd-progress-circle\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003Cdiv class=\"imageBox\" *ngFor=\"let image of images\" [ngClass]=\"{currentImage: currentImage &amp;&amp; currentImage._id == image._id }\" tooltip=\"{{image.name}}\" tooltipAppendToBody=\"true\" tooltipEnable=\"false\"\u003E\u003Csliced-image class=\"thumbnail\" (click)=\"setBoardImage(image)\" [image]=\"image\" [thumbnail]=\"true\"\u003E\u003C\u002Fsliced-image\u003E\u003Cdiv class=\"text\"\u003E\u003Cdiv class=\"name\"\u003E\u003Cdiv class=\"nameHelper\" *ngIf=\"!editImage[image._id]\" (click)=\"setEditName(image._id, imageEdit)\"\u003E{{ image.name }}\u003C\u002Fdiv\u003E\u003Cinput class=\"input imageNameInput\" #imageEdit [hidden]=\"!editImage[image._id]\" [(ngModel)]=\"image.name\" (blur)=\"saveImage(image)\" (keydown)=\"imageKeyDown($event)\"\u003E\u003Cmd-icon class=\"editIcon\" *ngIf=\"!editImage[image._id]\" (click)=\"editImage[image._id] = true\"\u003Eedit\u003C\u002Fmd-icon\u003E\u003C\u002Fdiv\u003E\u003Cmd-icon class=\"deleteIcon\" (click)=\"deleteImage(image)\"\u003Edelete\u003C\u002Fmd-icon\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
+	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"image-bar\"\u003E\u003Cdiv class=\"box\"\u003E\u003Cinput class=\"hiddenInput\" id=\"file\" type=\"file\" (change)=\"loadFile($event)\"\u003E\u003Clabel class=\"imageBox placeholder\" #dropZone [class.hover]=\"hover\" (drop)=\"onDrop($event)\" (dragover)=\"onDragOver($event)\" (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragExit($event)\" (dragexit)=\"onDragExit($event)\" for=\"file\"\u003E\u003Cdiv class=\"add\"\u003E+\u003C\u002Fdiv\u003E\u003Cdiv class=\"text\"\u003Edrag image here\u003C\u002Fdiv\u003E\u003Cdiv class=\"loadingContainer\" [hidden]=\"!loading\"\u003E\u003Cdiv class=\"loading\"\u003E\u003Cdiv class=\"content\"\u003E\u003Cmd-progress-circle mode=\"indeterminate\"\u003ELoading, please wait!\u003C\u002Fmd-progress-circle\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003Cdiv class=\"imageBox\" *ngFor=\"let image of images\" [ngClass]=\"{currentImage: currentImage &amp;&amp; currentImage._id == image._id }\" tooltip=\"{{image.name}}\" tooltipAppendToBody=\"true\" tooltipEnable=\"false\"\u003E\u003Csliced-image class=\"thumbnail\" (click)=\"setBoardImage(image)\" [image]=\"image\" [thumbnail]=\"true\"\u003E\u003C\u002Fsliced-image\u003E\u003Cdiv class=\"text\"\u003E\u003Cdiv class=\"name\"\u003E\u003Cdiv class=\"nameHelper\" *ngIf=\"!editImage[image._id]\" (click)=\"setEditName(image._id, imageEdit)\"\u003E{{ image.name }}\u003C\u002Fdiv\u003E\u003Cinput class=\"input imageNameInput\" #imageEdit [hidden]=\"!editImage[image._id]\" [(ngModel)]=\"image.name\" (blur)=\"saveImage(image)\" (keydown)=\"imageKeyDown($event)\"\u003E\u003Cmd-icon class=\"editIcon\" *ngIf=\"!editImage[image._id]\" (click)=\"editImage[image._id] = true\"\u003Eedit\u003C\u002Fmd-icon\u003E\u003C\u002Fdiv\u003E\u003Cmd-icon class=\"deleteIcon\" (click)=\"deleteImage(image)\"\u003Edelete\u003C\u002Fmd-icon\u003E\u003C!--i.material-icons delete--\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
 	module.exports = template;
 
 /***/ },
@@ -91140,7 +91141,7 @@ webpackJsonp([0],[
 
 	var pug = __webpack_require__(425);
 
-	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"sidebar\"\u003E\u003Cdiv class=\"create\" (click)=\"createComponent()\"\u003E\u003Cmd-icon class=\"addIcon\"\u003Eadd\u003C\u002Fmd-icon\u003E\u003Cdiv class=\"addTitle\"\u003ECreate component\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Ccomponent-element *ngFor=\"let folder of folders | async \" [folder]=\"folder\"\u003E\u003C\u002Fcomponent-element\u003E\u003Cpre\u003E{{ currentFolders._id | async }}\u003C\u002Fpre\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
+	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"sidebar\"\u003E\u003Cdiv class=\"create\" (click)=\"createComponent()\"\u003E\u003C!--md-icon.addIcon add--\u003E\u003Cdiv class=\"addIcon fa fa-plus\"\u003E&nbsp;\u003C\u002Fdiv\u003E\u003Cdiv class=\"addTitle\"\u003ECreate component\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Ccomponent-element *ngFor=\"let folder of folders | async \" [folder]=\"folder\"\u003E\u003C\u002Fcomponent-element\u003E\u003Cpre\u003E{{ currentFolders._id | async }}\u003C\u002Fpre\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
 	module.exports = template;
 
 /***/ },
