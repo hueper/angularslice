@@ -1,5 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { Injectable, ViewContainerRef } from '@angular/core';
+import { Overlay } from 'angular2-modal';
+import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { Modal } from 'angular2-modal/providers';
+
 import {
   ComponentDialogComponent,
   ConfirmDialogComponent,
@@ -11,8 +14,12 @@ import {
 @Injectable()
 export class DialogService {
 
-  constructor(private modal: Modal) {
-
+  constructor(
+    private overlay: Overlay,
+    vcRef: ViewContainerRef,
+    private modal: Modal
+  ) {
+    overlay.defaultViewContainer = vcRef;
   }
 
   openGithubDialog() {
@@ -57,15 +64,26 @@ export class DialogService {
   }
 
   openConfirmDialog() {
-    const data = new ConfirmDialogData();
+    console.log(this.overlay);
     return this.modal
-               .open(ConfirmDialogComponent, data)
-               .then(dialog => {
-                 return dialog.result;
-               })
-               .catch(err => {
-                 console.log(err);
-                 return null;
-               });
+      // .confirm()
+      .open(ConfirmDialogComponent, new ConfirmDialogData());
+      // .alert()
+      // .size('lg')
+      // .showClose(true)
+      // .title('A simple Alert style modal window')
+      // .body(require('../../dialogs/confirm-dialog/confirm-dialog.pug'))
+      // .open();
+
+    // const data = new ConfirmDialogData();
+    // return this.modal
+    //            .open(ConfirmDialogComponent, data)
+    //            .then(dialog => {
+    //              return dialog.result;
+    //            })
+    //            .catch(err => {
+    //              console.log(err);
+    //              return null;
+    //            });
   }
 }

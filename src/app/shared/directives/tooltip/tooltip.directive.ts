@@ -54,9 +54,8 @@ export class TooltipDirective {
       { provide: TooltipOptions, useValue: options }
     ], this.injector);
 
-    let componentFactory = this.ComponentFactoryResolver.resolveComponentFactory(TooltipContainerComponent);
-
     this.tooltip = new Promise((resolve, reject) => {
+      let componentFactory = this.ComponentFactoryResolver.resolveComponentFactory(TooltipContainerComponent);
       this.cRef = this.tooltipService.showTooltip(componentFactory, binding);
       resolve(this.cRef);
     });

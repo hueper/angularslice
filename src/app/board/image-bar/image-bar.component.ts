@@ -1,10 +1,13 @@
-import { Component, OnDestroy, ElementRef } from "@angular/core";
+import { Component, OnDestroy, ElementRef, ViewContainerRef } from "@angular/core";
 import * as _ from "lodash";
 import { Subscription } from "rxjs/Rx";
+import { Modal } from 'angular2-modal/providers';
+import { Overlay } from 'angular2-modal';
 
 import { ImageService, FolderService, DialogService, RawImageService } from "../../shared/services";
 import { Image, Folder } from "../../shared/models";
 import { AnalyticsService } from "../../shared/services/analytics.service";
+import { ConfirmDialogComponent, ConfirmDialogData } from "../../dialogs/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'image-bar',
@@ -26,11 +29,16 @@ export class ImageBarComponent implements OnDestroy {
   private image: any = {};
 
   constructor(private imageService: ImageService,
+              private overlay: Overlay,
+              private modal: Modal,
+              vcRef: ViewContainerRef,
               private ga: AnalyticsService,
               private rawImageService: RawImageService,
               private folderService: FolderService,
               private el: ElementRef,
               private dialogService: DialogService) {
+
+    overlay.defaultViewContainer = vcRef;
 
     this.subscriptions.push(this.folderService.currentSource.subscribe(currentSource => {
       this.currentFolder = currentSource;
@@ -89,6 +97,11 @@ export class ImageBarComponent implements OnDestroy {
   }
 
   deleteImage(image) {
+    // return this.modal.open(ConfirmDialogComponent, new ConfirmDialogData()).then((result) => {
+    //   if (result) {
+    //     this.imageService.delete(image);
+    //   }
+    // });
     this.ga.eventTrack('deleteImage', { category: 'manually' });
     // Confirm Dialog
     this.dialogService.openConfirmDialog().then((result) => {

@@ -38,7 +38,6 @@ export class ConfirmDialogComponent implements ModalComponent<ConfirmDialogData>
 
 }
 
-
 export class ConfirmDialogData extends BSModalContext {
   public confirmData: ConfirmData;
 
