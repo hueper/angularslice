@@ -90468,6 +90468,7 @@ webpackJsonp([0],[
 	        this.dialogService = dialogService;
 	        this.areaService = areaService;
 	        this.scaleWidth = 1;
+	        // private _scaleWidth: number = 1;
 	        this.scaleHeight = 1;
 	    }
 	    AreaComponent.prototype.goToComponent = function () {
@@ -90493,6 +90494,8 @@ webpackJsonp([0],[
 	            height: this.areaData.getHeight() * this.scaleHeight + "px"
 	        };
 	        return values;
+	    };
+	    AreaComponent.prototype.ngOnChanges = function () {
 	    };
 	    __decorate([
 	        core_1.Input(), 
@@ -90722,35 +90725,45 @@ webpackJsonp([0],[
 	var _1 = __webpack_require__(400);
 	var services_1 = __webpack_require__(74);
 	var SlicedImageComponent = (function () {
-	    function SlicedImageComponent(imageService, el, ngZone) {
+	    function SlicedImageComponent(applicationRef, imageService, el, ngZone) {
+	        this.applicationRef = applicationRef;
 	        this.imageService = imageService;
 	        this.el = el;
 	        this.ngZone = ngZone;
 	    }
+	    // set image(value) {
+	    //   this._image = value;
+	    //   this.draw();
+	    // }
+	    //
+	    // get image() {
+	    //   return this._image;
+	    // }
 	    SlicedImageComponent.prototype.draw = function () {
 	        var _this = this;
-	        this.ngZone.run(function () {
-	            if (_this.myCanvas) {
-	                var canvas_1 = _this.myCanvas.nativeElement;
-	                var rawImage = _this.imageService.getRawImage(_this.image);
-	                var ctx_1 = canvas_1.getContext('2d');
-	                var img_1 = document.createElement('img');
-	                var canvasSize_1;
-	                img_1.src = rawImage.url;
-	                img_1.onload = function () {
-	                    var dest = _this.el.nativeElement;
-	                    canvasSize_1 = _this.generateSizeLandscape(dest.offsetWidth, _this.image.width, _this.image.height);
-	                    if (canvasSize_1.height > dest.offsetHeight) {
-	                        canvasSize_1 = _this.generateSizePortrait(dest.offsetHeight, _this.image.width, _this.image.height);
-	                    }
-	                    _this.width = canvas_1.width = canvasSize_1.width;
-	                    _this.height = canvas_1.height = canvasSize_1.height;
-	                    _this.scaleWidth = _this.width / _this.image.width;
-	                    _this.scaleHeight = _this.height / _this.image.height;
-	                    ctx_1.drawImage(img_1, _this.image.x, _this.image.y, _this.image.width, _this.image.height, 0, 0, canvasSize_1.width, canvasSize_1.height);
-	                };
-	            }
-	        });
+	        // this.ngZone.run(() => {
+	        if (this.myCanvas) {
+	            var canvas_1 = this.myCanvas.nativeElement;
+	            var rawImage = this.imageService.getRawImage(this.image);
+	            var ctx_1 = canvas_1.getContext('2d');
+	            var img_1 = document.createElement('img');
+	            var canvasSize_1;
+	            img_1.src = rawImage.url;
+	            img_1.onload = function () {
+	                var dest = _this.el.nativeElement;
+	                canvasSize_1 = _this.generateSizeLandscape(dest.offsetWidth, _this.image.width, _this.image.height);
+	                if (canvasSize_1.height > dest.offsetHeight) {
+	                    canvasSize_1 = _this.generateSizePortrait(dest.offsetHeight, _this.image.width, _this.image.height);
+	                }
+	                _this.width = canvas_1.width = canvasSize_1.width;
+	                _this.height = canvas_1.height = canvasSize_1.height;
+	                _this.scaleWidth = _this.width / _this.image.width;
+	                _this.scaleHeight = _this.height / _this.image.height;
+	                _this.applicationRef.tick();
+	                ctx_1.drawImage(img_1, _this.image.x, _this.image.y, _this.image.width, _this.image.height, 0, 0, canvasSize_1.width, canvasSize_1.height);
+	            };
+	        }
+	        // })
 	    };
 	    SlicedImageComponent.prototype.ngOnChanges = function () {
 	        this.draw();
@@ -90791,7 +90804,7 @@ webpackJsonp([0],[
 	            styles: [__webpack_require__(471)],
 	            template: __webpack_require__(472)(),
 	        }), 
-	        __metadata('design:paramtypes', [services_1.ImageService, core_1.ElementRef, core_1.NgZone])
+	        __metadata('design:paramtypes', [core_1.ApplicationRef, services_1.ImageService, core_1.ElementRef, core_1.NgZone])
 	    ], SlicedImageComponent);
 	    return SlicedImageComponent;
 	}());
