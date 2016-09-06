@@ -38,7 +38,12 @@ import { ComponentElementComponent } from "./sidebar/component-element/component
 import { EditorComponent } from "./editor/editor.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { TooltipContainerComponent } from "./shared/directives/tooltip/tooltip-component/tooltip-container.component";
+import { ConfirmDialogComponent } from "./dialogs/confirm-dialog/confirm-dialog.component";
+import { GithubDialogComponent } from "./dialogs/github-dialog/github-dialog.component";
+import { ComponentDialogComponent } from "./dialogs/component-dialog/component-dialog.component";
+import { ExportDialogComponent } from "./dialogs/export-dialog/export-dialog.component";
 
+import { MdUniqueSelectionDispatcher } from "@angular2-material/core";
 import { MdButton } from "@angular2-material/button";
 import { MdIcon } from "@angular2-material/icon";
 import { MdInput } from "@angular2-material/input";
@@ -56,6 +61,10 @@ import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio";
     SlicedImageComponent,
     ToolbarComponent,
     TooltipContainerComponent,
+    ConfirmDialogComponent,
+    ComponentDialogComponent,
+    ExportDialogComponent,
+    GithubDialogComponent,
     TooltipDirective,
     MdButton,
     MdInput,
@@ -65,6 +74,12 @@ import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio";
     MdRadioButton,
     EscapeHtmlPipe,
     ComponentElementComponent,
+  ],
+  entryComponents: [
+    ConfirmDialogComponent,
+    ComponentDialogComponent,
+    ExportDialogComponent,
+    GithubDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +100,7 @@ import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio";
     Angulartics2,
     appRoutingProviders,
     MdIconRegistry,
+    MdUniqueSelectionDispatcher,
 
     AreaService,
     FileService,

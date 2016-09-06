@@ -1,7 +1,7 @@
 import { Injectable, ViewContainerRef } from '@angular/core';
 import { Overlay } from 'angular2-modal';
 import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
-import { Modal } from 'angular2-modal/providers';
+import { Modal } from 'angular2-modal/plugins/bootstrap'
 
 import {
   ComponentDialogComponent,
@@ -15,17 +15,17 @@ import {
 export class DialogService {
 
   constructor(
-    private overlay: Overlay,
-    vcRef: ViewContainerRef,
+    // private overlay: Overlay,
+    // vcRef: ViewContainerRef,
     private modal: Modal
   ) {
-    overlay.defaultViewContainer = vcRef;
+    // overlay.defaultViewContainer = vcRef;
   }
 
   openGithubDialog() {
     const data = new BSModalContext();
     return this.modal
-               .open(GithubDialogComponent, data)
+               .open(GithubDialogComponent, { context: data })
                .then(dialog => {
                  return dialog.result;
                })
@@ -38,7 +38,7 @@ export class DialogService {
   openExportDialog(): Promise<any> {
     const data = new BSModalContext();
     return this.modal
-               .open(ExportDialogComponent, data)
+               .open(ExportDialogComponent, { context: data })
                .then(dialog => {
                  return dialog.result;
                })
@@ -53,7 +53,7 @@ export class DialogService {
     data["hasImage"] = hasImage;
 
     return this.modal
-               .open(ComponentDialogComponent, data)
+               .open(ComponentDialogComponent, { context: data })
                .then(dialog => {
                  return dialog.result;
                })
@@ -64,26 +64,14 @@ export class DialogService {
   }
 
   openConfirmDialog() {
-    console.log(this.overlay);
     return this.modal
-      // .confirm()
-      .open(ConfirmDialogComponent, new ConfirmDialogData());
-      // .alert()
-      // .size('lg')
-      // .showClose(true)
-      // .title('A simple Alert style modal window')
-      // .body(require('../../dialogs/confirm-dialog/confirm-dialog.pug'))
-      // .open();
-
-    // const data = new ConfirmDialogData();
-    // return this.modal
-    //            .open(ConfirmDialogComponent, data)
-    //            .then(dialog => {
-    //              return dialog.result;
-    //            })
-    //            .catch(err => {
-    //              console.log(err);
-    //              return null;
-    //            });
+                .open(ConfirmDialogComponent, { context: new ConfirmDialogData() })
+                .then(dialog => {
+                  return dialog.result;
+                })
+                .catch(err => {
+                  console.log(err);
+                  return null;
+                });
   }
 }

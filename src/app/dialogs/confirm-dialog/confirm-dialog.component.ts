@@ -33,7 +33,7 @@ export class ConfirmDialogComponent implements ModalComponent<ConfirmDialogData>
   }
 
   cancel() {
-    this.dialog.dismiss();
+    this.dialog.close(false);
   }
 
 }

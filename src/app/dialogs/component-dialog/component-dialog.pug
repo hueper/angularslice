@@ -5,21 +5,21 @@
       .row(*ngIf='hasImage')
         .column
           label Let's attach a component to the selected area.
-          md-radio-group([(ngModel)]='component.type')
+          md-radio-group([(ngModel)]='component.type', name='type')
             md-radio-button(value='new') Create new component
             br
             md-radio-button(value='exist') Select an existing one
       .row(*ngIf='component.type === "new"')
         .column
-          md-input([(ngModel)]='component.newFolderName', #componentName, required, placeholder="Add name for the component")
+          md-input([(ngModel)]='component.newFolderName', #componentName, required, placeholder="Add name for the component", name='newFolderName')
       .row(*ngIf='component.type === "exist"')
         .column
           div Select the component:
-            select([(ngModel)]='component.folder', (change)='changeExistingComponent($event)')
+            select([(ngModel)]='component.folder', (change)='changeExistingComponent($event)', name='folder')
               option(*ngFor='let folder of folders', [value]='folder._id') {{ folder.name }}
       .row.addition(*ngIf='hasImage')
         .column
-          md-checkbox([ngModel]='component.attach', (change)='changeAttachImage($event)') Add the area's image to the attached component
+          md-checkbox([ngModel]='component.attach', (change)='changeAttachImage($event)', name='attach') Add the area's image to the attached component
         .column.info(
           tooltip="As you select an area on an image, you create a reference to a component.<br>It's still up to you, whether you want to add this selected image to the newly created component.<br> Basically you can create components without images or even add multiple ones for different layouts.",
           tooltipPlacement='left'
@@ -27,7 +27,7 @@
           md-icon info
       .row(*ngIf='component.attach && hasImage')
         .column
-          md-input([(ngModel)]='component.newImageName', placeholder = "Add name for the image")
+          md-input([(ngModel)]='component.newImageName', placeholder = "Add name for the image", name='newImageName')
       .row.row--rightAligned
         .md-button-wrapper
           button(md-raised-button, color="secondary", type="button", (click)='close()') Cancel

@@ -29,16 +29,16 @@ export class ImageBarComponent implements OnDestroy {
   private image: any = {};
 
   constructor(private imageService: ImageService,
-              private overlay: Overlay,
+              // private overlay: Overlay,
               private modal: Modal,
-              vcRef: ViewContainerRef,
+              // vcRef: ViewContainerRef,
               private ga: AnalyticsService,
               private rawImageService: RawImageService,
               private folderService: FolderService,
               private el: ElementRef,
               private dialogService: DialogService) {
 
-    overlay.defaultViewContainer = vcRef;
+    // overlay.defaultViewContainer = vcRef;
 
     this.subscriptions.push(this.folderService.currentSource.subscribe(currentSource => {
       this.currentFolder = currentSource;
@@ -97,11 +97,6 @@ export class ImageBarComponent implements OnDestroy {
   }
 
   deleteImage(image) {
-    // return this.modal.open(ConfirmDialogComponent, new ConfirmDialogData()).then((result) => {
-    //   if (result) {
-    //     this.imageService.delete(image);
-    //   }
-    // });
     this.ga.eventTrack('deleteImage', { category: 'manually' });
     // Confirm Dialog
     this.dialogService.openConfirmDialog().then((result) => {

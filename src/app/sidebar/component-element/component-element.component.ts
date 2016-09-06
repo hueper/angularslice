@@ -1,5 +1,6 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ViewContainerRef } from "@angular/core";
 import { Observable } from "rxjs/Rx";
+import { Overlay } from "angular2-modal"
 
 import { FolderService, FileService, ImageService, DialogService } from "../../shared/services";
 import { Folder, File, Image } from "../../shared/models";
@@ -27,11 +28,17 @@ export class ComponentElementComponent {
     return this.currentFolder.folderId == (null || undefined);
   }
 
-  constructor(private imageService: ImageService,
-              private ga: AnalyticsService,
-              private folderService: FolderService,
-              private fileService: FileService,
-              private dialogService: DialogService) {
+  constructor(
+    private imageService: ImageService,
+    private ga: AnalyticsService,
+    private folderService: FolderService,
+    private fileService: FileService,
+    private dialogService: DialogService,
+    // private overlay: Overlay,
+    // vcRef: ViewContainerRef
+  ) {
+
+    // overlay.defaultViewContainer = vcRef;
 
     this.images = this.imageService.filter(image => this.folder._id == image.folderId)
     this.folders = folderService.filter(folder => folder.folderId === this.folder._id);
