@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 
 import { Area } from '../../shared/models';
@@ -11,12 +11,14 @@ import { AnalyticsService } from "../../shared/services/analytics.service";
   styles: [require('./area.component.scss')],
   template: require('./area.component.pug')(),
 })
-export class AreaComponent {
+export class AreaComponent implements OnChanges  {
 
   @Input() areaData: Area;
   @Input() isHovered: boolean;
 
   @Input() scaleWidth: number = 1;
+  // private _scaleWidth: number = 1;
+
   @Input() scaleHeight: number = 1;
 
   constructor(private folderService: FolderService,
@@ -51,6 +53,9 @@ export class AreaComponent {
       height: `${this.areaData.getHeight() * this.scaleHeight}px`
     };
     return values;
+  }
+
+  ngOnChanges() {
   }
 
 }

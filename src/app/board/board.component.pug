@@ -11,14 +11,15 @@
 
   .fileUploadPlaceholder(*ngIf='images.length <= 0')
     input#fileFull.hiddenInput(type="file", (change)="loadFile($event)")
-    label.centerWrapper(#dropZone,
-    [class.hover]='hover',
-    (drop)='onDrop($event)',
-    (dragover)='onDragOver($event)',
-    (dragenter)='onDragEnter($event)',
-    (dragleave)='onDragExit($event)',
-    (dragexit)='onDragExit($event)',
-    for='fileFull'
+    label.centerWrapper(
+      #dropZone,
+      [class.hover]='hover',
+      (drop)='onDrop($event)',
+      (dragover)='onDragOver($event)',
+      (dragenter)='onDragEnter($event)',
+      (dragleave)='onDragExit($event)',
+      (dragexit)='onDragExit($event)',
+      for='fileFull'
     )
       i.material-icons(style='font-size: 20vmin;') panorama
       p.noImage No image attached yet
@@ -31,17 +32,21 @@
 
   .workingSpace(#workingSpace, *ngIf='images.length > 0')
     .imageContainer(
-    *ngIf='currentImage',
-    (mousedown)="onMouseDown($event, imageContainer, workingSpace)"
+      *ngIf='currentImage',
+      (mousedown)="onMouseDown($event, imageContainer, workingSpace)"
     )
       sliced-image([image]='currentImage', #imageContainer, [thumbnail]='false')
-        area(*ngFor="let area of areas",
-        [scaleWidth]='imageContainer.scaleWidth',
-        [scaleHeight]='imageContainer.scaleHeight',
-        [areaData]="area",
-        [ngStyle]="areaStyle",
-        (click)='setActiveArea(area)')
-        area([areaData]="newArea",
-        *ngIf="newArea",
-        [ngStyle]="areaStyle")
+        area(
+          *ngFor="let area of areas",
+          [scaleWidth]='imageContainer.scaleWidth',
+          [scaleHeight]='imageContainer.scaleHeight',
+          [areaData]="area",
+          [ngStyle]="areaStyle",
+          (click)='setActiveArea(area)'
+        )
+        area(
+          [areaData]="newArea",
+          *ngIf="newArea",
+          [ngStyle]="areaStyle"
+        )
   image-bar(*ngIf='images.length > 0', [loading]='loading')

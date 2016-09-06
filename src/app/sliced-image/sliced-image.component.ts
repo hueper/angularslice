@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, ViewChild, AfterViewInit, OnChanges, NgZone } from "@angular/core";
+import { Component, Input, ElementRef, ViewChild, AfterViewInit, OnChanges, NgZone, ApplicationRef } from "@angular/core";
 import { Image } from "../shared/models/";
 import { ImageService } from "../shared/services";
 
@@ -22,15 +22,25 @@ export class SlicedImageComponent implements AfterViewInit, OnChanges {
 
 
   constructor(
-    private imageService:ImageService,
-    private el:ElementRef,
-    private ngZone:NgZone
+    private applicationRef: ApplicationRef,
+    private imageService: ImageService,
+    private el: ElementRef,
+    private ngZone: NgZone
   ) {
 
   }
 
+  // set image(value) {
+  //   this._image = value;
+  //   this.draw();
+  // }
+  //
+  // get image() {
+  //   return this._image;
+  // }
+
   draw() {
-    this.ngZone.run(() => {
+    // this.ngZone.run(() => {
       if (this.myCanvas) {
 
         let canvas = this.myCanvas.nativeElement;
@@ -53,10 +63,12 @@ export class SlicedImageComponent implements AfterViewInit, OnChanges {
           this.scaleWidth = this.width / this.image.width;
           this.scaleHeight = this.height / this.image.height;
 
+          this.applicationRef.tick();
+
           ctx.drawImage(img, this.image.x, this.image.y, this.image.width, this.image.height, 0, 0, canvasSize.width, canvasSize.height);
         };
       }
-    })
+    // })
   }
 
   ngOnChanges() {
