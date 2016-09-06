@@ -14,3 +14,4 @@ export * from './user.service';
 export * from './project.service';
 export * from './tooltip.service';
 export * from './analytics.service';
+export * from './export.service';

@@ -32,7 +32,6 @@ export class ComponentDialogComponent implements ModalComponent<BSModalContext>,
     ).subscribe((folders: any[]) => {
       this.folders = folders;
       console.log("this.folders => ", this.folders);
-
     }));
     this.component = {
       type: 'new',

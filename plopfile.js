@@ -18,17 +18,17 @@ module.exports = function (plop) {
       {
         type: 'add',
         path: 'src/app/{{path}}{{name}}.component.ts',
-        templateFile: 'plop-templates/component.ts',
+        templateFile: 'plop-templates/component/component.ts',
       },
       {
         type: 'add',
         path: 'src/app/{{path}}{{name}}.component.jade',
-        templateFile: 'plop-templates/component.jade',
+        templateFile: 'plop-templates/component/component.jade',
       },
       {
         type: 'add',
         path: 'src/app/{{path}}{{name}}.component.scss',
-        templateFile: 'plop-templates/component.scss',
+        templateFile: 'plop-templates/component/component.scss',
       }
     ]
   });

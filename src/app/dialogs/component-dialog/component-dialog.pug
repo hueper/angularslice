@@ -16,7 +16,7 @@
         .column
           div Select the component:
             select([(ngModel)]='component.folder', (change)='changeExistingComponent($event)', name='folder')
-              option(*ngFor='let folder of folders', [value]='folder._id') {{ folder.name }}
+              option(*ngFor='let folder of folders', [value]='folder._id') {{ folder.text }}
       .row.addition(*ngIf='hasImage')
         .column
           md-checkbox([ngModel]='component.attach', (change)='changeAttachImage($event)', name='attach') Add the area's image to the attached component
