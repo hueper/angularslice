@@ -38010,6 +38010,11 @@ webpackJsonp([0],[
 	var editor_component_1 = __webpack_require__(453);
 	var toolbar_component_1 = __webpack_require__(483);
 	var tooltip_container_component_1 = __webpack_require__(460);
+	var confirm_dialog_component_1 = __webpack_require__(433);
+	var github_dialog_component_1 = __webpack_require__(429);
+	var component_dialog_component_1 = __webpack_require__(423);
+	var export_dialog_component_1 = __webpack_require__(437);
+	var core_2 = __webpack_require__(447);
 	var button_1 = __webpack_require__(486);
 	var icon_2 = __webpack_require__(446);
 	var input_1 = __webpack_require__(487);
@@ -38030,6 +38035,10 @@ webpackJsonp([0],[
 	                sliced_image_component_1.SlicedImageComponent,
 	                toolbar_component_1.ToolbarComponent,
 	                tooltip_container_component_1.TooltipContainerComponent,
+	                confirm_dialog_component_1.ConfirmDialogComponent,
+	                component_dialog_component_1.ComponentDialogComponent,
+	                export_dialog_component_1.ExportDialogComponent,
+	                github_dialog_component_1.GithubDialogComponent,
 	                tooltip_directive_1.TooltipDirective,
 	                button_1.MdButton,
 	                input_1.MdInput,
@@ -38039,6 +38048,12 @@ webpackJsonp([0],[
 	                radio_1.MdRadioButton,
 	                EscapeHtml_1.EscapeHtmlPipe,
 	                component_element_component_1.ComponentElementComponent,
+	            ],
+	            entryComponents: [
+	                confirm_dialog_component_1.ConfirmDialogComponent,
+	                component_dialog_component_1.ComponentDialogComponent,
+	                export_dialog_component_1.ExportDialogComponent,
+	                github_dialog_component_1.GithubDialogComponent,
 	            ],
 	            imports: [
 	                platform_browser_1.BrowserModule,
@@ -38058,6 +38073,7 @@ webpackJsonp([0],[
 	                angulartics2_1.Angulartics2,
 	                app_routes_ts_1.appRoutingProviders,
 	                icon_1.MdIconRegistry,
+	                core_2.MdUniqueSelectionDispatcher,
 	                services_1.AreaService,
 	                services_1.FileService,
 	                services_1.FolderService,
@@ -78812,20 +78828,21 @@ webpackJsonp([0],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var angular2_modal_1 = __webpack_require__(28);
 	var bootstrap_1 = __webpack_require__(26);
-	var providers_1 = __webpack_require__(35);
+	var bootstrap_2 = __webpack_require__(26);
 	var dialogs_1 = __webpack_require__(421);
 	var DialogService = (function () {
-	    function DialogService(overlay, vcRef, modal) {
-	        this.overlay = overlay;
+	    function DialogService(
+	        // private overlay: Overlay,
+	        // vcRef: ViewContainerRef,
+	        modal) {
 	        this.modal = modal;
-	        overlay.defaultViewContainer = vcRef;
+	        // overlay.defaultViewContainer = vcRef;
 	    }
 	    DialogService.prototype.openGithubDialog = function () {
 	        var data = new bootstrap_1.BSModalContext();
 	        return this.modal
-	            .open(dialogs_1.GithubDialogComponent, data)
+	            .open(dialogs_1.GithubDialogComponent, { context: data })
 	            .then(function (dialog) {
 	            return dialog.result;
 	        })
@@ -78837,7 +78854,7 @@ webpackJsonp([0],[
 	    DialogService.prototype.openExportDialog = function () {
 	        var data = new bootstrap_1.BSModalContext();
 	        return this.modal
-	            .open(dialogs_1.ExportDialogComponent, data)
+	            .open(dialogs_1.ExportDialogComponent, { context: data })
 	            .then(function (dialog) {
 	            return dialog.result;
 	        })
@@ -78851,7 +78868,7 @@ webpackJsonp([0],[
 	        var data = new bootstrap_1.BSModalContext();
 	        data["hasImage"] = hasImage;
 	        return this.modal
-	            .open(dialogs_1.ComponentDialogComponent, data)
+	            .open(dialogs_1.ComponentDialogComponent, { context: data })
 	            .then(function (dialog) {
 	            return dialog.result;
 	        })
@@ -78861,29 +78878,19 @@ webpackJsonp([0],[
 	        });
 	    };
 	    DialogService.prototype.openConfirmDialog = function () {
-	        console.log(this.overlay);
 	        return this.modal
-	            .open(dialogs_1.ConfirmDialogComponent, new dialogs_1.ConfirmDialogData());
-	        // .alert()
-	        // .size('lg')
-	        // .showClose(true)
-	        // .title('A simple Alert style modal window')
-	        // .body(require('../../dialogs/confirm-dialog/confirm-dialog.pug'))
-	        // .open();
-	        // const data = new ConfirmDialogData();
-	        // return this.modal
-	        //            .open(ConfirmDialogComponent, data)
-	        //            .then(dialog => {
-	        //              return dialog.result;
-	        //            })
-	        //            .catch(err => {
-	        //              console.log(err);
-	        //              return null;
-	        //            });
+	            .open(dialogs_1.ConfirmDialogComponent, { context: new dialogs_1.ConfirmDialogData() })
+	            .then(function (dialog) {
+	            return dialog.result;
+	        })
+	            .catch(function (err) {
+	            console.log(err);
+	            return null;
+	        });
 	    };
 	    DialogService = __decorate([
 	        core_1.Injectable(), 
-	        __metadata('design:paramtypes', [angular2_modal_1.Overlay, core_1.ViewContainerRef, providers_1.Modal])
+	        __metadata('design:paramtypes', [bootstrap_2.Modal])
 	    ], DialogService);
 	    return DialogService;
 	}());
@@ -79027,7 +79034,7 @@ webpackJsonp([0],[
 
 	var pug = __webpack_require__(425);
 
-	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"dialogBackground\" (click)=\"close()\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"dialog\"\u003E\u003Cform (keypress)=\"eventHandler($event)\"\u003E\u003Cdiv class=\"flexContainer\"\u003E\u003Cdiv class=\"row\" *ngIf=\"hasImage\"\u003E\u003Cdiv class=\"column\"\u003E\u003Clabel\u003ELet's attach a component to the selected area.\u003C\u002Flabel\u003E\u003Cmd-radio-group [(ngModel)]=\"component.type\"\u003E\u003Cmd-radio-button value=\"new\"\u003ECreate new component\u003C\u002Fmd-radio-button\u003E\u003Cbr\u003E\u003Cmd-radio-button value=\"exist\"\u003ESelect an existing one\u003C\u002Fmd-radio-button\u003E\u003C\u002Fmd-radio-group\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row\" *ngIf=\"component.type === &quot;new&quot;\"\u003E\u003Cdiv class=\"column\"\u003E\u003Cmd-input [(ngModel)]=\"component.newFolderName\" #componentName required placeholder=\"Add name for the component\"\u003E\u003C\u002Fmd-input\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row\" *ngIf=\"component.type === &quot;exist&quot;\"\u003E\u003Cdiv class=\"column\"\u003E\u003Cdiv\u003ESelect the component:\u003Cselect [(ngModel)]=\"component.folder\" (change)=\"changeExistingComponent($event)\"\u003E\u003Coption *ngFor=\"let folder of folders\" [value]=\"folder._id\"\u003E{{ folder.name }}\u003C\u002Foption\u003E\u003C\u002Fselect\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row addition\" *ngIf=\"hasImage\"\u003E\u003Cdiv class=\"column\"\u003E\u003Cmd-checkbox [ngModel]=\"component.attach\" (change)=\"changeAttachImage($event)\"\u003EAdd the area's image to the attached component\u003C\u002Fmd-checkbox\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"column info\" tooltip=\"As you select an area on an image, you create a reference to a component.&lt;br&gt;It's still up to you, whether you want to add this selected image to the newly created component.&lt;br&gt; Basically you can create components without images or even add multiple ones for different layouts.\" tooltipPlacement=\"left\"\u003E\u003Cmd-icon\u003Einfo\u003C\u002Fmd-icon\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row\" *ngIf=\"component.attach &amp;&amp; hasImage\"\u003E\u003Cdiv class=\"column\"\u003E\u003Cmd-input [(ngModel)]=\"component.newImageName\" placeholder=\"Add name for the image\"\u003E\u003C\u002Fmd-input\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row row--rightAligned\"\u003E\u003Cdiv class=\"md-button-wrapper\"\u003E\u003Cbutton md-raised-button color=\"secondary\" type=\"button\" (click)=\"close()\"\u003ECancel\u003C\u002Fbutton\u003E\u003Cbutton md-raised-button color=\"primary\" type=\"button\" (click)=\"send()\"\u003ESave\u003C\u002Fbutton\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fform\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
+	function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"dialogBackground\" (click)=\"close()\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"dialog\"\u003E\u003Cform (keypress)=\"eventHandler($event)\"\u003E\u003Cdiv class=\"flexContainer\"\u003E\u003Cdiv class=\"row\" *ngIf=\"hasImage\"\u003E\u003Cdiv class=\"column\"\u003E\u003Clabel\u003ELet's attach a component to the selected area.\u003C\u002Flabel\u003E\u003Cmd-radio-group [(ngModel)]=\"component.type\" name=\"type\"\u003E\u003Cmd-radio-button value=\"new\"\u003ECreate new component\u003C\u002Fmd-radio-button\u003E\u003Cbr\u003E\u003Cmd-radio-button value=\"exist\"\u003ESelect an existing one\u003C\u002Fmd-radio-button\u003E\u003C\u002Fmd-radio-group\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row\" *ngIf=\"component.type === &quot;new&quot;\"\u003E\u003Cdiv class=\"column\"\u003E\u003Cmd-input [(ngModel)]=\"component.newFolderName\" #componentName required placeholder=\"Add name for the component\" name=\"newFolderName\"\u003E\u003C\u002Fmd-input\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row\" *ngIf=\"component.type === &quot;exist&quot;\"\u003E\u003Cdiv class=\"column\"\u003E\u003Cdiv\u003ESelect the component:\u003Cselect [(ngModel)]=\"component.folder\" (change)=\"changeExistingComponent($event)\" name=\"folder\"\u003E\u003Coption *ngFor=\"let folder of folders\" [value]=\"folder._id\"\u003E{{ folder.name }}\u003C\u002Foption\u003E\u003C\u002Fselect\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row addition\" *ngIf=\"hasImage\"\u003E\u003Cdiv class=\"column\"\u003E\u003Cmd-checkbox [ngModel]=\"component.attach\" (change)=\"changeAttachImage($event)\" name=\"attach\"\u003EAdd the area's image to the attached component\u003C\u002Fmd-checkbox\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"column info\" tooltip=\"As you select an area on an image, you create a reference to a component.&lt;br&gt;It's still up to you, whether you want to add this selected image to the newly created component.&lt;br&gt; Basically you can create components without images or even add multiple ones for different layouts.\" tooltipPlacement=\"left\"\u003E\u003Cmd-icon\u003Einfo\u003C\u002Fmd-icon\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row\" *ngIf=\"component.attach &amp;&amp; hasImage\"\u003E\u003Cdiv class=\"column\"\u003E\u003Cmd-input [(ngModel)]=\"component.newImageName\" placeholder=\"Add name for the image\" name=\"newImageName\"\u003E\u003C\u002Fmd-input\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row row--rightAligned\"\u003E\u003Cdiv class=\"md-button-wrapper\"\u003E\u003Cbutton md-raised-button color=\"secondary\" type=\"button\" (click)=\"close()\"\u003ECancel\u003C\u002Fbutton\u003E\u003Cbutton md-raised-button color=\"primary\" type=\"button\" (click)=\"send()\"\u003ESave\u003C\u002Fbutton\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fform\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
 	module.exports = template;
 
 /***/ },
@@ -79434,7 +79441,7 @@ webpackJsonp([0],[
 	        this.dialog.close(true);
 	    };
 	    ConfirmDialogComponent.prototype.cancel = function () {
-	        this.dialog.dismiss();
+	        this.dialog.close(false);
 	    };
 	    ConfirmDialogComponent = __decorate([
 	        core_1.Component({
@@ -90548,14 +90555,17 @@ webpackJsonp([0],[
 	var core_1 = __webpack_require__(3);
 	var _ = __webpack_require__(77);
 	var providers_1 = __webpack_require__(35);
-	var angular2_modal_1 = __webpack_require__(28);
 	var services_1 = __webpack_require__(74);
 	var analytics_service_1 = __webpack_require__(417);
 	var ImageBarComponent = (function () {
-	    function ImageBarComponent(imageService, overlay, modal, vcRef, ga, rawImageService, folderService, el, dialogService) {
+	    function ImageBarComponent(imageService, 
+	        // private overlay: Overlay,
+	        modal, 
+	        // vcRef: ViewContainerRef,
+	        ga, rawImageService, folderService, el, dialogService) {
+	        // overlay.defaultViewContainer = vcRef;
 	        var _this = this;
 	        this.imageService = imageService;
-	        this.overlay = overlay;
 	        this.modal = modal;
 	        this.ga = ga;
 	        this.rawImageService = rawImageService;
@@ -90567,7 +90577,6 @@ webpackJsonp([0],[
 	        this.hover = false;
 	        this.editImage = {};
 	        this.image = {};
-	        overlay.defaultViewContainer = vcRef;
 	        this.subscriptions.push(this.folderService.currentSource.subscribe(function (currentSource) {
 	            _this.currentFolder = currentSource;
 	            if (_this.imagesSubscribe) {
@@ -90615,11 +90624,6 @@ webpackJsonp([0],[
 	    };
 	    ImageBarComponent.prototype.deleteImage = function (image) {
 	        var _this = this;
-	        // return this.modal.open(ConfirmDialogComponent, new ConfirmDialogData()).then((result) => {
-	        //   if (result) {
-	        //     this.imageService.delete(image);
-	        //   }
-	        // });
 	        this.ga.eventTrack('deleteImage', { category: 'manually' });
 	        // Confirm Dialog
 	        this.dialogService.openConfirmDialog().then(function (result) {
@@ -90678,7 +90682,7 @@ webpackJsonp([0],[
 	            template: __webpack_require__(468)(),
 	            styles: [__webpack_require__(469)],
 	        }), 
-	        __metadata('design:paramtypes', [services_1.ImageService, angular2_modal_1.Overlay, providers_1.Modal, core_1.ViewContainerRef, analytics_service_1.AnalyticsService, services_1.RawImageService, services_1.FolderService, core_1.ElementRef, services_1.DialogService])
+	        __metadata('design:paramtypes', [services_1.ImageService, providers_1.Modal, analytics_service_1.AnalyticsService, services_1.RawImageService, services_1.FolderService, core_1.ElementRef, services_1.DialogService])
 	    ], ImageBarComponent);
 	    return ImageBarComponent;
 	}());
@@ -91224,6 +91228,7 @@ webpackJsonp([0],[
 	var analytics_service_1 = __webpack_require__(417);
 	var ComponentElementComponent = (function () {
 	    function ComponentElementComponent(imageService, ga, folderService, fileService, dialogService) {
+	        // overlay.defaultViewContainer = vcRef;
 	        var _this = this;
 	        this.imageService = imageService;
 	        this.ga = ga;
