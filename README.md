@@ -1,22 +1,36 @@
-# Angular Slicer
+# Angular Slice
+[ngSlice.io](http://nglsice.io) -> The Visual Angular 2 Boostrapping Tool.
+Feel free to ask & open issues. We're hardly trying to improve the work of the community.
 
-Angular Slicer project. Generate Angular 2 project structures with ease.
+## Gettings started
 
-The project is ready to work with projects and views in projects, thus you need to use the following
-path for testing: /projects/1/views/1.
-A possible dev url: [http://localhost:3001/projects/1/views/1](http://localhost:3001/projects/1/views/1).
+ - Run `npm i`
+ - Run `typings i`
+ - Run `npm start`
+ - Open your browser at `localhost:3001`
+ - Upload your images - for now PNG and JPG formats are supported.
+ - Slice the components
+ - Export the code in ZIP format
+ 
+## Change the source
+ Feel free to fork the project and customize for your special needs.
+ 
+ At the moment we support just component generation. 
+ To change the default templating simply edit `src/app/shared/templates`
+ 
+ 
+## Plans
+### Feature
+ - Support more entity types - pipes, services, etc.
+ - Support more dialects - pug, less, etc.
+ - Inline editor
+ - Reverse engineering - to open already existing projects
+ - **Do you have something in mind? Let us know!**
 
-## Install
-
- Run `npm install`
-
-## Develop
-
-  To start hack on the site, just run `docker-compose create`.
-
-## Deploy
-
-  To build a deployable version run `npm build`.
+### OSS plans
+ - Detailed documentation
+ - Public roadmap
+ - Open discussions
 
 ## Branching
 
