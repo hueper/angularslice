@@ -31,10 +31,11 @@ Feel free to ask & open issues. We're hardly trying to improve the work of the c
  - Detailed documentation
  - Public roadmap
  - Open discussions
-
-## Branching
-
-  Follow the recommended [git flow](http://nvie.com/posts/a-successful-git-branching-model/) branching model!
+  
+## Contact
+Web: [ngslice.io](http://ngslice.io)
+Twitter: [@ngslice_io](http://twitter.com/ngslice_io)
+Email: info[AT]ngslice.io
   
 ## Changelog
   
