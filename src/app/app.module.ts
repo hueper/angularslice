@@ -24,7 +24,8 @@ import {
   AnalyticsService,
   ProjectService,
   TemplateService,
-  UserService
+  UserService,
+  ExportService,
 } from "./shared/services";
 
 import { TooltipDirective } from "./shared/directives/tooltip/tooltip.directive";
@@ -112,6 +113,7 @@ import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio";
     TemplateService,
     TooltipService,
     UserService,
+    ExportService,
     {
       provide: APP_BASE_HREF,
       useValue: location.pathname,
