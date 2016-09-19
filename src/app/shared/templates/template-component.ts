@@ -5,7 +5,7 @@ export const TemplateComponent = {
       template: `<div class="{{name}}"></div>`,
     },
     {
-      extension: 'css',
+      extension: 'scss',
       template:
 `.{{name}} {
 }`,
@@ -17,8 +17,8 @@ export const TemplateComponent = {
 
 @Component({
   selector: '{{name}}',
-  template: require('./{{name}}.jade')(),
-  styles: [ require('./{{name}}.scss') ],
+  templateUrl: './{{name}}.html')(),
+  styleUrls: [ './{{name}}.scss') ],
   providers: [],
   pipes: [],
   directives: [],

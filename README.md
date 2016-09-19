@@ -38,7 +38,11 @@ Twitter: [@ngslice_io](http://twitter.com/ngslice_io)
 Email: info[AT]ngslice.io
   
 ## Changelog
-  
+
+### 2016-09-18, upgrade to Anglar 2.0.0
+    Had to manually rewrite a line in node_modules/@angular2-material/core/gestures/MdGEstureConfig.d.ts ->
+    Switch HammerManager to any.
+
 ### 2016-09-03, Angular 2 RC.6
   Had to manually rewrite a line in node_modules/@angular2-material/core/gestures/MdGEstureConfig.d.ts ->
   Switch HammerManager to any.
